@@ -1,0 +1,4 @@
+peerpen.AppModuleFactoryMachine
+peerpen.persistence.UserRepositoryFactoryMachine
+peerpen.rest.HelloResourceFactoryMachine
+peerpen.rest.HelloResourceRouterFactoryMachine

@@ -1,0 +1,16 @@
+13:55:37.570 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+13:55:37.706 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+13:55:38.033 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+13:55:38.037 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> DEV MODE << >> AUTO COMPILE <<
+ -- for admin console,
+ --   VISIT http://localhost:8080/con/@/ui/
+ --
+
+13:55:39.718 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 5 sources compiled in 1.451 s
+13:55:39.838 [main             ] INFO  restx.classloader.CompilationManager - watching for changes in [src/main/java, src/main/resources]; current location is /Users/bobbyyit/Documents/PeerPen/peerpen/.
+13:55:46.769 [qtp859906017-22  ] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.0.0.Final
+13:55:47.428 [qtp859906017-22  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/ui/img/glyphicons-halflings.png >> 404 - 6.722 ms
+13:55:47.677 [qtp859906017-24  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/pages >> 200 - 89.19 ms
+13:55:47.688 [qtp859906017-19  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /sessions/current >> 200 - 19.29 ms
