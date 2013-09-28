@@ -14,3 +14,845 @@
 13:55:47.428 [qtp859906017-22  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/ui/img/glyphicons-halflings.png >> 404 - 6.722 ms
 13:55:47.677 [qtp859906017-24  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/pages >> 200 - 89.19 ms
 13:55:47.688 [qtp859906017-19  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /sessions/current >> 200 - 19.29 ms
+14:52:52.505 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+14:52:52.803 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+14:52:53.246 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+14:52:53.270 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> DEV MODE << >> AUTO COMPILE <<
+ -- for admin console,
+ --   VISIT http://localhost:8080/con/@/ui/
+ --
+
+14:52:56.389 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 7 sources compiled in 2.588 s
+14:52:56.551 [main             ] INFO  restx.classloader.CompilationManager - watching for changes in [src/main/java, src/main/resources]; current location is /Users/bobbyyit/Documents/Peerpen/peerpen/.
+14:52:59.668 [qtp269528446-19  ] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.0.0.Final
+14:53:00.920 [qtp269528446-19  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/pages >> 200 - 89.90 ms
+14:53:00.920 [qtp269528446-22  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /sessions/current >> 200 - 90.51 ms
+14:53:00.947 [qtp269528446-22  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/ui/img/glyphicons-halflings.png >> 404 - 4.045 ms
+14:53:00.959 [qtp269528446-19  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs >> 200 - 15.51 ms
+14:53:01.090 [qtp269528446-25  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/monitor >> 200 - 65.65 ms
+14:53:01.094 [qtp269528446-24  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/admin-pages >> 200 - 79.14 ms
+14:53:01.109 [qtp269528446-22  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/session >> 200 - 41.62 ms
+14:53:01.113 [qtp269528446-21  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/test >> 200 - 70.47 ms
+14:53:01.121 [qtp269528446-20  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/hello >> 200 - 90.15 ms
+14:53:01.122 [qtp269528446-23  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/specs >> 200 - 98.93 ms
+14:53:12.855 [qtp269528446-20  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs >> 200 - 10.05 ms
+14:53:12.861 [qtp269528446-19  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/test >> 200 - 18.91 ms
+14:53:13.231 [qtp269528446-24  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/specs ? path=/getOjectList&httpMethod=GET >> 200 - 79.71 ms
+14:53:20.063 [qtp269528446-22  ] WARN  restx.StdRestxMainRouter - request raised IllegalStateException: query param whom is required
+java.lang.IllegalStateException: query param whom is required
+	at restx.common.MorePreconditions.checkPresent(MorePreconditions.java:19) ~[restx-common-0.2.9.2.jar:na]
+	at peerpen.rest.TestRouter$1.doRoute(TestRouter.java:35) ~[na:na]
+	at restx.StdEntityRoute.handle(StdEntityRoute.java:40) ~[restx-core-0.2.9.2.jar:na]
+	at restx.security.RestxSessionFilter.handle(RestxSessionFilter.java:79) ~[restx-core-0.2.9.2.jar:na]
+	at restx.StdRestxMainRouter.route(StdRestxMainRouter.java:127) ~[restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$PerRequestFactoryLoader.route(RestxMainRouterFactory.java:153) [restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$RecordingMainRouter.route(RestxMainRouterFactory.java:134) [restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$CompilationManagerRouter.route(RestxMainRouterFactory.java:255) [restx-core-0.2.9.2.jar:na]
+	at restx.servlet.AbstractRestxMainRouterServlet.service(AbstractRestxMainRouterServlet.java:44) [restx-servlet-0.2.9.2.jar:na]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:770) [javax.servlet-api-3.0.1.jar:3.0.1]
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:669) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:455) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:536) [jetty-security-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:154) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.Server.handle(Server.java:365) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635) [jetty-http-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235) [jetty-http-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628) [jetty-io-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52) [jetty-io-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at java.lang.Thread.run(Thread.java:724) [na:1.7.0_40]
+14:53:20.065 [qtp269528446-22  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /test ? who=sdfds >> 400 - 14.51 ms
+14:53:24.643 [qtp269528446-25  ] WARN  restx.StdRestxMainRouter - request raised IllegalStateException: query param what is required
+java.lang.IllegalStateException: query param what is required
+	at restx.common.MorePreconditions.checkPresent(MorePreconditions.java:19) ~[restx-common-0.2.9.2.jar:na]
+	at peerpen.rest.TestRouter$1.doRoute(TestRouter.java:35) ~[na:na]
+	at restx.StdEntityRoute.handle(StdEntityRoute.java:40) ~[restx-core-0.2.9.2.jar:na]
+	at restx.security.RestxSessionFilter.handle(RestxSessionFilter.java:79) ~[restx-core-0.2.9.2.jar:na]
+	at restx.StdRestxMainRouter.route(StdRestxMainRouter.java:127) ~[restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$PerRequestFactoryLoader.route(RestxMainRouterFactory.java:153) [restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$RecordingMainRouter.route(RestxMainRouterFactory.java:134) [restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$CompilationManagerRouter.route(RestxMainRouterFactory.java:255) [restx-core-0.2.9.2.jar:na]
+	at restx.servlet.AbstractRestxMainRouterServlet.service(AbstractRestxMainRouterServlet.java:44) [restx-servlet-0.2.9.2.jar:na]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:770) [javax.servlet-api-3.0.1.jar:3.0.1]
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:669) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:455) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:536) [jetty-security-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:154) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.Server.handle(Server.java:365) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635) [jetty-http-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235) [jetty-http-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628) [jetty-io-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52) [jetty-io-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at java.lang.Thread.run(Thread.java:724) [na:1.7.0_40]
+14:53:24.644 [qtp269528446-25  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /test ? whom=sdfds >> 400 - 4.669 ms
+14:53:33.934 [qtp269528446-19  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /test ? whom=sdfds&what=dsfas >> 200 - 35.87 ms
+14:53:48.486 [Thread-1         ] INFO  o.e.j.s.listener.ELContextCleaner - javax.el.BeanELResolver purged
+14:53:48.547 [Thread-1         ] INFO  o.e.jetty.util.thread.ShutdownThread - shutdown already commenced
+14:56:05.081 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+14:56:05.212 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+14:56:05.603 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+14:56:05.607 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> DEV MODE << >> AUTO COMPILE <<
+ -- for admin console,
+ --   VISIT http://localhost:8080/con/@/ui/
+ --
+
+14:56:05.869 [main             ] INFO  restx.classloader.CompilationManager - watching for changes in [src/main/java, src/main/resources]; current location is /Users/bobbyyit/Documents/Peerpen/peerpen/.
+14:56:21.799 [qtp1739347372-19 ] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.0.0.Final
+14:56:22.291 [qtp1739347372-19 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /getOjectList >> 200 - 397.2 ms
+14:56:28.672 [Thread-1         ] INFO  o.e.j.s.listener.ELContextCleaner - javax.el.BeanELResolver purged
+14:56:28.728 [Thread-1         ] INFO  o.e.jetty.util.thread.ShutdownThread - shutdown already commenced
+14:57:57.837 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+14:57:57.962 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+14:57:58.317 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+14:57:58.321 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> DEV MODE << >> AUTO COMPILE <<
+ -- for admin console,
+ --   VISIT http://localhost:8080/con/@/ui/
+ --
+
+14:57:59.883 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 1.319 s
+14:57:59.965 [main             ] INFO  restx.classloader.CompilationManager - watching for changes in [src/main/java, src/main/resources]; current location is /Users/bobbyyit/Documents/Peerpen/peerpen/.
+14:58:11.583 [qtp1522733525-19 ] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.0.0.Final
+14:58:11.842 [qtp1522733525-19 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /getOjectList >> 200 - 169.1 ms
+14:58:15.988 [Thread-1         ] INFO  o.e.j.s.listener.ELContextCleaner - javax.el.BeanELResolver purged
+14:58:16.044 [Thread-1         ] INFO  o.e.jetty.util.thread.ShutdownThread - shutdown already commenced
+15:03:10.739 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+15:03:10.882 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+15:03:11.264 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+15:03:11.278 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> DEV MODE << >> AUTO COMPILE <<
+ -- for admin console,
+ --   VISIT http://localhost:8080/con/@/ui/
+ --
+
+15:03:11.582 [main             ] INFO  restx.classloader.CompilationManager - watching for changes in [src/main/java, src/main/resources]; current location is /Users/bobbyyit/Documents/Peerpen/peerpen/.
+15:03:23.305 [qtp1865463714-19 ] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.0.0.Final
+15:03:23.673 [qtp1865463714-19 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /getOjectList >> 200 - 249.7 ms
+15:03:38.002 [qtp1865463714-19 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /message ? who=dsfa >> 200 - 7.566 ms
+15:05:06.151 [Thread-1         ] INFO  o.e.j.s.listener.ELContextCleaner - javax.el.BeanELResolver purged
+15:05:06.205 [Thread-1         ] INFO  o.e.jetty.util.thread.ShutdownThread - shutdown already commenced
+15:08:57.337 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+15:08:57.492 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+15:08:57.853 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+15:08:57.857 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> DEV MODE << >> AUTO COMPILE <<
+ -- for admin console,
+ --   VISIT http://localhost:8080/con/@/ui/
+ --
+
+15:08:58.102 [main             ] INFO  restx.classloader.CompilationManager - watching for changes in [src/main/java, src/main/resources]; current location is /Users/bobbyyit/Documents/Peerpen/peerpen/.
+15:08:58.115 [main             ] WARN  o.e.j.u.component.AbstractLifeCycle - FAILED SelectChannelConnector@0.0.0.0:8080: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:444) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:436) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:214) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.7.0_40]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.open(SelectChannelConnector.java:187) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.doStart(SelectChannelConnector.java:265) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:288) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at restx.server.JettyWebServer.start(JettyWebServer.java:77) [restx-server-jetty-0.2.9.2.jar:na]
+	at restx.server.JettyWebServer.startAndAwait(JettyWebServer.java:81) [restx-server-jetty-0.2.9.2.jar:na]
+	at peerpen.AppServer.main(AppServer.java:30) [classes/:na]
+15:08:58.116 [main             ] WARN  o.e.j.u.component.AbstractLifeCycle - FAILED org.eclipse.jetty.server.Server@593fa6c5: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:444) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:436) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:214) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.7.0_40]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.open(SelectChannelConnector.java:187) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.doStart(SelectChannelConnector.java:265) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) ~[jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:288) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) ~[jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at restx.server.JettyWebServer.start(JettyWebServer.java:77) [restx-server-jetty-0.2.9.2.jar:na]
+	at restx.server.JettyWebServer.startAndAwait(JettyWebServer.java:81) [restx-server-jetty-0.2.9.2.jar:na]
+	at peerpen.AppServer.main(AppServer.java:30) [classes/:na]
+15:09:10.017 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+15:09:10.151 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+15:09:10.514 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+15:09:10.520 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> DEV MODE << >> AUTO COMPILE <<
+ -- for admin console,
+ --   VISIT http://localhost:8080/con/@/ui/
+ --
+
+15:09:10.768 [main             ] INFO  restx.classloader.CompilationManager - watching for changes in [src/main/java, src/main/resources]; current location is /Users/bobbyyit/Documents/Peerpen/peerpen/.
+15:09:42.093 [qtp1522733525-19 ] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.0.0.Final
+15:09:42.810 [qtp1522733525-20 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/ui/img/glyphicons-halflings.png >> 404 - 4.399 ms
+15:09:42.888 [qtp1522733525-19 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/ui/img/glyphicons-halflings.png >> 404 - 9.205 ms
+15:09:43.189 [qtp1522733525-21 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/pages >> 401 - 2.678 ms
+15:09:43.191 [qtp1522733525-22 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /sessions/current >> 401 - 525.0 ?s
+15:09:43.224 [qtp1522733525-19 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/pages >> 401 - 349.0 ?s
+15:09:43.225 [qtp1522733525-20 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /sessions/current >> 401 - 608.0 ?s
+15:09:50.414 [qtp1522733525-19 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] POST /sessions >> 200 - 359.7 ms
+15:09:50.631 [qtp1522733525-20 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/ui/img/glyphicons-halflings.png >> 404 - 5.355 ms
+15:09:50.718 [qtp1522733525-19 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /sessions/current >> 200 - 14.10 ms
+15:09:50.735 [qtp1522733525-22 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/pages >> 200 - 14.20 ms
+15:10:03.322 [qtp1522733525-23 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/pages >> 200 - 6.693 ms
+15:10:03.344 [qtp1522733525-22 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /sessions/current >> 200 - 12.08 ms
+15:10:03.403 [qtp1522733525-24 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/ui/img/glyphicons-halflings.png >> 404 - 5.407 ms
+15:10:03.420 [qtp1522733525-21 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs >> 200 - 17.94 ms
+15:10:03.576 [qtp1522733525-20 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/monitor >> 200 - 63.04 ms
+15:10:03.578 [qtp1522733525-22 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/admin-pages >> 200 - 89.08 ms
+15:10:03.583 [qtp1522733525-23 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/specs >> 200 - 106.5 ms
+15:10:03.585 [qtp1522733525-24 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/hello >> 200 - 52.17 ms
+15:10:03.590 [qtp1522733525-21 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/test >> 200 - 55.78 ms
+15:10:03.591 [qtp1522733525-19 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/session >> 200 - 41.32 ms
+15:11:12.698 [qtp1522733525-23 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /message ? who=mike >> 200 - 8.304 ms
+15:11:29.774 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 1.566 s
+15:11:30.639 [qtp1522733525-23 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /message ? who=mike >> 200 - 2.468 ms
+15:11:31.870 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 997.7 ms
+15:11:32.230 [qtp1522733525-23 ] WARN  restx.StdRestxMainRouter - request raised IllegalStateException: query param whom is required
+java.lang.IllegalStateException: query param whom is required
+	at restx.common.MorePreconditions.checkPresent(MorePreconditions.java:19) ~[restx-common-0.2.9.2.jar:na]
+	at peerpen.rest.HelloResourceRouter$1.doRoute(HelloResourceRouter.java:35) ~[na:na]
+	at restx.StdEntityRoute.handle(StdEntityRoute.java:40) ~[restx-core-0.2.9.2.jar:na]
+	at restx.security.RestxSessionFilter.handle(RestxSessionFilter.java:79) ~[restx-core-0.2.9.2.jar:na]
+	at restx.StdRestxMainRouter.route(StdRestxMainRouter.java:127) ~[restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$PerRequestFactoryLoader.route(RestxMainRouterFactory.java:153) [restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$RecordingMainRouter.route(RestxMainRouterFactory.java:134) [restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$CompilationManagerRouter.route(RestxMainRouterFactory.java:255) [restx-core-0.2.9.2.jar:na]
+	at restx.servlet.AbstractRestxMainRouterServlet.service(AbstractRestxMainRouterServlet.java:44) [restx-servlet-0.2.9.2.jar:na]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:770) [javax.servlet-api-3.0.1.jar:3.0.1]
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:669) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:455) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:536) [jetty-security-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:154) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.Server.handle(Server.java:365) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635) [jetty-http-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235) [jetty-http-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628) [jetty-io-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52) [jetty-io-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at java.lang.Thread.run(Thread.java:724) [na:1.7.0_40]
+15:11:32.231 [qtp1522733525-23 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /message ? who=mike >> 400 - 11.40 ms
+15:13:23.211 [qtp1522733525-21 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /getObject >> 404 - 962.0 ?s
+15:13:32.589 [qtp1522733525-28 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /getOject >> 200 - 5.863 ms
+15:14:08.994 [qtp1522733525-21 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /getOjectList >> 200 - 3.968 ms
+15:16:18.656 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 452.1 ms
+15:16:21.205 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 335.9 ms
+15:17:19.037 [qtp1522733525-19 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /message2 ? whom=qtip >> 200 - 4.441 ms
+15:17:31.084 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 214.6 ms
+15:17:38.451 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 248.7 ms
+15:17:41.080 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 211.2 ms
+15:17:46.172 [qtp1522733525-19 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip >> 200 - 3.719 ms
+15:17:55.230 [qtp1522733525-19 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip >> 200 - 2.562 ms
+15:17:58.460 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 257.3 ms
+15:18:01.089 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 219.3 ms
+15:19:28.489 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 285.9 ms
+15:19:30.264 [qtp1522733525-30 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip >> 404 - 488.0 ?s
+15:19:31.031 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 160.8 ms
+15:20:04.949 [qtp1522733525-30 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip&who=sdfsd >> 404 - 428.0 ?s
+15:20:07.007 [qtp1522733525-30 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip&who=sdfsd >> 404 - 353.0 ?s
+15:20:36.331 [qtp1522733525-31 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message3 ? whom=qtip&who=sdfsd >> 404 - 417.0 ?s
+15:20:38.403 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 201.1 ms
+15:20:41.055 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 184.9 ms
+15:20:50.034 [qtp1522733525-31 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message3 ? whom=qtip&who=sdfsd >> 404 - 459.0 ?s
+15:20:58.373 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 169.9 ms
+15:21:01.042 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 171.4 ms
+15:21:02.860 [qtp1522733525-31 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message3 ? whom=qtip&who=sdfsd >> 200 - 5.292 ms
+15:21:09.675 [qtp1522733525-31 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip&who=sdfsd >> 200 - 2.453 ms
+15:21:18.384 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 181.3 ms
+15:21:18.599 [qtp1522733525-32 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip&who=sdfsd >> 200 - 2.696 ms
+15:21:19.509 [qtp1522733525-32 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip&who=sdfsd >> 200 - 3.462 ms
+15:21:21.110 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 240.1 ms
+15:21:24.775 [qtp1522733525-32 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip&who=sdfsd >> 200 - 3.469 ms
+15:21:26.144 [qtp1522733525-32 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip&who=sdfsd >> 200 - 2.428 ms
+15:21:30.899 [qtp1522733525-32 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip >> 200 - 2.474 ms
+15:21:41.047 [qtp1522733525-32 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip&who=sdfsd >> 200 - 2.491 ms
+15:21:45.839 [qtp1522733525-32 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip&who=sdfsd >> 200 - 2.490 ms
+15:22:18.524 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 322.0 ms
+15:22:19.958 [qtp1522733525-33 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip&who=sdfsd >> 200 - 2.549 ms
+15:22:21.018 [pool-2-thread-1  ] INFO  restx.classloader.CompilationManager - compilation finished: 1 sources compiled in 147.2 ms
+15:22:31.240 [qtp1522733525-33 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip&who=sdfsd >> 200 - 5.887 ms
+15:22:51.031 [qtp1522733525-33 ] WARN  restx.StdRestxMainRouter - request raised IllegalStateException: query param who is required
+java.lang.IllegalStateException: query param who is required
+	at restx.common.MorePreconditions.checkPresent(MorePreconditions.java:19) ~[restx-common-0.2.9.2.jar:na]
+	at peerpen.rest.HelloResourceRouter$2.doRoute(HelloResourceRouter.java:60) ~[na:na]
+	at restx.StdEntityRoute.handle(StdEntityRoute.java:40) ~[restx-core-0.2.9.2.jar:na]
+	at restx.security.RestxSessionFilter.handle(RestxSessionFilter.java:79) ~[restx-core-0.2.9.2.jar:na]
+	at restx.StdRestxMainRouter.route(StdRestxMainRouter.java:127) ~[restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$PerRequestFactoryLoader.route(RestxMainRouterFactory.java:153) [restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$RecordingMainRouter.route(RestxMainRouterFactory.java:134) [restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$CompilationManagerRouter.route(RestxMainRouterFactory.java:255) [restx-core-0.2.9.2.jar:na]
+	at restx.servlet.AbstractRestxMainRouterServlet.service(AbstractRestxMainRouterServlet.java:44) [restx-servlet-0.2.9.2.jar:na]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:770) [javax.servlet-api-3.0.1.jar:3.0.1]
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:669) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:455) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:536) [jetty-security-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:154) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.Server.handle(Server.java:365) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635) [jetty-http-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235) [jetty-http-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628) [jetty-io-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52) [jetty-io-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at java.lang.Thread.run(Thread.java:724) [na:1.7.0_40]
+15:22:51.032 [qtp1522733525-33 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip >> 400 - 4.714 ms
+15:23:01.048 [qtp1522733525-33 ] WARN  restx.StdRestxMainRouter - request raised IllegalStateException: query param who is required
+java.lang.IllegalStateException: query param who is required
+	at restx.common.MorePreconditions.checkPresent(MorePreconditions.java:19) ~[restx-common-0.2.9.2.jar:na]
+	at peerpen.rest.HelloResourceRouter$2.doRoute(HelloResourceRouter.java:60) ~[na:na]
+	at restx.StdEntityRoute.handle(StdEntityRoute.java:40) ~[restx-core-0.2.9.2.jar:na]
+	at restx.security.RestxSessionFilter.handle(RestxSessionFilter.java:79) ~[restx-core-0.2.9.2.jar:na]
+	at restx.StdRestxMainRouter.route(StdRestxMainRouter.java:127) ~[restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$PerRequestFactoryLoader.route(RestxMainRouterFactory.java:153) [restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$RecordingMainRouter.route(RestxMainRouterFactory.java:134) [restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$CompilationManagerRouter.route(RestxMainRouterFactory.java:255) [restx-core-0.2.9.2.jar:na]
+	at restx.servlet.AbstractRestxMainRouterServlet.service(AbstractRestxMainRouterServlet.java:44) [restx-servlet-0.2.9.2.jar:na]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:770) [javax.servlet-api-3.0.1.jar:3.0.1]
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:669) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:455) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:536) [jetty-security-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:154) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.Server.handle(Server.java:365) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635) [jetty-http-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235) [jetty-http-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628) [jetty-io-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52) [jetty-io-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at java.lang.Thread.run(Thread.java:724) [na:1.7.0_40]
+15:23:01.049 [qtp1522733525-33 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip >> 400 - 3.964 ms
+15:23:05.028 [Thread-1         ] INFO  o.e.j.s.listener.ELContextCleaner - javax.el.BeanELResolver purged
+15:23:05.118 [Thread-1         ] INFO  o.e.jetty.util.thread.ShutdownThread - shutdown already commenced
+15:23:09.770 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+15:23:09.903 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+15:23:10.275 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+15:23:10.281 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> DEV MODE << >> AUTO COMPILE <<
+ -- for admin console,
+ --   VISIT http://localhost:8080/con/@/ui/
+ --
+
+15:23:10.553 [main             ] INFO  restx.classloader.CompilationManager - watching for changes in [src/main/java, src/main/resources]; current location is /Users/bobbyyit/Documents/Peerpen/peerpen/.
+15:23:14.163 [qtp1182759051-19 ] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.0.0.Final
+15:23:14.542 [qtp1182759051-19 ] WARN  restx.StdRestxMainRouter - request raised IllegalStateException: query param who is required
+java.lang.IllegalStateException: query param who is required
+	at restx.common.MorePreconditions.checkPresent(MorePreconditions.java:19) ~[restx-common-0.2.9.2.jar:na]
+	at peerpen.rest.HelloResourceRouter$2.doRoute(HelloResourceRouter.java:60) ~[na:na]
+	at restx.StdEntityRoute.handle(StdEntityRoute.java:40) ~[restx-core-0.2.9.2.jar:na]
+	at restx.security.RestxSessionFilter.handle(RestxSessionFilter.java:79) ~[restx-core-0.2.9.2.jar:na]
+	at restx.StdRestxMainRouter.route(StdRestxMainRouter.java:127) ~[restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$PerRequestFactoryLoader.route(RestxMainRouterFactory.java:153) [restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$RecordingMainRouter.route(RestxMainRouterFactory.java:134) [restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$CompilationManagerRouter.route(RestxMainRouterFactory.java:255) [restx-core-0.2.9.2.jar:na]
+	at restx.servlet.AbstractRestxMainRouterServlet.service(AbstractRestxMainRouterServlet.java:44) [restx-servlet-0.2.9.2.jar:na]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:770) [javax.servlet-api-3.0.1.jar:3.0.1]
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:669) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:455) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:536) [jetty-security-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:154) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.Server.handle(Server.java:365) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635) [jetty-http-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235) [jetty-http-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628) [jetty-io-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52) [jetty-io-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at java.lang.Thread.run(Thread.java:724) [na:1.7.0_40]
+15:23:14.547 [qtp1182759051-19 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip >> 400 - 290.2 ms
+15:23:15.725 [qtp1182759051-20 ] WARN  restx.StdRestxMainRouter - request raised IllegalStateException: query param who is required
+java.lang.IllegalStateException: query param who is required
+	at restx.common.MorePreconditions.checkPresent(MorePreconditions.java:19) ~[restx-common-0.2.9.2.jar:na]
+	at peerpen.rest.HelloResourceRouter$2.doRoute(HelloResourceRouter.java:60) ~[na:na]
+	at restx.StdEntityRoute.handle(StdEntityRoute.java:40) ~[restx-core-0.2.9.2.jar:na]
+	at restx.security.RestxSessionFilter.handle(RestxSessionFilter.java:79) ~[restx-core-0.2.9.2.jar:na]
+	at restx.StdRestxMainRouter.route(StdRestxMainRouter.java:127) ~[restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$PerRequestFactoryLoader.route(RestxMainRouterFactory.java:153) [restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$RecordingMainRouter.route(RestxMainRouterFactory.java:134) [restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$CompilationManagerRouter.route(RestxMainRouterFactory.java:255) [restx-core-0.2.9.2.jar:na]
+	at restx.servlet.AbstractRestxMainRouterServlet.service(AbstractRestxMainRouterServlet.java:44) [restx-servlet-0.2.9.2.jar:na]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:770) [javax.servlet-api-3.0.1.jar:3.0.1]
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:669) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:455) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:536) [jetty-security-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:154) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.Server.handle(Server.java:365) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635) [jetty-http-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235) [jetty-http-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628) [jetty-io-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52) [jetty-io-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at java.lang.Thread.run(Thread.java:724) [na:1.7.0_40]
+15:23:15.726 [qtp1182759051-20 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip >> 400 - 5.302 ms
+15:24:18.759 [qtp1182759051-20 ] WARN  restx.StdRestxMainRouter - request raised IllegalStateException: query param who is required
+java.lang.IllegalStateException: query param who is required
+	at restx.common.MorePreconditions.checkPresent(MorePreconditions.java:19) ~[restx-common-0.2.9.2.jar:na]
+	at peerpen.rest.HelloResourceRouter$2.doRoute(HelloResourceRouter.java:60) ~[na:na]
+	at restx.StdEntityRoute.handle(StdEntityRoute.java:40) ~[restx-core-0.2.9.2.jar:na]
+	at restx.security.RestxSessionFilter.handle(RestxSessionFilter.java:79) ~[restx-core-0.2.9.2.jar:na]
+	at restx.StdRestxMainRouter.route(StdRestxMainRouter.java:127) ~[restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$PerRequestFactoryLoader.route(RestxMainRouterFactory.java:153) [restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$RecordingMainRouter.route(RestxMainRouterFactory.java:134) [restx-core-0.2.9.2.jar:na]
+	at restx.RestxMainRouterFactory$CompilationManagerRouter.route(RestxMainRouterFactory.java:255) [restx-core-0.2.9.2.jar:na]
+	at restx.servlet.AbstractRestxMainRouterServlet.service(AbstractRestxMainRouterServlet.java:44) [restx-servlet-0.2.9.2.jar:na]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:770) [javax.servlet-api-3.0.1.jar:3.0.1]
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:669) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:455) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:536) [jetty-security-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382) [jetty-servlet-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:154) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.Server.handle(Server.java:365) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635) [jetty-http-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235) [jetty-http-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628) [jetty-io-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52) [jetty-io-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at java.lang.Thread.run(Thread.java:724) [na:1.7.0_40]
+15:24:18.760 [qtp1182759051-20 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /hello/message2 ? whom=qtip >> 400 - 5.759 ms
+15:45:52.893 [qtp1182759051-41 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs >> 200 - 44.97 ms
+15:45:52.928 [qtp1182759051-42 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/monitor >> 200 - 78.15 ms
+15:45:53.011 [qtp1182759051-41 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/specs ? path=/@/monitor&httpMethod=GET >> 200 - 38.45 ms
+15:45:53.924 [qtp1182759051-42 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs >> 200 - 9.309 ms
+15:45:54.214 [qtp1182759051-41 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/monitor >> 200 - 98.57 ms
+15:45:54.218 [qtp1182759051-43 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/admin-pages >> 200 - 80.20 ms
+15:45:54.225 [qtp1182759051-42 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/specs >> 200 - 42.21 ms
+15:45:54.228 [qtp1182759051-45 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/test >> 200 - 102.6 ms
+15:45:54.235 [qtp1182759051-46 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/session >> 200 - 88.76 ms
+15:45:54.236 [qtp1182759051-44 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/api-docs/hello >> 200 - 88.88 ms
+16:19:02.531 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+16:19:02.674 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+16:19:02.914 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+16:19:02.916 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> PROD MODE <<
+ -- for admin console,
+ --   VISIT http://localhost:61076/con/@/ui/
+ --
+
+16:19:03.161 [main             ] INFO  o.e.j.s.listener.ELContextCleaner - javax.el.BeanELResolver purged
+16:20:34.416 [Thread-1         ] INFO  o.e.j.s.listener.ELContextCleaner - javax.el.BeanELResolver purged
+16:20:34.471 [Thread-1         ] INFO  o.e.jetty.util.thread.ShutdownThread - shutdown already commenced
+16:28:48.281 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+16:28:48.423 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+16:28:48.664 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+16:28:48.666 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> PROD MODE <<
+ -- for admin console,
+ --   VISIT http://localhost:63167/con/@/ui/
+ --
+
+16:28:48.827 [main             ] INFO  o.e.j.s.listener.ELContextCleaner - javax.el.BeanELResolver purged
+16:31:54.749 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+16:31:54.877 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+16:31:55.127 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+16:31:55.129 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> PROD MODE <<
+ -- for admin console,
+ --   VISIT http://localhost:63838/con/@/ui/
+ --
+
+16:31:55.299 [main             ] INFO  o.e.j.s.listener.ELContextCleaner - javax.el.BeanELResolver purged
+16:33:18.335 [main             ] WARN  org.reflections.Reflections - given scan urls are empty. set urls in the configuration
+16:33:18.473 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+16:33:18.603 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+16:33:18.973 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+16:33:18.975 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> PROD MODE <<
+ -- for admin console,
+ --   VISIT http://localhost:64127/con/@/ui/
+ --
+
+16:33:19.012 [main             ] INFO  o.e.j.s.listener.ELContextCleaner - javax.el.BeanELResolver purged
+16:33:48.680 [main             ] WARN  org.reflections.Reflections - given scan urls are empty. set urls in the configuration
+16:33:48.811 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+16:33:48.941 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+16:33:49.321 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+16:33:49.323 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> PROD MODE <<
+ -- for admin console,
+ --   VISIT http://localhost:64230/con/@/ui/
+ --
+
+16:33:49.354 [main             ] INFO  o.e.j.s.listener.ELContextCleaner - javax.el.BeanELResolver purged
+16:34:11.398 [main             ] WARN  org.reflections.Reflections - given scan urls are empty. set urls in the configuration
+16:34:11.530 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+16:34:11.662 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+16:34:12.040 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+16:34:12.042 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> PROD MODE <<
+ -- for admin console,
+ --   VISIT http://localhost:64314/con/@/ui/
+ --
+
+16:34:12.079 [main             ] INFO  o.e.j.s.listener.ELContextCleaner - javax.el.BeanELResolver purged
+16:34:33.024 [main             ] WARN  org.reflections.Reflections - given scan urls are empty. set urls in the configuration
+16:34:33.151 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+16:34:33.285 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+16:34:33.678 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+16:34:33.680 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> PROD MODE <<
+ -- for admin console,
+ --   VISIT http://localhost:64387/con/@/ui/
+ --
+
+16:34:33.714 [main             ] INFO  o.e.j.s.listener.ELContextCleaner - javax.el.BeanELResolver purged
+16:37:06.099 [main             ] WARN  org.reflections.Reflections - given scan urls are empty. set urls in the configuration
+16:37:06.230 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+16:37:06.370 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+16:37:06.742 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+16:37:06.744 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> PROD MODE <<
+ -- for admin console,
+ --   VISIT http://localhost:64931/con/@/ui/
+ --
+
+16:37:06.782 [main             ] INFO  o.e.j.s.listener.ELContextCleaner - javax.el.BeanELResolver purged
+17:07:47.805 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+17:07:47.931 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+17:07:48.330 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+17:07:48.335 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> DEV MODE << >> AUTO COMPILE <<
+ -- for admin console,
+ --   VISIT http://localhost:8080/con/@/ui/
+ --
+
+17:07:48.609 [main             ] INFO  restx.classloader.CompilationManager - watching for changes in [src/main/java, src/main/resources]; current location is /Users/bobbyyit/Documents/Peerpen/peerpen/.
+17:07:48.621 [main             ] WARN  o.e.j.u.component.AbstractLifeCycle - FAILED SelectChannelConnector@0.0.0.0:8080: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:444) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:436) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:214) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.7.0_40]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.open(SelectChannelConnector.java:187) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.doStart(SelectChannelConnector.java:265) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:288) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at restx.server.JettyWebServer.start(JettyWebServer.java:77) [restx-server-jetty-0.2.9.2.jar:na]
+	at restx.server.JettyWebServer.startAndAwait(JettyWebServer.java:81) [restx-server-jetty-0.2.9.2.jar:na]
+	at peerpen.AppServer.main(AppServer.java:30) [classes/:na]
+17:07:48.622 [main             ] WARN  o.e.j.u.component.AbstractLifeCycle - FAILED org.eclipse.jetty.server.Server@4bcdf76a: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:444) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:436) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:214) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.7.0_40]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.open(SelectChannelConnector.java:187) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.doStart(SelectChannelConnector.java:265) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) ~[jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:288) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) ~[jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at restx.server.JettyWebServer.start(JettyWebServer.java:77) [restx-server-jetty-0.2.9.2.jar:na]
+	at restx.server.JettyWebServer.startAndAwait(JettyWebServer.java:81) [restx-server-jetty-0.2.9.2.jar:na]
+	at peerpen.AppServer.main(AppServer.java:30) [classes/:na]
+17:08:10.740 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+17:08:10.871 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+17:08:11.231 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+17:08:11.235 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> DEV MODE << >> AUTO COMPILE <<
+ -- for admin console,
+ --   VISIT http://localhost:8080/con/@/ui/
+ --
+
+17:08:11.472 [main             ] INFO  restx.classloader.CompilationManager - watching for changes in [src/main/java, src/main/resources]; current location is /Users/bobbyyit/Documents/Peerpen/peerpen/.
+17:08:11.484 [main             ] WARN  o.e.j.u.component.AbstractLifeCycle - FAILED SelectChannelConnector@0.0.0.0:8080: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:444) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:436) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:214) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.7.0_40]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.open(SelectChannelConnector.java:187) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.doStart(SelectChannelConnector.java:265) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:288) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at restx.server.JettyWebServer.start(JettyWebServer.java:77) [restx-server-jetty-0.2.9.2.jar:na]
+	at restx.server.JettyWebServer.startAndAwait(JettyWebServer.java:81) [restx-server-jetty-0.2.9.2.jar:na]
+	at peerpen.AppServer.main(AppServer.java:30) [classes/:na]
+17:08:11.485 [main             ] WARN  o.e.j.u.component.AbstractLifeCycle - FAILED org.eclipse.jetty.server.Server@28ca36f8: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:444) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:436) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:214) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.7.0_40]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.open(SelectChannelConnector.java:187) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.doStart(SelectChannelConnector.java:265) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) ~[jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:288) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) ~[jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at restx.server.JettyWebServer.start(JettyWebServer.java:77) [restx-server-jetty-0.2.9.2.jar:na]
+	at restx.server.JettyWebServer.startAndAwait(JettyWebServer.java:81) [restx-server-jetty-0.2.9.2.jar:na]
+	at peerpen.AppServer.main(AppServer.java:30) [classes/:na]
+17:08:32.344 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+17:08:32.478 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+17:08:32.868 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+17:08:32.874 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> DEV MODE << >> AUTO COMPILE <<
+ -- for admin console,
+ --   VISIT http://localhost:8080/con/@/ui/
+ --
+
+17:08:33.127 [main             ] INFO  restx.classloader.CompilationManager - watching for changes in [src/main/java, src/main/resources]; current location is /Users/bobbyyit/Documents/Peerpen/peerpen/.
+17:08:41.175 [qtp1739347372-19 ] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.0.0.Final
+17:08:41.734 [qtp1739347372-19 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/ui/img/glyphicons-halflings.png >> 404 - 2.590 ms
+17:08:41.983 [qtp1739347372-21 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/pages >> 401 - 4.296 ms
+17:08:42.051 [qtp1739347372-20 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /sessions/current >> 401 - 556.0 ?s
+17:08:47.456 [qtp1739347372-19 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] POST /sessions >> 200 - 354.0 ms
+17:08:47.724 [qtp1739347372-22 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/ui/img/glyphicons-halflings.png >> 404 - 4.907 ms
+17:08:47.807 [qtp1739347372-24 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /@/pages >> 200 - 14.40 ms
+17:08:47.810 [qtp1739347372-19 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /sessions/current >> 200 - 11.39 ms
+17:09:02.562 [qtp1739347372-20 ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /getArray >> 200 - 5.648 ms
+17:09:11.119 [Thread-1         ] INFO  o.e.j.s.listener.ELContextCleaner - javax.el.BeanELResolver purged
+17:09:11.174 [Thread-1         ] INFO  o.e.jetty.util.thread.ShutdownThread - shutdown already commenced
+17:17:58.274 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+17:17:58.404 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+17:17:58.799 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+17:17:58.805 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> DEV MODE << >> AUTO COMPILE <<
+ -- for admin console,
+ --   VISIT http://localhost:8080/con/@/ui/
+ --
+
+17:17:59.048 [main             ] INFO  restx.classloader.CompilationManager - watching for changes in [src/main/java, src/main/resources]; current location is /Users/bobbyyit/Documents/Peerpen/peerpen/.
+17:17:59.060 [main             ] WARN  o.e.j.u.component.AbstractLifeCycle - FAILED SelectChannelConnector@0.0.0.0:8080: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:444) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:436) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:214) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.7.0_40]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.open(SelectChannelConnector.java:187) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.doStart(SelectChannelConnector.java:265) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:288) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at restx.server.JettyWebServer.start(JettyWebServer.java:77) [restx-server-jetty-0.2.9.2.jar:na]
+	at restx.server.JettyWebServer.startAndAwait(JettyWebServer.java:81) [restx-server-jetty-0.2.9.2.jar:na]
+	at peerpen.AppServer.main(AppServer.java:30) [classes/:na]
+17:17:59.061 [main             ] WARN  o.e.j.u.component.AbstractLifeCycle - FAILED org.eclipse.jetty.server.Server@21dec6bf: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:444) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:436) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:214) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.7.0_40]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.open(SelectChannelConnector.java:187) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.doStart(SelectChannelConnector.java:265) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) ~[jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:288) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) ~[jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at restx.server.JettyWebServer.start(JettyWebServer.java:77) [restx-server-jetty-0.2.9.2.jar:na]
+	at restx.server.JettyWebServer.startAndAwait(JettyWebServer.java:81) [restx-server-jetty-0.2.9.2.jar:na]
+	at peerpen.AppServer.main(AppServer.java:30) [classes/:na]
+17:51:27.087 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+17:51:27.248 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+17:51:27.607 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+17:51:27.611 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> DEV MODE << >> AUTO COMPILE <<
+ -- for admin console,
+ --   VISIT http://localhost:8080/con/@/ui/
+ --
+
+17:51:27.881 [main             ] INFO  restx.classloader.CompilationManager - watching for changes in [src/main/java, src/main/resources]; current location is /Users/bobbyyit/Documents/Peerpen/peerpen/.
+17:51:27.893 [main             ] WARN  o.e.j.u.component.AbstractLifeCycle - FAILED SelectChannelConnector@0.0.0.0:8080: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:444) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:436) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:214) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.7.0_40]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.open(SelectChannelConnector.java:187) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.doStart(SelectChannelConnector.java:265) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:288) [jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at restx.server.JettyWebServer.start(JettyWebServer.java:77) [restx-server-jetty-0.2.9.2.jar:na]
+	at restx.server.JettyWebServer.startAndAwait(JettyWebServer.java:81) [restx-server-jetty-0.2.9.2.jar:na]
+	at peerpen.AppServer.main(AppServer.java:30) [classes/:na]
+17:51:27.894 [main             ] WARN  o.e.j.u.component.AbstractLifeCycle - FAILED org.eclipse.jetty.server.Server@351ff5d1: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:444) ~[na:1.7.0_40]
+	at sun.nio.ch.Net.bind(Net.java:436) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:214) ~[na:1.7.0_40]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.7.0_40]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.open(SelectChannelConnector.java:187) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.doStart(SelectChannelConnector.java:265) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) ~[jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:288) ~[jetty-server-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) ~[jetty-util-8.1.8.v20121106.jar:8.1.8.v20121106]
+	at restx.server.JettyWebServer.start(JettyWebServer.java:77) [restx-server-jetty-0.2.9.2.jar:na]
+	at restx.server.JettyWebServer.startAndAwait(JettyWebServer.java:81) [restx-server-jetty-0.2.9.2.jar:na]
+	at peerpen.AppServer.main(AppServer.java:30) [classes/:na]
+17:51:43.483 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+17:51:43.606 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+17:51:44.013 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+17:51:44.018 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> DEV MODE << >> AUTO COMPILE <<
+ -- for admin console,
+ --   VISIT http://localhost:8080/con/@/ui/
+ --
+
+17:51:44.264 [main             ] INFO  restx.classloader.CompilationManager - watching for changes in [src/main/java, src/main/resources]; current location is /Users/bobbyyit/Documents/Peerpen/peerpen/.
+17:51:57.909 [qtp921580399-19  ] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.0.0.Final
+17:51:58.302 [qtp921580399-19  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /getArray >> 200 - 267.8 ms
+17:52:35.217 [qtp921580399-19  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /getOjectList >> 200 - 65.77 ms
+17:53:17.812 [Thread-1         ] INFO  o.e.j.s.listener.ELContextCleaner - javax.el.BeanELResolver purged
+17:53:17.866 [Thread-1         ] INFO  o.e.jetty.util.thread.ShutdownThread - shutdown already commenced
+17:53:52.880 [main             ] INFO  org.eclipse.jetty.server.Server - jetty-8.1.8.v20121106
+17:53:53.004 [main             ] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+17:53:53.368 [main             ] INFO  restx.RestxMainRouterFactory - LOADING MAIN ROUTER
+17:53:53.374 [main             ] INFO  restx.RestxMainRouterFactory - 
+--------------------------------------
+ -- RESTX >> LOAD ON REQUEST << >> DEV MODE << >> AUTO COMPILE <<
+ -- for admin console,
+ --   VISIT http://localhost:8080/con/@/ui/
+ --
+
+17:53:53.630 [main             ] INFO  restx.classloader.CompilationManager - watching for changes in [src/main/java, src/main/resources]; current location is /Users/bobbyyit/Documents/Peerpen/peerpen/.
+17:53:59.998 [qtp921580399-19  ] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.0.0.Final
+17:54:00.352 [qtp921580399-19  ] INFO  restx.StdRestxMainRouter - << [RESTX REQUEST] GET /getOjectList >> 200 - 224.5 ms
+18:03:51.388 [Thread-1         ] INFO  o.e.j.s.listener.ELContextCleaner - javax.el.BeanELResolver purged
+18:03:51.444 [Thread-1         ] INFO  o.e.jetty.util.thread.ShutdownThread - shutdown already commenced
