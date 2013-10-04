@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h1>Welcome to PeerPen !!!</h1>
 
+<jsp:useBean id="user" type="com.sunnyd.peerpen.domain.User" scope="session" />
+    <p>You have logged in as: <%= user.getUserName()%></p>
+    <p>Now everyone knows you logged with this password ----> <%= user.getPassword()%></p>
 </body>
 </html>

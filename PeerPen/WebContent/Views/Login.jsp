@@ -8,14 +8,19 @@
 <title>PeerPen - Login</title>
 </head>
 <body>
-
-   <h1>Login</h1>
+	<form action="Login" method="post">
+	<h1>Login</h1>
    
-   <h2>Test</h2>
+    <h3>Username</h3>
+	<input type="text" name="un"/><br/>
+	<h3>Password</h3>
+	<input type="password" name="pw"/><br/>
+	<input type="submit" value="submit"/><br/>
+	</form>
    
-    <jsp:useBean id="user" type="com.sunnyd.peerpen.domain.User" scope="request" />
+ <%--    <jsp:useBean id="user" type="com.sunnyd.peerpen.domain.User" scope="request" />
     <p>Artist Name: <%= user.getUserName()%></p>
     <p>Artist Info: <%= user.getPassword()%></p>
-
+ --%>
 </body>
 </html>

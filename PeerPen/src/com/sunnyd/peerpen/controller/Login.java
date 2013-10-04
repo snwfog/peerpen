@@ -1,11 +1,15 @@
 package com.sunnyd.peerpen.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.sunnyd.peerpen.domain.User;
 
 /**
  * Servlet implementation class FrontServlet
@@ -28,6 +32,7 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
 		FrontCommand command;
 		command = getCommand(request);
 		command.init(getServletContext(), request, response);
@@ -62,7 +67,33 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		
+		
+		try
+		{	    
+		     User user = new User();
+		     user.setUserName(request.getParameter("un"));
+		     user.setPassword(request.getParameter("pw"));
+		     
+//		     user = UserDAO.login(user);
+		     user.setValid(true);
+			   		    
+		     if (user.isValid())
+		     {
+		          HttpSession session = request.getSession(true);	    
+		          session.setAttribute("user",user); 
+		          response.sendRedirect("Views/NewFile.jsp"); //logged-in page      		
+		     }
+			        
+		     else 
+		          response.sendRedirect("missingData.jsp"); //error page 
+		} 
+				
+				
+		catch (Throwable theException) 	    
+		{
+		     System.out.println(theException); 
+		}
 	}
 
 }

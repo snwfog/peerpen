@@ -1,34 +1,65 @@
 package com.sunnyd.peerpen.domain;
 
 public class User {
-	String user_name;
-	String password;
+	private String user_name;
+	private String password;
+	private String first_name;
+    private String last_name;
+    public boolean valid;
 
-	public User() {
-		user_name = "john smith";
-		password = "qwerty";
+	public String getFirst_name() {
+		return first_name;
 	}
 
-	public User(String user, String password) {
-		this.user_name = user;
-		this.password = password;
+    public void setFirst_name(String newfirst_name) {
+        first_name = newfirst_name;
 	}
 
-	public User(User user) {
-		this.user_name = user.getUserName();
-		this.password = user.getPassword();
+	
+    public String getLast_name() {
+         return last_name;
 	}
+
+    public void setLast_name(String newlast_name) {
+         last_name = newlast_name;
+	}
+//	public User(String user, String password) {
+//		this.user_name = user;
+//		this.password = password;
+//	}
+
+//	public User(User user) {
+//		this.user_name = user.getUserName();
+//		this.password = user.getPassword();
+//	}
 
 	public String getPassword() {
 		return this.password;
 	}
+	
+	public void setPassword(String password){
+		this.password = password; 
+	}
 
+	
 	public String getUserName() {
 		return this.user_name;
 	}
 
-	public static User findUser(String name, String password) {
-		return new User(name, password);
+	public void setUserName(String username){
+		this.user_name = username;
 	}
+	
+//	public static User findUser(String name, String password) {
+//		return new User(name, password);
+//	}
+	
+	public boolean isValid() {
+        return valid;
+	}
+
+    public void setValid(boolean newValid) {
+        valid = newValid;
+	}	
 
 }
