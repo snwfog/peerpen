@@ -9,7 +9,6 @@
 <body>
 <h1>Create User</h1>
 	<form method="post">
-	<h1>Login</h1>
    
     <h3>Username</h3>
 	<input type="text" name="un"/><br/>

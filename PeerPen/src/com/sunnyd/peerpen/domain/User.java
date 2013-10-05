@@ -5,6 +5,10 @@ public class User {
 	private String password;
 	private String first_name;
     private String last_name;
+    private String gender;
+    private String personal_website;
+    private String email;
+    private String points;
     public boolean valid;
 
 	public String getFirst_name() {
