@@ -60,7 +60,8 @@ public class Login extends HttpServlet {
 		}
 		return result;
 	}
-
+	
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -71,22 +72,23 @@ public class Login extends HttpServlet {
 		
 		try
 		{	    
-		     User user = new User();
-		     user.setUserName(request.getParameter("un"));
-		     user.setPassword(request.getParameter("pw"));
-		     
-//		     user = UserDAO.login(user);
-		     user.setValid(true);
+			 User user = new User();
+			 user.setUserName(request.getParameter("un"));
+			 user.setPassword(request.getParameter("pw"));
+			 
+			//		     user = UserDAO.login(user);
+			 user.setValid(true);
 			   		    
-		     if (user.isValid())
-		     {
-		          HttpSession session = request.getSession(true);	    
-		          session.setAttribute("user",user); 
-		          response.sendRedirect("Views/NewFile.jsp"); //logged-in page      		
+			 if (user.isValid())
+			 {
+		         HttpSession session = request.getSession(true);	    
+		         session.setAttribute("user",user); 
+		         request.getRequestDispatcher("Views/Session.jsp").forward(request, response);
+//		         response.sendRedirect("Views/Session.jsp"); //logged-in page      		
 		     }
 			        
 		     else 
-		          response.sendRedirect("missingData.jsp"); //error page 
+		    	 response.sendRedirect("missingData.jsp"); //error page 
 		} 
 				
 				
