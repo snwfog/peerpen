@@ -35,25 +35,24 @@ public class User extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		if(request.getRequestURI().contentEquals(UserNewURI)){
-//			show create user page
+		if (request.getRequestURI().contentEquals(UserNewURI)) {
+			// show create user page
 			UserManager um = new UserManager();
 			um.init(getServletContext(), request, response);
-			um.createUser();
+			um.createPeerPage();
+		} else if (request.getRequestURI().contentEquals(UserURI)) {
+			// show user page?
+			// get user stuff id and show stuff
 		}
-		else if(request.getRequestURI().contentEquals(UserURI)){
-//			show user page?
-//			get user stuff id and show stuff
-		}
-		
+
 		System.out.println(request.getRequestURL());
 		System.out.println(request.getRequestURI());
 		System.out.println(request.getParameter("user"));
 
-//		FrontCommand command;
-//		command = getCommand(request);
-//		command.init(getServletContext(), request, response);
-//		command.process();
+		// FrontCommand command;
+		// command = getCommand(request);
+		// command.init(getServletContext(), request, response);
+		// command.process();
 	}
 
 	/**
@@ -62,8 +61,35 @@ public class User extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("halalalalalalalalalal!!!!!!!!!!!!!!!!!!!!!!!!!!!! powpowpowpowpowpowpowpowpowpow!!!");
 
+		String first_name = request.getParameter("first_name");
+		String last_name = request.getParameter("last_name");
+		String sex = request.getParameter("sex");
+		String website = request.getParameter("personal_website");
+		String user_name = request.getParameter("user_name");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+
+		UserManager um = new UserManager();
+		um.init(getServletContext(), request, response);
+		um.createPeer(first_name, last_name, sex, website, user_name, email,
+				password);
+
+		System.out
+				.println("halalalalalalalalalal!!!!!!!!!!!!!!!!!!!!!!!!!!!! powpowpowpowpowpowpowpowpowpow!!!");
+
+	}
+
+	private Class<?> getCommandClass(String controller) {
+		Class<?> result;
+		final String commandClassName = "com.sunnyd.peerpen.manager."
+				+ controller + "Manager";
+		try {
+			result = Class.forName(commandClassName);
+		} catch (ClassNotFoundException e) {
+			result = UnknownCommand.class;
+		}
+		return result;
 	}
 
 }

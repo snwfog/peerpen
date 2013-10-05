@@ -15,7 +15,7 @@ public class UserManager extends FrontCommand {
 
 	}
 
-	public void createUser() throws ServletException, IOException {
+	public void createPeerPage() throws ServletException, IOException {
 		System.out.println("create new user");
 		forward("/Views/NewUser.jsp");
 	}
@@ -26,5 +26,13 @@ public class UserManager extends FrontCommand {
 //		 request.getParameter("name")
 //		 request.setAttribute("user", new User(user));
 		forward("/Views/User.jsp");
+	}
+
+	
+	public void createPeer(String first_name, String last_name, String sex,
+			String website, String user_name, String email, String password) throws ServletException, IOException{
+		
+		forward("dsfads");
+		
 	}
 }
