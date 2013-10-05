@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sunnyd.peerpen.domain.User;
+import com.sunnyd.peerpen.manager.SessionManager;
+import com.sunnyd.peerpen.manager.UserManager;
 
 /**
  * Servlet implementation class FrontServlet
@@ -81,14 +83,15 @@ public class Login extends HttpServlet {
 			   		    
 			 if (user.isValid())
 			 {
-		         HttpSession session = request.getSession(true);	    
-		         session.setAttribute("user",user); 
-		         request.getRequestDispatcher("Views/Session.jsp").forward(request, response);
-//		         response.sendRedirect("Views/Session.jsp"); //logged-in page      		
+				 HttpSession session = request.getSession(true);	    
+				 session.setAttribute("user",user); 
+				 SessionManager ss = new SessionManager();
+				 ss.init(getServletContext(), request, response);
+				 ss.process();
 		     }
 			        
 		     else 
-		    	 response.sendRedirect("missingData.jsp"); //error page 
+		    	 request.getRequestDispatcher("/Views/missingData.jsp").forward(request, response);//error page 
 		} 
 				
 				
