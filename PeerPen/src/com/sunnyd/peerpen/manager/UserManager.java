@@ -29,10 +29,11 @@ public class UserManager extends FrontCommand {
 	}
 
 	
-	public void createPeer(String first_name, String last_name, String sex,
+	public boolean createPeer(String first_name, String last_name, String sex,
 			String website, String user_name, String email, String password) throws ServletException, IOException{
 		
-		forward("dsfads");
+		System.out.println("creating user...");
+		return true;
 		
 	}
 }

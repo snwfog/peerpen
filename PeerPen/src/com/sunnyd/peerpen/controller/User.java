@@ -48,6 +48,11 @@ public class User extends HttpServlet {
 		System.out.println(request.getRequestURL());
 		System.out.println(request.getRequestURI());
 		System.out.println(request.getParameter("user"));
+		System.out.println(request.getProtocol());
+
+		System.out.println(request.getServerName() + ":"
+				+ request.getServerPort() + "/");
+		System.out.println("--------------------");
 
 		// FrontCommand command;
 		// command = getCommand(request);
@@ -72,12 +77,24 @@ public class User extends HttpServlet {
 
 		UserManager um = new UserManager();
 		um.init(getServletContext(), request, response);
-		um.createPeer(first_name, last_name, sex, website, user_name, email,
-				password);
+		boolean status = um.createPeer(first_name, last_name, sex, website,
+				user_name, email, password);
 
-		System.out
-				.println("halalalalalalalalalal!!!!!!!!!!!!!!!!!!!!!!!!!!!! powpowpowpowpowpowpowpowpowpow!!!");
+		FrontCommand command;
+		command = getCommand("FrontPage");
+		command.init(getServletContext(), request, response);
+		command.process();
 
+	}
+
+	private FrontCommand getCommand(String manager) {
+		try {
+			return (FrontCommand) getCommandClass(manager).newInstance();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	private Class<?> getCommandClass(String controller) {
