@@ -83,11 +83,12 @@ public class Login extends HttpServlet {
 			   		    
 			 if (user.isValid())
 			 {
+				 
+				 
 				 HttpSession session = request.getSession(true);	    
 				 session.setAttribute("user",user); 
-				 SessionManager ss = new SessionManager();
-				 ss.init(getServletContext(), request, response);
-				 ss.process();
+				 response.sendRedirect("http://localhost:8080/PeerPen/FrontPage");
+				
 		     }
 			        
 		     else 

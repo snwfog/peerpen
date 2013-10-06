@@ -34,6 +34,11 @@ public class FrontPage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
+		FrontCommand session;
+		session = getCommand(request);
+		session.init(getServletContext(), request, response);
+		session.process();
 	
 	}
 
@@ -50,7 +55,7 @@ public class FrontPage extends HttpServlet {
 	private Class<?> getCommandClass(HttpServletRequest request) {
 		Class<?> result;
 		final String commandClassName = "com.sunnyd.peerpen.manager."
-				+ (String) request.getParameter("command") + "Manager";
+				+ "SessionManager";
 		try {
 			result = Class.forName(commandClassName);
 		} catch (ClassNotFoundException e) {

@@ -8,7 +8,7 @@
 <title>PeerPen - Login</title>
 </head>
 <body>
-	<form action="<c:url value="/PeerPen/Home"/>"  method="post">
+	<form action="Login" method="post">
 	<h1>Login</h1>
    
     <h3>Username</h3>
