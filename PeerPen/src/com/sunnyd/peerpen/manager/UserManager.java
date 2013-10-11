@@ -23,27 +23,18 @@ public class UserManager extends FrontCommand {
 	}
 
 	public void createPeerPage() throws ServletException, IOException {
-		System.out.println("create new user");
 		forward("/Views/NewUser.jsp");
 	}
 
 	public void viewUser(String id) throws ServletException, IOException {
-		System.out.println("show user");
+
 		User user = new User("John", "Smith", "Shemale", "www.peerpen.com",
 				"i_like_turtles", "steve.jobs@apple.com", "root");
 
 		HttpSession session = request.getSession(true);
 		session.setAttribute("user", user);
 
-		// request.setAttribute("user", user);
 		forward("/Views/Profile.jsp");
-		// request.getRequestDispatcher("/Views/Profile.jsp").forward(request,
-		// response);
-		System.out.println("show user");
-		// String redirectURL = "http://" + request.getServerName() + ":"
-		// + request.getServerPort() + "/" + "PeerPen/User/Profile";
-
-		// response.sendRedirect("PeerPen/Views/Profile.jsp");
 	}
 
 	public User createPeer(String first_name, String last_name, String sex,
@@ -52,10 +43,8 @@ public class UserManager extends FrontCommand {
 
 		User user = new User(first_name, last_name, sex, website, user_name,
 				email, password);
-
-		System.out.println("creating user...");
+		
 		return user;
-
 	}
 
 	public void creationUser(String string) throws ServletException,
@@ -67,11 +56,13 @@ public class UserManager extends FrontCommand {
 		HttpSession session = request.getSession(true);
 		session.setAttribute("user", user);
 
-		System.out.println("show user");
 		String redirectURL = "http://" + request.getServerName() + ":"
 				+ request.getServerPort() + "/" + "PeerPen/User/Profile";
 
 		response.sendRedirect(redirectURL);
+	}
 
+	public void editUser() {
+		
 	}
 }

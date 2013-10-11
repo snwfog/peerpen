@@ -13,10 +13,11 @@ import com.sunnyd.peerpen.manager.UserManager;
 /**
  * Servlet implementation class FrontServlet
  */
-@WebServlet(urlPatterns = { "/User", "/User/new", "/User/Profile" })
+@WebServlet(urlPatterns = { "/User", "/User/new", "/User/Profile", "/User/EditProfile" })
 public class User extends SuperBass {
 	final static String UserProfileURI = "/PeerPen/User/Profile";
 	final static String UserNewURI = "/PeerPen/User/new";
+	final static String UserEditURI = "/PeerPen/User/EditProfile";
 
 	private static final long serialVersionUID = 1L;
 
@@ -35,16 +36,14 @@ public class User extends SuperBass {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		UserManager um = new UserManager();
-		um.init(getServletContext(), request, response);
+		UserManager usermanager = new UserManager();
+		usermanager.init(getServletContext(), request, response);
 		if (request.getRequestURI().contentEquals(UserNewURI)) {
-			// show create user page
-			um.createPeerPage();
+			usermanager.createPeerPage();
 		} else if (request.getRequestURI().contentEquals(UserProfileURI)) {
-			// show user page?
-			System.out.println("show user profile page");
-			um.viewUser("gags");
-
+			usermanager.viewUser("INSERT USERNAME OR ID HERE FROM SESSION");
+		} else if (request.getRequestURI().contentEquals(UserEditURI)) {
+			usermanager.editUser();
 		}
 
 //		System.out.println(request.getRequestURL());
@@ -55,11 +54,6 @@ public class User extends SuperBass {
 //		System.out.println(request.getServerName() + ":"
 //				+ request.getServerPort() + "/");
 		System.out.println("--------------------");
-
-		// FrontCommand command;
-		// command = getCommand(request);
-		// command.init(getServletContext(), request, response);
-		// command.process();
 	}
 
 	/**
@@ -83,12 +77,6 @@ public class User extends SuperBass {
 				last_name, sex, website, user_name, email, password);
 
 		um.creationUser("1");
-
-		// FrontCommand command;
-		// command = getCommand("User");
-		// command.init(getServletContext(), request, response);
-		// command.processRedirect();
-
 	}
 
 
