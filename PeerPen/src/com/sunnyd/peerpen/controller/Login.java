@@ -54,7 +54,7 @@ public class Login extends HttpServlet {
 	private Class<?> getCommandClass(HttpServletRequest request) {
 		Class<?> result;
 		final String commandClassName = "com.sunnyd.peerpen.manager."
-				+ (String) request.getParameter("command") + "Manager";
+				+"LoginManager";
 		try {
 			result = Class.forName(commandClassName);
 		} catch (ClassNotFoundException e) {

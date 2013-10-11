@@ -4,13 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<title>Insert title here</title>
+<title>Front Page</title>
 </head>
 <body>
-<h1>Welcome to PeerPen !!!</h1>
-
 <jsp:useBean id="user" type="com.sunnyd.peerpen.domain.User" scope="session" />
+<h1>Welcome to PeerPen <%=user.getUserName()%></h1>
+
     <p>You have logged in as: <%= user.getUserName()%></p>
     <p>Now everyone knows you logged with this password ----> <%= user.getPassword()%></p>
+    
+    <p><a href="Views/Logout.jsp">Logout</a></p>
 </body>
 </html>
