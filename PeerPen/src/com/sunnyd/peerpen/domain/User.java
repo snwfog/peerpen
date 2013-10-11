@@ -27,15 +27,19 @@ public class User {
     public void setLast_name(String newlast_name) {
          last_name = newlast_name;
 	}
-//	public User(String user, String password) {
-//		this.user_name = user;
-//		this.password = password;
-//	}
+	public User(String user, String password) {
+		this.user_name = user;
+		this.password = password;
+	}
 
 //	public User(User user) {
 //		this.user_name = user.getUserName();
 //		this.password = user.getPassword();
 //	}
+
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public String getPassword() {
 		return this.password;

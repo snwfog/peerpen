@@ -14,7 +14,7 @@ import com.sunnyd.peerpen.manager.UserManager;
  * Servlet implementation class FrontServlet
  */
 @WebServlet(urlPatterns = { "/User", "/User/new" })
-public class User extends HttpServlet {
+public class User extends SuperBass {
 	final static String UserURI = "/PeerPen/User";
 	final static String UserNewURI = "/PeerPen/User/new";
 

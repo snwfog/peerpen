@@ -3,6 +3,7 @@ package com.sunnyd.peerpen.manager;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import com.sunnyd.peerpen.controller.FrontCommand;
+import com.sunnyd.peerpen.domain.User;
 
 public class UserManager extends FrontCommand {
 
@@ -31,6 +32,10 @@ public class UserManager extends FrontCommand {
 	
 	public boolean createPeer(String first_name, String last_name, String sex,
 			String website, String user_name, String email, String password) throws ServletException, IOException{
+		
+		User user = new User();
+		
+		
 		
 		System.out.println("creating user...");
 		return true;
