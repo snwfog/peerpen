@@ -17,7 +17,7 @@ import com.sunnyd.peerpen.manager.UserManager;
  * Servlet implementation class FrontServlet
  */
 @WebServlet("/FrontPage")
-public class FrontPage extends HttpServlet {
+public class FrontPage extends SuperBass {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -34,11 +34,16 @@ public class FrontPage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
-		FrontCommand session;
-		session = getCommand(request);
-		session.init(getServletContext(), request, response);
-		session.process();
+		HttpSession session = request.getSession(true);
+		FrontCommand login;
+		login = getCommand(request);
+		login.init(getServletContext(), request, response);
+		if(sessionExists(session)){
+			login.processForward();
+		}
+		else{
+			
+		}
 	
 	}
 

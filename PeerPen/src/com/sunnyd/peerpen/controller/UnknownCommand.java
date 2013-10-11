@@ -7,8 +7,12 @@ import javax.servlet.ServletException;
 public class UnknownCommand extends FrontCommand {
 
 	@Override
-	public void process() throws ServletException, IOException {
+	public void processForward() throws ServletException, IOException {
 		forward("/Views/Login.jsp");
 
+	}
+	public void processRedirect() throws ServletException, IOException {
+		
+		
 	}
 }

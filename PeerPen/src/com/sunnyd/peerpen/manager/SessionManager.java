@@ -10,11 +10,15 @@ import com.sunnyd.peerpen.domain.User;
 public class SessionManager extends FrontCommand {
 
 @Override
-public void process() throws ServletException, IOException {
+public void processForward() throws ServletException, IOException {
 	// TODO Auto-generated method stub
 	
 	forward("/Views/Session.jsp");
 	}
+public void processRedirect() throws ServletException, IOException {
+	
+	
+}
 
 
 }

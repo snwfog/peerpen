@@ -9,7 +9,7 @@ import com.sunnyd.peerpen.domain.User;
 
 public class FrontPageManager extends FrontCommand {
 
-	public void process() throws ServletException, IOException {
+	public void processForward() throws ServletException, IOException {
 		// User user = User.findUser("bob", "hilo");//
 		// request.getParameter("name")
 		// request.setAttribute("user", new User(user));
@@ -17,6 +17,10 @@ public class FrontPageManager extends FrontCommand {
 		String redirectURL = "http://" + request.getServerName() + ":"
 				+ request.getServerPort() + "/" + "PeerPen/Login";
 		response.sendRedirect(redirectURL);
+	}
+	public void processRedirect() throws ServletException, IOException {
+		
+		
 	}
 
 }

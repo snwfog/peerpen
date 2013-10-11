@@ -20,8 +20,9 @@ public abstract class FrontCommand {
 		
 	}
 
-	abstract public void process() throws ServletException, IOException;
+	abstract public void processForward() throws ServletException, IOException;
 	
+	abstract public void processRedirect() throws ServletException, IOException;
 	
 	protected void forward(String target) throws ServletException, IOException{
 		RequestDispatcher dispatcher = context.getRequestDispatcher(target);

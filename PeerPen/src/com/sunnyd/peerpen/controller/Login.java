@@ -16,7 +16,7 @@ import com.sunnyd.peerpen.manager.UserManager;
 /**
  * Servlet implementation class FrontServlet
  */
-@WebServlet("/Login")
+@WebServlet(urlPatterns = { "/","/Login"})
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -38,7 +38,7 @@ public class Login extends HttpServlet {
 		FrontCommand command;
 		command = getCommand(request);
 		command.init(getServletContext(), request, response);
-		command.process();
+		command.processForward();
 	}
 
 	private FrontCommand getCommand(HttpServletRequest request) {
