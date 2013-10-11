@@ -36,9 +36,9 @@ public class User extends SuperBass {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		UserManager um = new UserManager();
+		um.init(getServletContext(), request, response);
 		if (request.getRequestURI().contentEquals(UserNewURI)) {
 			// show create user page
-			um.init(getServletContext(), request, response);
 			um.createPeerPage();
 		} else if (request.getRequestURI().contentEquals(UserProfileURI)) {
 			// show user page?
@@ -82,7 +82,7 @@ public class User extends SuperBass {
 		com.sunnyd.peerpen.domain.User user = um.createPeer(first_name,
 				last_name, sex, website, user_name, email, password);
 
-		um.viewUser("1");
+		um.creationUser("1");
 
 		// FrontCommand command;
 		// command = getCommand("User");
@@ -91,26 +91,5 @@ public class User extends SuperBass {
 
 	}
 
-	private FrontCommand getCommand(String manager) {
-		try {
-			return (FrontCommand) getCommandClass(manager).newInstance();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	private Class<?> getCommandClass(String controller) {
-		Class<?> result;
-		final String commandClassName = "com.sunnyd.peerpen.manager."
-				+ controller + "Manager";
-		try {
-			result = Class.forName(commandClassName);
-		} catch (ClassNotFoundException e) {
-			result = UnknownCommand.class;
-		}
-		return result;
-	}
 
 }

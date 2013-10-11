@@ -2,6 +2,8 @@ package com.sunnyd.peerpen.manager;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpSession;
+
 import com.sunnyd.peerpen.controller.FrontCommand;
 import com.sunnyd.peerpen.domain.User;
 
@@ -27,15 +29,21 @@ public class UserManager extends FrontCommand {
 
 	public void viewUser(String id) throws ServletException, IOException {
 		System.out.println("show user");
-		User user = new User("John", "Smith", "Shemale", "www.peerpen.com", "i_like_turtles", "steve.jobs@apple.com",
-				"root");
+		User user = new User("John", "Smith", "Shemale", "www.peerpen.com",
+				"i_like_turtles", "steve.jobs@apple.com", "root");
 
-		request.setAttribute("user", user);
+		HttpSession session = request.getSession(true);
+		session.setAttribute("user", user);
+
+		// request.setAttribute("user", user);
 		forward("/Views/Profile.jsp");
-
+		// request.getRequestDispatcher("/Views/Profile.jsp").forward(request,
+		// response);
+		System.out.println("show user");
 		// String redirectURL = "http://" + request.getServerName() + ":"
 		// + request.getServerPort() + "/" + "PeerPen/User/Profile";
-		// response.sendRedirect(redirectURL);
+
+		// response.sendRedirect("PeerPen/Views/Profile.jsp");
 	}
 
 	public User createPeer(String first_name, String last_name, String sex,
@@ -47,6 +55,23 @@ public class UserManager extends FrontCommand {
 
 		System.out.println("creating user...");
 		return user;
+
+	}
+
+	public void creationUser(String string) throws ServletException,
+			IOException {
+		System.out.println("show user");
+		User user = new User("John", "Smith", "Shemale", "www.peerpen.com",
+				"i_like_turtles", "steve.jobs@apple.com", "root");
+
+		HttpSession session = request.getSession(true);
+		session.setAttribute("user", user);
+
+		System.out.println("show user");
+		String redirectURL = "http://" + request.getServerName() + ":"
+				+ request.getServerPort() + "/" + "PeerPen/User/Profile";
+
+		response.sendRedirect(redirectURL);
 
 	}
 }
