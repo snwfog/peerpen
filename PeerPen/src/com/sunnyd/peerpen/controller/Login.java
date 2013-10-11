@@ -36,7 +36,10 @@ public class Login extends SuperBass {
 			HttpServletResponse response) throws ServletException, IOException {
 		
 		FrontCommand command;
-		command = getCommand("Login");
+		if (!sessionExists(request))
+			command = getCommand("Login");
+		else
+			command = getCommand("Logout");
 		command.init(getServletContext(), request, response);
 		command.processForward();
 	}
