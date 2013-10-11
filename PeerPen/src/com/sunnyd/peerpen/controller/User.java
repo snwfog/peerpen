@@ -91,26 +91,5 @@ public class User extends SuperBass {
 
 	}
 
-	private FrontCommand getCommand(String manager) {
-		try {
-			return (FrontCommand) getCommandClass(manager).newInstance();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	private Class<?> getCommandClass(String controller) {
-		Class<?> result;
-		final String commandClassName = "com.sunnyd.peerpen.manager."
-				+ controller + "Manager";
-		try {
-			result = Class.forName(commandClassName);
-		} catch (ClassNotFoundException e) {
-			result = UnknownCommand.class;
-		}
-		return result;
-	}
 
 }

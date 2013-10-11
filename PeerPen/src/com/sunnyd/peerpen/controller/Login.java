@@ -17,7 +17,7 @@ import com.sunnyd.peerpen.manager.UserManager;
  * Servlet implementation class FrontServlet
  */
 @WebServlet(urlPatterns = { "/","/Login"})
-public class Login extends HttpServlet {
+public class Login extends SuperBass {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -36,33 +36,10 @@ public class Login extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		
 		FrontCommand command;
-		command = getCommand(request);
+		command = getCommand("Login");
 		command.init(getServletContext(), request, response);
 		command.processForward();
 	}
-
-	private FrontCommand getCommand(HttpServletRequest request) {
-		try {
-			return (FrontCommand) getCommandClass(request).newInstance();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	private Class<?> getCommandClass(HttpServletRequest request) {
-		Class<?> result;
-		final String commandClassName = "com.sunnyd.peerpen.manager."
-				+"LoginManager";
-		try {
-			result = Class.forName(commandClassName);
-		} catch (ClassNotFoundException e) {
-			result = UnknownCommand.class;
-		}
-		return result;
-	}
-	
 	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

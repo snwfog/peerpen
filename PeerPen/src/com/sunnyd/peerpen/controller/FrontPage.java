@@ -35,7 +35,7 @@ public class FrontPage extends SuperBass {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		FrontCommand login;
-		login = getCommand(request);
+		login = getCommand("Session");
 		login.init(getServletContext(), request, response);
 		if(sessionExists(request)){
 			login.processForward();
@@ -46,28 +46,6 @@ public class FrontPage extends SuperBass {
 	
 	}
 
-	private FrontCommand getCommand(HttpServletRequest request) {
-		try {
-			return (FrontCommand) getCommandClass(request).newInstance();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	private Class<?> getCommandClass(HttpServletRequest request) {
-		Class<?> result;
-		final String commandClassName = "com.sunnyd.peerpen.manager."
-				+ "SessionManager";
-		try {
-			result = Class.forName(commandClassName);
-		} catch (ClassNotFoundException e) {
-			result = UnknownCommand.class;
-		}
-		return result;
-	}
-	
 	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
