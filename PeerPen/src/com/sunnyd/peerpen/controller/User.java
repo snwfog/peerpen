@@ -13,9 +13,9 @@ import com.sunnyd.peerpen.manager.UserManager;
 /**
  * Servlet implementation class FrontServlet
  */
-@WebServlet(urlPatterns = { "/User", "/User/new" })
+@WebServlet(urlPatterns = { "/User", "/User/new", "/User/Profile" })
 public class User extends SuperBass {
-	final static String UserURI = "/PeerPen/User";
+	final static String UserProfileURI = "/PeerPen/User/Profile";
 	final static String UserNewURI = "/PeerPen/User/new";
 
 	private static final long serialVersionUID = 1L;
@@ -35,23 +35,25 @@ public class User extends SuperBass {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
+		UserManager um = new UserManager();
 		if (request.getRequestURI().contentEquals(UserNewURI)) {
 			// show create user page
-			UserManager um = new UserManager();
 			um.init(getServletContext(), request, response);
 			um.createPeerPage();
-		} else if (request.getRequestURI().contentEquals(UserURI)) {
+		} else if (request.getRequestURI().contentEquals(UserProfileURI)) {
 			// show user page?
-			// get user stuff id and show stuff
+			System.out.println("show user profile page");
+			um.viewUser("gags");
+
 		}
 
-		System.out.println(request.getRequestURL());
-		System.out.println(request.getRequestURI());
-		System.out.println(request.getParameter("user"));
-		System.out.println(request.getProtocol());
-
-		System.out.println(request.getServerName() + ":"
-				+ request.getServerPort() + "/");
+//		System.out.println(request.getRequestURL());
+//		System.out.println(request.getRequestURI());
+//		System.out.println(request.getParameter("user"));
+//		System.out.println(request.getProtocol());
+//
+//		System.out.println(request.getServerName() + ":"
+//				+ request.getServerPort() + "/");
 		System.out.println("--------------------");
 
 		// FrontCommand command;
@@ -77,13 +79,15 @@ public class User extends SuperBass {
 
 		UserManager um = new UserManager();
 		um.init(getServletContext(), request, response);
-		com.sunnyd.peerpen.domain.User user = um.createPeer(first_name, last_name, sex, website,
-				user_name, email, password);
+		com.sunnyd.peerpen.domain.User user = um.createPeer(first_name,
+				last_name, sex, website, user_name, email, password);
 
-		FrontCommand command;
-		command = getCommand("FrontPage");
-		command.init(getServletContext(), request, response);
-		command.processForward();
+		um.viewUser("1");
+
+		// FrontCommand command;
+		// command = getCommand("User");
+		// command.init(getServletContext(), request, response);
+		// command.processRedirect();
 
 	}
 

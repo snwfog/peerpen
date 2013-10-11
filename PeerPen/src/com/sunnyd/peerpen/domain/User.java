@@ -20,19 +20,19 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getFirst_name() {
+	public String getFirstName() {
 		return first_name;
 	}
 
-    public void setFirst_name(String newfirst_name) {
+    public void setFirstName(String newfirst_name) {
         first_name = newfirst_name;
 	}
 
-    public String getLast_name() {
+    public String getLastName() {
          return last_name;
 	}
 
-    public void setLast_name(String newlast_name) {
+    public void setLastName(String newlast_name) {
          last_name = newlast_name;
 	}
 	public User(String user, String password) {
@@ -44,10 +44,10 @@ public class User {
 			String website, String user_name2, String email2, String password2) {
 		this.first_name = first_name2;
 		this.last_name = last_name2;
-		this.gender = sex;
-		this.personal_website = website;
+		this.setGender(sex);
+		this.setPersonalWebsite(website);
 		this.user_name = user_name2;
-		this.email = email2;
+		this.setEmail(email2);
 		this.password = password2;
 	}
 
@@ -78,6 +78,38 @@ public class User {
 
     public void setValid(boolean newValid) {
         valid = newValid;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getPersonalWebsite() {
+		return personal_website;
+	}
+
+	public void setPersonalWebsite(String personal_website) {
+		this.personal_website = personal_website;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPoints() {
+		return points;
+	}
+
+	public void setPoints(String points) {
+		this.points = points;
 	}	
 
 }
