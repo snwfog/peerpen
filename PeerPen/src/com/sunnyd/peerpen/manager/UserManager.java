@@ -8,13 +8,18 @@ import com.sunnyd.peerpen.domain.User;
 public class UserManager extends FrontCommand {
 
 	// @Override
-	public void process() throws ServletException, IOException {
+	public void processForward() throws ServletException, IOException {
 //		 User user = User.findUser("bob", "hilo");//
 //		 request.getParameter("name")
 //		 request.setAttribute("user", new User(user));
 		forward("/Views/Login.jsp");
 
 	}
+	
+	public void processRedirect() throws ServletException, IOException{
+		
+	}
+	
 
 	public void createPeerPage() throws ServletException, IOException {
 		System.out.println("create new user");
@@ -30,15 +35,13 @@ public class UserManager extends FrontCommand {
 	}
 
 	
-	public boolean createPeer(String first_name, String last_name, String sex,
+	public User createPeer(String first_name, String last_name, String sex,
 			String website, String user_name, String email, String password) throws ServletException, IOException{
 		
-		User user = new User();
-		
-		
+		User user = new User(first_name, last_name, sex, website, user_name, email, password);
 		
 		System.out.println("creating user...");
-		return true;
+		return user;
 		
 	}
 }

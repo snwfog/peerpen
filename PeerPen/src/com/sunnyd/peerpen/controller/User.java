@@ -77,13 +77,13 @@ public class User extends SuperBass {
 
 		UserManager um = new UserManager();
 		um.init(getServletContext(), request, response);
-		boolean status = um.createPeer(first_name, last_name, sex, website,
+		com.sunnyd.peerpen.domain.User user = um.createPeer(first_name, last_name, sex, website,
 				user_name, email, password);
 
 		FrontCommand command;
 		command = getCommand("FrontPage");
 		command.init(getServletContext(), request, response);
-		command.process();
+		command.processForward();
 
 	}
 

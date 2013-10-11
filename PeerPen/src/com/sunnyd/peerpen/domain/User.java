@@ -11,6 +11,15 @@ public class User {
     private String points;
     public boolean valid;
 
+//	public User(User user) {
+//		this.user_name = user.getUserName();
+//		this.password = user.getPassword();
+//	}
+
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getFirst_name() {
 		return first_name;
 	}
@@ -19,7 +28,6 @@ public class User {
         first_name = newfirst_name;
 	}
 
-	
     public String getLast_name() {
          return last_name;
 	}
@@ -32,13 +40,15 @@ public class User {
 		this.password = password;
 	}
 
-//	public User(User user) {
-//		this.user_name = user.getUserName();
-//		this.password = user.getPassword();
-//	}
-
-	public User() {
-		// TODO Auto-generated constructor stub
+	public User(String first_name2, String last_name2, String sex,
+			String website, String user_name2, String email2, String password2) {
+		this.first_name = first_name2;
+		this.last_name = last_name2;
+		this.gender = sex;
+		this.personal_website = website;
+		this.user_name = user_name2;
+		this.email = email2;
+		this.password = password2;
 	}
 
 	public String getPassword() {
