@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class SuperBass extends HttpServlet{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7273037356425614164L;
 	protected HttpSession session = null;
 	private String hello(){
 		return "teset";
@@ -23,6 +27,27 @@ public class SuperBass extends HttpServlet{
 				return false;
 			
 		return true;
+	}
+	protected FrontCommand getCommand(String manager) {
+		try {
+			return (FrontCommand) getCommandClass(manager).newInstance();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	protected Class<?> getCommandClass(String controller) {
+		Class<?> result;
+		final String commandClassName = "com.sunnyd.peerpen.manager."
+				+ controller + "Manager";
+		try {
+			result = Class.forName(commandClassName);
+		} catch (ClassNotFoundException e) {
+			result = UnknownCommand.class;
+		}
+		return result;
 	}
 }
 	
