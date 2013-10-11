@@ -8,8 +8,6 @@ public class LoginManager extends FrontCommand {
 
 //	@Override
 	public void processForward() throws ServletException, IOException {
-//		User user = User.findUser("bob", "hilo");// request.getParameter("name")
-//		request.setAttribute("user", new User(user));
 		forward("/Views/Login.jsp");
 
 	}
