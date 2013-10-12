@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sunnyd.peerpen.Manager.LoginManager;
 import com.sunnyd.peerpen.Manager.SessionManager;
 import com.sunnyd.peerpen.Manager.UserManager;
 import com.sunnyd.peerpen.Model.User;
@@ -73,12 +74,18 @@ public class Login extends SuperBase {
 				 session.setMaxInactiveInterval(60*60*24*14);
 				 System.out.println("default timeout period for sessions : " + session.getMaxInactiveInterval());
 				 session.setAttribute("user",user); 
-				 response.sendRedirect("http://localhost:8080/PeerPen/FrontPage");
+				 LoginManager logging = new LoginManager();
+				 logging.init(getServletContext(), request, response);
+				 logging.processRedirect();
 				
 		     }
 			        
-		     else 
-		    	 request.getRequestDispatcher("/Views/missingData.jsp").forward(request, response);//error page 
+			 else{ 
+		    		UserManager newUser = new UserManager();
+					newUser.init(getServletContext(), request, response);
+					newUser.processRedirect();
+					
+			 }
 		} 
 				
 				

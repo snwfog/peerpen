@@ -14,6 +14,7 @@ public class UserManager extends FrontCommand {
 	}
 
 	public void processRedirect() throws ServletException, IOException {
+		redirect("/User/new");
 
 	}
 
