@@ -6,7 +6,7 @@
 <head>
 <script>
 function go() {
-window.location.replace("Login",'window','toolbar=1,location=1,directories=1,status=1,menubar=1,scrollbars=1,resizable=1');
+window.location.replace("Logout",'window','toolbar=1,location=1,directories=1,status=1,menubar=1,scrollbars=1,resizable=1');
 self.close();
 }
 </script>    
