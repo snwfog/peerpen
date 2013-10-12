@@ -11,8 +11,8 @@ public class UnknownCommand extends FrontCommand {
 		forward("/Views/missingData.jsp");
 
 	}
+
 	public void processRedirect() throws ServletException, IOException {
-		
-		
+
 	}
 }

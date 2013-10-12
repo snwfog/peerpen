@@ -7,16 +7,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.sunnyd.peerpen.Manager.SessionManager;
-import com.sunnyd.peerpen.Manager.UserManager;
-import com.sunnyd.peerpen.Model.User;
 
 /**
  * Servlet implementation class FrontServlet
  */
-@WebServlet(urlPatterns = { "/FrontPage"})
+@WebServlet(urlPatterns = { "/FrontPage" })
 public class FrontPage extends SuperBase {
 	private static final long serialVersionUID = 1L;
 
@@ -37,24 +32,21 @@ public class FrontPage extends SuperBase {
 		FrontCommand login;
 		login = getCommand("Session");
 		login.init(getServletContext(), request, response);
-		if(sessionExists(request)){
+		if (sessionExists(request)) {
 			login.processForward();
-		}
-		else{
+		} else {
 			login.processRedirect();
 		}
-	
+
 	}
 
-	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
-		
+
 	}
 
 }

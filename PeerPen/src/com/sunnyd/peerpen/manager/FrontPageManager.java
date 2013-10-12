@@ -2,11 +2,9 @@ package com.sunnyd.peerpen.Manager;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 
 import com.sunnyd.peerpen.Controller.FrontCommand;
-import com.sunnyd.peerpen.Model.User;
 
 public class FrontPageManager extends FrontCommand {
 
@@ -19,9 +17,10 @@ public class FrontPageManager extends FrontCommand {
 				+ request.getServerPort() + "/" + "PeerPen/Login";
 		response.sendRedirect(redirectURL);
 	}
+
 	public void processRedirect() throws ServletException, IOException {
 		redirect("/FrontPage");
-		
+
 	}
 
 }

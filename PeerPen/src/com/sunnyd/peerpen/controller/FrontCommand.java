@@ -1,11 +1,12 @@
 package com.sunnyd.peerpen.Controller;
 
+import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import javax.servlet.ServletException;
 
 public abstract class FrontCommand {
 	protected ServletContext context;
@@ -20,22 +21,20 @@ public abstract class FrontCommand {
 		this.response = response;
 		this.LOCALHOSTURL = "http://" + request.getServerName() + ":"
 				+ request.getServerPort() + "/PeerPen";
-		
+
 	}
 
 	abstract public void processForward() throws ServletException, IOException;
-	
+
 	abstract public void processRedirect() throws ServletException, IOException;
-	
-	protected void forward(String target) throws ServletException, IOException{
+
+	protected void forward(String target) throws ServletException, IOException {
 		RequestDispatcher dispatcher = context.getRequestDispatcher(target);
 		dispatcher.forward(request, response);
 	}
-	
-	protected void redirect(String target) throws ServletException, IOException{
-		response.sendRedirect(LOCALHOSTURL+target);
+
+	protected void redirect(String target) throws ServletException, IOException {
+		response.sendRedirect(LOCALHOSTURL + target);
 	}
-	
-	
 
 }

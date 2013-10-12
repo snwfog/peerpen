@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 
 import com.sunnyd.peerpen.Controller.FrontCommand;
-import com.sunnyd.peerpen.Model.User;
 
 public class LogoutManager extends FrontCommand {
 
@@ -14,8 +13,8 @@ public class LogoutManager extends FrontCommand {
 		forward("/Views/Logout.jsp");
 
 	}
+
 	public void processRedirect() throws ServletException, IOException {
-		
-		
+
 	}
 }

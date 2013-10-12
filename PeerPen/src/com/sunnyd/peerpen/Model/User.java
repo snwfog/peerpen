@@ -4,17 +4,17 @@ public class User {
 	private String user_name;
 	private String password;
 	private String first_name;
-    private String last_name;
-    private String gender;
-    private String personal_website;
-    private String email;
-    private String points;
-    public boolean valid;
+	private String last_name;
+	private String gender;
+	private String personal_website;
+	private String email;
+	private String points;
+	public boolean valid;
 
-//	public User(User user) {
-//		this.user_name = user.getUserName();
-//		this.password = user.getPassword();
-//	}
+	// public User(User user) {
+	// this.user_name = user.getUserName();
+	// this.password = user.getPassword();
+	// }
 
 	public User() {
 		// TODO Auto-generated constructor stub
@@ -24,17 +24,18 @@ public class User {
 		return first_name;
 	}
 
-    public void setFirstName(String newfirst_name) {
-        first_name = newfirst_name;
+	public void setFirstName(String newfirst_name) {
+		first_name = newfirst_name;
 	}
 
-    public String getLastName() {
-         return last_name;
+	public String getLastName() {
+		return last_name;
 	}
 
-    public void setLastName(String newlast_name) {
-         last_name = newlast_name;
+	public void setLastName(String newlast_name) {
+		last_name = newlast_name;
 	}
+
 	public User(String user, String password) {
 		this.user_name = user;
 		this.password = password;
@@ -54,30 +55,29 @@ public class User {
 	public String getPassword() {
 		return this.password;
 	}
-	
-	public void setPassword(String password){
-		this.password = password; 
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	
 	public String getUserName() {
 		return this.user_name;
 	}
 
-	public void setUserName(String username){
+	public void setUserName(String username) {
 		this.user_name = username;
 	}
-	
-//	public static User findUser(String name, String password) {
-//		return new User(name, password);
-//	}
-	
+
+	// public static User findUser(String name, String password) {
+	// return new User(name, password);
+	// }
+
 	public boolean isValid() {
-        return valid;
+		return valid;
 	}
 
-    public void setValid(boolean newValid) {
-        valid = newValid;
+	public void setValid(boolean newValid) {
+		valid = newValid;
 	}
 
 	public String getGender() {
@@ -110,6 +110,6 @@ public class User {
 
 	public void setPoints(String points) {
 		this.points = points;
-	}	
+	}
 
 }

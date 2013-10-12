@@ -1,6 +1,7 @@
 package com.sunnyd.peerpen.Manager;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
 
@@ -23,8 +24,8 @@ public class UserManager extends FrontCommand {
 	}
 
 	public void viewUser(String id) throws ServletException, IOException {
-		HttpSession session = request.getSession(true);
-//		session.setAttribute("user", user);
+//		HttpSession session = request.getSession(true);
+		// session.setAttribute("user", user);
 
 		forward("/Views/Profile.jsp");
 	}

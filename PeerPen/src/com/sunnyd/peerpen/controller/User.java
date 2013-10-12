@@ -38,16 +38,16 @@ public class User extends SuperBase {
 
 		System.out.println((String) request.getParameter("command"));
 		if ((String) request.getParameter("command") != null) {
-//			make method to JUMP controller from the command
-//			 FrontCommand command;
-//			 command = getCommand(request.getParameter("command"));
-//			 command.init(getServletContext(), request, response);
-//			 command.processForward();
+			// make method to JUMP controller from the command
+			// FrontCommand command;
+			// command = getCommand(request.getParameter("command"));
+			// command.init(getServletContext(), request, response);
+			// command.processForward();
 
-//			FrontCommand login;
-//			login = getCommand("FrontPage");
-//			login.init(getServletContext(), request, response);
-//			login.processRedirect();
+			// FrontCommand login;
+			// login = getCommand("FrontPage");
+			// login.init(getServletContext(), request, response);
+			// login.processRedirect();
 		}
 
 		UserManager usermanager = new UserManager();

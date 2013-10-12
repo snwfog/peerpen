@@ -5,26 +5,27 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class SuperBase extends HttpServlet{
+public class SuperBase extends HttpServlet {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7273037356425614164L;
 	protected HttpSession session = null;
-	
-	protected boolean sessionExists(HttpServletRequest request) throws ServletException, IOException{
+
+	protected boolean sessionExists(HttpServletRequest request)
+			throws ServletException, IOException {
 		session = request.getSession(false);
-		if(session == null)
+		if (session == null)
 			return false;
-		
+
 		else if (session.getAttribute("user") == null)
-				return false;
-			
+			return false;
+
 		return true;
 	}
+
 	protected FrontCommand getCommand(String manager) {
 		try {
 			return (FrontCommand) getCommandClass(manager).newInstance();
@@ -46,7 +47,5 @@ public class SuperBase extends HttpServlet{
 		}
 		return result;
 	}
-	
-	
+
 }
-	

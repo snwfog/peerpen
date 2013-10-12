@@ -1,7 +1,6 @@
 package com.sunnyd.peerpen.Controller;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sunnyd.peerpen.Manager.LoginManager;
-import com.sunnyd.peerpen.Manager.SessionManager;
 import com.sunnyd.peerpen.Manager.UserManager;
 import com.sunnyd.peerpen.Model.User;
 
