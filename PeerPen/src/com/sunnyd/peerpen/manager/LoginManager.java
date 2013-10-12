@@ -1,8 +1,9 @@
-package com.sunnyd.peerpen.manager;
+package com.sunnyd.peerpen.Manager;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
-import com.sunnyd.peerpen.controller.FrontCommand;
+
+import com.sunnyd.peerpen.Controller.FrontCommand;
 
 public class LoginManager extends FrontCommand {
 

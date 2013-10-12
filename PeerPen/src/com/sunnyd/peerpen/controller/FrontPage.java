@@ -1,4 +1,4 @@
-package com.sunnyd.peerpen.controller;
+package com.sunnyd.peerpen.Controller;
 
 import java.io.IOException;
 
@@ -9,15 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sunnyd.peerpen.domain.User;
-import com.sunnyd.peerpen.manager.SessionManager;
-import com.sunnyd.peerpen.manager.UserManager;
+import com.sunnyd.peerpen.Manager.SessionManager;
+import com.sunnyd.peerpen.Manager.UserManager;
+import com.sunnyd.peerpen.Model.User;
 
 /**
  * Servlet implementation class FrontServlet
  */
 @WebServlet(urlPatterns = { "/FrontPage"})
-public class FrontPage extends SuperBass {
+public class FrontPage extends SuperBase {
 	private static final long serialVersionUID = 1L;
 
 	/**

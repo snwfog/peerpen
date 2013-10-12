@@ -1,4 +1,4 @@
-package com.sunnyd.peerpen.controller;
+package com.sunnyd.peerpen.Controller;
 
 import java.io.IOException;
 

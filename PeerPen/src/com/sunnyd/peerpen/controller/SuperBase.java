@@ -1,4 +1,4 @@
-package com.sunnyd.peerpen.controller;
+package com.sunnyd.peerpen.Controller;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class SuperBass extends HttpServlet{
+public class SuperBase extends HttpServlet{
 	/**
 	 * 
 	 */
@@ -40,7 +40,7 @@ public class SuperBass extends HttpServlet{
 
 	protected Class<?> getCommandClass(String controller) {
 		Class<?> result;
-		final String commandClassName = "com.sunnyd.peerpen.manager."
+		final String commandClassName = "com.sunnyd.peerpen.Manager."
 				+ controller + "Manager";
 		try {
 			result = Class.forName(commandClassName);

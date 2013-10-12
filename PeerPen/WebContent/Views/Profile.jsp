@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1 align="center">This is your profile page!</h1>
-<jsp:useBean id="user" type="com.sunnyd.peerpen.domain.User" scope="session" />
+<jsp:useBean id="user" type="com.sunnyd.peerpen.Model.User" scope="session" />
     
     <p>First Name: <%= user.getFirstName()%></p>
     <p>Last Name: <%= user.getLastName()%></p>

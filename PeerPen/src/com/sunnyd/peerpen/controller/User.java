@@ -1,4 +1,4 @@
-package com.sunnyd.peerpen.controller;
+package com.sunnyd.peerpen.Controller;
 
 import java.io.IOException;
 
@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sunnyd.peerpen.manager.UserManager;
+import com.sunnyd.peerpen.Manager.UserManager;
 
 /**
  * Servlet implementation class FrontServlet
  */
 @WebServlet(urlPatterns = { "/User", "/User/new", "/User/Profile", "/User/EditProfile" })
-public class User extends SuperBass {
+public class User extends SuperBase {
 	final static String UserProfileURI = "/PeerPen/User/Profile";
 	final static String UserNewURI = "/PeerPen/User/new";
 	final static String UserEditURI = "/PeerPen/User/EditProfile";
@@ -73,7 +73,7 @@ public class User extends SuperBass {
 
 		UserManager um = new UserManager();
 		um.init(getServletContext(), request, response);
-		com.sunnyd.peerpen.domain.User user = um.createPeer(first_name,
+		com.sunnyd.peerpen.Model.User user = um.createPeer(first_name,
 				last_name, sex, website, user_name, email, password);
 
 		um.creationUser("1");

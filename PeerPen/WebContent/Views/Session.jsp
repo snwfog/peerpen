@@ -14,7 +14,7 @@ self.close();
 <title>Front Page</title>
 </head>
 <body>
-<jsp:useBean id="user" type="com.sunnyd.peerpen.domain.User" scope="session" />
+<jsp:useBean id="user" type="com.sunnyd.peerpen.Model.User" scope="session" />
 <h1>Welcome to PeerPen <%=user.getUserName()%>!!</h1>
 
     <p>You have logged in as: <%= user.getUserName()%></p>
