@@ -22,7 +22,7 @@
 		<p>
 			Gender:
 			<%
-			if (user.getGender() == user.getGender()) {
+			if (user.getGender() == "Male") {
 				out.println("<input type=\"radio\" name=\"sex\" value=\"Male\" checked=\"checked\">Male | <input type=\"radio\" name=\"sex\" value=\"Female\">Female");
 			} else {
 				out.println("<input type=\"radio\" name=\"sex\" value=\"Male\" >Male | <input type=\"radio\" name=\"sex\" value=\"Female\" checked=\"checked\">Female");

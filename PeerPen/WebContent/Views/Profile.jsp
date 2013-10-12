@@ -20,6 +20,8 @@
     <p>Personal Web-site: <%= user.getPersonalWebsite()%></p>
 
  <p><a href="EditProfile">Edit</a></p>
+ 
+ <p><a href="?command=FrontPage">Home Page</a>
 
 
 </body>

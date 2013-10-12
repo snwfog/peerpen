@@ -27,7 +27,6 @@ public class User extends SuperBase {
 	 */
 	public User() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -37,6 +36,8 @@ public class User extends SuperBase {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
+		System.out.println((String)request.getParameter("command"));
+		
 		UserManager usermanager = new UserManager();
 		usermanager.init(getServletContext(), request, response);
 		if (request.getRequestURI().contentEquals(UserNewURI)) {
@@ -46,15 +47,6 @@ public class User extends SuperBase {
 		} else if (request.getRequestURI().contentEquals(UserEditURI)) {
 			usermanager.editUserView();
 		}
-
-		// System.out.println(request.getRequestURL());
-		// System.out.println(request.getRequestURI());
-		// System.out.println(request.getParameter("user"));
-		// System.out.println(request.getProtocol());
-		//
-		// System.out.println(request.getServerName() + ":"
-		// + request.getServerPort() + "/");
-		System.out.println("--------------------");
 	}
 
 	/**
@@ -65,7 +57,6 @@ public class User extends SuperBase {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		String method = request.getParameter("method");
-		System.out.println(method);
 
 		String first_name = request.getParameter("first_name");
 		String last_name = request.getParameter("last_name");
@@ -75,13 +66,13 @@ public class User extends SuperBase {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 
-		UserManager um = new UserManager();
-		um.init(getServletContext(), request, response);
+		UserManager usermanager = new UserManager();
+		usermanager.init(getServletContext(), request, response);
 		if (method != null) {
-			um.editUser(first_name, last_name, sex, website, user_name,
+			usermanager.editUser(first_name, last_name, sex, website, user_name,
 					email, password);
 		} else {
-			um.creationUser(first_name, last_name, sex, website, user_name,
+			usermanager.creationUser(first_name, last_name, sex, website, user_name,
 					email, password);
 		}
 	}
