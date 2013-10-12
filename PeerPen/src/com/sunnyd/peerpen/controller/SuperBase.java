@@ -14,9 +14,6 @@ public class SuperBase extends HttpServlet{
 	 */
 	private static final long serialVersionUID = 7273037356425614164L;
 	protected HttpSession session = null;
-	private String hello(){
-		return "teset";
-	}
 	
 	protected boolean sessionExists(HttpServletRequest request) throws ServletException, IOException{
 		session = request.getSession(false);

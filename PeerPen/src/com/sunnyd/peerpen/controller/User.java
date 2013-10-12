@@ -13,7 +13,8 @@ import com.sunnyd.peerpen.Manager.UserManager;
 /**
  * Servlet implementation class FrontServlet
  */
-@WebServlet(urlPatterns = { "/User", "/User/new", "/User/Profile", "/User/EditProfile" })
+@WebServlet(urlPatterns = { "/User", "/User/new", "/User/Profile",
+		"/User/EditProfile" })
 public class User extends SuperBase {
 	final static String UserProfileURI = "/PeerPen/User/Profile";
 	final static String UserNewURI = "/PeerPen/User/new";
@@ -43,16 +44,16 @@ public class User extends SuperBase {
 		} else if (request.getRequestURI().contentEquals(UserProfileURI)) {
 			usermanager.viewUser("INSERT USERNAME OR ID HERE FROM SESSION");
 		} else if (request.getRequestURI().contentEquals(UserEditURI)) {
-			usermanager.editUser();
+			usermanager.editUserView();
 		}
 
-//		System.out.println(request.getRequestURL());
-//		System.out.println(request.getRequestURI());
-//		System.out.println(request.getParameter("user"));
-//		System.out.println(request.getProtocol());
-//
-//		System.out.println(request.getServerName() + ":"
-//				+ request.getServerPort() + "/");
+		// System.out.println(request.getRequestURL());
+		// System.out.println(request.getRequestURI());
+		// System.out.println(request.getParameter("user"));
+		// System.out.println(request.getProtocol());
+		//
+		// System.out.println(request.getServerName() + ":"
+		// + request.getServerPort() + "/");
 		System.out.println("--------------------");
 	}
 
@@ -62,6 +63,9 @@ public class User extends SuperBase {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+
+		String method = request.getParameter("method");
+		System.out.println(method);
 
 		String first_name = request.getParameter("first_name");
 		String last_name = request.getParameter("last_name");
@@ -73,11 +77,12 @@ public class User extends SuperBase {
 
 		UserManager um = new UserManager();
 		um.init(getServletContext(), request, response);
-		com.sunnyd.peerpen.Model.User user = um.createPeer(first_name,
-				last_name, sex, website, user_name, email, password);
-
-		um.creationUser("1");
+		if (method != null) {
+			um.editUser(first_name, last_name, sex, website, user_name,
+					email, password);
+		} else {
+			um.creationUser(first_name, last_name, sex, website, user_name,
+					email, password);
+		}
 	}
-
-
 }

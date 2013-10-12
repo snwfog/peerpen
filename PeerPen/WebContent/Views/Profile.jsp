@@ -19,7 +19,7 @@
     <p>User name: <%= user.getUserName()%></p>
     <p>Personal Web-site: <%= user.getPersonalWebsite()%></p>
 
- <p><a href="EditProfile">Create</a></p>
+ <p><a href="EditProfile">Edit</a></p>
 
 
 </body>
