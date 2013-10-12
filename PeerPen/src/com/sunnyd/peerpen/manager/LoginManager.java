@@ -13,7 +13,8 @@ public class LoginManager extends FrontCommand {
 
 	}
 	public void processRedirect() throws ServletException, IOException {
-		
+//		response.sendRedirect("/FrontPage");
+		redirect("/FrontPage");
 	
 	}
 }
