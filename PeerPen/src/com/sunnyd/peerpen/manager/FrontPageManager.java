@@ -20,7 +20,7 @@ public class FrontPageManager extends FrontCommand {
 		response.sendRedirect(redirectURL);
 	}
 	public void processRedirect() throws ServletException, IOException {
-		
+		redirect("/FrontPage");
 		
 	}
 

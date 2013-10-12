@@ -12,7 +12,6 @@
     
     <p>First Name: <%= user.getFirstName()%></p>
     <p>Last Name: <%= user.getLastName()%></p>
-    <p>Username: <%= user.getUserName()%></p>
     <p>Gender: <%= user.getGender()%></p>
     <p>Email: <%= user.getEmail()%></p>
     <p>Password: <%= user.getPassword()%></p>
@@ -21,7 +20,7 @@
 
  <p><a href="EditProfile">Edit</a></p>
  
- <p><a href="?command=FrontPage">Home Page</a>
+ <p><a href="?command=Session">Home Page</a>
 
 
 </body>

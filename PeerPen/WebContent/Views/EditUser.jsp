@@ -37,7 +37,7 @@
 				value="<%=user.getPassword()%>">
 		</p>
 		<p>
-			User name: <input type="text" name="username"
+			User name: <input type="text" name="user_name"
 				value="<%=user.getUserName()%>">
 		</p>
 		<p>

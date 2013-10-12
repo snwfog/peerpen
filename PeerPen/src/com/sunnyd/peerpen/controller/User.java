@@ -36,8 +36,20 @@ public class User extends SuperBase {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		System.out.println((String)request.getParameter("command"));
-		
+		System.out.println((String) request.getParameter("command"));
+		if ((String) request.getParameter("command") != null) {
+//			make method to JUMP controller from the command
+//			 FrontCommand command;
+//			 command = getCommand(request.getParameter("command"));
+//			 command.init(getServletContext(), request, response);
+//			 command.processForward();
+
+//			FrontCommand login;
+//			login = getCommand("FrontPage");
+//			login.init(getServletContext(), request, response);
+//			login.processRedirect();
+		}
+
 		UserManager usermanager = new UserManager();
 		usermanager.init(getServletContext(), request, response);
 		if (request.getRequestURI().contentEquals(UserNewURI)) {
@@ -69,11 +81,11 @@ public class User extends SuperBase {
 		UserManager usermanager = new UserManager();
 		usermanager.init(getServletContext(), request, response);
 		if (method != null) {
-			usermanager.editUser(first_name, last_name, sex, website, user_name,
-					email, password);
+			usermanager.editUser(first_name, last_name, sex, website,
+					user_name, email, password);
 		} else {
-			usermanager.creationUser(first_name, last_name, sex, website, user_name,
-					email, password);
+			usermanager.creationUser(first_name, last_name, sex, website,
+					user_name, email, password);
 		}
 	}
 }
