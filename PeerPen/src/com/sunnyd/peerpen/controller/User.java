@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sunnyd.peerpen.Manager.UserManager;
+import com.sunnyd.peerpen.Manager.FrontPageManager;
+
 
 /**
  * Servlet implementation class FrontServlet
@@ -38,11 +40,10 @@ public class User extends SuperBase {
 
 		System.out.println((String) request.getParameter("command"));
 		if ((String) request.getParameter("command") != null) {
-			// make method to JUMP controller from the command
-			// FrontCommand command;
-			// command = getCommand(request.getParameter("command"));
-			// command.init(getServletContext(), request, response);
-			// command.processForward();
+////			 make method to JUMP controller from the command
+//			 FrontPageManager command = new FrontPageManager();
+//			 command.init(getServletContext(), request, response);
+//			 command.homePageRedirect();
 
 			// FrontCommand login;
 			// login = getCommand("FrontPage");

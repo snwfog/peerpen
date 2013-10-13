@@ -30,7 +30,7 @@ public class FrontPage extends SuperBase {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		FrontCommand login;
-		login = getCommand("Session");
+		login = getCommand("FrontPage");
 		login.init(getServletContext(), request, response);
 		if (sessionExists(request)) {
 			login.processForward();

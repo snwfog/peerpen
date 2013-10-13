@@ -20,7 +20,7 @@
 
  <p><a href="EditProfile">Edit</a></p>
  
- <p><a href="?command=Session">Home Page</a>
+ <p><a href="http://localhost:8080/PeerPen/FrontPage">Home Page</a>
 
 
 </body>

@@ -8,19 +8,18 @@ import com.sunnyd.peerpen.Controller.FrontCommand;
 
 public class FrontPageManager extends FrontCommand {
 
+	@Override
 	public void processForward() throws ServletException, IOException {
-		// User user = User.findUser("bob", "hilo");//
-		// request.getParameter("name")
-		// request.setAttribute("user", new User(user));
+		// TODO Auto-generated method stub
 
-		String redirectURL = "http://" + request.getServerName() + ":"
-				+ request.getServerPort() + "/" + "PeerPen/Login";
-		response.sendRedirect(redirectURL);
+		forward("/Views/FrontPage.jsp");
 	}
 
+	@Override
 	public void processRedirect() throws ServletException, IOException {
-		redirect("/FrontPage");
+		// TODO Auto-generated method stub
 
+		forward("/Views/Login.jsp");
 	}
-
+	
 }
