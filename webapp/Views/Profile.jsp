@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1 align="center">This is your profile page!</h1>
-	<jsp:useBean id="user" type="com.sunnyd.peerpen.Model.User"
+	<jsp:useBean id="user" type="com.peerpen.model.User"
 		scope="session" />
 	<% String path = (String) session.getAttribute("path")+"/FrontPage"; %>
 	<p>

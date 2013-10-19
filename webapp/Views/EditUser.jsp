@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1 align="center">Edit Page!</h1>
-	<jsp:useBean id="user" type="com.sunnyd.peerpen.Model.User"
+	<jsp:useBean id="user" type="com.peerpen.model.User"
 		scope="session" />
 	<form method="post" align="center">
 		<p>
