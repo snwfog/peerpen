@@ -5,7 +5,7 @@
   <artifactId>peerpen</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>PeerPen</name>
+  <name>peerpen</name>
 
   <dependencies>
     <dependency>
