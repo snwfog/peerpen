@@ -8,20 +8,37 @@
 </head>
 <body>
 	<h1 align="center">This is your profile page!</h1>
-<jsp:useBean id="user" type="com.sunnyd.peerpen.Model.User" scope="session" />
-    
-    <p>First Name: <%= user.getFirstName()%></p>
-    <p>Last Name: <%= user.getLastName()%></p>
-    <p>Gender: <%= user.getGender()%></p>
-    <p>Email: <%= user.getEmail()%></p>
-    <p>Password: <%= user.getPassword()%></p>
-    <p>User name: <%= user.getUserName()%></p>
-    <p>Personal Web-site: <%= user.getPersonalWebsite()%></p>
+	<jsp:useBean id="user" type="com.sunnyd.peerpen.Model.User"
+		scope="session" />
+	<% String path = (String) session.getAttribute("path")+"/FrontPage"; %>
+	<p>
+		First Name:
+		<%=user.getFirstName()%></p>
+	<p>
+		Last Name:
+		<%=user.getLastName()%></p>
+	<p>
+		Gender:
+		<%=user.getGender()%></p>
+	<p>
+		Email:
+		<%=user.getEmail()%></p>
+	<p>
+		Password:
+		<%=user.getPassword()%></p>
+	<p>
+		User name:
+		<%=user.getUserName()%></p>
+	<p>
+		Personal Web-site:
+		<%=user.getPersonalWebsite()%></p>
 
- <p><a href="EditProfile">Edit</a></p>
- 
- <p><a href="http://localhost:8080/PeerPen/FrontPage">Home Page</a>
+	<p>
+		<a href="EditProfile">Edit</a>
+	</p>
 
-
+	<p>
+	<%=path %>
+	<a href=<%=path%>>Home Page</a>
 </body>
 </html>

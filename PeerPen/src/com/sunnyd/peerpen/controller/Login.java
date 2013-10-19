@@ -57,21 +57,20 @@ public class Login extends SuperBase {
 		
 		try
 		{	    
-			 User user = new User();
-			 user.setUserName(request.getParameter("un"));
-			 user.setPassword(request.getParameter("pw"));
+			LoginManager user = new LoginManager();
+			String username = request.getParameter("un");
+			String password = request.getParameter("pw");
 			 
 			//		     user = UserDAO.login(user);
-			 user.setValid(true);
 			   		    
-			 if (user.isValid())
+			if (user.validateUser(username, password))
 			 {
 				 
-				 
 				 HttpSession session = request.getSession(true);
-				 session.setMaxInactiveInterval(60*60*24*14);
+//				 session.setMaxInactiveInterval(60*60*24*14);
+				 session.setMaxInactiveInterval(15);
 				 System.out.println("default timeout period for sessions : " + session.getMaxInactiveInterval());
-				 session.setAttribute("user",user); 
+				 session.setAttribute("user",user.findUser(username, password)); 
 				 LoginManager logging = new LoginManager();
 				 logging.init(getServletContext(), request, response);
 				 logging.processRedirect();

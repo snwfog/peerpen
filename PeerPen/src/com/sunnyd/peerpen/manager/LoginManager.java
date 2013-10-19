@@ -1,5 +1,5 @@
 package com.sunnyd.peerpen.Manager;
-
+import com.sunnyd.peerpen.Model.User;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -18,5 +18,19 @@ public class LoginManager extends FrontCommand {
 		// response.sendRedirect("/FrontPage");
 		redirect("/FrontPage");
 
+	}
+	
+	public Boolean validateUser(String username, String password){
+		if(username.equals("Bobby") && password.equals("Yit")){
+			return true;
+		}
+		else return false;
+	}
+	public User findUser(String username, String password){
+		// TODO change this related to database
+		if(username.equals("Bobby") && password.equals("Yit"))
+			return new User(username,password);
+		else
+			return null;
 	}
 }

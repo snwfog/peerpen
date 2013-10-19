@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sunnyd.peerpen.Manager.UserManager;
 import com.sunnyd.peerpen.Manager.FrontPageManager;
@@ -68,7 +69,8 @@ public class User extends SuperBase {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
+		
+		
 		String method = request.getParameter("method");
 
 		String first_name = request.getParameter("first_name");
@@ -78,7 +80,9 @@ public class User extends SuperBase {
 		String user_name = request.getParameter("user_name");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-
+		System.out.println(request.getContextPath());
+		HttpSession session = request.getSession(true);
+		session.setAttribute("path", request.getContextPath());
 		UserManager usermanager = new UserManager();
 		usermanager.init(getServletContext(), request, response);
 		if (method != null) {
