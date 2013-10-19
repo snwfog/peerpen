@@ -14,11 +14,11 @@ import java.io.IOException;
 /**
  * Servlet implementation class FrontServlet
  */
-@WebServlet(urlPatterns = {"/", "/Login", "/Logout"})
+@WebServlet(urlPatterns = {"/", "/login", "/logout"})
 public class Login extends SuperBase
 {
-  final static String LoginURI = "/PeerPen/Login";
-  final static String LogoutURI = "/PeerPen/Logout";
+  final static String LoginURI = "/login";
+  final static String LogoutURI = "/logout";
   private static final long serialVersionUID = 1L;
 
   /**
@@ -39,11 +39,11 @@ public class Login extends SuperBase
   {
     FrontCommand command;
     if (!sessionExists(request))
-      command = getCommand("Login");
+      command = getCommand("login");
     else if ((request.getRequestURI().contentEquals(LogoutURI)))
-      command = getCommand("Logout");
+      command = getCommand("logout");
     else
-      command = getCommand("Login");
+      command = getCommand("login");
     command.init(getServletContext(), request, response);
     command.processForward();
   }

@@ -44,7 +44,7 @@ public class SuperBase extends HttpServlet
   protected Class<?> getCommandClass(String controller)
   {
     Class<?> result;
-    final String commandClassName = "com.sunnyd.peerpen.Manager."
+    final String commandClassName = "com.peerpen.manager."
         + controller + "Manager";
     try
     {

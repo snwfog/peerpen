@@ -15,13 +15,13 @@ import java.io.IOException;
 /**
  * Servlet implementation class FrontServlet
  */
-@WebServlet(urlPatterns = {"/User", "/User/new", "/User/Profile",
-    "/User/EditProfile"})
+@WebServlet(urlPatterns = {"/user", "/user/new", "/user/profile",
+    "/user/editprofile"})
 public class User extends SuperBase
 {
-  final static String UserProfileURI = "/PeerPen/User/Profile";
-  final static String UserNewURI = "/PeerPen/User/new";
-  final static String UserEditURI = "/PeerPen/User/EditProfile";
+  final static String UserProfileURI = "/user/profile";
+  final static String UserNewURI = "/user/new";
+  final static String UserEditURI = "/user/edit";
 
   private static final long serialVersionUID = 1L;
 

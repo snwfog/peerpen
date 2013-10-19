@@ -9,7 +9,7 @@ public class UnknownCommand extends FrontCommand
   @Override
   public void processForward() throws ServletException, IOException
   {
-    forward("/Views/missingData.jsp");
+    forward("/views/missingData.jsp");
 
   }
 

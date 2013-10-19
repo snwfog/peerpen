@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class FrontServlet
  */
-@WebServlet(urlPatterns = {"/FrontPage"})
+@WebServlet(urlPatterns = {"/frontpage"})
 public class FrontPage extends SuperBase
 {
   private static final long serialVersionUID = 1L;
@@ -32,7 +32,7 @@ public class FrontPage extends SuperBase
       HttpServletResponse response) throws ServletException, IOException
   {
     FrontCommand login;
-    login = getCommand("FrontPage");
+    login = getCommand("frontpage");
     login.init(getServletContext(), request, response);
     if (sessionExists(request))
     {
