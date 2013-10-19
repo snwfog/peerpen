@@ -22,7 +22,7 @@ public class FrontPageManager extends FrontCommand
   {
     // TODO Auto-generated method stub
 
-    forward("/Views/Login.jsp");
+    forward("/Views/login.jsp");
   }
 
 }

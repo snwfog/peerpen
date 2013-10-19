@@ -13,7 +13,7 @@ public class LoginManager extends FrontCommand
   // @Override
   public void processForward() throws ServletException, IOException
   {
-    forward("/Views/Login.jsp");
+    forward("/Views/login.jsp");
 
   }
 

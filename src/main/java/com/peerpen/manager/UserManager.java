@@ -13,7 +13,7 @@ public class UserManager extends FrontCommand
 
   public void processForward() throws ServletException, IOException
   {
-    forward("/Views/Login.jsp");
+    forward("/Views/login.jsp");
   }
 
   public void processRedirect() throws ServletException, IOException
