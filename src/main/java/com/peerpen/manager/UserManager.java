@@ -1,7 +1,7 @@
 package com.peerpen.manager;
 
 import com.peerpen.controller.FrontCommand;
-import com.peerpen.model.User;
+import com.peerpen.model.Peer;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
@@ -43,15 +43,15 @@ public class UserManager extends FrontCommand
     forward("/Views/EditUser.jsp");
   }
 
-  public User createPeer(String first_name, String last_name, String sex,
+  public Peer createPeer(String first_name, String last_name, String sex,
       String website, String user_name, String email, String password)
       throws ServletException, IOException
   {
 
-    User user = new User(first_name, last_name, sex, website, user_name,
-        email, password);
+//    User user = new User(first_name, last_name, sex, website, user_name,
+//        email, password);
 
-    return user;
+    return new Peer();
   }
 
   /**
@@ -62,11 +62,11 @@ public class UserManager extends FrontCommand
       String website, String user_name, String email, String password)
       throws ServletException, IOException
   {
-    User user = new User(first_name, last_name, sex, website, user_name,
-        email, password);
+//    User user = new User(first_name, last_name, sex, website, user_name,
+//        email, password);
 
-    HttpSession session = request.getSession(true);
-    session.setAttribute("user", user);
+//    HttpSession session = request.getSession(true);
+//    session.setAttribute("user", user);
 
     redirect("/User/Profile");
   }
@@ -75,11 +75,11 @@ public class UserManager extends FrontCommand
       String website, String user_name, String email, String password)
       throws ServletException, IOException
   {
-    User user = new User(first_name, last_name, sex, website, user_name,
-        email, password);
+//    User user = new User(first_name, last_name, sex, website, user_name,
+//        email, password);
 
-    HttpSession session = request.getSession(true);
-    session.setAttribute("user", user);
+//    HttpSession session = request.getSession(true);
+//    session.setAttribute("user", user);
 
     redirect("/User/Profile");
   }

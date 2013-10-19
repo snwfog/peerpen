@@ -1,7 +1,7 @@
 package com.peerpen.manager;
 
 import com.peerpen.controller.FrontCommand;
-import com.peerpen.model.User;
+import com.peerpen.model.Peer;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
@@ -29,11 +29,11 @@ public class LoginManager extends FrontCommand
     return (username.equals("Bobby") && password.equals("Yit"));
   }
 
-  public User findUser(String username, String password)
+  public Peer findUser(String username, String password)
   {
     // TODO change this related to database
     if (username.equals("Bobby") && password.equals("Yit"))
-      return new User(username, password);
+      return new Peer();
     else
       return null;
   }
