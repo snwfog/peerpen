@@ -1,14 +1,16 @@
-package com.sunnyd.peerpen.Manager;
+package com.peerpen.manager;
+
+import com.peerpen.controller.FrontCommand;
+import com.peerpen.model.User;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
 
-import com.sunnyd.peerpen.Controller.FrontCommand;
-import com.sunnyd.peerpen.Model.User;
 
-public class UserManager extends FrontCommand {
+public class UserManager extends FrontCommand
+{
 
 	public void processForward() throws ServletException, IOException {
 		forward("/Views/Login.jsp");

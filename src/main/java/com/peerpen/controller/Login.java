@@ -1,7 +1,7 @@
-package com.sunnyd.peerpen.Controller;
+package com.peerpen.controller;
 
-import com.sunnyd.peerpen.Manager.LoginManager;
-import com.sunnyd.peerpen.Manager.UserManager;
+import com.peerpen.manager.LoginManager;
+import com.peerpen.manager.UserManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

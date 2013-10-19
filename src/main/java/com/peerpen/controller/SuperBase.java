@@ -1,4 +1,4 @@
-package com.sunnyd.peerpen.Controller;
+package com.peerpen.controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

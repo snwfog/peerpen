@@ -1,4 +1,4 @@
-package com.sunnyd.peerpen.Controller;
+package com.peerpen.controller;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;

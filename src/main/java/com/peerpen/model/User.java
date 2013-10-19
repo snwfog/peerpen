@@ -1,4 +1,4 @@
-package com.sunnyd.peerpen.Model;
+package com.peerpen.model;
 
 public class User {
 	private String user_name;

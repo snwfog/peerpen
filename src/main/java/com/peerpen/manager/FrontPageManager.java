@@ -1,12 +1,14 @@
-package com.sunnyd.peerpen.Manager;
+package com.peerpen.manager;
+
+import com.peerpen.controller.FrontCommand;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 
-import com.sunnyd.peerpen.Controller.FrontCommand;
 
-public class FrontPageManager extends FrontCommand {
+public class FrontPageManager extends FrontCommand
+{
 
 	@Override
 	public void processForward() throws ServletException, IOException {
