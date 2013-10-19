@@ -3,17 +3,17 @@ package com.peerpen.model;
 public class User
 {
   public boolean valid;
-  private String user_name;
+  private String username;
   private String password;
-  private String first_name;
-  private String last_name;
+  private String firstName;
+  private String lastName;
   private String gender;
-  private String personal_website;
+  private String personalURL;
   private String email;
   private String points;
 
   // public User(User user) {
-  // this.user_name = user.getUserName();
+  // this.username = user.getUserName();
   // this.password = user.getPassword();
   // }
 
@@ -24,40 +24,40 @@ public class User
 
   public User(String user, String password)
   {
-    this.user_name = user;
+    this.username = user;
     this.password = password;
   }
 
   public User(String first_name2, String last_name2, String sex,
       String website, String user_name2, String email2, String password2)
   {
-    this.first_name = first_name2;
-    this.last_name = last_name2;
+    this.firstName = first_name2;
+    this.lastName = last_name2;
     this.setGender(sex);
     this.setPersonalWebsite(website);
-    this.user_name = user_name2;
+    this.username = user_name2;
     this.setEmail(email2);
     this.password = password2;
   }
 
   public String getFirstName()
   {
-    return first_name;
+    return firstName;
   }
 
   public void setFirstName(String newfirst_name)
   {
-    first_name = newfirst_name;
+    firstName = newfirst_name;
   }
 
   public String getLastName()
   {
-    return last_name;
+    return lastName;
   }
 
   public void setLastName(String newlast_name)
   {
-    last_name = newlast_name;
+    lastName = newlast_name;
   }
 
   public String getPassword()
@@ -72,12 +72,12 @@ public class User
 
   public String getUserName()
   {
-    return this.user_name;
+    return this.username;
   }
 
   public void setUserName(String username)
   {
-    this.user_name = username;
+    this.username = username;
   }
 
   // public static User findUser(String name, String password) {
@@ -106,12 +106,12 @@ public class User
 
   public String getPersonalWebsite()
   {
-    return personal_website;
+    return personalURL;
   }
 
   public void setPersonalWebsite(String personal_website)
   {
-    this.personal_website = personal_website;
+    this.personalURL = personal_website;
   }
 
   public String getEmail()
