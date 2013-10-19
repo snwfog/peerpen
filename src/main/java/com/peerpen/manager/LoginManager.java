@@ -24,13 +24,9 @@ public class LoginManager extends FrontCommand
 
   }
 
-  public Boolean validateUser(String username, String password)
+  public boolean validateUser(String username, String password)
   {
-    if (username.equals("Bobby") && password.equals("Yit"))
-    {
-      return true;
-    }
-    else return false;
+    return (username.equals("Bobby") && password.equals("Yit"));
   }
 
   public User findUser(String username, String password)

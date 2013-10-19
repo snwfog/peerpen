@@ -12,7 +12,7 @@ public abstract class FrontCommand
   protected ServletContext context;
   protected HttpServletRequest request;
   protected HttpServletResponse response;
-  protected String LOCALHOSTURL;
+  protected String localhostURL;
 
   public void init(ServletContext servletContext, HttpServletRequest request,
       HttpServletResponse response)
@@ -20,7 +20,7 @@ public abstract class FrontCommand
     this.context = servletContext;
     this.request = request;
     this.response = response;
-    this.LOCALHOSTURL = "http://" + request.getServerName() + ":"
+    this.localhostURL = "http://" + request.getServerName() + ":"
         + request.getServerPort() + "/PeerPen";
 
   }
@@ -37,7 +37,7 @@ public abstract class FrontCommand
 
   protected void redirect(String target) throws ServletException, IOException
   {
-    response.sendRedirect(LOCALHOSTURL + target);
+    response.sendRedirect(localhostURL + target);
   }
 
 }

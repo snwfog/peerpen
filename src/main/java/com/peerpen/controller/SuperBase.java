@@ -18,10 +18,7 @@ public class SuperBase extends HttpServlet
       throws ServletException, IOException
   {
     session = request.getSession(false);
-    if (session == null)
-      return false;
-
-    else if (session.getAttribute("user") == null)
+    if (session == null || session.getAttribute("user") == null)
       return false;
 
     return true;
@@ -32,7 +29,6 @@ public class SuperBase extends HttpServlet
     try
     {
       return (FrontCommand) getCommandClass(manager).newInstance();
-
     }
     catch (Exception e)
     {

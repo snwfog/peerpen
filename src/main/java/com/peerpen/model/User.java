@@ -1,5 +1,10 @@
 package com.peerpen.model;
 
+/**
+ * @deprecated This class is not used anymore, use an appropriate
+ * Active Record model
+ */
+@Deprecated
 public class User
 {
   public boolean valid;
