@@ -35,20 +35,10 @@ public class Peer extends Base
     super();
   }
 
-  // TODO: We need a parameterized constructor here
+  // TODO: We need to add a parameterized constructor here
   public Peer(HashMap<String, Object> HM)
   {
     super(HM);
-  }
-
-  public static void main(String[] args)
-  {
-    Peer p = new Peer();
-    p.setFirstName("asoidjasoidjaisjdioj");
-    p.setLastName("Zhang");
-    p.setEmail("mail");
-    p.setPoint(0);
-    System.out.println(p.save());
   }
 
   public String getFirstName()
