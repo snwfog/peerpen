@@ -15,81 +15,94 @@ import java.io.IOException;
 /**
  * Servlet implementation class FrontServlet
  */
-@WebServlet(urlPatterns = { "/User", "/User/new", "/User/Profile",
-		"/User/EditProfile" })
-public class User extends SuperBase {
-	final static String UserProfileURI = "/PeerPen/User/Profile";
-	final static String UserNewURI = "/PeerPen/User/new";
-	final static String UserEditURI = "/PeerPen/User/EditProfile";
+@WebServlet(urlPatterns = {"/User", "/User/new", "/User/Profile",
+    "/User/EditProfile"})
+public class User extends SuperBase
+{
+  final static String UserProfileURI = "/PeerPen/User/Profile";
+  final static String UserNewURI = "/PeerPen/User/new";
+  final static String UserEditURI = "/PeerPen/User/EditProfile";
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public User() {
-		super();
-	}
+  /**
+   * @see HttpServlet#HttpServlet()
+   */
+  public User()
+  {
+    super();
+  }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+  /**
+   * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+   *      response)
+   */
+  protected void doGet(HttpServletRequest request,
+      HttpServletResponse response) throws ServletException, IOException
+  {
 
-		System.out.println((String) request.getParameter("command"));
-		if ((String) request.getParameter("command") != null) {
+    System.out.println((String) request.getParameter("command"));
+    if ((String) request.getParameter("command") != null)
+    {
 ////			 make method to JUMP controller from the command
 //			 FrontPageManager command = new FrontPageManager();
 //			 command.init(getServletContext(), request, response);
 //			 command.homePageRedirect();
 
-			// FrontCommand login;
-			// login = getCommand("FrontPage");
-			// login.init(getServletContext(), request, response);
-			// login.processRedirect();
-		}
+      // FrontCommand login;
+      // login = getCommand("FrontPage");
+      // login.init(getServletContext(), request, response);
+      // login.processRedirect();
+    }
 
-		UserManager usermanager = new UserManager();
-		usermanager.init(getServletContext(), request, response);
-		if (request.getRequestURI().contentEquals(UserNewURI)) {
-			usermanager.createPeerPage();
-		} else if (request.getRequestURI().contentEquals(UserProfileURI)) {
-			usermanager.viewUser("INSERT USERNAME OR ID HERE FROM SESSION");
-		} else if (request.getRequestURI().contentEquals(UserEditURI)) {
-			usermanager.editUserView();
-		}
-	}
+    UserManager usermanager = new UserManager();
+    usermanager.init(getServletContext(), request, response);
+    if (request.getRequestURI().contentEquals(UserNewURI))
+    {
+      usermanager.createPeerPage();
+    }
+    else if (request.getRequestURI().contentEquals(UserProfileURI))
+    {
+      usermanager.viewUser("INSERT USERNAME OR ID HERE FROM SESSION");
+    }
+    else if (request.getRequestURI().contentEquals(UserEditURI))
+    {
+      usermanager.editUserView();
+    }
+  }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		String method = request.getParameter("method");
+  /**
+   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+   *      response)
+   */
+  protected void doPost(HttpServletRequest request,
+      HttpServletResponse response) throws ServletException, IOException
+  {
 
-		String first_name = request.getParameter("first_name");
-		String last_name = request.getParameter("last_name");
-		String sex = request.getParameter("sex");
-		String website = request.getParameter("personal_website");
-		String user_name = request.getParameter("user_name");
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		System.out.println(request.getContextPath());
-		HttpSession session = request.getSession(true);
-		session.setAttribute("path", request.getContextPath());
-		UserManager usermanager = new UserManager();
-		usermanager.init(getServletContext(), request, response);
-		if (method != null) {
-			usermanager.editUser(first_name, last_name, sex, website,
-					user_name, email, password);
-		} else {
-			usermanager.creationUser(first_name, last_name, sex, website,
-					user_name, email, password);
-		}
-	}
+
+    String method = request.getParameter("method");
+
+    String first_name = request.getParameter("first_name");
+    String last_name = request.getParameter("last_name");
+    String sex = request.getParameter("sex");
+    String website = request.getParameter("personal_website");
+    String user_name = request.getParameter("user_name");
+    String email = request.getParameter("email");
+    String password = request.getParameter("password");
+    System.out.println(request.getContextPath());
+    HttpSession session = request.getSession(true);
+    session.setAttribute("path", request.getContextPath());
+    UserManager usermanager = new UserManager();
+    usermanager.init(getServletContext(), request, response);
+    if (method != null)
+    {
+      usermanager.editUser(first_name, last_name, sex, website,
+          user_name, email, password);
+    }
+    else
+    {
+      usermanager.creationUser(first_name, last_name, sex, website,
+          user_name, email, password);
+    }
+  }
 }

@@ -10,42 +10,49 @@ import java.io.IOException;
 /**
  * Servlet implementation class FrontServlet
  */
-@WebServlet(urlPatterns = { "/FrontPage" })
-public class FrontPage extends SuperBase {
-	private static final long serialVersionUID = 1L;
+@WebServlet(urlPatterns = {"/FrontPage"})
+public class FrontPage extends SuperBase
+{
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public FrontPage() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+  /**
+   * @see HttpServlet#HttpServlet()
+   */
+  public FrontPage()
+  {
+    super();
+    // TODO Auto-generated constructor stub
+  }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		FrontCommand login;
-		login = getCommand("FrontPage");
-		login.init(getServletContext(), request, response);
-		if (sessionExists(request)) {
-			login.processForward();
-		} else {
-			login.processRedirect();
-		}
+  /**
+   * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+   *      response)
+   */
+  protected void doGet(HttpServletRequest request,
+      HttpServletResponse response) throws ServletException, IOException
+  {
+    FrontCommand login;
+    login = getCommand("FrontPage");
+    login.init(getServletContext(), request, response);
+    if (sessionExists(request))
+    {
+      login.processForward();
+    }
+    else
+    {
+      login.processRedirect();
+    }
 
-	}
+  }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+  /**
+   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+   *      response)
+   */
+  protected void doPost(HttpServletRequest request,
+      HttpServletResponse response) throws ServletException, IOException
+  {
 
-	}
+  }
 
 }
