@@ -1,4 +1,6 @@
 !lib/*.jar
+.settings/*
+WebContent/
 .idea/*
 target/
 classes/
