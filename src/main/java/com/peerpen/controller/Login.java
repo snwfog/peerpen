@@ -1,97 +1,48 @@
 package com.peerpen.controller;
 
-import com.peerpen.manager.LoginManager;
-import com.peerpen.manager.UserManager;
+import com.sunnyd.database.Manager;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
- * Servlet implementation class FrontServlet
+ * Created with IntelliJ IDEA.
+ * User: momoking
+ * Date: 10/25/2013
+ * Time: 3:35 PM
+ * To change this template use File | Settings | File Templates.
  */
-public class Login extends SuperBase
-{
-  final static String LoginURI = "/login";
-  final static String LogoutURI = "/logout";
-  private static final long serialVersionUID = 1L;
+public class Login extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
 
-  /**
-   * @see HttpServlet#HttpServlet()
-   */
-  public Login()
-  {
-    super();
-    // TODO Auto-generated constructor stub
-  }
-
-  /**
-   * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-   *      response)
-   */
-  protected void doGet(HttpServletRequest request,
-      HttpServletResponse response) throws ServletException, IOException
-  {
-    FrontCommand command;
-    if (!sessionExists(request))
-      command = getCommand("login");
-    else if ((request.getRequestURI().contentEquals(LogoutURI)))
-      command = getCommand("logout");
-    else
-      command = getCommand("login");
-    command.init(getServletContext(), request, response);
-    command.processForward();
-  }
-
-  /**
-   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-   *      response)
-   */
-  protected void doPost(HttpServletRequest request,
-      HttpServletResponse response) throws ServletException, IOException
-  {
-
-
-    try
-    {
-      LoginManager user = new LoginManager();
-      String username = request.getParameter("un");
-      String password = request.getParameter("pw");
-
-      //		     user = UserDAO.login(user);
-
-      if (user.validateUser(username, password))
-      {
-
-        HttpSession session = request.getSession(true);
-//				 session.setMaxInactiveInterval(60*60*24*14);
-        session.setMaxInactiveInterval(15);
-        System.out.println("default timeout period for sessions : " + session.getMaxInactiveInterval());
-        session.setAttribute("user", user.findUser(username, password));
-        LoginManager logging = new LoginManager();
-        logging.init(getServletContext(), request, response);
-        logging.processRedirect();
-
-      }
-
-      else
-      {
-        UserManager newUser = new UserManager();
-        newUser.init(getServletContext(), request, response);
-        newUser.processRedirect();
-
-      }
     }
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("userName", "user");
+        map.put("password", "pass");
 
-    catch (Throwable theException)
-    {
-      System.out.println(theException);
+        String redirect = "/view/error.jsp";
+        try {
+            ArrayList<HashMap<String, Object>> matches = Manager.findAll("peers", map);
+            //System.out.println("real shit" + matches.size());
+            if (matches.size() == 1){ // means found exactly 1 user with that username and password
+                HttpSession session = request.getSession();
+                session.setAttribute("userSession", request.getParameter("username"));
+                redirect = "/view/ok.jsp";
+            }
+            response.sendRedirect(redirect);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
-  }
-
 }
