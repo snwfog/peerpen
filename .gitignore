@@ -1,5 +1,6 @@
 !lib/*.jar
 .idea/*
 target/
+classes/
 .DS_Store
 out
