@@ -26,11 +26,11 @@ Add a new server deployment, it should be your local Tomcat repository. This ste
 ![deployment tab](http://cdn.charlescy.com/blog/img/deployment-menu.png)
 
 Finally, you need to add a running configuration from:
-![run configuration](http://cdn.charlescy.com/blog/img/run-project.png)
+![run configuration](http://cdn.charlescy.com/blog/img/run-config.png)
 
 ![run project](http://cdn.charlescy.com/blog/img/run-project.png)
 ![add tomcat](http://cdn.charlescy.com/blog/img/add-tomcat.png)
-![add deploy artifact](http://cdn.charlescy.com/blog/img/add-tomcat.png)
+![add deploy artifact](http://cdn.charlescy.com/blog/img/add-deploy-artifact.png)
 
 
 
