@@ -29,14 +29,13 @@ public class Login extends HttpServlet {
         map.put("userName", "user");
         map.put("password", "pass");
 
-        String redirect = "/view/error.jsp";
+        String redirect = "view/missingData.jsp";
         try {
             ArrayList<HashMap<String, Object>> matches = Manager.findAll("peers", map);
-            //System.out.println("real shit" + matches.size());
             if (matches.size() == 1){ // means found exactly 1 user with that username and password
                 HttpSession session = request.getSession();
                 session.setAttribute("userSession", request.getParameter("username"));
-                redirect = "/view/ok.jsp";
+                redirect = "view/ok.jsp";
             }
             response.sendRedirect(redirect);
 
