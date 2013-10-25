@@ -1,26 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 
-<!doctype html>
-<html lang="en-US">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>PeerPen - Login</title>
+    <meta charset="utf-8">
+    <title>This is a fucking Test</title>
+    <%--<jsp:include page="../assets/css/bootstrap.css"/>--%>
+    <link rel="stylesheet" href="/assets/css/bootstrap.css" type="text/css" >
 </head>
 <body>
-<form action="login.do" method="post">
-  <h1>Login</h1>
-
-  <h3>Username</h3>
-  <label for="username">Username</label>
-  <input type="text" id="username" name="username"/><br/>
-
-  <h3>Password</h3>
-  <label for="password">Password</label>
-  <input type="password" id="password" name="password"/><br/>
-
-  <input type="submit" value="Sign in" />
-</form>
-
+<div class="container">
+    <div class="content">
+        <div class="row">
+            <div class="login-form">
+                <h2>Login</h2>
+                <form action="login.do" method="post">
+                    <fieldset>
+                        <div class="clearfix">
+                            <input type="text" id="username" name="username" placeholder="Username">
+                        </div>
+                        <div class="clearfix">
+                            <input type="password" id="password" name="password" placeholder="Password">
+                        </div>
+                        <button class="btn btn-primary" type="button submit">Sign in</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="assets/js/bootstrap.js"></script>
 </body>
+
 </html>
