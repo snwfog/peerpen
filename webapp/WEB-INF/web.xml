@@ -8,10 +8,6 @@
     <servlet-name>login.do</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>login.do</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
   <session-config>
   <session-timeout>60</session-timeout>
 </session-config>

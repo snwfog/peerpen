@@ -86,6 +86,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="ppar-1.0-SNAPSHOT-sources" level="project" />
   </component>
 </module>
 
