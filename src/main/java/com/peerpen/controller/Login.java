@@ -14,7 +14,6 @@ import java.io.IOException;
 /**
  * Servlet implementation class FrontServlet
  */
-@WebServlet(urlPatterns = {"/", "/login", "/logout"})
 public class Login extends SuperBase
 {
   final static String LoginURI = "/login";

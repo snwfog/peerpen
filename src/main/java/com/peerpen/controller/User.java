@@ -15,8 +15,6 @@ import java.io.IOException;
 /**
  * Servlet implementation class FrontServlet
  */
-@WebServlet(urlPatterns = {"/user", "/user/new", "/user/profile",
-    "/user/editprofile"})
 public class User extends SuperBase
 {
   final static String UserProfileURI = "/user/profile";

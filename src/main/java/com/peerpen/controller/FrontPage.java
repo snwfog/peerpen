@@ -10,7 +10,6 @@ import java.io.IOException;
 /**
  * Servlet implementation class FrontServlet
  */
-@WebServlet(urlPatterns = {"/frontpage"})
 public class FrontPage extends SuperBase
 {
   private static final long serialVersionUID = 1L;
