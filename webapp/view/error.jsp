@@ -1,11 +1,4 @@
-<!doctype html>
-<html lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<%@ include file="/view/includes/static/header.jsp" %>
 
 ERROR!!!!!
-</body>
-</html>
+<%@ include file="/view/includes/static/footer.jsp" %>

@@ -1,9 +1,4 @@
-<!doctype html>
-<html lang="en-US">
-<head>
-<title>PeerPen - New Peer</title>
-</head>
-<body>
+<%@ include file="/view/includes/static/header.jsp" %>
 	<h1 align="center">Become a Peer today! #yolo #awesome #peerpen</h1>
 	<form action="/register.do" method="post" align="center">
 		<table border="0" align="center">
@@ -39,5 +34,4 @@
 		</table>
 		<br /> <input type="submit" value="submit" />
 	</form>
-</body>
-</html>
+<%@ include file="/view/includes/static/footer.jsp" %>
