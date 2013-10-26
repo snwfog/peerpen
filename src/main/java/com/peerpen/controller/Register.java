@@ -52,7 +52,7 @@ public class Register extends HttpServlet {
                 newPeer.save();
 
                 HttpSession session = request.getSession();
-                session.setAttribute("userSession", request.getParameter("username"));
+                session.setAttribute("userSession", user_name);
                 redirect = "/profile";
             }
             response.sendRedirect(redirect);
