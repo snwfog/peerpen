@@ -1,25 +1,20 @@
-<!doctype html>
-<html lang="en-US">
-<head>
-  <title>PeerPen - Profile</title>
-</head>
-<body>
-
+<%@ include file="/view/includes/static/header.jsp" %>
 
 <%
-  if (session.getAttribute("userSession") == null)
-  {
-    response.sendRedirect("/login");
-  }
-
-
+    if (session.getAttribute("userSession") == null)
+    {
+        response.sendRedirect("/login");
+    }
 %>
 
-<h1>U r logged in!!!Welcome back <%= session.getAttribute("userSession") %>
-  !</h1>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand">PeerPen</a>
+        </div>
 
-<a href="/logout.do">logout</a>
+    </div>
+</div>
 
-
-</body>
-</html>
+<br><br><p align="center"><%= session.getAttribute("userSession") %>'s Profile Page  (<a href="/logout.do">logout</a>)</p>
+<%@ include file="/view/includes/static/footer.jsp" %>

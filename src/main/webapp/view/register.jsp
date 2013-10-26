@@ -6,7 +6,7 @@
         <h2 align="center">Registration</h2>
     </div>
     <div id="registerBody">
-        <form id="register" action="/register" method="post">
+        <form id="register" action="/register.do" method="post">
             <div class="form-group" >
                 <label>First Name</label>
                 <input class="form-control" type="text" name="first_name" />
