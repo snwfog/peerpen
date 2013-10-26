@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>This is a fucking Test</title>
-    <%--<jsp:include page="../assets/css/bootstrap.css"/>--%>
+    <%--<jsp:include page="../assets/css/bootstrap.jsp"/>--%>
     <link rel="stylesheet" href="/assets/css/bootstrap.css" type="text/css" >
 </head>
 <body>
