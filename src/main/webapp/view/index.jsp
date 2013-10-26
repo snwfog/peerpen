@@ -47,7 +47,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <h3>Instant Feedback From Peers</h3>
+          <h3>Instant Feedback</h3>
 
           <p>
             Collaboratively administrate empowered markets via plug-and-play
