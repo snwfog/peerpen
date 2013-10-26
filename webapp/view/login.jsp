@@ -1,11 +1,10 @@
 
 
 <%@ include file="/view/includes/static/header.jsp" %>
-
 <div class="container col-md-3 col-md-offset-3">
     <div class="form-group">
         <h2>Login</h2>
-        <form role ="form" action="/login" method="post">
+        <form role ="form" action="/login.do" method="post">
             <fieldset>
                 <div class="clearfix">
                     <input type="text" id="username" name="username" placeholder="Username">

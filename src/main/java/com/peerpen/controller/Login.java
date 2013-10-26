@@ -28,13 +28,13 @@ public class Login extends HttpServlet {
         map.put("userName", request.getParameter("username"));
         map.put("password", request.getParameter("password"));
 
-        String redirect = "view/missingData.jsp";
+        String redirect = "/error";
         try {
             ArrayList<HashMap<String, Object>> matches = Manager.findAll("peers", map);
             if (matches.size() == 1){ // means found exactly 1 user with that username and password
                 HttpSession session = request.getSession();
                 session.setAttribute("userSession", request.getParameter("username"));
-                redirect = "view/profile.jsp";
+                redirect = "/profile";
             }
             response.sendRedirect(redirect);
 
@@ -45,12 +45,10 @@ public class Login extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // forward to login jsp
-        ServletContext context = getServletContext();
-        RequestDispatcher dispatcher = context.getRequestDispatcher("/view/login.jsp");
-        dispatcher.forward(request, response);
-
-
+//        // forward to login jsp
+//        ServletContext context = getServletContext();
+//        RequestDispatcher dispatcher = context.getRequestDispatcher("/view/login.jsp");
+//        dispatcher.forward(request, response);
 
 
     }
