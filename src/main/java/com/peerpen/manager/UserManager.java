@@ -24,7 +24,7 @@ public class UserManager extends FrontCommand
 
   public void createPeerPage() throws ServletException, IOException
   {
-    forward("/Views/NewUser.jsp");
+    forward("/Views/register.jsp");
   }
 
   public void viewUser(String id) throws ServletException, IOException
@@ -32,7 +32,7 @@ public class UserManager extends FrontCommand
 //		HttpSession session = request.getSession(true);
     // session.setAttribute("user", user);
 
-    forward("/Views/Profile.jsp");
+    forward("/Views/profile.jsp");
   }
 
   /**

@@ -1,12 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <title>This is a fucking Test</title>
-    <%--<jsp:include page="../assets/css/bootstrap.css"/>--%>
+    <%--<jsp:include page="../assets/css/bootstrap.jsp"/>--%>
     <link rel="stylesheet" href="/assets/css/bootstrap.css" type="text/css" >
 </head>
 <body>
@@ -16,7 +13,7 @@
         <div class="row">
             <div class="login-form">
                 <h2>Login</h2>
-                <form action="login.do" method="post">
+                <form action="/login" method="post">
                     <fieldset>
                         <div class="clearfix">
                             <input type="text" id="username" name="username" placeholder="Username">
@@ -34,6 +31,8 @@
 <%@ include file="/view/includes/static/footer.jsp" %>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="assets/js/bootstrap.js"></script>
+
+
 </body>
 
 </html>

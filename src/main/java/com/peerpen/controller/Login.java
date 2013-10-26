@@ -2,6 +2,8 @@ package com.peerpen.controller;
 
 import com.sunnyd.database.Manager;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,14 +22,11 @@ import java.util.HashMap;
  */
 public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //doGet(request, response);
+        System.out.println("gets here");
         HashMap<String, Object> map = new HashMap<String, Object>();
-        map.put("userName", "user");
-        map.put("password", "pass");
+        map.put("userName", request.getParameter("username"));
+        map.put("password", request.getParameter("password"));
 
         String redirect = "view/missingData.jsp";
         try {
@@ -35,13 +34,24 @@ public class Login extends HttpServlet {
             if (matches.size() == 1){ // means found exactly 1 user with that username and password
                 HttpSession session = request.getSession();
                 session.setAttribute("userSession", request.getParameter("username"));
-                redirect = "view/ok.jsp";
+                redirect = "view/profile.jsp";
             }
             response.sendRedirect(redirect);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // forward to login jsp
+        ServletContext context = getServletContext();
+        RequestDispatcher dispatcher = context.getRequestDispatcher("/view/login.jsp");
+        dispatcher.forward(request, response);
+
+
+
 
     }
 }
