@@ -33,17 +33,10 @@ public class Login extends HttpServlet {
         String redirect = "/error";
         try {
             ArrayList<HashMap<String, Object>> matches = Manager.findAll("peers", map);
+
             if (matches.size() == 1){ // means found exactly 1 user with that username and password
                 HashMap<String, Object> match = matches.get(0); // get this hashmap from the arraylist
-                Peer peer = new Peer();
-                peer.setFirstName(match.get("firstName").toString());
-                peer.setLastName(match.get("lastName").toString());
-                peer.setUserName(match.get("userName").toString());
-                peer.setPassword(match.get("password").toString());
-                peer.setPersonalWebsite(match.get("personalWebsite").toString());
-                peer.setEmail(match.get("email").toString());
-                peer.setPoint(Integer.parseInt(match.get("point").toString()));
-                peer.setRankId(Integer.parseInt(match.get("rankId").toString()));
+                Peer peer = new Peer(match);
                 // store the peer obj in session
                 HttpSession session = request.getSession();
                 session.setAttribute("user", peer);
