@@ -2,6 +2,7 @@ package com.peerpen.controller;
 
 import com.sunnyd.database.Manager;
 
+import javax.servlet.FilterChain;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -37,6 +38,7 @@ public class Login extends HttpServlet {
                 session.setMaxInactiveInterval(259200); // 3 days in secs
                 redirect = "/profile";
             }
+
             response.sendRedirect(redirect);
 
         } catch (Exception e) {
@@ -50,7 +52,6 @@ public class Login extends HttpServlet {
 //        ServletContext context = getServletContext();
 //        RequestDispatcher dispatcher = context.getRequestDispatcher("/view/login.jsp");
 //        dispatcher.forward(request, response);
-
-
     }
+
 }

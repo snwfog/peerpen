@@ -78,6 +78,17 @@
 
 
 
+    <filter>
+        <filter-name>noCacheFilter</filter-name>
+        <filter-class>com.peerpen.controller.NoCacheFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>noCacheFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+
 
     <session-config>
         <session-timeout>72</session-timeout>
