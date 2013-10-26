@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +12,7 @@
         <div class="row">
             <div class="login-form">
                 <h2>Login</h2>
-                <form action="login.do" method="post">
+                <form action="/login" method="post">
                     <fieldset>
                         <div class="clearfix">
                             <input type="text" id="username" name="username" placeholder="Username">
@@ -32,6 +29,7 @@
 </div>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="assets/js/bootstrap.js"></script>
+
 </body>
 
 </html>
