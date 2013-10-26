@@ -49,10 +49,11 @@ public class Register extends HttpServlet {
                 newPeer.setEmail(email);
                 newPeer.setPersonalWebsite(website);
                 newPeer.setPassword(password);
+                newPeer.setPoint(0);
                 newPeer.save();
 
                 HttpSession session = request.getSession();
-                session.setAttribute("user", user_name);
+                session.setAttribute("user", newPeer);
                 redirect = "/profile";
             }
             response.sendRedirect(redirect);
