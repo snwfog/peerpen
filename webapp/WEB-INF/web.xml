@@ -25,6 +25,15 @@
         <url-pattern>/login.do</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>logout.do</servlet-name>
+        <servlet-class>com.peerpen.controller.Logout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logout.do</servlet-name>
+        <url-pattern>/logout.do</url-pattern>
+    </servlet-mapping>
+
 
 
     <servlet>
@@ -42,6 +51,29 @@
     <servlet-mapping>
         <servlet-name>register.do</servlet-name>
         <url-pattern>/register.do</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet>
+        <servlet-name>profile</servlet-name>
+        <jsp-file>/view/profile.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>profile</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+
+
+
+
+    <servlet>
+        <servlet-name>error</servlet-name>
+        <jsp-file>/view/error.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>error</servlet-name>
+        <url-pattern>/error</url-pattern>
     </servlet-mapping>
 
 

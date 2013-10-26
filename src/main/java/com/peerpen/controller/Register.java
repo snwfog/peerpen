@@ -38,7 +38,7 @@ public class Register extends HttpServlet {
         // check if user already exists
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("userName", user_name);
-        String redirect = "view/missingData.jsp";
+        String redirect = "/error";
         try {
             ArrayList<HashMap<String, Object>> matches = Manager.findAll("peers", map);
             if (matches.size() == 0){ // means user does not exist
@@ -53,7 +53,7 @@ public class Register extends HttpServlet {
 
                 HttpSession session = request.getSession();
                 session.setAttribute("userSession", request.getParameter("username"));
-                redirect = "view/profile.jsp";
+                redirect = "/profile";
             }
             response.sendRedirect(redirect);
 

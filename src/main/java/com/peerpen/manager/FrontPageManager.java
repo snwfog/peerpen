@@ -14,7 +14,7 @@ public class FrontPageManager extends FrontCommand
   {
     // TODO Auto-generated method stub
 
-    forward("/Views/FrontPage.jsp");
+    //forward("/Views/FrontPage.jsp");
   }
 
   @Override
