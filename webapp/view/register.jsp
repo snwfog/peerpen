@@ -5,7 +5,7 @@
 </head>
 <body>
 	<h1 align="center">Become a Peer today! #yolo #awesome #peerpen</h1>
-	<form action="/register" method="post" align="center">
+	<form action="/register.do" method="post" align="center">
 		<table border="0" align="center">
 			<tr>
 				<td>First Name</td>

@@ -45,12 +45,10 @@ public class Login extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // forward to login jsp
-        ServletContext context = getServletContext();
-        RequestDispatcher dispatcher = context.getRequestDispatcher("/view/login.jsp");
-        dispatcher.forward(request, response);
-
-
+//        // forward to login jsp
+//        ServletContext context = getServletContext();
+//        RequestDispatcher dispatcher = context.getRequestDispatcher("/view/login.jsp");
+//        dispatcher.forward(request, response);
 
 
     }

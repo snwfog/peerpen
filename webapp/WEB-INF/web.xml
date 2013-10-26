@@ -27,14 +27,21 @@
 
 
 
-
     <servlet>
         <servlet-name>register</servlet-name>
-        <servlet-class>com.peerpen.controller.Register</servlet-class>
+        <jsp-file>/view/register.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>register.do</servlet-name>
+        <servlet-class>com.peerpen.controller.Register</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>register.do</servlet-name>
+        <url-pattern>/register.do</url-pattern>
     </servlet-mapping>
 
 
