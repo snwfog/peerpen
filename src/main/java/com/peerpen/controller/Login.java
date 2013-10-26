@@ -34,6 +34,7 @@ public class Login extends HttpServlet {
             if (matches.size() == 1){ // means found exactly 1 user with that username and password
                 HttpSession session = request.getSession();
                 session.setAttribute("userSession", request.getParameter("username"));
+                session.setMaxInactiveInterval(259200); // 3 days in secs
                 redirect = "/profile";
             }
             response.sendRedirect(redirect);
