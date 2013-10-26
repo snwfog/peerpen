@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/assets/css/bootstrap.css" type="text/css" >
 </head>
 <body>
+<%@ include file="/view/includes/static/header.jsp" %>
 <div class="container">
     <div class="content">
         <div class="row">
@@ -30,6 +31,7 @@
         </div>
     </div>
 </div>
+<%@ include file="/view/includes/static/footer.jsp" %>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="assets/js/bootstrap.js"></script>
 </body>
