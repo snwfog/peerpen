@@ -1,21 +1,22 @@
 <%@ include file="/view/includes/static/header.jsp" %>
-<div class="row">
-    <div class="col-xs-6 col-md-4"></div>
-    <div class="col-xs-6 col-md-4">
+
+<div class="row well">
+    <div class="col-xs-6 col-sm-4 col-md-4"></div>
+    <div class="col-xs-6 col-sm-4 col-md-4">
         <h2>Login</h2>
 
         <form role="form" action="/login.do" method="post">
-            <fieldset>
-                <div class="clearfix">
-                    <input type="text" id="username" name="username" placeholder="Username">
+                <div class="clearfix col-lg-2">
+                    <input class="form-control " type="text" id="username" name="username" placeholder="Username">
                 </div>
-                <div class="clearfix">
-                    <input type="password" id="password" name="password" placeholder="Password">
+                <div class="clearfix col-lg-2 form-group">
+                    <input class="form-control" type="password" id="password" name="password" placeholder="Password">
                 </div>
-                <button class="btn btn-primary" type="button submit">Sign in</button>
-            </fieldset>
+                <div class="clearfix col-lg-2">
+                    <button class="btn btn-primary" type="button submit">Sign in</button>
+                </div>
+
         </form>
     </div>
-    <div class="col-xs-6 col-md-4"></div>
 </div>
 <%@ include file="/view/includes/static/footer.jsp" %>
