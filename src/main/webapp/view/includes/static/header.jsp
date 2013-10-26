@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>PeerPen - A Capstone project by Sunny Delight</title>
+
   <link rel="stylesheet" href="/assets/css/lib/bootstrap.min.css" type="text/css">
   <link rel="stylesheet" href="/assets/css/lib/flat-ui.min.css" type="text/css">
   <link rel="stylesheet" href="/assets/css/custom/peerpen.css" type="text/css">
@@ -13,7 +14,6 @@
   <script src="/assets/js/lib/bootstrap.js"></script>
   <script src="/assets/js/lib/jquery.stellar.min.js"></script>
   <script src="/assets/js/custom/script.js"></script>
-
 
 </head>
 <body>
