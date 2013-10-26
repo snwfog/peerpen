@@ -1,1 +1,5 @@
-$(window).stellar()
+$ ->
+  $.stellar
+    horizontalScrolling: false
+    verticalOffset: 40
+
