@@ -63,6 +63,14 @@
         <servlet-name>profile</servlet-name>
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>profile.do</servlet-name>
+        <servlet-class>com.peerpen.controller.Profile</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>profile.do</servlet-name>
+        <url-pattern>/profile.do</url-pattern>
+    </servlet-mapping>
 
 
 
