@@ -18,19 +18,19 @@
 <br><br>
 
 <p align="center"> (<a href="/logout.do">logout</a>)</p>
+<table>
+    <tr><td>First</td><td><%= peer.getFirstName().toString() %></td></tr>
+    <tr><td>Last</td><td><%= peer.getLastName().toString() %></td></tr>
+    <tr><td>Username</td><td><%= peer.getUserName().toString() %></td></tr>
+    <tr><td>Email</td><td><%= peer.getEmail().toString() %></td></tr>
+    <tr><td>Point</td><td><%= Integer.parseInt(peer.getPoint().toString()) %></td></tr>
+    <tr><td>Website</td><td><%= peer.getPersonalWebsite().toString() %></td></tr>
+</table>
 
 <%
-        out.println(peer.getFirstName().toString());
-        out.println(peer.getLastName().toString());
-        out.println(peer.getUserName().toString());
-        out.println(peer.getEmail().toString());
-        out.println(Integer.parseInt(peer.getPoint().toString()));
-        out.println(peer.getPersonalWebsite().toString());
-
     } else {
         response.sendRedirect("/login");
     }
-
 %>
 
 
