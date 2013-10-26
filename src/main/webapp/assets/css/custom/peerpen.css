@@ -1,10 +1,11 @@
 body#registration{
     background-image: url('http://shadowness.com/file/item4/90236/image_t6.jpg');
     background-size: 100% auto;
+    background-repeat: no-repeat;
     display: block;
 }
 div.registerContainer{
-    margin-top: 2%;
+    margin-top: 5px;
     margin-left:10%;
     display:block;
     float:left;
@@ -34,7 +35,7 @@ form#register{
 }
 
 div#registrationImage{
-    margin-top:3%;
+    margin-top:10px;
     margin-left:30px;
     display:block;
     float:left;

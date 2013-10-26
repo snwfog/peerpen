@@ -1,7 +1,9 @@
 package com.peerpen.controller;
 
+import com.peerpen.model.Peer;
 import com.sunnyd.database.Manager;
 
+import javax.servlet.FilterChain;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -32,10 +34,24 @@ public class Login extends HttpServlet {
         try {
             ArrayList<HashMap<String, Object>> matches = Manager.findAll("peers", map);
             if (matches.size() == 1){ // means found exactly 1 user with that username and password
+                HashMap<String, Object> match = matches.get(0); // get this hashmap from the arraylist
+                Peer peer = new Peer();
+                peer.setFirstName(match.get("firstName").toString());
+                peer.setLastName(match.get("lastName").toString());
+                peer.setUserName(match.get("userName").toString());
+                peer.setPassword(match.get("password").toString());
+                peer.setPersonalWebsite(match.get("personalWebsite").toString());
+                peer.setEmail(match.get("email").toString());
+                peer.setPoint(Integer.parseInt(match.get("point").toString()));
+                peer.setRankId(Integer.parseInt(match.get("rankId").toString()));
+                // store the peer obj in session
                 HttpSession session = request.getSession();
-                session.setAttribute("userSession", request.getParameter("username"));
+                session.setAttribute("user", peer);
+                session.setMaxInactiveInterval(259200); // 3 days in secs
+                //request.setAttribute("user", peer);
                 redirect = "/profile";
             }
+
             response.sendRedirect(redirect);
 
         } catch (Exception e) {
@@ -45,11 +61,6 @@ public class Login extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        // forward to login jsp
-//        ServletContext context = getServletContext();
-//        RequestDispatcher dispatcher = context.getRequestDispatcher("/view/login.jsp");
-//        dispatcher.forward(request, response);
-
-
     }
+
 }
