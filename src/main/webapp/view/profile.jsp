@@ -15,8 +15,8 @@
 
 %>
 
-<h1>U r logged in!!!Welcome back <%= session.getAttribute("userSession") %>
-  !</h1>
+<h1><%= session.getAttribute("userSession") %>'s Profile Page</h1>
+
 
 <a href="/logout.do">logout</a>
 
