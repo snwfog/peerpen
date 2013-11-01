@@ -39,13 +39,13 @@ $(document).ready(function(){
                     <h4><%= peer.getFirstName() %> <%= peer.getLastName() %></h4>
                     <form action="/profile.do" method="post">
                         <table>
-                            <tr><td>id</td><td><input type="text" class="peerId" name="id" value=<%= peer.getId().toString() %> readonly></td></tr>
-                            <tr><td>First</td><td><input type="text" class="peerProperties" name="first_name" value=<%= peer.getFirstName().toString() %> readonly></td></tr>
-                            <tr><td>Last</td><td><input type="text" class="peerProperties" name="last_name" value=<%= peer.getLastName().toString() %> readonly></td></tr>
-                            <tr><td>Username</td><td><input type="text" class="peerProperties" name="user_name" value=<%= peer.getUserName().toString() %> readonly></td></tr>
-                            <tr><td>Email</td><td><input type="text" class="peerProperties" name="email" value=<%= peer.getEmail().toString() %> readonly></td></tr>
-                            <tr><td>Points</td><td><input type="text" class="peerProperties" name="point" value=<%= Integer.parseInt(peer.getPoint().toString()) %> readonly></td></tr>
-                            <tr><td>Website</td><td><input type="text" class="peerProperties" name="personal_website" value=<%= peer.getPersonalWebsite().toString() %> readonly></td></tr>
+                            <tr><td>id</td><td><input type="text" class="peerId" name="id" value="<%= peer.getId().toString() %>" readonly></td></tr>
+                            <tr><td>First</td><td><input type="text" class="peerProperties" name="first_name" value="<%= peer.getFirstName().toString() %>" readonly></td></tr>
+                            <tr><td>Last</td><td><input type="text" class="peerProperties" name="last_name" value="<%= peer.getLastName().toString() %>" readonly></td></tr>
+                            <tr><td>Username</td><td><input type="text" class="peerProperties" name="user_name" value="<%= peer.getUserName().toString() %>" readonly></td></tr>
+                            <tr><td>Email</td><td><input type="text" class="peerProperties" name="email" value="<%= peer.getEmail().toString() %>" readonly></td></tr>
+                            <tr><td>Points</td><td><input type="text" class="peerPoint" name="point" value="<%= Integer.parseInt(peer.getPoint().toString()) %>" readonly></td></tr>
+                            <tr><td>Website</td><td><input type="text" class="peerProperties" name="personal_website" value="<%= peer.getPersonalWebsite().toString() %>" readonly></td></tr>
                         </table>
                         <a href="#" id="edit">edit</a> | <a href="#" id="done">done</a>
                         <input type="submit" value="Save" />
