@@ -5,6 +5,7 @@ import com.sunnyd.IModel;
 import com.sunnyd.annotations.*;
 import com.sunnyd.database.Manager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -25,6 +26,9 @@ public class Hunk extends Base implements IModel {
     @ActiveRelationHasOne
     private Integer documentId;
     private Document document;
+
+    @ActiveRelationHasMany
+    private Changeset[] changesets;
 
     public Hunk() {
         super();
@@ -70,5 +74,23 @@ public class Hunk extends Base implements IModel {
         }
         return document;
     }
+
+    public Changeset[] getChangesets()
+    {
+        HashMap<String, Object> condition = new HashMap<String, Object>();
+        condition.put("hunkId", this.getId());
+
+        ArrayList<HashMap<String, Object>> foundChangesets = Manager.findAll("changesets", condition);
+        int size = foundChangesets.size();
+        changesets = new Changeset[size - 1];
+
+        for (int i = 0; i < size; i++)
+        {
+            Changeset c = new Changeset(foundChangesets.get(i));
+            changesets[i] = c;
+        }
+        return changesets;
+    }
+
 
 }

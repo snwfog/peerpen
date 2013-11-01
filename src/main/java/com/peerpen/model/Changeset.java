@@ -18,6 +18,10 @@ public class Changeset extends Base implements IModel {
     private Integer peerId;
     private Peer peer;
 
+    @ActiveRelationHasOne
+    private Integer hunkId;
+    private Hunk hunk;
+
 
     public Changeset() {
         super();
@@ -61,6 +65,23 @@ public class Changeset extends Base implements IModel {
             peer = Peer.find(this.getPeerId());
         }
         return peer;
+    }
+
+    public void setHunkId(Integer hunkId){
+        this.hunkId = hunkId;
+    }
+
+    public int getHunkId(){
+        return this.hunkId;
+    }
+
+    public Hunk getHunk(){
+        if(hunk == null){
+            // HashMap<String, Object> foundPeer = Manager.find(peerId, "peers");
+            //this.peer = new Peer(foundPeer);
+            hunk = Changeset.find(this.getHunkId());
+        }
+        return hunk;
     }
 
 }
