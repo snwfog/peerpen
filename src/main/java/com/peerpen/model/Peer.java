@@ -29,6 +29,8 @@ public class Peer extends Base
   private String personalWebsite;
   @ActiveRelationHasMany
   private Document[] documents;
+  @ActiveRelationHasMany
+  private Changeset[] changesets;
 
   public Peer()
   {
@@ -145,5 +147,22 @@ public class Peer extends Base
     }
     return documents;
   }
+
+    public Changeset[] getChangesets()
+    {
+        HashMap<String, Object> condition = new HashMap<String, Object>();
+        condition.put("peerId", this.getId());
+
+        ArrayList<HashMap<String, Object>> foundChangesets = Manager.findAll("changesets", condition);
+        int size = foundChangesets.size();
+        changesets = new Changeset[size - 1];
+
+        for (int i = 0; i < size; i++)
+        {
+            Changeset c = new Changeset(foundChangesets.get(i));
+            changesets[i] = c;
+        }
+        return changesets;
+    }
 
 }
