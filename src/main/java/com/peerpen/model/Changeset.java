@@ -7,8 +7,6 @@ import java.util.HashMap;
 
 public class Changeset extends Base implements IModel {
 
-    public static final String tableName = "changesets";
-
     public Changeset() {
         super();
     }

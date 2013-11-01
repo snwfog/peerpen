@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import com.sunnyd.Base;
 import com.sunnyd.IModel;
+import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.annotations.ActiveRelationHasOne;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.database.Manager;
@@ -23,6 +24,8 @@ public class Document extends Base implements IModel {
     private Peer peer;
     @ActiveRecordField
     private Integer peerId;
+    @ActiveRecordField
+    private String docType;
     
     
     public Document() {
@@ -95,6 +98,18 @@ public class Document extends Base implements IModel {
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
         setUpdateFlag(true);
+    }
+
+
+    public String getDocType() {
+        return docType;
+    }
+
+    public void setDocType(String type) {
+        if(type.toLowerCase().trim().contentEquals("resume") | type.toLowerCase().trim().contentEquals("coverLetter")){
+            this.docType = type;
+            setUpdateFlag(true);
+        }
     }
 
 }
