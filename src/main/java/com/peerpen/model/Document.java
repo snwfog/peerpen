@@ -124,7 +124,7 @@ public class Document extends Base implements IModel {
 
         ArrayList<HashMap<String, Object>> foundHunks = Manager.findAll("hunks", condition);
         int size = foundHunks.size();
-        hunks = new Hunk[size - 1];
+        hunks = new Hunk[size];
 
         for (int i = 0; i < size; i++)
         {
@@ -141,7 +141,7 @@ public class Document extends Base implements IModel {
 
         ArrayList<HashMap<String, Object>> foundChangesets = Manager.findAll("changesets", condition);
         int size = foundChangesets.size();
-        changesets = new Changeset[size - 1];
+        changesets = new Changeset[size];
 
         for (int i = 0; i < size; i++)
         {

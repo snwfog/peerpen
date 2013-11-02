@@ -139,7 +139,7 @@ public class Peer extends Base
 
     ArrayList<HashMap<String, Object>> foundDocuments = Manager.findAll("documents", condition);
     int size = foundDocuments.size();
-    documents = new Document[size - 1];
+    documents = new Document[size];
 
     for (int i = 0; i < size; i++)
     {
@@ -156,7 +156,7 @@ public class Peer extends Base
 
         ArrayList<HashMap<String, Object>> foundChangesets = Manager.findAll("changesets", condition);
         int size = foundChangesets.size();
-        changesets = new Changeset[size - 1];
+        changesets = new Changeset[size];
 
         for (int i = 0; i < size; i++)
         {
@@ -177,7 +177,8 @@ public class Peer extends Base
         System.out.println(p.getFirstName());
         System.out.println(p.getUserName());
         Document[] a = p.getDocuments();
-        //System.out.println((p.getDocuments()));
+        Changeset[] c = p.getChangesets();
+        System.out.println(a);
 
     }
 
