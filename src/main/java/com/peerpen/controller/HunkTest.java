@@ -40,6 +40,7 @@ public class HunkTest extends HttpServlet
     //HashMap<String, String> createdBoxes = new HashMap<String, String>();
     ArrayList<Hunk> list = new ArrayList<Hunk>();
     Document newDoc = new Document();
+    newDoc.setDocName("newDoc");
     newDoc.setPeerId(1);
     newDoc.save();
     while (it.hasNext())
@@ -48,7 +49,7 @@ public class HunkTest extends HttpServlet
       String boxid = ob.get("id").toString();
       String html = ob.get("html").toString();
             Hunk h = new Hunk();
-            h.setDocument(newDoc);
+            h.setDocumentId(newDoc.getId());
             h.setIdView(boxid);
             h.setContent(html);
             list.add(h);
