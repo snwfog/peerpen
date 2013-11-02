@@ -6,6 +6,7 @@ import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.database.Manager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Peer extends Base
@@ -163,6 +164,21 @@ public class Peer extends Base
             changesets[i] = c;
         }
         return changesets;
+    }
+
+    public static void main(String[] args) {
+        /*Peer p = new Peer();
+        p.setFirstName("wais");
+        p.setUserName("wais");
+        p.setPassword("khedri");
+        System.out.println(p.save());
+          */
+        Peer p = Peer.find(1);
+        System.out.println(p.getFirstName());
+        System.out.println(p.getUserName());
+        Document[] a = p.getDocuments();
+        //System.out.println((p.getDocuments()));
+
     }
 
 }

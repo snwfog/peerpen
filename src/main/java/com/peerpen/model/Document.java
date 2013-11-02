@@ -78,13 +78,13 @@ public class Document extends Base implements IModel {
     public static void main(String[] args) {
         Document d = new Document();
         d.setDocName("mydoc");
-        d.setPeerId(3); // why this setPeerId is not working @mike?
+        d.setPeerId(1); // why this setPeerId is not working @mike?
         System.out.println(d.save());
         
 //        Document d = Document.find(4);
         System.out.println(d.getPeer().getFirstName());
         System.out.println(d.getPeer().getLastName());
-        System.out.println(d.getPeer().getCreationDate());
+        //System.out.println(d.getPeer().getCreationDate());
     }
 
     public Date getLastModifiedDate() {

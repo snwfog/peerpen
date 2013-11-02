@@ -20,11 +20,14 @@ public class Hunk extends Base implements IModel {
 
     @ActiveRecordField
     private String idView;
+
     @ActiveRecordField
     private String content;
 
-    @ActiveRelationHasOne
+    @ActiveRecordField
     private Integer documentId;
+
+    @ActiveRelationHasOne
     private Document document;
 
     @ActiveRelationHasMany
@@ -48,7 +51,7 @@ public class Hunk extends Base implements IModel {
     }
 
     public String getContent() {
-        return idView;
+        return content;
     }
 
     public void setContent(String content) {
@@ -56,21 +59,23 @@ public class Hunk extends Base implements IModel {
         setUpdateFlag(true);
     }
 
-    public void setDocId(){
-        this.documentId = document.getId();
+    public void setDocumentId(Integer documentId){
+        this.documentId = documentId;
     }
 
-    public Integer getDocId(){
+    public Integer getDocumentId(){
           return this.documentId;
     }
 
-    public void setDocument(Document document){
+    /*public void setDocument(Document document){
         this.document = document;
-    }
+        setUpdateFlag(true);
+    } */
 
     public Document getDocument(){
         if(document == null){
-           document = Document.find(this.getDocId());
+           HashMap<String, Object> foundDocument = Manager.find(documentId, "documents");
+           this.document = new Document(foundDocument);
         }
         return document;
     }
@@ -91,6 +96,19 @@ public class Hunk extends Base implements IModel {
         }
         return changesets;
     }
+    public static void main(String[] args) {
+        Hunk h = new Hunk();
+        h.setContent("ababaabbbabbababb");
+        h.setDocumentId(2);
+        System.out.println(h.save());
+
+        Hunk a = Hunk.find(h.getId());
+//        Document d = Document.find(4);
+        System.out.println("lplplplp"+a.getContent());
+        System.out.println(a.getDocument().getDocName());
+
+    }
+
 
 
 }

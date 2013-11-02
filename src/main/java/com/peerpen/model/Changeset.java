@@ -10,17 +10,27 @@ import java.util.HashMap;
 public class Changeset extends Base implements IModel {
     public static final String tableName = "changesets";
 
+    @ActiveRecordField
+    private String content;
+
     @ActiveRelationHasOne
-    private Integer documentId;
     private Document document;
 
     @ActiveRelationHasOne
-    private Integer peerId;
     private Peer peer;
 
+    @ActiveRecordField
+    private Integer peerId;
+
+    @ActiveRecordField
+    private Integer documentId;
+
     @ActiveRelationHasOne
-    private Integer hunkId;
     private Hunk hunk;
+
+    @ActiveRecordField
+    private Integer hunkId;
+
 
 
     public Changeset() {
@@ -31,11 +41,20 @@ public class Changeset extends Base implements IModel {
         super(HM);
     }
 
-    public void setDocId(){
-        this.documentId = document.getId();
+    public String getContent() {
+        return content;
     }
 
-    public Integer getDocId(){
+    public void setContent(String content) {
+        this.content = content;
+        setUpdateFlag(true);
+    }
+
+    public void setDocumentId(Integer documentId){
+        this.documentId = documentId;
+    }
+
+    public Integer getDocumentId(){
         return this.documentId;
     }
 
@@ -45,7 +64,8 @@ public class Changeset extends Base implements IModel {
 
     public Document getDocument(){
         if(document == null){
-            document = Document.find(this.getDocId());
+            HashMap<String, Object> foundDocument = Manager.find(documentId, "documents");
+            this.document = new Document(foundDocument);
         }
         return document;
     }
@@ -54,15 +74,14 @@ public class Changeset extends Base implements IModel {
         this.peerId = peerId;
     }
 
-        public int getPeerId(){
-            return this.peerId;
-        }
+    public Integer getPeerId(){
+        return this.peerId;
+    }
 
     public Peer getPeer(){
         if(peer == null){
-           // HashMap<String, Object> foundPeer = Manager.find(peerId, "peers");
-           //this.peer = new Peer(foundPeer);
-            peer = Peer.find(this.getPeerId());
+           HashMap<String, Object> foundPeer = Manager.find(peerId, "peers");
+           this.peer = new Peer(foundPeer);
         }
         return peer;
     }
@@ -77,11 +96,29 @@ public class Changeset extends Base implements IModel {
 
     public Hunk getHunk(){
         if(hunk == null){
-            // HashMap<String, Object> foundPeer = Manager.find(peerId, "peers");
-            //this.peer = new Peer(foundPeer);
-            hunk = Changeset.find(this.getHunkId());
+            HashMap<String, Object> foundHunk = Manager.find(hunkId, "hunks");
+            this.hunk = new Hunk(foundHunk);
         }
         return hunk;
     }
+
+    public static void main(String[] args) {
+        Changeset c = new Changeset();
+        c.setContent("aaaaaaaaaaa");
+        c.setHunkId(27);
+        c.setDocumentId(2);
+        c.setPeerId(2);
+        System.out.println(c.save());
+
+//        Document d = Document.find(4);
+        System.out.println(c.getContent());
+        System.out.println(c.getHunk().getContent());
+        System.out.println(c.getDocument().getDocName());
+        System.out.println(c.getPeer().getUserName());
+
+
+        //System.out.println(d.getPeer().getCreationDate());
+    }
+
 
 }
