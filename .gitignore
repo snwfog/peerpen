@@ -1,4 +1,5 @@
 !lib/*.jar
+webapp/*
 .settings/*
 WebContent/
 .idea/*
