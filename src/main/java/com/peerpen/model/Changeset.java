@@ -63,10 +63,7 @@ public class Changeset extends Base implements IModel {
     }
 
     public Document getDocument(){
-        if(document == null){
-            HashMap<String, Object> foundDocument = Manager.find(documentId, "documents");
-            this.document = new Document(foundDocument);
-        }
+        initRelation("document");
         return document;
     }
 
@@ -79,10 +76,7 @@ public class Changeset extends Base implements IModel {
     }
 
     public Peer getPeer(){
-        if(peer == null){
-           HashMap<String, Object> foundPeer = Manager.find(peerId, "peers");
-           this.peer = new Peer(foundPeer);
-        }
+        initRelation("peer");
         return peer;
     }
 
@@ -95,10 +89,7 @@ public class Changeset extends Base implements IModel {
     }
 
     public Hunk getHunk(){
-        if(hunk == null){
-            HashMap<String, Object> foundHunk = Manager.find(hunkId, "hunks");
-            this.hunk = new Hunk(foundHunk);
-        }
+        initRelation("hunk");
         return hunk;
     }
 

@@ -28,6 +28,8 @@ public class Peer extends Base
   private Integer rankId;
   @ActiveRecordField
   private String personalWebsite;
+  @ActiveRecordField
+  private String description;
   @ActiveRelationHasMany
   private Document[] documents;
   @ActiveRelationHasMany
@@ -132,38 +134,27 @@ public class Peer extends Base
     setUpdateFlag(true);
   }
 
+  public String getDescription()
+  {
+    return description;
+  }
+
+  public void setDescription(String description)
+  {
+    this.description = description;
+    setUpdateFlag(true);
+  }
+
   public Document[] getDocuments()
   {
-    HashMap<String, Object> condition = new HashMap<String, Object>();
-    condition.put("peerId", this.getId());
-
-    ArrayList<HashMap<String, Object>> foundDocuments = Manager.findAll("documents", condition);
-    int size = foundDocuments.size();
-    documents = new Document[size];
-
-    for (int i = 0; i < size; i++)
-    {
-      Document d = new Document(foundDocuments.get(i));
-      documents[i] = d;
-    }
-    return documents;
+    initRelation("documents");
+    return this.documents;
   }
 
     public Changeset[] getChangesets()
     {
-        HashMap<String, Object> condition = new HashMap<String, Object>();
-        condition.put("peerId", this.getId());
-
-        ArrayList<HashMap<String, Object>> foundChangesets = Manager.findAll("changesets", condition);
-        int size = foundChangesets.size();
-        changesets = new Changeset[size];
-
-        for (int i = 0; i < size; i++)
-        {
-            Changeset c = new Changeset(foundChangesets.get(i));
-            changesets[i] = c;
-        }
-        return changesets;
+        initRelation("changesets");
+        return this.changesets;
     }
 
     public static void main(String[] args) {
@@ -176,9 +167,8 @@ public class Peer extends Base
         Peer p = Peer.find(1);
         System.out.println(p.getFirstName());
         System.out.println(p.getUserName());
-        Document[] a = p.getDocuments();
-        Changeset[] c = p.getChangesets();
-        System.out.println(a);
+        System.out.println(Arrays.asList(p.getDocuments()).toString());
+        System.out.println(Arrays.asList(p.getChangesets()).toString());
 
     }
 

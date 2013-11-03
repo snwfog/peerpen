@@ -21,6 +21,7 @@ public class Document extends Base implements IModel {
     private Date lastModifiedDate;
     @ActiveRecordField
     private Date creationDate;
+
     @ActiveRelationHasOne
     private Peer peer;
     @ActiveRecordField
@@ -46,10 +47,7 @@ public class Document extends Base implements IModel {
     }
 
     public Peer getPeer(){
-        if(peer == null){
-            HashMap<String, Object> foundPeer = Manager.find(peerId, "peers");
-            this.peer = new Peer(foundPeer);
-        }
+        initRelation("peer");
         return peer;
     }
     
@@ -78,12 +76,15 @@ public class Document extends Base implements IModel {
     public static void main(String[] args) {
         Document d = new Document();
         d.setDocName("mydoc");
-        d.setPeerId(1); // why this setPeerId is not working @mike?
+        d.setPeerId(1);
         System.out.println(d.save());
         
 //        Document d = Document.find(4);
-        System.out.println(d.getPeer().getFirstName());
+        System.out.println(d.getPeer());
         System.out.println(d.getPeer().getLastName());
+        System.out.println(d.getHunks());
+        System.out.println(d.getChangesets());
+
         //System.out.println(d.getPeer().getCreationDate());
     }
 
@@ -119,36 +120,14 @@ public class Document extends Base implements IModel {
 
     public Hunk[] getHunks()
     {
-        HashMap<String, Object> condition = new HashMap<String, Object>();
-        condition.put("documentId", this.getId());
-
-        ArrayList<HashMap<String, Object>> foundHunks = Manager.findAll("hunks", condition);
-        int size = foundHunks.size();
-        hunks = new Hunk[size];
-
-        for (int i = 0; i < size; i++)
-        {
-            Hunk h = new Hunk(foundHunks.get(i));
-            hunks[i] = h;
-        }
-        return hunks;
+        initRelation("hunks");
+        return this.hunks;
     }
 
     public Changeset[] getChangesets()
     {
-        HashMap<String, Object> condition = new HashMap<String, Object>();
-        condition.put("documentId", this.getId());
-
-        ArrayList<HashMap<String, Object>> foundChangesets = Manager.findAll("changesets", condition);
-        int size = foundChangesets.size();
-        changesets = new Changeset[size];
-
-        for (int i = 0; i < size; i++)
-        {
-            Changeset c = new Changeset(foundChangesets.get(i));
-            changesets[i] = c;
-        }
-        return changesets;
+        initRelation("changesets");
+        return this.changesets;
     }
 
 }

@@ -67,34 +67,20 @@ public class Hunk extends Base implements IModel {
           return this.documentId;
     }
 
-    /*public void setDocument(Document document){
+    public void setDocument(Document document){
         this.document = document;
         setUpdateFlag(true);
-    } */
+    }
 
     public Document getDocument(){
-        if(document == null){
-           HashMap<String, Object> foundDocument = Manager.find(documentId, "documents");
-           this.document = new Document(foundDocument);
-        }
+        initRelation("document");
         return document;
     }
 
     public Changeset[] getChangesets()
     {
-        HashMap<String, Object> condition = new HashMap<String, Object>();
-        condition.put("hunkId", this.getId());
-
-        ArrayList<HashMap<String, Object>> foundChangesets = Manager.findAll("changesets", condition);
-        int size = foundChangesets.size();
-        changesets = new Changeset[size];
-
-        for (int i = 0; i < size; i++)
-        {
-            Changeset c = new Changeset(foundChangesets.get(i));
-            changesets[i] = c;
-        }
-        return changesets;
+        initRelation("changesets");
+        return this.changesets;
     }
     public static void main(String[] args) {
         Hunk h = new Hunk();
@@ -103,7 +89,6 @@ public class Hunk extends Base implements IModel {
         System.out.println(h.save());
 
         Hunk a = Hunk.find(h.getId());
-//        Document d = Document.find(4);
         System.out.println("lplplplp"+a.getContent());
         System.out.println(a.getDocument().getDocName());
 
