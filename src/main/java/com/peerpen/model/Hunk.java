@@ -85,7 +85,7 @@ public class Hunk extends Base implements IModel {
     public static void main(String[] args) {
         Hunk h = new Hunk();
         h.setContent("ababaabbbabbababb");
-        h.setDocumentId(2);
+        h.setDocumentId(4);
         System.out.println(h.save());
 
         Hunk a = Hunk.find(h.getId());
