@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import com.google.gson.*;
 import com.peerpen.model.*;
+import com.sunnyd.database.Manager;
 
 import java.util.*;
 
@@ -35,32 +36,81 @@ public class HunkTest extends HttpServlet
 
     JsonParser parser = new JsonParser();
     JsonObject rootObj = parser.parse(raw).getAsJsonObject();
-    JsonArray mylist = rootObj.getAsJsonArray("created");
-    Iterator<JsonElement> it = mylist.iterator();
-    //HashMap<String, String> createdBoxes = new HashMap<String, String>();
-    ArrayList<Hunk> list = new ArrayList<Hunk>();
-    Document newDoc = new Document();
-    newDoc.setDocName("newDoc");
-    newDoc.setPeerId(1);
-    newDoc.save();
-    while (it.hasNext())
+
+    JsonArray createdList = rootObj.getAsJsonArray("created");
+    JsonArray modifiedList = rootObj.getAsJsonArray("modified");
+    JsonArray deletedList = rootObj.getAsJsonArray("deleted");
+
+    Iterator<JsonElement> createdIterator = createdList.iterator();
+    Iterator<JsonElement> modifiedIterator = modifiedList.iterator();
+    Iterator<JsonElement> deletedIterator = deletedList.iterator();
+
+    // CREATE
+//    ArrayList<Hunk> createdHunkList = new ArrayList<Hunk>();
+//    Document newDoc = new Document();
+//    newDoc.setDocName("newDoc");
+//    newDoc.setPeerId(1);
+//    newDoc.save();
+//    while (createdIterator.hasNext())
+//    {
+//      JsonObject ob = createdIterator.next().getAsJsonObject().getAsJsonObject();
+//      String boxid = ob.get("id").toString();
+//      String html = ob.get("html").toString();
+//            Hunk h = new Hunk();
+//            h.setDocumentId(newDoc.getId());
+//            h.setIdView(boxid);
+//            h.setContent(html);
+//            createdHunkList.add(h);
+//    }
+//
+//    for (Hunk h : createdHunkList)
+//    {
+//      h.save();
+//    }
+
+
+    // MODIFY
+
+    // save the hunk to changeset
+//    ArrayList<Hunk> list = new ArrayList<Hunk>();
+//    Document modDoc = new Document();
+//    modDoc.getId();
+
+
+    while (modifiedIterator.hasNext())
     {
-      JsonObject ob = it.next().getAsJsonObject().getAsJsonObject();
+      JsonObject ob = modifiedIterator.next().getAsJsonObject().getAsJsonObject();
       String boxid = ob.get("id").toString();
       String html = ob.get("html").toString();
-            Hunk h = new Hunk();
-            h.setDocumentId(newDoc.getId());
-            h.setIdView(boxid);
-            h.setContent(html);
-            list.add(h);
+      HashMap<String, Object> findCriteria = new HashMap<String, Object>();
+      //findCriteria.put("idView", "box2");
+      int id = -1;
+      ArrayList<HashMap<String, Object>> found = Manager.findAll("hunks", findCriteria);
+      for (HashMap<String, Object> h : found){
+        for (String key : h.keySet()){
+          //System.out.println("ppp" + key + ":" + h.get(key));
+          if (key.equals("idView")){
+            id = Integer.parseInt(h.get("id").toString());
+          }
+        }
+      }
+
+      //System.out.println("is this the id?" + found.get(0).toString());
+
+    HashMap<String, Object> updated = new HashMap<String, Object>();
+    updated.put("content", html);
+    Manager.update(id, "hunks", updated);
+
+//      Hunk h = new Hunk();
+//
+//      h.setDocumentId(newDoc.getId());
+//      h.setIdView(boxid);
+//      h.setContent(html);
+//      list.add(h);
     }
 
-    for (Hunk h : list)
-    {
-      h.save();
-      //System.out.println("here" + h.getContent().toString());
+
     }
-  }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
