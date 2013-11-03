@@ -4,6 +4,17 @@ body#registration{
     background-repeat: no-repeat;
     display: block;
 }
+img.profile{
+    width: 24px;
+    height: 24px;
+}
+img.profile2{
+    width: 220px;
+    height: 300px;
+}
+.personal-info h4{
+     color: #e67e22;
+ }
 div.registerContainer{
     margin-top: 5px;
     margin-left:10%;

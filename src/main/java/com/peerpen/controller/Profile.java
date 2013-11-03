@@ -27,6 +27,7 @@ public class Profile extends HttpServlet {
         String last_name = request.getParameter("last_name");
         String website = request.getParameter("personal_website");
         String email = request.getParameter("email");
+        String description = request.getParameter("description");
 
 
         // here we should validate the input...
@@ -37,6 +38,7 @@ public class Profile extends HttpServlet {
         map.put("lastName", last_name);
         map.put("personalWebsite", website);
         map.put("email", email);
+        map.put("description", description);
 
 
         String redirect = "/error";

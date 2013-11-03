@@ -138,6 +138,15 @@ public class Peer extends Base
   {
     return description;
   }
+  public void setDescription(String description)
+  {
+    this.description = description;
+    setUpdateFlag(true);
+  }
+  public Document[] getDocuments()
+  {
+    return description;
+  }
 
   public void setDescription(String description)
   {

@@ -6,7 +6,7 @@
   <title>PeerPen - A Capstone project by Sunny Delight</title>
 
   <link rel="stylesheet" href="/assets/css/lib/bootstrap.min.css" type="text/css">
-  <link rel="stylesheet" href="/assets/css/lib/flat-ui.min.css" type="text/css">
+  <link rel="stylesheet" href="/assets/css/lib/flat-ui.css" type="text/css">
   <link rel="stylesheet" href="/assets/css/custom/peerpen.css" type="text/css">
   <link rel="stylesheet" href="/assets/css/custom/style.min.css" type="text/css">
 
