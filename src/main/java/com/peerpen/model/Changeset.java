@@ -94,14 +94,15 @@ public class Changeset extends Base implements IModel {
     }
 
     public static void main(String[] args) {
-        Changeset c = new Changeset();
-        c.setContent("aaaaaaaaaaa");
+        //Changeset c = new Changeset();
+        /*c.setContent("aaaaaaaaaaa");
         c.setHunkId(27);
         c.setDocumentId(2);
         c.setPeerId(2);
-        System.out.println(c.save());
+        System.out.println(c.save()); */
 
 //        Document d = Document.find(4);
+        Changeset c = Changeset.find(11);
         System.out.println(c.getContent());
         System.out.println(c.getHunk().getContent());
         System.out.println(c.getDocument().getDocName());
