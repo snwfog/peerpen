@@ -89,9 +89,9 @@ public class Hunk extends Base implements IModel {
         h.setDocumentId(4);
         System.out.println(h.save());
 
-        Hunk a = Hunk.find(h.getId());
-        System.out.println("lplplplp"+a.getContent());
-        System.out.println(a.getDocument().getDocName());
+//        Hunk a = Hunk.find(h.getId());
+//        System.out.println("lplplplp"+a.getContent());
+//        System.out.println(a.getDocument().getDocName());
 
     }
 
