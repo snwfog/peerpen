@@ -22,7 +22,7 @@ import java.util.HashMap;
  * Time: 7:05 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Register extends HttpServlet {
+public class RegistrationController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //doGet(request, response);
         // get all register input

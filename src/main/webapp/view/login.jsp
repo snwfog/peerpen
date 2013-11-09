@@ -22,7 +22,7 @@
 <%--<div class="row">--%>
 <%--<div class="col-xs-6 col-md-4"></div>--%>
 <%--<div class="col-xs-6 col-md-4">--%>
-<%--<h2>Login</h2>--%>
+<%--<h2>LoginController</h2>--%>
 
 <%--<form role="form" action="/login.do" method="post">--%>
 <%--<fieldset>--%>
