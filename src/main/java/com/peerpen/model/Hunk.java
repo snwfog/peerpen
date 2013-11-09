@@ -31,7 +31,7 @@ public class Hunk extends Base implements IModel {
     private Document document;
 
     @ActiveRelationHasMany
-    private Changeset[] changesets;
+    private ArrayList<Changeset> changesets;
 
     public Hunk() {
         super();
@@ -78,7 +78,7 @@ public class Hunk extends Base implements IModel {
         return document;
     }
 
-    public Changeset[] getChangesets()
+    public ArrayList<Changeset> getChangesets()
     {
         initRelation("changesets");
         return this.changesets;
