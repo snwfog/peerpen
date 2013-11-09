@@ -31,7 +31,7 @@ public class Hunk extends Base implements IModel {
     private Document document;
 
     @ActiveRelationHasMany
-    private Changeset[] changesets;
+    private ArrayList<Changeset> changesets;
 
     public Hunk() {
         super();
@@ -68,7 +68,8 @@ public class Hunk extends Base implements IModel {
     }
 
     public void setDocument(Document document){
-        this.document = document;
+        this.documentId = document.getId();
+        this.document = null;
         setUpdateFlag(true);
     }
 
@@ -77,7 +78,7 @@ public class Hunk extends Base implements IModel {
         return document;
     }
 
-    public Changeset[] getChangesets()
+    public ArrayList<Changeset> getChangesets()
     {
         initRelation("changesets");
         return this.changesets;
@@ -88,9 +89,9 @@ public class Hunk extends Base implements IModel {
         h.setDocumentId(4);
         System.out.println(h.save());
 
-        Hunk a = Hunk.find(h.getId());
-        System.out.println("lplplplp"+a.getContent());
-        System.out.println(a.getDocument().getDocName());
+//        Hunk a = Hunk.find(h.getId());
+//        System.out.println("lplplplp"+a.getContent());
+//        System.out.println(a.getDocument().getDocName());
 
     }
 

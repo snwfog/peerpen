@@ -19,7 +19,7 @@ import java.util.HashMap;
  * Time: 7:05 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Profile extends HttpServlet {
+public class ProfileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // get all profile input
         int id = Integer.parseInt(request.getParameter("id"));

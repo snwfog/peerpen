@@ -18,7 +18,7 @@
 
     <servlet>
         <servlet-name>login.do</servlet-name>
-        <servlet-class>com.peerpen.controller.Login</servlet-class>
+        <servlet-class>com.peerpen.controller.LoginController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>login.do</servlet-name>
@@ -27,7 +27,7 @@
 
     <servlet>
         <servlet-name>logout.do</servlet-name>
-        <servlet-class>com.peerpen.controller.Logout</servlet-class>
+        <servlet-class>com.peerpen.controller.LogoutController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>logout.do</servlet-name>
@@ -46,7 +46,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>register.do</servlet-name>
-        <servlet-class>com.peerpen.controller.Register</servlet-class>
+        <servlet-class>com.peerpen.controller.RegistrationController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>register.do</servlet-name>
@@ -65,7 +65,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>profile.do</servlet-name>
-        <servlet-class>com.peerpen.controller.Profile</servlet-class>
+        <servlet-class>com.peerpen.controller.ProfileController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>profile.do</servlet-name>

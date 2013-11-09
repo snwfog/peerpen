@@ -8,11 +8,13 @@
         $("#personal_icon").attr('class', 'glyphicon glyphicon-ok')
         $(".peerPersonal").attr("readonly", false);
         $('#save_personal').css('visibility', '');
+        return false;
       }
       else {
         $('#personal_icon').attr('class', 'glyphicon glyphicon-pencil')
         $(".peerPersonal").attr("readonly", true);
         $('#save_personal').css('visibility', 'hidden');
+        return false;
       }
     });
     $('#edit_description').click(function () {
@@ -20,11 +22,13 @@
         $("#description_icon").attr('class', 'glyphicon glyphicon-ok')
         $(".peerDescription").attr("readonly", false);
         $('#save_description').css('visibility', '');
+        return false;
       }
       else {
         $('#description_icon').attr('class', 'glyphicon glyphicon-pencil')
         $(".peerDescription").attr("readonly", true);
         $('#save_description').css('visibility', 'hidden');
+        return false;
       }
     });
     $('#edit_contact').click(function () {
@@ -32,23 +36,27 @@
         $("#contact_icon").attr('class', 'glyphicon glyphicon-ok')
         $(".peerContact").attr("readonly", false);
         $('#save_contact').css('visibility', '');
+        return false;
       }
       else {
         $('#contact_icon').attr('class', 'glyphicon glyphicon-pencil')
         $(".peerContact").attr("readonly", true);
         $('#save_contact').css('visibility', 'hidden');
+        return false;
       }
     });
     $('#save_personal').click(function (){
       document.getElementById("form_personal").submit();
+      return false;
     });
     $('#save_description').click(function (){
       document.getElementById("form_description").submit();
+      return false;
     });
     $('#save_contact').click(function (){
       document.getElementById("form_contact").submit();
+      return false;
     });
-
   });
 </script>
 
@@ -72,7 +80,7 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
             class="glyphicon glyphicon-globe"></span><b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Discovery</a></li>
+          <li><a href="http://localhost:8080/hunk">Discovery</a></li>
           <li><a href="#">Feeds</a></li>
         </ul>
       </li>
@@ -105,46 +113,63 @@
 
 <br>
 
-<div class="row">
   <div class="col-md-3">
     <div class="bs-sidebar well">
       <a href="#"><img class="profile2"
                        src="/assets/images/profile/pic.jpg"/></a>
     </div>
+    <div class="profile">
+      <p>Member Info</p>
+    </div>
+      <table class="table table-condensed">
+        <tr>
+          <td class="active">Member Type: Regular Member</td>
+        <tr>
+          <td class="success">Peer Points: 325</td>
+        </tr>
+          <td class="warning">Achievements: 12</td>
+        <tr>
+          <td class="danger">Friends: 0 friends </td>
+        </tr>
+      </table>
   </div>
-  <div class="col-md-9 personal-info">
-    <div class="col-md-9 col-md-3">
-      <h4>Personal Information</h4>
+  <div class="col-md-9 profile">
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-5">
+          <p>Personal Information</p>&nbsp<a id="edit_personal" href="#"><span id="personal_icon" class="glyphicon glyphicon-pencil"></span></a>
+        </div>
+      </div>
       <div class="well">
         <div class="row">
           <form action="/profile.do" id="form_personal" method="post">
           <div class="col-md-6">
             <table>
               <tr>
-                <td>First name </td>
+                <td><h6>First name</h6></td>
                 <td><input type="text" class="form-control peerPersonal"
                            name="first_name"
                            value="<%= peer.getFirstName().toString() %>" readonly>
                 </td>
               </tr>
               <tr>
-                <td>Last name </td>
+                <td><h6>Last name</h6></td>
                 <td><input type="text" class="form-control peerPersonal"
                            name="last_name"
                            value="<%= peer.getLastName().toString() %>" readonly>
                 </td>
               </tr>
               <tr>
-                <td>Username </td>
+                <td><h6>Username</h6></td>
                 <td><input type="text" class="form-control peerUsername"
                            name="user_name"
                            value="<%= peer.getUserName().toString() %>" readonly>
                 </td>
               </tr>
               <tr>
-                <td>Date of Birth </td>
-                <td><input type="text" class="form-control peerDoB"
-                           name="user_dob"
+                <td><h6>Date of Birth &nbsp</h6></td>
+                <td><input type="text" class="form-control peerPersonal"
+                           name="dob"
                            value="" readonly>
                 </td>
               </tr>
@@ -155,30 +180,30 @@
           <div class="col-md-6">
             <table>
               <tr>
-                <td>First name </td>
+                <td><h6>Gender</h6></td>
                 <td><input type="text" class="form-control peerPersonal"
-                           name="first_name"
-                           value="<%= peer.getFirstName().toString() %>" readonly>
+                           name="gender"
+                           value="" readonly>
                 </td>
               </tr>
               <tr>
-                <td>Last name </td>
+                <td><h6>Country</h6></td>
                 <td><input type="text" class="form-control peerPersonal"
-                           name="last_name"
-                           value="<%= peer.getLastName().toString() %>" readonly>
+                           name="country"
+                           value="" readonly>
                 </td>
               </tr>
               <tr>
-                <td>Username </td>
-                <td><input type="text" class="form-control peerUsername"
-                           name="user_name"
-                           value="<%= peer.getUserName().toString() %>" readonly>
+                <td><h6>Industry</h6></td>
+                <td><input type="text" class="form-control peerPersonal"
+                           name="industry"
+                           value="" readonly>
                 </td>
               </tr>
               <tr>
-                <td>Date of Birth </td>
-                <td><input type="text" class="form-control peerDoB"
-                           name="user_dob"
+                <td><h6>Years of Experience &nbsp</h6></td>
+                <td><input type="text" class="form-control peerPersonal"
+                           name="yoe"
                            value="" readonly>
                 </td>
               </tr>
@@ -192,16 +217,17 @@
         id="save_personal" value="Save" href="#">Save
           Changes</a>
       </div>
-      <a class ="pull-right" id="edit_personal" href="#"><span id="personal_icon" class="glyphicon glyphicon-pencil"></span>Edit</a>
-
     </div>
 
-    <div class="col-md-9">
-      <h4>About Me</h4>
-
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-5">
+          <p>About Me</p>&nbsp<a id="edit_description" href="#"><span id="description_icon" class="glyphicon glyphicon-pencil"></span></a>
+        </div>
+      </div>
       <div class="well">
         <form action="/profile.do" id="form_description" method="post">
-        <textarea class ="peerDescription well form-control" name ="description" style="resize:none" rows="3" readonly>I am Blabla...</textarea>
+        <textarea class ="peerDescription well form-control" name ="description" style="resize:none" rows="3" readonly><%= peer.getDescription().toString() %></textarea>
         <input type="hidden" class="form-control peerID" name="id"
                  value="<%= Integer.parseInt(peer.getId().toString())%>">
         </form>
@@ -209,17 +235,19 @@
            id="save_description" value="Save" href="#">Save
           Changes</a>
       </div>
-      <a class ="pull-right" id="edit_description" href="#"><span id="description_icon" class="glyphicon glyphicon-pencil"></span>Edit</a>
 
     </div>
-    <div class="col-md-9">
-      <h4>Contact Information</h4>
-
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-5">
+          <p>Contact Information</p>&nbsp<a id="edit_contact" href="#"><span id="contact_icon" class="glyphicon glyphicon-pencil"></span></a>
+        </div>
+      </div>
       <div class="well">
         <form action="/profile.do" id="form_contact" method="post">
           <table>
             <tr>
-              <td>Email </td>
+              <td><h6>Email</h6></td>
               <td><input type="text" class="form-control peerContact"
                          name="email" value="<%= peer.getEmail().toString() %>"
                          readonly></td>
@@ -229,7 +257,7 @@
                    readonly>
             </tr>
             <tr>
-              <td>Website </td>
+              <td><h6>Website &nbsp</h6></td>
               <td><input type="text" class="form-control peerContact"
                          name="personal_website"
                          value="<%= peer.getPersonalWebsite().toString() %>"
@@ -243,7 +271,6 @@
            id="save_contact" value="Save" href="#">Save
           Changes</a>
       </div>
-      <a class ="pull-right" id="edit_contact" href="#"><span id="contact_icon" class="glyphicon glyphicon-pencil"></span>Edit</a>
     </div>
   </div>
 </div>

@@ -14,8 +14,17 @@
                 <input class="form-control" type="text" name="last_name" />
             </div>
             <div class="form-group">
-                <label> Personal website </label>
-                <input class="span4 form-control" type="text" name="personal_website" />
+                <label> Username </label>
+                <input class="form-control" type="text" name="user_name"  />
+            </div>
+
+            <div class="form-group">
+                <label> Password </label>
+                <input class="form-control" type="password" name="password"  />
+            </div>
+            <div class="form-group">
+                <label> Confirm Password </label>
+                <input class="span4 form-control" type="text" name="confirm_password" />
             </div>
             <%--<tr>--%>
             <%--<td>Sex</td>--%>
@@ -28,15 +37,6 @@
                 <input class="form-control" type="text" name="email"  />
             </div>
 
-            <div class="form-group">
-                <label> Username </label>
-                <input class="form-control" type="text" name="user_name"  />
-            </div>
-
-            <div class="form-group">
-                <label> Password </label>
-                <input class="form-control" type="password" name="password"  />
-            </div>
             <button type="submit" class="btn btn-primary" value="submit">Register</button>
         </form>
     </div>

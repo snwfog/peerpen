@@ -25,15 +25,6 @@ public class HunkTest extends HttpServlet
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
     String raw = request.getParameter("json_hunks");
-    //System.out.println("raw" + raw);
-
-//        Hunk a = new Hunk();
-//        a.setIdView("box3");
-//        a.setContent("div");
-//        Document d = new Document();
-//        a.setDocument(d);
-//        System.out.println(a.getContent().toString());
-
     JsonParser parser = new JsonParser();
     JsonObject rootObj = parser.parse(raw).getAsJsonObject();
 
@@ -45,8 +36,7 @@ public class HunkTest extends HttpServlet
     Iterator<JsonElement> modifiedIterator = modifiedList.iterator();
     Iterator<JsonElement> deletedIterator = deletedList.iterator();
 
-    // CREATE
-//    ArrayList<Hunk> createdHunkList = new ArrayList<Hunk>();
+    // CREATE (this will insert a new hunk into db)
 //    Document newDoc = new Document();
 //    newDoc.setDocName("newDoc");
 //    newDoc.setPeerId(1);
@@ -54,63 +44,73 @@ public class HunkTest extends HttpServlet
 //    while (createdIterator.hasNext())
 //    {
 //      JsonObject ob = createdIterator.next().getAsJsonObject().getAsJsonObject();
-//      String boxid = ob.get("id").toString();
-//      String html = ob.get("html").toString();
-//            Hunk h = new Hunk();
-//            h.setDocumentId(newDoc.getId());
-//            h.setIdView(boxid);
-//            h.setContent(html);
-//            createdHunkList.add(h);
-//    }
-//
-//    for (Hunk h : createdHunkList)
-//    {
-//      h.save();
+//      String receivedIdView = ob.get("id").toString();
+//      String receivedHtml = ob.get("html").toString();
+//      Hunk hunk = new Hunk();
+//      hunk.setDocumentId(newDoc.getId());
+//      hunk.setIdView(receivedIdView);
+//      hunk.setContent(receivedHtml);
+//      hunk.save();
 //    }
 
 
-    // MODIFY
 
-    // save the hunk to changeset
-//    ArrayList<Hunk> list = new ArrayList<Hunk>();
-//    Document modDoc = new Document();
-//    modDoc.getId();
-
-
+    // MODIFY (this will update the hunk if owner, or insert a changeset if peer)
+//    check if session user is the document owner?
+    Boolean isOwner = true;
     while (modifiedIterator.hasNext())
     {
+      // received: idView, newhtml content
       JsonObject ob = modifiedIterator.next().getAsJsonObject().getAsJsonObject();
-      String boxid = ob.get("id").toString();
-      String html = ob.get("html").toString();
-      HashMap<String, Object> findCriteria = new HashMap<String, Object>();
-      //findCriteria.put("idView", "box2");
-      int id = -1;
-      ArrayList<HashMap<String, Object>> found = Manager.findAll("hunks", findCriteria);
-      for (HashMap<String, Object> h : found){
-        for (String key : h.keySet()){
-          //System.out.println("ppp" + key + ":" + h.get(key));
-          if (key.equals("idView")){
-            id = Integer.parseInt(h.get("id").toString());
-          }
-        }
+      String receivedIdView = ob.get("id").toString();
+      String receivedHtml = ob.get("html").toString();
+      System.out.println("MODIFICATION(received):" + receivedIdView + " " + receivedHtml);
+
+      // finding the old hunk (need a better way to do this)
+      HashMap<String, Object> existingHunkData = new HashMap<String, Object>();
+      existingHunkData.put("idView", receivedIdView);
+      ArrayList<HashMap<String, Object>> existingHunks = Manager.findAll("hunks", existingHunkData);
+      Hunk existingHunk = new Hunk(existingHunks.get(0));
+      int existingHunkId = existingHunk.getId();
+      System.out.println("oldHunkId:" + existingHunkId);
+
+      if (isOwner)
+      {
+        // update the old hunk directly and save
+        existingHunk.setContent(receivedHtml);
+        existingHunk.update();
+      }
+      else
+      {
+        // create a new changeset
+        HashMap<String, Object> changesetData = new HashMap<String, Object>();
+        changesetData.put("hunkId", existingHunkId);
+        changesetData.put("content", receivedHtml);
+        Changeset changeset = new Changeset(changesetData);
+        changeset.save();
       }
 
-      //System.out.println("is this the id?" + found.get(0).toString());
+    }
 
-    HashMap<String, Object> updated = new HashMap<String, Object>();
-    updated.put("content", html);
-    Manager.update(id, "hunks", updated);
-
-//      Hunk h = new Hunk();
+//    while(deletedIterator.hasNext())
+//    {
+//      // received: idView, newhtml content
+//      JsonObject ob = deletedIterator.next().getAsJsonObject().getAsJsonObject();
+//      String receivedIdView = ob.get("id").toString();
+//      String receivedHtml = ob.get("html").toString();
+//      System.out.println("DELETE(received):" + receivedIdView + " " + receivedHtml);
 //
-//      h.setDocumentId(newDoc.getId());
-//      h.setIdView(boxid);
-//      h.setContent(html);
-//      list.add(h);
-    }
-
-
-    }
+//      // finding the old hunk (need a better way to do this)
+//      HashMap<String, Object> existingHunkData = new HashMap<String, Object>();
+//      existingHunkData.put("idView", receivedIdView);
+//      ArrayList<HashMap<String, Object>> existingHunks = Manager.findAll("hunks", existingHunkData);
+//      Hunk existingHunk = new Hunk(existingHunks.get(0));
+//
+//      // Destroy Hunk & Changesets
+//      existingHunk.Destroy();
+//
+//    }
+  }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {

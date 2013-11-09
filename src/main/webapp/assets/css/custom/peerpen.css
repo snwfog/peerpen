@@ -12,9 +12,17 @@ img.profile2{
     width: 220px;
     height: 300px;
 }
-.personal-info h4{
-     color: #e67e22;
+.profile p{
+    color: #e67e22;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    line-height: 1.1;
+    font-size: 18px;
+    float:left;
  }
+
+
+
 div.registerContainer{
     margin-top: 5px;
     margin-left:10%;

@@ -164,7 +164,7 @@ public class Peer extends Base
         p.setPassword("khedri");
         System.out.println(p.save());
           */
-        Peer p = Peer.find(1);
+        Peer p = Peer.find(2);
         System.out.println(p.getFirstName());
         System.out.println(p.getUserName());
         System.out.println(Arrays.asList(p.getDocuments()).toString());

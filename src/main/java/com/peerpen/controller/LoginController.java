@@ -22,7 +22,7 @@ import java.util.HashMap;
  * Time: 3:35 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Login extends HttpServlet {
+public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //doGet(request, response);
         System.out.println("gets here");
