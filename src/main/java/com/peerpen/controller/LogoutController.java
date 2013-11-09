@@ -15,7 +15,7 @@ import java.io.IOException;
  * Time: 10:30 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Logout extends HttpServlet {
+public class LogoutController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
