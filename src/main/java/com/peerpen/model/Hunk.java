@@ -68,7 +68,8 @@ public class Hunk extends Base implements IModel {
     }
 
     public void setDocument(Document document){
-        this.document = document;
+        this.documentId = document.getId();
+        this.document = null;
         setUpdateFlag(true);
     }
 

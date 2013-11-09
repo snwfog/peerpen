@@ -70,36 +70,42 @@ public class HunkTest extends HttpServlet
 
 
     // MODIFY
-
-    // save the hunk to changeset
-//    ArrayList<Hunk> list = new ArrayList<Hunk>();
-//    Document modDoc = new Document();
-//    modDoc.getId();
-
-
+    // check if session user is the document owner?
+    Boolean isOwner = false;
     while (modifiedIterator.hasNext())
     {
+      // received: idView, newhtml content
       JsonObject ob = modifiedIterator.next().getAsJsonObject().getAsJsonObject();
-      String boxid = ob.get("id").toString();
-      String html = ob.get("html").toString();
-      HashMap<String, Object> findCriteria = new HashMap<String, Object>();
-      //findCriteria.put("idView", "box2");
-      int id = -1;
-      ArrayList<HashMap<String, Object>> found = Manager.findAll("hunks", findCriteria);
-      for (HashMap<String, Object> h : found){
-        for (String key : h.keySet()){
-          //System.out.println("ppp" + key + ":" + h.get(key));
-          if (key.equals("idView")){
-            id = Integer.parseInt(h.get("id").toString());
-          }
-        }
+      String receivedIdView = ob.get("id").toString();
+      String receivedHtml = ob.get("html").toString();
+      System.out.println("MODIFICATION(received):" + receivedIdView + " " + receivedHtml);
+
+      // finding the old hunk (need a better way to do this)
+      HashMap<String, Object> existingHunkData = new HashMap<String, Object>();
+      existingHunkData.put("idView", receivedIdView);
+      ArrayList<HashMap<String, Object>> existingHunks = Manager.findAll("hunks", existingHunkData);
+      Hunk existingHunk = new Hunk(existingHunks.get(0));
+      int existingHunkId = existingHunk.getId();
+      System.out.println("oldHunkId:" + existingHunkId);
+
+      if (isOwner)
+      {
+        // update the hunk content and save
+        existingHunk.setContent(receivedHtml);
+        existingHunk.update();
+      }
+      else
+      {
+        // get the uid based on idView given
+        HashMap<String, Object> changesetData = new HashMap<String, Object>();
+        changesetData.put("hunkId", existingHunkId);
+        changesetData.put("content", receivedHtml);
+        Changeset changeset = new Changeset(changesetData);
+        changeset.save();
       }
 
-      //System.out.println("is this the id?" + found.get(0).toString());
+    }
 
-    HashMap<String, Object> updated = new HashMap<String, Object>();
-    updated.put("content", html);
-    Manager.update(id, "hunks", updated);
 
 //      Hunk h = new Hunk();
 //
@@ -107,10 +113,9 @@ public class HunkTest extends HttpServlet
 //      h.setIdView(boxid);
 //      h.setContent(html);
 //      list.add(h);
-    }
 
 
-    }
+  }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
