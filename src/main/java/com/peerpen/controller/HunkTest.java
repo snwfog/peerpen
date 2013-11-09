@@ -106,6 +106,24 @@ public class HunkTest extends HttpServlet
 
     }
 
+    while(deletedIterator.hasNext())
+    {
+      // received: idView, newhtml content
+      JsonObject ob = deletedIterator.next().getAsJsonObject().getAsJsonObject();
+      String receivedIdView = ob.get("id").toString();
+      String receivedHtml = ob.get("html").toString();
+      System.out.println("DELETE(received):" + receivedIdView + " " + receivedHtml);
+
+      // finding the old hunk (need a better way to do this)
+      HashMap<String, Object> existingHunkData = new HashMap<String, Object>();
+      existingHunkData.put("idView", receivedIdView);
+      ArrayList<HashMap<String, Object>> existingHunks = Manager.findAll("hunks", existingHunkData);
+      Hunk existingHunk = new Hunk(existingHunks.get(0));
+
+      // Destroy Hunk & Changesets
+      existingHunk.Destroy();
+
+    }
 
 //      Hunk h = new Hunk();
 //
