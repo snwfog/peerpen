@@ -33,10 +33,10 @@ import org.apache.maven.model.Contributor;
 public class HunkController extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        System.out.println("getsin hunk controller!");
         String raw = request.getParameter("json_ajax");
+        Boolean isOwner = Boolean.parseBoolean( request.getParameter( "isOwner" ));   //  check if session user is the document owner?
 
-        // handling JSON from Ajax
+        // handling JSON from Ajax .. the old way using chrome console
         //Scanner scanner = new Scanner( request.getReader() );
         //StringBuffer sb = new StringBuffer();
         //while ( scanner.hasNextLine() ) {
@@ -57,6 +57,10 @@ public class HunkController extends HttpServlet {
         Iterator<JsonElement> deletedIterator = deletedList.iterator();
 
 
+
+
+
+
         // todo
         // for creation: handle case for Contributor
         // for delete: handle case for Contributor
@@ -72,18 +76,26 @@ public class HunkController extends HttpServlet {
             String etag = ob.get( "etag" ).toString();
             String receivedIdView = ob.get( "id" ).toString();
             String receivedHtml = ob.get( "html" ).toString();
-            Hunk hunk = new Hunk();
-            hunk.setDocumentId( newDoc.getId() );
-            hunk.setIdView( receivedIdView );
-            hunk.setContent( receivedHtml );
-            hunk.save();
+            if(isOwner){
+                // create and save new hunk directly
+                Hunk hunk = new Hunk();
+                hunk.setDocumentId( newDoc.getId() );
+                hunk.setIdView( receivedIdView );
+                hunk.setContent( receivedHtml );
+                hunk.save();
+            }else{
+                // create a new changeset
+                HashMap<String, Object> changesetData = new HashMap<String, Object>();
+                changesetData.put( "content", receivedHtml );
+                Changeset changeset = new Changeset( changesetData );
+                changeset.save();
+            }
+
         }
 
 
 
         // Modify.. if owner: override the hunk directly; if contributor: insert a changeset
-        //    check if session user is the document owner?
-        Boolean isOwner = false;
         while ( modifiedIterator.hasNext() ) {
             // received: idView, newhtml content
             JsonObject ob = modifiedIterator.next().getAsJsonObject().getAsJsonObject();

@@ -99,7 +99,7 @@
 
     <servlet>
         <servlet-name>hunk</servlet-name>
-        <jsp-file>/view/test_hunk.jsp</jsp-file>
+        <jsp-file>/view/simulator.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>hunk</servlet-name>
