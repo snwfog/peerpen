@@ -107,7 +107,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>hunk.do</servlet-name>
-        <servlet-class>com.peerpen.controller.HunkTest</servlet-class>
+        <servlet-class>com.peerpen.controller.HunkController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>hunk.do</servlet-name>
