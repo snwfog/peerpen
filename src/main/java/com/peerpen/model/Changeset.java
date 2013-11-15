@@ -102,7 +102,7 @@ public class Changeset extends Base implements IModel {
         System.out.println(c.save()); */
 
 //        Document d = Document.find(4);
-        Changeset c = Changeset.find(11);
+        Changeset c = new Changeset().find(11);
         System.out.println(c.getContent());
         System.out.println(c.getHunk().getContent());
         System.out.println(c.getDocument().getDocName());

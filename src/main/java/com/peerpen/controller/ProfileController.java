@@ -43,10 +43,11 @@ public class ProfileController extends HttpServlet {
 
         String redirect = "/error";
         try {
-
-            System.out.println("true or fals?" + Manager.update(id,"peers",map));
+              //Quang, i commented out the line below to adjust for the new ppar. make sure it works
+//            System.out.println("true or fals?" + Manager.update(id,"peers",map));
             redirect = "/profile";
-            Peer peer = new Peer(Manager.find(id, "peers"));
+          Peer peer = new Peer().find(id);
+//            Peer peer = new Peer(Manager.find(id, "peers"));
             HttpSession session = request.getSession();
             session.setAttribute("user", peer);
             response.sendRedirect(redirect);

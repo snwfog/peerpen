@@ -99,7 +99,7 @@
 
     <servlet>
         <servlet-name>hunk</servlet-name>
-        <jsp-file>/view/test_hunk.jsp</jsp-file>
+        <jsp-file>/view/simulator.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>hunk</servlet-name>
@@ -107,7 +107,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>hunk.do</servlet-name>
-        <servlet-class>com.peerpen.controller.HunkTest</servlet-class>
+        <servlet-class>com.peerpen.controller.HunkController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>hunk.do</servlet-name>

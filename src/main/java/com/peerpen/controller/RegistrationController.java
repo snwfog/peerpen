@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.HashMap;
 
 /**
@@ -36,11 +37,12 @@ public class RegistrationController extends HttpServlet {
         // here we should validate the input...
 
         // check if user already exists
-        HashMap<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map =  new HashMap<String, Object>();
         map.put("userName", user_name);
         String redirect = "/error";
         try {
-            ArrayList<HashMap<String, Object>> matches = Manager.findAll("peers", map);
+            ArrayList<Map<String, Object>> matches = Manager.findAll("peers", map);
+          System.out.println(matches);
             if (matches.size() == 0){ // means user does not exist
                 Peer newPeer = new Peer();
                 newPeer.setFirstName(first_name);

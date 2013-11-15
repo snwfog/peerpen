@@ -81,14 +81,19 @@
         <dependency>
             <groupId>com.sunnyd.ppar</groupId>
             <artifactId>ppar</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0.4-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
     <repositories>
         <repository>
+            <!--mvn dependency:resolve-->
             <id>com.sunnyd.ppar</id>
-            <url>https://github.com/snwfog/mvn-repo/raw/master/snapshots</url>
+            <url>https://github.com/snwfog/ppar/raw/mvn-repo</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
         </repository>
     </repositories>
 

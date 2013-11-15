@@ -7,7 +7,7 @@ import com.sunnyd.database.Manager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Map;
 
 public class Peer extends Base
 {
@@ -41,7 +41,7 @@ public class Peer extends Base
   }
 
   // TODO: We need to add a parameterized constructor here
-  public Peer(HashMap<String, Object> HM)
+  public Peer(Map<String, Object> HM)
   {
     super(HM);
   }
@@ -164,7 +164,7 @@ public class Peer extends Base
         p.setPassword("khedri");
         System.out.println(p.save());
           */
-        Peer p = Peer.find(2);
+        Peer p = new Peer().find(2);
         System.out.println(p.getFirstName());
         System.out.println(p.getUserName());
         System.out.println(Arrays.asList(p.getDocuments()).toString());
