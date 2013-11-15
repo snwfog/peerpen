@@ -38,17 +38,6 @@ public class Hunk extends Base implements IModel {
         super( HM );
     }
 
-    public static void main( String[] args ) {
-        Hunk h = new Hunk();
-        h.setContent( "ababaabbbabbababb" );
-        h.setDocumentId( 4 );
-        System.out.println( h.save() );
-
-        Hunk a = new Hunk().find( h.getId() );
-        System.out.println( "lplplplp" + a.getContent() );
-        System.out.println( a.getDocument().getDocName() );
-
-    }
 
     public String getIdView() {
         return idView;
