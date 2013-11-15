@@ -87,6 +87,7 @@
 
     <repositories>
         <repository>
+            <!--mvn dependency:resolve-->
             <id>com.sunnyd.ppar</id>
             <url>https://github.com/snwfog/ppar/raw/mvn-repo</url>
             <snapshots>
