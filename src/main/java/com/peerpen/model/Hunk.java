@@ -6,7 +6,7 @@ import com.sunnyd.annotations.*;
 import com.sunnyd.database.Manager;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -37,7 +37,7 @@ public class Hunk extends Base implements IModel {
         super();
     }
 
-    public Hunk(HashMap<String, Object> HM) {
+    public Hunk(Map<String, Object> HM) {
         super(HM);
     }
 

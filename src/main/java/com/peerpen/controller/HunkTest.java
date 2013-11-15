@@ -69,7 +69,7 @@ public class HunkTest extends HttpServlet
       // finding the old hunk (need a better way to do this)
       HashMap<String, Object> existingHunkData = new HashMap<String, Object>();
       existingHunkData.put("idView", receivedIdView);
-      ArrayList<HashMap<String, Object>> existingHunks = Manager.findAll("hunks", existingHunkData);
+      ArrayList<Map<String, Object>> existingHunks = new Manager().findAll("hunks", existingHunkData);
       Hunk existingHunk = new Hunk(existingHunks.get(0));
       int existingHunkId = existingHunk.getId();
       System.out.println("oldHunkId:" + existingHunkId);

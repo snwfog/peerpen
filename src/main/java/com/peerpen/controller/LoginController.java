@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,16 +27,16 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //doGet(request, response);
         System.out.println("gets here");
-        HashMap<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("userName", request.getParameter("username"));
         map.put("password", request.getParameter("password"));
 
         String redirect = "/error";
         try {
-            ArrayList<HashMap<String, Object>> matches = Manager.findAll("peers", map);
+            ArrayList<Map<String, Object>> matches = Manager.findAll("peers", map);
 
             if (matches.size() == 1){ // means found exactly 1 user with that username and password
-                HashMap<String, Object> match = matches.get(0); // get this hashmap from the arraylist
+                Map<String, Object> match = matches.get(0); // get this hashmap from the arraylist
                 Peer peer = new Peer(match);
                 // store the peer obj in session
                 HttpSession session = request.getSession();

@@ -78,8 +78,8 @@ public class Document extends Base implements IModel {
         //d.setDocName("mydoc");
         //d.setPeerId(4);
         //System.out.println(d.save());
-        
-        Document d = Document.find(16);
+
+        Document d = new Document().find(16);
         System.out.println(d.getPeer());
         System.out.println(d.getPeer().getLastName());
         System.out.println(d.getHunks());
