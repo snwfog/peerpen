@@ -7,7 +7,7 @@ import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.annotations.ActiveRelationHasOne;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -34,7 +34,7 @@ public class Hunk extends Base implements IModel {
         super();
     }
 
-    public Hunk( HashMap<String, Object> HM ) {
+    public Hunk( Map<String, Object> HM ) {
         super( HM );
     }
 
