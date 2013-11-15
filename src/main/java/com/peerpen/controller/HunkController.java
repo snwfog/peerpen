@@ -129,7 +129,7 @@ public class HunkController extends HttpServlet {
 
 
 
-        // Deletion .. this will remove all changeset related to the hunk, and remove the hunk
+        // Deletion .. if owner: rm all related changeset and hunk; if contributor: insert changeset with null content
         while ( deletedIterator.hasNext() ) {
             // received: idView, newhtml content
             JsonObject ob = deletedIterator.next().getAsJsonObject().getAsJsonObject();
@@ -143,9 +143,20 @@ public class HunkController extends HttpServlet {
             existingHunkData.put( "idView", receivedIdView );
             ArrayList<Map<String, Object>> existingHunks = new Hunk().findAll( existingHunkData );
             Hunk existingHunk = new Hunk( existingHunks.get( 0 ) );
+            int existingHunkId = existingHunk.getId();
 
-            // Destroy Hunk & Changesets
-            existingHunk.Destroy();
+            if (isOwner){
+                // Destroy Hunk & Changesets
+                existingHunk.Destroy();
+            }else{
+                // create a new changeset with null as content
+                HashMap<String, Object> changesetData = new HashMap<String, Object>();
+                changesetData.put( "hunkId", existingHunkId );
+                changesetData.put( "content", null );
+                Changeset changeset = new Changeset( changesetData );
+                changeset.save();
+            }
+
         }
 
     }

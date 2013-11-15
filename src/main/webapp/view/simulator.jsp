@@ -1,4 +1,11 @@
+<%@ page import="com.peerpen.model.Peer" %>
 <%@ include file="/view/includes/static/header.jsp" %>
+
+<%--<%--%>
+    <%--Peer peer = (Peer) session.getAttribute( "user" );--%>
+    <%--if (peer != null)--%>
+    <%--{--%>
+<%--%>--%>
 
 <script>
 $(document).ready(function() {
@@ -29,7 +36,13 @@ deleted: [{id:box1, etag:111, html:content}]
     </textarea>
     <input type="radio" id="isOwner" name="isOwner" value="true" checked>Owner <input type="radio" name="isOwner" id="isOwner" value="false">Contributor
     <br />
-    <input type="button" id="submit" value="send via ajax" />
+    <input type="button" id="submit" value="post via ajax" />
 </form>
 
-</html>
+<%--<%--%>
+    <%--}--%>
+    <%--else--%>
+        <%--response.sendRedirect("/login");--%>
+<%--%>--%>
+
+<%@ include file="/view/includes/static/footer.jsp" %>
