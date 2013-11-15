@@ -46,26 +46,26 @@ public class HunkTest extends HttpServlet {
         Iterator<JsonElement> deletedIterator = deletedList.iterator();
 
         //CREATE (this will insert a new hunk into db)
-        Document newDoc = new Document();
-        newDoc.setDocName( "newDoc" );
-        newDoc.setPeerId( 1 );
-        newDoc.save();
-        while ( createdIterator.hasNext() ) {
-            JsonObject ob = createdIterator.next().getAsJsonObject().getAsJsonObject();
-            String receivedIdView = ob.get( "id" ).toString();
-            String receivedHtml = ob.get( "html" ).toString();
-            Hunk hunk = new Hunk();
-            hunk.setDocumentId( newDoc.getId() );
-            hunk.setIdView( receivedIdView );
-            hunk.setContent( receivedHtml );
-            hunk.save();
-        }
+        //Document newDoc = new Document();
+        //newDoc.setDocName( "newDocasdadsa" );
+        //newDoc.setPeerId( 1 );
+        //newDoc.save();
+        //while ( createdIterator.hasNext() ) {
+        //    JsonObject ob = createdIterator.next().getAsJsonObject().getAsJsonObject();
+        //    String receivedIdView = ob.get( "id" ).toString();
+        //    String receivedHtml = ob.get( "html" ).toString();
+        //    Hunk hunk = new Hunk();
+        //    hunk.setDocumentId( newDoc.getId() );
+        //    hunk.setIdView( receivedIdView );
+        //    hunk.setContent( receivedHtml );
+        //    hunk.save();
+        //}
 
 
 
         // MODIFY (this will update the hunk if owner, or insert a changeset if peer)
         //    check if session user is the document owner?
-        Boolean isOwner = true;
+        Boolean isOwner = false;
         while ( modifiedIterator.hasNext() ) {
             // received: idView, newhtml content
             JsonObject ob = modifiedIterator.next().getAsJsonObject().getAsJsonObject();
@@ -96,24 +96,24 @@ public class HunkTest extends HttpServlet {
 
         }
 
-        //    while(deletedIterator.hasNext())
-        //    {
-        //      // received: idView, newhtml content
-        //      JsonObject ob = deletedIterator.next().getAsJsonObject().getAsJsonObject();
-        //      String receivedIdView = ob.get("id").toString();
-        //      String receivedHtml = ob.get("html").toString();
-        //      System.out.println("DELETE(received):" + receivedIdView + " " + receivedHtml);
-        //
-        //      // finding the old hunk (need a better way to do this)
-        //      HashMap<String, Object> existingHunkData = new HashMap<String, Object>();
-        //      existingHunkData.put("idView", receivedIdView);
-        //      ArrayList<Map<String, Object>> existingHunks = Manager.findAll("hunks", existingHunkData);
-        //      Hunk existingHunk = new Hunk(existingHunks.get(0));
-        //
-        //      // Destroy Hunk & Changesets
-        //      existingHunk.Destroy();
-        //
-        //    }
+            //while(deletedIterator.hasNext())
+            //{
+            //  // received: idView, newhtml content
+            //  JsonObject ob = deletedIterator.next().getAsJsonObject().getAsJsonObject();
+            //  String receivedIdView = ob.get("id").toString();
+            //  String receivedHtml = ob.get("html").toString();
+            //  System.out.println("DELETE(received):" + receivedIdView + " " + receivedHtml);
+            //
+            //  // finding the old hunk (need a better way to do this)
+            //  HashMap<String, Object> existingHunkData = new HashMap<String, Object>();
+            //  existingHunkData.put("idView", receivedIdView);
+            //  ArrayList<Map<String, Object>> existingHunks = Manager.findAll("hunks", existingHunkData);
+            //  Hunk existingHunk = new Hunk(existingHunks.get(0));
+            //
+            //  // Destroy Hunk & Changesets
+            //  existingHunk.Destroy();
+            //
+            //}
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {

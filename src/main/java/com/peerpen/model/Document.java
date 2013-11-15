@@ -26,8 +26,8 @@ public class Document extends Base implements IModel {
     private Peer peer;
     @ActiveRecordField
     private Integer peerId;
-    @ActiveRecordField
-    private String docType;
+    //@ActiveRecordField
+    //private String class;
     @ActiveRelationHasMany
     private Hunk[] hunks;
     @ActiveRelationHasMany
@@ -106,17 +106,17 @@ public class Document extends Base implements IModel {
         setUpdateFlag(true);
     }
 
-
-    public String getDocType() {
-        return docType;
-    }
-
-    public void setDocType(String type) {
-        if(type.toLowerCase().trim().contentEquals("resume") | type.toLowerCase().trim().contentEquals("coverLetter")){
-            this.docType = type;
-            setUpdateFlag(true);
-        }
-    }
+    //
+    //public String getDocType() {
+    //    return docType;
+    //}
+    //
+    //public void setDocType(String type) {
+    //    if(type.toLowerCase().trim().contentEquals("resume") | type.toLowerCase().trim().contentEquals("coverLetter")){
+    //        this.docType = type;
+    //        setUpdateFlag(true);
+    //    }
+    //}
 
     public Hunk[] getHunks()
     {
