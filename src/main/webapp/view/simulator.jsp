@@ -39,6 +39,12 @@ deleted: [{id:box1, etag:111, html:content}]
     <input type="button" id="submit" value="post via ajax" />
 </form>
 
+
+<form action="hunk.do" method="get">
+    <input type="text" name="id" id="id">
+    <input type="submit" value="load hunk">
+</form>
+
 <%--<%--%>
     <%--}--%>
     <%--else--%>

@@ -18,6 +18,7 @@
                  name="password" placeholder="Password">
         </div>
         <button class="btn btn-success" type="submit">Sign In</button>
+        <a href="/reset">Forgot password?</a>
       </form>
     </div>
   </div>

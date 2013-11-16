@@ -3,6 +3,9 @@ package com.peerpen.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.sunnyd.Base;
 import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRelationHasMany;
@@ -29,16 +32,16 @@ public class Document extends Base implements IModel {
     //@ActiveRecordField
     //private String class;
     @ActiveRelationHasMany
-    private Hunk[] hunks;
+    private List<Hunk> hunks;
     @ActiveRelationHasMany
-    private Changeset[] changesets;
+    private List<Changeset> changesets;
     
     
     public Document() {
         super();
     }
 
-    public Document(HashMap<String, Object> HM) {
+    public Document(Map<String, Object> HM) {
         super(HM);
     }
 
@@ -118,13 +121,13 @@ public class Document extends Base implements IModel {
     //    }
     //}
 
-    public Hunk[] getHunks()
+    public List<Hunk> getHunks()
     {
         initRelation("hunks");
         return this.hunks;
     }
 
-    public Changeset[] getChangesets()
+    public List<Changeset> getChangesets()
     {
         initRelation("changesets");
         return this.changesets;

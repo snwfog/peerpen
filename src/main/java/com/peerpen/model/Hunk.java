@@ -9,6 +9,8 @@ import com.sunnyd.annotations.ActiveRelationHasOne;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Mike
@@ -90,5 +92,15 @@ public class Hunk extends Base implements IModel {
 //        System.out.println("lplplplp"+a.getContent());
 //        System.out.println(a.getDocument().getDocName());
 
+    }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder( getContent());
+        sb.replace(0, 1, "");
+        sb.replace( sb.length() - 1, sb.length(), "");
+        String obj = getIdView() + ":\"" + StringEscapeUtils.escapeJava(sb.toString()) + "\"";
+        return obj;
     }
 }
