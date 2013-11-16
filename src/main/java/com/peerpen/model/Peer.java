@@ -7,6 +7,7 @@ import com.sunnyd.database.Manager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Map;
 
 public class Peer extends Base
@@ -30,6 +31,14 @@ public class Peer extends Base
   private String personalWebsite;
   @ActiveRecordField
   private String description;
+  @ActiveRecordField
+  private Date dateOfBirth;
+  @ActiveRecordField
+  private Integer experience;
+  @ActiveRecordField
+  private String country;
+  @ActiveRecordField
+  private String industry;
   @ActiveRelationHasMany
   private Document[] documents;
   @ActiveRelationHasMany
@@ -180,4 +189,47 @@ public class Peer extends Base
 
     }
 
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Integer getExperience() {
+        if(experience==null)
+        {
+            return 0;
+        }else
+        return experience;
+    }
+
+    public void setExperience(Integer experience) {
+        this.experience = experience;
+    }
+
+    public String getCountry() {
+        if(country==null)
+        {
+            return "";
+        }else
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getIndustry() {
+        if(industry==null)
+        {
+            return "";
+        }else
+        return industry;
+    }
+
+    public void setIndustry(String industry) {
+        this.industry = industry;
+    }
 }
