@@ -125,6 +125,10 @@ public class Peer extends Base
 
   public String getPersonalWebsite()
   {
+      if(personalWebsite==null)
+      {
+          return "";
+      }else
     return personalWebsite;
   }
 
@@ -136,6 +140,10 @@ public class Peer extends Base
 
   public String getDescription()
   {
+    if(description==null)
+    {
+        return "";
+    }else
     return description;
   }
 
