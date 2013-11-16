@@ -6,7 +6,7 @@
       var e = $('#email').val();
       im = $("<img>");
       im.attr('src',"/assets/images/ajax-loader.gif");
-      $('#loading').html(im);
+      $('#message').html(im);
       $.get('reset.do', {
         email : e
       }, function(responseText) {
@@ -16,7 +16,7 @@
         }
         else
         {
-          $('#message').html("<div class=\"alert alert-danger\">It looks like you entered an invalid email address or phone number. Please try again.</div>");
+          $('#message').html("<div class=\"alert alert-danger\">It looks like you entered an invalid email address. Please try again.</div>");
         }
 
       });
