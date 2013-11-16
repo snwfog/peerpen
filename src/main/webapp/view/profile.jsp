@@ -229,7 +229,7 @@
         <form action="/profile.do" id="form_description" method="post">
         <textarea class ="peerDescription well form-control" name ="description" style="resize:none" rows="3" readonly><%= peer.getDescription().toString() %></textarea>
         <input type="hidden" class="form-control peerID" name="id"
-                 value="<%= Integer.parseInt(peer.getId().toString())%>">
+                 value="<%= Integer.parseInt(peer.getId().toString())%>"/>
         </form>
         <a class ="pull-right" type="submit" class="pull-right" style="visibility:hidden"
            id="save_description" value="Save" href="#">Save

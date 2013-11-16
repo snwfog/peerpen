@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -33,7 +34,7 @@ public class ProfileController extends HttpServlet {
         // here we should validate the input...
 
         // check if user already exists
-        HashMap<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("firstName", first_name);
         map.put("lastName", last_name);
         map.put("personalWebsite", website);
@@ -46,7 +47,14 @@ public class ProfileController extends HttpServlet {
               //Quang, i commented out the line below to adjust for the new ppar. make sure it works
 //            System.out.println("true or fals?" + Manager.update(id,"peers",map));
             redirect = "/profile";
-          Peer peer = new Peer().find(id);
+            Peer peer = new Peer().find(id);
+            peer.setFirstName(first_name);
+            peer.setLastName(last_name);
+            peer.setPersonalWebsite(website);
+            peer.setEmail(email);
+            peer.setDescription(description);
+            peer.update();
+
 //            Peer peer = new Peer(Manager.find(id, "peers"));
             HttpSession session = request.getSession();
             session.setAttribute("user", peer);
