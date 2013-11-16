@@ -37,6 +37,8 @@ public class Peer extends Base
   private String country;
   @ActiveRecordField
   private String industry;
+  @ActiveRecordField
+  private String gender;
   @ActiveRelationHasMany
   private List<Document> documents;
   @ActiveRelationHasMany
@@ -243,5 +245,13 @@ public class Peer extends Base
 
     public void setIndustry(String industry) {
         this.industry = industry;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }
