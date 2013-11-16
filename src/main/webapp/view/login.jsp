@@ -14,6 +14,7 @@
         <h2>Please sign in</h2>
         <input type="text" class="form-control" name="username" style="margin:10px 0" placeholder="Username" autofocus="">
         <input type="password" class="form-control" name="password" style="margin:10px 0" placeholder="Password">
+        <a href="/reset" >Forgot password?</a>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
 </div>
