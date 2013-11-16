@@ -5,10 +5,8 @@ import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.database.Manager;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
+
 
 public class Peer extends Base
 {
@@ -40,9 +38,9 @@ public class Peer extends Base
   @ActiveRecordField
   private String industry;
   @ActiveRelationHasMany
-  private Document[] documents;
+  private List<Document> documents;
   @ActiveRelationHasMany
-  private Changeset[] changesets;
+  private List<Changeset> changesets;
 
   public Peer()
   {
@@ -162,30 +160,44 @@ public class Peer extends Base
     setUpdateFlag(true);
   }
 
-  public Document[] getDocuments()
+  public List<Document> getDocuments()
   {
     initRelation("documents");
     return this.documents;
   }
 
-    public Changeset[] getChangesets()
-    {
-        initRelation("changesets");
-        return this.changesets;
-    }
+  public void setDocuments(List<Document> docs)
+  {
+    this.documents = docs;
+  }
+
+  public List<Changeset> getChangesets()
+  {
+      initRelation("changesets");
+      return this.changesets;
+  }
+
+  public void setChangesets(List<Changeset> changeSets)
+  {
+    this.changesets = changeSets ;
+  }
 
     public static void main(String[] args) {
-        /*Peer p = new Peer();
-        p.setFirstName("wais");
-        p.setUserName("wais");
-        p.setPassword("khedri");
-        System.out.println(p.save());
-          */
-        Peer p = new Peer().find(2);
-        System.out.println(p.getFirstName());
-        System.out.println(p.getUserName());
-        System.out.println(Arrays.asList(p.getDocuments()).toString());
-        System.out.println(Arrays.asList(p.getChangesets()).toString());
+      Map<String, Object> map = new HashMap<String, Object>();
+      map.put("email", "asn.brotha@gmail.com");
+
+      ArrayList<Map<String, Object>> matches = new Peer().findAll(map);
+
+
+      System.out.println(matches.get(0));
+      Peer pear = new Peer(matches.get(0));
+      pear.setRankId(null);
+      pear.setPassword("HAHAHAHA");
+      pear.update();
+//        Peer a = new Peer().find(3);
+//        System.out.println(a.getFirstName());
+//        a.setFirstName("dsfdsaf");
+//        a.update();
 
     }
 
