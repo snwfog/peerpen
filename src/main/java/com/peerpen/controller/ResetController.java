@@ -160,7 +160,7 @@ public class ResetController extends HttpServlet
         "}\n" +
         "#background-table { background-color: #ececec; }\n" +
         "/* Webkit Elements */\n" +
-        "#top-bar { border-radius:6px 6px 0px 0px; -moz-border-radius: 6px 6px 0px 0px; -webkit-border-radius:6px 6px 0px 0px; -webkit-font-smoothing: antialiased; background-color: #084cc2; color: #ede899; }\n" +
+        "#top-bar { border-radius:6px 6px 0px 0px; -moz-border-radius: 6px 6px 0px 0px; -webkit-border-radius:6px 6px 0px 0px; -webkit-font-smoothing: antialiased; background-color: #CC7B19; color: #ede899; }\n" +
         "#top-bar a { font-weight: bold; color: #ede899; text-decoration: none;}\n" +
         "#footer { border-radius:0px 0px 6px 6px; -moz-border-radius: 0px 0px 6px 6px; -webkit-border-radius:0px 0px 6px 6px; -webkit-font-smoothing: antialiased; }\n" +
         "/* Fonts and Content */\n" +
@@ -169,8 +169,8 @@ public class ResetController extends HttpServlet
         "/* Prevent Webkit and Windows Mobile platforms from changing default font sizes on header and footer. */\n" +
         ".header-content { font-size: 12px; color: #ede899; }\n" +
         ".header-content a { font-weight: bold; color: #ede899; text-decoration: none; }\n" +
-        "#headline p { color: #1029a6; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; font-size: 48px; text-align: center; margin-top:0px; margin-bottom:30px; }\n" +
-        "#headline p a { color: #1029a6; text-decoration: none; }\n" +
+        "#headline p { color: #cc7b19; font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif; font-size: 48px; text-align: center; margin-top:0px; margin-bottom:30px; }\n" +
+        "#headline p a { color: #cc7b19; text-decoration: none; }\n" +
         ".article-title { font-size: 18px; line-height:24px; color: #e97900; font-weight:bold; margin-top:0px; margin-bottom:18px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; }\n" +
         ".article-title a { color: #e97900; text-decoration: none; }\n" +
         ".article-title.with-meta {margin-bottom: 0;}\n" +
@@ -186,20 +186,20 @@ public class ResetController extends HttpServlet
         ".footer-content-left a { color: #ede899; font-weight: bold; text-decoration: none; }\n" +
         ".footer-content-right { font-size: 11px; line-height: 16px; color: #e2e2e2; margin-top: 0px; margin-bottom: 15px; }\n" +
         ".footer-content-right a { color: #ede899; font-weight: bold; text-decoration: none; }\n" +
-        "#footer { background-color: #618442; color: #e2e2e2; }\n" +
+        "#footer { background-color: #2D435E; color: #e2e2e2; }\n" +
         "#footer a { color: #ede899; text-decoration: none; font-weight: bold; }\n" +
         "#permission-reminder { white-space: normal; }\n" +
         "#street-address { color: #ede899; white-space: normal; }\n" +
         "</style>\n" +
         "<!--[if gte mso 9]>\n" +
-        "<style _tmplitem=\"2787\" >\n" +
+        "<style _tmplitem=\"5340\" >\n" +
         ".article-content ol, .article-content ul {\n" +
         "   margin: 0 0 0 24px;\n" +
         "   padding: 0;\n" +
         "   list-style-position: inside;\n" +
         "}\n" +
         "</style>\n" +
-        "<![endif]--></head><body><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"1\" id=\"background-table\">\n" +
+        "<![endif]--></head><body><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" id=\"background-table\">\n" +
         "\t<tbody><tr>\n" +
         "\t\t<td align=\"center\" bgcolor=\"#ececec\">\n" +
         "        \t<table class=\"w640\" style=\"margin:0 10px;\" width=\"640\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n" +
@@ -207,14 +207,14 @@ public class ResetController extends HttpServlet
         "                \n" +
         "            \t<tr>\n" +
         "                \t<td class=\"w640\" width=\"640\">\n" +
-        "                        <table id=\"top-bar\" class=\"w640\" width=\"640\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" bgcolor=\"#bf6404\">\n" +
+        "                        <table id=\"top-bar\" class=\"w640\" width=\"640\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" bgcolor=\"#2d435e\">\n" +
         "    <tbody><tr>\n" +
         "        <td class=\"w15\" width=\"15\"></td>\n" +
         "        <td class=\"w325\" width=\"350\" valign=\"middle\" align=\"left\">\n" +
         "            <table class=\"w325\" width=\"350\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n" +
         "                <tbody><tr><td class=\"w325\" width=\"350\" height=\"8\"></td></tr>\n" +
         "            </tbody></table>\n" +
-        "            <div class=\"header-content\"><webversion>Web Version</webversion><span class=\"hide\">  |  <preferences lang=\"en\">Update preferences</preferences>  |  <unsubscribe>Unsubscribe</unsubscribe></span></div>\n" +
+        "            <div class=\"header-content\"><webversion>Web Version</webversion><span class=\"hide\">&nbsp;&nbsp;|&nbsp; <preferences lang=\"en\">Update preferences</preferences>&nbsp;&nbsp;|&nbsp; <unsubscribe>Unsubscribe</unsubscribe></span></div>\n" +
         "            <table class=\"w325\" width=\"350\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n" +
         "                <tbody><tr><td class=\"w325\" width=\"350\" height=\"8\"></td></tr>\n" +
         "            </tbody></table>\n" +
@@ -226,6 +226,18 @@ public class ResetController extends HttpServlet
         "            </tbody></table>\n" +
         "            <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n" +
         "    <tbody><tr>\n" +
+        "        \n" +
+        "        <td valign=\"middle\"><fblike><img src=\"https://img.createsend1.com/img/templatebuilder/like-glyph.png\" border=\"0\" width=\"8\" height=\"14\" alt=\"Facebook icon\"=\"\"></fblike></td>\n" +
+        "        <td width=\"3\"></td>\n" +
+        "        <td valign=\"middle\"><div class=\"header-content\"><fblike>Like</fblike></div></td>\n" +
+        "        \n" +
+        "        \n" +
+        "        <td class=\"w10\" width=\"10\"></td>\n" +
+        "        <td valign=\"middle\"><tweet><img src=\"https://img.createsend1.com/img/templatebuilder/tweet-glyph.png\" border=\"0\" width=\"17\" height=\"13\" alt=\"Twitter icon\"=\"\"></tweet></td>\n" +
+        "        <td width=\"3\"></td>\n" +
+        "        <td valign=\"middle\"><div class=\"header-content\"><tweet>Tweet</tweet></div></td>\n" +
+        "        \n" +
+        "        \n" +
         "    </tr>\n" +
         "</tbody></table>\n" +
         "            <table class=\"w255\" width=\"255\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n" +
@@ -234,12 +246,11 @@ public class ResetController extends HttpServlet
         "        </td>\n" +
         "        <td class=\"w15\" width=\"15\"></td>\n" +
         "    </tr>\n" +
-        "</tbody></table> \n" +
+        "</tbody></table>    \n" +
         "                    </td>\n" +
         "                </tr>\n" +
         "                <tr>\n" +
-        "                <td id=\"header\" class=\"w640\" width=\"640\" align=\"center\" bgcolor=\"#bf6404\">\n" +
-        "    \n" +
+        "                <td id=\"header\" class=\"w640\" width=\"640\" align=\"center\" bgcolor=\"#2d435e\">\n" +
         "    <table class=\"w640\" width=\"640\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n" +
         "        <tbody><tr><td class=\"w30\" width=\"30\"></td><td class=\"w580\" width=\"580\" height=\"30\"></td><td class=\"w30\" width=\"30\"></td></tr>\n" +
         "        <tr>\n" +
@@ -247,7 +258,7 @@ public class ResetController extends HttpServlet
         "            <td class=\"w580\" width=\"580\">\n" +
         "                <div align=\"center\" id=\"headline\">\n" +
         "                    <p>\n" +
-        "                        <strong><a href=\"http://Peerpen.com\"><singleline label=\"Title\">Peerpen</singleline></a></strong>\n" +
+        "                        <strong><singleline label=\"Title\">Peerpen</singleline></strong>\n" +
         "                    </p>\n" +
         "                </div>\n" +
         "            </td>\n" +
@@ -256,8 +267,9 @@ public class ResetController extends HttpServlet
         "    </tbody></table>\n" +
         "</td>\n" +
         "                </tr>\n" +
+        "                \n" +
         "                <tr><td class=\"w640\" width=\"640\" height=\"30\" bgcolor=\"#ffffff\"></td></tr>\n" +
-        "                <tr id=\"`\"><td class=\"w640\" width=\"640\" bgcolor=\"#ffffff\">\n" +
+        "                <tr id=\"simple-content-row\"><td class=\"w640\" width=\"640\" bgcolor=\"#ffffff\">\n" +
         "    <table class=\"w640\" width=\"640\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n" +
         "        <tbody><tr>\n" +
         "            <td class=\"w30\" width=\"30\"></td>\n" +
@@ -268,23 +280,25 @@ public class ResetController extends HttpServlet
         "                        <table class=\"w580\" width=\"580\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n" +
         "                            <tbody><tr>\n" +
         "                                <td class=\"w580\" width=\"580\">\n" +
-        "                                    <p align=\"left\" class=\"article-title\"><singleline label=\"Title\">Dear "+name+" ,</singleline></p>\n" +
+        "                                    <p align=\"left\" class=\"article-title\"><singleline label=\"Title\">Dear "+name+",</singleline></p>\n" +
         "                                    <div align=\"left\" class=\"article-content\">\n" +
         "                                        <multiline label=\"Description\">Your Peerpen password has been reset, and we thought you'd like to know. If is this unexpected contact us immediatly at spam_me_every_five_minutes@spam.com</multiline><br />\n" +
         "                                        <br />\n" +
-        "                                        <multiline label=\"Description\">Please follow this <a href=\"http://www.google.com\">link</a> using the your new password: "+password+" </multiline><br /><br />\n" +
+        "                                        <multiline label=\"Description\">Please follow this <a href=\"http://localhost:8080/login\">link</a> using the your new password: "+ password+" </multiline><br /><br />\n" +
         "                                        <multiline label=\"Description\">It is strongly advised that you change the auto-generated password.</multiline>\n" +
         "                                    </div>\n" +
         "                                    <hr />\n" +
         "                                    <div align=\"left\" class=\"article-content\">\n" +
         "                                        <multiline label=\"Description\"><h3>Forgot your password?</h3>\n" +
-        "                                        You can reset your password online by selecting Forgot your password on the epost sign-in page. You will be prompted to provide your epost username. You'll then have the choice of having a temporary password emailed to you, or resetting your password online by correctly answering your authentication question.</multiline>\n" +
+        "                                        You can reset your password online by selecting Forgot your password on the Peerpen sign-in page. You will be prompted to provide your Peerpen email. You'll then have the choice of having a temporary password emailed to you, or resetting your password online by correctly answering your authentication question.</multiline>\n" +
         "                                    </div>\n" +
         "                                </td>\n" +
         "                            </tr>\n" +
         "                            <tr><td class=\"w580\" width=\"580\" height=\"10\"></td></tr>\n" +
         "                        </tbody></table>\n" +
         "                    </layout> \n" +
+        "                                        \n" +
+        "\n" +
         "                </repeater>\n" +
         "            </td>\n" +
         "            <td class=\"w30\" width=\"30\"></td>\n" +
@@ -295,13 +309,14 @@ public class ResetController extends HttpServlet
         "                \n" +
         "                <tr>\n" +
         "                <td class=\"w640\" width=\"640\">\n" +
-        "    <table id=\"footer\" class=\"w640\" width=\"640\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" bgcolor=\"#618442\">\n" +
+        "    <table id=\"footer\" class=\"w640\" width=\"640\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" bgcolor=\"#2D435E\">\n" +
         "        <tbody><tr><td class=\"w30\" width=\"30\"></td><td class=\"w580 h0\" width=\"360\" height=\"30\"></td><td class=\"w0\" width=\"60\"></td><td class=\"w0\" width=\"160\"></td><td class=\"w30\" width=\"30\"></td></tr>\n" +
         "        <tr>\n" +
         "            <td class=\"w30\" width=\"30\"></td>\n" +
         "            <td class=\"w580\" width=\"360\" valign=\"top\">\n" +
-        "            <span class=\"hide\"><p id=\"permission-reminder\" align=\"left\" class=\"footer-content-left\"><span>You're receiving this because you are subcribed to the spamming list</span></p></span>\n" +
-        "            <p align=\"left\" class=\"footer-content-left\"><preferences lang=\"en\">Edit your subscription</preferences> | <unsubscribe>Un-Unnsubscribe</unsubscribe></p>\n" +
+        "            <span class=\"hide\"><p id=\"permission-reminder\" align=\"left\" class=\"footer-content-left\"><span>\t</span><br>\n" +
+        "<span>You're receiving this because you are subcribed to the spamming list.</span></p></span>\n" +
+        "            <p align=\"left\" class=\"footer-content-left\"><preferences lang=\"en\">Edit your subscription</preferences> | <unsubscribe>Unsubscribe</unsubscribe></p>\n" +
         "            </td>\n" +
         "            <td class=\"hide w0\" width=\"60\"></td>\n" +
         "            <td class=\"hide w0\" width=\"160\" valign=\"top\">\n" +
@@ -317,7 +332,7 @@ public class ResetController extends HttpServlet
         "            </tbody></table>\n" +
         "        </td>\n" +
         "\t</tr>\n" +
-        "</tbody></table></body></html>\n"    ;
+        "</tbody></table></body></html>\n";
 
     return body;
 
