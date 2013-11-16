@@ -174,7 +174,7 @@
                 </td>
               </tr>
               <input type="hidden" class="form-control peerID" name="id"
-                     value="<%= Integer.parseInt(peer.getId().toString())%>">
+                     value="<%= peer.getId().toString()%>">
             </table>
           </div>
           <div class="col-md-6">
@@ -190,7 +190,7 @@
                 <td><h6>Country</h6></td>
                 <td><input type="text" class="form-control peerPersonal"
                            name="country"
-                           value="" readonly>
+                           value="<%= peer.getCountry().toString()%>" readonly>
                 </td>
               </tr>
               <tr>
@@ -249,7 +249,7 @@
             <tr>
               <td><h6>Email</h6></td>
               <td><input type="text" class="form-control peerContact"
-                         name="email" value="<%= peer.getEmail().toString() %>"
+                         name="email" value="<%= peer.getEmail() == null ? "" : peer.getEmail().toString() %>"
                          readonly></td>
             </tr>
             <input type="hidden" class="form-control peerPoint" name="point"

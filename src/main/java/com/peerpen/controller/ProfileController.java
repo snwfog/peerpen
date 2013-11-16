@@ -23,12 +23,15 @@ import java.util.Map;
 public class ProfileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // get all profile input
+
+        System.out.println("MIKIIIKEIKEIKaiosdoaijdasoij");
         int id = Integer.parseInt(request.getParameter("id"));
         String first_name = request.getParameter("first_name");
         String last_name = request.getParameter("last_name");
         String website = request.getParameter("personal_website");
         String email = request.getParameter("email");
         String description = request.getParameter("description");
+        String country = request.getParameter("country");
 
 
         // here we should validate the input...
@@ -40,7 +43,7 @@ public class ProfileController extends HttpServlet {
         map.put("personalWebsite", website);
         map.put("email", email);
         map.put("description", description);
-
+        map.put("country", country);
 
         String redirect = "/error";
         try {
@@ -53,6 +56,7 @@ public class ProfileController extends HttpServlet {
             peer.setPersonalWebsite(website);
             peer.setEmail(email);
             peer.setDescription(description);
+            peer.setCountry(country);
             peer.update();
 
 //            Peer peer = new Peer(Manager.find(id, "peers"));
