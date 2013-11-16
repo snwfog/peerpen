@@ -92,11 +92,7 @@
         <dependency>
             <groupId>com.sunnyd.ppar</groupId>
             <artifactId>ppar</artifactId>
-<<<<<<< HEAD
-            <version>1.0.4-SNAPSHOT</version>
-=======
-            <version>1.0.6-SNAPSHOT</version>
->>>>>>> reset password
+            <version>1.0.7-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

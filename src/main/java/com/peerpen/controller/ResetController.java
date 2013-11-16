@@ -43,14 +43,14 @@ public class ResetController extends HttpServlet
 
     if(matches.size() == 1)
     {
+      String password = "DFASD32r32j";
       System.out.println(matches.get(0));
       Peer pear = new Peer(matches.get(0));
-      System.out.println("PEAR PASSWORD IS: " + pear.getPassword());
-      pear.setPassword("abcd");
-      System.out.println("NEW PEAR PASSWORD IS " + pear.getPassword());
+
+      pear.setPassword(password);
       pear.update();
 
-      sendMail(email, "Peerpen - Password has been resetted", getEmail(pear.getFirstName(), "abcd"), "sunnyd.peerpen@gmail.com", "penisland");
+      sendMail(email, "Peerpen - Password has been resetted", getEmail(pear.getFirstName(), password), "sunnyd.peerpen@gmail.com", "penisland");
       message = "True";
     }
     else{
