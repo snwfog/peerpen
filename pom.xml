@@ -92,7 +92,7 @@
         <dependency>
             <groupId>com.sunnyd.ppar</groupId>
             <artifactId>ppar</artifactId>
-            <version>1.0.7-SNAPSHOT</version>
+            <version>1.0.21-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

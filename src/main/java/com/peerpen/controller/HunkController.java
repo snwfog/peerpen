@@ -121,8 +121,8 @@ public class HunkController extends HttpServlet {
             // finding the old hunk (need a better way to do this)
             HashMap<String, Object> existingHunkData = new HashMap<String, Object>();
             existingHunkData.put( "idView", receivedIdView );
-            ArrayList<Map<String, Object>> existingHunks = new Hunk().findAll( existingHunkData );
-            Hunk existingHunk = new Hunk( existingHunks.get( 0 ) );
+            List<Hunk> existingHunks = new Hunk().findAll( existingHunkData );
+            Hunk existingHunk =existingHunks.get( 0 );
             int existingHunkId = existingHunk.getId();
             System.out.println( "oldHunkId:" + existingHunkId );
 
@@ -155,13 +155,13 @@ public class HunkController extends HttpServlet {
             // finding the old hunk (need a better way to do this)
             HashMap<String, Object> existingHunkData = new HashMap<String, Object>();
             existingHunkData.put( "idView", receivedIdView );
-            ArrayList<Map<String, Object>> existingHunks = new Hunk().findAll( existingHunkData );
-            Hunk existingHunk = new Hunk( existingHunks.get( 0 ) );
+            List<Hunk> existingHunks = new Hunk().findAll( existingHunkData );
+            Hunk existingHunk = existingHunks.get( 0 );
             int existingHunkId = existingHunk.getId();
 
             if (isOwner){
                 // Destroy Hunk & Changesets
-                existingHunk.Destroy();
+                existingHunk.destroy();
             }else{
                 // create a new changeset with null as content
                 HashMap<String, Object> changesetData = new HashMap<String, Object>();

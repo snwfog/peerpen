@@ -188,11 +188,11 @@ public class Peer extends Base
       Map<String, Object> map = new HashMap<String, Object>();
       map.put("email", "asn.brotha@gmail.com");
 
-      ArrayList<Map<String, Object>> matches = new Peer().findAll(map);
+      List<Peer> matches = new Peer().findAll(map);
 
 
       System.out.println(matches.get(0));
-      Peer pear = new Peer(matches.get(0));
+      Peer pear = matches.get(0);
       pear.setRankId(null);
       pear.setPassword("HAHAHAHA");
       pear.update();

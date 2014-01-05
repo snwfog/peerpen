@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 
@@ -39,13 +36,13 @@ public class ResetController extends HttpServlet
 
     Map<String, Object> map = new HashMap<String, Object>();
     map.put("email", request.getParameter("email"));
-    ArrayList<Map<String, Object>> matches = new Peer().findAll(map);
+    List<Peer> matches = new Peer().findAll(map);
 
     if(matches.size() == 1)
     {
       String password = "DFASD32r32j";
       System.out.println(matches.get(0));
-      Peer pear = new Peer(matches.get(0));
+      Peer pear = matches.get(0);
 
       pear.setPassword(password);
       pear.update();
