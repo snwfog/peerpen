@@ -131,6 +131,24 @@
     <url-pattern>/reset.do/*</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>comment</servlet-name>
+    <jsp-file>/view/comment.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>comment</servlet-name>
+    <url-pattern>/comment</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>comment.do</servlet-name>
+    <servlet-class>com.peerpen.controller.CommentController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>comment.do</servlet-name>
+    <url-pattern>/comment.do</url-pattern>
+  </servlet-mapping>
+
+
 
     <session-config>
         <session-timeout>72</session-timeout>

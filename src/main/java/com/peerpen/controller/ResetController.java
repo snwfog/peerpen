@@ -1,10 +1,9 @@
 package com.peerpen.controller;
 
 import com.sunnyd.database.Manager;
-
 import com.peerpen.model.Peer;
+import org.apache.commons.lang3.RandomStringUtils;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,11 +25,6 @@ public class ResetController extends HttpServlet
 {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
-
-  }
-
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-  {
     String email = request.getParameter("email");
     String message;
 
@@ -40,14 +34,14 @@ public class ResetController extends HttpServlet
 
     if(matches.size() == 1)
     {
-      String password = "DFASD32r32j";
+      String password = getRandomPassword();
       System.out.println(matches.get(0));
       Peer pear = matches.get(0);
 
       pear.setPassword(password);
       pear.update();
 
-      sendMail(email, "Peerpen - Password has been resetted", getEmail(pear.getFirstName(), password), "sunnyd.peerpen@gmail.com", "penisland");
+      sendMail(email, "Peerpen - Password has been reset", getEmail(pear.getFirstName(), password), "sunnyd.peerpen@gmail.com", "penisland");
       message = "True";
     }
     else{
@@ -57,6 +51,11 @@ public class ResetController extends HttpServlet
     response.setContentType("text/plain");
     response.setCharacterEncoding("UTF-8");
     response.getWriter().write(message);
+  }
+
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+  {
+
 
   }
 
@@ -333,5 +332,9 @@ public class ResetController extends HttpServlet
 
     return body;
 
+  }
+
+  private String getRandomPassword() {
+    return RandomStringUtils.randomAlphabetic(2) + RandomStringUtils.randomAlphanumeric(7);
   }
 }

@@ -29,4 +29,17 @@ public class Comment extends Base implements IModel {
         this.message = message;
         setUpdateFlag(true);
     }
+
+  //testing purposes only
+  private String name;
+  public void setName(String name)
+  {
+    this.name = name;
+  }
+
+  public String getName()
+  {
+    return name;
+  }
+  //testing purposes only
 }

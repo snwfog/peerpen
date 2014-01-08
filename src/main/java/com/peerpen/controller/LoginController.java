@@ -31,7 +31,7 @@ public class LoginController extends HttpServlet {
         map.put("userName", request.getParameter("username"));
         map.put("password", request.getParameter("password"));
 
-        String redirect = "/error";
+        String redirect = "/login?status=error";
         try {
             ArrayList<Map<String, Object>> matches = Manager.findAll("peers", map);
 
