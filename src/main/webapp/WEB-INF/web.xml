@@ -180,6 +180,23 @@
     <url-pattern>/comment.do</url-pattern>
   </servlet-mapping>
 
+    <servlet>
+        <servlet-name>search</servlet-name>
+        <jsp-file>/view/search.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>search</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>search.do</servlet-name>
+        <servlet-class>com.peerpen.controller.SearchController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>search.do</servlet-name>
+        <url-pattern>/search.do</url-pattern>
+    </servlet-mapping>
+
 
 
     <session-config>
