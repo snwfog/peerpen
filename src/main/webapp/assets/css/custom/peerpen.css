@@ -66,8 +66,8 @@ div#registrationImage{
     background-color:white;
     background-image: url('http://lerablog.org/wp-content/uploads/2013/05/job-interview-diagram.jpg');
     background-size: 100% auto;
-    height: 520px;
-    width:50%;
+    height: 270px;
+    width:112%;
 
     border-radius: 5px;
     border-color: #dcdcdc;
@@ -136,5 +136,13 @@ h2.description{
   color: #999;
   letter-spacing: 1px;
   margin: 0 0 10px 0;
-  font-size: 90%;
+  font-size: 70%;
+}
+.field{
+    letter-spacing: 1px;
+    font-size: 90%;
+}
+.description{
+    letter-spacing: 1px;
+    font-size: 70%;
 }

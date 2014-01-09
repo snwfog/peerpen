@@ -1,65 +1,6 @@
 <%@ page import="com.peerpen.model.Peer" %>
+<%@ page import="java.util.Date"%>
 <%@ include file="/view/includes/static/header.jsp" %>
-
-<script type="text/javascript">
-  $(document).ready(function () {
-    $('#edit_personal').click(function () {
-      if ($('#personal_icon').attr('class') == 'glyphicon glyphicon-pencil') {
-        $("#personal_icon").attr('class', 'glyphicon glyphicon-ok')
-        $(".peerPersonal").attr("readonly", false);
-        $('#save_personal').css('visibility', '');
-        return false;
-      }
-      else {
-        $('#personal_icon').attr('class', 'glyphicon glyphicon-pencil')
-        $(".peerPersonal").attr("readonly", true);
-        $('#save_personal').css('visibility', 'hidden');
-        return false;
-      }
-    });
-    $('#edit_description').click(function () {
-      if ($('#description_icon').attr('class') == 'glyphicon glyphicon-pencil') {
-        $("#description_icon").attr('class', 'glyphicon glyphicon-ok')
-        $(".peerDescription").attr("readonly", false);
-        $('#save_description').css('visibility', '');
-        return false;
-      }
-      else {
-        $('#description_icon').attr('class', 'glyphicon glyphicon-pencil')
-        $(".peerDescription").attr("readonly", true);
-        $('#save_description').css('visibility', 'hidden');
-        return false;
-      }
-    });
-    $('#edit_contact').click(function () {
-      if ($('#contact_icon').attr('class') == 'glyphicon glyphicon-pencil') {
-        $("#contact_icon").attr('class', 'glyphicon glyphicon-ok')
-        $(".peerContact").attr("readonly", false);
-        $('#save_contact').css('visibility', '');
-        return false;
-      }
-      else {
-        $('#contact_icon').attr('class', 'glyphicon glyphicon-pencil')
-        $(".peerContact").attr("readonly", true);
-        $('#save_contact').css('visibility', 'hidden');
-        return false;
-      }
-    });
-    $('#save_personal').click(function (){
-      document.getElementById("form_personal").submit();
-      return false;
-    });
-    $('#save_description').click(function (){
-      document.getElementById("form_description").submit();
-      return false;
-    });
-    $('#save_contact').click(function (){
-      document.getElementById("form_contact").submit();
-      return false;
-    });
-  });
-</script>
-
 
 <%
   Peer peer = (Peer) session.getAttribute("user");
@@ -170,7 +111,7 @@
                 <td><h6>Date of Birth &nbsp</h6></td>
                 <td><input type="text" class="form-control peerPersonal"
                            name="dob"
-                           value="" readonly>
+                           value="<%= session.getAttribute("birth_date")%>" readonly>
                 </td>
               </tr>
               <input type="hidden" class="form-control peerID" name="id"
@@ -183,7 +124,7 @@
                 <td><h6>Gender</h6></td>
                 <td><input type="text" class="form-control peerPersonal"
                            name="gender"
-                           value="" readonly>
+                           value="<%=peer.getGender().toString()%>" readonly>
                 </td>
               </tr>
               <tr>
@@ -197,18 +138,21 @@
                 <td><h6>Industry</h6></td>
                 <td><input type="text" class="form-control peerPersonal"
                            name="industry"
-                           value="" readonly>
+                           value="<%=peer.getIndustry().toString()%>" readonly>
                 </td>
               </tr>
               <tr>
                 <td><h6>Years of Experience &nbsp</h6></td>
                 <td><input type="text" class="form-control peerPersonal"
                            name="yoe"
-                           value="" readonly>
+                           value="<%=peer.getExperience().toString()%>" readonly>
                 </td>
               </tr>
               <input type="hidden" class="form-control peerID" name="id"
                      value="<%= Integer.parseInt(peer.getId().toString())%>">
+              <input type="hidden" name ="description" value ="<%= peer.getDescription()%>" >
+              <input type="hidden" name ="email" value ="<%= peer.getEmail()%>" >
+              <input type="hidden" name ="personal_website" value ="<%= peer.getPersonalWebsite()%>" >
             </table>
           </div>
           </form>
@@ -227,11 +171,22 @@
       </div>
       <div class="well">
         <form action="/profile.do" id="form_description" method="post">
-        <textarea class ="peerDescription well form-control" name ="description" style="resize:none" rows="3" readonly><%= peer.getDescription().toString() %></textarea>
-        <input type="hidden" class="form-control peerID" name="id"
-                 value="<%= Integer.parseInt(peer.getId().toString())%>"/>
+            <textarea class ="peerDescription well form-control" name ="description" style="resize:none" rows="3" readonly><%= peer.getDescription().toString() %></textarea>
+            <input type="hidden" class="form-control peerID" name="id" value="<%= Integer.parseInt(peer.getId().toString())%>"/>
+            <input type="hidden" name ="email" value ="<%= peer.getEmail()%>" >
+            <input type="hidden" name ="personal_website" value ="<%= peer.getPersonalWebsite()%>" >
+            <input type="hidden" class="form-control peerPersonal" name="first_name" value="<%= peer.getFirstName().toString() %>">
+            <input type="hidden" class="form-control peerPersonal" name="last_name" value="<%= peer.getLastName().toString() %>" >
+            <input type="hidden" class="form-control peerUsername" name="user_name" value="<%= peer.getUserName().toString() %>" >
+            <input type="hidden" class="form-control peerDoB" name="dob" value="<%=session.getAttribute("birth_date")%>">
+            <input type="hidden" class="form-control peerID" name="id" value="<%= peer.getId().toString()%>">
+            <input type="hidden" class="form-control peerPersonal" name="gender" value="<%=peer.getGender().toString()%>" >
+            <input type="hidden" class="form-control peerPersonal" name="           country" value="<%= peer.getCountry().toString()%>" >
+            <input type="hidden" class="form-control peerPersonal" name="industry" value="<%=peer.getIndustry().toString()%>">
+            <input type="hidden" class="form-control peerPersonal" name="yoe" value="<%=peer.getExperience().toString()%>">
+
         </form>
-        <a class ="pull-right" type="submit" class="pull-right" style="visibility:hidden"
+        <a class ="pull-right" type="submit" class="pull-right" style="visibility:hidden"x
            id="save_description" value="Save" href="#">Save
           Changes</a>
       </div>
@@ -266,6 +221,16 @@
             <input type="hidden" class="form-control peerID" name="id"
                    value="<%= Integer.parseInt(peer.getId().toString())%>">
           </table>
+            <input type="hidden" class="form-control peerPersonal" name="first_name" value="<%= peer.getFirstName().toString() %>">
+            <input type="hidden" class="form-control peerPersonal" name="last_name" value="<%= peer.getLastName().toString() %>" >
+            <input type="hidden" class="form-control peerUsername" name="user_name" value="<%= peer.getUserName().toString() %>" >
+            <input type="hidden" class="form-control peerPersonal" name="dob" value="<%= session.getAttribute("birth_date")%>">
+            <input type="hidden" class="form-control peerID" name="id" value="<%= peer.getId().toString()%>">
+            <input type="hidden" class="form-control peerPersonal" name="gender" value="<%=peer.getGender().toString()%>" >
+            <input type="hidden" class="form-control peerPersonal" name="country" value="<%= peer.getCountry().toString()%>" >
+            <input type="hidden" class="form-control peerPersonal" name="industry" value="<%=peer.getIndustry().toString()%>">
+            <input type="hidden" class="form-control peerPersonal" name="yoe" value="<%=peer.getExperience().toString()%>">
+            <input type="hidden" name ="description" value ="<%= peer.getDescription()%>" >
         </form>
         <a class ="pull-right" type="submit" class="pull-right" style="visibility:hidden"
            id="save_contact" value="Save" href="#">Save

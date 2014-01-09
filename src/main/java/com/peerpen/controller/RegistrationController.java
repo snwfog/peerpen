@@ -29,7 +29,6 @@ public class RegistrationController extends HttpServlet {
         // get all register input
         String first_name = request.getParameter("first_name");
         String last_name = request.getParameter("last_name");
-        String website = request.getParameter("personal_website");
         String user_name = request.getParameter("user_name");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -49,14 +48,13 @@ public class RegistrationController extends HttpServlet {
                 newPeer.setLastName(last_name);
                 newPeer.setUserName(user_name);
                 newPeer.setEmail(email);
-                newPeer.setPersonalWebsite(website);
                 newPeer.setPassword(password);
                 newPeer.setPoint(0);
                 newPeer.save();
 
                 HttpSession session = request.getSession();
                 session.setAttribute("user", newPeer);
-                redirect = "/profile";
+                redirect = "/registration2";
             }
             response.sendRedirect(redirect);
 

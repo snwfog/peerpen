@@ -12,9 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -33,16 +32,21 @@ public class LoginController extends HttpServlet {
 
         String redirect = "/login?status=error";
         try {
-            ArrayList<Map<String, Object>> matches = Manager.findAll("peers", map);
+            List<Peer> matches = new Peer().findAll(map);
+            System.out.println(matches.size());
 
             if (matches.size() == 1){ // means found exactly 1 user with that username and password
-                Map<String, Object> match = matches.get(0); // get this hashmap from the arraylist
-                Peer peer = new Peer(match);
+                Peer peer = matches.get(0);
+                Date dob = peer.getDateOfBirth();
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                String dateOfBirth = formatter.format(dob);
+
                 // store the peer obj in session
                 HttpSession session = request.getSession();
                 session.setAttribute("user", peer);
+                session.setAttribute("birth_date", dateOfBirth);
                 session.setMaxInactiveInterval(259200); // 3 days in secs
-                //request.setAttribute("user", peer);
                 redirect = "/profile";
             }
 

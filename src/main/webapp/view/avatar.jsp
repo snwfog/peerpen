@@ -1,5 +1,9 @@
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ include file="/view/includes/static/header.jsp" %>
+
+<%
+    Peer peer = (Peer) session.getAttribute("user");
+%>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -8,7 +12,7 @@
     <ul class="nav navbar-nav">
       <li><a href="#"><img class="profile"
                            src="/assets/images/profile/pic2.jpg"/></a></li>
-      <li><a> Peter Trang
+      <li><a> <%= peer.getFirstName()%> <%= peer.getLastName()%>
       </a></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
@@ -45,18 +49,30 @@
   </div>
 </nav>
 <div class="page-wrap">
+    <form action="/avatar.do" id="form_description" method="post">
+        <input type="hidden" class ="peerDescription well form-control" name ="description" value="<%= session.getAttribute("description")%>">
+        <input type="hidden" class="form-control peerID" name="id" value="<%= peer.getId().toString()%>"/>
+        <input type="hidden" class="form-control peerDoB" name="dob" value="<%= session.getAttribute("dob")%>">
+        <input type="hidden" class="form-control peerPersonal" name="gender" value="<%=session.getAttribute("gender")%>" >
+        <input type="hidden" class="form-control peerPersonal" name="country" value="<%= session.getAttribute("country")%>" >
+        <input type="hidden" class="form-control peerPersonal" name="industry" value="<%=session.getAttribute("industry")%>">
+        <input type="hidden" class="form-control peerPersonal" name="yoe" value="<%=session.getAttribute("yoe")%>">
+        <input type="hidden" class="form-control peerPersonal" name="personal_website" value="<%=session.getAttribute("personal_website")%>">
 
-  <h1>Summary of your profile <button class="pull-right btn btn-primary" type="submit">Next (2/2)</button></h1>
+        <h1>Summary of your profile <button class="pull-right btn btn-primary" type="submit">Next (2/2)</button></h1>
+    </form>
 
   <div class="dravatar">
     <h4>Drag & Drop picture</h4>
     <div class="dravatar-avatar-wrap">
       <img src="/assets/images/profile/256.jpg" id="profile-avatar" alt="Image for Profile">
+      <div class="description"><%=session.getAttribute("gender")%>, <%=session.getAttribute("dob")%></div>
     </div>
 
-    <h2>Peter Trang</h2>
+    <h2><%= peer.getFirstName()%> <%= peer.getLastName()%></h2>
+    <div class="field"><%=session.getAttribute("industry")%> Industry for <%=session.getAttribute("yoe")%> Years</div>
     <div class="location">MTL QC, CA</div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur voluptatem accusantium voluptas doloremque porro temporibus aut rerum possimus cum minus.</p>
+    <p><%=session.getAttribute("description")%></p>
 
   </div>
 

@@ -1,48 +1,38 @@
 <%@ include file="/view/includes/static/header.jsp" %>
-<body id="registration">
-<div class="registerContainer">
-    <div id="clear"></div>
-    <div id="registerHeader">
-        <h2 align="center">Registration</h2>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand">PeerPen</a>
+        </div>
     </div>
-    <div id="registerBody">
-        <form id="register" action="/register.do" method="post">
-            <div class="form-group" >
-                <label>First Name</label>
-                <input class="form-control" type="text" name="first_name" />
-                <label> Last name </label>
-                <input class="form-control" type="text" name="last_name" />
-            </div>
-            <div class="form-group">
-                <label> Username </label>
-                <input class="form-control" type="text" name="user_name"  />
-            </div>
 
-            <div class="form-group">
-                <label> Password </label>
-                <input class="form-control" type="password" name="password"  />
+</div>
+<div class="register">
+    <h1>
+        Get started!
+    </h1>
+        <form class="form-inline" id="register" action="/register.do" method="post">
+            <div style=" max-width:500px; float:left;">
+                <h4>Take a first step in building your career!</h4>
+                <div class="" id="registrationImage">
+                </div>
             </div>
-            <div class="form-group">
-                <label> Confirm Password </label>
-                <input class="span4 form-control" type="text" name="confirm_password" />
+            <div style=" max-width:352px; margin-left:50%">
+                <h2>Join Now</h2>
+                <h4>Become a member of PeerPen</h4>
+                <div class="form-group">
+                    <input type="text" class="form-control" style="margin:10px 0" name="first_name" placeholder="First Name"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" style="margin:10px 0" name="last_name" placeholder="Last Name"/>
+                </div>
+                <input type="text" class="form-control" style="margin:10px 0" name="user_name" placeholder="Username" />
+                <input type="password" class="form-control" style="margin:10px 0" name="password" placeholder="Password" />
+                <input type="password" class="form-control" style="margin:10px 0" name="confirm_password" placeholder="Confirmed Password" />
+                <input type="text" class="form-control" style="margin:10px 0" name="email" placeholder="Email" />
+                <button type="submit" class="btn btn-primary pull-right" value="submit">Sign Up</button>
             </div>
-            <%--<tr>--%>
-            <%--<td>Sex</td>--%>
-            <%--<td><input type="radio" name="sex" value="Male">Male | <input--%>
-            <%--type="radio" name="sex" value="Female">Female</td>--%>
-            <%--</tr>--%>
-
-            <div class="form-group">
-                <label> Email </label>
-                <input class="form-control" type="text" name="email"  />
-            </div>
-
-            <button type="submit" class="btn btn-primary" value="submit">Register</button>
         </form>
-    </div>
-    <div id="clear"></div>
 </div>
-<div id="registrationImage">
-</div>
-</body>
+
 <%@ include file="/view/includes/static/footer.jsp" %>

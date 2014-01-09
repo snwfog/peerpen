@@ -1,7 +1,6 @@
 package com.peerpen.controller;
 
 import com.peerpen.model.Peer;
-import com.sunnyd.database.Manager;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,10 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 /**
  * Created with IntelliJ IDEA.
  * User: momoking
@@ -32,23 +32,31 @@ public class ProfileController extends HttpServlet {
         String email = request.getParameter("email");
         String description = request.getParameter("description");
         String country = request.getParameter("country");
+        String gender = request.getParameter("gender");
+        String industry = request.getParameter("industry");
+        int yoe = Integer.parseInt(request.getParameter("yoe"));
+        String dateOfBirth = (request.getParameter("dob"));
+        System.out.println("THIS IS IT!"+dateOfBirth);
 
+        Date dob = new Date();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            dob = formatter.parse(dateOfBirth);
+            dateOfBirth = formatter.format(dob);
+        }catch (Exception e) {
+            System.out.println("Unable to parse date stamp");
+        }
 
         // here we should validate the input...
 
-        // check if user already exists
+        // check if email already exists
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("firstName", first_name);
-        map.put("lastName", last_name);
-        map.put("personalWebsite", website);
         map.put("email", email);
-        map.put("description", description);
-        map.put("country", country);
 
         String redirect = "/error";
         try {
-              //Quang, i commented out the line below to adjust for the new ppar. make sure it works
-//            System.out.println("true or fals?" + Manager.update(id,"peers",map));
+
             redirect = "/profile";
             Peer peer = new Peer().find(id);
             peer.setFirstName(first_name);
@@ -57,11 +65,16 @@ public class ProfileController extends HttpServlet {
             peer.setEmail(email);
             peer.setDescription(description);
             peer.setCountry(country);
+            peer.setEmail(email);
+            peer.setGender(gender);
+            peer.setIndustry(industry);
+            peer.setExperience(yoe);
+            peer.setDateOfBirth(dob);
             peer.update();
 
-//            Peer peer = new Peer(Manager.find(id, "peers"));
             HttpSession session = request.getSession();
             session.setAttribute("user", peer);
+            session.setAttribute("birth_date", dateOfBirth);
             response.sendRedirect(redirect);
 
         } catch (Exception e) {

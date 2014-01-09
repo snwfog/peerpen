@@ -34,8 +34,6 @@
         <url-pattern>/logout.do</url-pattern>
     </servlet-mapping>
 
-
-
     <servlet>
         <servlet-name>register</servlet-name>
         <jsp-file>/view/register.jsp</jsp-file>
@@ -51,6 +49,40 @@
     <servlet-mapping>
         <servlet-name>register.do</servlet-name>
         <url-pattern>/register.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>registration2</servlet-name>
+        <jsp-file>/view/registration2.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registration2</servlet-name>
+        <url-pattern>/registration2</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>registration2.do</servlet-name>
+        <servlet-class>com.peerpen.controller.Registration2Controller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registration2.do</servlet-name>
+        <url-pattern>/registration2.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>avatar</servlet-name>
+        <jsp-file>/view/avatar.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>avatar</servlet-name>
+        <url-pattern>/avatar</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>avatar.do</servlet-name>
+        <servlet-class>com.peerpen.controller.AvatarController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>avatar.do</servlet-name>
+        <url-pattern>/avatar.do</url-pattern>
     </servlet-mapping>
 
 
