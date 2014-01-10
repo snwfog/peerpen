@@ -3,6 +3,7 @@ package com.peerpen.model;
 import com.sunnyd.Base;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
+import com.sunnyd.annotations.ActiveRelationHasOne;
 import com.sunnyd.database.Manager;
 
 import java.util.*;
@@ -43,6 +44,10 @@ public class Peer extends Base
   private List<Document> documents;
   @ActiveRelationHasMany
   private List<Changeset> changesets;
+  @ActiveRelationHasOne
+  private Avatar avatar;
+  @ActiveRecordField
+  private Integer avatarId;
 
   public Peer()
   {
@@ -253,5 +258,18 @@ public class Peer extends Base
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public Avatar getAvatar(){
+        initRelation("avatar");
+        return avatar;
+    }
+
+    public void setAvatarId(Integer avatarId){
+        this.avatarId = avatarId;
+    }
+
+    public int getAvatarId(){
+        return this.avatarId;
     }
 }
