@@ -3,6 +3,7 @@ package com.peerpen.controller;
 import com.peerpen.model.Comment;
 import com.peerpen.model.Document;
 import com.peerpen.model.Peer;
+import com.peerpen.model.Changeset;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +33,12 @@ public class CommentController extends HttpServlet
     Peer pear = (Peer)session.getAttribute("user");
 
 //    Need to implement. Need to get comments from the
-//    Document document = new Document().find(request.getAttribute("document"));
+    Document document = new Document();//.find(request.getAttribute("document"));
+    List<Comment> comments = document.getComments();
+    List<Changeset> sc = document.getChangesets();
+    for (Changeset changeset : sc){
+      List<Comment> comment =  changeset.getComments();
+    }
 //    List<Comment> comments = document.getComments();
 
 //    Need to implement setters and getters for docId, peerId etc
