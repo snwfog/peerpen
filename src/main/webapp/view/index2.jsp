@@ -48,9 +48,9 @@
                         </ul>
                     </li>
                 </ul>
-                <form class="navbar-form pull-right">
-                    <input class="span2" type="text" placeholder="Email">
-                    <input class="span2" type="password" placeholder="Password">
+                <form class="navbar-form pull-right" action="/login.do" method="post">
+                    <input class="span2" type="text" placeholder="Username" name="username">
+                    <input class="span2" type="password" placeholder="Password" name="password">
                     <button type="submit" class="btn btn-primary">Sign in</button>
                 </form>
             </div>
