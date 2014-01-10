@@ -13,7 +13,7 @@
       %>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <a href="/documents.do"><%= d.getDocName() %></a>
+                <a href="/document.do"><%= d.getDocName() %></a>
             </div>
         </div>
         <% } %>
