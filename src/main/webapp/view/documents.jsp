@@ -12,11 +12,10 @@
       {
       %>
         <div class="panel panel-default">
-
-                <%= d.getDocName() %>
+            <div class="panel-heading">
+                <a href="/documents.do"><%= d.getDocName() %></a>
             </div>
-
-
+        </div>
         <% } %>
       <%--<div class="caption">--%>
         <%--<% for (Document c : (List<Document>) request.getAttribute("documents"))--%>
