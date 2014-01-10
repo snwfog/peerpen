@@ -190,7 +190,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>documents.do</servlet-name>
-    <servlet-class>com.peerpen.controller.DocumentController</servlet-class>
+    <servlet-class>com.peerpen.controller.DocumentsController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>documents.do</servlet-name>
@@ -214,6 +214,22 @@
         <url-pattern>/search.do</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>document</servlet-name>
+        <jsp-file>/view/document.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>document</servlet-name>
+        <url-pattern>/document</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>document.do</servlet-name>
+        <servlet-class>com.peerpen.controller.DocumentController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>document.do</servlet-name>
+        <url-pattern>/document.do</url-pattern>
+    </servlet-mapping>
 
 
     <session-config>
