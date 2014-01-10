@@ -41,6 +41,11 @@ public class DocumentsController extends HttpServlet
 
     List<Document>  documents = pear.getDocuments();
 
+    for (Document doc : documents)
+    {
+        request.setAttribute("document", doc);
+    }
+
     request.setAttribute("documents", documents);
     request.setAttribute("test", "bobby");
     request.getRequestDispatcher("/documents").forward(request, response);

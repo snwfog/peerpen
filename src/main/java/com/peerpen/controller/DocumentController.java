@@ -1,5 +1,8 @@
 package com.peerpen.controller;
 
+import com.peerpen.model.Changeset;
+import com.peerpen.model.Comment;
+import com.peerpen.model.Document;
 import com.peerpen.model.Peer;
 
 import javax.servlet.ServletException;
@@ -8,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,12 +28,68 @@ public class DocumentController extends HttpServlet
         HttpSession session = request.getSession();
         Peer pear = (Peer)session.getAttribute("user");
 
+
+        //Document document = (Document)request.getAttribute("document");
+
+        //Document document = new Document();//.find(request.getAttribute("document"));
+        //List<Comment> comments = document.getComments();
+        /*List<Changeset> sc = document.getChangesets();
+        for (Changeset changeset : sc){
+            List<Comment> comment =  changeset.getComments();
+        }
+        */
+//    List<Comment> comments = document.getComments();
+
+//    Need to implement setters and getters for docId, peerId etc
+//    Comment comment = new Comment();
+//    comment.setMessage("This resume is bad, fix it!");
+//    comment.setDocumentId(document.getId());
+//    comment.save();
+
+//    request.setAttribute("document", document);
+//    request.setAttribute("comments", comments);
+
+//    Experimental:
+        List<Document> documents = pear.getDocuments();
+
+        for(Document document : documents)
+        {
+        System.out.println("dsfsdfdsfdsfdfd"+document.getId());
+
+            List<Comment> list = document.getComments();
+            request.setAttribute("comments", list);
+
+            request.setAttribute("document", document);
+        }
         request.getRequestDispatcher("/document").forward(request, response);
     }
 
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        HttpSession session = request.getSession();
+        Peer peer = (Peer)session.getAttribute("user");
 
+        Comment comment = new Comment();
+        comment.setMessage(request.getParameter("comment").toString());
+        comment.setName(peer.getFirstName() + " " +peer.getLastName());
+        comment.setPeerId(peer.getId());
+
+        //comment.save();
+
+        List<Document> documents = peer.getDocuments();
+        for(Document doc : documents)
+        {
+            List<Comment> comments = doc.getComments();
+            comment.setDocumentId(doc.getId());
+            comment.save();
+            comments.add(comment);
+
+            doc.update();
+            request.setAttribute("comments", comments);
+        }
+        //request.setAttribute("comments", comments);
+        request.getRequestDispatcher("/document").forward(request, response);
     }
 
 }
