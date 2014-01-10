@@ -3,28 +3,20 @@ package com.peerpen.controller;
 import com.peerpen.model.Peer;
 import com.sunnyd.database.Manager;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
 
-/**
- * Created with IntelliJ IDEA.
- * User: momoking
- * Date: 10/25/2013
- * Time: 7:05 PM
- * To change this template use File | Settings | File Templates.
- */
 public class RegistrationController extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         //doGet(request, response);
         // get all register input
         String first_name = request.getParameter("first_name");
@@ -36,13 +28,13 @@ public class RegistrationController extends HttpServlet {
         // here we should validate the input...
 
         // check if user already exists
-        Map<String, Object> map =  new HashMap<String, Object>();
-        map.put("userName", user_name);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put( "userName", user_name );
         String redirect = "/error";
         try {
-            ArrayList<Map<String, Object>> matches = Manager.findAll("peers", map);
-          System.out.println(matches);
-            if (matches.size() == 0){ // means user does not exist
+            ArrayList<Map<String, Object>> matches = Manager.findAll( "peers", map );
+            System.out.println( matches );
+            if ( matches.size() == 0 ) { // means user does not exist
                 Peer newPeer = new Peer();
                 newPeer.setFirstName(first_name);
                 newPeer.setLastName(last_name);
@@ -55,21 +47,22 @@ public class RegistrationController extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", newPeer);
                 redirect = "/registration2";
-            }
-            response.sendRedirect(redirect);
 
-        } catch (Exception e) {
+            }
+            response.sendRedirect( redirect );
+
+        } catch ( Exception e ) {
             e.printStackTrace();
         }
 
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        // forward to registration jsp
-//        ServletContext context = getServletContext();
-//        RequestDispatcher dispatcher = context.getRequestDispatcher("/view/register.jsp");
-//        dispatcher.forward(request, response);
+    protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+        //        // forward to registration jsp
+        //        ServletContext context = getServletContext();
+        //        RequestDispatcher dispatcher = context.getRequestDispatcher("/view/register.jsp");
+        //        dispatcher.forward(request, response);
 
     }
 }

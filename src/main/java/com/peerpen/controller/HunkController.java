@@ -27,13 +27,6 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.model.Contributor;
 
-/**
- * Created with IntelliJ IDEA.
- * User: momoking
- * Date: 11/15/2013
- * Time: 3:18 PM
- * To change this template use File | Settings | File Templates.
- */
 public class HunkController extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
