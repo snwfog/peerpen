@@ -3,12 +3,21 @@
 <%@ page import="com.peerpen.model.Document" %>
 <%@ include file="/view/includes/static/header.jsp" %>
 
-<%--<% Peer peer = (Peer) session.getAttribute("user"); %>--%>
+<% Peer peer = (Peer) session.getAttribute("user"); %>
 <div class="row">
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
 
-      <%= request.getAttribute("test")%>
+      <% for (Document d : (List<Document>) request.getAttribute("documents"))
+      {
+      %>
+        <div class="panel panel-default">
+
+                <%= d.getDocName() %>
+            </div>
+
+
+        <% } %>
       <%--<div class="caption">--%>
         <%--<% for (Document c : (List<Document>) request.getAttribute("documents"))--%>
         <%--{--%>

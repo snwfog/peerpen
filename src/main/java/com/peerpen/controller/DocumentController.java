@@ -29,16 +29,18 @@ public class DocumentController extends HttpServlet
     List<Document> listofDocuments =new  ArrayList < Document >();
     Document doc1 = new Document();
     doc1.setDocName("DOCUMENT1");
-    //doc1.setPeerId(pear.getId());
-    System.out.println(pear.getId());
+    doc1.setPeerId(pear.getId());
+    System.out.println("dsfsdfdsfdsfdsfsd"+pear.getId());
     doc1.save();
+
+    System.out.println("dfsddfdsfd"+doc1.getDocName());
     listofDocuments.add(doc1);
     pear.setDocuments(listofDocuments);
     pear.update();
 
     List<Document>  documents = pear.getDocuments();
 
-//    request.setAttribute("documents", documents);
+    request.setAttribute("documents", documents);
     request.setAttribute("test", "bobby");
     request.getRequestDispatcher("/documents").forward(request, response);
 
