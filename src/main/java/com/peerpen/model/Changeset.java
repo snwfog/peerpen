@@ -6,6 +6,7 @@ import com.sunnyd.annotations.*;
 import com.sunnyd.database.Manager;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Changeset extends Base implements IModel {
     public static final String tableName = "changesets";
@@ -30,6 +31,9 @@ public class Changeset extends Base implements IModel {
 
     @ActiveRecordField
     private Integer hunkId;
+
+    @ActiveRelationHasMany
+    private List<Comment> comments;
 
 
 
@@ -91,6 +95,12 @@ public class Changeset extends Base implements IModel {
     public Hunk getHunk(){
         initRelation("hunk");
         return hunk;
+    }
+
+    public List<Comment> getComments()
+    {
+        initRelation("comments");
+        return this.comments;
     }
 
     public static void main(String[] args) {

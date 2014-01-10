@@ -35,6 +35,8 @@ public class Document extends Base implements IModel {
     private List<Hunk> hunks;
     @ActiveRelationHasMany
     private List<Changeset> changesets;
+    @ActiveRelationHasMany
+    private List<Comment> comments;
     
     
     public Document() {
@@ -131,6 +133,12 @@ public class Document extends Base implements IModel {
     {
         initRelation("changesets");
         return this.changesets;
+    }
+
+    public List<Comment> getComments()
+    {
+        initRelation("comments");
+        return this.comments;
     }
 
 }
