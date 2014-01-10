@@ -22,6 +22,8 @@ public class DocumentController extends HttpServlet
     {
         HttpSession session = request.getSession();
         Peer pear = (Peer)session.getAttribute("user");
+
+        request.getRequestDispatcher("/document").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
