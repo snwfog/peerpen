@@ -28,9 +28,9 @@ public class DocumentController extends HttpServlet
         HttpSession session = request.getSession();
         Peer pear = (Peer)session.getAttribute("user");
 
+        int doc_id = Integer.parseInt(request.getParameter("doc_id"));
 
-        //Document document = (Document)request.getAttribute("document");
-
+        Document document = new Document().find(doc_id);
         //Document document = new Document();//.find(request.getAttribute("document"));
         //List<Comment> comments = document.getComments();
         /*List<Changeset> sc = document.getChangesets();
@@ -50,17 +50,16 @@ public class DocumentController extends HttpServlet
 //    request.setAttribute("comments", comments);
 
 //    Experimental:
-        List<Document> documents = pear.getDocuments();
+        //List<Document> documents = pear.getDocuments();
 
-        for(Document document : documents)
-        {
+
         System.out.println("dsfsdfdsfdsfdfd"+document.getId());
 
-            List<Comment> list = document.getComments();
-            request.setAttribute("comments", list);
+        List<Comment> list = document.getComments();
+        request.setAttribute("comments", list);
 
-            request.setAttribute("document", document);
-        }
+        request.setAttribute("document", document);
+
         request.getRequestDispatcher("/document").forward(request, response);
     }
 
@@ -69,25 +68,28 @@ public class DocumentController extends HttpServlet
     {
         HttpSession session = request.getSession();
         Peer peer = (Peer)session.getAttribute("user");
+        //Document document = (Document)request.getAttribute("document");
+
+        int doc_id = Integer.parseInt(request.getParameter("doc_id"));
+
+        Document document = new Document().find(doc_id);
 
         Comment comment = new Comment();
         comment.setMessage(request.getParameter("comment").toString());
         comment.setName(peer.getFirstName() + " " +peer.getLastName());
         comment.setPeerId(peer.getId());
-
+        comment.setDocumentId(document.getId());
+        comment.save();
         //comment.save();
 
-        List<Document> documents = peer.getDocuments();
-        for(Document doc : documents)
-        {
-            List<Comment> comments = doc.getComments();
-            comment.setDocumentId(doc.getId());
-            comment.save();
-            comments.add(comment);
 
-            doc.update();
-            request.setAttribute("comments", comments);
-        }
+        List<Comment> comments = document.getComments();
+
+        comments.add(comment);
+
+        document.update();
+        request.setAttribute("comments", comments);
+        request.setAttribute("document",document);
         //request.setAttribute("comments", comments);
         request.getRequestDispatcher("/document").forward(request, response);
     }

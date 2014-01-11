@@ -24,6 +24,8 @@
     <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
             <div class="caption">
+               <% if (document.getComments()!=null)
+               { document.getComments();}%>
                 <% for (Comment c : (List<Comment>) request.getAttribute("comments"))
                 {
                 %>
@@ -39,9 +41,8 @@
                     <div class="panel-heading"><%= peer.getFirstName() %> <%= peer.getLastName() %></div>
                     <div class="panel-body">
                         <form method="POST" action="/document.do">
-
-                            <%--<input type="hidden" name="id" value="<%= document.getId()%>"/>--%>
-                            <textarea name="comment" rows="4" cols="45"  resize="none">I WANT TO GO UP YOUR DIAGON ALLEY</textarea>
+                            <input type="hidden" name="doc_id" value="<%= document.getId().toString()%>"/>
+                            <textarea name="comment" rows="4" cols="45"  resize="none"></textarea>
                             <br /><br />
                             <%--<input type="hidden" name="thread" value="<>">--%>
                             <button type="submit" class="btn btn-success">Post</button>
