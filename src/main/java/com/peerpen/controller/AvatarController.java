@@ -15,6 +15,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * Created by Zearf on 1/7/2014.
  */
@@ -30,6 +32,7 @@ public class AvatarController extends HttpServlet {
         String description = request.getParameter("description");
         String website = request.getParameter("personal_website");
 
+        StringUtils.split(" ");
 
         Date dob = new Date();
 

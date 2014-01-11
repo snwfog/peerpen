@@ -31,8 +31,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="sass-stdlib" level="application" />
     <orderEntry type="library" name="Maven: com.sunnyd.ppar:ppar:1.0.23-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: com.sunnyd.ppar:ppar:1.0.23-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: com.sunnyd.ppar:ppar:1.0.23-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.4" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.6.4" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-simple:1.6.4" level="project" />
