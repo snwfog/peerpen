@@ -5,6 +5,7 @@ import com.sunnyd.IModel;
 import com.sunnyd.annotations.*;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Comment extends Base implements IModel {
 
@@ -30,7 +31,7 @@ public class Comment extends Base implements IModel {
         super();
     }
 
-    public Comment(HashMap<String, Object> HM) {
+    public Comment(Map<String, Object> HM) {
         super(HM);
     }
 
