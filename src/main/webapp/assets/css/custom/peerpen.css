@@ -146,3 +146,9 @@ h2.description{
     letter-spacing: 1px;
     font-size: 70%;
 }
+.validation{
+    color:#CC3300;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+;
+}

@@ -11,7 +11,7 @@
     <h1>
         Get started!
     </h1>
-        <form class="form-inline" id="register" action="/register.do" method="post">
+        <form class="form-inline" name="register" onsubmit="return validateForm()" id="register" action="/register.do" method="post">
             <div style=" max-width:500px; float:left;">
                 <h4>Take a first step in building your career!</h4>
                 <div class="" id="registrationImage">
@@ -21,15 +21,15 @@
                 <h2>Join Now</h2>
                 <h4>Become a member of PeerPen</h4>
                 <div class="form-group">
-                    <input type="text" class="form-control" style="margin:10px 0" name="first_name" placeholder="First Name"/>
+                    <input type="text" class="form-control" style="margin:10px 0" id="valid_fname" name="first_name" rel="popover" data-content="<div class='validation'>You need to fill in your first name</div>" data-html="true" placeholder="First Name"/>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" style="margin:10px 0" name="last_name" placeholder="Last Name"/>
+                    <input type="text" class="form-control" style="margin:10px 0" id="valid_lname" name="last_name" placeholder="Last Name" data-content="<div class='validation'>You need to fill in your last name</div>" data-html="true"/>
                 </div>
-                <input type="text" class="form-control" style="margin:10px 0" name="user_name" placeholder="Username" />
-                <input type="password" class="form-control" style="margin:10px 0" name="password" placeholder="Password" />
-                <input type="password" class="form-control" style="margin:10px 0" name="confirm_password" placeholder="Confirmed Password" />
-                <input type="text" class="form-control" style="margin:10px 0" name="email" placeholder="Email" />
+                <input type="text" class="form-control" style="margin:10px 0" id="valid_username" name="user_name" placeholder="Username" data-content="<div class='validation'>You need to fill in with a username</div>" data-html="true"/>
+                <input type="password" class="form-control" style="margin:10px 0" id="valid_pass" name="password" placeholder="Password" data-content="<div class='validation'>You need to fill in with a password</div>" data-html="true"/>
+                <input type="password" class="form-control" style="margin:10px 0" id="valid_cpass" name="confirm_password" placeholder="Confirmed Password" data-content="<div class='validation'>You need to confirm your password</div>" data-html="true"/>
+                <input type="text" class="form-control" style="margin:10px 0" id="valid_email" name="email" placeholder="Email" data-content="<div class='validation'>You need to fill in your email address</div>" data-html="true" />
                 <button type="submit" class="btn btn-primary pull-right" value="submit">Sign Up</button>
             </div>
         </form>
