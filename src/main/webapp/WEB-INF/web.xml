@@ -3,7 +3,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
 
     <welcome-file-list>
-        <welcome-file>/view/index.jsp</welcome-file>
+        <welcome-file>/view/index2.jsp</welcome-file>
     </welcome-file-list>
 
 
@@ -190,7 +190,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>documents.do</servlet-name>
-    <servlet-class>com.peerpen.controller.DocumentController</servlet-class>
+    <servlet-class>com.peerpen.controller.DocumentsController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>documents.do</servlet-name>
@@ -214,6 +214,22 @@
         <url-pattern>/search.do</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>document</servlet-name>
+        <jsp-file>/view/document.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>document</servlet-name>
+        <url-pattern>/document</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>document.do</servlet-name>
+        <servlet-class>com.peerpen.controller.DocumentController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>document.do</servlet-name>
+        <url-pattern>/document.do</url-pattern>
+    </servlet-mapping>
 
 
     <session-config>

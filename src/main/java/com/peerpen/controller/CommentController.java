@@ -51,7 +51,7 @@ public class CommentController extends HttpServlet
 //    request.setAttribute("comments", comments);
 
 //    Experimental:
-    List<Comment> list = getComments();
+    List<Comment> list = document.getComments();
     request.setAttribute("comments", list);
 
 
@@ -59,7 +59,7 @@ public class CommentController extends HttpServlet
 
   }
 
-  private List<Comment> getComments()
+ /* private List<Comment> getComments()
   {
     List<Comment> list = new ArrayList<Comment>();
 
@@ -80,7 +80,7 @@ public class CommentController extends HttpServlet
     list.add(comment3);
     return list;
   }
-
+  */
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
     HttpSession session = request.getSession();
@@ -90,10 +90,14 @@ public class CommentController extends HttpServlet
     comment.setMessage(request.getParameter("comment").toString());
     comment.setName(peer.getFirstName() + " " +peer.getLastName());
 
-    List<Comment> list = getComments();
-    list.add(comment);
+    comment.save();
 
-    request.setAttribute("comments", list);
+
+    //List<Comment> comments = d.getComments();
+    //comments.add(comment);
+
+    //d.update();
+    //request.setAttribute("comments", comments);
     request.getRequestDispatcher("/comment").forward(request, response);
 
   }

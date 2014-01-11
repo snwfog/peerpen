@@ -5,6 +5,7 @@ import com.sunnyd.IModel;
 import com.sunnyd.annotations.*;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Comment extends Base implements IModel {
 
@@ -12,12 +13,25 @@ public class Comment extends Base implements IModel {
 
     @ActiveRecordField
     private String message;
+    @ActiveRecordField
+    private Integer peerId;
+    @ActiveRelationHasOne
+    private Peer peer;
+    @ActiveRecordField
+    private Integer documentId;
+    @ActiveRelationHasOne
+    private Document document;
+    @ActiveRecordField
+    private Integer changesetId;
+    @ActiveRelationHasOne
+    private Changeset changeset;
+
 
     public Comment() {
         super();
     }
 
-    public Comment(HashMap<String, Object> HM) {
+    public Comment(Map<String, Object> HM) {
         super(HM);
     }
 
@@ -41,5 +55,43 @@ public class Comment extends Base implements IModel {
   {
     return name;
   }
-  //testing purposes only
+
+    public Peer getPeer(){
+        initRelation("peer");
+        return peer;
+    }
+
+    public void setPeerId(Integer peerId){
+        this.peerId = peerId;
+    }
+
+    public int getPeerId(){
+        return this.peerId;
+    }
+
+    public Document getDocument(){
+        initRelation("document");
+        return document;
+    }
+
+    public void setDocumentId(Integer documentId){
+        this.documentId = documentId;
+    }
+
+    public int getDocumentId(){
+        return this.documentId;
+    }
+
+    public Changeset getChangeset(){
+        initRelation("changeset");
+        return changeset;
+    }
+
+    public void setChangesetId(Integer changesetId){
+        this.changesetId = changesetId;
+    }
+
+    public int getChangesetId(){
+        return this.changesetId;
+    }
 }
