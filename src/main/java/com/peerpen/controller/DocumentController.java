@@ -1,6 +1,5 @@
 package com.peerpen.controller;
 
-import com.peerpen.model.Changeset;
 import com.peerpen.model.Comment;
 import com.peerpen.model.Document;
 import com.peerpen.model.Peer;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,20 +44,10 @@ public class DocumentController extends HttpServlet
 //    comment.setDocumentId(document.getId());
 //    comment.save();
 
-//    request.setAttribute("document", document);
-//    request.setAttribute("comments", comments);
-
-//    Experimental:
-        //List<Document> documents = pear.getDocuments();
-
-
-        System.out.println("dsfsdfdsfdsfdfd"+document.getId());
-
         List<Comment> list = document.getComments();
+
         request.setAttribute("comments", list);
-
         request.setAttribute("document", document);
-
         request.getRequestDispatcher("/document").forward(request, response);
     }
 
@@ -68,7 +56,6 @@ public class DocumentController extends HttpServlet
     {
         HttpSession session = request.getSession();
         Peer peer = (Peer)session.getAttribute("user");
-        //Document document = (Document)request.getAttribute("document");
 
         int doc_id = Integer.parseInt(request.getParameter("doc_id"));
 
@@ -80,17 +67,11 @@ public class DocumentController extends HttpServlet
         comment.setPeerId(peer.getId());
         comment.setDocumentId(document.getId());
         comment.save();
-        //comment.save();
-
 
         List<Comment> comments = document.getComments();
 
-        comments.add(comment);
-
-        document.update();
         request.setAttribute("comments", comments);
         request.setAttribute("document",document);
-        //request.setAttribute("comments", comments);
         request.getRequestDispatcher("/document").forward(request, response);
     }
 

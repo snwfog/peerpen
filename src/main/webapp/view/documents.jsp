@@ -23,17 +23,6 @@
             </div>
         </div>
         <% } %>
-      <%--<div class="caption">--%>
-        <%--<% for (Document c : (List<Document>) request.getAttribute("documents"))--%>
-        <%--{--%>
-        <%--%>--%>
-        <%--<div class="panel panel-default">--%>
-          <%--<div class="panel-heading"><%= c.getDocName() %>--%>
-        <%--</div>--%>
-
-        <%--<% } %>--%>
-
-      <%--</div>--%>
     </div>
   </div>
 </div>
