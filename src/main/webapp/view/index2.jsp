@@ -2,22 +2,22 @@
 <!-- Le styles -->
 <%--<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>--%>
 <%--<style type="text/css">--%>
-    <%--body {--%>
-        <%--padding-top: 46px;--%>
-        <%--padding-bottom: 40px;--%>
-    <%--}--%>
+<%--body {--%>
+<%--padding-top: 46px;--%>
+<%--padding-bottom: 40px;--%>
+<%--}--%>
 
-    <%--.hero-unit {--%>
-        <%--background: #00001C url(../assets/img/cover4.jpg) no-repeat top left;--%>
-    <%--}--%>
+<%--.hero-unit {--%>
+<%--background: #00001C url(../assets/img/cover4.jpg) no-repeat top left;--%>
+<%--}--%>
 
-    <%--.hero-unit h1 {--%>
-        <%--color: #FFF--%>
-    <%--}--%>
+<%--.hero-unit h1 {--%>
+<%--color: #FFF--%>
+<%--}--%>
 
-    <%--.hero-unit p {--%>
-        <%--color: #F5F5F5--%>
-    <%--}--%>
+<%--.hero-unit p {--%>
+<%--color: #F5F5F5--%>
+<%--}--%>
 <%--</style>--%>
 
 <div class="navbar navbar-fixed-top">
@@ -28,7 +28,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="#">Project name</a>
+            <a class="brand" href="#">PeerPen<a>
 
             <div class="nav-collapse collapse">
                 <ul class="nav">
@@ -48,6 +48,7 @@
                         </ul>
                     </li>
                 </ul>
+
                 <form class="navbar-form pull-right" action="/login.do" method="post">
                     <input class="span2" type="text" placeholder="Username" name="username">
                     <input class="span2" type="password" placeholder="Password" name="password">
