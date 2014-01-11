@@ -1,5 +1,6 @@
 package com.peerpen.controller;
 
+import com.peerpen.model.Changeset;
 import com.peerpen.model.Comment;
 import com.peerpen.model.Document;
 import com.peerpen.model.Peer;
@@ -51,28 +52,35 @@ public class DocumentController extends HttpServlet
         request.getRequestDispatcher("/document").forward(request, response);
     }
 
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        HttpSession session = request.getSession();
-        Peer peer = (Peer)session.getAttribute("user");
+      HttpSession session = request.getSession();
+      Peer peer = (Peer)session.getAttribute("user");
+      Document document = new Document().find(Integer.parseInt(request.getParameter("doc_id")));
 
-        int doc_id = Integer.parseInt(request.getParameter("doc_id"));
-
-        Document document = new Document().find(doc_id);
-
+      if (request.getParameter("method")!= null)
+      {
+        if(request.getParameter("method").contentEquals("DELETE"))
+        {
+         Comment comment =  new Comment().find(Integer.parseInt(request.getParameter("commentId")));
+         comment.destroy();
+        }
+      }
+      else
+      {
         Comment comment = new Comment();
         comment.setMessage(request.getParameter("comment").toString());
         comment.setName(peer.getFirstName() + " " +peer.getLastName());
         comment.setPeerId(peer.getId());
         comment.setDocumentId(document.getId());
         comment.save();
+      }
 
-        List<Comment> comments = document.getComments();
+      List<Comment> comments = document.getComments();
 
-        request.setAttribute("comments", comments);
-        request.setAttribute("document",document);
-        request.getRequestDispatcher("/document").forward(request, response);
+      request.setAttribute("comments", comments);
+      request.setAttribute("document",document);
+      request.getRequestDispatcher("/document").forward(request, response);
     }
 
 }
