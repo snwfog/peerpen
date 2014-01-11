@@ -8,4 +8,4 @@ target/
 classes/
 .DS_Store
 out
-peerpen.iml
+*.iml
