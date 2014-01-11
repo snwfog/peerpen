@@ -26,24 +26,9 @@ public class DocumentController extends HttpServlet
     {
         HttpSession session = request.getSession();
         Peer pear = (Peer)session.getAttribute("user");
+        Document document = new Document().find(Integer.parseInt(request.getParameter("doc_id")));
 
-        int doc_id = Integer.parseInt(request.getParameter("doc_id"));
-
-        Document document = new Document().find(doc_id);
-        //Document document = new Document();//.find(request.getAttribute("document"));
-        //List<Comment> comments = document.getComments();
-        /*List<Changeset> sc = document.getChangesets();
-        for (Changeset changeset : sc){
-            List<Comment> comment =  changeset.getComments();
-        }
-        */
-//    List<Comment> comments = document.getComments();
-
-//    Need to implement setters and getters for docId, peerId etc
-//    Comment comment = new Comment();
-//    comment.setMessage("This resume is bad, fix it!");
-//    comment.setDocumentId(document.getId());
-//    comment.save();
+//        List<Object> o = method to get changeset AND comments already sorted out by points
 
         List<Comment> list = document.getComments();
 
