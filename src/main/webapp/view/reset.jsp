@@ -48,10 +48,7 @@
     <form action="" style="max-width:330px; margin:0 auto" >
       <h2>Changing your password is simple</h2>
       Please enter your email address to get instructions.
-      <div class="input-group">
-      <span class="input-group-addon">@</span>
       <input type="text" class="form-control" id="email" placeholder="Email address">
-      </div>
       <br />
       <input type="button" id="submit" value="Submit" class="btn btn-lg btn-primary btn-block" />
         <br />
