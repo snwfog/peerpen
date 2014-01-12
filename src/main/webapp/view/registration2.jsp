@@ -17,14 +17,14 @@
 
 </div>
 <div class="register">
-    <form class="form-inline" action="/registration2.do" method="post">
+    <form class="form-inline" name="register" onsubmit="return validateProfile()" action="/registration2.do" method="post">
     <h1>Complete your profile <button class="pull-right btn btn-primary" type="submit">Next (1/2)</button></h1>
     <div class="row">
             <div class="col-md-5">
                 <textarea class="form-control" style="resize:none;" name="description" rows="9" placeholder="Present your experience, skills and expertise"></textarea>
             </div>
             <div style="max-width:330px; margin-left:50%">
-                <input type="text" class="form-control" name="dob" style="margin:10px 0" placeholder="Date of Birth">
+                <input type="text" class="form-control" name="dob" style="margin:10px 0" id="valid_dob" placeholder="Date of Birth" data-content="<div class='validation'>Valid date required in the form of yyyy-MM-dd (2014-04-18)</div>" data-html="true">
                 <div class="radio">
                     <label>
                         <input style="margin:10px 10px" type="radio" name="gender" id="optionsRadios1" value="Male" checked>
