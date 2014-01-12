@@ -1,5 +1,9 @@
 package com.peerpen.model;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,7 +15,13 @@ import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.annotations.ActiveRelationHasOne;
 import com.sunnyd.annotations.ActiveRecordField;
+import com.sunnyd.database.Connector;
 import com.sunnyd.database.Manager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static com.sunnyd.database.Manager.convertJavaToSql;
+import static com.sunnyd.database.Manager.convertSQLToJava;
 
 public class Document extends Base implements IModel {
     public static final String tableName = "documents";
@@ -140,5 +150,65 @@ public class Document extends Base implements IModel {
         initRelation("comments");
         return this.comments;
     }
+
+    private static Connection connection;
+    static final Logger logger = LoggerFactory.getLogger( Manager.class );
+    static {
+        try {
+            connection = Connector.getConnection();
+        } catch ( SQLException e ) {
+            logger.error( "Failed statically initiate database connection." );
+        }
+
+    }
+
+    public List<Object> getCommentsByOrder()
+       {
+        Connection connection = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        List<Object> objects = new ArrayList<Object>();
+        try {
+            connection = Connector.getConnection();
+            stmt = connection.createStatement();
+            //rs = stmt.executeQuery( "SELECT * FROM " + tableName + " WHERE ID = " + id );
+            rs = stmt.executeQuery( "SELECT id FROM `comments` ORDER BY last_modified_date DESC");
+
+            //List<Object> objects = new ArrayList<Object>();
+
+            while (rs.next()) {
+//                String coffeeName = rs.getString("COF_NAME");
+//                int supplierID = rs.getInt("SUP_ID");
+//                float price = rs.getFloat("PRICE");
+//                int sales = rs.getInt("SALES");
+//                int total = rs.getInt("TOTAL");
+//                System.out.println(coffeeName + "\t" + supplierID +
+//                        "\t" + price + "\t" + sales +
+//                        "\t" + total);
+                Map<String, Object> row = new HashMap<String, Object>();
+                row = Manager.convertSQLToJava( rs );
+                objects.add(row);
+            }
+
+
+        } catch (SQLException e ) {
+            e.printStackTrace();
+        } finally {
+            closeConnection( connection );  }
+
+    return objects;
+    }
+
+    private static void closeConnection( Connection connection ) {
+        try {
+            if ( !connection.isClosed() ) {
+                connection.close();
+            }
+        } catch ( SQLException e ) {
+
+        }
+
+    }
+
 
 }
