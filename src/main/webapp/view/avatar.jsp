@@ -77,7 +77,12 @@
   </div>
 
   <h3>Upload a picture through browsing...</h3>
-  <input type="file" id="uploader">
+
+  <form action="upload.do" method="post" enctype="multipart/form-data">
+    <input id="uploader" type="file" name="file" size="50" />
+    <br />
+    <input type="submit" value="Upload File" />
+  </form>
 
 </div>
 
