@@ -62,8 +62,6 @@ public class AvatarController extends HttpServlet {
         session.setAttribute("user", peer);
         session.setAttribute("birth_date", dateOfBirth);
         response.sendRedirect("/profile");
-
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
