@@ -40,11 +40,7 @@ public class DocumentController extends HttpServlet
         System.out.println("111111111111111111111"+objects);
         for(Comment l:objects)
         {
-            System.out.println("222222222222"+l);
             System.out.println("22222222222222"+l.getClass());
-            System.out.println("22222222222222"+l.getClass().getDeclaredClasses());
-            System.out.println("22222222222222"+l.getClass().getAnnotations());
-            System.out.println("22222222222222"+l.getClass().getDeclaringClass());
         }
         request.setAttribute("comments", list);
         request.setAttribute("document", document);

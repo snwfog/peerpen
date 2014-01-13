@@ -197,7 +197,7 @@ public class Document extends Base implements IModel {
             e.printStackTrace();
         } finally {
             closeConnection( connection );  }
-
+           System.out.println("bbbbbbbbbbbbbbb"+comments);
     return comments;
     }
 
