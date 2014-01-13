@@ -1,3 +1,4 @@
+<%@ page import="java.util.ArrayList" %>
 <%@ include file="/view/includes/static/header.jsp" %>
 
 <form action="search.do" method="get" align="center">
@@ -11,6 +12,12 @@
     <input type="radio" name="area" value="tags" />Tags
 </form>
 
+<!-- Handling search result -->
+${searchResults}
+
+<%--<c:forEach items="${searchResults}" var="searchResult" begin="0" end="4">--%>
+<%--<p>${searchResult}</p>--%>
+<%--</c:forEach>--%>
 
 
 <%@ include file="/view/includes/static/footer.jsp" %>
