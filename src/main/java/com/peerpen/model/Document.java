@@ -162,12 +162,12 @@ public class Document extends Base implements IModel {
 
     }
 
-    public List<Object> getCommentsByOrder()
+    public List<Comment> getDocumentCommentsByOrder()
        {
         Connection connection = null;
         Statement stmt = null;
         ResultSet rs = null;
-        List<Object> objects = new ArrayList<Object>();
+        List<Comment> comments = new ArrayList<Comment>();
         try {
             connection = Connector.getConnection();
             stmt = connection.createStatement();
@@ -187,7 +187,9 @@ public class Document extends Base implements IModel {
 //                        "\t" + total);
                 Map<String, Object> row = new HashMap<String, Object>();
                 row = Manager.convertSQLToJava( rs );
-                objects.add(row);
+                //comments.add(row);
+                Comment c = new Comment(row);
+                comments.add(c);
             }
 
 
@@ -196,7 +198,7 @@ public class Document extends Base implements IModel {
         } finally {
             closeConnection( connection );  }
 
-    return objects;
+    return comments;
     }
 
     private static void closeConnection( Connection connection ) {
