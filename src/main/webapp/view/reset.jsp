@@ -18,9 +18,7 @@
     function submit(email)
     {
       var e = email;
-      im = $('<img>');
-      im.attr('src', '/assets/images/ajax-loader.gif');
-      $('#message').html(im);
+      $('#message').html('<i class="fa fa-spinner fa-spin"></i>');
       $.post('reset.do', {
         email : e
       }, function(responseText) {

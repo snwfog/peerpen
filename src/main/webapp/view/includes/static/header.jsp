@@ -18,7 +18,10 @@
 
     <%--<link rel="stylesheet" href="/assets/css/lib/bootstrap.min.css" type="text/css">--%>
     <%--<link rel="stylesheet" href="/assets/css/lib/flat-ui.css" type="text/css">--%>
+
+    <%--temporary fix--%>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <!--<script src="../assets/js/html5shiv.js"></script>-->
