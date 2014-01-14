@@ -15,9 +15,9 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <form method="GET" action="/document.do">
-                    <input type="hidden" name="doc_id" value="<%= d.getId().toString()%>"/>
+                    <input type="hidden" name="docId" value="<%= d.getId().toString()%>"/>
 
-                    <input type="text" name="doc_name" value="<%= d.getDocName() %>" readonly/>
+                    <input type="text" name="docName" value="<%= d.getDocName() %>" readonly/>
                     <button type="submit" class="btn btn-success">Check Document</button>
                 </form>
             </div>

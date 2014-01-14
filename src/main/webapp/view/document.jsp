@@ -35,7 +35,7 @@
           <h3 class="card-heading simple"><%= peer.getFirstName() %> <%= peer.getLastName() %></h3>
           <div class="card-body">   <p>
             <form method="POST" action="/document.do">
-              <input type="hidden" name="doc_id" value="<%= document.getId().toString()%>"/>
+              <input type="hidden" name="docId" value="<%= document.getId().toString()%>"/>
               <textarea name="comment" rows="4" cols="45"  resize="none"></textarea>
               <br /><br />
               <button type="submit" class="btn btn-success">Post</button>
@@ -76,7 +76,7 @@
     <form id="deleteComment" method="POST" action="/document.do">
       <input type="hidden" name="_method" value="_delete"/>
       <input type="hidden" name="commentId" id="commentId" value=""/>
-      <input type="hidden" name="doc_id" value="<%= document.getId().toString()%>"/>
+      <input type="hidden" name="docId" value="<%= document.getId().toString()%>"/>
       <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
       <button type="submit" class="btn btn-primary">Delete</button>
     </form>

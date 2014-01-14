@@ -27,7 +27,7 @@ public class DocumentController extends HttpServlet
     {
         HttpSession session = request.getSession();
         Peer pear = (Peer)session.getAttribute("user");
-        Document document = new Document().find(Integer.parseInt(request.getParameter("doc_id")));
+        Document document = new Document().find(Integer.parseInt(request.getParameter("docId")));
 
         List<Comment> comments = document.getDocumentCommentsByOrder();
 
@@ -49,7 +49,7 @@ public class DocumentController extends HttpServlet
     {
       HttpSession session = request.getSession();
       Peer peer = (Peer)session.getAttribute("user");
-      Document document = new Document().find(Integer.parseInt(request.getParameter("doc_id")));
+      Document document = new Document().find(Integer.parseInt(request.getParameter("docId")));
 
       Comment comment = new Comment();
       comment.setMessage(request.getParameter("comment").toString());
@@ -73,7 +73,7 @@ public class DocumentController extends HttpServlet
   {
     HttpSession session = request.getSession();
     Peer peer = (Peer)session.getAttribute("user");
-    Document document = new Document().find(Integer.parseInt(request.getParameter("doc_id")));
+    Document document = new Document().find(Integer.parseInt(request.getParameter("docId")));
 
     Comment comment =  new Comment().find(Integer.parseInt(request.getParameter("commentId")));
     comment.destroy();
