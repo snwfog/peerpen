@@ -29,18 +29,20 @@ public class SearchController extends HttpServlet {
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        String query = request.getParameter( "query" );
-        String area = request.getParameter( "area" ); // all, document, peers, groups..
+        String query = " "; // prevent wild search
+        String area = "";
+
+        if (request.getParameter( "area" )!= null){
+            area = request.getParameter( "area" );
+        }
+        if (request.getParameter( "query" )!= null && !request.getParameter( "query" ).isEmpty()){
+            query = request.getParameter( "query" );
+        }
+
         String origin = request.getRequestURI();
         HttpSession session = request.getSession();
 
-        if(area.equals( "all" )){
-            List<Object> everything = new ArrayList<Object>(  );
-            everything.addAll( new Document().getMatchedDocuments( query ));
-            everything.addAll( new Peer().getMatchedPeers( query ));
-            everything.addAll( new Group().getMatchedGroups( query ));
-            session.setAttribute( "searchResults", everything );
-        }else if(area.equals( "documents" )){
+        if(area.equals( "documents" )){
             session.setAttribute("searchResults", new Document().getMatchedDocuments( query ));
         }else if(area.equals( "peers" )){
             session.setAttribute("searchResults", new Peer().getMatchedPeers( query ));
@@ -48,7 +50,14 @@ public class SearchController extends HttpServlet {
             session.setAttribute("searchResults", new Group().getMatchedGroups( query ));
         }else if(area.equals( "tags" )){
             //session.setAttribute("searchResults", getMatchedTags( query ));
+        }else{ // all or not set
+            List<Object> everything = new ArrayList<Object>(  );
+            everything.addAll( new Document().getMatchedDocuments( query ));
+            everything.addAll( new Peer().getMatchedPeers( query ));
+            everything.addAll( new Group().getMatchedGroups( query ));
+            session.setAttribute( "searchResults", everything );
         }
+
         response.sendRedirect( "/search" );
     }
 }

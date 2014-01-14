@@ -41,9 +41,10 @@
         </ul>
       </li>
     </ul>
-    <form class="navbar-form navbar-right" role="search">
+    <form class="navbar-form navbar-right" role="search" action="search.do" method="get">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search">
+        <input type="text" name="query" class="form-control" placeholder="Search">
+        <input type="submit" name="submit" value="OK" />
       </div>
       <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
       &nbsp &nbsp<a href="/logout.do">Logout</a>
