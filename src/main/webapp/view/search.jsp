@@ -41,7 +41,7 @@
                 Group group = (Group) resultItem;
                 %>
                 [Group] <a href="/group/<%= group.getId() %>"><%= group.getGroupName() %></a>
-                - <i><%= group.getDescription() %>"></i><br />
+                - <i><%= group.getDescription() %></i><br />
                 <%
             }
         }
