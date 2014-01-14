@@ -20,7 +20,7 @@ public class Rank extends Base implements IModel {
         super();
     }
 
-    public Rank(HashMap<String, Object> HM) {
+    public Rank(Map<String, Object> HM) {
         super(HM);
     }
 

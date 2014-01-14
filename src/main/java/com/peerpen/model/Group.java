@@ -19,7 +19,7 @@ public class Group extends Base implements IModel {
         super();
     }
 
-    public Group(HashMap<String, Object> HM) {
+    public Group(Map<String, Object> HM) {
         super(HM);
     }
 

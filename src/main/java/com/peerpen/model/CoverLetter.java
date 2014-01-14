@@ -13,7 +13,7 @@ public class CoverLetter extends Document {
         super();
     }
 
-    public CoverLetter(HashMap<String, Object> HM) {
+    public CoverLetter(Map<String, Object> HM) {
         super(HM);
     }
 

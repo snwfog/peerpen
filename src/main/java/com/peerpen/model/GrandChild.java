@@ -16,7 +16,7 @@ public class GrandChild extends Child{
         super();
     }
     
-    public GrandChild(HashMap<String, Object> HM) {
+    public GrandChild(Map<String, Object> HM) {
         super(HM);
     }
     

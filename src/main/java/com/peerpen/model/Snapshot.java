@@ -13,7 +13,7 @@ public class Snapshot extends Base implements IModel {
         super();
     }
 
-    public Snapshot(HashMap<String, Object> HM) {
+    public Snapshot(Map<String, Object> HM) {
         super(HM);
     }
 }

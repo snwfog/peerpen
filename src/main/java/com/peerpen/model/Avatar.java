@@ -7,6 +7,7 @@ import com.sunnyd.annotations.ActiveRelationHasOne;
 
 import java.sql.Blob;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -36,7 +37,7 @@ public class Avatar extends Base implements IModel {
         super();
     }
 
-    public Avatar(HashMap<String, Object> HM) {
+    public Avatar(Map<String, Object> HM) {
         super(HM);
     }
 
