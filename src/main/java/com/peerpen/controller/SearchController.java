@@ -1,15 +1,13 @@
 package com.peerpen.controller;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import com.sunnyd.models.*;
-import com.sunnyd.database.Manager;
+import com.peerpen.model.Document;
+import com.peerpen.model.Group;
+import com.peerpen.model.Peer;
 
-import javax.servlet.RequestDispatcher;
+import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,35 +30,34 @@ public class SearchController extends HttpServlet {
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         String query = request.getParameter( "query" );
         String area = request.getParameter( "area" ); // area of search
+
         String origin = request.getRequestURI();
 
-        Map<String, Object> conditions = new HashMap<String, Object>(  );
-        ArrayList results = new ArrayList(  );
-
+        HttpSession session = request.getSession();
+        session.setAttribute( "searchArea", area );
 
         //System.out.println(query + " " + origin + " " + area);
 
-        //
+
         if(area.equals( "all" )){
             //
         }else if(area.equals( "documents" )){
-            conditions.put("docName", query);
-            results = Manager.findAll( "documents", conditions );
+            String sql = "SELECT * FROM `documents` WHERE `doc_name` LIKE '%" + query + "%'";
+            List<Document> documents = new Document().queryAll(sql);
+            session.setAttribute("searchResults", documents);
         }else if(area.equals( "peers" )){
-            conditions.put("userName", query);
-            results = Manager.findAll( "peers", conditions );
+            String sql = "SELECT * FROM `peers` WHERE `user_name` LIKE '%" + query + "%'";
+            List<Peer> peers = new Peer().queryAll(sql);
+            session.setAttribute("searchResults", peers);
         }else if(area.equals( "groups" )){
-            conditions.put("groupName", query);
-            results = Manager.findAll( "groups", conditions );
+            String sql = "SELECT * FROM `groups` WHERE `group_name` LIKE '%" + query + "%'";
+            List<Group> groups = new Group().queryAll(sql);
+            session.setAttribute("searchResults", groups);
         }else if(area.equals( "tags" )){
-            //
+            String sql = "SELECT * FROM `tag_descriptors` WHERE `tag_name` LIKE '%" + query + "%'";
+            //List<Tag> tags = new Tag().queryAll(sql);
+            //session.setAttribute("searchResults", tags);
         }
-
-        //System.out.println("result:" + results.toString());
-
-        // Forward results
-        HttpSession session = request.getSession();
-        session.setAttribute("searchResults", results);
         response.sendRedirect( "/search" );
     }
 }
