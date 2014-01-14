@@ -30,55 +30,25 @@ public class SearchController extends HttpServlet {
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         String query = request.getParameter( "query" );
-        String area = request.getParameter( "area" ); // area of search
-
+        String area = request.getParameter( "area" ); // all, document, peers, groups..
         String origin = request.getRequestURI();
-
         HttpSession session = request.getSession();
-        session.setAttribute( "searchArea", area );
-
-        //System.out.println(query + " " + origin + " " + area);
-
 
         if(area.equals( "all" )){
             List<Object> everything = new ArrayList<Object>(  );
-            everything.addAll( getMatchedDocuments( query ));
-            everything.addAll( getMatchedPeers( query ));
-            //everything.addAll( getMatchedGroups( query ));
+            everything.addAll( new Document().getMatchedDocuments( query ));
+            everything.addAll( new Peer().getMatchedPeers( query ));
+            everything.addAll( new Group().getMatchedGroups( query ));
             session.setAttribute( "searchResults", everything );
         }else if(area.equals( "documents" )){
-            session.setAttribute("searchResults", getMatchedDocuments( query ));
+            session.setAttribute("searchResults", new Document().getMatchedDocuments( query ));
         }else if(area.equals( "peers" )){
-            session.setAttribute("searchResults", getMatchedPeers( query ));
+            session.setAttribute("searchResults", new Peer().getMatchedPeers( query ));
         }else if(area.equals( "groups" )){
-            //session.setAttribute("searchResults", getMatchedGroups( query ));
+            session.setAttribute("searchResults", new Group().getMatchedGroups( query ));
         }else if(area.equals( "tags" )){
             //session.setAttribute("searchResults", getMatchedTags( query ));
         }
         response.sendRedirect( "/search" );
     }
-
-    private List getMatchedDocuments(String keyword){
-        String sql = "SELECT * FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%'";
-        List<Document> documents = new Document().queryAll(sql);
-        return documents;
-    }
-
-    private List getMatchedPeers(String keyword){
-        String sql = "SELECT * FROM `peers` WHERE `user_name` LIKE '%" + keyword + "%'";
-        List<Peer> peers = new Peer().queryAll(sql);
-        return peers;
-    }
-
-    private List getMatchedGroups(String keyword){
-        String sql = "SELECT * FROM `groups` WHERE `group_name` LIKE '%" + keyword + "%'";
-        List<Group> groups = new Group().queryAll(sql);
-        return groups;
-    }
-
-    //private List getMatchedTags(String keyword){
-    //    String sql = "SELECT * FROM `tag_descriptors` WHERE `tag_name` LIKE '%" + keyword + "%'";
-    //    List<Tag> tags = new Tag().queryAll(sql);
-    //    return tags;
-    //}
 }

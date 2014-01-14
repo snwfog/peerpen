@@ -40,8 +40,8 @@
             }else if(itemClass.endsWith( "Group" )){
                 Group group = (Group) resultItem;
                 %>
-                [Group] <a href="/group/<%= group.getId() %>" alt="<%= group.getDescription() %>">
-                <%= group.getGroupName() %></a><br />
+                [Group] <a href="/group/<%= group.getId() %>"><%= group.getGroupName() %></a>
+                - <i><%= group.getDescription() %>"></i><br />
                 <%
             }
         }

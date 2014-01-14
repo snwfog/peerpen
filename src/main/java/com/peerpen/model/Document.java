@@ -172,6 +172,13 @@ public class Document extends Base implements IModel {
     return comments;
     }
 
+    // method used by search
+    public List<Document> getMatchedDocuments(String keyword){
+        String sql = "SELECT * FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%'";
+        List<Document> documents = new Document().queryAll(sql);
+        return documents;
+    }
+
     private static void closeConnection( Connection connection ) {
         try {
             if ( !connection.isClosed() ) {
