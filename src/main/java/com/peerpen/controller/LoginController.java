@@ -37,15 +37,19 @@ public class LoginController extends HttpServlet {
 
             if (matches.size() == 1){ // means found exactly 1 user with that username and password
                 Peer peer = matches.get(0);
-                Date dob = peer.getDateOfBirth();
+                Date dob;
+                String dateOfBirth = "";
+                if (peer.getDateOfBirth() != null)
+                {
+                    dob = peer.getDateOfBirth();
 
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                String dateOfBirth = formatter.format(dob);
-
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    dateOfBirth  = formatter.format(dob);
+                }
                 // store the peer obj in session
                 HttpSession session = request.getSession();
-                session.setAttribute("user", peer);
                 session.setAttribute("birth_date", dateOfBirth);
+                session.setAttribute("user", peer);
                 session.setMaxInactiveInterval(259200); // 3 days in secs
                 redirect = "/profile";
             }

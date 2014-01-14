@@ -111,7 +111,7 @@
                 <td><h6>Date of Birth &nbsp</h6></td>
                 <td><input type="text" class="form-control peerPersonal"
                            name="dob"
-                           value="<%= session.getAttribute("birth_date")%>" readonly>
+                           value="<%= session.getAttribute("birth_date") == null ? "" : session.getAttribute("birth_date").toString()%>" readonly>
                 </td>
               </tr>
               <input type="hidden" class="form-control peerID" name="id"
@@ -124,7 +124,7 @@
                 <td><h6>Gender</h6></td>
                 <td><input type="text" class="form-control peerPersonal"
                            name="gender"
-                           value="<%=peer.getGender().toString()%>" readonly>
+                           value="<%= peer.getGender() == null ? "" : peer.getGender().toString() %>" readonly>
                 </td>
               </tr>
               <tr>
@@ -145,7 +145,7 @@
                 <td><h6>Years of Experience &nbsp</h6></td>
                 <td><input type="text" class="form-control peerPersonal"
                            name="yoe"
-                           value="<%=peer.getExperience().toString()%>" readonly>
+                           value="<%= peer.getExperience() == 0 ? "" : peer.getExperience().toString() %>" readonly>
                 </td>
               </tr>
               <input type="hidden" class="form-control peerID" name="id"
@@ -181,7 +181,7 @@
             <input type="hidden" class="form-control peerDoB" name="dob" value="<%=session.getAttribute("birth_date")%>">
             <input type="hidden" class="form-control peerID" name="id" value="<%= peer.getId().toString()%>">
             <input type="hidden" class="form-control peerPersonal" name="gender" value="<%=peer.getGender().toString()%>" >
-            <input type="hidden" class="form-control peerPersonal" name="           country" value="<%= peer.getCountry().toString()%>" >
+            <input type="hidden" class="form-control peerPersonal" name="country" value="<%= peer.getCountry().toString()%>" >
             <input type="hidden" class="form-control peerPersonal" name="industry" value="<%=peer.getIndustry().toString()%>">
             <input type="hidden" class="form-control peerPersonal" name="yoe" value="<%=peer.getExperience().toString()%>">
 
