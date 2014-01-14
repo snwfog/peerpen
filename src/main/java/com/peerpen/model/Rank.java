@@ -5,6 +5,7 @@ import com.sunnyd.IModel;
 import com.sunnyd.annotations.*;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Rank extends Base implements IModel {
 
@@ -20,7 +21,7 @@ public class Rank extends Base implements IModel {
         super();
     }
 
-    public Rank(HashMap<String, Object> HM) {
+    public Rank(Map<String, Object> HM) {
         super(HM);
     }
 

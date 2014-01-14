@@ -4,6 +4,7 @@ import com.sunnyd.Base;
 import com.sunnyd.IModel;
 import com.sunnyd.annotations.*;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Group extends Base implements IModel {
 
@@ -19,7 +20,7 @@ public class Group extends Base implements IModel {
         super();
     }
 
-    public Group(HashMap<String, Object> HM) {
+    public Group(Map<String, Object> HM) {
         super(HM);
     }
 

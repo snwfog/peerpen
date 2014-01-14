@@ -4,6 +4,7 @@ import com.sunnyd.Base;
 import com.sunnyd.IModel;
 import com.sunnyd.annotations.*;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Snapshot extends Base implements IModel {
 
@@ -13,7 +14,7 @@ public class Snapshot extends Base implements IModel {
         super();
     }
 
-    public Snapshot(HashMap<String, Object> HM) {
+    public Snapshot(Map<String, Object> HM) {
         super(HM);
     }
 }

@@ -7,6 +7,7 @@ import com.sunnyd.database.Manager;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Changeset extends Base implements IModel {
     public static final String tableName = "changesets";
@@ -41,7 +42,7 @@ public class Changeset extends Base implements IModel {
         super();
     }
 
-    public Changeset(HashMap<String, Object> HM) {
+    public Changeset(Map<String, Object> HM) {
         super(HM);
     }
 

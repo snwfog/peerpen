@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,11 +29,9 @@ public class DocumentController extends HttpServlet
         Peer pear = (Peer)session.getAttribute("user");
         Document document = new Document().find(Integer.parseInt(request.getParameter("doc_id")));
 
-//        List<Object> o = method to get changeset AND comments already sorted out by points
+        List<Comment> comments = document.getDocumentCommentsByOrder();
 
-        List<Comment> list = document.getComments();
-
-        request.setAttribute("comments", list);
+        request.setAttribute("comments", comments);
         request.setAttribute("document", document);
         request.getRequestDispatcher("/document").forward(request, response);
     }
@@ -64,7 +63,7 @@ public class DocumentController extends HttpServlet
       List<Comment> comments = document.getComments();
 
       request.setAttribute("comments", comments);
-      request.setAttribute("document",document);
+      request.setAttribute("document", document);
       request.getRequestDispatcher("/document").forward(request, response);
     }
 

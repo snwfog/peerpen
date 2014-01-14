@@ -1,5 +1,9 @@
 package com.peerpen.model;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,7 +15,13 @@ import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.annotations.ActiveRelationHasOne;
 import com.sunnyd.annotations.ActiveRecordField;
+import com.sunnyd.database.Connector;
 import com.sunnyd.database.Manager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static com.sunnyd.database.Manager.convertJavaToSql;
+import static com.sunnyd.database.Manager.convertSQLToJava;
 
 public class Document extends Base implements IModel {
     public static final String tableName = "documents";
@@ -140,5 +150,38 @@ public class Document extends Base implements IModel {
         initRelation("comments");
         return this.comments;
     }
+
+    private static Connection connection;
+    static final Logger logger = LoggerFactory.getLogger( Manager.class );
+    static {
+        try {
+            connection = Connector.getConnection();
+        } catch ( SQLException e ) {
+            logger.error( "Failed statically initiate database connection." );
+        }
+
+    }
+
+    public List<Comment> getDocumentCommentsByOrder()
+       {
+        Connection connection = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        List<Comment> comments = new Comment().queryAll("SELECT * FROM `comments` ORDER BY last_modified_date DESC");
+
+    return comments;
+    }
+
+    private static void closeConnection( Connection connection ) {
+        try {
+            if ( !connection.isClosed() ) {
+                connection.close();
+            }
+        } catch ( SQLException e ) {
+
+        }
+
+    }
+
 
 }

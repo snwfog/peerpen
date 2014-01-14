@@ -215,6 +215,24 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>tag</servlet-name>
+        <jsp-file>/view/tag.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>tag</servlet-name>
+        <url-pattern>/tag</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>tag.do</servlet-name>
+        <servlet-class>com.peerpen.controller.TagController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>tag.do</servlet-name>
+        <url-pattern>/tag.do</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
         <servlet-name>document</servlet-name>
         <jsp-file>/view/document.jsp</jsp-file>
     </servlet>
@@ -230,10 +248,35 @@
         <servlet-name>document.do</servlet-name>
         <url-pattern>/document.do</url-pattern>
     </servlet-mapping>
-
+  <servlet>
+    <servlet-name>upload.do</servlet-name>
+    <servlet-class>com.peerpen.controller.UploadController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>upload.do</servlet-name>
+    <url-pattern>/upload.do</url-pattern>
+  </servlet-mapping>
 
     <session-config>
         <session-timeout>72</session-timeout>
     </session-config>
+
+  <context-param>
+    <description>Location to store uploaded file</description>
+    <param-name>file-upload-mac</param-name>
+    <param-value>
+      <!--Change this to whoever is responsible for it-->
+      /Users/bobbyyit/Desktop/
+    </param-value>
+  </context-param>
+  <context-param>
+    <description>Location to store uploaded file</description>
+    <param-name>file-upload-win</param-name>
+    <param-value>
+      <!--Change this to whoever is responsible for it-->
+      <!--not tested yet-->
+      c:\PeerPen\temp\
+    </param-value>
+  </context-param>
 
 </web-app>
