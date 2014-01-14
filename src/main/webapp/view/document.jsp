@@ -2,7 +2,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="com.peerpen.model.Document" %>
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <%@ include file="/view/includes/static/header.jsp" %>
 
 <script>
@@ -65,7 +64,7 @@
 </div>
 <div class="modal hide" id="deleteDialog">
   <div class="modal-header">
-    <button class="close" data-dismiss="modal">×</button>
+    <button class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
     <h3>Confirm delete</h3>
   </div>
   <div class="modal-body">
