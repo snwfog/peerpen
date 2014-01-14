@@ -1,6 +1,7 @@
 package com.peerpen.model;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import com.sunnyd.annotations.ActiveRecordInheritFrom;
 import com.sunnyd.annotations.ActiveRecordField;

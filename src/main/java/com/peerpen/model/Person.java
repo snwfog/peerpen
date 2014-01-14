@@ -5,6 +5,7 @@ import com.sunnyd.IModel;
 import com.sunnyd.annotations.*;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Person extends Base implements IModel {
     public static final String tableName = "persons";

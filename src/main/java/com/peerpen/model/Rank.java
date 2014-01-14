@@ -5,6 +5,7 @@ import com.sunnyd.IModel;
 import com.sunnyd.annotations.*;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Rank extends Base implements IModel {
 
