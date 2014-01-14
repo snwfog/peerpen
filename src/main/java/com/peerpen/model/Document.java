@@ -167,37 +167,8 @@ public class Document extends Base implements IModel {
         Connection connection = null;
         Statement stmt = null;
         ResultSet rs = null;
-        List<Comment> comments = new ArrayList<Comment>();
-        try {
-            connection = Connector.getConnection();
-            stmt = connection.createStatement();
-            //rs = stmt.executeQuery( "SELECT * FROM " + tableName + " WHERE ID = " + id );
-            rs = stmt.executeQuery( "SELECT id FROM `comments` ORDER BY last_modified_date DESC");
+        List<Comment> comments = new Comment().queryAll("SELECT * FROM `comments` ORDER BY last_modified_date DESC");
 
-            //List<Object> objects = new ArrayList<Object>();
-
-            while (rs.next()) {
-//                String coffeeName = rs.getString("COF_NAME");
-//                int supplierID = rs.getInt("SUP_ID");
-//                float price = rs.getFloat("PRICE");
-//                int sales = rs.getInt("SALES");
-//                int total = rs.getInt("TOTAL");
-//                System.out.println(coffeeName + "\t" + supplierID +
-//                        "\t" + price + "\t" + sales +
-//                        "\t" + total);
-                Map<String, Object> row = new HashMap<String, Object>();
-                row = Manager.convertSQLToJava( rs );
-                //comments.add(row);
-                Comment c = new Comment(row);
-                comments.add(c);
-            }
-
-
-        } catch (SQLException e ) {
-            e.printStackTrace();
-        } finally {
-            closeConnection( connection );  }
-           System.out.println("bbbbbbbbbbbbbbb"+comments);
     return comments;
     }
 

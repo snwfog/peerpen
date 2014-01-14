@@ -29,20 +29,9 @@ public class DocumentController extends HttpServlet
         Peer pear = (Peer)session.getAttribute("user");
         Document document = new Document().find(Integer.parseInt(request.getParameter("doc_id")));
 
+        List<Comment> comments = document.getDocumentCommentsByOrder();
 
-//        List<Object> o = method to get changeset AND comments already sorted out by points
-
-        List<Comment> list = document.getComments();
-        System.out.println("111111111111111111111"+list);
-
-        List<Comment> objects = document.getDocumentCommentsByOrder();
-
-        System.out.println("111111111111111111111"+objects);
-        for(Comment l:objects)
-        {
-            System.out.println("22222222222222"+l.getClass());
-        }
-        request.setAttribute("comments", list);
+        request.setAttribute("comments", comments);
         request.setAttribute("document", document);
         request.getRequestDispatcher("/document").forward(request, response);
     }
