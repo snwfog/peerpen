@@ -53,8 +53,10 @@
               </div>
             </p>
             <p>
-              <a data-toggle="modal" data-id="<%= c.getId()%>" class="confirmDeleteCommentDialog"
+              <% if(peer.getId()==document.getPeerId() || peer.getId()==c.getPeerId()){%>
+                <a data-toggle="modal" data-id="<%= c.getId()%>" class="confirmDeleteCommentDialog"
                  href="#deleteDialog">delete</a>
+              <% } %>
             </p>
           </div>
         <% } %>
