@@ -60,7 +60,8 @@ public class DocumentController extends HttpServlet
         comment.save();
       }
 
-      List<Comment> comments = document.getComments();
+      //List<Comment> comments = document.getComments();
+        List<Comment> comments = document.getDocumentCommentsByOrder();
 
       request.setAttribute("comments", comments);
       request.setAttribute("document", document);
