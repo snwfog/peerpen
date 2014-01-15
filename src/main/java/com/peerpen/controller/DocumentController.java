@@ -31,6 +31,11 @@ public class DocumentController extends HttpServlet
 
         List<Comment> comments = document.getDocumentCommentsByOrder();
 
+//      BUG FOUND
+      System.out.println("# of Comments using getComments:  "+document.getComments().size());
+      System.out.println("# of Comments using getDocumentCommentsByOrder:  "+document.getDocumentCommentsByOrder().size());
+//      getDocumentCommentsByOrder is getting ALL comments from the db
+
         request.setAttribute("comments", comments);
         request.setAttribute("document", document);
         request.getRequestDispatcher("/document").forward(request, response);
