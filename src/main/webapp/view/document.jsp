@@ -135,4 +135,4 @@
   </div>
 </div>
 
-<script type="text/javascript" src="/assets/js/lib/bootstrap.min.js"></script>
+<%@ include file="/view/includes/static/footer.jsp" %>
