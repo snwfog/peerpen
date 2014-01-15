@@ -3,11 +3,13 @@
 <%@ page import="com.peerpen.model.Document" %>
 <%@ page import="com.peerpen.model.Comment" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.peerpen.model.Changeset" %>
 
 <%--Declare all request variables here, easy to debug!!!--%>
 <% Peer peer = (Peer) session.getAttribute("user"); %>
 <% Document document =(Document) request.getAttribute("document");%>
 <% List<Comment> comments = (List<Comment>) request.getAttribute("comments");%>
+<% Changeset changeset = (Changeset) request.getAttribute("changeset");%>
 
 <script type="text/javascript">
   jQuery(document).ready(function($) {
@@ -69,45 +71,59 @@
         <h2>Changeset</h2>
         <p>
         <div class="card">
-          <h3 class="card-heading simple">Changeset 1</h3>
-          <div class="card-body">
-            <p>Change format of Education</p>
-          </div>
+          <% for (Changeset ch: document.getChangesets()){%>
+          <h3 class="card-heading simple"> <%= ch.getContent() %> </h3>
+          <%--<div class="card-body">--%>
+            <%--<p>Change format of Education</p>--%>
+          <%--</div>--%>
           <div class="card-comments">
             <div class="comments-collapse-toggle">
-              <a data-toggle="collapse" data-target="#c1-comments" href="#c1-comments">34 comments <i class="icon-angle-down"></i></a>
+              <a data-toggle="collapse" data-target="#c1-comments" href="#c1-comments"><%= ch.getComments().size()%> <i class="icon-angle-down"></i></a>
             </div>
+
             <div id="c1-comments" class="comments collapse">
+              <% for (Comment c: ch.getChangesetCommentsByOrder(document.getId(),ch.getId())){%>
               <div class="media">
                 <a class="pull-left" href="#">
                   <img class="media-object" data-src="holder.js/28x28" alt="avatar"/>
                 </a>
                 <div class="media-body">
-                  <h4 class="media-heading">Jane Smith title</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
+                  <%--<h4 class="media-heading"><%= c.getName()%></h4>--%>
+                  <p><%= c.getMessage()%></p>
                 </div>
+                  <div class="card-actions">
+                      <button class="btn">25&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
+                      <% if(peer.getId() == ch.getPeerId() || peer.getId() == c.getPeerId()){%>
+                      <a data-toggle="modal" data-id="<%= c.getId()%>" class="confirmDeleteCommentDialog"
+                         href="#deleteDialog">delete</a>
+                      <% } %>
+                  </div>
               </div>
-              <div class="media">
-                <a class="pull-left" href="#">
-                  <img class="media-object" data-src="holder.js/28x28" alt="avatar"/>
-                </a>
-                <div class="media-body">
-                  <h4 class="media-heading">John Smith title2</h4>
-                  <p>dsafsdfdsod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-                </div>
-              </div>
+              <%}%>
               <div class="media">
                 <a class="pull-left" href="#">
                   <img class="media-object" data-src="holder.js/28x28" alt="avatar"/>
                 </a>
                 <div class="media-body">
                   <%--<h4 class="media-heading">Your Name</h4>--%>
-                  <textarea style="width:100%"></textarea>
-                  <button class="btn btn-success">Post</button>
+                  <%--<textarea style="width:100%"></textarea>--%>
+                  <%--<button class="btn btn-success">Post</button>--%>
+                  <form method="POST" action="/document.do">
+
+                      <textarea name="comment" style="width:100%"></textarea>
+                      <input type="hidden" name="docId" value="<%= document.getId()%>"/>
+                      <input type="hidden" name="changesetId" value="<%= ch.getId()%>"/>
+                      <input type="hidden" name="_method" value="_add_comment_to_changeset"/>
+
+                      <%--<br />--%>
+                      <button type="submit" class="btn btn-success ">Post</button>
+
+                  </form>
                 </div>
               </div>
             </div>
           </div>
+          <%}%>
         </div>
 
         </p>

@@ -5,6 +5,9 @@ import com.sunnyd.IModel;
 import com.sunnyd.annotations.*;
 import com.sunnyd.database.Manager;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -122,6 +125,20 @@ public class Changeset extends Base implements IModel {
 
         //System.out.println(d.getPeer().getCreationDate());
     }
+
+    public List<Comment> getChangesetCommentsByOrder(Integer docId, Integer changesetId)
+    {
+        Connection connection = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        List<Comment> comments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE document_id= "+ docId +" AND changeset_id= "+ changesetId +" ORDER BY total_vote DESC, last_modified_date DESC");
+
+        return comments;
+    }
+
+
+
+
 
 
 }

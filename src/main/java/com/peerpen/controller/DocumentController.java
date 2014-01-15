@@ -26,15 +26,11 @@ public class DocumentController extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         HttpSession session = request.getSession();
-        Peer pear = (Peer)session.getAttribute("user");
+        Peer peer = (Peer)session.getAttribute("user");
         Document document = new Document().find(Integer.parseInt(request.getParameter("docId")));
 
-        List<Comment> comments = document.getDocumentCommentsByOrder();
-
-//      BUG FOUND
-      System.out.println("# of Comments using getComments:  "+document.getComments().size());
-      System.out.println("# of Comments using getDocumentCommentsByOrder:  "+document.getDocumentCommentsByOrder().size());
-//      getDocumentCommentsByOrder is getting ALL comments from the db
+        List<Comment> comments = document.getDocumentCommentsByOrder(document.getId());
+        List<Changeset> changesets = document.getChangesets();
 
         request.setAttribute("comments", comments);
         request.setAttribute("document", document);
@@ -49,6 +45,10 @@ public class DocumentController extends HttpServlet
       {
         doDelete(request, response);
       }
+        if(request.getParameter("_method").contentEquals("_add_comment_to_changeset"))
+        {
+            commentOnChangeset(request, response);
+        }
     }
     else
     {
@@ -56,14 +56,16 @@ public class DocumentController extends HttpServlet
       Peer peer = (Peer)session.getAttribute("user");
       Document document = new Document().find(Integer.parseInt(request.getParameter("docId")));
 
+
       Comment comment = new Comment();
       comment.setMessage(request.getParameter("comment").toString());
       comment.setName(peer.getFirstName() + " " +peer.getLastName());
       comment.setPeerId(peer.getId());
       comment.setDocumentId(document.getId());
+
       comment.save();
 
-      List<Comment> comments = document.getDocumentCommentsByOrder();
+      List<Comment> comments = document.getDocumentCommentsByOrder(document.getId());
 
       request.setAttribute("comments", comments);
       request.setAttribute("document", document);
@@ -83,11 +85,35 @@ public class DocumentController extends HttpServlet
     Comment comment =  new Comment().find(Integer.parseInt(request.getParameter("commentId")));
     comment.destroy();
 
-    List<Comment> comments = document.getDocumentCommentsByOrder();
+    List<Comment> comments = document.getDocumentCommentsByOrder(document.getId());
 
     request.setAttribute("comments", comments);
     request.setAttribute("document", document);
     request.getRequestDispatcher("/document").forward(request, response);
   }
+
+    protected void commentOnChangeset(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        HttpSession session = request.getSession();
+        Peer peer = (Peer)session.getAttribute("user");
+        Document document = new Document().find(Integer.parseInt(request.getParameter("docId")));
+        Changeset changeset = new Changeset().find(Integer.parseInt(request.getParameter("changesetId")));
+
+        Comment comment = new Comment();
+        comment.setMessage(request.getParameter("comment").toString());
+        comment.setName(peer.getFirstName() + " " +peer.getLastName());
+        comment.setPeerId(peer.getId());
+        comment.setDocumentId(document.getId());
+        comment.setChangesetId(changeset.getId());
+        comment.save();
+
+        List<Comment> comments = document.getDocumentCommentsByOrder(document.getId());
+
+        request.setAttribute("comments", comments);
+        request.setAttribute("document", document);
+        request.setAttribute("changeset", changeset);
+        request.getRequestDispatcher("/document").forward(request, response);
+    }
+
 
 }
