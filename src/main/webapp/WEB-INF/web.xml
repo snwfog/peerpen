@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         id="WebApp_ID" version="3.0">
 
     <welcome-file-list>
         <welcome-file>/view/index2.jsp</welcome-file>
@@ -86,7 +88,6 @@
     </servlet-mapping>
 
 
-
     <servlet>
         <servlet-name>profile</servlet-name>
         <jsp-file>/view/profile.jsp</jsp-file>
@@ -105,8 +106,6 @@
     </servlet-mapping>
 
 
-
-
     <servlet>
         <servlet-name>error</servlet-name>
         <jsp-file>/view/error.jsp</jsp-file>
@@ -117,7 +116,6 @@
     </servlet-mapping>
 
 
-
     <filter>
         <filter-name>noCacheFilter</filter-name>
         <filter-class>com.peerpen.controller.NoCacheFilter</filter-class>
@@ -126,7 +124,6 @@
         <filter-name>noCacheFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
 
 
     <servlet>
@@ -146,56 +143,56 @@
         <url-pattern>/hunk.do</url-pattern>
     </servlet-mapping>
 
-  <servlet>
-    <servlet-name>reset</servlet-name>
-    <jsp-file>/view/reset.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>reset</servlet-name>
-    <url-pattern>/reset</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>reset.do</servlet-name>
-    <servlet-class>com.peerpen.controller.ResetController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>reset.do</servlet-name>
-    <url-pattern>/reset.do/*</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>reset</servlet-name>
+        <jsp-file>/view/reset.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>reset</servlet-name>
+        <url-pattern>/reset</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>reset.do</servlet-name>
+        <servlet-class>com.peerpen.controller.ResetController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>reset.do</servlet-name>
+        <url-pattern>/reset.do/*</url-pattern>
+    </servlet-mapping>
 
-  <servlet>
-    <servlet-name>comment</servlet-name>
-    <jsp-file>/view/comment.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>comment</servlet-name>
-    <url-pattern>/comment</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>comment.do</servlet-name>
-    <servlet-class>com.peerpen.controller.CommentController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>comment.do</servlet-name>
-    <url-pattern>/comment.do</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>comment</servlet-name>
+        <jsp-file>/view/comment.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>comment</servlet-name>
+        <url-pattern>/comment</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>comment.do</servlet-name>
+        <servlet-class>com.peerpen.controller.CommentController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>comment.do</servlet-name>
+        <url-pattern>/comment.do</url-pattern>
+    </servlet-mapping>
 
-  <servlet>
-    <servlet-name>documents</servlet-name>
-    <jsp-file>/view/documents.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>documents</servlet-name>
-    <url-pattern>/documents</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>documents.do</servlet-name>
-    <servlet-class>com.peerpen.controller.DocumentsController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>documents.do</servlet-name>
-    <url-pattern>/documents.do</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>documents</servlet-name>
+        <jsp-file>/view/documents.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>documents</servlet-name>
+        <url-pattern>/documents</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>documents.do</servlet-name>
+        <servlet-class>com.peerpen.controller.DocumentsController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>documents.do</servlet-name>
+        <url-pattern>/documents.do</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>search</servlet-name>
@@ -266,35 +263,40 @@
         <url-pattern>/changeset.do</url-pattern>
     </servlet-mapping>
 
-  <servlet>
-    <servlet-name>upload.do</servlet-name>
-    <servlet-class>com.peerpen.controller.UploadController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>upload.do</servlet-name>
-    <url-pattern>/upload.do</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>upload.do</servlet-name>
+        <servlet-class>com.peerpen.controller.UploadController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>upload.do</servlet-name>
+        <url-pattern>/upload.do</url-pattern>
+    </servlet-mapping>
 
     <session-config>
         <session-timeout>72</session-timeout>
     </session-config>
 
-  <context-param>
-    <description>Location to store uploaded file</description>
-    <param-name>file-upload-mac</param-name>
-    <param-value>
-      <!--Change this to whoever is responsible for it-->
-      /Users/bobbyyit/Desktop/
-    </param-value>
-  </context-param>
-  <context-param>
-    <description>Location to store uploaded file</description>
-    <param-name>file-upload-win</param-name>
-    <param-value>
-      <!--Change this to whoever is responsible for it-->
-      <!--not tested yet-->
-      c:\PeerPen\temp\
-    </param-value>
-  </context-param>
+    <context-param>
+        <description>Location to store uploaded file</description>
+        <param-name>file-upload-mac</param-name>
+        <param-value>
+            <!--Change this to whoever is responsible for it-->
+            /Users/bobbyyit/Desktop/
+        </param-value>
+    </context-param>
+    <context-param>
+        <description>Location to store uploaded file</description>
+        <param-name>file-upload-win</param-name>
+        <param-value>
+            <!--Change this to whoever is responsible for it-->
+            <!--not tested yet-->
+            c:\PeerPen\temp\
+        </param-value>
+    </context-param>
 
+    <context-param>
+        <description>Location of the permissible domain model</description>
+        <param-name>resource</param-name>
+        <param-value>config/resource.yml</param-value>
+    </context-param>
 </web-app>
