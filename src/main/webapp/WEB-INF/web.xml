@@ -248,6 +248,24 @@
         <servlet-name>document.do</servlet-name>
         <url-pattern>/document.do</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>changeset</servlet-name>
+        <jsp-file>/view/document.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>changeset</servlet-name>
+        <url-pattern>/changeset</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>changeset.do</servlet-name>
+        <servlet-class>com.peerpen.controller.ChangesetController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>changeset.do</servlet-name>
+        <url-pattern>/changeset.do</url-pattern>
+    </servlet-mapping>
+
   <servlet>
     <servlet-name>upload.do</servlet-name>
     <servlet-class>com.peerpen.controller.UploadController</servlet-class>
