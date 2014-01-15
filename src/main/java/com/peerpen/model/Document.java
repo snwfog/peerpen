@@ -162,12 +162,12 @@ public class Document extends Base implements IModel {
 
     }
 
-    public List<Comment> getDocumentCommentsByOrder()
+    public List<Comment> getDocumentCommentsByOrder(Integer docId)
        {
         Connection connection = null;
         Statement stmt = null;
         ResultSet rs = null;
-        List<Comment> comments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` ORDER BY total_vote DESC, last_modified_date DESC");
+        List<Comment> comments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE document_id= "+ docId +" AND changeset_id IS NULL ORDER BY total_vote DESC, last_modified_date DESC");
 
     return comments;
     }
