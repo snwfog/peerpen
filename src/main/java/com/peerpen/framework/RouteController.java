@@ -3,9 +3,12 @@ package com.peerpen.framework;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,8 +26,8 @@ public class RouteController extends HttpServlet {
     private static String pattern = "/{0}";
     private static MessageFormat format = new MessageFormat(pattern);
 
-    public List<String> getAllRoutes( List list ) {
-        List<String> allRoutes = new ArrayList<String>();
+    public Set<String> getAllRoutes( List list ) {
+        Set<String> allRoutes = new LinkedHashSet<String>();
         for ( Object m : list ) {
             StringBuffer sb = new StringBuffer();
             if ( m instanceof Map ) {
@@ -39,7 +42,7 @@ public class RouteController extends HttpServlet {
         return allRoutes;
     }
 
-    private StringBuffer getRoute( Map m, StringBuffer sb, List<String> allRoutes ) {
+    private StringBuffer getRoute( Map m, StringBuffer sb, Set<String> allRoutes ) {
         for ( Object ob : m.keySet() ) {
             sb.append( format.format( pattern, ob ) );
             allRoutes.add( sb.toString() );
@@ -64,9 +67,15 @@ public class RouteController extends HttpServlet {
     protected void doGet( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
 
         List routeList = (List) this.getServletContext().getAttribute( "routes" );
-        List<String> allRoutes = this.getAllRoutes( routeList );
+        Set<String> allRoutes = this.getAllRoutes( routeList );
+
+        logger.info("Here are all of the permissible routes: ");
         for ( String route : allRoutes ) {
             logger.info( route );
         }
+
+        req.setAttribute( "routes", allRoutes );
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/view/route.jsp");
+        dispatcher.forward(req, resp);
     }
 }
