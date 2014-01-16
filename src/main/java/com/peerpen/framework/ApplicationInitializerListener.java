@@ -43,7 +43,8 @@ public class ApplicationInitializerListener implements ServletContextListener {
 
     private void setSafeRoutes( ServletContextEvent event ) {
         String safeRoutes = event.getServletContext().getInitParameter( "safe-routes" );
-        Set<String> safeRoutesSet = new HashSet<String>( Arrays.asList( safeRoutes.split( "\\s" ) ) );
+        Set<String> safeRoutesSet =
+                new HashSet<String>( Arrays.asList( safeRoutes.replaceAll( "[^\\S\\n]", "" ).split( "\\n" ) ) );
 
         event.getServletContext().setAttribute( "safeRoutes", safeRoutesSet );
     }

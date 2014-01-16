@@ -18,7 +18,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by snw on 1/15/2014.
+ * This controller will show all the available and permissible routes of this web application
+ * by visiting the page /routes
  */
 public class RouteController extends HttpServlet {
 
