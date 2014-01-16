@@ -78,7 +78,7 @@
           <%--</div>--%>
           <div class="card-comments">
             <div class="comments-collapse-toggle">
-              <a data-toggle="collapse" data-target="#c1-comments" href="#c1-comments"><%= ch.getComments().size()%> <i class="icon-angle-down"></i></a>
+              <a data-toggle="collapse" data-target="#c1-comments" href="#c1-comments"><%= ch.getComments().size()%> Comments<i class="icon-angle-down"></i></a>
             </div>
 
             <div id="c1-comments" class="comments collapse">
@@ -88,7 +88,7 @@
                   <img class="media-object" data-src="holder.js/28x28" alt="avatar"/>
                 </a>
                 <div class="media-body">
-                  <%--<h4 class="media-heading"><%= c.getName()%></h4>--%>
+                  <h4 class="media-heading"><%= c.getName()%></h4>
                   <p><%= c.getMessage()%></p>
                 </div>
                   <div class="card-actions">
@@ -113,7 +113,7 @@
                       <textarea name="comment" style="width:100%"></textarea>
                       <input type="hidden" name="docId" value="<%= document.getId()%>"/>
                       <input type="hidden" name="changesetId" value="<%= ch.getId()%>"/>
-                      <input type="hidden" name="_method" value="_add_comment_to_changeset"/>
+                      <input type="hidden" name="_method" value="_doPut"/>
 
                       <%--<br />--%>
                       <button type="submit" class="btn btn-success ">Post</button>

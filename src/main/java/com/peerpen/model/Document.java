@@ -162,8 +162,9 @@ public class Document extends Base implements IModel {
 
     }
 
-    public List<Comment> getDocumentCommentsByOrder(Integer docId)
+    public List<Comment> getOrderedComments()
        {
+        Integer docId = this.getId();
         Connection connection = null;
         Statement stmt = null;
         ResultSet rs = null;
