@@ -46,7 +46,7 @@ public class DocumentController extends HttpServlet
       }
       else if(request.getParameter("_method").contentEquals("_doPut"))
       {
-          doPut(request, response);
+        doPut(request, response);
       }
     }
     else
@@ -113,6 +113,5 @@ public class DocumentController extends HttpServlet
     request.setAttribute("changeset", changeset);
     request.getRequestDispatcher("/document").forward(request, response);
   }
-
 
 }

@@ -70,25 +70,25 @@
       <div class="tab-pane" id="changesetSection">
         <h2>Changeset</h2>
         <p>
+        <% for (Changeset ch: document.getChangesets()){%>
         <div class="card">
-          <% for (Changeset ch: document.getChangesets()){%>
           <h3 class="card-heading simple"> <%= ch.getContent() %> </h3>
           <%--<div class="card-body">--%>
             <%--<p>Change format of Education</p>--%>
           <%--</div>--%>
           <div class="card-comments">
             <div class="comments-collapse-toggle">
-              <a data-toggle="collapse" data-target="#c1-comments" href="#c1-comments"><%= ch.getComments().size()%> Comments<i class="icon-angle-down"></i></a>
+              <a data-toggle="collapse" data-target="#<%= ch.getId()%>-comments" href="#<%= ch.getId()%>-comments"><%= ch.getComments().size()%> Comments<i class="icon-angle-down"></i></a>
             </div>
 
-            <div id="c1-comments" class="comments collapse">
+            <div id="<%= ch.getId()%>-comments" class="comments collapse">
               <% for (Comment c: ch.getChangesetCommentsByOrder(document.getId(),ch.getId())){%>
               <div class="media">
                 <a class="pull-left" href="#">
                   <img class="media-object" data-src="holder.js/28x28" alt="avatar"/>
                 </a>
                 <div class="media-body">
-                  <h4 class="media-heading"><%= c.getName()%></h4>
+                  <%--<h4 class="media-heading"><%= c.getName()%></h4>--%>
                   <p><%= c.getMessage()%></p>
                 </div>
                   <div class="card-actions">
@@ -123,8 +123,8 @@
               </div>
             </div>
           </div>
-          <%}%>
         </div>
+        <%}%>
 
         </p>
       </div>
