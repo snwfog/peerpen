@@ -1,9 +1,12 @@
-peer:
+- peer:
   - document:
     - comment:
       - like
 
   - profile
+
+- group
+
 
 
 

@@ -9,10 +9,11 @@ public class Router extends HttpServlet {
     private boolean isPermissibleRoutes(String stringQuery)
     {
 
+        return false;
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) {
-
+        String rURI = request.getRequestURI();
 
     }
 
