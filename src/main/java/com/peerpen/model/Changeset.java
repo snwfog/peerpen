@@ -60,6 +60,7 @@ public class Changeset extends Feedable implements IModel {
 
     public void setDocumentId(Integer documentId){
         this.documentId = documentId;
+        setUpdateFlag(true);
     }
 
     public Integer getDocumentId(){
@@ -124,6 +125,10 @@ public class Changeset extends Feedable implements IModel {
 //
 //
 //        //System.out.println(d.getPeer().getCreationDate());
+//        Changeset a = new Changeset();
+//        a.save();
+//        a.destroy();
+
 
     }
 
