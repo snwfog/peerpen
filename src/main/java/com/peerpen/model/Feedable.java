@@ -5,6 +5,7 @@ import com.sunnyd.annotations.ActiveRecordField;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,9 @@ public class Feedable extends Base {
 
     @ActiveRecordField
     private Integer childId;
+
+    @ActiveRecordField
+    private Integer userId;
 
     private Feedable trueSelf;
 
@@ -47,6 +51,26 @@ public class Feedable extends Base {
            a.setType(this.getClass().getSimpleName());
            a.setChildId(this.getId());
            a.setStatus("new");
+
+           if(this instanceof Changeset){
+               Changeset ch = (Changeset) this;
+               if(ch.getDocument() != null){
+                   a.setUserId(ch.getDocument().getPeerId());
+               }
+           }
+
+            if(this instanceof Comment){
+                Comment com = (Comment) this;
+                if(com.getDocumentId() != 0){
+                    if(com.getDocument() != null){
+                        a.setUserId(com.getDocument().getPeerId());
+                    }
+                }else{
+                    if(com.getChangeset() != null){
+                        a.setUserId(com.getChangeset().getPeerId());
+                    }
+                }
+            }
            return a.saveFeedable();
         }else{
             return false;
@@ -56,15 +80,37 @@ public class Feedable extends Base {
     private boolean saveFeedable(){
         return super.save();
     }
+
     @Override
     public boolean update(){
-        Feedable a = new Feedable().find(this.getId());
+        Map<String, Object> m = new HashMap<String, Object>();
+        m.put("childId", this.getId());
+        Feedable a = new Feedable().find(m);
         super.update();
         if(a == null){
             System.out.println("NO FEEDABLE FOR OBJECT!!!!");
             return false;
         }else{
+           System.out.println("FOUND FEEDABLE");
            a.setStatus("update");
+           if(this instanceof Changeset){
+               Changeset ch = (Changeset) this;
+               if(ch.getDocument() != null){
+                   a.setUserId(ch.getDocument().getPeerId());
+               }
+           }
+            if(this instanceof Comment){
+                Comment com = (Comment) this;
+                if(com.getDocumentId() != 0){
+                    if(com.getDocument() != null){
+                        a.setUserId(com.getDocument().getPeerId());
+                    }
+                }else{
+                    if(com.getChangeset() != null){
+                        a.setUserId(com.getChangeset().getPeerId());
+                    }
+                }
+            }
            return a.updateFeedable();
         }
     }
@@ -85,11 +131,13 @@ public class Feedable extends Base {
     }
 
     public boolean destroyFeedable(){
-        return super.save();
+        return super.destroy();
     }
 
     public boolean updateFeedable(){
-        return super.save();
+        System.out.println(this.getStatus());
+        System.out.println("updating feedable");
+        return super.update();
     }
 
 
@@ -144,5 +192,15 @@ public class Feedable extends Base {
 
     public void setStatus(String status) {
         this.status = status;
+        setUpdateFlag(true);
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+        setUpdateFlag(true);
     }
 }

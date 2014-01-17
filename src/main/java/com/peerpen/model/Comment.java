@@ -7,7 +7,7 @@ import com.sunnyd.annotations.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Comment extends Base implements IModel {
+public class Comment extends Feedable implements IModel {
 
     public static final String tableName = "comments";
 
@@ -21,6 +21,7 @@ public class Comment extends Base implements IModel {
     private Integer documentId;
     @ActiveRelationHasOne
     private Document document;
+
     @ActiveRecordField
     private Integer changesetId;
     @ActiveRelationHasOne
