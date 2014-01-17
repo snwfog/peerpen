@@ -12,7 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Changeset extends Base implements IModel {
+
+//Feedable model will not avoided by base and any parent of Feedable
+public class Changeset extends Feedable implements IModel {
     public static final String tableName = "changesets";
 
     @ActiveRecordField
@@ -38,8 +40,6 @@ public class Changeset extends Base implements IModel {
 
     @ActiveRelationHasMany
     private List<Comment> comments;
-
-
 
     public Changeset() {
         super();
@@ -108,22 +108,23 @@ public class Changeset extends Base implements IModel {
     }
 
     public static void main(String[] args) {
-        //Changeset c = new Changeset();
-        /*c.setContent("aaaaaaaaaaa");
-        c.setHunkId(27);
-        c.setDocumentId(2);
-        c.setPeerId(2);
-        System.out.println(c.save()); */
+//        //Changeset c = new Changeset();
+//        /*c.setContent("aaaaaaaaaaa");
+//        c.setHunkId(27);
+//        c.setDocumentId(2);
+//        c.setPeerId(2);
+//        System.out.println(c.save()); */
+//
+////        Document d = Document.find(4);
+//        Changeset c = new Changeset().find(11);
+//        System.out.println(c.getContent());
+//        System.out.println(c.getHunk().getContent());
+//        System.out.println(c.getDocument().getDocName());
+//        System.out.println(c.getPeer().getUserName());
+//
+//
+//        //System.out.println(d.getPeer().getCreationDate());
 
-//        Document d = Document.find(4);
-        Changeset c = new Changeset().find(11);
-        System.out.println(c.getContent());
-        System.out.println(c.getHunk().getContent());
-        System.out.println(c.getDocument().getDocName());
-        System.out.println(c.getPeer().getUserName());
-
-
-        //System.out.println(d.getPeer().getCreationDate());
     }
 
     public List<Comment> getChangesetCommentsByOrder(Integer docId, Integer changesetId)

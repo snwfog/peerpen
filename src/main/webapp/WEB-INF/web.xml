@@ -165,7 +165,7 @@
 
   <servlet>
     <servlet-name>comment</servlet-name>
-    <jsp-file>/view/comment.jsp</jsp-file>
+    <jsp-file>/view/document.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>comment</servlet-name>

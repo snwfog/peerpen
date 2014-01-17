@@ -61,6 +61,8 @@ public class DocumentController extends HttpServlet
       comment.setName(peer.getFirstName() + " " +peer.getLastName());
       comment.setPeerId(peer.getId());
       comment.setDocumentId(document.getId());
+      comment.setUpVote(0);
+      comment.setDownVote(0);
 
       comment.save();
 
@@ -104,6 +106,8 @@ public class DocumentController extends HttpServlet
     comment.setPeerId(peer.getId());
     comment.setDocumentId(document.getId());
     comment.setChangesetId(changeset.getId());
+    comment.setUpVote(0);
+    comment.setDownVote(0);
     comment.save();
 
     List<Comment> comments = document.getOrderedComments();
