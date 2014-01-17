@@ -280,4 +280,16 @@ public class Peer extends Base
         return peers;
     }
 
+    // method used for search autocomplete
+    public List<String> getSuggestedPeers(String keyword){
+        String sql = "SELECT `user_name` FROM `peers` WHERE `user_name` LIKE '%" + keyword + "%'";
+        List<Peer> peers = new Peer().queryAll(sql);
+        // store only doc_name to list
+        List<String> suggestions = new ArrayList<String>();
+        for(int i=0;i<peers.size();i++){
+            suggestions.add(peers.get(i).getUserName());
+        }
+        return suggestions;
+    }
+
 }

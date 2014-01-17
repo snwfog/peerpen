@@ -4,8 +4,32 @@
 <%@ page import="com.peerpen.model.Group" %>
 <%@ include file="/view/includes/static/header.jsp" %>
 
+<script>
+$(document).ready(function() {
+    $('#query').keyup(function()
+    {
+        if ($('#query').val().length > 2){
+            query = $('#query').val();
+            $.post('autocomplete.do', {
+                query: query
+            }, function(responseJson) {
+                var $ul = $('#suggestion_list');    // locate the ul dom
+                $ul.empty();     // remove existing li's
+                $.each(responseJson, function(key, value) {
+                    // Iterate over the JSON object.
+                    $('<li>').text( value ).appendTo($ul);
+                });
+            });
+        }
+
+    });
+});
+</script>
+
+
+
 <form action="search.do" method="get" align="center">
-    Search <input type="text" name="query" />
+    Search <input type="text" name="query" id="query" />
     <input type="submit" name="submit" value="OK" />
     <br />
     <input type="radio" name="area" value="all" checked />All
@@ -14,6 +38,8 @@
     <input type="radio" name="area" value="groups" />Groups
     <%--<input type="radio" name="area" value="tags" />Tags--%>
 </form>
+
+<ul id="suggestion_list"></ul>
 
 <!-- Handling search result -->
 <%
