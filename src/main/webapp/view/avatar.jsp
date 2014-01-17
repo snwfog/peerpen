@@ -50,14 +50,14 @@
 </nav>
 <div class="page-wrap">
     <form action="/avatar.do" id="form_description" method="post">
-        <input type="hidden" class ="peerDescription well form-control" name ="description" value="<%= session.getAttribute("description")%>">
+        <input type="hidden" class ="peerDescription well form-control" name ="description" value="<%= session.getAttribute("description") == null ? "" : session.getAttribute("description") %>">
         <input type="hidden" class="form-control peerID" name="id" value="<%= peer.getId().toString()%>"/>
-        <input type="hidden" class="form-control peerDoB" name="dob" value="<%= session.getAttribute("dob")%>">
-        <input type="hidden" class="form-control peerPersonal" name="gender" value="<%=session.getAttribute("gender")%>" >
-        <input type="hidden" class="form-control peerPersonal" name="country" value="<%= session.getAttribute("country")%>" >
-        <input type="hidden" class="form-control peerPersonal" name="industry" value="<%=session.getAttribute("industry")%>">
-        <input type="hidden" class="form-control peerPersonal" name="yoe" value="<%=session.getAttribute("yoe")%>">
-        <input type="hidden" class="form-control peerPersonal" name="personal_website" value="<%=session.getAttribute("personal_website")%>">
+        <input type="hidden" class="form-control peerDoB" name="dob" value="<%=session.getAttribute("dob") %>">
+        <input type="hidden" class="form-control peerPersonal" name="gender" value="<%= session.getAttribute("gender") == null ? "" : session.getAttribute("gender") %>" >
+        <input type="hidden" class="form-control peerPersonal" name="country" value="<%= session.getAttribute("country") == null ? "" : session.getAttribute("country") %>" >
+        <input type="hidden" class="form-control peerPersonal" name="industry" value="<%= session.getAttribute("industry") == null ? "" : session.getAttribute("industry") %>">
+        <input type="hidden" class="form-control peerPersonal" name="yoe" value="<%= session.getAttribute("yoe").toString()%>">
+        <input type="hidden" class="form-control peerPersonal" name="personal_website" value="<%= session.getAttribute("personal_website") == null ? "" : session.getAttribute("personal_website") %>">
 
         <h1>Summary of your profile <button class="pull-right btn btn-primary" type="submit">Next (2/2)</button></h1>
     </form>
@@ -66,13 +66,13 @@
     <h4>Drag & Drop picture</h4>
     <div class="dravatar-avatar-wrap">
       <img src="/assets/images/profile/256.jpg" id="profile-avatar" alt="Image for Profile">
-      <div class="description"><%=session.getAttribute("gender")%>, <%=session.getAttribute("dob")%></div>
+      <div class="description"><%= session.getAttribute("gender") == null ? "" : session.getAttribute("gender") %><%if (session.getAttribute("dob") == null){ %>, <%}%> <%= session.getAttribute("dob") == null ? "" : session.getAttribute("dob") %></div>
     </div>
 
     <h2><%= peer.getFirstName()%> <%= peer.getLastName()%></h2>
-    <div class="field"><%=session.getAttribute("industry")%> Industry for <%=session.getAttribute("yoe")%> Years</div>
-    <div class="location">MTL QC, CA</div>
-    <p><%=session.getAttribute("description")%></p>
+    <div class="field"><%= session.getAttribute("industry") == null ? "" : session.getAttribute("industry")%> <%= session.getAttribute("yoe") == null? "" : (session.getAttribute("yoe"))%></div>
+    <div class="location"><%= session.getAttribute("country") == null ? "" : session.getAttribute("country")%></div>
+    <p><%= session.getAttribute("description") == null ? "" : session.getAttribute("description")%></p>
 
   </div>
 

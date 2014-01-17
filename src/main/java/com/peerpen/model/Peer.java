@@ -272,4 +272,12 @@ public class Peer extends Base
     public int getAvatarId(){
         return this.avatarId;
     }
+
+
+    public List<Peer> getMatchedPeers(String keyword){
+        String sql = "SELECT * FROM `peers` WHERE `user_name` LIKE '%" + keyword + "%'";
+        List<Peer> peers = new Peer().queryAll(sql);
+        return peers;
+    }
+
 }

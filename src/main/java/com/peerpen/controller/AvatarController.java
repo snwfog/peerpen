@@ -28,10 +28,12 @@ public class AvatarController extends HttpServlet {
         String gender = request.getParameter("gender");
         String country = request.getParameter("country");
         String industry = request.getParameter("industry");
-        Integer yoe = Integer.parseInt(request.getParameter("yoe"));
+        String yearOfExperience = request.getParameter("yoe");
         String description = request.getParameter("description");
         String website = request.getParameter("personal_website");
-
+        int yoe = 0;
+        if(!(yearOfExperience == null || yearOfExperience == ""))
+            yoe = Integer.parseInt(yearOfExperience);
         StringUtils.split(" ");
 
         Date dob = new Date();
@@ -50,7 +52,8 @@ public class AvatarController extends HttpServlet {
             peer.setGender(gender);
             peer.setCountry(country);
             peer.setIndustry(industry);
-            peer.setExperience(yoe);
+            if(yoe != 0)
+                peer.setExperience(yoe);
             peer.setDescription(description);
             peer.setPersonalWebsite(website);
             peer.update();

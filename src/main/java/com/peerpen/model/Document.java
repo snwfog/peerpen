@@ -162,14 +162,22 @@ public class Document extends Base implements IModel {
 
     }
 
-    public List<Comment> getDocumentCommentsByOrder()
+    public List<Comment> getOrderedComments()
        {
+        Integer docId = this.getId();
         Connection connection = null;
         Statement stmt = null;
         ResultSet rs = null;
-        List<Comment> comments = new Comment().queryAll("SELECT * FROM `comments` ORDER BY last_modified_date DESC");
+        List<Comment> comments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE document_id= "+ docId +" AND changeset_id IS NULL ORDER BY total_vote DESC, last_modified_date DESC");
 
     return comments;
+    }
+
+    // method used by search
+    public List<Document> getMatchedDocuments(String keyword){
+        String sql = "SELECT * FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%'";
+        List<Document> documents = new Document().queryAll(sql);
+        return documents;
     }
 
     private static void closeConnection( Connection connection ) {
