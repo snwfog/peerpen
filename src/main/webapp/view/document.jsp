@@ -56,7 +56,31 @@
               <%= comment.getMessage() %>
             </div>
             <div class="card-actions">
-              <button class="btn">25&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
+                <form method="POST" action="/comment.do">
+
+                    <input type="hidden" name="docId" value="<%= document.getId()%>"/>
+                    <input type="hidden" name="commentId" value="<%= comment.getId()%>"/>
+                    <input type="hidden" name="upVote" value="<%= comment.getUpVote()%>"/>
+                    <input type="hidden" name="downVote" value="<%= comment.getDownVote()%>"/>
+                    <input type="hidden" name="_method" value="_upVote"/>
+
+                    <button class="btn"><%= comment.getUpVote()%>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
+
+                 </form>
+                <form method="POST" action="/comment.do">
+
+                    <input type="hidden" name="docId" value="<%= document.getId()%>"/>
+                    <input type="hidden" name="commentId" value="<%= comment.getId()%>"/>
+                    <input type="hidden" name="upVote" value="<%= comment.getUpVote()%>"/>
+                    <input type="hidden" name="downVote" value="<%= comment.getDownVote()%>"/>
+                    <input type="hidden" name="_method" value="_downVote"/>
+
+                    <button class="btn"><%= comment.getDownVote()%>&nbsp;<i class="fa fa-thumbs-down"></i></button>&nbsp;
+
+                </form>
+
+
+
               <% if(peer.getId() == document.getPeerId() || peer.getId() == comment.getPeerId()){%>
               <a data-toggle="modal" data-id="<%= comment.getId()%>" class="confirmDeleteCommentDialog"
                  href="#deleteDialog">delete</a>
@@ -92,7 +116,30 @@
                   <p><%= c.getMessage()%></p>
                 </div>
                   <div class="card-actions">
-                      <button class="btn">25&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
+                      <form method="POST" action="/comment.do">
+
+                          <input type="hidden" name="docId" value="<%= document.getId()%>"/>
+                          <input type="hidden" name="commentId" value="<%= c.getId()%>"/>
+                          <input type="hidden" name="upVote" value="<%= c.getUpVote()%>"/>
+                          <input type="hidden" name="downVote" value="<%= c.getDownVote()%>"/>
+                          <input type="hidden" name="_method" value="_upVote"/>
+
+                          <button class="btn"><%= c.getUpVote()%>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
+
+                      </form>
+
+                      <form method="POST" action="/comment.do">
+
+                          <input type="hidden" name="docId" value="<%= document.getId()%>"/>
+                          <input type="hidden" name="commentId" value="<%= c.getId()%>"/>
+                          <input type="hidden" name="upVote" value="<%= c.getUpVote()%>"/>
+                          <input type="hidden" name="downVote" value="<%= c.getDownVote()%>"/>
+                          <input type="hidden" name="_method" value="_downVote"/>
+
+                          <button class="btn"><%= c.getDownVote()%>&nbsp; <i class="fa fa-thumbs-down"></i></button>&nbsp;
+
+                      </form>
+
                       <% if(peer.getId() == ch.getPeerId() || peer.getId() == c.getPeerId()){%>
                       <a data-toggle="modal" data-id="<%= c.getId()%>" class="confirmDeleteCommentDialog"
                          href="#deleteDialog">delete</a>
