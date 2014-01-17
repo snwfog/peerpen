@@ -28,78 +28,66 @@ public class CommentController extends HttpServlet
 {
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
-    HttpSession session = request.getSession();
-
-    Peer pear = (Peer)session.getAttribute("user");
-
-//    Need to implement. Need to get comments from the
-    Document document = new Document();//.find(request.getAttribute("document"));
-    List<Comment> comments = document.getComments();
-    List<Changeset> sc = document.getChangesets();
-    for (Changeset changeset : sc){
-      List<Comment> comment =  changeset.getComments();
-    }
-//    List<Comment> comments = document.getComments();
-
-//    Need to implement setters and getters for docId, peerId etc
-//    Comment comment = new Comment();
-//    comment.setMessage("This resume is bad, fix it!");
-//    comment.setDocumentId(document.getId());
-//    comment.save();
-
-//    request.setAttribute("document", document);
-//    request.setAttribute("comments", comments);
-
-//    Experimental:
-    List<Comment> list = document.getComments();
-    request.setAttribute("comments", list);
-
-
-    request.getRequestDispatcher("/comment").forward(request, response);
 
   }
 
- /* private List<Comment> getComments()
-  {
-    List<Comment> list = new ArrayList<Comment>();
 
-    Comment comment1 = new Comment();
-    comment1.setMessage("Enlargo Boobidus Expecto!");
-    comment1.setName("Hermione Granger");
-
-    Comment comment2 = new Comment();
-    comment2.setMessage("Fapon Patronum!!");
-    comment2.setName("Harry Potter");
-
-    Comment comment3 = new Comment();
-    comment3.setMessage("Erecto Gigantum!");
-    comment3.setName("Draco Malfoy");
-
-    list.add(comment1);
-    list.add(comment2);
-    list.add(comment3);
-    return list;
-  }
-  */
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
-    HttpSession session = request.getSession();
-    Peer peer = (Peer)session.getAttribute("user");
+      if (request.getParameter("_method") != null)
+      {
 
-    Comment comment = new Comment();
-    comment.setMessage(request.getParameter("comment").toString());
-    comment.setName(peer.getFirstName() + " " +peer.getLastName());
+          if(request.getParameter("_method").contentEquals("_upVote"))
+          {
+              addUpVote(request, response);
+          }
+          else if (request.getParameter("_method").contentEquals("_downVote"))
+          {
+              addDownVote(request,response);
+          }
+      }
 
-    comment.save();
-
-
-    //List<Comment> comments = d.getComments();
-    //comments.add(comment);
-
-    //d.update();
-    //request.setAttribute("comments", comments);
-    request.getRequestDispatcher("/comment").forward(request, response);
 
   }
+    protected void addUpVote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        HttpSession session = request.getSession();
+        Peer peer = (Peer)session.getAttribute("user");
+        Document document = new Document().find(Integer.parseInt(request.getParameter("docId")));
+        Comment comment = new Comment().find(Integer.parseInt(request.getParameter("commentId")));
+
+        comment.setUpVote(comment.getUpVote()+1);
+        //comment.setDownVote(0);
+
+        comment.update();
+
+        List<Comment> comments = document.getOrderedComments();
+
+        request.setAttribute("comments", comments);
+        request.setAttribute("document", document);
+        request.setAttribute("comment", comment);
+        request.getRequestDispatcher("/comment").forward(request, response);
+    }
+
+    protected void addDownVote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        HttpSession session = request.getSession();
+        Peer peer = (Peer)session.getAttribute("user");
+        Document document = new Document().find(Integer.parseInt(request.getParameter("docId")));
+        Comment comment = new Comment().find(Integer.parseInt(request.getParameter("commentId")));
+
+        comment.setDownVote(comment.getDownVote()+1);
+        //comment.setDownVote(0);
+
+        comment.update();
+
+        List<Comment> comments = document.getOrderedComments();
+
+        request.setAttribute("comments", comments);
+        request.setAttribute("document", document);
+        request.setAttribute("comment", comment);
+        request.getRequestDispatcher("/comment").forward(request, response);
+    }
+
 
 }

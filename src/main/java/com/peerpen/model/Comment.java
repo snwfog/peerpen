@@ -26,6 +26,12 @@ public class Comment extends Feedable implements IModel {
     private Integer changesetId;
     @ActiveRelationHasOne
     private Changeset changeset;
+    @ActiveRecordField
+    private Integer upVote;
+    @ActiveRecordField
+    private Integer downVote;
+
+    private Integer totalVote;
 
 
     public Comment() {
@@ -95,4 +101,28 @@ public class Comment extends Feedable implements IModel {
     public int getChangesetId(){
         return this.changesetId;
     }
+
+    public Integer getUpVote() {
+        return upVote;
+    }
+
+    public void setUpVote(Integer upVote) {
+        this.upVote = upVote;
+        setUpdateFlag(true);
+    }
+
+    public Integer getDownVote() {
+        return downVote;
+    }
+
+    public void setDownVote(Integer downVote) {
+        this.downVote = downVote;
+        setUpdateFlag(true);
+    }
+
+    public Integer getTotalVote(Integer upVote,Integer downVote) {
+        totalVote = upVote-downVote;
+        return totalVote;
+    }
+
 }

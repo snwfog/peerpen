@@ -165,7 +165,7 @@
 
   <servlet>
     <servlet-name>comment</servlet-name>
-    <jsp-file>/view/comment.jsp</jsp-file>
+    <jsp-file>/view/document.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>comment</servlet-name>
@@ -213,6 +213,28 @@
         <servlet-name>search.do</servlet-name>
         <url-pattern>/search.do</url-pattern>
     </servlet-mapping>
+
+
+
+
+    <servlet>
+        <servlet-name>autocomplete</servlet-name>
+        <jsp-file>/view/autocomplete.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>autocomplete</servlet-name>
+        <url-pattern>/autocomplete</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>autocomplete.do</servlet-name>
+        <servlet-class>com.peerpen.controller.AutocompleteController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>autocomplete.do</servlet-name>
+        <url-pattern>/autocomplete.do</url-pattern>
+    </servlet-mapping>
+
+
 
     <servlet>
         <servlet-name>tag</servlet-name>
