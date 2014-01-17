@@ -32,8 +32,8 @@ public class AutocompleteController extends HttpServlet {
         String query = request.getParameter( "query" );
         System.out.print( query );
 
-        List<String> documents = new Document().getSuggestedDocuments( query );
-        List<String> peers = new Peer().getSuggestedPeers( query );
+        List<String> documents = new Document().getSuggestedDocuments( query, 1 );
+        List<String> peers = new Peer().getSuggestedPeers( query, 1 );
 
         Set suggestionPool = new LinkedHashSet(  );
         suggestionPool.addAll( documents );

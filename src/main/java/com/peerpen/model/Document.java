@@ -181,8 +181,8 @@ public class Document extends Base implements IModel {
     }
 
     // method used for search autocomplete
-    public List<String> getSuggestedDocuments(String keyword){
-        String sql = "SELECT doc_name FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%'";
+    public List<String> getSuggestedDocuments(String keyword, int limit){
+        String sql = "SELECT doc_name FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%' LIMIT " + limit;
         List<Document> documents = new Document().queryAll(sql);
         // store only doc_name to list
         List<String> suggestions = new ArrayList<String>();
