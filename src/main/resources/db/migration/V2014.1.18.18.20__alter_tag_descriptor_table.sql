@@ -1,0 +1,1 @@
+alter table tag_descriptors add unique (tag_name);
