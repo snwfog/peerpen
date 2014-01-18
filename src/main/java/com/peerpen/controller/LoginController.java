@@ -39,7 +39,6 @@ public class LoginController extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        //doGet(request, response);
         System.out.println( "gets here" );
         Map<String, Object> map = new HashMap<String, Object>();
         map.put( "userName", request.getParameter( "username" ) );

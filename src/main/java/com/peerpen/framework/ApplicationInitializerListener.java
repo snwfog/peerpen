@@ -4,9 +4,12 @@ package com.peerpen.framework;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletContextEvent;
@@ -22,31 +25,41 @@ public class ApplicationInitializerListener implements ServletContextListener {
 
     @Override
     public void contextInitialized( ServletContextEvent event ) {
-        setGlobalRoutes( event );
-        setSafeRoutes( event );
+        setAllRoutes( event );
+        setExemptRoutes( event );
+        setApplicationSecret(event);
         //setJspGlobalVariables( event );
     }
 
+    /**
+     * Set the secret of the application for internal routing
+     * @param event
+     */
+    private void setApplicationSecret( ServletContextEvent event ) {
+        String appSecret = event.getServletContext().getInitParameter( "app-secret" );
+        event.getServletContext().setAttribute( "appSecret", appSecret );
+    }
 
     /**
      * Will set into servlet context all possible routes
      * @param event
      */
-    private void setGlobalRoutes( ServletContextEvent event ) {
+    private void setAllRoutes( ServletContextEvent event ) {
         Yaml yml = new Yaml();
         String fileRelativePath = event.getServletContext().getInitParameter( "resource" );
         InputStream fis = event.getServletContext().getResourceAsStream( "/WEB-INF/classes/" + fileRelativePath );
         logger.info( "Reading routes information from YAML (" + fis + ")" );
         List m = (List) yml.load( fis );
-        event.getServletContext().setAttribute( "routes", m );
+        Set<String> allRoutes = this.getAllRoutes( m );
+        event.getServletContext().setAttribute( "allRoutes", allRoutes );
     }
 
-    private void setSafeRoutes( ServletContextEvent event ) {
-        String safeRoutes = event.getServletContext().getInitParameter( "safe-routes" );
+    private void setExemptRoutes( ServletContextEvent event ) {
+        String safeRoutes = event.getServletContext().getInitParameter( "exempt-routes" );
         Set<String> safeRoutesSet =
                 new HashSet<String>( Arrays.asList( safeRoutes.replaceAll( "[^\\S\\n]", "" ).split( "\\n" ) ) );
 
-        event.getServletContext().setAttribute( "safeRoutes", safeRoutesSet );
+        event.getServletContext().setAttribute( "exemptRoutes", safeRoutesSet );
     }
 
     private void setJspGlobalVariables( ServletContextEvent event ) {
@@ -59,6 +72,46 @@ public class ApplicationInitializerListener implements ServletContextListener {
         }
 
 
+    }
+
+    private static String pattern = "/{0}";
+    private static MessageFormat format = new MessageFormat(pattern);
+
+    public Set<String> getAllRoutes( List list ) {
+        Set<String> allRoutes = new LinkedHashSet<String>();
+        for ( Object m : list ) {
+            StringBuffer sb = new StringBuffer();
+            if ( m instanceof Map ) {
+                StringBuffer newSb = new StringBuffer( sb );
+                getRoute( (Map) m, newSb, allRoutes );
+            } else {
+                sb.append( format.format( pattern, m ) );
+                allRoutes.add( sb.toString() );
+            }
+        }
+
+        return allRoutes;
+    }
+
+    private StringBuffer getRoute( Map m, StringBuffer sb, Set<String> allRoutes ) {
+        for ( Object ob : m.keySet() ) {
+            sb.append( format.format( pattern, ob ) );
+            allRoutes.add( sb.toString() );
+            if ( m.get( ob ) instanceof List ) {
+                List list = (List) m.get( ob );
+                for ( Object listObject : list ) {
+                    if ( listObject instanceof Map ) {
+                        StringBuffer newSb = new StringBuffer( sb );
+                        getRoute( (Map) listObject, newSb, allRoutes );
+                    } else {
+                        sb.append( format.format( pattern, listObject ) );
+                        allRoutes.add( sb.toString() );
+                    }
+                }
+            }
+        }
+
+        return sb;
     }
 
     @Override

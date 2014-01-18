@@ -14,6 +14,44 @@
         </listener-class>
     </listener>
 
+    <!--
+        FILTER SECTION
+     ================= -->
+
+    <filter>
+        <filter-name>no-cache-filter</filter-name>
+        <filter-class>com.peerpen.framework.filter.NoCacheFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>no-cache-filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>route-filter</filter-name>
+        <filter-class>com.peerpen.framework.filter.RouteFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>route-filter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>request-filter</filter-name>
+        <filter-class>com.peerpen.framework.filter.InternalRequestFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>request-filter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <!--<dispatcher>FORWARD</dispatcher>-->
+    </filter-mapping>
+
+    <!--
+        SERVLET MAPPING
+    =================== -->
+
     <servlet>
         <description>Index page, unfortunately, it has to have index.html or it won't work</description>
         <servlet-name>index</servlet-name>
@@ -23,18 +61,6 @@
         <servlet-name>index</servlet-name>
         <url-pattern>/index.html</url-pattern>
     </servlet-mapping>
-
-
-    <servlet>
-        <description>Front controller for all permissible resources</description>
-        <servlet-name>front</servlet-name>
-        <servlet-class>com.peerpen.framework.Router</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>front</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-
 
     <servlet>
         <description>This will give you a list of all of the available and accepted routes</description>
@@ -143,16 +169,6 @@
     <!--</servlet-mapping>-->
 
 
-    <filter>
-        <filter-name>noCacheFilter</filter-name>
-        <filter-class>com.peerpen.controller.NoCacheFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>noCacheFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-
     <!--<servlet>-->
     <!--<servlet-name>hunk</servlet-name>-->
     <!--<jsp-file>/view/simulator.jsp</jsp-file>-->
@@ -161,14 +177,15 @@
     <!--<servlet-name>hunk</servlet-name>-->
     <!--<url-pattern>/hunk</url-pattern>-->
     <!--</servlet-mapping>-->
-    <!--<servlet>-->
-    <!--<servlet-name>hunk.do</servlet-name>-->
-    <!--<servlet-class>com.peerpen.controller.HunkController</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>hunk.do</servlet-name>-->
-    <!--<url-pattern>/hunk.do</url-pattern>-->
-    <!--</servlet-mapping>-->
+
+    <servlet>
+        <servlet-name>hunk.do</servlet-name>
+        <servlet-class>com.peerpen.controller.HunkController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>hunk.do</servlet-name>
+        <url-pattern>/hunk.do</url-pattern>
+    </servlet-mapping>
 
     <!--<servlet>-->
     <!--<servlet-name>reset</servlet-name>-->
@@ -308,6 +325,7 @@
         <url-pattern>/error</url-pattern>
     </servlet-mapping>
 
+
     <!--<session-config>-->
     <!--<session-timeout>72</session-timeout>-->
     <!--</session-config>-->
@@ -330,6 +348,10 @@
     <!--</param-value>-->
     <!--</context-param>-->
 
+    <!--
+        SERVLET CONTEXT PARAM
+    ========================= -->
+
     <context-param>
         <description>Location of the permissible domain model</description>
         <param-name>resource</param-name>
@@ -338,12 +360,18 @@
 
     <context-param>
         <description>URL of safe resources that do not require login or session</description>
-        <param-name>safe-routes</param-name>
+        <param-name>exempt-routes</param-name>
         <param-value>
             /index
             /error
             /assets
+            /routes
         </param-value>
     </context-param>
 
+    <context-param>
+        <description>Application secret...shushhhh</description>
+        <param-name>app-secret</param-name>
+        <param-value>0e04d8638c7cd715a1b2d6000433b8fe78422708</param-value>
+    </context-param>
 </web-app>
