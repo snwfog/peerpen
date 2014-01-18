@@ -3,9 +3,9 @@ if(search_autocomplete){
     $(document).ready(function() {
         $('#search_query').keyup(function(event)
         {
-            var keyin = $('#search_query').val();
+            var term = $('#search_query').val();
             $.post('search_autocomplete.do', {
-                keyin: keyin
+                term: term
             }, function(responseJson) {
                 var ul = $('#suggestion_list');    // locate the ul dom
                 ul.empty();     // remove existing li's

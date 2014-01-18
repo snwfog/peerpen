@@ -29,23 +29,25 @@ import javax.servlet.http.HttpServletResponse;
 public class SearchAutocompleteController extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        String keyin = request.getParameter( "keyin" );
-        System.out.print( "user input:" + keyin );
-
-        if (keyin.isEmpty()){
-            keyin = " ";
+        // Handling input (i.e.: http://localhost:8080/search_autocomplete.do?q=test)
+        String q = " ";
+        if( request.getParameter("term")!= null){
+            q = request.getParameter( "term" );
         }
 
-        List<String> documents = new Document().getSuggestedDocuments( keyin, 1 );
-        List<String> peers = new Peer().getSuggestedPeers( keyin, 1 );
+        // Obtains for each searchable model a list of suggestion base on the query
+        List<String> documents = new Document().getSuggestedDocuments( q, 1 );
+        List<String> peers = new Peer().getSuggestedPeers( q, 1 );
 
+        // Merge all lists into a set (unique)
         Set suggestionPool = new LinkedHashSet(  );
         suggestionPool.addAll( documents );
         suggestionPool.addAll( peers );
 
+        // Convert set into json string
         String json = new Gson().toJson( suggestionPool );
-        System.out.print( "returned suggestions:" + json );
 
+        // Return json string as response
         response.setContentType( "application/json" );
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
