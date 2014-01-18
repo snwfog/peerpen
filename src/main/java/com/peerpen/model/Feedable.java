@@ -168,6 +168,15 @@ public class Feedable extends Base {
         }
     }
 
+    public static List<Feedable> getFeed(Peer p){
+      return getFeed(p.getId());
+    }
+
+    public static List<Feedable> getFeed(int id){
+        Map<String, Object> m = new HashMap<String, Object>();
+        return new Feedable().findAll(m);
+    }
+
     public String getType() {
         return type;
     }
