@@ -275,7 +275,7 @@ public class Peer extends Base
 
 
     public List<Peer> getMatchedPeers(String keyword){
-        String sql = "SELECT * FROM `peers` WHERE `user_name` LIKE '%" + keyword + "%'";
+        String sql = "SELECT * FROM `peers` WHERE `user_name` LIKE '%" + keyword + "%' OR `first_name` LIKE '%" + keyword + "%' OR `last_name` LIKE '%" + keyword + "%'";
         List<Peer> peers = new Peer().queryAll(sql);
         return peers;
     }
@@ -284,11 +284,13 @@ public class Peer extends Base
     public List<String> getSuggestedPeers(String keyword, int limit){
         String sql = "SELECT `user_name` FROM `peers` WHERE `user_name` LIKE '%" + keyword + "%' LIMIT " + limit;
         List<Peer> peers = new Peer().queryAll(sql);
-        // store only doc_name to list
         List<String> suggestions = new ArrayList<String>();
-        for(int i=0;i<peers.size();i++){
-            suggestions.add(peers.get(i).getUserName());
+        if(peers.size() > 0){
+            for(int i=0;i<peers.size();i++){
+                suggestions.add(peers.get(i).getUserName());
+            }
         }
+
         return suggestions;
     }
 

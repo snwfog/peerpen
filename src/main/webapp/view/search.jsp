@@ -5,6 +5,8 @@
 <%@ include file="/view/includes/static/header.jsp" %>
 
 <script>
+var autocomplete = true;
+if(autocomplete){
 $(document).ready(function() {
     $('#query').keyup(function(event)
     {
@@ -33,8 +35,8 @@ $(document).ready(function() {
             });
         });
     });
-
 });
+}
 </script>
 
 
