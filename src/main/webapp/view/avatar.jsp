@@ -62,10 +62,19 @@
         <h1>Summary of your profile <button class="pull-right btn btn-primary" type="submit">Next (2/2)</button></h1>
     </form>
 
-  <div class="dravatar">
+  <form action="upload.do" method="post" enctype="multipart/form-data">
+  <div  class="pull-right">
+          <img id="photo" src="/assets/images/profile/256.jpg" style="float:left;" />
+      <h3>Upload a picture through browsing...</h3>
+
+      <input id="uploader" type="file" name="file" size="50" />
+      <br />
+      <input type="submit" value="Upload File" />
+  </div>
+  <div class="dravatar pull-left" style=" max-width:500px;">
     <h4>Drag & Drop picture</h4>
     <div class="dravatar-avatar-wrap">
-      <img src="/assets/images/profile/256.jpg" id="profile-avatar" alt="Image for Profile">
+      <img src="/assets/images/profile/256.jpg" name="avatar-image" id="profile-avatar" alt="Image for Profile">
       <div class="description"><%= session.getAttribute("gender") == null ? "" : session.getAttribute("gender") %><%if (session.getAttribute("dob") == null){ %>, <%}%> <%= session.getAttribute("dob") == null ? "" : session.getAttribute("dob") %></div>
     </div>
 
@@ -76,15 +85,10 @@
 
   </div>
 
-  <h3>Upload a picture through browsing...</h3>
-
-  <form action="upload.do" method="post" enctype="multipart/form-data">
-    <input id="uploader" type="file" name="file" size="50" />
-    <br />
-    <input type="submit" value="Upload File" />
   </form>
-
 </div>
+
+<div id="uploadPreview"></div>
 
 <!-- avatar dragging part-->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>

@@ -28,6 +28,8 @@ public class UploadController extends HttpServlet
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
 //    http://www.tutorialspoint.com/jsp/jsp_file_uploading.htm
+    String avatarFolder = request.getSession().getServletContext().getRealPath("/")+"assets/images/profile/";
+    System.out.println("context Path "+request.getSession().getServletContext().getRealPath("/") );
     File file ;
     int maxFileSize = 5000 * 1024;
     int maxMemSize = 5000 * 1024;
@@ -35,7 +37,7 @@ public class UploadController extends HttpServlet
     String filePath = null;
     if (System.getProperty("os.name").contains("Mac"))
     {
-      filePath = context.getInitParameter("file-upload-mac");
+      filePath = avatarFolder;
     }
     else
     {
@@ -51,7 +53,7 @@ public class UploadController extends HttpServlet
       // maximum size that will be stored in memory
       factory.setSizeThreshold(maxMemSize);
       // Location to save data that is larger than maxMemSize.
-      factory.setRepository(new File("i dont konw what to put here"));
+      factory.setRepository(new File("i don't know what to put here"));
 
       // Create a new file upload handler
       ServletFileUpload upload = new ServletFileUpload(factory);
@@ -92,6 +94,7 @@ public class UploadController extends HttpServlet
     }else{
       System.out.println("NO file uploaded");
     }
+      response.sendRedirect("/avatar");
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

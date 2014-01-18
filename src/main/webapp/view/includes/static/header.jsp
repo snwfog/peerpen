@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="/assets/css/lib/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/custom/peerpen.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/custom/style.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/lib/imgareaselect-animated.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/lib/imgareaselect-default.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/lib/imgareaselect-deprecated.css" type="text/css">
+
 
     <%--<link rel="stylesheet" href="/assets/css/lib/bootstrap.min.css" type="text/css">--%>
     <%--<link rel="stylesheet" href="/assets/css/lib/flat-ui.css" type="text/css">--%>
@@ -33,6 +37,7 @@
     <%--<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">--%>
     <%--<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">--%>
     <%--<link rel="shortcut icon" href="../assets/ico/favicon.png">--%>
+
 
 </head>
 <body>

@@ -29,7 +29,7 @@
                 <input type="text" class="form-control" style="margin:10px 0" id="valid_username" name="user_name" placeholder="Username" data-content="<div class='validation'>You need to fill in with a username</div>" data-html="true"/>
                 <input type="password" class="form-control" style="margin:10px 0" id="valid_pass" name="password" placeholder="Password" data-content="<div class='validation'>You need to fill in with a password</div>" data-html="true"/>
                 <input type="password" class="form-control" style="margin:10px 0" id="valid_cpass" name="confirm_password" placeholder="Confirmed Password" data-content="<div class='validation'>You need to confirm your password</div>" data-html="true"/>
-                <input type="text" class="form-control" style="margin:10px 0" id="valid_email" name="email" placeholder="Email" data-content="<div class='validation'>You need to fill in your email address</div>" data-html="true" />
+                <input type="text" class="form-control" style="margin:10px 0" id="valid_email" name="email" placeholder="Email" data-content="<div class='validation'>You need to fill in your valid email address</div>" data-html="true" />
                 <button type="submit" class="btn btn-primary pull-right" value="submit">Sign Up</button>
             </div>
         </form>

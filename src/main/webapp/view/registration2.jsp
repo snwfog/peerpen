@@ -24,7 +24,7 @@
                 <textarea class="form-control" style="resize:none;" name="description" rows="9" placeholder="Present your experience, skills and expertise"></textarea>
             </div>
             <div style="max-width:330px; margin-left:50%">
-                <input type="text" class="form-control" name="dob" style="margin:10px 0" id="valid_dob" placeholder="Date of Birth" data-content="<div class='validation'>Valid date required in the form of yyyy-MM-dd (2014-04-18)</div>" data-html="true">
+                <input type="text" class="form-control" name="dob" style="margin:10px 0" id="valid_dob" placeholder="Date of Birth" data-content="<div class='validation'>Valid date required in the form of yyyy-MM-dd (eg. 2014-04-18)</div>" data-html="true">
                 <div class="radio">
                     <label>
                         <input style="margin:10px 10px" type="radio" name="gender" id="optionsRadios1" value="Male" checked>
@@ -39,7 +39,7 @@
                 </div>
                 <input type="text" class="form-control" name="country" style="margin:10px 0" placeholder="Country">
                 <input type="text" class="form-control" name="industry" style="margin:10px 0" placeholder="Industry">
-                <input type="text" class="form-control" name="yoe" style="margin:10px 0" placeholder="Years of Experience">
+                <input type="text" class="form-control" name="yoe" style="margin:10px 0" id="valid_yoe" placeholder="Years of Experience" data-content="<div class='validation'>The years of experience must be in integer(s) format (eg. 12)</div>" data-html="true">
                 <input type="text" class="form-control" name="personal_website" style="margin:10px 0" placeholder="Personal Website">
                 <input type="hidden" class="form-control" name="id" value="<%= peer.getId()%>">
             </div>
