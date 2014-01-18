@@ -150,3 +150,33 @@ h2.description{
     font-weight: 500;
 ;
 }
+
+
+
+
+
+
+.bs-example {
+    position: relative;
+    padding: 45px 15px 15px;
+    margin: 0 -15px 15px;
+    margin-left: 0;
+    margin-right: 0;
+    background-color: #fff;
+    border-width: 1px;
+    border-color: #ddd;
+    border-style: solid;
+    border-radius: 4px 4px 0 0;
+    box-shadow: none;
+}
+/* Echo out a label for the example */
+.bs-example-label{
+    position: absolute;
+    top:  15px;
+    left: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #bbb;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}

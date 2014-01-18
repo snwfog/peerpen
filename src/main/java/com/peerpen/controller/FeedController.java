@@ -1,6 +1,9 @@
 package com.peerpen.controller;
 
+import com.peerpen.model.Feedable;
 import com.peerpen.model.Peer;
+import com.sunnyd.Base;
+import org.jooq.DSLContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +29,9 @@ public class FeedController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("feeeet");
+
+
+        request.setAttribute("FeedableList", Feedable.getFeed(1));
         request.getRequestDispatcher("/feed").forward(request, response);
     }
 

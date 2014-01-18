@@ -2,6 +2,9 @@ package com.peerpen.model;
 
 import com.sunnyd.Base;
 import com.sunnyd.annotations.ActiveRecordField;
+import org.jooq.DSLContext;
+import org.jooq.Field;
+import org.jooq.impl.DSL;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -173,8 +176,13 @@ public class Feedable extends Base {
     }
 
     public static List<Feedable> getFeed(int id){
-        Map<String, Object> m = new HashMap<String, Object>();
-        return new Feedable().findAll(m);
+        DSLContext jooq = startQuery();
+
+        Field<?> allField    = DSL.field("a.*");
+        Field<?> lastModifiedDate    = DSL.field("a.last_modified_date");
+
+        String query = jooq.select(allField).from("feedables a").where("a.user_id = "+id).orderBy(lastModifiedDate.desc()).toString();
+        return new Feedable().queryAll(query);
     }
 
     public String getType() {

@@ -125,15 +125,25 @@ public class Changeset extends Feedable implements IModel {
 //
 //
 //        //System.out.println(d.getPeer().getCreationDate());
-//        Changeset a = new Changeset();
-//        a.save();
-//        a.destroy();
+
+
+//            Changeset a = new Changeset();
+//            a.setDocumentId(1);
+//            a.setPeerId(1);
+//            a.setHunkId(1);
+//            a.setContent("DONT DO IT");
+//            a.save();
 
           Comment com = new Comment();
-          com.setMessage("aoidjaodjoa");
+          com.setMessage("faggot stick");
           com.setDocumentId(1);
           com.setPeerId(1);
           com.save();
+
+
+//        for( Feedable f : Feedable.getFeed(1)){
+//            System.out.println(f.reveal().getLastModifiedDate().toString());
+//        }
 
 
 
