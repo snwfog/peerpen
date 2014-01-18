@@ -129,6 +129,13 @@ public class Changeset extends Feedable implements IModel {
 //        a.save();
 //        a.destroy();
 
+          Comment com = new Comment();
+          com.setMessage("aoidjaodjoa");
+          com.setDocumentId(1);
+          com.setPeerId(1);
+          com.save();
+
+
 
     }
 
