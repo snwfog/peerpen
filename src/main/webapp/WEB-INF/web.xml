@@ -224,23 +224,6 @@
     <!--</servlet-mapping>-->
 
     <!--<servlet>-->
-    <!--<servlet-name>documents</servlet-name>-->
-    <!--<jsp-file>/view/documents.jsp</jsp-file>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>documents</servlet-name>-->
-    <!--<url-pattern>/documents</url-pattern>-->
-    <!--</servlet-mapping>-->
-    <!--<servlet>-->
-    <!--<servlet-name>documents.do</servlet-name>-->
-    <!--<servlet-class>com.peerpen.controller.DocumentsController</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>documents.do</servlet-name>-->
-    <!--<url-pattern>/documents.do</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--<servlet>-->
     <!--<servlet-name>search</servlet-name>-->
     <!--<jsp-file>/view/search.jsp</jsp-file>-->
     <!--</servlet>-->
@@ -275,22 +258,22 @@
     <!--</servlet-mapping>-->
 
 
-    <!--<servlet>-->
-    <!--<servlet-name>document</servlet-name>-->
-    <!--<jsp-file>/view/document.jsp</jsp-file>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>document</servlet-name>-->
-    <!--<url-pattern>/document</url-pattern>-->
-    <!--</servlet-mapping>-->
-    <!--<servlet>-->
-    <!--<servlet-name>document.do</servlet-name>-->
-    <!--<servlet-class>com.peerpen.controller.DocumentController</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>document.do</servlet-name>-->
-    <!--<url-pattern>/document.do</url-pattern>-->
-    <!--</servlet-mapping>-->
+    <servlet>
+        <servlet-name>document</servlet-name>
+        <jsp-file>/view/document.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>document</servlet-name>
+        <url-pattern>/document</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>document.do</servlet-name>
+        <servlet-class>com.peerpen.controller.DocumentController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>document.do</servlet-name>
+        <url-pattern>/document.do</url-pattern>
+    </servlet-mapping>
 
     <!--<servlet>-->
     <!--<servlet-name>changeset</servlet-name>-->

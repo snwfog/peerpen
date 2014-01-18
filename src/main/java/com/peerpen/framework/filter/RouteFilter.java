@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.peerpen.framework.InternalHttpServletRequest;
 import com.peerpen.framework.exception.HttpException;
 import com.peerpen.framework.exception.MissingArgumentException;
-import com.peerpen.framework.exception.NonePermissibleRoute;
+import com.peerpen.framework.exception.NonPermissibleRoute;
 import com.peerpen.framework.exception.NotLoggedInException;
 import com.peerpen.framework.exception.TooManyUrlNestingException;
 import com.peerpen.framework.exception.UserNotFoundException;
@@ -129,8 +129,8 @@ public class RouteFilter implements Filter {
             } else {
                 this.redirectError( httpRequest, (HttpServletResponse) response );
             }
-        } catch ( MissingArgumentException | NonePermissibleRoute | TooManyUrlNestingException e) {
-            this.redirectError(request, response, e);
+        } catch ( MissingArgumentException | NonPermissibleRoute | TooManyUrlNestingException e ) {
+            this.redirectError( (HttpServletRequest) request, (HttpServletResponse) response, e );
         }
     }
 
@@ -195,22 +195,24 @@ public class RouteFilter implements Filter {
 
 
     private boolean isPermissibleRoutes( String stringQuery )
-            throws NonePermissibleRoute, TooManyUrlNestingException, MissingArgumentException {
-        String url = stringQuery.substring( 0, Math.min( stringQuery.indexOf( "?" ), stringQuery.length() ) );
+            throws NonPermissibleRoute, TooManyUrlNestingException, MissingArgumentException {
+        String url = stringQuery.substring( 0
+                , stringQuery.contains( "?" ) ? stringQuery.indexOf( "?" ) : stringQuery.length() );
         String[] strippedUrl = url.split( "[/0-9/]+" );
         String strippedJoinedUrl = StringUtils.join( strippedUrl, "/" );
         Set<String> routes = (Set<String>) fc.getServletContext().getAttribute( "allRoutes" );
         if ( !routes.contains( strippedJoinedUrl ) ) {
-            throw new NonePermissibleRoute( "Route does not exists " + stringQuery );
+            throw new NonPermissibleRoute( "Route does not exists " + stringQuery );
         }
 
-        if ( strippedUrl.length > 8 ) {
+        // Greater than 4 nesting will be way too much mkay?
+        if ( strippedUrl.length > 5 ) {
             throw new TooManyUrlNestingException( "Too many nesting found: " + strippedUrl.length );
         }
 
-        if ( strippedUrl.length % 2 != 0 ) {
-            throw new MissingArgumentException( "Missing argument, found " + strippedUrl.length );
-        }
+        //if ( strippedUrl.length % 2 != 0 ) {
+        //    throw new MissingArgumentException( "Missing argument, found " + strippedUrl.length );
+        //}
 
         return true;
     }
@@ -244,8 +246,8 @@ public class RouteFilter implements Filter {
 
     }
 
-    public void redirectError( HttpServletRequest request, HttpServletResponse response, HttpException exception) {
-        redirect( request, response, exception.getStatusCode(), "/error", exception.toString());
+    public void redirectError( HttpServletRequest request, HttpServletResponse response, HttpException exception ) {
+        redirect( request, response, exception.getStatusCode(), "/error", exception.toString() );
     }
 
     public void redirectUnauthorized( HttpServletRequest request, HttpServletResponse response ) {
