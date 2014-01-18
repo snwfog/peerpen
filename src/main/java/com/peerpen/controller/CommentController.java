@@ -61,32 +61,27 @@ public class CommentController extends HttpServlet
 
         comment.update();
 
-        List<Comment> comments = document.getOrderedComments();
+        //List<Comment> comments = document.getOrderedComments();
+        String message= comment.getId().toString()+"|"+comment.getUpVote().toString();
 
-        request.setAttribute("comments", comments);
-        request.setAttribute("document", document);
-        request.setAttribute("comment", comment);
-        request.getRequestDispatcher("/comment").forward(request, response);
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(message);
     }
 
     protected void addDownVote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        HttpSession session = request.getSession();
-        Peer peer = (Peer)session.getAttribute("user");
-        Document document = new Document().find(Integer.parseInt(request.getParameter("docId")));
+
         Comment comment = new Comment().find(Integer.parseInt(request.getParameter("commentId")));
-
         comment.setDownVote(comment.getDownVote()+1);
-        //comment.setDownVote(0);
-
+        int commentId = comment.getId()+1;
+        String message= commentId+"|"+comment.getDownVote().toString();
         comment.update();
 
-        List<Comment> comments = document.getOrderedComments();
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(message);
 
-        request.setAttribute("comments", comments);
-        request.setAttribute("document", document);
-        request.setAttribute("comment", comment);
-        request.getRequestDispatcher("/comment").forward(request, response);
     }
 
 

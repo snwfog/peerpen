@@ -11,6 +11,7 @@
 <% List<Comment> comments = (List<Comment>) request.getAttribute("comments");%>
 <% Changeset changeset = (Changeset) request.getAttribute("changeset");%>
 
+
 <script type="text/javascript">
   jQuery(document).ready(function($) {
     $('#tabs').tab();
@@ -20,6 +21,147 @@
     var commentId = $(this).data('id');
     $(".modal-footer #commentId").val(commentId);
   });
+</script>
+
+
+<script>
+    function doAjaxPost3() {
+        /* attach a submit handler to the form */
+        $("form.AjaxSubmit3").submit(function (event) {
+
+            /* stop form from submitting normally */
+            event.preventDefault();
+
+            /* get some values from elements on the page: */
+            var $form = $(this);
+            var commentId = $(this).data('id');
+
+            //$(".AjaxSubmit #commentPoint").val(commentId);
+            var url = $form.attr('action');
+            var data = $form.serialize();
+
+//Here I call the ajax and post the data
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                success: function(response, textStatus, jqXHR){
+                    $(".AjaxSubmit3 #commentPoint").val(commentId);
+                    var a = response.split("|");
+                    var b = "up-"+a[0];
+
+                    $(".AjaxSubmit3 #"+b).html(a[1]);   //select the id and put the response in the html
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log('error(s):'+textStatus, errorThrown);
+                }
+            });
+        });
+        return false;
+    };
+
+    function doAjaxPost4() {
+        /* attach a submit handler to the form */
+        $("form.AjaxSubmit4").submit(function (event) {
+
+            /* stop form from submitting normally */
+            event.preventDefault();
+
+            /* get some values from elements on the page: */
+            var $form = $(this);
+            var commentId = $(this).data('id');
+
+            //$(".AjaxSubmit #commentPoint").val(commentId);
+            var url = $form.attr('action');
+            var data = $form.serialize();
+
+//Here I call the ajax and post the data
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                success: function(response, textStatus, jqXHR){
+                    $(".AjaxSubmit4 #commentPoint").val(commentId);
+                    var a = response.split("|");
+                    var b = "down-"+a[0];
+
+                    $(".AjaxSubmit4 #"+b).html(a[1]);   //select the id and put the response in the html
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log('error(s):'+textStatus, errorThrown);
+                }
+            });
+        });
+        return false;
+    };
+
+    function doAjaxPost1() {
+        /* attach a submit handler to the form */
+        $("form.AjaxSubmit1").submit(function (event) {
+
+            /* stop form from submitting normally */
+            event.preventDefault();
+
+            /* get some values from elements on the page: */
+            var $form = $(this);
+            var commentId = $(this).data('id');
+
+            //$(".AjaxSubmit #commentPoint").val(commentId);
+            var url = $form.attr('action');
+            var data = $form.serialize();
+
+//Here I call the ajax and post the data
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                success: function(response, textStatus, jqXHR){
+                    $(".AjaxSubmit1 #commentPoint").val(commentId);
+                    var a = response.split("|");
+
+                    $(".AjaxSubmit1 #"+a[0]).html(a[1]);   //select the id and put the response in the html
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log('error(s):'+textStatus, errorThrown);
+                }
+            });
+        });
+        return false;
+    };
+
+    function doAjaxPost2() {
+        /* attach a submit handler to the form */
+        $("form.AjaxSubmit2").submit(function (event) {
+
+            /* stop form from submitting normally */
+            event.preventDefault();
+
+            /* get some values from elements on the page: */
+            var $form = $(this);
+            var commentId = $(this).data('id');
+
+            var url = $form.attr('action');
+            var data = $form.serialize();
+
+//Here I call the ajax and post the data
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                success: function(response, textStatus, jqXHR){
+//                    var commentId = $(this).data('id');
+//                    alert(commentId);
+                    $(".AjaxSubmit2 #commentPoint").val(commentId);
+                    var a = response.split("|");
+                    $(".AjaxSubmit2 #"+a[0]).html(a[1]);   //select the id and put the response in the html
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log('error(s):'+textStatus, errorThrown);
+                }
+            });
+        });
+        return false;
+    };
 </script>
 
 <div class="container">
@@ -56,7 +198,7 @@
               <%= comment.getMessage() %>
             </div>
             <div class="card-actions">
-                <form method="POST" action="/comment.do">
+                <form method="POST" action="/comment.do" class="AjaxSubmit3">
 
                     <input type="hidden" name="docId" value="<%= document.getId()%>"/>
                     <input type="hidden" name="commentId" value="<%= comment.getId()%>"/>
@@ -64,10 +206,12 @@
                     <input type="hidden" name="downVote" value="<%= comment.getDownVote()%>"/>
                     <input type="hidden" name="_method" value="_upVote"/>
 
-                    <button class="btn"><%= comment.getUpVote()%>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
+                    <button class="btn" onclick="doAjaxPost3();">
+                        <div class="point" id="up-<%= comment.getId()%>" name="point"><%= comment.getUpVote()%></div>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
 
-                 </form>
-                <form method="POST" action="/comment.do">
+
+                </form>
+                <form method="POST" action="/comment.do" class="AjaxSubmit4">
 
                     <input type="hidden" name="docId" value="<%= document.getId()%>"/>
                     <input type="hidden" name="commentId" value="<%= comment.getId()%>"/>
@@ -75,11 +219,10 @@
                     <input type="hidden" name="downVote" value="<%= comment.getDownVote()%>"/>
                     <input type="hidden" name="_method" value="_downVote"/>
 
-                    <button class="btn"><%= comment.getDownVote()%>&nbsp;<i class="fa fa-thumbs-down"></i></button>&nbsp;
+                    <button  class="btn" onclick="doAjaxPost4();">
+                        <div class="point" id="down-<%= comment.getId()+1%>" name="point"><%= comment.getDownVote()%></div>&nbsp; <i class="fa fa-thumbs-down"></i></button>&nbsp;
 
                 </form>
-
-
 
               <% if(peer.getId() == document.getPeerId() || peer.getId() == comment.getPeerId()){%>
               <a data-toggle="modal" data-id="<%= comment.getId()%>" class="confirmDeleteCommentDialog"
@@ -116,7 +259,7 @@
                   <p><%= c.getMessage()%></p>
                 </div>
                   <div class="card-actions">
-                      <form method="POST" action="/comment.do">
+                      <form data-id="<%= c.getId()%>" method="POST" action="/comment.do" class="AjaxSubmit1">
 
                           <input type="hidden" name="docId" value="<%= document.getId()%>"/>
                           <input type="hidden" name="commentId" value="<%= c.getId()%>"/>
@@ -124,11 +267,12 @@
                           <input type="hidden" name="downVote" value="<%= c.getDownVote()%>"/>
                           <input type="hidden" name="_method" value="_upVote"/>
 
-                          <button class="btn"><%= c.getUpVote()%>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
+                          <button class="btn" onclick="doAjaxPost1();">
+                              <div class="point" id="<%= c.getId()%>" name="point"><%= c.getUpVote()%></div>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
 
                       </form>
 
-                      <form method="POST" action="/comment.do">
+                      <form data-id="<%= c.getId()%>" method="POST" action="/comment.do"  class="AjaxSubmit2" >
 
                           <input type="hidden" name="docId" value="<%= document.getId()%>"/>
                           <input type="hidden" name="commentId" value="<%= c.getId()%>"/>
@@ -136,8 +280,8 @@
                           <input type="hidden" name="downVote" value="<%= c.getDownVote()%>"/>
                           <input type="hidden" name="_method" value="_downVote"/>
 
-                          <button class="btn"><%= c.getDownVote()%>&nbsp; <i class="fa fa-thumbs-down"></i></button>&nbsp;
-
+                          <button  class="btn" onclick="doAjaxPost2();">
+                              <div class="point" id="<%= c.getId()+1%>" name="point"><%= c.getDownVote()%></div>&nbsp; <i class="fa fa-thumbs-down"></i></button>&nbsp;
                       </form>
 
                       <% if(peer.getId() == ch.getPeerId() || peer.getId() == c.getPeerId()){%>
