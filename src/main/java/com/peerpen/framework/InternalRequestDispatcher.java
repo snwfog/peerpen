@@ -22,14 +22,22 @@ public class InternalRequestDispatcher implements RequestDispatcher {
     public void internalForward( ServletRequest request, ServletResponse response )
             throws ServletException, IOException {
         ((InternalHttpServletRequest) request).injectSecret();
-        logger.warn( "Internally forwarding the request to " + ((InternalHttpServletRequest) request).getRequestURI() );
+        logger.warn( "Internally forwarding the request to "
+                + ((InternalHttpServletRequest) request).getRequestURI() );
+        this.rd.forward( request, response );
+    }
+
+    public void checkedForward( ServletRequest request, ServletResponse response )
+            throws ServletException, IOException {
+        logger.warn( "Processing a checked forward request to "
+                + ((InternalHttpServletRequest) request).getRequestURI() );
         this.rd.forward( request, response );
     }
 
     @Override
-    public void forward( ServletRequest request, ServletResponse response ) throws ServletException, IOException {
-        logger.warn( "Normal forwarding the request to " + ((InternalHttpServletRequest) request).getRequestURI() );
-        this.rd.forward( request, response );
+    public void forward( ServletRequest request, ServletResponse response )
+            throws ServletException, IOException {
+        internalForward( request, response );
     }
 
     @Override

@@ -32,8 +32,7 @@ public class RouteController extends HttpServlet {
 
         req.setAttribute( "routes", allRoutes );
 
-        RequestDispatcher dispatcher =
-                ((InternalHttpServletRequest) req).injectSecret().getRequestDispatcher( "hunk.do" );
+        RequestDispatcher dispatcher = req.getRequestDispatcher( "/view/routes.jsp" );
         dispatcher.forward( req, resp );
     }
 }

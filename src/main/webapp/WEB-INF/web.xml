@@ -25,6 +25,7 @@
     <filter-mapping>
         <filter-name>no-cache-filter</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
 
     <filter>
@@ -45,6 +46,7 @@
     <filter-mapping>
         <filter-name>request-filter</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
         <!--<dispatcher>FORWARD</dispatcher>-->
     </filter-mapping>
 
