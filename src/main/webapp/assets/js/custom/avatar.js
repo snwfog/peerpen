@@ -10,6 +10,7 @@ jQuery.event.props.push('dataTransfer');
     settings: {
       bod: $("body"),
       img: $("#profile-avatar"),
+      img2: $("#photo"),
       fileInput: $("#uploader")
     },
 
@@ -70,10 +71,9 @@ jQuery.event.props.push('dataTransfer');
 
       if (typeof file !== 'undefined' && file.type.match('image.*')) {
 
-        Avatar.resizeImage(file, 256, function(data) {
+        Avatar.resizeImage(file, 450, function(data) {
           Avatar.placeImage(data);
         });
-
       } else {
 
         alert("You need to insert an image");
@@ -106,7 +106,9 @@ jQuery.event.props.push('dataTransfer');
 
     placeImage: function(data) {
       s.img.attr("src", data);
+      s.img2.attr("src", data);
     }
+
 
   }
 

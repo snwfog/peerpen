@@ -30,7 +30,11 @@ public class AutocompleteController extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         String query = request.getParameter( "query" );
-        System.out.print( query );
+        System.out.print( "user input:" + query );
+
+        if (query.isEmpty()){
+            query = " ";
+        }
 
         List<String> documents = new Document().getSuggestedDocuments( query, 1 );
         List<String> peers = new Peer().getSuggestedPeers( query, 1 );
@@ -40,7 +44,7 @@ public class AutocompleteController extends HttpServlet {
         suggestionPool.addAll( peers );
 
         String json = new Gson().toJson( suggestionPool );
-        System.out.print( "pool:" + json );
+        System.out.print( "returned suggestions:" + json );
 
         response.setContentType( "application/json" );
         response.setCharacterEncoding("UTF-8");

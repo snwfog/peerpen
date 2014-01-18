@@ -5,41 +5,57 @@
 <%@ include file="/view/includes/static/header.jsp" %>
 
 <script>
+var autocomplete = true;
+if(autocomplete){
 $(document).ready(function() {
-    $('#query').keyup(function()
+    $('#query').keyup(function(event)
     {
-        if ($('#query').val().length > 2){
-            query = $('#query').val();
-            $.post('autocomplete.do', {
-                query: query
-            }, function(responseJson) {
-                var $ul = $('#suggestion_list');    // locate the ul dom
-                $ul.empty();     // remove existing li's
-                $.each(responseJson, function(key, value) {
-                    // Iterate over the JSON object.
-                    $('<li>').text( value ).appendTo($ul);
+        var query = $('#query').val();
+        $.post('autocomplete.do', {
+            query: query
+        }, function(responseJson) {
+            var ul = $('#suggestion_list');    // locate the ul dom
+            ul.empty();     // remove existing li's
+            $.each(responseJson, function(key, value) {
+                // Iterate over the JSON object.
+                var li = $('<li id="suggest_item" style="display:block;text-align:left;padding:5px">').text( value );
+                ul.append(li);
+                li.mouseover(function(){
+                    $(this).css("background-color","gray");
                 });
+                li.mouseout(function(){
+                    $(this).css("background-color", "white");
+                });
+                li.click(function(){
+                    $('#query').val(li.text());
+                });
+                if (event.keyCode == 40) { // down
+                    //li.siblings().first().css("background-color","gray");
+                }
             });
-        }
-
+        });
     });
 });
+}
 </script>
 
 
 
+<div>
 <form action="search.do" method="get" align="center">
-    Search <input type="text" name="query" id="query" />
+    Search <input type="text" name="query" id="query" style="margin-bottom:0px;" autocomplete="off" />
     <input type="submit" name="submit" value="OK" />
     <br />
-    <input type="radio" name="area" value="all" checked />All
-    <input type="radio" name="area" value="documents" />Documents
-    <input type="radio" name="area" value="peers" />Peers
-    <input type="radio" name="area" value="groups" />Groups
-    <%--<input type="radio" name="area" value="tags" />Tags--%>
+    <ul id="suggestion_list" style="background-color:white;width:200px;margin:auto"></ul>
+    <%--<br />--%>
+    <%--<input type="radio" name="area" value="all" checked />All--%>
+    <%--<input type="radio" name="area" value="documents" />Documents--%>
+    <%--<input type="radio" name="area" value="peers" />Peers--%>
+    <%--<input type="radio" name="area" value="groups" />Groups--%>
+    <%--&lt;%&ndash;<input type="radio" name="area" value="tags" />Tags&ndash;%&gt;--%>
 </form>
+</div>
 
-<ul id="suggestion_list"></ul>
 
 <!-- Handling search result -->
 <%
