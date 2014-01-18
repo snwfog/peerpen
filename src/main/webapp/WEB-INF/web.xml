@@ -297,28 +297,36 @@
     <url-pattern>/upload.do</url-pattern>
   </servlet-mapping>
 
-    <!--FEED STUFF-->
-    <servlet>
-        <servlet-name>feed.do</servlet-name>
-        <servlet-class>com.peerpen.controller.FeedController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>feed.do</servlet-name>
-        <url-pattern>/feed.do</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>feed</servlet-name>
-        <jsp-file>/view/feed.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>feed</servlet-name>
-        <url-pattern>/feed</url-pattern>
-    </servlet-mapping>
+  <!--FEED STUFF-->
+  <servlet>
+      <servlet-name>feed.do</servlet-name>
+      <servlet-class>com.peerpen.controller.FeedController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>feed.do</servlet-name>
+      <url-pattern>/feed.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+      <servlet-name>feed</servlet-name>
+      <jsp-file>/view/feed.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>feed</servlet-name>
+      <url-pattern>/feed</url-pattern>
+  </servlet-mapping>
 
+  <servlet>
+    <servlet-name>about</servlet-name>
+    <jsp-file>/view/about.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>about</servlet-name>
+    <url-pattern>/about</url-pattern>
+  </servlet-mapping>
 
-    <session-config>
-        <session-timeout>72</session-timeout>
-    </session-config>
+  <session-config>
+      <session-timeout>72</session-timeout>
+  </session-config>
 
   <context-param>
     <description>Location to store uploaded file</description>
