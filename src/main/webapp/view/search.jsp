@@ -5,45 +5,19 @@
 <%@ include file="/view/includes/static/header.jsp" %>
 
 <script>
-var autocomplete = true;
-if(autocomplete){
-$(document).ready(function() {
-    $('#query').keyup(function(event)
-    {
-        var query = $('#query').val();
-        $.post('autocomplete.do', {
-            query: query
-        }, function(responseJson) {
-            var ul = $('#suggestion_list');    // locate the ul dom
-            ul.empty();     // remove existing li's
-            $.each(responseJson, function(key, value) {
-                // Iterate over the JSON object.
-                var li = $('<li id="suggest_item" style="display:block;text-align:left;padding:5px">').text( value );
-                ul.append(li);
-                li.mouseover(function(){
-                    $(this).css("background-color","gray");
-                });
-                li.mouseout(function(){
-                    $(this).css("background-color", "white");
-                });
-                li.click(function(){
-                    $('#query').val(li.text());
-                });
-                if (event.keyCode == 40) { // down
-                    //li.siblings().first().css("background-color","gray");
-                }
-            });
-        });
+$(function() {
+   $( "#search_query" ).autocomplete({
+        source: "search_autocomplete.do", // param name must be 'term'
+        minLength: 2
     });
 });
-}
 </script>
 
 
 
 <div>
 <form action="search.do" method="get" align="center">
-    Search <input type="text" name="query" id="query" style="margin-bottom:0px;" autocomplete="off" />
+    Search <input type="text" name="search_query" id="search_query" autocomplete="off" style="margin-bottom:0px;" />
     <input type="submit" name="submit" value="OK" />
     <br />
     <ul id="suggestion_list" style="background-color:white;width:200px;margin:auto"></ul>
@@ -55,6 +29,9 @@ $(document).ready(function() {
     <%--&lt;%&ndash;<input type="radio" name="area" value="tags" />Tags&ndash;%&gt;--%>
 </form>
 </div>
+
+
+
 
 
 <!-- Handling search result -->

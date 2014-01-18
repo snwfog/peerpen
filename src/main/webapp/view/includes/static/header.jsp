@@ -18,13 +18,17 @@
     <link rel="stylesheet" href="/assets/css/lib/imgareaselect-animated.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/lib/imgareaselect-default.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/lib/imgareaselect-deprecated.css" type="text/css">
-
-
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <%--<link rel="stylesheet" href="/assets/css/lib/bootstrap.min.css" type="text/css">--%>
     <%--<link rel="stylesheet" href="/assets/css/lib/flat-ui.css" type="text/css">--%>
 
-    <%--temporary fix--%>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+
+    <!-- dont put the following to footer -->
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>      <!-- for search autocomplete -->
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script><!-- for search autocomplete -->
+    <%--<script type="text/javascript" src="/assets/js/custom/search_autocomplete.js"></script> custom search autocomplete --%>
+
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>

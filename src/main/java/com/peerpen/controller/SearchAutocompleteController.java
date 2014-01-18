@@ -26,26 +26,28 @@ import javax.servlet.http.HttpServletResponse;
  * Time: 12:37 PM
  * To change this template use File | Settings | File Templates.
  */
-public class AutocompleteController extends HttpServlet {
+public class SearchAutocompleteController extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        String query = request.getParameter( "query" );
-        System.out.print( "user input:" + query );
-
-        if (query.isEmpty()){
-            query = " ";
+        // Handling input (i.e.: http://localhost:8080/search_autocomplete.do?q=test)
+        String q = " ";
+        if( request.getParameter("term")!= null){
+            q = request.getParameter( "term" );
         }
 
-        List<String> documents = new Document().getSuggestedDocuments( query, 1 );
-        List<String> peers = new Peer().getSuggestedPeers( query, 1 );
+        // Obtains for each searchable model a list of suggestion base on the query
+        List<String> documents = new Document().getSuggestedDocuments( q, 1 );
+        List<String> peers = new Peer().getSuggestedPeers( q, 1 );
 
+        // Merge all lists into a set (unique)
         Set suggestionPool = new LinkedHashSet(  );
         suggestionPool.addAll( documents );
         suggestionPool.addAll( peers );
 
+        // Convert set into json string
         String json = new Gson().toJson( suggestionPool );
-        System.out.print( "returned suggestions:" + json );
 
+        // Return json string as response
         response.setContentType( "application/json" );
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);

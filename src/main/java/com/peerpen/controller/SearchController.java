@@ -35,8 +35,8 @@ public class SearchController extends HttpServlet {
         if (request.getParameter( "area" )!= null){
             area = request.getParameter( "area" );
         }
-        if (request.getParameter( "query" )!= null && !request.getParameter( "query" ).isEmpty()){
-            query = request.getParameter( "query" );
+        if (request.getParameter( "search_query" )!= null && !request.getParameter( "search_query" ).isEmpty()){
+            query = request.getParameter( "search_query" );
         }
 
         String origin = request.getRequestURI();
