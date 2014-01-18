@@ -7,6 +7,7 @@ import com.peerpen.framework.exception.NotLoggedInException;
 import com.peerpen.framework.exception.UserNotFoundException;
 import com.peerpen.model.Peer;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,7 +65,6 @@ public class RouteFilter implements Filter {
                 if ( fis == null ) {
                     throw new FileNotFoundException( "Could not locate file " + rURI );
                 }
-
                 // Set to general plain, could be made better by looking at file extension
                 // http://stackoverflow.com/questions/7380468/write-an-html-page-in-the-servlet-response-properly
                 response.setContentType( this.detectMimeType( rURI ) );
@@ -86,8 +87,15 @@ public class RouteFilter implements Filter {
         } else if ( isPermissibleRoutes( rURI ) ) {
             // Let the user go through
             HttpSession session = httpRequest.getSession();
+
+            if ( isAjaxRequest( httpRequest ) ) {
+                logger.info( "Request is an application Ajax request" );
+                request.setAttribute( "requestType", "applicationJson" );
+                request.setAttribute( "requestData", sanitizeJsonData( httpRequest ) );
+            }
+
             try {
-                logger.info( "Trying to locate a peer with sessionId of " + session.getId() );
+                logger.info( "Trying to locate and to validate a peer with sessionId of " + session.getId() );
                 Map<String, Object> condition = ImmutableMap.of( "sessionId", (Object) session.getId() );
                 Peer p = (new Peer()).find( condition );
                 if ( p == null ) {
@@ -112,6 +120,30 @@ public class RouteFilter implements Filter {
         } else {
             this.redirectError( httpRequest, (HttpServletResponse) response );
         }
+    }
+
+    // TODO: Implement Map<String, String> or JsonElement
+    private String sanitizeJsonData( HttpServletRequest httpRequest ) {
+        logger.info( "Sanitizing Ajax data" );
+        StringBuffer sb = new StringBuffer();
+        String line = null;
+        try {
+            BufferedReader reader = httpRequest.getReader();
+            while ( (line = reader.readLine()) != null ) {
+                sb.append( StringEscapeUtils.escapeHtml4( line ) );
+            }
+        } catch ( IOException e ) {
+            logger.error( "Error parsing application Json data" );
+        }
+
+        // Serializing into Json object
+        return sb.toString();
+    }
+
+    private boolean isAjaxRequest( HttpServletRequest request ) {
+        String applicationRequestHeader = request.getHeader( "Content-Type" );
+        return applicationRequestHeader != null &&
+                "application/x-www-form-urlencoded; charset=UTF-8".contains( applicationRequestHeader );
     }
 
     @Override
