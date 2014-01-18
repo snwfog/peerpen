@@ -3,7 +3,10 @@ package com.peerpen.framework.filter;
 import com.google.common.collect.ImmutableMap;
 import com.peerpen.framework.InternalHttpServletRequest;
 import com.peerpen.framework.exception.HttpException;
+import com.peerpen.framework.exception.MissingArgumentException;
+import com.peerpen.framework.exception.NonePermissibleRoute;
 import com.peerpen.framework.exception.NotLoggedInException;
+import com.peerpen.framework.exception.TooManyUrlNestingException;
 import com.peerpen.framework.exception.UserNotFoundException;
 import com.peerpen.model.Peer;
 
@@ -27,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,76 +53,84 @@ public class RouteFilter implements Filter {
         String rURI = httpRequest.getRequestURI();
         String appPath =
                 fc.getServletContext().getRealPath( "" ); // /Users/snw/Dropbox/prog/java/peerpen/target/peerpen
-        if ( isInternalPreauthorizedForward( httpRequest, (HttpServletResponse) response ) ) {
-            logger.warn( "Received an interval request for " + httpRequest.getRequestURI() );
-            chain.doFilter( request, response );
-            //try {
-            //    (request.getRequestDispatcher( rURI )).forward( request, response );
-            //} catch ( ServletException e ) {
-            //    logger.error( "Failed internal forward to path " + rURI );
-            //} catch ( IOException e ) {
-            //    logger.error( "Failed internal forward to path " + rURI );
-            //}
-        } else if ( isSafeRoutes( rURI ) ) {
-            try {
-                InputStream fis = fc.getServletContext().getResourceAsStream( rURI );
-                if ( fis == null ) {
-                    throw new FileNotFoundException( "Could not locate file " + rURI );
+        try {
+            if ( isInternalPreauthorizedForward( httpRequest, (HttpServletResponse) response ) ) {
+                logger.warn( "Received an interval request for " + httpRequest.getRequestURI() );
+                chain.doFilter( request, response );
+                //try {
+                //    (request.getRequestDispatcher( rURI )).forward( request, response );
+                //} catch ( ServletException e ) {
+                //    logger.error( "Failed internal forward to path " + rURI );
+                //} catch ( IOException e ) {
+                //    logger.error( "Failed internal forward to path " + rURI );
+                //}
+            } else if ( isSafeRoutes( rURI ) ) {
+                try {
+                    InputStream fis = fc.getServletContext().getResourceAsStream( rURI );
+                    if ( fis == null ) {
+                        throw new FileNotFoundException( "Could not locate file " + rURI );
+                    }
+                    // Set to general plain, could be made better by looking at file extension
+                    // http://stackoverflow.com/questions/7380468/write-an-html-page-in-the-servlet-response-properly
+                    response.setContentType( this.detectMimeType( rURI ) );
+                    PrintWriter pw = response.getWriter();
+                    byte[] bytes = new byte[fis.available()];
+                    fis.read( bytes );
+                    response.setContentLength( bytes.length );
+                    pw.print( new String( bytes ) );
+                    pw.flush();
+                    pw.close();
+                } catch ( FileNotFoundException e ) {
+                    //this.redirectError( httpRequest, (HttpServletResponse) response );
+                    // Maybe its a page that we are trying to go?
+                    chain.doFilter( httpRequest, response );
+                    logger.error( e.toString() );
+                } catch ( IOException e ) {
+                    this.redirectError( httpRequest, (HttpServletResponse) response );
+                    logger.error( e.toString() );
                 }
-                // Set to general plain, could be made better by looking at file extension
-                // http://stackoverflow.com/questions/7380468/write-an-html-page-in-the-servlet-response-properly
-                response.setContentType( this.detectMimeType( rURI ) );
-                PrintWriter pw = response.getWriter();
-                byte[] bytes = new byte[fis.available()];
-                fis.read( bytes );
-                response.setContentLength( bytes.length );
-                pw.print( new String( bytes ) );
-                pw.flush();
-                pw.close();
-            } catch ( FileNotFoundException e ) {
-                //this.redirectError( httpRequest, (HttpServletResponse) response );
-                // Maybe its a page that we are trying to go?
-                chain.doFilter( httpRequest, response );
-                logger.error( e.toString() );
-            } catch ( IOException e ) {
-                this.redirectError( httpRequest, (HttpServletResponse) response );
-                logger.error( e.toString() );
-            }
-        } else if ( isPermissibleRoutes( rURI ) ) {
-            // Let the user go through
-            HttpSession session = httpRequest.getSession();
+            } else if ( isPermissibleRoutes( rURI ) ) {
 
-            if ( isAjaxRequest( httpRequest ) ) {
-                logger.info( "Request is an application Ajax request" );
-                request.setAttribute( "requestType", "applicationJson" );
-                request.setAttribute( "requestData", sanitizeJsonData( httpRequest ) );
-            }
+                Map<String, String> parametersMap = ImmutableMap.of();
 
-            try {
-                logger.info( "Trying to locate and to validate a peer with sessionId of " + session.getId() );
-                Map<String, Object> condition = ImmutableMap.of( "sessionId", (Object) session.getId() );
-                Peer p = (new Peer()).find( condition );
-                if ( p == null ) {
-                    throw new UserNotFoundException( session );
+
+                // Let the user go through
+                HttpSession session = httpRequest.getSession();
+
+                if ( isAjaxRequest( httpRequest ) ) {
+                    logger.info( "Request is an application Ajax request" );
+                    request.setAttribute( "requestType", "applicationJson" );
+                    request.setAttribute( "requestData", sanitizeJsonData( httpRequest ) );
                 }
-                if ( session.isNew() && p.getSessionId().equals( session.getId() ) ) {
-                    (request.getRequestDispatcher( httpRequest.getRequestURL().toString() )).forward( request,
-                            response );
-                } else {
-                    throw new NotLoggedInException( session );
+
+                try {
+                    logger.info( "Trying to locate and to validate a peer with sessionId of " + session.getId() );
+                    Map<String, Object> condition = ImmutableMap.of( "sessionId", (Object) session.getId() );
+                    Peer p = (new Peer()).find( condition );
+                    if ( p == null ) {
+                        throw new UserNotFoundException( session );
+                    }
+                    if ( session.isNew() && p.getSessionId().equals( session.getId() ) ) {
+                        (request.getRequestDispatcher( httpRequest.getRequestURL().toString() )).forward( request,
+                                response );
+                    } else {
+                        throw new NotLoggedInException( session );
+                    }
+                } catch ( UserNotFoundException e ) {
+                    this.redirectUnauthorized( httpRequest, (HttpServletResponse) response );
+                } catch ( NotLoggedInException e ) {
+                    request.setAttribute( "exception", e );
+                    this.redirectError( httpRequest, (HttpServletResponse) response );
+                } catch ( ServletException e ) {
+                    logger.error( "Cannot find servlet" );
+                } catch ( IOException e ) {
+                    logger.error( "Cannot find proper jsp" );
                 }
-            } catch ( UserNotFoundException e ) {
-                this.redirectUnauthorized( httpRequest, (HttpServletResponse) response );
-            } catch ( NotLoggedInException e ) {
-                request.setAttribute( "exception", e );
+            } else {
                 this.redirectError( httpRequest, (HttpServletResponse) response );
-            } catch ( ServletException e ) {
-                logger.error( "Cannot find servlet" );
-            } catch ( IOException e ) {
-                logger.error( "Cannot find proper jsp" );
             }
-        } else {
-            this.redirectError( httpRequest, (HttpServletResponse) response );
+        } catch ( MissingArgumentException | NonePermissibleRoute | TooManyUrlNestingException e) {
+            this.redirectError(request, response, e);
         }
     }
 
@@ -182,9 +194,25 @@ public class RouteFilter implements Filter {
     }
 
 
-    private boolean isPermissibleRoutes( String stringQuery ) {
+    private boolean isPermissibleRoutes( String stringQuery )
+            throws NonePermissibleRoute, TooManyUrlNestingException, MissingArgumentException {
+        String url = stringQuery.substring( 0, Math.min( stringQuery.indexOf( "?" ), stringQuery.length() ) );
+        String[] strippedUrl = url.split( "[/0-9/]+" );
+        String strippedJoinedUrl = StringUtils.join( strippedUrl, "/" );
         Set<String> routes = (Set<String>) fc.getServletContext().getAttribute( "allRoutes" );
-        return routes.contains( stringQuery );
+        if ( !routes.contains( strippedJoinedUrl ) ) {
+            throw new NonePermissibleRoute( "Route does not exists " + stringQuery );
+        }
+
+        if ( strippedUrl.length > 8 ) {
+            throw new TooManyUrlNestingException( "Too many nesting found: " + strippedUrl.length );
+        }
+
+        if ( strippedUrl.length % 2 != 0 ) {
+            throw new MissingArgumentException( "Missing argument, found " + strippedUrl.length );
+        }
+
+        return true;
     }
 
     private void redirect( HttpServletRequest request, HttpServletResponse response, int code, String path,
@@ -214,6 +242,10 @@ public class RouteFilter implements Filter {
             redirect( request, response, 404, "/error", "Something went wrong with accessing this page." );
         }
 
+    }
+
+    public void redirectError( HttpServletRequest request, HttpServletResponse response, HttpException exception) {
+        redirect( request, response, exception.getStatusCode(), "/error", exception.toString());
     }
 
     public void redirectUnauthorized( HttpServletRequest request, HttpServletResponse response ) {
