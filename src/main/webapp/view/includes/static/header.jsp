@@ -20,7 +20,9 @@
     <%--<link rel="stylesheet" href="/assets/css/lib/flat-ui.css" type="text/css">--%>
 
     <%--temporary fix--%>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <%--<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script> too slow!! --%>
+    <script type="text/javascript" src="/assets/js/custom/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/custom/search_autocomplete.js"></script>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
