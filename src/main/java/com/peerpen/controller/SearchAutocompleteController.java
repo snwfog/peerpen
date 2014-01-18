@@ -26,18 +26,18 @@ import javax.servlet.http.HttpServletResponse;
  * Time: 12:37 PM
  * To change this template use File | Settings | File Templates.
  */
-public class AutocompleteController extends HttpServlet {
+public class SearchAutocompleteController extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        String query = request.getParameter( "query" );
-        System.out.print( "user input:" + query );
+        String keyin = request.getParameter( "keyin" );
+        System.out.print( "user input:" + keyin );
 
-        if (query.isEmpty()){
-            query = " ";
+        if (keyin.isEmpty()){
+            keyin = " ";
         }
 
-        List<String> documents = new Document().getSuggestedDocuments( query, 1 );
-        List<String> peers = new Peer().getSuggestedPeers( query, 1 );
+        List<String> documents = new Document().getSuggestedDocuments( keyin, 1 );
+        List<String> peers = new Peer().getSuggestedPeers( keyin, 1 );
 
         Set suggestionPool = new LinkedHashSet(  );
         suggestionPool.addAll( documents );
