@@ -3,51 +3,6 @@
 
 <style>
 
-#back-top {
-  position: fixed;
-  bottom: 30px;
-  margin-left: 75%;
-}
-
-#back-top a {
-  width: 108px;
-  display: block;
-  text-align: center;
-  font: 11px/100% Arial, Helvetica, sans-serif;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: #bbb;
-
-  /* transition */
-  -webkit-transition: 1s;
-  -moz-transition: 1s;
-  transition: 1s;
-}
-#back-top a:hover {
-  color: #000;
-}
-
-  /* arrow icon (span tag) */
-#back-top span {
-  width: 108px;
-  height: 108px;
-  display: block;
-  margin-bottom: 7px;
-  background: #ddd url('../../assets/images/up-arrow.png') no-repeat center center;
-
-  /* rounded corners */
-  -webkit-border-radius: 15px;
-  -moz-border-radius: 15px;
-  border-radius: 15px;
-
-  /* transition */
-  -webkit-transition: 1s;
-  -moz-transition: 1s;
-  transition: 1s;
-}
-#back-top a:hover span {
-  background-color: #777;
-}
 
   /* GLOBAL STYLES
   -------------------------------------------------- */
@@ -192,17 +147,11 @@ body {
 
 @media (max-width: 767px) {
 
-  .navbar-inner {
-    margin: -20px;
-  }
-
   .carousel {
     margin-left: -20px;
     margin-right: -20px;
   }
-  .carousel .container {
 
-  }
   .carousel .item {
     height: 300px;
   }
@@ -217,8 +166,7 @@ body {
   .carousel-caption h1 {
     font-size: 30px;
   }
-  .carousel-caption .lead,
-  .carousel-caption .btn {
+  .carousel-caption .lead{
     font-size: 18px;
   }
 
