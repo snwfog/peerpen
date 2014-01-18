@@ -218,20 +218,20 @@
 
 
     <servlet>
-        <servlet-name>autocomplete</servlet-name>
-        <jsp-file>/view/autocomplete.jsp</jsp-file>
+        <servlet-name>search_autocomplete</servlet-name>
+        <jsp-file>/view/search_autocomplete.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>autocomplete</servlet-name>
-        <url-pattern>/autocomplete</url-pattern>
+        <servlet-name>search_autocomplete</servlet-name>
+        <url-pattern>/search_autocomplete</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>autocomplete.do</servlet-name>
-        <servlet-class>com.peerpen.controller.AutocompleteController</servlet-class>
+        <servlet-name>search_autocomplete.do</servlet-name>
+        <servlet-class>com.peerpen.controller.SearchAutocompleteController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>autocomplete.do</servlet-name>
-        <url-pattern>/autocomplete.do</url-pattern>
+        <servlet-name>search_autocomplete.do</servlet-name>
+        <url-pattern>/search_autocomplete.do</url-pattern>
     </servlet-mapping>
 
 
