@@ -7,7 +7,6 @@ import com.peerpen.framework.exception.MissingArgumentException;
 import com.peerpen.framework.exception.NonPermissibleRoute;
 import com.peerpen.framework.exception.NotLoggedInException;
 import com.peerpen.framework.exception.TooManyUrlNestingException;
-import com.peerpen.framework.exception.UserNotFoundException;
 import com.peerpen.model.Peer;
 
 import java.io.BufferedReader;
@@ -15,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.text.MessageFormat;
 import java.util.Map;
 import java.util.Set;
 
@@ -47,24 +47,15 @@ public class RouteFilter implements Filter {
     @Override
     public void doFilter( ServletRequest request, ServletResponse response, FilterChain chain )
             throws IOException, ServletException {
-        logger.info( "Serving a request for " + ((HttpServletRequest) request).getRequestURL() );
         HttpServletRequest httpRequest = (HttpServletRequest) request;
-
         String rURI = httpRequest.getRequestURI();
         String appPath =
                 fc.getServletContext().getRealPath( "" ); // /Users/snw/Dropbox/prog/java/peerpen/target/peerpen
+
+        logger.info( "Incoming request for " + ((HttpServletRequest) request).getRequestURL() );
+
         try {
-            if ( isInternalPreauthorizedForward( httpRequest, (HttpServletResponse) response ) ) {
-                logger.warn( "Received an interval request for " + httpRequest.getRequestURI() );
-                chain.doFilter( request, response );
-                //try {
-                //    (request.getRequestDispatcher( rURI )).forward( request, response );
-                //} catch ( ServletException e ) {
-                //    logger.error( "Failed internal forward to path " + rURI );
-                //} catch ( IOException e ) {
-                //    logger.error( "Failed internal forward to path " + rURI );
-                //}
-            } else if ( isSafeRoutes( rURI ) ) {
+            if ( isSafeRoutes( rURI ) ) {
                 try {
                     InputStream fis = fc.getServletContext().getResourceAsStream( rURI );
                     if ( fis == null ) {
@@ -85,20 +76,36 @@ public class RouteFilter implements Filter {
                     // Maybe its a page that we are trying to go?
                     chain.doFilter( httpRequest, response );
                     logger.error( e.toString() );
+                    logger.error( "Assume to be root" );
                 } catch ( IOException e ) {
                     this.redirectError( httpRequest, (HttpServletResponse) response );
                     logger.error( e.toString() );
+
                 }
+
             } else if ( isPermissibleRoutes( rURI ) ) {
+                if ( isInternalPreauthorizedForward( httpRequest, (HttpServletResponse) response ) ) {
+                    logger.warn( "Received request is an internal request for " + httpRequest.getRequestURI() );
+                    chain.doFilter( request, response );
+                    //try {
+                    //    (request.getRequestDispatcher( rURI )).forward( request, response );
+                    //} catch ( ServletException e ) {
+                    //    logger.error( "Failed internal forward to path " + rURI );
+                    //} catch ( IOException e ) {
+                    //    logger.error( "Failed internal forward to path " + rURI );
+                    //}
+
+                }
 
                 Map<String, String> parametersMap = ImmutableMap.of();
-
 
                 // Let the user go through
                 HttpSession session = httpRequest.getSession();
 
                 if ( isAjaxRequest( httpRequest ) ) {
-                    logger.info( "Request is an application Ajax request" );
+                    logger.info( "Received request is an application Ajax request for " + httpRequest.getRequestURI() );
+                    // TODO: Implement the logging for Json data
+                    logger.info( "Data submitted to servlet is " + " NOT YET IMPLEMENTED" );
                     request.setAttribute( "requestType", "applicationJson" );
                     request.setAttribute( "requestData", sanitizeJsonData( httpRequest ) );
                 }
@@ -106,32 +113,43 @@ public class RouteFilter implements Filter {
                 try {
                     logger.info( "Trying to locate and to validate a peer with sessionId of " + session.getId() );
                     Map<String, Object> condition = ImmutableMap.of( "sessionId", (Object) session.getId() );
-                    Peer p = (new Peer()).find( condition );
-                    if ( p == null ) {
-                        throw new UserNotFoundException( session );
-                    }
-                    if ( session.isNew() && p.getSessionId().equals( session.getId() ) ) {
-                        (request.getRequestDispatcher( httpRequest.getRequestURL().toString() )).forward( request,
-                                response );
+                    Peer user = null;
+                    if ( (user = Peer.isLoggedIn( httpRequest )) != null ) {
+                        request.setAttribute( "peer", user );
+                        // TODO: Validate the rest of the resource along the path
+                        // TODO: Inject the parameter map
+
+                        // Take the last resource and call up on that particular controller and preauthorize
+                        String[] resources = rURI.split( "[/0-9/]+" );
+                        String lastController = resources[resources.length - 1];
+                        //chain.doFilter( request, response );
+                        String internalRoute = MessageFormat.format( "/{0}", lastController );
+                        request.setAttribute( "internalRequestURI", internalRoute );
+                        logger.info( "Forwarding an external request of " + rURI + " to an internal controller of " +
+                                internalRoute );
+                        request.getRequestDispatcher( internalRoute ).forward( request, response );
+                        //throw new UserNotFoundException( session );
                     } else {
                         throw new NotLoggedInException( session );
                     }
-                } catch ( UserNotFoundException e ) {
-                    this.redirectUnauthorized( httpRequest, (HttpServletResponse) response );
                 } catch ( NotLoggedInException e ) {
-                    request.setAttribute( "exception", e );
+                    request.setAttribute( "exception", e ); // TODO: Change this signature
                     this.redirectError( httpRequest, (HttpServletResponse) response );
                 } catch ( ServletException e ) {
-                    logger.error( "Cannot find servlet" );
+                    logger.error( "Servlet crashed from coding error", e );
+                    this.redirectError( httpRequest, (HttpServletResponse) response, e );
                 } catch ( IOException e ) {
-                    logger.error( "Cannot find proper jsp" );
+                    logger.error( "Cannot find proper jsp", e );
+                    this.redirectError( httpRequest, (HttpServletResponse) response, e );
                 }
             } else {
                 this.redirectError( httpRequest, (HttpServletResponse) response );
             }
-        } catch ( MissingArgumentException | NonPermissibleRoute | TooManyUrlNestingException e ) {
+        } catch ( MissingArgumentException | NonPermissibleRoute |
+                TooManyUrlNestingException e ) {
             this.redirectError( (HttpServletRequest) request, (HttpServletResponse) response, e );
         }
+
     }
 
     // TODO: Implement Map<String, String> or JsonElement
@@ -196,8 +214,8 @@ public class RouteFilter implements Filter {
 
     private boolean isPermissibleRoutes( String stringQuery )
             throws NonPermissibleRoute, TooManyUrlNestingException, MissingArgumentException {
-        String url = stringQuery.substring( 0
-                , stringQuery.contains( "?" ) ? stringQuery.indexOf( "?" ) : stringQuery.length() );
+        String url = stringQuery.substring( 0,
+                stringQuery.contains( "?" ) ? stringQuery.indexOf( "?" ) : stringQuery.length() );
         String[] strippedUrl = url.split( "[/0-9/]+" );
         String strippedJoinedUrl = StringUtils.join( strippedUrl, "/" );
         Set<String> routes = (Set<String>) fc.getServletContext().getAttribute( "allRoutes" );
@@ -215,6 +233,16 @@ public class RouteFilter implements Filter {
         //}
 
         return true;
+    }
+
+    private void redirectError( HttpServletRequest request, HttpServletResponse response, Throwable e ) {
+        request.setAttribute( "exception", e );
+        if ( e instanceof HttpException ) {
+            HttpException exc = (HttpException) e;
+            this.redirect( request, response, exc.getStatusCode(), "/error", e.toString() );
+        } else {
+            this.redirectError( request, response );
+        }
     }
 
     private void redirect( HttpServletRequest request, HttpServletResponse response, int code, String path,
@@ -237,11 +265,11 @@ public class RouteFilter implements Filter {
     }
 
     public void redirectError( HttpServletRequest request, HttpServletResponse response ) {
-        HttpException e = (HttpException) request.getAttribute( "exception" );
-        if ( e != null ) {
-            redirect( request, response, e.getStatusCode(), "/error", e.toString() );
+        Throwable e = (Throwable) request.getAttribute( "exception" );
+        if ( e != null && e instanceof HttpException ) {
+            redirect( request, response, ((HttpException) e).getStatusCode(), "/error", e.toString() );
         } else {
-            redirect( request, response, 404, "/error", "Something went wrong with accessing this page." );
+            redirect( request, response, 404, "/error", "Something went wrong when accessing this page." );
         }
 
     }

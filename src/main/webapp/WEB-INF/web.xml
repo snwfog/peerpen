@@ -29,22 +29,22 @@
     </filter-mapping>
 
     <filter>
-        <filter-name>route-filter</filter-name>
-        <filter-class>com.peerpen.framework.filter.RouteFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>route-filter</filter-name>
-        <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>FORWARD</dispatcher>
-    </filter-mapping>
-
-    <filter>
         <filter-name>request-filter</filter-name>
         <filter-class>com.peerpen.framework.filter.InternalRequestFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>request-filter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <!--<dispatcher>FORWARD</dispatcher>-->
+    </filter-mapping>
+
+    <filter>
+        <filter-name>route-filter</filter-name>
+        <filter-class>com.peerpen.framework.filter.RouteFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>route-filter</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <!--<dispatcher>FORWARD</dispatcher>-->

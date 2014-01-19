@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 public class Peer extends Base {
 
@@ -266,5 +268,21 @@ public class Peer extends Base {
 
     public void setSessionId( String sessionId ) {
         this.sessionId = sessionId;
+    }
+
+    public static Peer isLoggedIn( HttpServletRequest httpRequest ) {
+        Map<String, String> param = (Map<String, String>)
+                httpRequest.getAttribute( "urlParameters" );
+        if (param != null)
+        {
+        }
+
+        return new Peer();
+    }
+
+    public boolean isValide()
+    {
+        return true;
+
     }
 }

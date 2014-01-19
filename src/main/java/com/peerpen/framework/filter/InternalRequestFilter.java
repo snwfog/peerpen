@@ -30,7 +30,7 @@ public class InternalRequestFilter implements Filter {
             throws IOException, ServletException {
         logger.info( "Determining the request source" );
         if ( request instanceof InternalHttpServletRequest ) {
-            logger.info("Internal request... Skipping the request mutation");
+            logger.info( "Internal request... Skipping the request mutation" );
             chain.doFilter( request, response );
         } else {
             logger.info( "Mutating into internal HTTP servlet request" );
