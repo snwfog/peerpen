@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Group extends Base implements IModel {
+public class Group extends Taggable implements IModel {
 
     public static final String tableName = "groups";
 

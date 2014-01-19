@@ -27,7 +27,7 @@ public class TagController extends HttpServlet {
 
     //private List getMatchedTags(String keyword){
     //    String sql = "SELECT * FROM `tag_descriptors` WHERE `tag_name` LIKE '%" + keyword + "%'";
-    //    List <Tag> tags = new Tag().queryAll(sql);
+    //    List <TagDescriptor> tags = new TagDescriptor().queryAll(sql);
     //    return tags;
     //}
 }
