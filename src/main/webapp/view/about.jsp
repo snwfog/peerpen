@@ -339,7 +339,13 @@ body {
         <h2>Sulong Ly</h2>
         <p>He loves japan.</p>
       </div>
-    </div><!-- /.span4 -->
+    </div><!-- /.span4 --><div class="span4">
+    <div class="well">
+      <img class="img-circle" src="/assets/images/developers/michelle.jpg">
+      <h2>Michelle Hui</h2>
+      <p>Peter's girlfriend.</p>
+    </div>
+  </div><!-- /.span4 -->
   </div><!-- /.row -->
 
   <!-- /END THE FEATURETTES -->
