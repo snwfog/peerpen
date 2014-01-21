@@ -1,3 +1,9 @@
+# Resource declaration
+# It uses regular expression to match the route that
+# is assigned to the resources
+# Controller with a (.do) is only for backward compatibility
+# Stick with resources that are domain models only
+
 - peer:
   - document(.do)?:
     - comment:

@@ -153,22 +153,22 @@
     <!--</servlet-mapping>-->
 
 
-    <!--<servlet>-->
-    <!--<servlet-name>profile</servlet-name>-->
-    <!--<jsp-file>/view/profile.jsp</jsp-file>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>profile</servlet-name>-->
-    <!--<url-pattern>/profile</url-pattern>-->
-    <!--</servlet-mapping>-->
-    <!--<servlet>-->
-    <!--<servlet-name>profile.do</servlet-name>-->
-    <!--<servlet-class>com.peerpen.controller.ProfileController</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>profile.do</servlet-name>-->
-    <!--<url-pattern>/profile.do</url-pattern>-->
-    <!--</servlet-mapping>-->
+    <servlet>
+        <servlet-name>profile</servlet-name>
+        <jsp-file>/view/profile.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>profile</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>profile.do</servlet-name>
+        <servlet-class>com.peerpen.controller.ProfileController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>profile.do</servlet-name>
+        <url-pattern>/profile.do</url-pattern>
+    </servlet-mapping>
 
 
     <!--<servlet>-->
@@ -348,6 +348,9 @@
         <param-name>exempt-routes</param-name>
         <param-value>
             /index
+            /login
+            /logout
+            /register
             /error
             /assets
             /routes

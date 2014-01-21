@@ -33,5 +33,4 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
 </div>
-<%@ include file="/view/debug.jsp" %>
 <%@ include file="/view/includes/static/footer.jsp" %>

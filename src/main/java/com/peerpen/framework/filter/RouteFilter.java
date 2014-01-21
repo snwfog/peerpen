@@ -120,6 +120,7 @@ public class RouteFilter implements Filter {
                         request.setAttribute( "peer", user );
                         // TODO: Validate the rest of the resource along the path
                         // TODO: Inject the parameter map
+                        // TODO: Inject the URL tunnel parameters as well
                         // Take the last resource and call up on that particular controller and preauthorize
                         String[] resources = rURI.replaceFirst( "/", "" ).split( "/" );
                         Map<String, String> parametersMap = new LinkedHashMap<>();
