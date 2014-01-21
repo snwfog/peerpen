@@ -8,4 +8,3 @@ target/
 classes/
 .DS_Store
 out
-*.iml
