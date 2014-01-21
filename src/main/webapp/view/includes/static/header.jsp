@@ -9,7 +9,7 @@
     <meta name="author" content="Capstone Sunny Delight 2014">
 
     <title>PeerPen - A Capstone project by Sunny Delight</title>
-    
+
     <link rel="stylesheet" href="/assets/css/lib/bootplus.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/lib/bootplus-responsive.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/lib/font-awesome.min.css" type="text/css">
@@ -28,6 +28,7 @@
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>      <!-- for search autocomplete -->
     <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script><!-- for search autocomplete -->
     <%--<script type="text/javascript" src="/assets/js/custom/search_autocomplete.js"></script> custom search autocomplete --%>
+
 
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->

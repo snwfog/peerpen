@@ -1,0 +1,1 @@
+ALTER TABLE `peers` ADD COLUMN session_id VARCHAR(127);
