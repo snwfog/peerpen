@@ -52,6 +52,7 @@ public class ApplicationInitializerListener implements ServletContextListener {
         List m = (List) yml.load( fis );
         ServletRoute route = new ServletRoute( m );
         Set<String> allRoutes = route.getAllRoutes();
+        event.getServletContext().setAttribute( "servletRoute", route );
         event.getServletContext().setAttribute( "allRoutes", allRoutes );
     }
 

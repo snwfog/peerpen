@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by snw on 1/20/2014.
  */
+@Deprecated
 public class GenericApplicationController extends HttpServlet {
 
     static final Logger logger = LoggerFactory.getLogger( GenericApplicationController.class );

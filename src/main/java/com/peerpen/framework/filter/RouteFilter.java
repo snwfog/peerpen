@@ -2,6 +2,7 @@ package com.peerpen.framework.filter;
 
 import com.google.common.collect.ImmutableMap;
 import com.peerpen.framework.InternalHttpServletRequest;
+import com.peerpen.framework.ServletRoute;
 import com.peerpen.framework.exception.HttpException;
 import com.peerpen.framework.exception.MissingArgumentException;
 import com.peerpen.framework.exception.NonPermissibleRoute;
@@ -235,10 +236,12 @@ public class RouteFilter implements Filter {
             throws NonPermissibleRoute, TooManyUrlNestingException, MissingArgumentException {
         String url = stringQuery.substring( 0,
                 stringQuery.contains( "?" ) ? stringQuery.indexOf( "?" ) : stringQuery.length() );
-        String[] strippedUrl = url.split( "[/0-9/]+" );
+        String[] strippedUrl = url.replaceFirst( "/", "" ).split( "[/0-9/]+" );
         String strippedJoinedUrl = StringUtils.join( strippedUrl, "/" );
+        ServletRoute route = (ServletRoute) fc.getServletContext().getAttribute( "servletRoute" );
         Set<String> routes = (Set<String>) fc.getServletContext().getAttribute( "allRoutes" );
-        if ( !routes.contains( strippedJoinedUrl ) ) {
+        if (!route.isValidRoute( strippedUrl )) {
+        //if ( !routes.contains( strippedJoinedUrl ) ) {
             throw new NonPermissibleRoute( "Route does not exists " + stringQuery );
         }
 

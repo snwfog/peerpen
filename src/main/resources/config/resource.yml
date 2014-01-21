@@ -1,5 +1,5 @@
 - peer:
-  - document.do:
+  - document(.do)?:
     - comment:
       - like
 

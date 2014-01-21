@@ -3,7 +3,6 @@ package com.peerpen.framework;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -44,11 +43,26 @@ public class ServletRoute {
         routes.removeFirst();
     }
 
-    public boolean isValideRoute( String route ) {
-        return false;
+    public boolean isValidRoute( String route ) {
+        return isValidRoute( route.replaceFirst( "/", "" ).split( "[/0-9/]+" ) );
     }
 
     public boolean isValidRoute( String[] routes ) {
+        int idx = 0;
+        for (RouteNode node : topLevelRoutes)
+            if (routes[idx].matches( node.path ))
+                return isValidRoute( routes, ++idx, node );
+
+        return false;
+    }
+
+    public boolean isValidRoute( String[] routes, int i, RouteNode node)
+    {
+        if (i == routes.length) return true;
+        for (RouteNode n : node.getChildren())
+            if (routes[i].matches( n.path ))
+                return isValidRoute( routes, ++i, node );
+
         return false;
     }
 
