@@ -238,9 +238,9 @@ public class RouteFilter implements Filter {
         String url = stringQuery.substring( 0,
                 stringQuery.contains( "?" ) ? stringQuery.indexOf( "?" ) : stringQuery.length() );
         String[] strippedUrl = url.replaceFirst( "/", "" ).split( "[/0-9/]+" );
-        String strippedJoinedUrl = StringUtils.join( strippedUrl, "/" );
         ServletRoute route = (ServletRoute) fc.getServletContext().getAttribute( "servletRoute" );
-        Set<String> routes = (Set<String>) fc.getServletContext().getAttribute( "allRoutes" );
+        //String strippedJoinedUrl = StringUtils.join( strippedUrl, "/" );
+        //Set<String> routes = (Set<String>) fc.getServletContext().getAttribute( "allRoutes" );
         if (!route.isValidRoute( strippedUrl )) {
         //if ( !routes.contains( strippedJoinedUrl ) ) {
             throw new NonPermissibleRoute( "Route does not exists " + stringQuery );

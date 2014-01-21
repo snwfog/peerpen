@@ -1,4 +1,5 @@
 <%@ page import="java.util.Enumeration" %>
+<%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
 
 <% if ( request != null ) { %>
 <div class="container code" id="debug">
@@ -12,7 +13,7 @@
         <% while ( attributes.hasMoreElements() && (name = (String) attributes.nextElement()) != null ) { %>
         <h3><%= name %>
         </h3>
-        <pre><%= request.getAttribute( name ) %></pre>
+        <pre><%= StringEscapeUtils.escapeHtml4( request.getAttribute( name ).toString() ) %></pre>
         <% } %>
     </div>
 </div>
