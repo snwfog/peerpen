@@ -27,7 +27,7 @@ public class ApplicationInitializerListener implements ServletContextListener {
     public void contextInitialized( ServletContextEvent event ) {
         setAllRoutes( event );
         setExemptRoutes( event );
-        setApplicationSecret(event);
+        setApplicationSecret( event );
         //setJspGlobalVariables( event );
     }
 
@@ -50,7 +50,8 @@ public class ApplicationInitializerListener implements ServletContextListener {
         InputStream fis = event.getServletContext().getResourceAsStream( "/WEB-INF/classes/" + fileRelativePath );
         logger.info( "Reading routes information from YAML (" + fis + ")" );
         List m = (List) yml.load( fis );
-        Set<String> allRoutes = this.getAllRoutes( m );
+        ServletRoute route = new ServletRoute( m );
+        Set<String> allRoutes = route.getAllRoutes();
         event.getServletContext().setAttribute( "allRoutes", allRoutes );
     }
 
@@ -75,7 +76,7 @@ public class ApplicationInitializerListener implements ServletContextListener {
     }
 
     private static String pattern = "/{0}";
-    private static MessageFormat format = new MessageFormat(pattern);
+    private static MessageFormat format = new MessageFormat( pattern );
 
     public Set<String> getAllRoutes( List list ) {
         Set<String> allRoutes = new LinkedHashSet<String>();

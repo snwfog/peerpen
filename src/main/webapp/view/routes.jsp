@@ -1,7 +1,7 @@
 <%@ page import="java.util.Set" %>
 <%@ include file="/view/includes/static/header.jsp" %>
 
-<div class="container">
+<div class="container code">
     <% Set<String> routes = (Set<String>) request.getAttribute( "routes" ); %>
 
     <h1>Routes</h1>

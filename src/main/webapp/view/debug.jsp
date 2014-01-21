@@ -1,6 +1,6 @@
 <%@ page import="java.util.Enumeration" %>
 
-<div class="container" id="debug">
+<div class="container code" id="debug">
     <div class="well">
         <h1>Internal Request Extra Parameters</h1>
         <h2><%= request.getClass().toString() %></h2>

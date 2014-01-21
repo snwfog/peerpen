@@ -19,6 +19,6 @@ i#bug {
 
 div.container#debug h1, div.container#debug h2, div.container#debug h3, div.container#debug h4, div.container#debug h5, div.container#debug p, div.container#debug pre {
   margin: 0px; }
-div.container#debug pre {
-  font-family: Inconsolata;
+
+div.code pre {
   font-size: 1.5em; }
