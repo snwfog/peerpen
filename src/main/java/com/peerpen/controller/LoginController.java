@@ -64,7 +64,7 @@ public class LoginController extends HttpServlet {
                 session.setAttribute( "birth_date", dateOfBirth );
                 session.setAttribute( "user", peer );
                 session.setMaxInactiveInterval( 259200 ); // 3 days in secs
-                redirect = "/profile";
+                redirect = "/peer/2/profile";
             }
 
             response.sendRedirect( redirect );

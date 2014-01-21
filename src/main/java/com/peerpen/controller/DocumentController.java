@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -104,9 +105,9 @@ public class DocumentController extends HttpServlet
 
     Comment comment = new Comment();
     comment.setMessage(request.getParameter("comment").toString());
-    comment.setName(peer.getFirstName() + " " +peer.getLastName());
-    comment.setPeerId(peer.getId());
-    comment.setDocumentId(document.getId());
+    comment.setName( peer.getFirstName() + " " + peer.getLastName() );
+    comment.setPeerId( peer.getId() );
+    comment.setDocumentId( document.getId() );
     comment.setChangesetId(changeset.getId());
     comment.setUpVote(0);
     comment.setDownVote(0);
