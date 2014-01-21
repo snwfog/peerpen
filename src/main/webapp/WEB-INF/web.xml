@@ -359,4 +359,10 @@
         <param-name>app-secret</param-name>
         <param-value>0e04d8638c7cd715a1b2d6000433b8fe78422708</param-value>
     </context-param>
+
+    <context-param>
+        <description>Display internal request object context parameters</description>
+        <param-name>debug</param-name>
+        <param-value>true</param-value>
+    </context-param>
 </web-app>

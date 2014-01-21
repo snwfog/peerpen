@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.text.MessageFormat;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -86,6 +87,7 @@ public class RouteFilter implements Filter {
             } else if ( isPermissibleRoutes( rURI ) ) {
                 if ( isInternalPreauthorizedForward( httpRequest, (HttpServletResponse) response ) ) {
                     logger.warn( "Received request is an internal request for " + httpRequest.getRequestURI() );
+                    logger.warn( "Going to assume that you know what you're doing... forwarding you right away" );
                     chain.doFilter( request, response );
                     //try {
                     //    (request.getRequestDispatcher( rURI )).forward( request, response );
@@ -97,7 +99,6 @@ public class RouteFilter implements Filter {
 
                 }
 
-                Map<String, String> parametersMap = ImmutableMap.of();
 
                 // Let the user go through
                 HttpSession session = httpRequest.getSession();
@@ -118,13 +119,31 @@ public class RouteFilter implements Filter {
                         request.setAttribute( "peer", user );
                         // TODO: Validate the rest of the resource along the path
                         // TODO: Inject the parameter map
-
                         // Take the last resource and call up on that particular controller and preauthorize
-                        String[] resources = rURI.split( "[/0-9/]+" );
-                        String lastController = resources[resources.length - 1];
+                        String[] resources = rURI.replaceFirst( "/", "" ).split( "/" );
+                        Map<String, String> parametersMap = new LinkedHashMap<>();
+                        for ( int i = 0; i < resources.length; i++ ) {
+                            if ( i + 1 < resources.length && this.isNumeric( resources[i + 1] ) ) {
+                                parametersMap.put( resources[i], resources[++i] );
+                            } else {
+                                parametersMap.put( resources[i], null );
+                            }
+                        }
+
+                        logger.info( "Logging parameter linked list map of " + parametersMap.toString() );
+                        request.setAttribute( "parameters", parametersMap );
+
+                        String lastController = null;
+                        if (resources.length % 2 == 0 && resources.length != 0)
+                            lastController = resources[resources.length - 2];
+                        else
+                            lastController = resources[resources.length - 1];
+
                         //chain.doFilter( request, response );
                         String internalRoute = MessageFormat.format( "/{0}", lastController );
                         request.setAttribute( "internalRequestURI", internalRoute );
+                        request.setAttribute( "externalRequestURI", rURI );
+                        request.setAttribute( "controller", internalRoute );
                         logger.info( "Forwarding an external request of " + rURI + " to an internal controller of " +
                                 internalRoute );
                         request.getRequestDispatcher( internalRoute ).forward( request, response );
@@ -225,7 +244,7 @@ public class RouteFilter implements Filter {
 
         // Greater than 4 nesting will be way too much mkay?
         if ( strippedUrl.length > 5 ) {
-            throw new TooManyUrlNestingException( "Too many nesting found: " + strippedUrl.length );
+            throw new TooManyUrlNestingException( "Too many nesting detected: " + strippedUrl.length );
         }
 
         //if ( strippedUrl.length % 2 != 0 ) {
@@ -281,6 +300,11 @@ public class RouteFilter implements Filter {
     public void redirectUnauthorized( HttpServletRequest request, HttpServletResponse response ) {
         redirect( request, response, 401, "/error", "Unauthorized access." );
     }
+
+    private boolean isNumeric( String str ) {
+        return str.matches( "-?\\d+(\\.\\d+)?" );
+    }
+
 }
 
 

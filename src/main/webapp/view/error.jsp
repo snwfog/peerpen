@@ -31,5 +31,11 @@
         </table>
         <% } %>
     </div>
+
+    <div class="row-fluid">
+        <div class="span6 offset3">
+            <i class="fa fa-bug fa-5x" id="bug"></i>
+        </div>
+    </div>
 </div>
 <%@ include file="/view/includes/static/footer.jsp" %>
