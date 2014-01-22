@@ -9,12 +9,12 @@
         <% String reason = (String) request.getAttribute( "reason" ); %>
         <% if (request.getAttribute( "exception" ) == null
                 && request.getAttribute( "javax.servlet.error.exception" ) == null && reason != null ) { %>
-            <h4><%= reason %></h4>
+            <h4><%= StringEscapeUtils.escapeHtml4( reason ) %></h4>
         <% } else { %>
             <% Throwable e = null; %>
             <% if ( (e = (Throwable) request.getAttribute( "exception" )) != null ||
                     (e = (Throwable) request.getAttribute( "javax.servlet.error.exception" )) != null ) { %>
-            <h4><%= e.toString() %></h4>
+            <h4><%= e.getClass().toString() %></h4>
             <% if (e.getMessage() != null && !e.getMessage().equalsIgnoreCase( "null" )) { %>
                 <pre><%= StringEscapeUtils.escapeHtml4( e.getMessage() ) %></pre>
             <% } %>
