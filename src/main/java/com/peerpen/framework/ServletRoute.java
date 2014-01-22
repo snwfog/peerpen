@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class ServletRoute {
@@ -49,19 +50,24 @@ public class ServletRoute {
 
     public boolean isValidRoute( String[] routes ) {
         int idx = 0;
-        for (RouteNode node : topLevelRoutes)
-            if (routes[idx].matches( node.path ))
+        for ( RouteNode node : topLevelRoutes ) {
+            if ( routes[idx].matches( node.path ) ) {
                 return isValidRoute( routes, ++idx, node );
+            }
+        }
 
         return false;
     }
 
-    public boolean isValidRoute( String[] routes, int i, RouteNode node)
-    {
-        if (i == routes.length) return true;
-        for (RouteNode n : node.getChildren())
-            if (routes[i].matches( n.path ))
+    public boolean isValidRoute( String[] routes, int i, RouteNode node ) {
+        if ( i == routes.length ) {
+            return true;
+        }
+        for ( RouteNode n : node.getChildren() ) {
+            if ( routes[i].matches( n.path ) ) {
                 return isValidRoute( routes, ++i, node );
+            }
+        }
 
         return false;
     }
@@ -79,6 +85,7 @@ public class ServletRoute {
         private void addChildRoute( Object r ) {
             if ( r instanceof Map ) {
                 for ( Object key : ((Map) r).keySet() ) {
+                    //path = StringEscapeUtils.escapeJava( StringEscapeUtils.escapeJava( (String) key ) );
                     path = (String) key;
                     Object value = ((Map) r).get( key );
                     if ( value instanceof List ) {
@@ -90,6 +97,7 @@ public class ServletRoute {
                     }
                 }
             } else {
+                //path = StringEscapeUtils.escapeJava( StringEscapeUtils.escapeJava( (String) r ) );
                 path = (String) r;
             }
         }

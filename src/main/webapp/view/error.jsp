@@ -1,34 +1,43 @@
-<%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
 <%@ include file="/view/includes/static/header.jsp" %>
 <div class="container">
-    <h1>Oh Snap! - <%= request.getAttribute( "errorCode" ) %>
+    <% String errorCode = String.valueOf( request.getAttribute( "errorCode" ) ); %>
+    <h1>Oh Snap! - <%= (errorCode != null ? errorCode :
+            String.valueOf( request.getAttribute( "javax.servlet.error.status_code" ) )) %>
     </h1>
 
     <div class="alert alert-error">
-        <h4><%= request.getAttribute( "reason" ) %>
-        </h4>
-        <% Throwable e = null; %>
-        <% if ( (e = (Throwable) request.getAttribute( "exception" )) != null ) { %>
-        <pre><%= StringEscapeUtils.escapeHtml4( e.getMessage() ) %></pre>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Trace</th>
-            </tr>
-            </thead>
-            <tbody>
-            <% int index = 1; %>
-            <% for ( StackTraceElement el : e.getStackTrace() ) { %>
-            <tr>
-                <td><%= index++ %>
-                </td>
-                <td><%= el.toString() %>
-                </td>
-            </tr>
+        <% String reason = (String) request.getAttribute( "reason" ); %>
+        <% if (request.getAttribute( "exception" ) == null
+                && request.getAttribute( "javax.servlet.error.exception" ) == null && reason != null ) { %>
+            <h4><%= reason %></h4>
+        <% } else { %>
+            <% Throwable e = null; %>
+            <% if ( (e = (Throwable) request.getAttribute( "exception" )) != null ||
+                    (e = (Throwable) request.getAttribute( "javax.servlet.error.exception" )) != null ) { %>
+            <h4><%= e.toString() %></h4>
+            <% if (e.getMessage() != null && !e.getMessage().equalsIgnoreCase( "null" )) { %>
+                <pre><%= StringEscapeUtils.escapeHtml4( e.getMessage() ) %></pre>
             <% } %>
-            </tbody>
-        </table>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Trace</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% int index = 1; %>
+                <% for ( StackTraceElement el : e.getStackTrace() ) { %>
+                <tr>
+                    <td><%= index++ %>
+                    </td>
+                    <td><%= el.toString() %>
+                    </td>
+                </tr>
+                <% } %>
+                </tbody>
+            </table>
+            <% } %>
         <% } %>
     </div>
 
