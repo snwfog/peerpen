@@ -1,77 +1,41 @@
 package com.peerpen.controller;
 
+import com.peerpen.framework.InternalRequestDispatcher;
+import com.peerpen.framework.exception.MissingArgumentException;
+import com.peerpen.framework.exception.NotLoggedInException;
 import com.peerpen.model.Peer;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
+import javax.el.MethodNotFoundException;
+import javax.naming.OperationNotSupportedException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.yaml.snakeyaml.Yaml;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**
- * Created with IntelliJ IDEA.
- * User: momoking
- * Date: 10/25/2013
- * Time: 3:35 PM
- * To change this template use File | Settings | File Templates.
- */
 public class LoginController extends HttpServlet {
+
+    static final Logger logger = LoggerFactory.getLogger( LoginController.class );
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-
-        System.out.println( request );
-        Yaml yml = new Yaml();
-        InputStream fis = this.getClass().getResourceAsStream( "/config/resource.yml" );
-        Map m = (Map) yml.load( fis );
+        throw new MethodNotFoundException( "Cannot call method GET on the login controller" );
     }
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        System.out.println( "gets here" );
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put( "userName", request.getParameter( "username" ) );
-        map.put( "password", request.getParameter( "password" ) );
-
-        String redirect = "/login?status=error";
         try {
-            List<Peer> matches = new Peer().findAll( map );
-            System.out.println( matches.size() );
-
-            if ( matches.size() == 1 ) { // means found exactly 1 user with that username and password
-                Peer peer = matches.get( 0 );
-                Date dob;
-                String dateOfBirth = "";
-                if ( peer.getDateOfBirth() != null ) {
-                    dob = peer.getDateOfBirth();
-
-                    SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd" );
-                    dateOfBirth = formatter.format( dob );
-                }
-                // store the peer obj in session
-                HttpSession session = request.getSession();
-                session.setAttribute( "birth_date", dateOfBirth );
-                session.setAttribute( "user", peer );
-                session.setMaxInactiveInterval( 259200 ); // 3 days in secs
-                redirect = "/peer/2/profile";
+            if ( Peer.isValidLogin( request ) ) {
+                response.sendRedirect( "/peer/2/profile.do" );
+                //request.getRequestDispatcher( "/peer/2/profile" ).forward( request, response );
             }
-
-            response.sendRedirect( redirect );
-
-        } catch ( Exception e ) {
-            e.printStackTrace();
+        } catch ( OperationNotSupportedException | NotLoggedInException | MissingArgumentException e ) {
+            logger.error( "", e );
+            ((InternalRequestDispatcher) request.getRequestDispatcher( "/error" )).forwardError( request, response, e );
         }
-
     }
 }

@@ -405,9 +405,6 @@
         <param-name>exempt-routes</param-name>
         <param-value>
             /index
-            /login
-            /logout
-            /register
             /error
             /assets
             /routes

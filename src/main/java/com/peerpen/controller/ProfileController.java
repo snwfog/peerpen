@@ -85,6 +85,7 @@ public class ProfileController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
 //        // forward to registration jsp
 //        ServletContext context = getServletContext();
 //        RequestDispatcher dispatcher = context.getRequestDispatcher("/view/register.jsp");

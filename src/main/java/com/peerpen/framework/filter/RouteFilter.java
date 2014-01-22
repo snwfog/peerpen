@@ -7,6 +7,7 @@ import com.peerpen.framework.exception.HttpException;
 import com.peerpen.framework.exception.MissingArgumentException;
 import com.peerpen.framework.exception.NonPermissibleRoute;
 import com.peerpen.framework.exception.NotLoggedInException;
+import com.peerpen.framework.exception.ParameterCollision;
 import com.peerpen.framework.exception.TooManyUrlNestingException;
 import com.peerpen.model.Peer;
 
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.text.MessageFormat;
+import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -32,7 +34,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -116,7 +117,8 @@ public class RouteFilter implements Filter {
                     logger.info( "Trying to locate and to validate a peer with sessionId of " + session.getId() );
                     Map<String, Object> condition = ImmutableMap.of( "sessionId", (Object) session.getId() );
                     Peer user = null;
-                    if ( (user = Peer.isLoggedIn( httpRequest )) != null ) {
+                    if ( (user = Peer.isLoggedIn( httpRequest )) != null && Peer.isValidSession( user, session ) ) {
+                        logger.info( "Located user " + user );
                         request.setAttribute( "peer", user );
                         // TODO: Validate the rest of the resource along the path
                         // TODO: Inject the parameter map
@@ -132,14 +134,24 @@ public class RouteFilter implements Filter {
                             }
                         }
 
+                        Enumeration enumeration = httpRequest.getParameterNames();
+                        while ( enumeration.hasMoreElements() ) {
+                            String key = (String) enumeration.nextElement();
+                            String oldValue = parametersMap.put( key, httpRequest.getParameter( key ) );
+                            if ( oldValue != null ) {
+                                throw new ParameterCollision( key );
+                            }
+                        }
+
                         logger.info( "Logging parameter linked list map of " + parametersMap.toString() );
                         request.setAttribute( "parameters", parametersMap );
 
                         String lastController = null;
-                        if (resources.length % 2 == 0 && resources.length != 0)
+                        if ( resources.length % 2 == 0 && resources.length != 0 ) {
                             lastController = resources[resources.length - 2];
-                        else
+                        } else {
                             lastController = resources[resources.length - 1];
+                        }
 
                         //chain.doFilter( request, response );
                         String internalRoute = MessageFormat.format( "/{0}", lastController );
@@ -161,6 +173,9 @@ public class RouteFilter implements Filter {
                     this.redirectError( httpRequest, (HttpServletResponse) response, e );
                 } catch ( IOException e ) {
                     logger.error( "Cannot find proper jsp", e );
+                    this.redirectError( httpRequest, (HttpServletResponse) response, e );
+                } catch ( ParameterCollision e ) {
+                    logger.error( "Conflict for parameter key", e );
                     this.redirectError( httpRequest, (HttpServletResponse) response, e );
                 }
             } else {
@@ -194,7 +209,7 @@ public class RouteFilter implements Filter {
     private boolean isAjaxRequest( HttpServletRequest request ) {
         String applicationRequestHeader = request.getHeader( "Content-Type" );
         return applicationRequestHeader != null &&
-                "application/x-www-form-urlencoded; charset=UTF-8".contains( applicationRequestHeader );
+                "application/json; charset=utf-8".contains( applicationRequestHeader );
     }
 
     @Override
@@ -218,12 +233,11 @@ public class RouteFilter implements Filter {
             return true;
         }
 
+        boolean isSafeRoutes = false;
         for ( String route : (Set<String>) fc.getServletContext().getAttribute( "exemptRoutes" ) ) {
-            if ( requestURI.indexOf( route ) == 0 ) {
-                return true;
-            }
+            isSafeRoutes = isSafeRoutes || (requestURI.contains( route ));
         }
-        return false;
+        return isSafeRoutes;
     }
 
     private String detectMimeType( String URI ) {
@@ -241,8 +255,8 @@ public class RouteFilter implements Filter {
         ServletRoute route = (ServletRoute) fc.getServletContext().getAttribute( "servletRoute" );
         //String strippedJoinedUrl = StringUtils.join( strippedUrl, "/" );
         //Set<String> routes = (Set<String>) fc.getServletContext().getAttribute( "allRoutes" );
-        if (!route.isValidRoute( strippedUrl )) {
-        //if ( !routes.contains( strippedJoinedUrl ) ) {
+        if ( !route.isValidRoute( strippedUrl ) ) {
+            //if ( !routes.contains( strippedJoinedUrl ) ) {
             throw new NonPermissibleRoute( "Route does not exists " + stringQuery );
         }
 

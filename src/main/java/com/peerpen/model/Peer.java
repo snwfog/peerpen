@@ -1,5 +1,9 @@
 package com.peerpen.model;
 
+import com.google.common.collect.Maps;
+import com.peerpen.framework.InternalHttpServletRequest;
+import com.peerpen.framework.exception.MissingArgumentException;
+import com.peerpen.framework.exception.NotLoggedInException;
 import com.sunnyd.Base;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
@@ -11,11 +15,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.naming.OperationNotSupportedException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class Peer extends Base {
 
+    static final Logger logger = LoggerFactory.getLogger( Peer.class );
     public static final String tableName = "peers";
     @ActiveRecordField
     private String firstName;
@@ -280,8 +290,35 @@ public class Peer extends Base {
         if ( param != null ) {
         }
 
-        return new Peer().find(2);
+        return new Peer().find( 2 );
     }
 
+    public static boolean isValidSession( Peer peer, HttpSession session ) {
+        return true;
+    }
 
+    public static boolean isValidLogin( HttpServletRequest request )
+            throws NotLoggedInException, OperationNotSupportedException, MissingArgumentException {
+        InternalHttpServletRequest internalRequest = InternalHttpServletRequest.transform( request );
+        internalRequest.expectPresenceOf( "username", "password" );
+        Map<String, Object> m = (Map<String, Object>) internalRequest.getParameterMap();
+        Map<String, Object> map = Maps.newHashMap();
+        map.put( "userName", m.get( "username" ) );
+        map.put( "password", m.get( "password" ) );
+
+        logger.info( "Retrieving peer with " + map );
+
+        Peer p = (new Peer()).find( 2 );
+        if ( p == null ) {
+            throw new NotLoggedInException( request.getSession() );
+        }
+
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return String.format( "[Peer][%s][%s] (Override me in %s)", this.firstName, this.lastName,
+                this.getClass().toString() );
+    }
 }

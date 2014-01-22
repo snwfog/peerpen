@@ -8,11 +8,12 @@
   - document(\.do)?:
     - comment:
       - like
-
-  - profile
-
+    - tag
+  - feed
+  - profile(\.do)?
 - group
-
+- login(\.do)?
+- logout(\.do)?
 
 
 

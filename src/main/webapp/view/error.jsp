@@ -14,7 +14,11 @@
             <% Throwable e = null; %>
             <% if ( (e = (Throwable) request.getAttribute( "exception" )) != null ||
                     (e = (Throwable) request.getAttribute( "javax.servlet.error.exception" )) != null ) { %>
-            <h4><%= e.getClass().toString() %></h4>
+            <% if (reason != null) { %>
+                <h4><%= reason %></h4>
+            <% } else { %>
+                <h4><%= e.getClass().toString() %></h4>
+            <% } %>
             <% if (e.getMessage() != null && !e.getMessage().equalsIgnoreCase( "null" )) { %>
                 <pre><%= StringEscapeUtils.escapeHtml4( e.getMessage() ) %></pre>
             <% } %>
