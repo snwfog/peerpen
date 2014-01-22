@@ -303,12 +303,12 @@ public class Peer extends Base {
         internalRequest.expectPresenceOf( "username", "password" );
         Map<String, Object> m = (Map<String, Object>) internalRequest.getParameterMap();
         Map<String, Object> map = Maps.newHashMap();
-        map.put( "userName", m.get( "username" ) );
-        map.put( "password", m.get( "password" ) );
+        map.put( "userName", ((String[]) m.get( "username" ))[0] );
+        map.put( "password", ((String[]) m.get( "password" ))[0] );
 
         logger.info( "Retrieving peer with " + map );
 
-        Peer p = (new Peer()).find( 2 );
+        Peer p = (new Peer()).find( map );
         if ( p == null ) {
             throw new NotLoggedInException( request.getSession() );
         }
