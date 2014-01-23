@@ -101,23 +101,23 @@
     <!--<url-pattern>/logout.do</url-pattern>-->
     <!--</servlet-mapping>-->
 
+    <!--<servlet>-->
+        <!--<description>First step in the registration</description>-->
+        <!--<servlet-name>register</servlet-name>-->
+        <!--<jsp-file>/view/register.jsp</jsp-file>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>register</servlet-name>-->
+        <!--<url-pattern>/register</url-pattern>-->
+    <!--</servlet-mapping>-->
+
     <servlet>
-        <description>First step in the registration</description>
         <servlet-name>register</servlet-name>
-        <jsp-file>/view/register.jsp</jsp-file>
+        <servlet-class>com.peerpen.controller.RegistrationController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>register.do</servlet-name>
-        <servlet-class>com.peerpen.controller.RegistrationController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>register.do</servlet-name>
-        <url-pattern>/register.do</url-pattern>
     </servlet-mapping>
 
     <servlet>

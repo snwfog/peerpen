@@ -10,6 +10,7 @@ import com.peerpen.framework.exception.NotLoggedInException;
 import com.peerpen.framework.exception.ParameterCollision;
 import com.peerpen.framework.exception.TooManyUrlNestingException;
 import com.peerpen.model.Peer;
+import com.sunnyd.database.Manager;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -138,7 +139,8 @@ public class RouteFilter implements Filter {
                         Enumeration enumeration = httpRequest.getParameterNames();
                         while ( enumeration.hasMoreElements() ) {
                             String key = (String) enumeration.nextElement();
-                            String oldValue = parametersMap.put( key, httpRequest.getParameter( key ) );
+                            String oldValue =
+                                    parametersMap.put( Manager.toCamelCase( key ), httpRequest.getParameter( key ) );
                             if ( oldValue != null ) {
                                 throw new ParameterCollision( key );
                             }
