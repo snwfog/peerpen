@@ -13,6 +13,7 @@
   - profile(\.do)?
 - group
 - search(\.do)?
+- search_autocomplete_ajax(\.do)?
 - login(\.do)?
 - logout(\.do)?
 - register(\.do)?

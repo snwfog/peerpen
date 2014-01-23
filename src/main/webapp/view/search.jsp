@@ -7,7 +7,7 @@
 <script>
 $(function() {
    $( "#search_query" ).autocomplete({
-        source: "search_autocomplete.do", // param name must be 'term'
+        source: "search_autocomplete_ajax.do", // param name must be 'term'
         minLength: 2
     });
 });
@@ -20,7 +20,7 @@ $(function() {
     Search <input type="text" name="search_query" id="search_query" autocomplete="off" style="margin-bottom:0px;" />
     <input type="submit" name="submit" value="OK" />
     <br />
-    <ul id="suggestion_list" style="background-color:white;width:200px;margin:auto"></ul>
+    <%--<ul id="suggestion_list" style="background-color:white;width:200px;margin:auto"></ul>--%>
     <%--<br />--%>
     <%--<input type="radio" name="area" value="all" checked />All--%>
     <%--<input type="radio" name="area" value="documents" />Documents--%>
