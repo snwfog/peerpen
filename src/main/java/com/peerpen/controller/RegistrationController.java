@@ -1,5 +1,6 @@
 package com.peerpen.controller;
 
+import com.google.common.collect.ImmutableMap;
 import com.peerpen.framework.InternalHttpServletRequest;
 import com.peerpen.framework.InternalRequestDispatcher;
 import com.peerpen.framework.exception.MissingArgumentException;
@@ -28,10 +29,17 @@ public class RegistrationController extends HttpServlet {
             InternalHttpServletRequest internalRequest = InternalHttpServletRequest.transform( request );
             internalRequest.expectPresenceOf( "first_name", "last_name", "user_name", "email", "password" );
             Map<String, Object> map = (Map<String, Object>) request.getAttribute( "parameters" );
+            Peer peer = (new Peer()).find( ImmutableMap.of( "userName", map.get( "userName" ) ) );
+            if ( peer != null ) {
+                throw new RegistrationFailedException( "User already exists " + map.get( "userName" ) );
+            }
             Peer p = new Peer( map );
-
+            // TODO: Validate uniqueness either using Java, or database constraint
+            // Create the user unquestionably given that this user does not exists already
             if ( (map.get( "password" )).equals( map.get( "confirmPassword" ) ) && p.save() ) {
-                internalRequest.getRequestDispatcher( "/peer/" + p.getId() + "/profile" ).forward( request, response );
+                p.setSessionId( request.getSession().getId() );
+                p.update();
+                response.encodeRedirectURL( "/peer/" + p.getId() + "/profile" );
             } else {
                 throw new RegistrationFailedException( map );
             }

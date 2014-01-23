@@ -429,6 +429,7 @@
             /error
             /assets
             /routes
+            /register
         </param-value>
     </context-param>
 

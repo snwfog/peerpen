@@ -1,9 +1,11 @@
 package com.peerpen.model;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.peerpen.framework.InternalHttpServletRequest;
 import com.peerpen.framework.exception.MissingArgumentException;
 import com.peerpen.framework.exception.NotLoggedInException;
+import com.peerpen.framework.exception.UserNotFoundException;
 import com.sunnyd.Base;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
@@ -63,6 +65,8 @@ public class Peer extends Base {
     private Avatar avatar;
     @ActiveRecordField
     private Integer avatarId;
+    @ActiveRecordField
+    private String sessionId;
 
     public Peer() {
         super();
@@ -159,6 +163,18 @@ public class Peer extends Base {
 
     public void setDescription( String description ) {
         this.description = description;
+        setUpdateFlag( true );
+    }
+
+    public String getSessionId() {
+        if ( sessionId == null ) {
+            return "";
+        }
+        return sessionId;
+    }
+
+    public void setSessionId( String sessionId ) {
+        this.sessionId = sessionId;
         setUpdateFlag( true );
     }
 
@@ -285,12 +301,9 @@ public class Peer extends Base {
         return suggestions;
     }
 
-    public static Peer isLoggedIn( HttpServletRequest httpRequest ) {
-        Map<String, String> param = (Map<String, String>) httpRequest.getAttribute( "urlParameters" );
-        if ( param != null ) {
-        }
-
-        return new Peer().find( 2 );
+    public static Peer instantiateFromSessionId( HttpServletRequest httpRequest ) {
+        Map<String, Object> cond = ImmutableMap.of( "sessionId", (Object) httpRequest.getSession().getId() );
+        return (new Peer()).find( cond );
     }
 
     public static boolean isValidSession( Peer peer, HttpSession session ) {
@@ -298,7 +311,7 @@ public class Peer extends Base {
     }
 
     public static boolean isValidLogin( HttpServletRequest request )
-            throws NotLoggedInException, OperationNotSupportedException, MissingArgumentException {
+            throws UserNotFoundException, OperationNotSupportedException, MissingArgumentException {
         InternalHttpServletRequest internalRequest = InternalHttpServletRequest.transform( request );
         internalRequest.expectPresenceOf( "username", "password" );
         Map<String, Object> m = (Map<String, Object>) internalRequest.getParameterMap();
@@ -310,7 +323,8 @@ public class Peer extends Base {
 
         Peer p = (new Peer()).find( map );
         if ( p == null ) {
-            throw new NotLoggedInException( request.getSession() );
+            throw new UserNotFoundException("Could not find user with value of "
+                    + map + " (this message shall be kept secret...");
         }
 
         return true;
@@ -321,4 +335,5 @@ public class Peer extends Base {
         return String.format( "[Peer][%s][%s] (Override me in %s)", this.firstName, this.lastName,
                 this.getClass().toString() );
     }
+
 }

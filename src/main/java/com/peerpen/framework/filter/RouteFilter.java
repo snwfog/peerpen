@@ -1,6 +1,5 @@
 package com.peerpen.framework.filter;
 
-import com.google.common.collect.ImmutableMap;
 import com.peerpen.framework.InternalHttpServletRequest;
 import com.peerpen.framework.ServletRoute;
 import com.peerpen.framework.exception.HttpException;
@@ -103,9 +102,12 @@ public class RouteFilter implements Filter {
 
                 }
 
+                // Don't create the session by default
+                HttpSession session = httpRequest.getSession( false ); // TODO: Watch out for session hi-jacking
+                if ( session == null ) {
+                    throw new NotLoggedInException( "Could not find an existing session" );
+                }
 
-                // Let the user go through
-                HttpSession session = httpRequest.getSession();
 
                 if ( isAjaxRequest( httpRequest ) ) {
                     logger.info( "Received request is an application Ajax request for " + httpRequest.getRequestURI() );
@@ -117,14 +119,11 @@ public class RouteFilter implements Filter {
 
                 try {
                     logger.info( "Trying to locate and to validate a peer with sessionId of " + session.getId() );
-                    Map<String, Object> condition = ImmutableMap.of( "sessionId", (Object) session.getId() );
                     Peer user = null;
-                    if ( (user = Peer.isLoggedIn( httpRequest )) != null && Peer.isValidSession( user, session ) ) {
+                    if ( (user = Peer.instantiateFromSessionId( httpRequest )) != null ) {
                         logger.info( "Located user " + user );
-                        request.setAttribute( "peer", user );
+                        request.setAttribute( "sessionUser", user );
                         // TODO: Validate the rest of the resource along the path
-                        // TODO: Inject the parameter map
-                        // TODO: Inject the URL tunnel parameters as well
                         // Take the last resource and call up on that particular controller and preauthorize
                         String[] resources = rURI.replaceFirst( "/", "" ).split( "/" );
                         Map<String, String> parametersMap = new LinkedHashMap<>();
@@ -164,9 +163,8 @@ public class RouteFilter implements Filter {
                         logger.info( "Forwarding an external request of " + rURI + " to an internal controller of " +
                                 internalRoute );
                         request.getRequestDispatcher( internalRoute ).forward( request, response );
-                        //throw new UserNotFoundException( session );
                     } else {
-                        throw new NotLoggedInException( session );
+                        throw new NotLoggedInException();
                     }
                 } catch ( NotLoggedInException e ) {
                     request.setAttribute( "exception", e ); // TODO: Change this signature
@@ -184,8 +182,7 @@ public class RouteFilter implements Filter {
             } else {
                 this.redirectError( httpRequest, (HttpServletResponse) response );
             }
-        } catch ( MissingArgumentException | NonPermissibleRoute |
-                TooManyUrlNestingException e ) {
+        } catch ( MissingArgumentException | NonPermissibleRoute | TooManyUrlNestingException | NotLoggedInException e ) {
             this.redirectError( (HttpServletRequest) request, (HttpServletResponse) response, e );
         }
 
