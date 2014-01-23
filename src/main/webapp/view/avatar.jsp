@@ -49,7 +49,7 @@
   </div>
 </nav>
 <div class="page-wrap">
-    <form action="/avatar.do" id="form_description" method="post">
+    <form action="/avatar.do" name="myForm" id="form_description" method="post">
         <input type="hidden" class ="peerDescription well form-control" name ="description" value="<%= session.getAttribute("description") == null ? "" : session.getAttribute("description") %>">
         <input type="hidden" class="form-control peerID" name="id" value="<%= peer.getId().toString()%>"/>
         <input type="hidden" class="form-control peerDoB" name="dob" value="<%=session.getAttribute("dob") %>">
@@ -58,7 +58,10 @@
         <input type="hidden" class="form-control peerPersonal" name="industry" value="<%= session.getAttribute("industry") == null ? "" : session.getAttribute("industry") %>">
         <input type="hidden" class="form-control peerPersonal" name="yoe" value="<%= session.getAttribute("yoe").toString()%>">
         <input type="hidden" class="form-control peerPersonal" name="personal_website" value="<%= session.getAttribute("personal_website") == null ? "" : session.getAttribute("personal_website") %>">
-
+        <input type="hidden" name="x1" value="" />
+        <input type="hidden" name="y1" value="" />
+        <input type="hidden" name="x2" value="" />
+        <input type="hidden" name="y2" value="" />
         <h1>Summary of your profile <button class="pull-right btn btn-primary" type="submit">Next (2/2)</button></h1>
     </form>
 
@@ -87,8 +90,6 @@
 
   </form>
 </div>
-
-<div id="uploadPreview"></div>
 
 <!-- avatar dragging part-->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>

@@ -58,6 +58,7 @@ public class RouteFilter implements Filter {
         logger.info( "Incoming request for " + ((HttpServletRequest) request).getRequestURL() );
 
         try {
+
             if ( isSafeRoutes( rURI ) ) {
                 try {
                     InputStream fis = fc.getServletContext().getResourceAsStream( rURI );

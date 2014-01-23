@@ -3,47 +3,16 @@
 <%@ include file="/view/includes/static/header.jsp" %>
 
 
-<script>
-    var autocomplete = true;
-    if(autocomplete){
-        $(document).ready(function() {
-            $('#query').keyup(function(event)
-            {
-                var query = $('#query').val();
-                $.post('autocomplete.do', {
-                    query: query
-                }, function(responseJson) {
-                    var ul = $('#suggestion_list');    // locate the ul dom
-                    ul.empty();     // remove existing li's
-                    $.each(responseJson, function(key, value) {
-                        // Iterate over the JSON object.
-                        var li = $('<li id="suggest_item" style="display:block;text-align:left;padding:5px">').text( value );
-                        ul.append(li);
-                        li.mouseover(function(){
-                            $(this).css("background-color","gray");
-                        });
-                        li.mouseout(function(){
-                            $(this).css("background-color", "white");
-                        });
-                        li.click(function(){
-                            $('#query').val(li.text());
-                        });
-                        if (event.keyCode == 40) { // down
-                            //li.siblings().first().css("background-color","gray");
-                        }
-                    });
-                });
-            });
-        });
-    }
-</script>
-
-
 <%
   Peer peer = (Peer) session.getAttribute("user");
   if (peer != null)
   {
 %>
+Cropped image :<%= session.getAttribute("croppedImage") %>
+<br />
+<img src="/assets/images/profile/<%= session.getAttribute("croppedImage") %>" />
+
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -284,7 +253,10 @@
 <%
   }
   else
-    response.sendRedirect("/login");
+  {
+      response.sendRedirect("/login");
+      System.out.println("HELLO THEREEEE");
+  }
 %>
 
 
