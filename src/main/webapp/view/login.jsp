@@ -18,7 +18,7 @@
 %>
 
 <div class="container">
-    <form style="max-width:330px; margin:0 auto" action="/login.do" method="post">
+    <form style="max-width:330px; margin:0 auto" action="/login" method="post">
         <h2>Please sign in</h2>
         <input type="text" class="form-control" name="username" style="margin:10px 0" placeholder="Username" autofocus="">
         <input type="password" class="form-control" name="password" style="margin:10px 0" placeholder="Password">

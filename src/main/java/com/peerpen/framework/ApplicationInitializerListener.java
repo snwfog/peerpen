@@ -4,12 +4,9 @@ package com.peerpen.framework;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletContextEvent;
@@ -25,8 +22,13 @@ public class ApplicationInitializerListener implements ServletContextListener {
 
     @Override
     public void contextInitialized( ServletContextEvent event ) {
+        logger.warn( "Set application global routes" );
         setAllRoutes( event );
+        logger.warn( "Set exempt routes" );
         setExemptRoutes( event );
+        logger.warn( "Set transient routes" );
+        setTransientRoutes( event );
+        logger.warn( "Set application secret" );
         setApplicationSecret( event );
         //setJspGlobalVariables( event );
     }
@@ -62,6 +64,14 @@ public class ApplicationInitializerListener implements ServletContextListener {
                 new HashSet<String>( Arrays.asList( safeRoutes.replaceAll( "[^\\S\\n]", "" ).split( "\\n" ) ) );
 
         event.getServletContext().setAttribute( "exemptRoutes", safeRoutesSet );
+    }
+
+    private void setTransientRoutes( ServletContextEvent event ) {
+        String safeRoutes = event.getServletContext().getInitParameter( "transient-routes" );
+        Set<String> transientRoutes =
+                new HashSet<String>( Arrays.asList( safeRoutes.replaceAll( "[^\\S\\n]", "" ).split( "\\n" ) ) );
+
+        event.getServletContext().setAttribute( "transientRoutes", transientRoutes );
     }
 
     private void setJspGlobalVariables( ServletContextEvent event ) {

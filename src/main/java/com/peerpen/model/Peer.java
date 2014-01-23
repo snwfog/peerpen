@@ -327,7 +327,8 @@ public class Peer extends Base {
                     + map + " (this message shall be kept secret...");
         }
 
-        return true;
+        p.setSessionId( request.getSession().getId() );
+        return p.update();
     }
 
     @Override

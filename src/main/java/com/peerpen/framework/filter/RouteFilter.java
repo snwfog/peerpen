@@ -87,7 +87,16 @@ public class RouteFilter implements Filter {
 
                 }
 
-            } else if ( isPermissibleRoutes( rURI ) ) {
+            } else if ( isTransientRoutes( rURI ) ) {
+                logger.warn( "User is not logged in... but it seems the route is a transient route for " + rURI );
+                logger.info( "Setting request parameter request map" );
+                try {
+                    setRequestParametersMap( request, httpRequest, rURI );
+                    chain.doFilter( request, response );
+                } catch ( ParameterCollision e ) {
+                    this.redirectError( (HttpServletRequest) request, (HttpServletResponse) response, e );
+                }
+            } else if ( isCheckedRoutes( rURI ) ) {
                 if ( isInternalPreauthorizedForward( httpRequest, (HttpServletResponse) response ) ) {
                     logger.warn( "Received request is an internal request for " + httpRequest.getRequestURI() );
                     logger.warn( "Going to assume that you know what you're doing... forwarding you right away" );
@@ -117,65 +126,35 @@ public class RouteFilter implements Filter {
                     request.setAttribute( "requestData", sanitizeJsonData( httpRequest ) );
                 }
 
+
                 try {
+                    logger.info( "Setting request parameter request map" );
+                    String[] resources = setRequestParametersMap( request, httpRequest, rURI );
                     logger.info( "Trying to locate and to validate a peer with sessionId of " + session.getId() );
                     Peer user = null;
                     if ( (user = Peer.instantiateFromSessionId( httpRequest )) != null ) {
                         logger.info( "Located user " + user );
                         request.setAttribute( "sessionUser", user );
                         // TODO: Validate the rest of the resource along the path
-                        // Take the last resource and call up on that particular controller and preauthorize
-                        String[] resources = rURI.replaceFirst( "/", "" ).split( "/" );
-                        Map<String, String> parametersMap = new LinkedHashMap<>();
-                        for ( int i = 0; i < resources.length; i++ ) {
-                            if ( i + 1 < resources.length && this.isNumeric( resources[i + 1] ) ) {
-                                parametersMap.put( resources[i], resources[++i] );
-                            } else {
-                                parametersMap.put( resources[i], null );
-                            }
-                        }
-
-                        Enumeration enumeration = httpRequest.getParameterNames();
-                        while ( enumeration.hasMoreElements() ) {
-                            String key = (String) enumeration.nextElement();
-                            String oldValue =
-                                    parametersMap.put( Manager.toCamelCase( key ), httpRequest.getParameter( key ) );
-                            if ( oldValue != null ) {
-                                throw new ParameterCollision( key );
-                            }
-                        }
-
-                        logger.info( "Logging parameter linked list map of " + parametersMap.toString() );
-                        request.setAttribute( "parameters", parametersMap );
-
-                        String lastController = null;
-                        if ( resources.length % 2 == 0 && resources.length != 0 ) {
-                            lastController = resources[resources.length - 2];
-                        } else {
-                            lastController = resources[resources.length - 1];
-                        }
-
-                        //chain.doFilter( request, response );
-                        String internalRoute = MessageFormat.format( "/{0}", lastController );
-                        request.setAttribute( "internalRequestURI", internalRoute );
-                        request.setAttribute( "externalRequestURI", rURI );
-                        request.setAttribute( "controller", internalRoute );
-                        logger.info( "Forwarding an external request of " + rURI + " to an internal controller of " +
-                                internalRoute );
+                        String internalRoute = setInternalForwardServlet( request, rURI, resources );
                         request.getRequestDispatcher( internalRoute ).forward( request, response );
                     } else {
                         throw new NotLoggedInException();
                     }
                 } catch ( NotLoggedInException e ) {
+
                     request.setAttribute( "exception", e ); // TODO: Change this signature
                     this.redirectError( httpRequest, (HttpServletResponse) response );
                 } catch ( ServletException e ) {
+                    request.setAttribute( "exception", e ); // TODO: Change this signature
                     logger.error( "Servlet crashed from coding error", e );
                     this.redirectError( httpRequest, (HttpServletResponse) response, e );
                 } catch ( IOException e ) {
+                    request.setAttribute( "exception", e ); // TODO: Change this signature
                     logger.error( "Cannot find proper jsp", e );
                     this.redirectError( httpRequest, (HttpServletResponse) response, e );
                 } catch ( ParameterCollision e ) {
+                    request.setAttribute( "exception", e ); // TODO: Change this signature
                     logger.error( "Conflict for parameter key", e );
                     this.redirectError( httpRequest, (HttpServletResponse) response, e );
                 }
@@ -186,6 +165,51 @@ public class RouteFilter implements Filter {
             this.redirectError( (HttpServletRequest) request, (HttpServletResponse) response, e );
         }
 
+    }
+
+    private String setInternalForwardServlet( ServletRequest request, String rURI, String[] resources ) {
+        String lastController = null;
+        if ( resources.length % 2 == 0 && resources.length != 0 ) {
+            lastController = resources[resources.length - 2];
+        } else {
+            lastController = resources[resources.length - 1];
+        }
+
+        //chain.doFilter( request, response );
+        String internalRoute = MessageFormat.format( "/{0}", lastController );
+        request.setAttribute( "internalRequestURI", internalRoute );
+        request.setAttribute( "externalRequestURI", rURI );
+        request.setAttribute( "controller", internalRoute );
+        logger.info( "Forwarding an external request of " + rURI + " to an internal controller of " +
+                internalRoute );
+        return internalRoute;
+    }
+
+    private String[] setRequestParametersMap( ServletRequest request, HttpServletRequest httpRequest, String rURI )
+            throws ParameterCollision {
+        // Take the last resource and call up on that particular controller and preauthorize
+        String[] resources = rURI.replaceFirst( "/", "" ).split( "/" );
+        Map<String, String> parametersMap = new LinkedHashMap<>();
+        for ( int i = 0; i < resources.length; i++ ) {
+            if ( i + 1 < resources.length && this.isNumeric( resources[i + 1] ) ) {
+                parametersMap.put( resources[i], resources[++i] );
+            } else {
+                parametersMap.put( resources[i], null );
+            }
+        }
+
+        Enumeration enumeration = httpRequest.getParameterNames();
+        while ( enumeration.hasMoreElements() ) {
+            String key = (String) enumeration.nextElement();
+            String oldValue = parametersMap.put( Manager.toCamelCase( key ), httpRequest.getParameter( key ) );
+            if ( oldValue != null ) {
+                throw new ParameterCollision( key );
+            }
+        }
+
+        logger.info( "Logging parameter linked list map of " + parametersMap.toString() );
+        request.setAttribute( "parameters", parametersMap );
+        return resources;
     }
 
     // TODO: Implement Map<String, String> or JsonElement
@@ -240,6 +264,17 @@ public class RouteFilter implements Filter {
         return isSafeRoutes;
     }
 
+    private boolean isTransientRoutes( String requestURI ) {
+        boolean isTransientRoutes = false;
+        for ( String route : (Set<String>) fc.getServletContext().getAttribute( "transientRoutes" ) ) {
+            // Note the matches rather than contains
+            isTransientRoutes = isTransientRoutes || (requestURI.matches( route ));
+        }
+
+        return isTransientRoutes;
+    }
+
+
     private String detectMimeType( String URI ) {
         int dotLocation = URI.lastIndexOf( "." );
         String type = URI.substring( dotLocation + 1, URI.length() );
@@ -247,7 +282,7 @@ public class RouteFilter implements Filter {
     }
 
 
-    private boolean isPermissibleRoutes( String stringQuery )
+    private boolean isCheckedRoutes( String stringQuery )
             throws NonPermissibleRoute, TooManyUrlNestingException, MissingArgumentException {
         String url = stringQuery.substring( 0,
                 stringQuery.contains( "?" ) ? stringQuery.indexOf( "?" ) : stringQuery.length() );
