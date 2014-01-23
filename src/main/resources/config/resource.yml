@@ -12,6 +12,7 @@
   - feed
   - profile(\.do)?
 - group
+- search(\.do)?
 - login(\.do)?
 - logout(\.do)?
 

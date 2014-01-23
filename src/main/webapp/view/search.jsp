@@ -16,7 +16,7 @@ $(function() {
 
 
 <div>
-<form action="search.do" method="get" align="center">
+<form action="/search.do" method="get" align="center">
     Search <input type="text" name="search_query" id="search_query" autocomplete="off" style="margin-bottom:0px;" />
     <input type="submit" name="submit" value="OK" />
     <br />
