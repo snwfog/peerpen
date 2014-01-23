@@ -36,14 +36,25 @@ public class SearchAutocompleteAjax extends HttpServlet {
             q = request.getParameter( "term" );
         }
 
-        // Obtains for each searchable model a list of suggestion base on the query
-        List<String> documents = new Document().getSuggestedDocuments( q, 3 );
-        List<String> peers = new Peer().getSuggestedPeers( q, 3 );
+        String area = "";
+        if (request.getParameter( "area" )!= null){
+            area = request.getParameter( "area" );
+        }
+
 
         // Merge all lists into a set (unique)
         Set suggestionPool = new LinkedHashSet(  );
-        suggestionPool.addAll( documents );
-        suggestionPool.addAll( peers );
+
+        // Obtains for each searchable model a list of suggestion base on the query
+        if(area.equals( "documents" )){
+            suggestionPool.addAll( new Document().getSuggestedDocuments( q, 5 ) );
+        }else if( area.equals("peers")){
+            suggestionPool.addAll( new Peer().getSuggestedPeers( q, 5 ) );
+        }else {
+            suggestionPool.addAll( new Document().getSuggestedDocuments( q, 3 ) );
+            suggestionPool.addAll( new Peer().getSuggestedPeers( q, 3 ) );
+        }
+
 
         // Convert set into json string
         String json = new Gson().toJson( suggestionPool );

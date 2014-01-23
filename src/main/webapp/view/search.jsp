@@ -7,28 +7,43 @@
 <script>
 $(function() {
    $( "#search_query" ).autocomplete({
-        source: "search_autocomplete_ajax.do", // param name must be 'term'
-        minLength: 2
+       source: function(request, response) {
+           $.ajax({
+               url: "/search_autocomplete_ajax.do",
+               dataType: "json",
+               data: {
+                   term: request.term,
+                   area: $("input[type='radio'][name='area']:checked").val()
+               },
+               success: function(data) {
+                   response(data);
+               }
+           });
+       },
+        //
+        //source: "search_autocomplete_ajax.do", // param name must be 'term'
+        minLength: 3
     });
 });
 </script>
 
 
 
-<div>
-<form action="/search.do" method="get" align="center">
-    Search <input type="text" name="search_query" id="search_query" autocomplete="off" style="margin-bottom:0px;" />
-    <input type="submit" name="submit" value="OK" />
-    <br />
+<form action="/search.do" method="get" class="form-horizontal" role="form">
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search" name="search_query" id="search_query" autocomplete="off" />
+        <input type="submit" class="btn btn-default" name="submit" value="GO" />
+    </div>
+    <div>
+        <input type="radio" name="area" value="all" checked />All
+        <input type="radio" name="area" value="documents" />Documents
+        <input type="radio" name="area" value="peers" />Peers
+        <%--<input type="radio" name="area" value="groups" />Groups--%>
+        <%--&lt;%&ndash;<input type="radio" name="area" value="tags" />Tags&ndash;%&gt;--%>
+    </div>
     <%--<ul id="suggestion_list" style="background-color:white;width:200px;margin:auto"></ul>--%>
-    <%--<br />--%>
-    <%--<input type="radio" name="area" value="all" checked />All--%>
-    <%--<input type="radio" name="area" value="documents" />Documents--%>
-    <%--<input type="radio" name="area" value="peers" />Peers--%>
-    <%--<input type="radio" name="area" value="groups" />Groups--%>
-    <%--&lt;%&ndash;<input type="radio" name="area" value="tags" />Tags&ndash;%&gt;--%>
 </form>
-</div>
+
 
 
 
