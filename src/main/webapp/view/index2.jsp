@@ -49,7 +49,7 @@
                     </li>
                 </ul>
 
-                <form class="navbar-form pull-right" action="/login.do" method="post">
+                <form class="navbar-form pull-right" action="/login" method="post">
                     <input class="span2" type="text" placeholder="Username" name="username">
                     <input class="span2" type="password" placeholder="Password" name="password">
                     <button type="submit" class="btn btn-primary">Sign in</button>
