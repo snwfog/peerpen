@@ -41,7 +41,7 @@ public class ServletRoute {
             fetchPath( allRoutes, routes, child );
         }
 
-        routes.removeFirst();
+        routes.removeLast();
     }
 
     public boolean isValidRoute( String route ) {
@@ -65,7 +65,7 @@ public class ServletRoute {
         }
         for ( RouteNode n : node.getChildren() ) {
             if ( routes[i].matches( n.path ) ) {
-                return isValidRoute( routes, ++i, node );
+                return isValidRoute( routes, ++i, n );
             }
         }
 

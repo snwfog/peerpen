@@ -76,45 +76,45 @@ public class ApplicationInitializerListener implements ServletContextListener {
 
     }
 
-    private static String pattern = "/{0}";
-    private static MessageFormat format = new MessageFormat( pattern );
-
-    public Set<String> getAllRoutes( List list ) {
-        Set<String> allRoutes = new LinkedHashSet<String>();
-        for ( Object m : list ) {
-            StringBuffer sb = new StringBuffer();
-            if ( m instanceof Map ) {
-                StringBuffer newSb = new StringBuffer( sb );
-                getRoute( (Map) m, newSb, allRoutes );
-            } else {
-                sb.append( format.format( pattern, m ) );
-                allRoutes.add( sb.toString() );
-            }
-        }
-
-        return allRoutes;
-    }
-
-    private StringBuffer getRoute( Map m, StringBuffer sb, Set<String> allRoutes ) {
-        for ( Object ob : m.keySet() ) {
-            sb.append( format.format( pattern, ob ) );
-            allRoutes.add( sb.toString() );
-            if ( m.get( ob ) instanceof List ) {
-                List list = (List) m.get( ob );
-                for ( Object listObject : list ) {
-                    if ( listObject instanceof Map ) {
-                        StringBuffer newSb = new StringBuffer( sb );
-                        getRoute( (Map) listObject, newSb, allRoutes );
-                    } else {
-                        sb.append( format.format( pattern, listObject ) );
-                        allRoutes.add( sb.toString() );
-                    }
-                }
-            }
-        }
-
-        return sb;
-    }
+    //private static String pattern = "/{0}";
+    //private static MessageFormat format = new MessageFormat( pattern );
+    //
+    //public Set<String> getAllRoutes( List list ) {
+    //    Set<String> allRoutes = new LinkedHashSet<String>();
+    //    for ( Object m : list ) {
+    //        StringBuffer sb = new StringBuffer();
+    //        if ( m instanceof Map ) {
+    //            StringBuffer newSb = new StringBuffer( sb );
+    //            getRoute( (Map) m, newSb, allRoutes );
+    //        } else {
+    //            sb.append( format.format( pattern, m ) );
+    //            allRoutes.add( sb.toString() );
+    //        }
+    //    }
+    //
+    //    return allRoutes;
+    //}
+    //
+    //private StringBuffer getRoute( Map m, StringBuffer sb, Set<String> allRoutes ) {
+    //    for ( Object ob : m.keySet() ) {
+    //        sb.append( format.format( pattern, ob ) );
+    //        allRoutes.add( sb.toString() );
+    //        if ( m.get( ob ) instanceof List ) {
+    //            List list = (List) m.get( ob );
+    //            for ( Object listObject : list ) {
+    //                if ( listObject instanceof Map ) {
+    //                    StringBuffer newSb = new StringBuffer( sb );
+    //                    getRoute( (Map) listObject, newSb, allRoutes );
+    //                } else {
+    //                    sb.append( format.format( pattern, listObject ) );
+    //                    allRoutes.add( sb.toString() );
+    //                }
+    //            }
+    //        }
+    //    }
+    //
+    //    return sb;
+    //}
 
     @Override
     public void contextDestroyed( ServletContextEvent event ) {
