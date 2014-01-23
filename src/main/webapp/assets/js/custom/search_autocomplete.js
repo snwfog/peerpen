@@ -1,3 +1,4 @@
+// custom autocomplete (below) is currently replaced by jquery autocomplete, but keep it just in case
 var search_autocomplete = true;
 if(search_autocomplete){
     $(document).ready(function() {

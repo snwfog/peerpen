@@ -1,5 +1,7 @@
 package com.peerpen.controller;
 
+import com.peerpen.framework.InternalHttpServletRequest;
+import com.peerpen.framework.exception.MissingArgumentException;
 import com.peerpen.model.Document;
 import com.peerpen.model.Group;
 import com.peerpen.model.Peer;
@@ -29,12 +31,13 @@ public class SearchController extends HttpServlet {
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        String query = " "; // prevent wild search
+        String query = "";
         String area = "";
 
         if (request.getParameter( "area" )!= null){
             area = request.getParameter( "area" );
         }
+
         if (request.getParameter( "search_query" )!= null && !request.getParameter( "search_query" ).isEmpty()){
             query = request.getParameter( "search_query" );
         }
@@ -42,22 +45,23 @@ public class SearchController extends HttpServlet {
         String origin = request.getRequestURI();
         HttpSession session = request.getSession();
 
-        if(area.equals( "documents" )){
-            session.setAttribute("searchResults", new Document().getMatchedDocuments( query ));
-        }else if(area.equals( "peers" )){
-            session.setAttribute("searchResults", new Peer().getMatchedPeers( query ));
-        }else if(area.equals( "groups" )){
-            session.setAttribute("searchResults", new Group().getMatchedGroups( query ));
-        }else if(area.equals( "tags" )){
-            //session.setAttribute("searchResults", getMatchedTags( query ));
-        }else{ // all or not set
-            List<Object> everything = new ArrayList<Object>(  );
-            everything.addAll( new Document().getMatchedDocuments( query ));
-            everything.addAll( new Peer().getMatchedPeers( query ));
-            everything.addAll( new Group().getMatchedGroups( query ));
-            session.setAttribute( "searchResults", everything );
+        if (!query.isEmpty()){
+            if(area.equals( "documents" )){
+                session.setAttribute("searchResults", new Document().getMatchedDocuments( query ));
+            }else if(area.equals( "peers" )){
+                session.setAttribute("searchResults", new Peer().getMatchedPeers( query ));
+            }else if(area.equals( "groups" )){
+                session.setAttribute("searchResults", new Group().getMatchedGroups( query ));
+            }else if(area.equals( "tags" )){
+                //session.setAttribute("searchResults", getMatchedTags( query ));
+            }else{ // all or not set
+                List<Object> everything = new ArrayList<Object>(  );
+                everything.addAll( new Document().getMatchedDocuments( query ));
+                everything.addAll( new Peer().getMatchedPeers( query ));
+                everything.addAll( new Group().getMatchedGroups( query ));
+                session.setAttribute( "searchResults", everything );
+            }
         }
-
         response.sendRedirect( "/search" );
     }
 }
