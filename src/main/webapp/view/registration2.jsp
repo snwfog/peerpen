@@ -2,12 +2,6 @@
 <%@ include file="/view/includes/static/header.jsp" %>
 
 
-<%
-    Peer peer = (Peer) session.getAttribute("user");
-    if (peer != null)
-    {
-%>
-
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -41,17 +35,11 @@
                 <input type="text" class="form-control" name="industry" style="margin:10px 0" placeholder="Industry">
                 <input type="text" class="form-control" name="yoe" style="margin:10px 0" id="valid_yoe" placeholder="Years of Experience" data-content="<div class='validation'>The years of experience must be in integer(s) format (eg. 12)</div>" data-html="true">
                 <input type="text" class="form-control" name="personal_website" style="margin:10px 0" placeholder="Personal Website">
-                <input type="hidden" class="form-control" name="id" value="<%= peer.getId()%>">
+                <%--<input type="hidden" class="form-control" name="id" value="<%= peer.getId()%>">--%>
+                <input type="hidden" class="form-control" name="id" value="2">
             </div>
     </div>
     </form>
 </div>
-
-<%
-    }
-    else
-        response.sendRedirect("/login");
-%>
-
 
 <%@ include file="/view/includes/static/footer.jsp" %>

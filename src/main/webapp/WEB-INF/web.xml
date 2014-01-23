@@ -102,6 +102,7 @@
     <!--</servlet-mapping>-->
 
     <servlet>
+        <description>First step in the registration</description>
         <servlet-name>register</servlet-name>
         <jsp-file>/view/register.jsp</jsp-file>
     </servlet>
@@ -109,39 +110,41 @@
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
-    <!--<servlet>-->
-    <!--<servlet-name>register.do</servlet-name>-->
-    <!--<servlet-class>com.peerpen.controller.RegistrationController</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>register.do</servlet-name>-->
-    <!--<url-pattern>/register.do</url-pattern>-->
-    <!--</servlet-mapping>-->
+
+    <servlet>
+        <servlet-name>register.do</servlet-name>
+        <servlet-class>com.peerpen.controller.RegistrationController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>register.do</servlet-name>
+        <url-pattern>/register.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>additional</servlet-name>
+        <jsp-file>/view/registration2.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>additional</servlet-name>
+        <url-pattern>/additional</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+    <servlet-name>additional.do</servlet-name>
+    <servlet-class>com.peerpen.controller.Registration2Controller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    <servlet-name>additional.do</servlet-name>
+    <url-pattern>/additional.do</url-pattern>
+    </servlet-mapping>
 
     <!--<servlet>-->
-    <!--<servlet-name>registration2</servlet-name>-->
-    <!--<jsp-file>/view/registration2.jsp</jsp-file>-->
+        <!--<servlet-name>register3</servlet-name>-->
+        <!--<jsp-file>/view/avatar.jsp</jsp-file>-->
     <!--</servlet>-->
     <!--<servlet-mapping>-->
-    <!--<servlet-name>registration2</servlet-name>-->
-    <!--<url-pattern>/registration2</url-pattern>-->
-    <!--</servlet-mapping>-->
-    <!--<servlet>-->
-    <!--<servlet-name>registration2.do</servlet-name>-->
-    <!--<servlet-class>com.peerpen.controller.Registration2Controller</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>registration2.do</servlet-name>-->
-    <!--<url-pattern>/registration2.do</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--<servlet>-->
-    <!--<servlet-name>avatar</servlet-name>-->
-    <!--<jsp-file>/view/avatar.jsp</jsp-file>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>avatar</servlet-name>-->
-    <!--<url-pattern>/avatar</url-pattern>-->
+        <!--<servlet-name>register3</servlet-name>-->
+        <!--<url-pattern>/avatar</url-pattern>-->
     <!--</servlet-mapping>-->
     <!--<servlet>-->
     <!--<servlet-name>avatar.do</servlet-name>-->
@@ -309,63 +312,63 @@
         <url-pattern>/error</url-pattern>
     </servlet-mapping>
 
-  <servlet>
-    <servlet-name>upload.do</servlet-name>
-    <servlet-class>com.peerpen.controller.UploadController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>upload.do</servlet-name>
-    <url-pattern>/upload.do</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>upload.do</servlet-name>
+        <servlet-class>com.peerpen.controller.UploadController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>upload.do</servlet-name>
+        <url-pattern>/upload.do</url-pattern>
+    </servlet-mapping>
 
-  <!--FEED STUFF-->
-  <servlet>
-      <servlet-name>feed.do</servlet-name>
-      <servlet-class>com.peerpen.controller.FeedController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-      <servlet-name>feed.do</servlet-name>
-      <url-pattern>/feed.do</url-pattern>
-  </servlet-mapping>
-  <servlet>
-      <servlet-name>feed</servlet-name>
-      <jsp-file>/view/feed.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-      <servlet-name>feed</servlet-name>
-      <url-pattern>/feed</url-pattern>
-  </servlet-mapping>
+    <!--FEED STUFF-->
+    <servlet>
+        <servlet-name>feed.do</servlet-name>
+        <servlet-class>com.peerpen.controller.FeedController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>feed.do</servlet-name>
+        <url-pattern>/feed.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>feed</servlet-name>
+        <jsp-file>/view/feed.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>feed</servlet-name>
+        <url-pattern>/feed</url-pattern>
+    </servlet-mapping>
 
-  <servlet>
-    <servlet-name>about</servlet-name>
-    <jsp-file>/view/about.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>about</servlet-name>
-    <url-pattern>/about</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>about</servlet-name>
+        <jsp-file>/view/about.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>about</servlet-name>
+        <url-pattern>/about</url-pattern>
+    </servlet-mapping>
 
-  <session-config>
-      <session-timeout>72</session-timeout>
-  </session-config>
+    <session-config>
+        <session-timeout>72</session-timeout>
+    </session-config>
 
-  <context-param>
-    <description>Location to store uploaded file</description>
-    <param-name>file-upload-mac</param-name>
-    <param-value>
-      <!--Change this to whoever is responsible for it-->
-      /Users/bobbyyit/Desktop/
-    </param-value>
-  </context-param>
-  <context-param>
-    <description>Location to store uploaded file</description>
-    <param-name>file-upload-win</param-name>
-    <param-value>
-      <!--Change this to whoever is responsible for it-->
-      <!--not tested yet-->
-      c:\PeerPen\temp\
-    </param-value>
-  </context-param>
+    <context-param>
+        <description>Location to store uploaded file</description>
+        <param-name>file-upload-mac</param-name>
+        <param-value>
+            <!--Change this to whoever is responsible for it-->
+            /Users/bobbyyit/Desktop/
+        </param-value>
+    </context-param>
+    <context-param>
+        <description>Location to store uploaded file</description>
+        <param-name>file-upload-win</param-name>
+        <param-value>
+            <!--Change this to whoever is responsible for it-->
+            <!--not tested yet-->
+            c:\PeerPen\temp\
+        </param-value>
+    </context-param>
 
 
     <!--<session-config>-->

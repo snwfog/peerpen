@@ -12,9 +12,11 @@
   - feed
   - profile(\.do)?
 - group
+
 - login(\.do)?
 - logout(\.do)?
-
+- register(\.do)?
+- additional(\.do)?
 
 
 

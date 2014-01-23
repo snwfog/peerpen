@@ -5,3 +5,157 @@ $(function() {
     verticalOffset: 40
   });
 });
+$(document).ready(function () {
+    $('img#photo').imgAreaSelect({
+        handles: true,
+        onSelectEnd: function (img, selection) {
+            alert('width: ' + selection.width + '; height: ' + selection.height);
+        }
+    });
+});
+function validateForm()
+{
+    var email_regex = /^[a-z0-9!#$%&'*+/=?^_{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
+    var fname=document.forms["register"]["first_name"].value;
+    var lname=document.forms["register"]["last_name"].value;
+    var username=document.forms["register"]["user_name"].value;
+    var pass=document.forms["register"]["password"].value;
+    var cpass=document.forms["register"]["confirm_password"].value;
+    var email=document.forms["register"]["email"].value;
+    if (fname==null || fname=="")
+    {
+        $('#valid_fname').popover({
+            placement: 'left'
+        }).popover('show');
+        setTimeout(function () {
+            $('#valid_fname').popover('destroy');
+        }, 3000);
+        return false;
+    }
+    if (lname==null || lname=="")
+    {
+        $('#valid_lname').popover('show');
+        setTimeout(function () {
+            $('#valid_lname').popover('destroy');
+        }, 3000);
+        return false;
+    }
+    if (username==null || username=="")
+    {
+        $('#valid_username').popover('show');
+        setTimeout(function () {
+            $('#valid_username').popover('destroy');
+        }, 3000);
+        return false;
+    }
+    if (pass==null || pass=="")
+    {
+        $('#valid_pass').popover('show');
+        setTimeout(function () {
+            $('#valid_pass').popover('destroy');
+        }, 3000);
+        return false;
+    }
+    if (cpass==null || cpass=="")
+    {
+        $('#valid_cpass').popover('show');
+        setTimeout(function () {
+            $('#valid_cpass').popover('destroy');
+        }, 3000);
+        return false;
+    }
+
+    if (email==null || email=="" || !(email_regex.test(email)))
+    {
+        $('#valid_email').popover('show');
+        setTimeout(function () {
+            $('#valid_email').popover('destroy');
+        }, 3000);
+        return false;
+    }
+    if(pass!=cpass)
+    {
+        $('#valid_cpass').popover('show');
+        setTimeout(function () {
+            $('#valid_cpass').popover('destroy');
+        }, 3000);
+        return false;
+    }
+}
+
+function validateProfile()
+{
+    var testDate=document.forms["register"]["dob"].value;
+    var testYoe=document.forms["register"]["yoe"].value;
+    var date_regex = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+    var exp_regex = /^\d{1}|[1-9]\d{1}$/;
+    if(!(date_regex.test(testDate)) && !(testDate==null || testDate==""))
+    {
+        $('#valid_dob').popover({
+            placement: 'right'
+        }).popover('show');
+        setTimeout(function () {
+            $('#valid_dob').popover('destroy');
+        }, 3500);
+        return false;
+
+    }
+    if(!(exp_regex.test(testYoe)) && !(testYoe==null || testYoe==""))
+    {
+        $('#valid_yoe').popover({
+            placement: 'right'
+        }).popover('show');
+        setTimeout(function () {
+            $('#valid_yoe').popover('destroy');
+        }, 3500);
+        return false;
+
+    }
+};
+$(document).ready(function () {
+    $('#photo').imgAreaSelect({
+        handles: true,
+        onSelectEnd :  function (img, c){
+            $('input[name="x1"]').val(c.x1);
+            $('input[name="y1"]').val(c.y1);
+            $('input[name="x2"]').val(c.x2);
+            $('input[name="y2"]').val(c.y2);
+            alert("x1 " + c.x1 + " y1 " + c.y1);
+            alert("x2 " + c.x2 + " y2 " + c.y2);
+        }
+    });
+});
+function checkAvatar()
+{
+    var avatarLoaded = document.getElementById("photo").src;
+    if(avatarLoaded!="/assets/images/profile/256.jpg")
+    {
+        var img = document.images[0];
+        $(document).ready(function () {
+            // atob to base64_decode the data-URI
+            var image_data = atob(img.src.split(',')[1]);
+            // Use typed arrays to convert the binary data to a Blob
+            var arraybuffer = new ArrayBuffer(image_data.length);
+            var view = new Uint8Array(arraybuffer);
+            for (var i=0; i<image_data.length; i++) {
+                view[i] = image_data.charCodeAt(i) & 0xff;
+            }
+            try {
+                // This is the recommended method:
+                var blob = new Blob([arraybuffer], {type: 'application/octet-stream'});
+            } catch (e) {
+                // The BlobBuilder API has been deprecated in favour of Blob, but older
+                // browsers don't know about the Blob constructor
+                // IE10 also supports BlobBuilder, but since the `Blob` constructor
+                //  also works, there's no need to add `MSBlobBuilder`.
+                var bb = new (window.WebKitBlobBuilder || window.MozBlobBuilder);
+                bb.append(arraybuffer);
+                var blob = bb.getBlob('application/octet-stream'); // <-- Here's the Blob
+            }
+
+            // Use the URL object to create a temporary URL
+            var url = (window.webkitURL || window.URL).createObjectURL(blob);
+            location.href = url; // <-- Download!
+        });
+    }
+}
