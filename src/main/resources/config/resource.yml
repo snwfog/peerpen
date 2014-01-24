@@ -6,18 +6,19 @@
 
 - peer:
   - document(\.do)?:
-    - comment:
+    - comment(\.do)?:
       - like
     - tag
   - feed(\.do)?
   - profile(\.do)?
   - extra
+  - additional(\.do)?
 - group
 - search(\.do)?
 - search_autocomplete_ajax(\.do)?
-- additional(\.do)?
 - document(\.do)?
 - reset(\.do)?
+
 
 
 

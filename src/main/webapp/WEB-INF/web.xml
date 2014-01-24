@@ -55,13 +55,13 @@
     =================== -->
 
     <servlet>
-        <description>Index page, unfortunately, it has to have index.html or it won't work</description>
+        <description>Application root</description>
         <servlet-name>index</servlet-name>
         <jsp-file>/view/index2.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>index</servlet-name>
-        <url-pattern>/index.html</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -185,29 +185,29 @@
     </servlet-mapping>
     <servlet>
       <servlet-name>reset.do</servlet-name>
-      <servlet-class>com.peerpen.controller.ResetController</servlet-class>
+      <servlet-class>com.peerpen.ajax.ResetControllerAjax</servlet-class>
     </servlet>
     <servlet-mapping>
       <servlet-name>reset.do</servlet-name>
       <url-pattern>/reset.do</url-pattern>
     </servlet-mapping>
 
-    <!--<servlet>-->
-    <!--<servlet-name>comment</servlet-name>-->
-    <!--<jsp-file>/view/comment.jsp</jsp-file>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>comment</servlet-name>-->
-    <!--<url-pattern>/comment</url-pattern>-->
-    <!--</servlet-mapping>-->
-    <!--<servlet>-->
-    <!--<servlet-name>comment.do</servlet-name>-->
-    <!--<servlet-class>com.peerpen.controller.CommentController</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>comment.do</servlet-name>-->
-    <!--<url-pattern>/comment.do</url-pattern>-->
-    <!--</servlet-mapping>-->
+    <servlet>
+    <servlet-name>comment</servlet-name>
+    <jsp-file>/view/comment.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+    <servlet-name>comment</servlet-name>
+    <url-pattern>/comment</url-pattern>
+    </servlet-mapping>
+    <servlet>
+    <servlet-name>comment.do</servlet-name>
+    <servlet-class>com.peerpen.controller.CommentController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    <servlet-name>comment.do</servlet-name>
+    <url-pattern>/comment.do</url-pattern>
+    </servlet-mapping>
 
     <servlet>
     <servlet-name>search</servlet-name>
@@ -405,10 +405,10 @@
     </context-param>
 
     <context-param>
+        <!-- Default root URL / is implied to be always safe -->
         <description>URL of safe resources that do not require login or session</description>
         <param-name>exempt-routes</param-name>
         <param-value>
-            /index
             /error
             /assets
             /routes

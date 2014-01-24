@@ -1,4 +1,4 @@
-package com.peerpen.controller;
+package com.peerpen.ajax;
 
 import com.peerpen.model.Peer;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -19,7 +19,7 @@ import javax.mail.internet.*;
  * To change this template use File | Settings | File Templates.
  */
 
-public class ResetController extends HttpServlet
+public class ResetControllerAjax extends HttpServlet
 {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {

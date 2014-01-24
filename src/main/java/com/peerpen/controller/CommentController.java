@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -34,14 +35,15 @@ public class CommentController extends HttpServlet
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
-      if (request.getParameter("_method") != null)
+      Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+      if (request.getParameter("method") != null)
       {
 
-          if(request.getParameter("_method").contentEquals("_upVote"))
+          if(request.getParameter("method").contentEquals("_upVote"))
           {
               addUpVote(request, response);
           }
-          else if (request.getParameter("_method").contentEquals("_downVote"))
+          else if (request.getParameter("method").contentEquals("_downVote"))
           {
               addDownVote(request,response);
           }
@@ -51,10 +53,9 @@ public class CommentController extends HttpServlet
   }
     protected void addUpVote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        HttpSession session = request.getSession();
-        Peer peer = (Peer)session.getAttribute("user");
-        Document document = new Document().find(Integer.parseInt(request.getParameter("docId")));
-        Comment comment = new Comment().find(Integer.parseInt(request.getParameter("commentId")));
+        Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+        Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
+        Comment comment = new Comment().find(Integer.parseInt(parameters.get("commentid")));
 
         comment.setUpVote(comment.getUpVote()+1);
         //comment.setDownVote(0);
@@ -71,8 +72,8 @@ public class CommentController extends HttpServlet
 
     protected void addDownVote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-
-        Comment comment = new Comment().find(Integer.parseInt(request.getParameter("commentId")));
+        Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+        Comment comment = new Comment().find(Integer.parseInt(parameters.get("commentid")));
         comment.setDownVote(comment.getDownVote()+1);
         int commentId = comment.getId()+1;
         String message= commentId+"|"+comment.getDownVote().toString();

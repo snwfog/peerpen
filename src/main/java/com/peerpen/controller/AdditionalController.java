@@ -6,19 +6,13 @@ import com.peerpen.framework.InternalRequestDispatcher;
 import com.peerpen.framework.exception.MissingArgumentException;
 import com.peerpen.framework.exception.RegistrationFailedException;
 import com.peerpen.model.Peer;
-import com.sunnyd.database.Manager;
 
 import javax.naming.OperationNotSupportedException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -83,7 +77,7 @@ public class AdditionalController extends HttpServlet {
 
             String path = request.getSession().getServletContext().getRealPath("/");
             Map<String, Object> map = (Map<String, Object>) request.getAttribute("parameters");
-            Peer p = new Peer(map);
+            Peer p = new Peer().find(Integer.parseInt(map.get("peer").toString()));
             request.setAttribute("user", p);
             request.setAttribute("path", path);
             System.out.println(map);

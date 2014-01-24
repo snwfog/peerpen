@@ -1,5 +1,6 @@
 package com.peerpen.framework.filter;
 
+import com.peerpen.framework.ContentWriter;
 import com.peerpen.framework.InternalHttpServletRequest;
 import com.peerpen.framework.ServletRoute;
 import com.peerpen.framework.exception.HttpException;
@@ -14,8 +15,6 @@ import com.sunnyd.database.Manager;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
 import java.text.MessageFormat;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
@@ -61,20 +60,9 @@ public class RouteFilter implements Filter {
 
             if ( isSafeRoutes( rURI ) ) {
                 try {
-                    InputStream fis = fc.getServletContext().getResourceAsStream( rURI );
-                    if ( fis == null ) {
-                        throw new FileNotFoundException( "Could not locate file " + rURI );
-                    }
                     // Set to general plain, could be made better by looking at file extension
                     // http://stackoverflow.com/questions/7380468/write-an-html-page-in-the-servlet-response-properly
-                    response.setContentType( this.detectMimeType( rURI ) );
-                    PrintWriter pw = response.getWriter();
-                    byte[] bytes = new byte[fis.available()];
-                    fis.read( bytes );
-                    response.setContentLength( bytes.length );
-                    pw.print( new String( bytes ) );
-                    pw.flush();
-                    pw.close();
+                    (new ContentWriter( request, response )).write();
                 } catch ( FileNotFoundException e ) {
                     //this.redirectError( httpRequest, (HttpServletResponse) response );
                     // Maybe its a page that we are trying to go?
@@ -84,7 +72,6 @@ public class RouteFilter implements Filter {
                 } catch ( IOException e ) {
                     this.redirectError( httpRequest, (HttpServletResponse) response );
                     logger.error( e.toString() );
-
                 }
 
             } else if ( isTransientRoutes( rURI ) ) {
@@ -259,6 +246,7 @@ public class RouteFilter implements Filter {
 
         boolean isSafeRoutes = false;
         for ( String route : (Set<String>) fc.getServletContext().getAttribute( "exemptRoutes" ) ) {
+            // FIXME: Quick fix for request URI that must be == or greater length than the safe route URI
             isSafeRoutes = isSafeRoutes || (requestURI.contains( route ));
         }
         return isSafeRoutes;
@@ -273,14 +261,6 @@ public class RouteFilter implements Filter {
 
         return isTransientRoutes;
     }
-
-
-    private String detectMimeType( String URI ) {
-        int dotLocation = URI.lastIndexOf( "." );
-        String type = URI.substring( dotLocation + 1, URI.length() );
-        return "text/" + type;
-    }
-
 
     private boolean isCheckedRoutes( String stringQuery )
             throws NonPermissibleRoute, TooManyUrlNestingException, MissingArgumentException {

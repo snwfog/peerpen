@@ -3,6 +3,7 @@ package com.peerpen.model;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.peerpen.framework.InternalHttpServletRequest;
+import com.peerpen.framework.exception.HttpSessionException;
 import com.peerpen.framework.exception.MissingArgumentException;
 import com.peerpen.framework.exception.NotLoggedInException;
 import com.peerpen.framework.exception.UserNotFoundException;
@@ -310,8 +311,8 @@ public class Peer extends Base {
         return true;
     }
 
-    public static boolean isValidLogin( HttpServletRequest request )
-            throws UserNotFoundException, OperationNotSupportedException, MissingArgumentException {
+    public static Peer isValidLogin( HttpServletRequest request )
+            throws UserNotFoundException, OperationNotSupportedException, MissingArgumentException, HttpSessionException {
         InternalHttpServletRequest internalRequest = InternalHttpServletRequest.transform( request );
         internalRequest.expectPresenceOf( "username", "password" );
         Map<String, Object> m = (Map<String, Object>) internalRequest.getParameterMap();
@@ -328,7 +329,9 @@ public class Peer extends Base {
         }
 
         p.setSessionId( request.getSession().getId() );
-        return p.update();
+        if (!p.update())
+            throw new HttpSessionException("Could not update peer " + p.toString() + " with sessionId of " + request.getSession().getId());
+        return p;
     }
 
     @Override
