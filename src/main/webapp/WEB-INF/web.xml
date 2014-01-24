@@ -175,22 +175,22 @@
         <url-pattern>/hunk.do</url-pattern>
     </servlet-mapping>
 
-    <!--<servlet>-->
-    <!--<servlet-name>reset</servlet-name>-->
-    <!--<jsp-file>/view/reset.jsp</jsp-file>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>reset</servlet-name>-->
-    <!--<url-pattern>/reset</url-pattern>-->
-    <!--</servlet-mapping>-->
-    <!--<servlet>-->
-    <!--<servlet-name>reset.do</servlet-name>-->
-    <!--<servlet-class>com.peerpen.controller.ResetController</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>reset.do</servlet-name>-->
-    <!--<url-pattern>/reset.do/*</url-pattern>-->
-    <!--</servlet-mapping>-->
+    <servlet>
+      <servlet-name>reset</servlet-name>
+      <jsp-file>/view/reset.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>reset</servlet-name>
+      <url-pattern>/reset</url-pattern>
+    </servlet-mapping>
+    <servlet>
+      <servlet-name>reset.do</servlet-name>
+      <servlet-class>com.peerpen.controller.ResetController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>reset.do</servlet-name>
+      <url-pattern>/reset.do</url-pattern>
+    </servlet-mapping>
 
     <!--<servlet>-->
     <!--<servlet-name>comment</servlet-name>-->
@@ -412,6 +412,7 @@
             /error
             /assets
             /routes
+            /reset
         </param-value>
     </context-param>
 

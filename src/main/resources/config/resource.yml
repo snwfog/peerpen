@@ -17,6 +17,7 @@
 - search_autocomplete_ajax(\.do)?
 - additional(\.do)?
 - document(\.do)?
+- reset(\.do)?
 
 
 
