@@ -111,6 +111,8 @@ public class RouteFilter implements Filter {
                     logger.info( "Data submitted to servlet is " + " NOT YET IMPLEMENTED" );
                     request.setAttribute( "requestType", "applicationJson" );
                     request.setAttribute( "requestData", sanitizeJsonData( httpRequest ) );
+                    logger.info("requestType: " + "applicationJson");
+                    logger.info("requestData: " + sanitizeJsonData( httpRequest ));
                 }
 
 
@@ -219,8 +221,11 @@ public class RouteFilter implements Filter {
 
     private boolean isAjaxRequest( HttpServletRequest request ) {
         String applicationRequestHeader = request.getHeader( "Content-Type" );
+        //application/x-www-form-urlencoded; charset=UTF-8
+        //return applicationRequestHeader != null &&
+        //        "application/json; charset=utf-8".contains( applicationRequestHeader );
         return applicationRequestHeader != null &&
-                "application/json; charset=utf-8".contains( applicationRequestHeader );
+                "application/x-www-form-urlencoded; charset=UTF-8".contains( applicationRequestHeader );
     }
 
     @Override
