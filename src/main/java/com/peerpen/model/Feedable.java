@@ -144,7 +144,7 @@ public class Feedable extends Base {
     }
 
 
-    public Feedable reveal(){
+    private Feedable reveal(){
         if(trueSelf == null){
             try {
                 Constructor cons = Class.forName(modelPath+this.getType()).getConstructor();
@@ -163,6 +163,7 @@ public class Feedable extends Base {
         }
         return trueSelf;
     }
+
 
     public static void revealList(List<Feedable> feedables){
         for( Feedable f : feedables){
@@ -219,5 +220,10 @@ public class Feedable extends Base {
     public void setUserId(Integer userId) {
         this.userId = userId;
         setUpdateFlag(true);
+    }
+
+    public Feedable getTrueSelf() {
+        reveal();
+        return trueSelf;
     }
 }

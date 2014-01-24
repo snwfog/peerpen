@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,9 +30,9 @@ public class FeedController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-        request.setAttribute("FeedableList", Feedable.getFeed(1));
+        Map<String, Object> map = (Map<String, Object>)request.getAttribute("parameters");
+        List<Feedable> data = Feedable.getFeed(Integer.parseInt((String)map.get("peer")));
+        request.setAttribute("FeedableList", data);
         request.getRequestDispatcher("/feed").forward(request, response);
     }
 

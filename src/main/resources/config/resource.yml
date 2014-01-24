@@ -9,7 +9,7 @@
     - comment:
       - like
     - tag
-  - feed
+  - feed(\.do)?
   - profile(\.do)?
   - extra
 - group

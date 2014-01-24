@@ -333,7 +333,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>feed</servlet-name>
-        <jsp-file>/view/feed.jsp</jsp-file>
+        <jsp-file>/view/feedViews/feed.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>feed</servlet-name>
