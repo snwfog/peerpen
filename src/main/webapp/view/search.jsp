@@ -3,9 +3,10 @@
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="com.peerpen.model.Group" %>
 <%@ include file="/view/includes/static/header.jsp" %>
-
 <script src="/assets/js/custom/search_autocomplete_caller.js"></script>
 
+
+<h1>Search</h1>
 
 <form action="/search.do" method="get" class="form-horizontal" role="form">
     <div class="form-group">

@@ -1,6 +1,12 @@
 package com.peerpen.controller;
+import com.peerpen.model.TagDescriptor;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +28,11 @@ public class TagController extends HttpServlet {
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-
+        // Get a list of all tag descriptors
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<TagDescriptor> tagDescriptors = new TagDescriptor().findAll( map );
+        request.setAttribute( "tagCloud", tagDescriptors );
+        request.getRequestDispatcher("/tag").forward(request, response);
     }
 
     //private List getMatchedTags(String keyword){

@@ -244,22 +244,42 @@
         <url-pattern>/search_autocomplete_ajax.do</url-pattern>
     </servlet-mapping>
 
-    <!--<servlet>-->
-    <!--<servlet-name>tag</servlet-name>-->
-    <!--<jsp-file>/view/tag.jsp</jsp-file>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>tag</servlet-name>-->
-    <!--<url-pattern>/tag</url-pattern>-->
-    <!--</servlet-mapping>-->
-    <!--<servlet>-->
-    <!--<servlet-name>tag.do</servlet-name>-->
-    <!--<servlet-class>com.peerpen.controller.TagController</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>tag.do</servlet-name>-->
-    <!--<url-pattern>/tag.do</url-pattern>-->
-    <!--</servlet-mapping>-->
+
+    <servlet>
+        <servlet-name>tag_autocomplete_ajax</servlet-name>
+        <jsp-file>/view/tag_autocomplete.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>tag_autocomplete_ajax</servlet-name>
+        <url-pattern>/tag_autocomplete_ajax</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>tag_autocomplete_ajax.do</servlet-name>
+        <servlet-class>com.peerpen.ajax.TagAutocompleteAjax</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>tag_autocomplete_ajax.do</servlet-name>
+        <url-pattern>/tag_autocomplete_ajax.do</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+    <servlet-name>tag</servlet-name>
+    <jsp-file>/view/tag.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+    <servlet-name>tag</servlet-name>
+    <url-pattern>/tag</url-pattern>
+    </servlet-mapping>
+    <servlet>
+    <servlet-name>tag.do</servlet-name>
+    <servlet-class>com.peerpen.controller.TagController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    <servlet-name>tag.do</servlet-name>
+    <url-pattern>/tag.do</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>document</servlet-name>

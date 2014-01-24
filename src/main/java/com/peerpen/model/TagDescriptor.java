@@ -4,6 +4,7 @@ import com.sunnyd.Base;
 import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +51,18 @@ public class TagDescriptor extends Base implements IModel {
         map.put("tagName", tagName);
         TagDescriptor td = new TagDescriptor(  ).find( map );
         return td != null;
+    }
+
+    public List<String> getSuggestedTagDescriptors( String keyword, int limit ) {
+        String sql = "SELECT `tag_name` FROM `tag_descriptors` WHERE `tag_name` LIKE '%" + keyword + "%' LIMIT " + limit;
+        List<TagDescriptor> tagDesc = new TagDescriptor().queryAll( sql );
+        List<String> suggestions = new ArrayList<String>();
+        if ( tagDesc.size() > 0 ) {
+            for ( int i = 0; i < tagDesc.size(); i++ ) {
+                suggestions.add( tagDesc.get( i ).getTagName() );
+            }
+        }
+        return suggestions;
     }
 
 
