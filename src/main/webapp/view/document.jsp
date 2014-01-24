@@ -6,22 +6,10 @@
 <%@ page import="java.util.List" %>
 
 <%--Declare all request variables here, easy to debug!!!--%>
-<% Peer peer = (Peer) request.getAttribute("user"); %>
+<% Peer peer = (Peer) request.getAttribute("sessionUser"); %>
 <% Document document =(Document) request.getAttribute("document");%>
 <% List<Comment> comments = (List<Comment>) request.getAttribute("comments");%>
 <% Changeset changeset = (Changeset) request.getAttribute("changeset");%>
-
-<script type="text/javascript">
-  jQuery(document).ready(function($) {
-    $('#tabs').tab();
-  });
-  $(document).on("click", ".confirmDeleteCommentDialog", function ()
-  {
-    var commentId = $(this).data('id');
-    $(".modal-footer #commentid").val(commentId);
-  });
-</script>
-
 
 <div class="container">
   <h1><%= document.getDocName()%></h1>
@@ -205,4 +193,5 @@
   </div>
 </div>
 <script src="/assets/js/custom/vote.js"></script>
+<script src="/assets/js/custom/deleteModal.js"></script>
 <%@ include file="/view/includes/static/footer.jsp" %>
