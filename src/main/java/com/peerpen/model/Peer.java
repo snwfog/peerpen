@@ -403,15 +403,15 @@ public class Peer extends Base
         this.getClass().toString());
   }
 
-  public Document getDocument(int i) throws PermissionDeniedException
+  public Document getDocument(int docId) throws PermissionDeniedException
   {
     Map<String, Object> map = Maps.newHashMap();
-    map.put("id", this.getId());
-    map.put("peer_id", i);
+    map.put("id", docId);
+    map.put("peer_id", this.getId());
     Document document = new Document().find(map);
 
     if(document == null)
-      throw new PermissionDeniedException("Permission denied, Peer " + this.getId() + " is not owner of Document " + i);
+      throw new PermissionDeniedException("Permission denied, Peer " + this.getId() + " is not owner of Document " + docId);
 
     return document;
   }
