@@ -32,7 +32,7 @@
                     <div class="well">
                         <img class="img-circle" src=<%= peer.getAvatar() !=null ? "" : "http://www.newyorker.com/online/blogs/photobooth/NASAEarth-01.jpg" %>>
                         <h2>User Name</h2>
-                        <p><a class="btn btn-primary" href="#">View details &raquo;</a></p>
+                        <p><a class="btn btn-primary" href="/peer/<%=peer.getId()%>/profile.do">View Profile &raquo;</a></p>
                     </div>
                 </div><!-- /.span4 -->
             </div>

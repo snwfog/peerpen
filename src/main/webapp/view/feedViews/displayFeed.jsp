@@ -14,21 +14,21 @@
                 <b><%=((Changeset)f.getTrueSelf()).getDocument().getDocName()%></b>
             </h2>
             <div class="card-body">
-                <div class="span6">
 
-                    <div class="bs-example">
-                        <div class="bs-example-label">From</div>
-                        <p style="word-wrap: break-word;">
-                          <%=((Changeset)f.getTrueSelf()).getContent()%>
-                        </p>
-                    </div>
-
-                </div>
 
                 <div class="span6">
                     <div class="bs-example">
                         <div class="bs-example-label">To</div>
                         <%=((Changeset)f.getTrueSelf()).getHunk().getContent()%>
+                    </div>
+                </div>
+
+                <div class="span6">
+                    <div class="bs-example">
+                        <div class="bs-example-label">From</div>
+                        <p style="word-wrap: break-word;">
+                            <%=((Changeset)f.getTrueSelf()).getContent()%>
+                        </p>
                     </div>
                 </div>
 
