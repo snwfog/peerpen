@@ -19,7 +19,7 @@
     {
       var e = email;
       $('#message').html('<i class="fa fa-spinner fa-spin"></i>');
-      $.post('reset.do', {
+      $.post('/reset.do', {
         email : e
       }, function(responseText) {
         if(responseText == "True")

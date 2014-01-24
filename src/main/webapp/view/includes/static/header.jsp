@@ -25,8 +25,8 @@
 
 
     <!-- dont put the following to footer -->
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>      <!-- for search autocomplete -->
-    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script><!-- for search autocomplete -->
+    <script src="/assets/js/lib/jquery-1.9.1.js"></script>     <!-- for search autocomplete -->
+    <script src="/assets/js/lib/jquery-ui-1.10.4.js"></script> <!-- for search autocomplete -->
     <%--<script type="text/javascript" src="/assets/js/custom/search_autocomplete.js"></script> custom search autocomplete --%>
 
 

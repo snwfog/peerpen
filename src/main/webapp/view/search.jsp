@@ -4,29 +4,7 @@
 <%@ page import="com.peerpen.model.Group" %>
 <%@ include file="/view/includes/static/header.jsp" %>
 
-<script>
-$(function() {
-   $( "#search_query" ).autocomplete({
-       source: function(request, response) {
-           $.ajax({
-               url: "/search_autocomplete_ajax.do",
-               dataType: "json",
-               data: {
-                   term: request.term,
-                   area: $("input[type='radio'][name='area']:checked").val()
-               },
-               success: function(data) {
-                   response(data);
-               }
-           });
-       },
-        //
-        //source: "search_autocomplete_ajax.do", // param name must be 'term'
-        minLength: 3
-    });
-});
-</script>
-
+<script src="/assets/js/custom/search_autocomplete_caller.js"></script>
 
 
 <form action="/search.do" method="get" class="form-horizontal" role="form">

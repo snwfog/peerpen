@@ -1,6 +1,5 @@
 package com.peerpen.controller;
 
-import com.sunnyd.database.Manager;
 import com.peerpen.model.Peer;
 import org.apache.commons.lang3.RandomStringUtils;
 import javax.servlet.ServletException;
@@ -20,7 +19,6 @@ import javax.mail.internet.*;
  * To change this template use File | Settings | File Templates.
  */
 
-
 public class ResetController extends HttpServlet
 {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -29,7 +27,7 @@ public class ResetController extends HttpServlet
     String message;
 
     Map<String, Object> map = new HashMap<String, Object>();
-    map.put("email", request.getParameter("email"));
+    map.put("email", email);
     List<Peer> matches = new Peer().findAll(map);
 
     if(matches.size() == 1)

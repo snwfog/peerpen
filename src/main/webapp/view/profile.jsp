@@ -1,6 +1,7 @@
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="java.util.Date"%>
 <%@ include file="/view/includes/static/header.jsp" %>
+<script src="/assets/js/custom/search_autocomplete_caller.js"></script>
 <%
     Peer peer = (Peer) request.getAttribute("user");
 %>
@@ -45,12 +46,10 @@
         </ul>
       </li>
     </ul>
-    <form class="navbar-form navbar-right" role="search" action="search.do" method="get">
+    <form class="navbar-form navbar-right" action="/search.do" method="get" role="form">
       <div class="form-group">
-        <input type="text" id="query" name="query" class="form-control" placeholder="Search" autocomplete="off">
-        <br />
-        <ul id="suggestion_list" style="background-color:white;width:200px;margin:auto"></ul>
-        <input type="submit" name="submit" value="OK" />
+        <input type="text" id="search_query" name="search_query" class="form-control" placeholder="Search" autocomplete="off" />
+        <input type="submit" class="btn btn-default" name="submit" value="GO" />
       </div>
       <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
       &nbsp &nbsp<a href="/logout.do">Logout</a>
