@@ -2,11 +2,11 @@
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="com.peerpen.model.Document" %>
 <%@ page import="com.peerpen.model.Comment" %>
-<%@ page import="java.util.List" %>
 <%@ page import="com.peerpen.model.Changeset" %>
+<%@ page import="java.util.List" %>
 
 <%--Declare all request variables here, easy to debug!!!--%>
-<% Peer peer = (Peer) session.getAttribute("user"); %>
+<% Peer peer = (Peer) request.getAttribute("user"); %>
 <% Document document =(Document) request.getAttribute("document");%>
 <% List<Comment> comments = (List<Comment>) request.getAttribute("comments");%>
 <% Changeset changeset = (Changeset) request.getAttribute("changeset");%>
@@ -19,7 +19,7 @@
   $(document).on("click", ".confirmDeleteCommentDialog", function ()
   {
     var commentId = $(this).data('id');
-    $(".modal-footer #commentId").val(commentId);
+    $(".modal-footer #commentid").val(commentId);
   });
 </script>
 
@@ -171,6 +171,7 @@
       <li class="active"><a href="#commentSection" data-toggle="tab">Comments</a></li>
       <li><a href="#changesetSection" data-toggle="tab">Changsets</a></li>
     </ul>
+
     <div id="my-tab-content" class="tab-content">
       <div class="tab-pane active" id="commentSection">
         <h2>Comments</h2>
@@ -183,6 +184,7 @@
 
                 <textarea name="comment" style="width:100%"></textarea>
                 <input type="hidden" name="docId" value="<%= document.getId()%>"/>
+                <input type="hidden" name="peerId" value="<%= peer.getId()%>"/>
                 <%--<br />--%>
                 <button type="submit" class="btn btn-success ">Post</button>
 
@@ -333,13 +335,13 @@
   </div>
   <div class="modal-footer">
     <form id="deleteComment" method="POST" action="/document.do">
-      <input type="hidden" name="_method" value="_delete"/>
-      <input type="hidden" name="commentId" id="commentId" value=""/>
-      <input type="hidden" name="docId" value="<%= document.getId().toString()%>"/>
+      <input type="hidden" name="method" value="_delete"/>
+      <input type="hidden" name="peerid" value="<%= peer.getId()%>"/>
+      <input type="hidden" name="commentid" id="commentid" value=""/>
+      <input type="hidden" name="docid" value="<%= document.getId()%>"/>
       <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
       <button type="submit" class="btn btn-primary">Delete</button>
     </form>
   </div>
 </div>
-
 <%@ include file="/view/includes/static/footer.jsp" %>
