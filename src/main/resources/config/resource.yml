@@ -6,7 +6,7 @@
 
 - peer:
   - document(\.do)?:
-    - comment:
+    - comment(\.do)?:
       - like
     - tag
   - feed
@@ -17,6 +17,7 @@
 - search_autocomplete_ajax(\.do)?
 - additional(\.do)?
 - document(\.do)?
+
 
 
 

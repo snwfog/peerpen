@@ -99,10 +99,10 @@ public class DocumentController extends HttpServlet
   protected void doPut(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException
   {
-    HttpSession session = request.getSession();
-    Peer peer = (Peer) session.getAttribute("user");
-    Document document = new Document().find(Integer.parseInt(request.getParameter("docId")));
-    Changeset changeset = new Changeset().find(Integer.parseInt(request.getParameter("changesetId")));
+    Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+    Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
+    Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
+    Changeset changeset = new Changeset().find(Integer.parseInt(parameters.get("changesetid")));
 
     Comment comment = new Comment();
     comment.setMessage(request.getParameter("comment").toString());
@@ -119,7 +119,8 @@ public class DocumentController extends HttpServlet
     request.setAttribute("comments", comments);
     request.setAttribute("document", document);
     request.setAttribute("changeset", changeset);
-    request.getRequestDispatcher("/document").forward(request, response);
+    //request.getRequestDispatcher("/document").forward(request, response);
+    response.sendRedirect("peer/2/document.do/1");
   }
 
 }
