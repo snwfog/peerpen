@@ -32,7 +32,9 @@
                 </div>
 
                 <div class="clearfix"></div>
-                <p><a class="btn" href="#">View Document &raquo;</a></p>
+                <%Integer peerId = ((Changeset)f.getTrueSelf()).getDocument().getPeerId();%>
+                <%Integer documentId = ((Changeset)f.getTrueSelf()).getDocumentId();%>
+                <p><a class="btn" href="/peer/<%=peerId%>/document.do/<%=documentId%>">View Document &raquo;</a></p>
             </div>
         </div>
     </div>
