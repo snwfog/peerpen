@@ -113,21 +113,13 @@
 
     <servlet>
         <servlet-name>additional</servlet-name>
-        <jsp-file>/view/registration2.jsp</jsp-file>
+        <servlet-class>com.peerpen.controller.AdditionalController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>additional</servlet-name>
         <url-pattern>/additional</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-    <servlet-name>additional.do</servlet-name>
-    <servlet-class>com.peerpen.controller.Registration2Controller</servlet-class>
-    </servlet>
-    <servlet-mapping>
-    <servlet-name>additional.do</servlet-name>
-    <url-pattern>/additional.do</url-pattern>
-    </servlet-mapping>
 
     <!--<servlet>-->
         <!--<servlet-name>register3</servlet-name>-->
@@ -431,6 +423,7 @@
             /login
             /logout
             /register
+            /additional
         </param-value>
     </context-param>
 

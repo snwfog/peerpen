@@ -13,7 +13,7 @@
         Get started!
     </h1>
 
-    <form class="form-inline" name="register" onsubmit="return validateForm()" id="register"
+    <form class="form-inline" name="register" id="register"
           action="/register" method="post">
         <div style=" max-width:500px; float:left;">
             <h4>Take a first step in building your career!</h4>

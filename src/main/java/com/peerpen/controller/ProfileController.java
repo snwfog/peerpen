@@ -85,7 +85,11 @@ public class ProfileController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
+        Map<String, Object> map = (Map<String, Object>) request.getAttribute("parameters");
+        Peer p = new Peer().find(Integer.parseInt(map.get("peer").toString()));
+        System.out.println("been here"+ p.getFirstName());
+        request.setAttribute("user", p);
+        request.getRequestDispatcher("/view/profile.jsp").forward(request, response);
 
     }
 }

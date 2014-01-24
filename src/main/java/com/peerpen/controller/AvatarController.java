@@ -1,3 +1,6 @@
+/**
+ * Created by Zearf on 1/7/2014.
+ */
 package com.peerpen.controller;
 
 import com.peerpen.model.Peer;
@@ -14,9 +17,6 @@ import java.util.Date;
 import java.io.File;
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * Created by Zearf on 1/7/2014.
- */
 public class AvatarController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // get all register input

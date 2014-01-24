@@ -1,16 +1,14 @@
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="java.util.Date"%>
 <%@ include file="/view/includes/static/header.jsp" %>
-
-
 <%
-  Peer peer = (Peer) session.getAttribute("user");
-  if (peer != null)
-  {
+    Peer peer = (Peer) request.getAttribute("user");
 %>
-Cropped image :<%= session.getAttribute("croppedImage") %>
-<br />
-<img src="/assets/images/profile/<%= session.getAttribute("croppedImage") %>" />
+
+
+<%--Cropped image :<%= session.getAttribute("croppedImage") %>--%>
+<%--<br />--%>
+<%--<img src="/assets/images/profile/<%= session.getAttribute("croppedImage") %>" />--%>
 
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -250,14 +248,6 @@ Cropped image :<%= session.getAttribute("croppedImage") %>
 </div>
 
 
-<%
-  }
-  else
-  {
-      response.sendRedirect("/login");
-      System.out.println("HELLO THEREEEE");
-  }
-%>
 
 
 <%@ include file="/view/includes/static/footer.jsp" %>
