@@ -4,7 +4,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
-<%@ page import="com.peerpen.model.Tag" %>
 <%@ include file="/view/includes/static/header.jsp" %>
 <script src="/assets/js/custom/tag_autocomplete_caller.js"></script>
 
@@ -17,22 +16,20 @@
     </div>
 </form>
 
-
-
 <%
     Map<String, Object> map = new HashMap<String, Object>();
     List<TagDescriptor> tagDescriptors = new TagDescriptor().findAll( map );
     for(int i=0;i<tagDescriptors.size();i++){
         TagDescriptor td = tagDescriptors.get( i );
         %>
-<a href="/tag_search.do?term=<%= td.getTagName() %>"><%= td.getTagName() %></a>
+<a href="/tag_search.do?term=<%= td.getTagName() %>"><code><%= td.getTagName() %></code></a>
 <%
     }
 %>
 
 
 
-<br /><br />
+<br /><br /><br />
 
 <h1>TESTING:</h1>
 

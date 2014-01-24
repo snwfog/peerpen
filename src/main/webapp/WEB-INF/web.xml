@@ -227,6 +227,23 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>tag_search</servlet-name>
+        <jsp-file>/view/tag_search.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>tag_search</servlet-name>
+        <url-pattern>/tag_search</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>tag_search.do</servlet-name>
+        <servlet-class>com.peerpen.controller.TagSearchController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>tag_search.do</servlet-name>
+        <url-pattern>/tag_search.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>search_autocomplete_ajax</servlet-name>
         <jsp-file>/view/search_autocomplete.jsp</jsp-file>
     </servlet>

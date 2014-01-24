@@ -16,6 +16,7 @@
 - group
 - tag(\.do)?
 - tag_autocomplete_ajax(\.do)?
+- tag_search(\.do)?
 - search(\.do)?
 - search_autocomplete_ajax(\.do)?
 - document(\.do)?
