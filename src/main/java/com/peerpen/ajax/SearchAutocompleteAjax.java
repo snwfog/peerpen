@@ -31,6 +31,9 @@ public class SearchAutocompleteAjax extends HttpServlet {
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+
+        // http://localhost:8080/search_autocomplete_ajax.do?term=resu
+
         String q = " ";
         if( request.getParameter("term")!= null){
             q = request.getParameter( "term" );
