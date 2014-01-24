@@ -1,5 +1,7 @@
 package com.peerpen.controller;
 
+import com.peerpen.framework.InternalRequestDispatcher;
+import com.peerpen.framework.exception.PermissionDeniedException;
 import com.peerpen.model.Changeset;
 import com.peerpen.model.Comment;
 import com.peerpen.model.Document;
@@ -13,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class DocumentController extends HttpServlet
 {
@@ -21,18 +22,29 @@ public class DocumentController extends HttpServlet
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException
   {
-
+    Peer owner = (Peer)request.getAttribute("sessionUser");
     Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
-    System.out.println("Request parameters:" + parameters);
     Peer peer = new Peer().find(Integer.parseInt(parameters.get("peer")));
-    Document document = new Document().find(Integer.parseInt(parameters.get("document.do")));
+    Document document = null;
 
-    List<Comment> comments = document.getOrderedComments();
+    try
+    {
+      if((document = peer.getDocument(Integer.parseInt(parameters.get("document.do")))) != null)
+      {
+        List<Comment> comments = document.getOrderedComments();
 
-    request.setAttribute("user", peer);
-    request.setAttribute("comments", comments);
-    request.setAttribute("document", document);
-    request.getRequestDispatcher("/document").forward(request, response);
+        request.setAttribute("user", peer);
+        request.setAttribute("comments", comments);
+        request.setAttribute("document", document);
+        request.getRequestDispatcher("/document").forward(request, response);
+      }
+    }
+    catch (PermissionDeniedException e)
+    {
+      ((InternalRequestDispatcher) request.getRequestDispatcher( "/error" )).forwardError(request, response, e);
+    }
+
+
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
