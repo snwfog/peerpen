@@ -1,6 +1,7 @@
 package com.peerpen.controller;
 
 import com.peerpen.framework.InternalRequestDispatcher;
+import com.peerpen.framework.exception.HttpSessionException;
 import com.peerpen.framework.exception.MissingArgumentException;
 import com.peerpen.framework.exception.UserNotFoundException;
 import com.peerpen.model.Peer;
@@ -30,10 +31,11 @@ public class LoginController extends HttpServlet {
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
         try {
-            if ( Peer.isValidLogin( request ) ) {
-                response.sendRedirect( "/peer/2/profile.do" );
+            Peer p = null;
+            if ( (p = Peer.isValidLogin( request )) != null ) {
+                response.sendRedirect( "/peer/" + p.getId() + "/profile.do" );
             }
-        } catch ( OperationNotSupportedException | MissingArgumentException e ) {
+        } catch ( OperationNotSupportedException | MissingArgumentException | HttpSessionException e ) {
             logger.error( "", e );
             ((InternalRequestDispatcher) request.getRequestDispatcher( "/error" )).forwardError( request, response, e );
         } catch ( UserNotFoundException e ) {
