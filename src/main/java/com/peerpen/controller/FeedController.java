@@ -31,8 +31,11 @@ public class FeedController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<String, Object> map = (Map<String, Object>)request.getAttribute("parameters");
-        List<Feedable> data = Feedable.getFeed(Integer.parseInt((String)map.get("peer")));
+        Integer peerId = Integer.parseInt((String)map.get("peer"));
+        Peer peer = new Peer().find(peerId);
+        List<Feedable> data = Feedable.getFeed(peerId);
         request.setAttribute("FeedableList", data);
+        request.setAttribute("peer", peer);
         request.getRequestDispatcher("/feed").forward(request, response);
     }
 

@@ -4,7 +4,7 @@
 <%@ page import="com.peerpen.model.Comment" %>
 <%@ include file="/view/includes/static/header.jsp" %>
 
-
+<% Peer peer = (Peer) request.getAttribute("peer"); %>
 
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -30,7 +30,7 @@
             <div class="span4">
                 <div class="span11">
                     <div class="well">
-                        <img class="img-circle" src="http://www.newyorker.com/online/blogs/photobooth/NASAEarth-01.jpg">
+                        <img class="img-circle" src=<%= peer.getAvatar() !=null ? "" : "http://www.newyorker.com/online/blogs/photobooth/NASAEarth-01.jpg" %>>
                         <h2>User Name</h2>
                         <p><a class="btn btn-primary" href="#">View details &raquo;</a></p>
                     </div>
@@ -60,11 +60,7 @@
                            <% }else{ %>
                                    <div class="row-fluid">
                                    <div class="card">
-                                   <h2 class="card-heading simple">Heading</h2>
-                                   <div class="card-body">
-                                   <p>You Got No Feeds</p>
-                                   <p><a class="btn" href="#">View details &raquo;</a></p>
-                                   </div>
+                                   <h2 class="card-heading simple">You Got No Feeds</h2>
                                    </div>
                                    </div>
                            <%}%>

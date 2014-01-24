@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.peerpen.model.Changeset" %>
 <%@ page import="com.peerpen.model.Comment" %>
+<%@ page import="com.peerpen.model.Peer" %>
 
 <% for(Feedable f : (List<Feedable>)request.getAttribute("FeedableList")){ %>
     <% if (f.getType().equalsIgnoreCase("Changeset")){%>
@@ -32,9 +33,8 @@
                 </div>
 
                 <div class="clearfix"></div>
-                <%Integer peerId = ((Changeset)f.getTrueSelf()).getDocument().getPeerId();%>
                 <%Integer documentId = ((Changeset)f.getTrueSelf()).getDocumentId();%>
-                <p><a class="btn" href="/peer/<%=peerId%>/document.do/<%=documentId%>">View Document &raquo;</a></p>
+                <p><a class="btn" href="/peer/<%=peer.getId()%>/document.do/<%=documentId%>">View Document &raquo;</a></p>
             </div>
         </div>
     </div>
