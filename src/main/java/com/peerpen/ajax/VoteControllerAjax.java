@@ -44,8 +44,8 @@ public class VoteControllerAjax extends HttpServlet {
         Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
         Comment comment = new Comment().find(Integer.parseInt(parameters.get("commentid")));
 
-        comment.setUpVote(comment.getUpVote()+1);
-        //comment.setDownVote(0);
+        //comment.setUpVote(comment.getUpVote()+1);
+        comment.upVote();
 
         comment.update();
 
@@ -61,7 +61,8 @@ public class VoteControllerAjax extends HttpServlet {
     {
         Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
         Comment comment = new Comment().find(Integer.parseInt(parameters.get("commentid")));
-        comment.setDownVote(comment.getDownVote()+1);
+        //comment.setDownVote(comment.getDownVote()+1);
+        comment.downVote();
         int commentId = comment.getId()+1;
         String message= commentId+"|"+comment.getDownVote().toString();
         comment.update();
