@@ -40,58 +40,25 @@ public class CommentController extends HttpServlet
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
-      //super.doPost(request,response);
-      InternalHttpServletRequest internalRequest = (InternalHttpServletRequest)request;
-      switch (internalRequest.getRequestMethod())
-      {
-          //case POST: doPost(request, response);
+      Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+      Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
+      Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
 
-          case DELETE: doDelete(request,response);
-            break;
+      Map<String, Object> map = Maps.newHashMap();
+      map.put("message", parameters.get("comment"));
+      map.put("peerId", peer.getId());
+      map.put("documentId", document.getId());
 
-          case PATCH: doPatch(request,response);
-            break;
+      Comment comment = new Comment(map);
+      comment.save();
 
-//          case DEFAULT: post(request, response);
-//            break;
-          default: post(request,response);
-      }
+      List<Comment> comments = document.getOrderedComments();
 
+      request.setAttribute("document", document);
+      request.getRequestDispatcher( "/view/document.jsp" ).forward( request, response );
   }
 
-    protected void addUpVote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-        Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
-        Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
-        Comment comment = new Comment().find(Integer.parseInt(parameters.get("commentid")));
-
-        comment.upVote();
-        //comment.setUpVote(comment.getUpVote()+1);
-        //comment.setDownVote(0);
-}
-    private void post(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
-        Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
-        Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
-
-        Map<String, Object> map = Maps.newHashMap();
-        map.put("message", parameters.get("comment"));
-        map.put("peerId", peer.getId());
-        map.put("documentId", document.getId());
-
-        Comment comment = new Comment(map);
-        comment.save();
-
-        List<Comment> comments = document.getOrderedComments();
-        //request.setAttribute("comments",comments);
-        request.setAttribute("document", document);
-        //request.getRequestDispatcher("/document").forward(request, response);
-        //response.sendRedirect("");
-        request.getRequestDispatcher( "/view/document.jsp" ).forward( request, response );
-    }
-
-    protected void doPatch(HttpServletRequest request, HttpServletResponse response)
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
         Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
@@ -105,8 +72,6 @@ public class CommentController extends HttpServlet
         comment.setPeerId(peer.getId());
         comment.setDocumentId(document.getId());
         comment.setChangesetId(changeset.getId());
-        //comment.setUpVote(0);
-        //comment.setDownVote(0);
         comment.save();
 
         List<Comment> comments = document.getOrderedComments();
@@ -114,8 +79,7 @@ public class CommentController extends HttpServlet
         request.setAttribute("comments", comments);
         request.setAttribute("document", document);
         request.setAttribute("changeset", changeset);
-        //request.getRequestDispatcher("/document").forward(request, response);
-        //response.sendRedirect("peer/2/document.do/1");
+
         request.getRequestDispatcher( "/view/document.jsp" ).forward(request, response);
     }
 
@@ -135,7 +99,6 @@ public class CommentController extends HttpServlet
         request.setAttribute("comments", comments);
         request.setAttribute("document", document);
         request.setAttribute("user", peer);
-        //response.sendRedirect("");
         request.getRequestDispatcher( "/view/document.jsp" ).forward( request, response );
     }
 

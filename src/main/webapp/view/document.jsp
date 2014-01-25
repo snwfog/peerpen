@@ -32,7 +32,7 @@
                 <textarea name="comment" style="width:100%"></textarea>
                 <input type="hidden" name="docId" value="<%= document.getId()%>"/>
                 <input type="hidden" name="peerId" value="<%= peer.getId()%>"/>
-                <input type="hidden" name="_method" value="POST">
+
                 <button type="submit" class="btn btn-success ">Post</button>
 
               </form>
@@ -53,7 +53,7 @@
                     <input type="hidden" name="commentid" value="<%= comment.getId()%>"/>
                     <input type="hidden" name="upvote" value="<%= comment.getUpVote()%>"/>
                     <input type="hidden" name="downvote" value="<%= comment.getDownVote()%>"/>
-                    <input type="hidden" name="_method" value="POST">
+
 
                     <button class="btn" onclick="upVote1();" >
                         <div class="point" id="up-<%= comment.getId()%>" name="point"><%= comment.getUpVote()%></div>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
@@ -66,7 +66,7 @@
                     <input type="hidden" name="commentid" value="<%= comment.getId()%>"/>
                     <input type="hidden" name="upvote" value="<%= comment.getUpVote()%>"/>
                     <input type="hidden" name="downvote" value="<%= comment.getDownVote()%>"/>
-                    <input type="hidden" name="_method" value="_patch"/>
+                    <input type="hidden" name="_method" value="put"/>
 
 
                     <button  class="btn" onclick="downVote1();" >
@@ -115,7 +115,7 @@
                           <input type="hidden" name="commentid" value="<%= c.getId()%>"/>
                           <input type="hidden" name="upvote" value="<%= c.getUpVote()%>"/>
                           <input type="hidden" name="downvote" value="<%= c.getDownVote()%>"/>
-                          <input type="hidden" name="_method" value="POST"/>
+
 
                           <button class="btn" onclick="upVote2();" >
                               <div class="point" id="<%= c.getId()%>" name="point"><%= c.getUpVote()%></div>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
@@ -128,7 +128,7 @@
                           <input type="hidden" name="commentid" value="<%= c.getId()%>"/>
                           <input type="hidden" name="upvote" value="<%= c.getUpVote()%>"/>
                           <input type="hidden" name="downvote" value="<%= c.getDownVote()%>"/>
-                          <input type="hidden" name="_method" value="_patch"/>
+                          <input type="hidden" name="_method" value="put"/>
 
                           <button  class="btn" onclick="downVote2();">
                               <div class="point" id="<%= c.getId()+1%>" name="point"><%= c.getDownVote()%></div>&nbsp; <i class="fa fa-thumbs-down"></i></button>&nbsp;
@@ -155,7 +155,7 @@
                       <input type="hidden" name="docid" value="<%= document.getId()%>"/>
                       <input type="hidden" name="changesetid" value="<%= ch.getId()%>"/>
                       <input type="hidden" name="peerid" value="<%= peer.getId()%>"/>
-                      <input type="hidden" name="_method" value="_patch"/>
+                      <input type="hidden" name="_method" value="put"/>
 
                       <%--<br />--%>
                       <button type="submit" class="btn btn-success ">Post</button>
@@ -184,7 +184,7 @@
   </div>
   <div class="modal-footer">
     <form id="deleteComment" method="POST" action="/peer/<%= peer.getId()%>/document/<%= document.getId()%>/comment">
-      <input type="hidden" name="_method" value="_delete"/>
+      <input type="hidden" name="_method" value="delete"/>
       <input type="hidden" name="peerid" value="<%= peer.getId()%>"/>
       <input type="hidden" name="commentid" id="commentid" value=""/>
       <input type="hidden" name="docid" value="<%= document.getId()%>"/>
