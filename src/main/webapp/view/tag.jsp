@@ -40,29 +40,22 @@
 <%
 
     //Get a list of all taggables
-    List<Taggable> taggables = new Taggable(  ).findAll( map );
-    for(int i=0; i<taggables.size();i++){
-        System.out.println( "listing all taggable item: " + taggables.get( i ).getId());
-    }
+    //List<Taggable> taggables = new Taggable(  ).findAll( map );
+    //for(int i=0; i<taggables.size();i++){
+    //    System.out.println( "listing all taggable item: " + taggables.get( i ).getId());
+    //}
 
     // proper way to attach a tag to entity:
     //1) get td
-    TagDescriptor td = new TagDescriptor(  ).getTagDescriptor( "blabla" );
+    //TagDescriptor td = new TagDescriptor(  ).getTagDescriptor( "blabla" );
 
     //2) entity.addTag(td)
-    Group g = new Group().find(3);
-    g.addTag(td);
-
-
-    // remove a tag
-    // todo
+    //Group g = new Group().find(3);
+    //g.addTag(td);
 
 
     // find a taggable item from tag name
-    // todo
-
-
-
+    //Taggable taggable = new Taggable(  );
 
 %>
 
