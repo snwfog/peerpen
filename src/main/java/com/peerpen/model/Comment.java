@@ -125,4 +125,11 @@ public class Comment extends Feedable implements IModel {
         return totalVote;
     }
 
+    @Override
+    public boolean save(){
+        this.upVote=0;
+        this.downVote=0;
+        return super.save();
+    }
+
 }

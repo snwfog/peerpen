@@ -69,8 +69,8 @@ public class CommentController extends HttpServlet
           map.put("peerId", peer.getId());
           map.put("documentId", document.getId());
 //      TODO: fix!
-          map.put("downVote", 0);
-          map.put("upVote", 0);
+          //map.put("downVote", 0);
+          //map.put("upVote", 0);
 
           Comment comment = new Comment(map);
           comment.save();
