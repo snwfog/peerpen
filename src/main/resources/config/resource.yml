@@ -9,10 +9,10 @@
     - comment(\.do)?:
       - like
     - tag
-  - feed(\.do)?
-  - profile(\.do)?
+  - additional
+  - feed
+  - profile
   - extra
-  - additional(\.do)?
 - group
 - tag(\.do)?
 - tag_autocomplete_ajax(\.do)?

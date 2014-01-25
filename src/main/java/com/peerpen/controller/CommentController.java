@@ -59,6 +59,16 @@ public class CommentController extends HttpServlet
 
   }
 
+    protected void addUpVote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+        Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
+        Comment comment = new Comment().find(Integer.parseInt(parameters.get("commentid")));
+
+        comment.upVote();
+        //comment.setUpVote(comment.getUpVote()+1);
+        //comment.setDownVote(0);
+}
     private void post(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
@@ -95,8 +105,8 @@ public class CommentController extends HttpServlet
         comment.setPeerId(peer.getId());
         comment.setDocumentId(document.getId());
         comment.setChangesetId(changeset.getId());
-        comment.setUpVote(0);
-        comment.setDownVote(0);
+        //comment.setUpVote(0);
+        //comment.setDownVote(0);
         comment.save();
 
         List<Comment> comments = document.getOrderedComments();

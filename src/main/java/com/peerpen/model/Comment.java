@@ -163,4 +163,10 @@ public class Comment extends Feedable implements IModel
     return super.save();
   }
 
+
+    public void upVote()
+    {
+        this.upVote++;
+    }
+
 }
