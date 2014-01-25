@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
 // */
 
-function doAjaxPost3() {
+function upVote1() {
     /* attach a submit handler to the form */
     $("form.AjaxSubmit3").submit(function (event) {
 
@@ -41,7 +41,7 @@ error: function(jqXHR, textStatus, errorThrown){
 return false;
 };
 
-function doAjaxPost4() {
+function downVote1() {
     /* attach a submit handler to the form */
     $("form.AjaxSubmit4").submit(function (event) {
 
@@ -76,7 +76,7 @@ error: function(jqXHR, textStatus, errorThrown){
 return false;
 };
 
-function doAjaxPost1() {
+function upVote2() {
     /* attach a submit handler to the form */
     $("form.AjaxSubmit1").submit(function (event) {
 
@@ -110,7 +110,7 @@ error: function(jqXHR, textStatus, errorThrown){
 return false;
 };
 
-function doAjaxPost2() {
+function downVote2() {
     /* attach a submit handler to the form */
     $("form.AjaxSubmit2").submit(function (event) {
 

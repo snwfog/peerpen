@@ -206,6 +206,15 @@
         <url-pattern>/comment</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>vote</servlet-name>
+        <servlet-class>com.peerpen.ajax.VoteControllerAjax</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>vote</servlet-name>
+        <url-pattern>/vote</url-pattern>
+    </servlet-mapping>
+
   <servlet>
     <servlet-name>search</servlet-name>
     <jsp-file>/view/search.jsp</jsp-file>

@@ -47,28 +47,29 @@
               <%= comment.getMessage() %>
             </div>
             <div class="card-actions">
-                <form method="POST" action="/peer/<%= peer.getId()%>/document/<%= document.getId()%>/comment.do"  class="AjaxSubmit3">
+                <form method="POST" action="/vote"  class="AjaxSubmit3">
 
                     <input type="hidden" name="docid" value="<%= document.getId()%>"/>
                     <input type="hidden" name="commentid" value="<%= comment.getId()%>"/>
                     <input type="hidden" name="upvote" value="<%= comment.getUpVote()%>"/>
                     <input type="hidden" name="downvote" value="<%= comment.getDownVote()%>"/>
-                    <%--<input type="hidden" name="_method" value="_upVote"/>--%>
+                    <input type="hidden" name="_method" value="POST">
 
-                    <button class="btn" onclick="doAjaxPost3();" >
+                    <button class="btn" onclick="upVote1();" >
                         <div class="point" id="up-<%= comment.getId()%>" name="point"><%= comment.getUpVote()%></div>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
 
 
                 </form>
-                <form method="POST" action="/peer/<%= peer.getId()%>/document/<%= document.getId()%>/comment.do"  id="downvotecomment" class="AjaxSubmit4">
+                <form method="POST" action="/vote"  id="downvotecomment" class="AjaxSubmit4">
 
                     <input type="hidden" name="docid" value="<%= document.getId()%>"/>
                     <input type="hidden" name="commentid" value="<%= comment.getId()%>"/>
                     <input type="hidden" name="upvote" value="<%= comment.getUpVote()%>"/>
                     <input type="hidden" name="downvote" value="<%= comment.getDownVote()%>"/>
-                    <input type="hidden" name="method" value="_downVote"/>
+                    <input type="hidden" name="_method" value="_patch"/>
 
-                    <button  class="btn" onclick="doAjaxPost4();" >
+
+                    <button  class="btn" onclick="downVote1();" >
                         <div class="point" id="down-<%= comment.getId()+1%>" name="point"><%= comment.getDownVote()%></div>&nbsp; <i class="fa fa-thumbs-down"></i></button>&nbsp;
 
                 </form>
@@ -108,28 +109,28 @@
                   <p><%= c.getMessage()%></p>
                 </div>
                   <div class="card-actions">
-                      <form data-id="<%= c.getId()%>" id="upvotechangesetcomment" method="POST" action="/peer/<%= peer.getId()%>/document/<%= document.getId()%>/comment.do" class="AjaxSubmit1">
+                      <form  id="upvotechangesetcomment" method="POST" action="/vote" class="AjaxSubmit1">
 
                           <input type="hidden" name="docid" value="<%= document.getId()%>"/>
                           <input type="hidden" name="commentid" value="<%= c.getId()%>"/>
                           <input type="hidden" name="upvote" value="<%= c.getUpVote()%>"/>
                           <input type="hidden" name="downvote" value="<%= c.getDownVote()%>"/>
-                          <input type="hidden" name="method" value="_upVote"/>
+                          <input type="hidden" name="_method" value="POST"/>
 
-                          <button class="btn" onclick="doAjaxPost1();" >
+                          <button class="btn" onclick="upVote2();" >
                               <div class="point" id="<%= c.getId()%>" name="point"><%= c.getUpVote()%></div>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
 
                       </form>
 
-                      <form data-id="<%= c.getId()%>" id="downvotechangesetcomment" method="POST" action="/peer/<%= peer.getId()%>/document/<%= document.getId()%>/comment.do"  class="AjaxSubmit2" >
+                      <form data-id="<%= c.getId()%>" id="downvotechangesetcomment" method="POST" action="/vote"  class="AjaxSubmit2" >
 
                           <input type="hidden" name="docid" value="<%= document.getId()%>"/>
                           <input type="hidden" name="commentid" value="<%= c.getId()%>"/>
                           <input type="hidden" name="upvote" value="<%= c.getUpVote()%>"/>
                           <input type="hidden" name="downvote" value="<%= c.getDownVote()%>"/>
-                          <input type="hidden" name="method" value="_downVote"/>
+                          <input type="hidden" name="_method" value="_patch"/>
 
-                          <button  class="btn" onclick="doAjaxPost2();">
+                          <button  class="btn" onclick="downVote2();">
                               <div class="point" id="<%= c.getId()+1%>" name="point"><%= c.getDownVote()%></div>&nbsp; <i class="fa fa-thumbs-down"></i></button>&nbsp;
                       </form>
 
