@@ -36,7 +36,7 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b
             class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="/peer/<%= peer.getId()%>/document.do">Documents</a></li>
+          <li><a href="/peer/<%= peer.getId()%>/document">Documents</a></li>
           <li><a href="#">Another action</a></li>
           <li><a href="#">Something else here</a></li>
           <li class="divider"></li>
@@ -46,13 +46,13 @@
         </ul>
       </li>
     </ul>
-    <form class="navbar-form navbar-right" action="/search.do" method="get" role="form">
+    <form class="navbar-form navbar-right" action="/search" method="get" role="form">
       <div class="form-group">
         <input type="text" id="search_query" name="search_query" class="form-control" placeholder="Search" autocomplete="off" />
         <input type="submit" class="btn btn-default" name="submit" value="GO" />
       </div>
       <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-      &nbsp &nbsp<a href="/logout.do">Logout</a>
+      &nbsp &nbsp<a href="/logout">Logout</a>
 
     </form>
   </div>
@@ -89,7 +89,7 @@
       </div>
       <div class="well">
         <div class="row">
-          <form action="/profile.do" id="form_personal" method="post">
+          <form action="/profile" id="form_personal" method="post">
           <div class="col-md-6">
             <table>
               <tr>
@@ -176,7 +176,7 @@
         </div>
       </div>
       <div class="well">
-        <form action="/profile.do" id="form_description" method="post">
+        <form action="/profile" id="form_description" method="post">
             <textarea class ="peerDescription well form-control" name ="description" style="resize:none" rows="3" readonly><%= peer.getDescription().toString() %></textarea>
             <input type="hidden" class="form-control peerID" name="id" value="<%= Integer.parseInt(peer.getId().toString())%>"/>
             <input type="hidden" name ="email" value ="<%= peer.getEmail()%>" >
@@ -205,7 +205,7 @@
         </div>
       </div>
       <div class="well">
-        <form action="/profile.do" id="form_contact" method="post">
+        <form action="/profile" id="form_contact" method="post">
           <table>
             <tr>
               <td><h6>Email</h6></td>

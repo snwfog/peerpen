@@ -185,6 +185,7 @@ public class RouteFilter implements Filter {
     private String[] setRequestParametersMap( ServletRequest request, HttpServletRequest httpRequest, String rURI )
             throws ParameterCollisionException {
         // Take the last resource and call up on that particular controller and preauthorize
+        // FIXME: Split URI parameters, data body parameters, and form parameters (if any)
         String[] resources = rURI.replaceFirst( "/", "" ).split( "/" );
         Map<String, String> parametersMap = new LinkedHashMap<>();
         for ( int i = 0; i < resources.length; i++ ) {

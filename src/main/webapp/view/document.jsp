@@ -182,7 +182,7 @@
     <p>Are you sure you want to delete this comment?</p>
   </div>
   <div class="modal-footer">
-    <form id="deleteComment" method="POST" action="/peer/<%= peer.getId()%>/document.do/<%= document.getId()%>/comment.do">
+    <form id="deleteComment" method="POST" action="/peer/<%= peer.getId()%>/document/<%= document.getId()%>/comment">
       <input type="hidden" name="method" value="_delete"/>
       <input type="hidden" name="peerid" value="<%= peer.getId()%>"/>
       <input type="hidden" name="commentid" id="commentid" value=""/>

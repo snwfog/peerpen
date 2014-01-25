@@ -5,7 +5,7 @@
 # Stick with resources that are domain models only
 
 - peer:
-  - document(\.do)?:
+  - document:
     - comment(\.do)?:
       - like
     - tag
@@ -19,7 +19,6 @@
 - tag_search(\.do)?
 - search(\.do)?
 - search_autocomplete_ajax(\.do)?
-- document(\.do)?
 - reset(\.do)?
 
 

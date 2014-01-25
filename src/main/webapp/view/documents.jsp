@@ -1,7 +1,7 @@
 <%@ include file="/view/includes/static/header.jsp" %>
-<%@ page import="com.peerpen.model.Document" %>
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.peerpen.model.Document" %>
 
 <%--Declare all request variables here, easy to debug!!!--%>
 <% Peer peer = (Peer) request.getAttribute( "peer" ); %>
