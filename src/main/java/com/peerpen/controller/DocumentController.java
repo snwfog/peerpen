@@ -1,5 +1,6 @@
 package com.peerpen.controller;
 
+import com.google.common.collect.Maps;
 import com.peerpen.framework.InternalRequestDispatcher;
 import com.peerpen.framework.exception.PermissionDeniedException;
 import com.peerpen.model.Changeset;
@@ -8,6 +9,7 @@ import com.peerpen.model.Document;
 import com.peerpen.model.Peer;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,8 +35,6 @@ public class DocumentController extends HttpServlet
       {
         List<Comment> comments = document.getOrderedComments();
 
-        request.setAttribute("user", peer);
-        request.setAttribute("comments", comments);
         request.setAttribute("document", document);
         request.getRequestDispatcher("/document").forward(request, response);
       }
@@ -68,20 +68,20 @@ public class DocumentController extends HttpServlet
       Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
       Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
 
-      Comment comment = new Comment();
-      comment.setMessage(parameters.get("comment"));
-      comment.setName(peer.getFirstName() + " " + peer.getLastName());
-      comment.setPeerId(peer.getId());
-      comment.setDocumentId(document.getId());
-      comment.setUpVote(0);
-      comment.setDownVote(0);
+      Map<String, Object> map = Maps.newHashMap();
+      map.put("message", parameters.get("comment"));
+      map.put("peerId", peer.getId());
+      map.put("documentId", document.getId());
+//      TODO: fix!
+      map.put("downVote", 0);
+      map.put("upVote", 0);
+
+      Comment comment = new Comment(map);
       comment.save();
 
       List<Comment> comments = document.getOrderedComments();
 
-      request.setAttribute("comments", comments);
       request.setAttribute("document", document);
-      request.setAttribute("user", peer);
       request.getRequestDispatcher("/document").forward(request, response);
     }
   }

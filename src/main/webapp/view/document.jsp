@@ -8,7 +8,7 @@
 <%--Declare all request variables here, easy to debug!!!--%>
 <% Peer peer = (Peer) request.getAttribute("sessionUser"); %>
 <% Document document =(Document) request.getAttribute("document");%>
-<% List<Comment> comments = (List<Comment>) request.getAttribute("comments");%>
+<% List<Comment> comments = document.getOrderedComments();%>
 <% Changeset changeset = (Changeset) request.getAttribute("changeset");%>
 
 <div class="container">

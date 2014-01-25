@@ -221,11 +221,11 @@ public class RouteFilter implements Filter {
 
     private boolean isAjaxRequest( HttpServletRequest request ) {
         String applicationRequestHeader = request.getHeader( "Content-Type" );
-        //application/x-www-form-urlencoded; charset=UTF-8
-        //return applicationRequestHeader != null &&
-        //        "application/json; charset=utf-8".contains( applicationRequestHeader );
+//        application/x-www-form-urlencoded; charset=UTF-8
         return applicationRequestHeader != null &&
-                "application/x-www-form-urlencoded; charset=UTF-8".contains( applicationRequestHeader );
+                "application/json; charset=utf-8".contains( applicationRequestHeader );
+//        return applicationRequestHeader != null &&
+//                "application/x-www-form-urlencoded; charset=UTF-8".contains( applicationRequestHeader );
     }
 
     @Override
