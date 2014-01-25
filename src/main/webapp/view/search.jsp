@@ -17,8 +17,7 @@
             <input type="radio" name="area" value="all" checked /> All
             <input type="radio" name="area" value="documents" /> Documents
             <input type="radio" name="area" value="peers" /> Peers
-            <%--<input type="radio" name="area" value="groups" />Groups--%>
-            <%--&lt;%&ndash;<input type="radio" name="area" value="tags" />Tags&ndash;%&gt;--%>
+            <input type="radio" name="area" value="groups" /> Groups
         </div>
         <%--<ul id="suggestion_list" style="background-color:white;width:200px;margin:auto"></ul>--%>
     </form>

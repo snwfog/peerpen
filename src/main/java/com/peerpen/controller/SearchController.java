@@ -52,8 +52,6 @@ public class SearchController extends HttpServlet {
                 session.setAttribute("searchResults", new Peer().getMatchedPeers( query ));
             }else if(area.equals( "groups" )){
                 session.setAttribute("searchResults", new Group().getMatchedGroups( query ));
-            }else if(area.equals( "tags" )){
-                //session.setAttribute("searchResults", getMatchedTags( query ));
             }else{ // all or not set
                 List<Object> everything = new ArrayList<Object>(  );
                 everything.addAll( new Document().getMatchedDocuments( query ));

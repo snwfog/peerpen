@@ -2,6 +2,7 @@ package com.peerpen.ajax;
 
 import com.google.gson.Gson;
 import com.peerpen.model.Document;
+import com.peerpen.model.Group;
 import com.peerpen.model.Peer;
 
 import java.io.IOException;
@@ -53,9 +54,12 @@ public class SearchAutocompleteAjax extends HttpServlet {
             suggestionPool.addAll( new Document().getSuggestedDocuments( q, 5 ) );
         }else if( area.equals("peers")){
             suggestionPool.addAll( new Peer().getSuggestedPeers( q, 5 ) );
+        }else if( area.equals("groups")){
+            suggestionPool.addAll( new Group().getSuggestedGroups( q, 5 ) );
         }else {
             suggestionPool.addAll( new Document().getSuggestedDocuments( q, 3 ) );
             suggestionPool.addAll( new Peer().getSuggestedPeers( q, 3 ) );
+            suggestionPool.addAll( new Group().getSuggestedGroups( q, 5 ) );
         }
 
 
