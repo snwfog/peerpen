@@ -4,7 +4,7 @@
 <%@ page import="com.peerpen.model.Comment" %>
 <%@ page import="com.peerpen.model.Peer" %>
 
-<% for(Feedable f : (List<Feedable>)request.getAttribute("FeedableList")){ %>
+<% for(Feedable f : (List<Feedable>)request.getAttribute("feedableList")){ %>
     <% if (f.getType().equalsIgnoreCase("Changeset")){%>
     <div class="row-fluid">
         <div class="card">

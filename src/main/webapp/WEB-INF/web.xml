@@ -93,13 +93,13 @@
     <!--</servlet-mapping>-->
 
     <!--<servlet>-->
-        <!--<description>First step in the registration</description>-->
-        <!--<servlet-name>register</servlet-name>-->
-        <!--<jsp-file>/view/register.jsp</jsp-file>-->
+    <!--<description>First step in the registration</description>-->
+    <!--<servlet-name>register</servlet-name>-->
+    <!--<jsp-file>/view/register.jsp</jsp-file>-->
     <!--</servlet>-->
     <!--<servlet-mapping>-->
-        <!--<servlet-name>register</servlet-name>-->
-        <!--<url-pattern>/register</url-pattern>-->
+    <!--<servlet-name>register</servlet-name>-->
+    <!--<url-pattern>/register</url-pattern>-->
     <!--</servlet-mapping>-->
 
     <servlet>
@@ -122,12 +122,12 @@
 
 
     <!--<servlet>-->
-        <!--<servlet-name>register3</servlet-name>-->
-        <!--<jsp-file>/view/avatar.jsp</jsp-file>-->
+    <!--<servlet-name>register3</servlet-name>-->
+    <!--<jsp-file>/view/avatar.jsp</jsp-file>-->
     <!--</servlet>-->
     <!--<servlet-mapping>-->
-        <!--<servlet-name>register3</servlet-name>-->
-        <!--<url-pattern>/avatar</url-pattern>-->
+    <!--<servlet-name>register3</servlet-name>-->
+    <!--<url-pattern>/avatar</url-pattern>-->
     <!--</servlet-mapping>-->
     <!--<servlet>-->
     <!--<servlet-name>avatar.do</servlet-name>-->
@@ -176,54 +176,54 @@
     </servlet-mapping>
 
     <servlet>
-      <servlet-name>reset</servlet-name>
-      <jsp-file>/view/reset.jsp</jsp-file>
+        <servlet-name>reset</servlet-name>
+        <jsp-file>/view/reset.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-      <servlet-name>reset</servlet-name>
-      <url-pattern>/reset</url-pattern>
+        <servlet-name>reset</servlet-name>
+        <url-pattern>/reset</url-pattern>
     </servlet-mapping>
     <servlet>
-      <servlet-name>reset.do</servlet-name>
-      <servlet-class>com.peerpen.ajax.ResetControllerAjax</servlet-class>
+        <servlet-name>reset.do</servlet-name>
+        <servlet-class>com.peerpen.ajax.ResetControllerAjax</servlet-class>
     </servlet>
     <servlet-mapping>
-      <servlet-name>reset.do</servlet-name>
-      <url-pattern>/reset.do</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-    <servlet-name>comment</servlet-name>
-    <jsp-file>/view/comment.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-    <servlet-name>comment</servlet-name>
-    <url-pattern>/comment</url-pattern>
-    </servlet-mapping>
-    <servlet>
-    <servlet-name>comment.do</servlet-name>
-    <servlet-class>com.peerpen.controller.CommentController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-    <servlet-name>comment.do</servlet-name>
-    <url-pattern>/comment.do</url-pattern>
+        <servlet-name>reset.do</servlet-name>
+        <url-pattern>/reset.do</url-pattern>
     </servlet-mapping>
 
     <servlet>
-    <servlet-name>search</servlet-name>
-    <jsp-file>/view/search.jsp</jsp-file>
+        <servlet-name>comment</servlet-name>
+        <jsp-file>/view/comment.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-    <servlet-name>search</servlet-name>
-    <url-pattern>/search</url-pattern>
+        <servlet-name>comment</servlet-name>
+        <url-pattern>/comment</url-pattern>
     </servlet-mapping>
     <servlet>
-    <servlet-name>search.do</servlet-name>
-    <servlet-class>com.peerpen.controller.SearchController</servlet-class>
+        <servlet-name>comment.do</servlet-name>
+        <servlet-class>com.peerpen.controller.CommentController</servlet-class>
     </servlet>
     <servlet-mapping>
-    <servlet-name>search.do</servlet-name>
-    <url-pattern>/search.do</url-pattern>
+        <servlet-name>comment.do</servlet-name>
+        <url-pattern>/comment.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>search</servlet-name>
+        <jsp-file>/view/search.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>search</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>search.do</servlet-name>
+        <servlet-class>com.peerpen.controller.SearchController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>search.do</servlet-name>
+        <url-pattern>/search.do</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -282,20 +282,20 @@
 
 
     <servlet>
-    <servlet-name>tag</servlet-name>
-    <jsp-file>/view/tag.jsp</jsp-file>
+        <servlet-name>tag</servlet-name>
+        <jsp-file>/view/tag.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-    <servlet-name>tag</servlet-name>
-    <url-pattern>/tag</url-pattern>
+        <servlet-name>tag</servlet-name>
+        <url-pattern>/tag</url-pattern>
     </servlet-mapping>
     <servlet>
-    <servlet-name>tag.do</servlet-name>
-    <servlet-class>com.peerpen.controller.TagController</servlet-class>
+        <servlet-name>tag.do</servlet-name>
+        <servlet-class>com.peerpen.controller.TagController</servlet-class>
     </servlet>
     <servlet-mapping>
-    <servlet-name>tag.do</servlet-name>
-    <url-pattern>/tag.do</url-pattern>
+        <servlet-name>tag.do</servlet-name>
+        <url-pattern>/tag.do</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -370,7 +370,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>feed</servlet-name>
-        <jsp-file>/view/feedViews/feed.jsp</jsp-file>
+        <jsp-file>/view/feed/feed.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>feed</servlet-name>
@@ -455,7 +455,8 @@
 
     <context-param>
         <description>URL of transient routes, transient routes content parameters, and session,
-            and free to forward to, but login is not reinforced</description>
+            and free to forward to, but login is not reinforced
+        </description>
         <param-name>transient-routes</param-name>
         <param-value>
             /login

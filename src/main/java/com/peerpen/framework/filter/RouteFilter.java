@@ -7,7 +7,7 @@ import com.peerpen.framework.exception.HttpException;
 import com.peerpen.framework.exception.MissingArgumentException;
 import com.peerpen.framework.exception.NonPermissibleRoute;
 import com.peerpen.framework.exception.NotLoggedInException;
-import com.peerpen.framework.exception.ParameterCollision;
+import com.peerpen.framework.exception.ParameterCollisionException;
 import com.peerpen.framework.exception.TooManyUrlNestingException;
 import com.peerpen.model.Peer;
 import com.sunnyd.database.Manager;
@@ -80,7 +80,7 @@ public class RouteFilter implements Filter {
                 try {
                     setRequestParametersMap( request, httpRequest, rURI );
                     chain.doFilter( request, response );
-                } catch ( ParameterCollision e ) {
+                } catch ( ParameterCollisionException e ) {
                     this.redirectError( (HttpServletRequest) request, (HttpServletResponse) response, e );
                 }
             } else if ( isCheckedRoutes( rURI ) ) {
@@ -107,7 +107,7 @@ public class RouteFilter implements Filter {
 
                 if ( isAjaxRequest( httpRequest ) ) {
                     logger.info( "Received request is an application Ajax request for " + httpRequest.getRequestURI() );
-                    // TODO: Implement the logging for Json data
+                    // TODO: Implement the logging for Json data + convert to global JSON object
                     logger.info( "Data submitted to servlet is " + " NOT YET IMPLEMENTED" );
                     request.setAttribute( "requestType", "applicationJson" );
                     request.setAttribute( "requestData", sanitizeJsonData( httpRequest ) );
@@ -142,7 +142,7 @@ public class RouteFilter implements Filter {
                     request.setAttribute( "exception", e ); // TODO: Change this signature
                     logger.error( "Cannot find proper jsp", e );
                     this.redirectError( httpRequest, (HttpServletResponse) response, e );
-                } catch ( ParameterCollision e ) {
+                } catch ( ParameterCollisionException e ) {
                     request.setAttribute( "exception", e ); // TODO: Change this signature
                     logger.error( "Conflict for parameter key", e );
                     this.redirectError( httpRequest, (HttpServletResponse) response, e );
@@ -175,7 +175,7 @@ public class RouteFilter implements Filter {
     }
 
     private String[] setRequestParametersMap( ServletRequest request, HttpServletRequest httpRequest, String rURI )
-            throws ParameterCollision {
+            throws ParameterCollisionException {
         // Take the last resource and call up on that particular controller and preauthorize
         String[] resources = rURI.replaceFirst( "/", "" ).split( "/" );
         Map<String, String> parametersMap = new LinkedHashMap<>();
@@ -192,7 +192,7 @@ public class RouteFilter implements Filter {
             String key = (String) enumeration.nextElement();
             String oldValue = parametersMap.put( Manager.toCamelCase( key ), httpRequest.getParameter( key ) );
             if ( oldValue != null ) {
-                throw new ParameterCollision( key );
+                throw new ParameterCollisionException( key );
             }
         }
 

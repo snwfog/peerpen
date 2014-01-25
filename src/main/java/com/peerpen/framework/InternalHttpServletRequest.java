@@ -1,5 +1,7 @@
 package com.peerpen.framework;
 
+import com.google.common.base.Throwables;
+import com.peerpen.framework.exception.AttributeCollisionException;
 import com.peerpen.framework.exception.MissingArgumentException;
 
 import javax.naming.OperationNotSupportedException;
@@ -25,8 +27,14 @@ public class InternalHttpServletRequest extends HttpServletRequestWrapper {
     }
 
     public HttpServletRequest injectSecret() {
-        this.setAttribute( "appSecret", this.getSession().getServletContext().getInitParameter( "app-secret" ) );
-        logger.warn( "Injecting secret into the http servlet request" );
+        String appSecret = (String) this.getAttribute( "appSecret" );
+        String sessionAppSecret = this.getSession().getServletContext().getInitParameter( "app-secret" );
+
+        if ( !(appSecret != null && appSecret.equals( sessionAppSecret )) ) {
+            this.setAttribute( "appSecret", sessionAppSecret );
+            logger.warn( "Injecting secret into the http servlet request" );
+        }
+
         return this;
     }
 
@@ -38,7 +46,9 @@ public class InternalHttpServletRequest extends HttpServletRequestWrapper {
     private boolean expectPresenceOf( String arg ) throws MissingArgumentException {
         boolean hasArg = this.getParameter( arg ) != null && !this.getParameter( arg ).equalsIgnoreCase( "" ) &&
                 !this.getParameter( arg ).equalsIgnoreCase( "null" );
-        if (!hasArg) throw new MissingArgumentException( arg );
+        if ( !hasArg ) {
+            throw new MissingArgumentException( arg );
+        }
 
         return true;
     }
@@ -63,4 +73,19 @@ public class InternalHttpServletRequest extends HttpServletRequestWrapper {
         }
     }
 
+    @Override
+    public void setAttribute( String name, Object o ) {
+        try {
+            // FIXME: Lame way of safe typing native catalina values
+            if ( name.indexOf( "org.apache.catalina" ) == -1 && name.indexOf( "internal." ) == -1 &&
+                    this.getAttribute( name ) != null ) {
+                throw new AttributeCollisionException( name, this.getAttribute( name ) );
+            } else {
+                super.setAttribute( name, o );
+            }
+        } catch ( AttributeCollisionException e ) {
+            logger.error( "Attribute collision, new object " + o.toString() + " is ignored", e );
+            Throwables.propagate( e );
+        }
+    }
 }
