@@ -45,5 +45,7 @@ public class TagSearchController extends HttpServlet {
             System.out.println(tags.get( i ).toString() + " + ");
         }
 
+        response.sendRedirect( "/tag" );
+
     }
 }
