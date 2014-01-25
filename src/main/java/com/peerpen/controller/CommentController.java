@@ -1,6 +1,7 @@
 package com.peerpen.controller;
 
 import com.google.common.collect.Maps;
+import com.peerpen.framework.InternalHttpServletRequest;
 import com.peerpen.model.Comment;
 import com.peerpen.model.Document;
 import com.peerpen.model.Peer;
@@ -36,6 +37,10 @@ public class CommentController extends HttpServlet
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
+      InternalHttpServletRequest internalRequest = (InternalHttpServletRequest)request;
+      switch (internalRequest.getRequestMethod())
+      {
+      }
       Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
       if (request.getParameter("method") != null)
       {

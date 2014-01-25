@@ -1,5 +1,6 @@
 package com.peerpen.framework.filter;
 
+import com.google.gson.Gson;
 import com.peerpen.framework.ContentWriter;
 import com.peerpen.framework.InternalHttpServletRequest;
 import com.peerpen.framework.ServletRoute;
@@ -110,7 +111,7 @@ public class RouteFilter implements Filter {
                     // TODO: Implement the logging for Json data + convert to global JSON object
                     logger.info( "Data submitted to servlet is " + " NOT YET IMPLEMENTED" );
                     request.setAttribute( "requestType", "applicationJson" );
-                    request.setAttribute( "requestData", sanitizeJsonData( httpRequest ) );
+                    request.setAttribute( "requestData", toGson( sanitizeJsonData( httpRequest ) ) );
                     logger.info( "requestType: " + "applicationJson" );
                     logger.info( "requestData: " + sanitizeJsonData( httpRequest ) );
                 }
@@ -154,6 +155,13 @@ public class RouteFilter implements Filter {
             this.redirectError( (HttpServletRequest) request, (HttpServletResponse) response, e );
         }
 
+    }
+
+    private Gson toGson(String json)
+    {
+        StringBuilder sb = new StringBuilder(json);
+
+        return new Gson();
     }
 
     private String setInternalForwardServlet( ServletRequest request, String rURI, String[] resources ) {
@@ -222,7 +230,6 @@ public class RouteFilter implements Filter {
 
     private boolean isAjaxRequest( HttpServletRequest request ) {
         String applicationRequestHeader = request.getHeader( "Content-Type" );
-        //        application/x-www-form-urlencoded; charset=UTF-8
         return applicationRequestHeader != null &&
                 "application/json; charset=utf-8".contains( applicationRequestHeader );
         //        return applicationRequestHeader != null &&

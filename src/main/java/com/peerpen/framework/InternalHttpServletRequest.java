@@ -4,6 +4,9 @@ import com.google.common.base.Throwables;
 import com.peerpen.framework.exception.AttributeCollisionException;
 import com.peerpen.framework.exception.MissingArgumentException;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.naming.OperationNotSupportedException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +17,13 @@ import org.slf4j.LoggerFactory;
 
 public class InternalHttpServletRequest extends HttpServletRequestWrapper {
 
-    public static enum HTTP_METHOD { GET, POST, PATCH, DELETE, DEFAULT }
+    public static enum HTTP_METHOD {
+        GET,
+        POST,
+        PATCH,
+        DELETE,
+        DEFAULT
+    }
 
     private RequestDispatcher rd;
     private HTTP_METHOD method;
@@ -48,9 +57,8 @@ public class InternalHttpServletRequest extends HttpServletRequestWrapper {
     }
 
     private boolean expectPresenceOf( String arg ) throws MissingArgumentException {
-        boolean hasArg = this.getParameter( arg ) != null
-                && !this.getParameter( arg ).equalsIgnoreCase( "" )
-                && !this.getParameter( arg ).equalsIgnoreCase( "null" );
+        boolean hasArg = this.getParameter( arg ) != null && !this.getParameter( arg ).equalsIgnoreCase( "" ) &&
+                !this.getParameter( arg ).equalsIgnoreCase( "null" );
         if ( !hasArg ) {
             throw new MissingArgumentException( arg );
         }
@@ -94,15 +102,25 @@ public class InternalHttpServletRequest extends HttpServletRequestWrapper {
         }
     }
 
-    public HTTP_METHOD getRequestMethod()
-    {
-        if (method != null) return method;
+    public boolean isAjaxRequest() {
+        return this.getHeader( "Content-Type" ).equals( "application/json; charset=utf-8" );
+
+    }
+
+    public Map<String, Object> getParametersMap() {
+        Map<String, Object> parameters = null;
+        return (parameters = (Map<String, Object>) this.getAttribute( "parameters" )) != null
+                ? parameters : new HashMap<String, Object>();
+    }
+
+    public HTTP_METHOD getRequestMethod() {
+        if ( method != null ) {
+            return method;
+        }
         String met = this.getParameter( "_method" );
 
-        if (met != null)
-        {
-            switch (met)
-            {
+        if ( met != null ) {
+            switch ( met ) {
                 case "_delete":
                     method = HTTP_METHOD.DELETE;
                     break;
