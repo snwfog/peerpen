@@ -1,58 +1,64 @@
 package com.peerpen.model;
 
-import com.sunnyd.Base;
 import com.sunnyd.IModel;
 import com.sunnyd.annotations.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
-public class Comment extends Feedable implements IModel {
+public class Comment extends Feedable implements IModel
+{
 
-    public static final String tableName = "comments";
+  public static final String tableName = "comments";
 
-    @ActiveRecordField
-    private String message;
-    @ActiveRecordField
-    private Integer peerId;
-    @ActiveRelationHasOne
-    private Peer peer;
-    @ActiveRecordField
-    private Integer documentId;
-    @ActiveRelationHasOne
-    private Document document;
+  @ActiveRecordField
+  private String message;
+  @ActiveRecordField
+  private Integer peerId;
+  @ActiveRelationHasOne
+  private Peer peer;
+  @ActiveRecordField
+  private Integer documentId;
+  @ActiveRelationHasOne
+  private Document document;
+  @ActiveRecordField
+  private Integer changesetId;
+  @ActiveRelationHasOne
+  private Changeset changeset;
+  @ActiveRecordField
+  private Integer upVote;
+  @ActiveRecordField
+  private Integer downVote;
 
-    @ActiveRecordField
-    private Integer changesetId;
-    @ActiveRelationHasOne
-    private Changeset changeset;
-    @ActiveRecordField
-    private Integer upVote;
-    @ActiveRecordField
-    private Integer downVote;
+  private Integer totalVote;
 
-    private Integer totalVote;
+  public Comment()
+  {
+    super();
+    this.upVote = 0;
+    this.downVote = 0;
+  }
 
+  public Comment(Map<String, Object> HM)
+  {
+    super(HM);
+    this.upVote = 0;
+    this.downVote = 0;
+  }
 
-    public Comment() {
-        super();
-    }
+  public String getMessage()
+  {
+    return message;
+  }
 
-    public Comment(Map<String, Object> HM) {
-        super(HM);
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-        setUpdateFlag(true);
-    }
+  public void setMessage(String message)
+  {
+    this.message = message;
+    setUpdateFlag(true);
+  }
 
   //testing purposes only
   private String name;
+
   public void setName(String name)
   {
     this.name = name;
@@ -63,73 +69,98 @@ public class Comment extends Feedable implements IModel {
     return name;
   }
 
-    public Peer getPeer(){
-        initRelation("peer");
-        return peer;
-    }
+  public Peer getPeer()
+  {
+    initRelation("peer");
+    return peer;
+  }
 
-    public void setPeerId(Integer peerId){
-        this.peerId = peerId;
-    }
+  public void setPeerId(Integer peerId)
+  {
+    this.peerId = peerId;
+  }
 
-    public int getPeerId(){
-        return this.peerId;
-    }
+  public int getPeerId()
+  {
+    return this.peerId;
+  }
 
-    public Document getDocument(){
-        initRelation("document");
-        return document;
-    }
+  public Document getDocument()
+  {
+    initRelation("document");
+    return document;
+  }
 
-    public void setDocumentId(Integer documentId){
-        this.documentId = documentId;
-    }
+  public void setDocumentId(Integer documentId)
+  {
+    this.documentId = documentId;
+  }
 
-    public int getDocumentId(){
-        return this.documentId;
-    }
+  public int getDocumentId()
+  {
+    return this.documentId;
+  }
 
-    public Changeset getChangeset(){
-        initRelation("changeset");
-        return changeset;
-    }
+  public Changeset getChangeset()
+  {
+    initRelation("changeset");
+    return changeset;
+  }
 
-    public void setChangesetId(Integer changesetId){
-        this.changesetId = changesetId;
-    }
+  public void setChangesetId(Integer changesetId)
+  {
+    this.changesetId = changesetId;
+  }
 
-    public int getChangesetId(){
-        return this.changesetId;
-    }
+  public int getChangesetId()
+  {
+    return this.changesetId;
+  }
 
-    public Integer getUpVote() {
-        return upVote;
-    }
+  public Integer getUpVote()
+  {
+    return upVote;
+  }
 
-    public void setUpVote(Integer upVote) {
-        this.upVote = upVote;
-        setUpdateFlag(true);
-    }
+  public void setUpVote(Integer upVote)
+  {
+    this.upVote = upVote;
+    setUpdateFlag(true);
+  }
 
-    public Integer getDownVote() {
-        return downVote;
-    }
+  public void upVote(Integer upVote)
+  {
+    this.upVote++;
+    setUpdateFlag(true);
+  }
 
-    public void setDownVote(Integer downVote) {
-        this.downVote = downVote;
-        setUpdateFlag(true);
-    }
+  public Integer getDownVote()
+  {
+    return downVote;
+  }
 
-    public Integer getTotalVote(Integer upVote,Integer downVote) {
-        totalVote = upVote-downVote;
-        return totalVote;
-    }
+  public void setDownVote(Integer downVote)
+  {
+    this.downVote = downVote;
+    setUpdateFlag(true);
+  }
 
-    @Override
-    public boolean save(){
-        this.upVote=0;
-        this.downVote=0;
-        return super.save();
-    }
+  public void downVote(Integer downVote)
+  {
+    this.downVote--;
+    setUpdateFlag(true);
+  }
+
+  public Integer getTotalVote(Integer upVote, Integer downVote)
+  {
+    totalVote = upVote - downVote;
+    return totalVote;
+  }
+
+  @Override
+  public boolean save()
+  {
+    return super.save();
+  }
 
 }
