@@ -2,8 +2,6 @@ package com.peerpen.controller;
 
 import com.peerpen.framework.GenericApplicationServlet;
 import com.peerpen.framework.ModelHierarchyUtil;
-import com.peerpen.model.Document;
-import com.peerpen.model.Peer;
 import com.sunnyd.Base;
 
 import java.io.IOException;
@@ -23,20 +21,16 @@ public class DocumentController extends GenericApplicationServlet {
         // FIXME: parameters is not garantee to be clean, need distinguish between parameters and URL parameters
         Map<String, Base> modelMap = ModelHierarchyUtil.parameterAsMap( parameters );
 
-        //if ( parameters.get( "document.do" ) == null ) {
-        //    request.setAttribute( "peer", peer );
-        //    request.getRequestDispatcher( "/documents" ).forward( request, response );
-        //} else {
-        //    try {
-        //        if ( (document = peer.getDocument( Integer.parseInt( parameters.get( "document.do" ) ) )) != null ) {
-        //            request.setAttribute( "document", document );
-        //            request.getRequestDispatcher( "/document" ).forward( request, response );
-        //        }
-        //    } catch ( PermissionDeniedException e ) {
-        //        ((InternalRequestDispatcher) request.getRequestDispatcher( "/error" )).forwardError( request, response,
-        //                e );
-        //    }
-        //}
+        if ( modelMap.get( "document" ) == null ) {
+            // Return all documents
+            request.setAttribute( "peer", modelMap.get( "peer" ) );
+            request.getRequestDispatcher( "/view/documents.jsp" ).forward( request, response );
+
+            // TODO: Need to handle better the display of single and multiple documents
+        } else {
+            request.setAttribute( "document", modelMap.get( "document" ) );
+            request.getRequestDispatcher( "/view/document.jsp" ).forward( request, response );
+        }
     }
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
