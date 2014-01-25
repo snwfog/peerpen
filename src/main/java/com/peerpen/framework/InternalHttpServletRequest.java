@@ -47,7 +47,7 @@ public class InternalHttpServletRequest extends HttpServletRequestWrapper {
                     method = HTTP_METHOD.PUT;
                     break;
                 case "PATCH":
-                    method = HTTP_METHOD.PATCH;
+                    method = HTTP_METHOD.PUT;
                     break;
                 case "DELETE":
                     method = HTTP_METHOD.DELETE;
@@ -146,32 +146,12 @@ public class InternalHttpServletRequest extends HttpServletRequestWrapper {
         return method.toString();
     }
 
+    @Deprecated
     public HTTP_METHOD getRequestMethod() {
         if ( method != null ) {
             return method;
         }
         String met = this.getParameter( "_method" );
-
-        //if ( met != null ) {
-        //    switch ( met ) {
-        //        case "_delete":
-        //            method = HTTP_METHOD.DELETE;
-        //            break;
-        //        case "_put":
-        //        case "_patch":
-        //            method = HTTP_METHOD.PATCH;
-        //            break;
-        //        case "POST":
-        //            method = HTTP_METHOD.POST;
-        //            break;
-        //        case "GET":
-        //            method = HTTP_METHOD.GET;
-        //            break;
-        //        default:
-        //            method = HTTP_METHOD.DEFAULT;
-        //    }
-        //
-        //}
 
         return method;
     }
