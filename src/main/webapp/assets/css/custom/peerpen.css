@@ -227,3 +227,16 @@ h2.description{
 #back-top a:hover span {
   background-color: #777;
 }
+
+input.parsley-error{
+  color: #b94a48;
+  background-color: #f2dede;
+  border: 1px solid #EED3D7;
+
+}
+
+input.parsley-success{
+  color: #468847;
+  background-color: #DFF0D8;
+  border: 1px solid #D6E9C6;
+}

@@ -1,7 +1,7 @@
 /**
  * Created by Zearf on 1/24/2014.
  */
-$("#register").submit(function(){
+/*$("#register").submit(function(){
 
     var email_regex = /^[a-z0-9!#$%&'*+/=?^_{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
     var fname=document.forms["register"]["first_name"].value;
@@ -99,4 +99,68 @@ $("#additional").submit(function(){
         return false;
 
     }
+});*/
+
+  $('#index2').click(function(){
+
+    $( '#index-form' ).parsley({
+    validators: {
+      user: function() {
+        return {
+          validate: function(val, user) {
+            return val!==null && val !=="";
+          },
+          priority: 1
+        };
+      },
+      pass: function() {
+        return {
+          validate: function(val, pass) {
+            var valide = val.length>pass;
+            if (!valide)
+              console.log("Password size must be longer than 6")
+            return valide;
+          },
+          priority: 2
+        };
+      }
+    }
+  , messages: {
+      user: "User name can not be empty.",
+      pass: "Password size must be longer than 6"
+
+    }
+});
+});
+
+$('#register').click(function(){
+
+    $( 'form#register' ).parsley({
+    validators: {
+      user: function() {
+        return {
+          validate: function(val, user) {
+            return val!==null && val !=="";
+          },
+          priority: 1
+        };
+      },
+      pass: function() {
+        return {
+          validate: function(val, pass) {
+            var valide = val.length>pass;
+            if (!valide)
+              console.log("Password size must be longer than 6")
+            return valide;
+          },
+          priority: 2
+        };
+      }
+    }
+  , messages: {
+      user: "User name can not be empty.",
+      pass: "Password size must be longer than 6"
+
+    }
+});
 });

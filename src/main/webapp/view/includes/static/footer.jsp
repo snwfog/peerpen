@@ -11,6 +11,6 @@
 <script src="/assets/js/lib/jquery.stellar.min.js"></script>
 <script src="/assets/js/lib/jquery.imgareaselect.min.js"></script>
 <script src="/assets/js/lib/jquery.imgareaselect.pack.js"></script>
-
+<script src="/assets/js/lib/parsley.js"></script>
 </body>
 </html>

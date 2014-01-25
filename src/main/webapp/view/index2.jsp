@@ -49,10 +49,10 @@
                     </li>
                 </ul>
 
-                <form class="navbar-form pull-right" action="/login" method="post">
-                    <input class="span2" type="text" placeholder="Username" name="username">
-                    <input class="span2" type="password" placeholder="Password" name="password">
-                    <button type="submit" class="btn btn-primary">Sign in</button>
+                <form class="navbar-form pull-right" id="index-form" action="/login" method="post" parsley-validate>
+                    <input class="span2 parsley-validated"  id="parsley-user" type="text" placeholder="Username" name="username" parsley-trigger="keyup" required parsley-user="0"/>
+                    <input class="span2 parsley-validated" id="parsley-pass" type="password" placeholder="Password" name="password" parsley-trigger="keyup" required parsley-pass="6">
+                    <button type="submit" class="btn btn-primary" id="index2">Sign in</button>
                 </form>
             </div>
             <!--/.nav-collapse -->
