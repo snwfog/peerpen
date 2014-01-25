@@ -16,6 +16,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,9 +40,8 @@ public class ContentWriter {
         response.setContentType( this.getMimeContentInfo().getMimeType() );
 
         if ( mimeType.contains( "image" ) ) {
-            BufferedImage bi = ImageIO.read( is );
             OutputStream out = response.getOutputStream();
-            ImageIO.write( bi, this.getRequestFileExtension(), out );
+            IOUtils.copy(is, out);
             out.close();
         } else {
             PrintWriter pw = response.getWriter();
