@@ -13,7 +13,7 @@
 <% List<Comment> comments = document.getOrderedComments();%>
 
 <div class="container">
-  <h1><%= document.getDocName()%></h1>
+  <h1><%= document.getDocName()%> <%= (sessionUser.getId() == urlUser.getId()) ? "" : " (View-only mode)" %></h1>
   <div id="content">
     <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
       <li class="active"><a href="#commentSection" data-toggle="tab">Comments</a></li>
@@ -54,7 +54,7 @@
                     <input type="hidden" name="commentid" value="<%= comment.getId()%>"/>
                     <input type="hidden" name="upvote" value="<%= comment.getUpVote()%>"/>
                     <input type="hidden" name="downvote" value="<%= comment.getDownVote()%>"/>
-                    <input type="hidden" name="_method" value="POST">
+
 
                     <button class="btn" onclick="upVote1();" >
                         <div class="point" id="up-<%= comment.getId()%>" name="point"><%= comment.getUpVote()%></div>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
@@ -67,7 +67,7 @@
                     <input type="hidden" name="commentid" value="<%= comment.getId()%>"/>
                     <input type="hidden" name="upvote" value="<%= comment.getUpVote()%>"/>
                     <input type="hidden" name="downvote" value="<%= comment.getDownVote()%>"/>
-                    <input type="hidden" name="_method" value="_patch"/>
+                    <input type="hidden" name="_method" value="put"/>
 
 
                     <button  class="btn" onclick="downVote1();" >
@@ -116,7 +116,7 @@
                           <input type="hidden" name="commentid" value="<%= c.getId()%>"/>
                           <input type="hidden" name="upvote" value="<%= c.getUpVote()%>"/>
                           <input type="hidden" name="downvote" value="<%= c.getDownVote()%>"/>
-                          <input type="hidden" name="_method" value="POST"/>
+
 
                           <button class="btn" onclick="upVote2();" >
                               <div class="point" id="<%= c.getId()%>" name="point"><%= c.getUpVote()%></div>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
@@ -129,7 +129,7 @@
                           <input type="hidden" name="commentid" value="<%= c.getId()%>"/>
                           <input type="hidden" name="upvote" value="<%= c.getUpVote()%>"/>
                           <input type="hidden" name="downvote" value="<%= c.getDownVote()%>"/>
-                          <input type="hidden" name="_method" value="_patch"/>
+                          <input type="hidden" name="_method" value="put"/>
 
                           <button  class="btn" onclick="downVote2();">
                               <div class="point" id="<%= c.getId()+1%>" name="point"><%= c.getDownVote()%></div>&nbsp; <i class="fa fa-thumbs-down"></i></button>&nbsp;

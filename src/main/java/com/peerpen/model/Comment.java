@@ -34,15 +34,11 @@ public class Comment extends Feedable implements IModel
   public Comment()
   {
     super();
-    this.upVote = 0;
-    this.downVote = 0;
   }
 
   public Comment(Map<String, Object> HM)
   {
     super(HM);
-    this.upVote = 0;
-    this.downVote = 0;
   }
 
   public String getMessage()
@@ -128,7 +124,7 @@ public class Comment extends Feedable implements IModel
     setUpdateFlag(true);
   }
 
-  public void upVote(Integer upVote)
+  public void upVote()
   {
     this.upVote++;
     setUpdateFlag(true);
@@ -145,9 +141,9 @@ public class Comment extends Feedable implements IModel
     setUpdateFlag(true);
   }
 
-  public void downVote(Integer downVote)
+  public void downVote()
   {
-    this.downVote--;
+    this.downVote++;
     setUpdateFlag(true);
   }
 
