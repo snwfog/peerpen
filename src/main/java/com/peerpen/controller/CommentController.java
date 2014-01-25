@@ -1,5 +1,6 @@
 package com.peerpen.controller;
 
+import com.google.common.collect.Maps;
 import com.peerpen.model.Comment;
 import com.peerpen.model.Document;
 import com.peerpen.model.Peer;
@@ -47,6 +48,38 @@ public class CommentController extends HttpServlet
           {
               addDownVote(request,response);
           }
+          else if (request.getParameter("method").contentEquals("_doPut"))
+          {
+              doPut(request,response);
+          }
+          else if (parameters.get("method").contentEquals("_delete"))
+          {
+              doDelete(request, response);
+          }
+      }
+
+      else
+      {
+
+          Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
+          Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
+
+          Map<String, Object> map = Maps.newHashMap();
+          map.put("message", parameters.get("comment"));
+          map.put("peerId", peer.getId());
+          map.put("documentId", document.getId());
+//      TODO: fix!
+          map.put("downVote", 0);
+          map.put("upVote", 0);
+
+          Comment comment = new Comment(map);
+          comment.save();
+
+          List<Comment> comments = document.getOrderedComments();
+
+          request.setAttribute("document", document);
+          //request.getRequestDispatcher("/document").forward(request, response);
+          response.sendRedirect("");
       }
 
 
@@ -84,6 +117,54 @@ public class CommentController extends HttpServlet
         response.getWriter().write(message);
 
     }
+
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+        Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
+        Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
+        Changeset changeset = new Changeset().find(Integer.parseInt(parameters.get("changesetid")));
+
+        Comment comment = new Comment();
+        comment.setMessage(request.getParameter("comment").toString());
+        comment.setName(peer.getFirstName() + " " + peer.getLastName());
+        comment.setPeerId(peer.getId());
+        comment.setDocumentId(document.getId());
+        comment.setChangesetId(changeset.getId());
+        comment.setUpVote(0);
+        comment.setDownVote(0);
+        comment.save();
+
+        List<Comment> comments = document.getOrderedComments();
+
+        request.setAttribute("comments", comments);
+        request.setAttribute("document", document);
+        request.setAttribute("changeset", changeset);
+        //request.getRequestDispatcher("/document").forward(request, response);
+        //response.sendRedirect("peer/2/document.do/1");
+        response.sendRedirect("");
+    }
+
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+
+        Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
+        Document document = new Document().find(Integer.parseInt(request.getParameter("docid")));
+
+        Comment comment = new Comment().find(Integer.parseInt(request.getParameter("commentid")));
+        comment.destroy();
+
+        List<Comment> comments = document.getOrderedComments();
+
+        request.setAttribute("comments", comments);
+        request.setAttribute("document", document);
+        request.setAttribute("user", peer);
+        response.sendRedirect("");
+    }
+
 
 
 }

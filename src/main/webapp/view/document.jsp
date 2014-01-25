@@ -27,7 +27,7 @@
           <div class="card">
             <h3 class="card-heading simple"><%= peer.getFirstName() %> <%= peer.getLastName() %></h3>
             <div class="card-body">
-              <form method="POST" action="/document.do">
+              <form method="POST" action="/peer/<%= peer.getId()%>/document.do/<%= document.getId()%>/comment.do">
 
                 <textarea name="comment" style="width:100%"></textarea>
                 <input type="hidden" name="docId" value="<%= document.getId()%>"/>
@@ -148,7 +148,7 @@
                   <%--<h4 class="media-heading">Your Name</h4>--%>
                   <%--<textarea style="width:100%"></textarea>--%>
                   <%--<button class="btn btn-success">Post</button>--%>
-                  <form method="POST" action="/document.do">
+                  <form method="POST" action="/peer/<%= peer.getId()%>/document.do/<%= document.getId()%>/comment.do">
 
                       <textarea name="comment" style="width:100%"></textarea>
                       <input type="hidden" name="docid" value="<%= document.getId()%>"/>
@@ -182,7 +182,7 @@
     <p>Are you sure you want to delete this comment?</p>
   </div>
   <div class="modal-footer">
-    <form id="deleteComment" method="POST" action="/document.do">
+    <form id="deleteComment" method="POST" action="/peer/<%= peer.getId()%>/document.do/<%= document.getId()%>/comment.do">
       <input type="hidden" name="method" value="_delete"/>
       <input type="hidden" name="peerid" value="<%= peer.getId()%>"/>
       <input type="hidden" name="commentid" id="commentid" value=""/>
