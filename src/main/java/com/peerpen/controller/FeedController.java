@@ -16,7 +16,7 @@ public class FeedController extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-
+        throw new UnsupportedOperationException( this.getClass().toString() );
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
@@ -27,7 +27,7 @@ public class FeedController extends HttpServlet {
         List<Feedable> data = Feedable.getFeed( peerId );
         request.setAttribute( "feedableList", data );
         request.setAttribute( "peer", peer );
-        request.getRequestDispatcher( "/feed" ).forward( request, response );
+        request.getRequestDispatcher( "/view/feed/feed.jsp" ).forward( request, response );
     }
 
 }

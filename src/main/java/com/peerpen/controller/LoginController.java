@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
         try {
             Peer p = null;
             if ( (p = Peer.isValidLogin( request )) != null ) {
-                response.sendRedirect( "/peer/" + p.getId() + "/feed.do" );
+                response.sendRedirect( "/peer/" + p.getId() + "/feed" );
             }
         } catch ( OperationNotSupportedException | MissingArgumentException | HttpSessionException e ) {
             logger.error( "", e );

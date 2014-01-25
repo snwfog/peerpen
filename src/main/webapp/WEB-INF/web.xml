@@ -361,16 +361,8 @@
 
     <!--FEED STUFF-->
     <servlet>
-        <servlet-name>feed.do</servlet-name>
-        <servlet-class>com.peerpen.controller.FeedController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>feed.do</servlet-name>
-        <url-pattern>/feed.do</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>feed</servlet-name>
-        <jsp-file>/view/feed/feed.jsp</jsp-file>
+        <servlet-class>com.peerpen.controller.FeedController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>feed</servlet-name>
