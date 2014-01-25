@@ -1,481 +1,497 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="WebApp_ID" version="3.0">
 
-    <!--<welcome-file-list>-->
-    <!--<welcome-file>/view/index2.jsp</welcome-file>-->
-    <!--</welcome-file-list>-->
+  <!--<welcome-file-list>-->
+  <!--<welcome-file>/view/index2.jsp</welcome-file>-->
+  <!--</welcome-file-list>-->
 
-    <listener>
-        <listener-class>
-            com.peerpen.framework.ApplicationInitializerListener
-        </listener-class>
-    </listener>
+  <listener>
+    <listener-class>
+      com.peerpen.framework.ApplicationInitializerListener
+    </listener-class>
+  </listener>
 
-    <!--
-        FILTER SECTION
-     ================= -->
+  <!--
+      FILTER SECTION
+   ================= -->
 
-    <filter>
-        <filter-name>no-cache-filter</filter-name>
-        <filter-class>com.peerpen.framework.filter.NoCacheFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>no-cache-filter</filter-name>
-        <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
+  <filter>
+    <filter-name>no-cache-filter</filter-name>
+    <filter-class>com.peerpen.framework.filter.NoCacheFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>no-cache-filter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
 
-    <filter>
-        <filter-name>request-filter</filter-name>
-        <filter-class>com.peerpen.framework.filter.InternalRequestFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>request-filter</filter-name>
-        <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-        <!--<dispatcher>FORWARD</dispatcher>-->
-    </filter-mapping>
+  <filter>
+    <filter-name>request-filter</filter-name>
+    <filter-class>com.peerpen.framework.filter.InternalRequestFilter
+    </filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>request-filter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <!--<dispatcher>FORWARD</dispatcher>-->
+  </filter-mapping>
 
-    <filter>
-        <filter-name>route-filter</filter-name>
-        <filter-class>com.peerpen.framework.filter.RouteFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>route-filter</filter-name>
-        <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-        <!--<dispatcher>FORWARD</dispatcher>-->
-    </filter-mapping>
+  <filter>
+    <filter-name>route-filter</filter-name>
+    <filter-class>com.peerpen.framework.filter.RouteFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>route-filter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <!--<dispatcher>FORWARD</dispatcher>-->
+  </filter-mapping>
 
-    <!--
-        SERVLET MAPPING
-    =================== -->
+  <!--
+      SERVLET MAPPING
+  =================== -->
 
-    <servlet>
-        <description>Application root</description>
-        <servlet-name>index</servlet-name>
-        <jsp-file>/view/index2.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>index</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
+  <servlet>
+    <description>Application root</description>
+    <servlet-name>index</servlet-name>
+    <jsp-file>/view/index2.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>index</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
 
-    <servlet>
-        <description>This will give you a list of all of the available and accepted routes</description>
-        <servlet-name>routes</servlet-name>
-        <servlet-class>com.peerpen.framework.RouteController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>routes</servlet-name>
-        <url-pattern>/routes</url-pattern>
-    </servlet-mapping>
+  <servlet>
+    <description>This will give you a list of all of the available and accepted
+      routes
+    </description>
+    <servlet-name>routes</servlet-name>
+    <servlet-class>com.peerpen.framework.RouteController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>routes</servlet-name>
+    <url-pattern>/routes</url-pattern>
+  </servlet-mapping>
 
-    <servlet>
-        <servlet-name>login</servlet-name>
-        <servlet-class>com.peerpen.controller.LoginController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>login</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
+  <servlet>
+    <servlet-name>login</servlet-name>
+    <servlet-class>com.peerpen.controller.LoginController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>login</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
 
-    <!--<servlet>-->
-    <!--<servlet-name>logout.do</servlet-name>-->
-    <!--<servlet-class>com.peerpen.controller.LogoutController</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>logout.do</servlet-name>-->
-    <!--<url-pattern>/logout.do</url-pattern>-->
-    <!--</servlet-mapping>-->
+  <!--<servlet>-->
+  <!--<servlet-name>logout.do</servlet-name>-->
+  <!--<servlet-class>com.peerpen.controller.LogoutController</servlet-class>-->
+  <!--</servlet>-->
+  <!--<servlet-mapping>-->
+  <!--<servlet-name>logout.do</servlet-name>-->
+  <!--<url-pattern>/logout.do</url-pattern>-->
+  <!--</servlet-mapping>-->
 
-    <!--<servlet>-->
-    <!--<description>First step in the registration</description>-->
-    <!--<servlet-name>register</servlet-name>-->
-    <!--<jsp-file>/view/register.jsp</jsp-file>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>register</servlet-name>-->
-    <!--<url-pattern>/register</url-pattern>-->
-    <!--</servlet-mapping>-->
+  <!--<servlet>-->
+  <!--<description>First step in the registration</description>-->
+  <!--<servlet-name>register</servlet-name>-->
+  <!--<jsp-file>/view/register.jsp</jsp-file>-->
+  <!--</servlet>-->
+  <!--<servlet-mapping>-->
+  <!--<servlet-name>register</servlet-name>-->
+  <!--<url-pattern>/register</url-pattern>-->
+  <!--</servlet-mapping>-->
 
-    <servlet>
-        <servlet-name>register</servlet-name>
-        <servlet-class>com.peerpen.controller.RegistrationController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>register</servlet-name>
-        <url-pattern>/register</url-pattern>
-    </servlet-mapping>
+  <servlet>
+    <servlet-name>register</servlet-name>
+    <servlet-class>com.peerpen.controller.RegistrationController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>register</servlet-name>
+    <url-pattern>/register</url-pattern>
+  </servlet-mapping>
 
-    <servlet>
-        <servlet-name>additional</servlet-name>
-        <servlet-class>com.peerpen.controller.AdditionalController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>additional</servlet-name>
-        <url-pattern>/additional</url-pattern>
-    </servlet-mapping>
-
-
-    <!--<servlet>-->
-    <!--<servlet-name>register3</servlet-name>-->
-    <!--<jsp-file>/view/avatar.jsp</jsp-file>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>register3</servlet-name>-->
-    <!--<url-pattern>/avatar</url-pattern>-->
-    <!--</servlet-mapping>-->
-    <!--<servlet>-->
-    <!--<servlet-name>avatar.do</servlet-name>-->
-    <!--<servlet-class>com.peerpen.controller.AvatarController</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>avatar.do</servlet-name>-->
-    <!--<url-pattern>/avatar.do</url-pattern>-->
-    <!--</servlet-mapping>-->
+  <servlet>
+    <servlet-name>additional</servlet-name>
+    <servlet-class>com.peerpen.controller.AdditionalController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>additional</servlet-name>
+    <url-pattern>/additional</url-pattern>
+  </servlet-mapping>
 
 
-    <servlet>
-        <servlet-name>profile</servlet-name>
-        <jsp-file>/view/profile.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>profile</servlet-name>
-        <url-pattern>/profile</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>profile.do</servlet-name>
-        <servlet-class>com.peerpen.controller.ProfileController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>profile.do</servlet-name>
-        <url-pattern>/profile.do</url-pattern>
-    </servlet-mapping>
+  <!--<servlet>-->
+  <!--<servlet-name>register3</servlet-name>-->
+  <!--<jsp-file>/view/avatar.jsp</jsp-file>-->
+  <!--</servlet>-->
+  <!--<servlet-mapping>-->
+  <!--<servlet-name>register3</servlet-name>-->
+  <!--<url-pattern>/avatar</url-pattern>-->
+  <!--</servlet-mapping>-->
+  <!--<servlet>-->
+  <!--<servlet-name>avatar.do</servlet-name>-->
+  <!--<servlet-class>com.peerpen.controller.AvatarController</servlet-class>-->
+  <!--</servlet>-->
+  <!--<servlet-mapping>-->
+  <!--<servlet-name>avatar.do</servlet-name>-->
+  <!--<url-pattern>/avatar.do</url-pattern>-->
+  <!--</servlet-mapping>-->
 
 
-    <!--<servlet>-->
-    <!--<servlet-name>hunk</servlet-name>-->
-    <!--<jsp-file>/view/simulator.jsp</jsp-file>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>hunk</servlet-name>-->
-    <!--<url-pattern>/hunk</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <servlet>
-        <servlet-name>hunk.do</servlet-name>
-        <servlet-class>com.peerpen.controller.HunkController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>hunk.do</servlet-name>
-        <url-pattern>/hunk.do</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>reset</servlet-name>
-        <jsp-file>/view/reset.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>reset</servlet-name>
-        <url-pattern>/reset</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>reset.do</servlet-name>
-        <servlet-class>com.peerpen.ajax.ResetControllerAjax</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>reset.do</servlet-name>
-        <url-pattern>/reset.do</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>comment</servlet-name>
-        <jsp-file>/view/comment.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>comment</servlet-name>
-        <url-pattern>/comment</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>comment.do</servlet-name>
-        <servlet-class>com.peerpen.controller.CommentController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>comment.do</servlet-name>
-        <url-pattern>/comment.do</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>search</servlet-name>
-        <jsp-file>/view/search.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>search</servlet-name>
-        <url-pattern>/search</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>search.do</servlet-name>
-        <servlet-class>com.peerpen.controller.SearchController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>search.do</servlet-name>
-        <url-pattern>/search.do</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>tag_search</servlet-name>
-        <jsp-file>/view/tag_search.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>tag_search</servlet-name>
-        <url-pattern>/tag_search</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>tag_search.do</servlet-name>
-        <servlet-class>com.peerpen.controller.TagSearchController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>tag_search.do</servlet-name>
-        <url-pattern>/tag_search.do</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>search_autocomplete_ajax</servlet-name>
-        <jsp-file>/view/search_autocomplete.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>search_autocomplete_ajax</servlet-name>
-        <url-pattern>/search_autocomplete_ajax</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>search_autocomplete_ajax.do</servlet-name>
-        <servlet-class>com.peerpen.ajax.SearchAutocompleteAjax</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>search_autocomplete_ajax.do</servlet-name>
-        <url-pattern>/search_autocomplete_ajax.do</url-pattern>
-    </servlet-mapping>
+  <servlet>
+    <servlet-name>profile</servlet-name>
+    <jsp-file>/view/profile.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>profile</servlet-name>
+    <url-pattern>/profile</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>profile.do</servlet-name>
+    <servlet-class>com.peerpen.controller.ProfileController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>profile.do</servlet-name>
+    <url-pattern>/profile.do</url-pattern>
+  </servlet-mapping>
 
 
-    <servlet>
-        <servlet-name>tag_autocomplete_ajax</servlet-name>
-        <jsp-file>/view/tag_autocomplete.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>tag_autocomplete_ajax</servlet-name>
-        <url-pattern>/tag_autocomplete_ajax</url-pattern>
-    </servlet-mapping>
+  <!--<servlet>-->
+  <!--<servlet-name>hunk</servlet-name>-->
+  <!--<jsp-file>/view/simulator.jsp</jsp-file>-->
+  <!--</servlet>-->
+  <!--<servlet-mapping>-->
+  <!--<servlet-name>hunk</servlet-name>-->
+  <!--<url-pattern>/hunk</url-pattern>-->
+  <!--</servlet-mapping>-->
 
-    <servlet>
-        <servlet-name>tag_autocomplete_ajax.do</servlet-name>
-        <servlet-class>com.peerpen.ajax.TagAutocompleteAjax</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>tag_autocomplete_ajax.do</servlet-name>
-        <url-pattern>/tag_autocomplete_ajax.do</url-pattern>
-    </servlet-mapping>
+  <servlet>
+    <servlet-name>hunk.do</servlet-name>
+    <servlet-class>com.peerpen.controller.HunkController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>hunk.do</servlet-name>
+    <url-pattern>/hunk.do</url-pattern>
+  </servlet-mapping>
 
+  <servlet>
+    <servlet-name>reset</servlet-name>
+    <jsp-file>/view/reset.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>reset</servlet-name>
+    <url-pattern>/reset</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>reset.do</servlet-name>
+    <servlet-class>com.peerpen.ajax.ResetControllerAjax</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>reset.do</servlet-name>
+    <url-pattern>/reset.do</url-pattern>
+  </servlet-mapping>
 
-    <servlet>
-        <servlet-name>tag</servlet-name>
-        <jsp-file>/view/tag.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>tag</servlet-name>
-        <url-pattern>/tag</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>tag.do</servlet-name>
-        <servlet-class>com.peerpen.controller.TagController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>tag.do</servlet-name>
-        <url-pattern>/tag.do</url-pattern>
-    </servlet-mapping>
+  <servlet>
+    <servlet-name>comment</servlet-name>
+    <jsp-file>/view/comment.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>comment</servlet-name>
+    <url-pattern>/comment</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>comment.do</servlet-name>
+    <servlet-class>com.peerpen.controller.CommentController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>comment.do</servlet-name>
+    <url-pattern>/comment.do</url-pattern>
+  </servlet-mapping>
 
-    <servlet>
-        <servlet-name>document</servlet-name>
-        <jsp-file>/view/document.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>document</servlet-name>
-        <url-pattern>/document</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>document.do</servlet-name>
-        <servlet-class>com.peerpen.controller.DocumentController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>document.do</servlet-name>
-        <url-pattern>/document.do</url-pattern>
-    </servlet-mapping>
+  <servlet>
+    <servlet-name>search</servlet-name>
+    <jsp-file>/view/search.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>search</servlet-name>
+    <url-pattern>/search</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>search.do</servlet-name>
+    <servlet-class>com.peerpen.controller.SearchController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>search.do</servlet-name>
+    <url-pattern>/search.do</url-pattern>
+  </servlet-mapping>
 
-    <!--<servlet>-->
-    <!--<servlet-name>changeset</servlet-name>-->
-    <!--<jsp-file>/view/document.jsp</jsp-file>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>changeset</servlet-name>-->
-    <!--<url-pattern>/changeset</url-pattern>-->
-    <!--</servlet-mapping>-->
-    <!--<servlet>-->
-    <!--<servlet-name>changeset.do</servlet-name>-->
-    <!--<servlet-class>com.peerpen.controller.ChangesetController</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>changeset.do</servlet-name>-->
-    <!--<url-pattern>/changeset.do</url-pattern>-->
-    <!--</servlet-mapping>-->
+  <servlet>
+    <servlet-name>tag_search</servlet-name>
+    <jsp-file>/view/tag_search.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>tag_search</servlet-name>
+    <url-pattern>/tag_search</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>tag_search.do</servlet-name>
+    <servlet-class>com.peerpen.controller.TagSearchController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>tag_search.do</servlet-name>
+    <url-pattern>/tag_search.do</url-pattern>
+  </servlet-mapping>
 
-    <!--<servlet>-->
-    <!--<servlet-name>upload.do</servlet-name>-->
-    <!--<servlet-class>com.peerpen.controller.UploadController</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>upload.do</servlet-name>-->
-    <!--<url-pattern>/upload.do</url-pattern>-->
-    <!--</servlet-mapping>-->
+  <servlet>
+    <servlet-name>search_autocomplete_ajax</servlet-name>
+    <jsp-file>/view/search_autocomplete.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>search_autocomplete_ajax</servlet-name>
+    <url-pattern>/search_autocomplete_ajax</url-pattern>
+  </servlet-mapping>
 
-    <servlet>
-        <servlet-name>error</servlet-name>
-        <jsp-file>/view/error.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>error</servlet-name>
-        <url-pattern>/error</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>upload.do</servlet-name>
-        <servlet-class>com.peerpen.controller.UploadController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>upload.do</servlet-name>
-        <url-pattern>/upload.do</url-pattern>
-    </servlet-mapping>
-
-    <!--FEED STUFF-->
-    <servlet>
-        <servlet-name>feed</servlet-name>
-        <servlet-class>com.peerpen.controller.FeedController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>feed</servlet-name>
-        <url-pattern>/feed</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>about</servlet-name>
-        <jsp-file>/view/about.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>about</servlet-name>
-        <url-pattern>/about</url-pattern>
-    </servlet-mapping>
-
-    <session-config>
-        <session-timeout>72</session-timeout>
-    </session-config>
-
-    <context-param>
-        <description>Location to store uploaded file</description>
-        <param-name>file-upload-mac</param-name>
-        <param-value>
-            <!--Change this to whoever is responsible for it-->
-            /Users/bobbyyit/Desktop/
-        </param-value>
-    </context-param>
-    <context-param>
-        <description>Location to store uploaded file</description>
-        <param-name>file-upload-win</param-name>
-        <param-value>
-            <!--Change this to whoever is responsible for it-->
-            <!--not tested yet-->
-            c:\PeerPen\temp\
-        </param-value>
-    </context-param>
+  <servlet>
+    <servlet-name>search_autocomplete_ajax.do</servlet-name>
+    <servlet-class>com.peerpen.ajax.SearchAutocompleteAjax</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>search_autocomplete_ajax.do</servlet-name>
+    <url-pattern>/search_autocomplete_ajax.do</url-pattern>
+  </servlet-mapping>
 
 
-    <!--<session-config>-->
-    <!--<session-timeout>72</session-timeout>-->
-    <!--</session-config>-->
+  <servlet>
+    <servlet-name>tag_autocomplete_ajax</servlet-name>
+    <jsp-file>/view/tag_autocomplete.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>tag_autocomplete_ajax</servlet-name>
+    <url-pattern>/tag_autocomplete_ajax</url-pattern>
+  </servlet-mapping>
 
-    <!--<context-param>-->
-    <!--<description>Location to store uploaded file</description>-->
-    <!--<param-name>file-upload-mac</param-name>-->
-    <!--<param-value>-->
-    <!--&lt;!&ndash;Change this to whoever is responsible for it&ndash;&gt;-->
-    <!--/Users/bobbyyit/Desktop/-->
-    <!--</param-value>-->
-    <!--</context-param>-->
-    <!--<context-param>-->
-    <!--<description>Location to store uploaded file</description>-->
-    <!--<param-name>file-upload-win</param-name>-->
-    <!--<param-value>-->
-    <!--&lt;!&ndash;Change this to whoever is responsible for it&ndash;&gt;-->
-    <!--&lt;!&ndash;not tested yet&ndash;&gt;-->
-    <!--c:\PeerPen\temp\-->
-    <!--</param-value>-->
-    <!--</context-param>-->
+  <servlet>
+    <servlet-name>tag_autocomplete_ajax.do</servlet-name>
+    <servlet-class>com.peerpen.ajax.TagAutocompleteAjax</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>tag_autocomplete_ajax.do</servlet-name>
+    <url-pattern>/tag_autocomplete_ajax.do</url-pattern>
+  </servlet-mapping>
 
-    <!--
-        SERVLET CONTEXT PARAM
-    ========================= -->
 
-    <context-param>
-        <description>Location of the permissible domain model</description>
-        <param-name>resource</param-name>
-        <param-value>config/resource.yml</param-value>
-    </context-param>
+  <servlet>
+    <servlet-name>tag</servlet-name>
+    <jsp-file>/view/tag.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>tag</servlet-name>
+    <url-pattern>/tag</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>tag.do</servlet-name>
+    <servlet-class>com.peerpen.controller.TagController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>tag.do</servlet-name>
+    <url-pattern>/tag.do</url-pattern>
+  </servlet-mapping>
 
-    <context-param>
-        <!-- Default root URL / is implied to be always safe -->
-        <description>URL of safe resources that do not require login or session</description>
-        <param-name>exempt-routes</param-name>
-        <param-value>
-            /error
-            /assets
-            /routes
-            /reset
-        </param-value>
-    </context-param>
+  <servlet>
+    <servlet-name>document</servlet-name>
+    <jsp-file>/view/document.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>document</servlet-name>
+    <url-pattern>/document</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>document.do</servlet-name>
+    <servlet-class>com.peerpen.controller.DocumentController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>document.do</servlet-name>
+    <url-pattern>/document.do</url-pattern>
+  </servlet-mapping>
 
-    <context-param>
-        <description>URL of transient routes, transient routes content parameters, and session,
-            and free to forward to, but login is not reinforced
-        </description>
-        <param-name>transient-routes</param-name>
-        <param-value>
-            /login
-            /logout
-            /register
-            /additional
-        </param-value>
-    </context-param>
+  <servlet>
+    <servlet-name>documents</servlet-name>
+    <jsp-file>/view/documents.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>documents</servlet-name>
+    <url-pattern>/documents</url-pattern>
+  </servlet-mapping>
 
-    <context-param>
-        <description>Application secret...shushhhh</description>
-        <param-name>app-secret</param-name>
-        <param-value>0e04d8638c7cd715a1b2d6000433b8fe78422708</param-value>
-    </context-param>
+  <!--<servlet>-->
+  <!--<servlet-name>changeset</servlet-name>-->
+  <!--<jsp-file>/view/document.jsp</jsp-file>-->
+  <!--</servlet>-->
+  <!--<servlet-mapping>-->
+  <!--<servlet-name>changeset</servlet-name>-->
+  <!--<url-pattern>/changeset</url-pattern>-->
+  <!--</servlet-mapping>-->
+  <!--<servlet>-->
+  <!--<servlet-name>changeset.do</servlet-name>-->
+  <!--<servlet-class>com.peerpen.controller.ChangesetController</servlet-class>-->
+  <!--</servlet>-->
+  <!--<servlet-mapping>-->
+  <!--<servlet-name>changeset.do</servlet-name>-->
+  <!--<url-pattern>/changeset.do</url-pattern>-->
+  <!--</servlet-mapping>-->
 
-    <context-param>
-        <description>Display internal request object context parameters</description>
-        <param-name>debug</param-name>
-        <param-value>true</param-value>
-    </context-param>
+  <!--<servlet>-->
+  <!--<servlet-name>upload.do</servlet-name>-->
+  <!--<servlet-class>com.peerpen.controller.UploadController</servlet-class>-->
+  <!--</servlet>-->
+  <!--<servlet-mapping>-->
+  <!--<servlet-name>upload.do</servlet-name>-->
+  <!--<url-pattern>/upload.do</url-pattern>-->
+  <!--</servlet-mapping>-->
 
-    <!--
-        ERROR HANDLING
-    ================== -->
-    <error-page>
-        <exception-type>java.lang.Exception</exception-type>
-        <location>/error</location>
-    </error-page>
+  <servlet>
+    <servlet-name>error</servlet-name>
+    <jsp-file>/view/error.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>error</servlet-name>
+    <url-pattern>/error</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>upload.do</servlet-name>
+    <servlet-class>com.peerpen.controller.UploadController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>upload.do</servlet-name>
+    <url-pattern>/upload.do</url-pattern>
+  </servlet-mapping>
+
+  <!--FEED STUFF-->
+  <servlet>
+    <servlet-name>feed</servlet-name>
+    <servlet-class>com.peerpen.controller.FeedController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>feed</servlet-name>
+    <url-pattern>/feed</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>about</servlet-name>
+    <jsp-file>/view/about.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>about</servlet-name>
+    <url-pattern>/about</url-pattern>
+  </servlet-mapping>
+
+  <session-config>
+    <session-timeout>72</session-timeout>
+  </session-config>
+
+  <context-param>
+    <description>Location to store uploaded file</description>
+    <param-name>file-upload-mac</param-name>
+    <param-value>
+      <!--Change this to whoever is responsible for it-->
+      /Users/bobbyyit/Desktop/
+    </param-value>
+  </context-param>
+  <context-param>
+    <description>Location to store uploaded file</description>
+    <param-name>file-upload-win</param-name>
+    <param-value>
+      <!--Change this to whoever is responsible for it-->
+      <!--not tested yet-->
+      c:\PeerPen\temp\
+    </param-value>
+  </context-param>
+
+
+  <!--<session-config>-->
+  <!--<session-timeout>72</session-timeout>-->
+  <!--</session-config>-->
+
+  <!--<context-param>-->
+  <!--<description>Location to store uploaded file</description>-->
+  <!--<param-name>file-upload-mac</param-name>-->
+  <!--<param-value>-->
+  <!--&lt;!&ndash;Change this to whoever is responsible for it&ndash;&gt;-->
+  <!--/Users/bobbyyit/Desktop/-->
+  <!--</param-value>-->
+  <!--</context-param>-->
+  <!--<context-param>-->
+  <!--<description>Location to store uploaded file</description>-->
+  <!--<param-name>file-upload-win</param-name>-->
+  <!--<param-value>-->
+  <!--&lt;!&ndash;Change this to whoever is responsible for it&ndash;&gt;-->
+  <!--&lt;!&ndash;not tested yet&ndash;&gt;-->
+  <!--c:\PeerPen\temp\-->
+  <!--</param-value>-->
+  <!--</context-param>-->
+
+  <!--
+      SERVLET CONTEXT PARAM
+  ========================= -->
+
+  <context-param>
+    <description>Location of the permissible domain model</description>
+    <param-name>resource</param-name>
+    <param-value>config/resource.yml</param-value>
+  </context-param>
+
+  <context-param>
+    <!-- Default root URL / is implied to be always safe -->
+    <description>URL of safe resources that do not require login or session
+    </description>
+    <param-name>exempt-routes</param-name>
+    <param-value>
+      /error
+      /assets
+      /routes
+      /reset
+    </param-value>
+  </context-param>
+
+  <context-param>
+    <description>URL of transient routes, transient routes content parameters,
+      and session,
+      and free to forward to, but login is not reinforced
+    </description>
+    <param-name>transient-routes</param-name>
+    <param-value>
+      /login
+      /logout
+      /register
+      /additional
+    </param-value>
+  </context-param>
+
+  <context-param>
+    <description>Application secret...shushhhh</description>
+    <param-name>app-secret</param-name>
+    <param-value>0e04d8638c7cd715a1b2d6000433b8fe78422708</param-value>
+  </context-param>
+
+  <context-param>
+    <description>Display internal request object context parameters
+    </description>
+    <param-name>debug</param-name>
+    <param-value>true</param-value>
+  </context-param>
+
+  <!--
+      ERROR HANDLING
+  ================== -->
+  <error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/error</location>
+  </error-page>
 
 </web-app>

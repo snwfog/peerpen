@@ -19,7 +19,7 @@ INSERT INTO `documents` (`id`, `doc_name`, `thumbnail_path`, `peer_id`, `last_mo
   (5,'Burger King CV','none',3,'2014-01-13 18:00:55','2014-01-13 18:00:55',0,NULL,NULL),
   (6,'McDonald CV','none',3,'2014-01-13 18:01:10','2014-01-13 18:01:10',0,NULL,NULL),
   (7,'Concordia Resume','none',4,'2014-01-13 18:01:33','2014-01-13 18:01:33',0,NULL,NULL),
-  (8,'McGill Masters Cover Letter','none',5,'2014-01-13 18:02:06','0000-00-00 00:00:00',0,NULL,NULL),
+  (8,'McGill Masters Cover Letter','none',5,'2014-01-24 21:50:24','2014-01-24 21:50:24',0,NULL,NULL),
   (9,'Exxcon Resume','none',5,'2014-01-13 18:02:31','2014-01-13 18:02:31',0,NULL,NULL);
 
 
@@ -43,7 +43,7 @@ VALUES
   (3,'Theres a few spelling mistakes..',1,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,4,NULL),
   (4,'Thanks! fixed :D',1,2,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,5,NULL),
   (5,'There a run-on sentence in your first paragraph.',2,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,5,NULL),
-  (6,'Thanks, fixed it! stayed up all night trying to fix it... :/\r\nYou\'re a life saver! ',2,2,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,6,NULL),
+  (6,'Thanks, fixed it! stayed up all night trying to fix it... :/\r\nYou a life saver! ',2,2,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,6,NULL),
   (7,'No problem :)',2,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,3,NULL),
   (8,'Nice!',2,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,5,NULL),
   (9,'Good Luck',1,4,'2014-01-15 23:26:41','2014-01-15 23:26:41',NULL,2,NULL),

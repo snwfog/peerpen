@@ -29,20 +29,28 @@ public class DocumentController extends HttpServlet
     Peer peer = new Peer().find(Integer.parseInt(parameters.get("peer")));
     Document document = null;
 
-    try
+    if(parameters.get("document.do") == null)
     {
-      if((document = peer.getDocument(Integer.parseInt(parameters.get("document.do")))) != null)
+      request.setAttribute("peer", peer);
+      request.getRequestDispatcher("/documents").forward(request, response);
+    }
+    else
+    {
+      try
       {
-        List<Comment> comments = document.getOrderedComments();
-
-        request.setAttribute("document", document);
-        request.getRequestDispatcher("/document").forward(request, response);
+        if((document = peer.getDocument(Integer.parseInt(parameters.get("document.do")))) != null)
+        {
+          request.setAttribute("document", document);
+          request.getRequestDispatcher("/document").forward(request, response);
+        }
+      }
+      catch (PermissionDeniedException e)
+      {
+        ((InternalRequestDispatcher) request.getRequestDispatcher( "/error" )).forwardError(request, response, e);
       }
     }
-    catch (PermissionDeniedException e)
-    {
-      ((InternalRequestDispatcher) request.getRequestDispatcher( "/error" )).forwardError(request, response, e);
-    }
+
+
 
 
   }
