@@ -14,7 +14,11 @@ import org.slf4j.LoggerFactory;
 
 public class InternalHttpServletRequest extends HttpServletRequestWrapper {
 
+    public static enum HTTP_METHOD { GET, POST, PATCH, DELETE, DEFAULT }
+
     private RequestDispatcher rd;
+    private HTTP_METHOD method;
+
     static final Logger logger = LoggerFactory.getLogger( InternalHttpServletRequest.class );
 
     /**
@@ -44,8 +48,9 @@ public class InternalHttpServletRequest extends HttpServletRequestWrapper {
     }
 
     private boolean expectPresenceOf( String arg ) throws MissingArgumentException {
-        boolean hasArg = this.getParameter( arg ) != null && !this.getParameter( arg ).equalsIgnoreCase( "" ) &&
-                !this.getParameter( arg ).equalsIgnoreCase( "null" );
+        boolean hasArg = this.getParameter( arg ) != null
+                && !this.getParameter( arg ).equalsIgnoreCase( "" )
+                && !this.getParameter( arg ).equalsIgnoreCase( "null" );
         if ( !hasArg ) {
             throw new MissingArgumentException( arg );
         }
@@ -87,5 +92,36 @@ public class InternalHttpServletRequest extends HttpServletRequestWrapper {
             logger.error( "Attribute collision, new object " + o.toString() + " is ignored", e );
             Throwables.propagate( e );
         }
+    }
+
+    public HTTP_METHOD getRequestMethod()
+    {
+        if (method != null) return method;
+        String met = this.getParameter( "_method" );
+
+        if (met != null)
+        {
+            switch (met)
+            {
+                case "_delete":
+                    method = HTTP_METHOD.DELETE;
+                    break;
+                case "_put":
+                case "_patch":
+                    method = HTTP_METHOD.PATCH;
+                    break;
+                case "POST":
+                    method = HTTP_METHOD.POST;
+                    break;
+                case "GET":
+                    method = HTTP_METHOD.GET;
+                    break;
+                default:
+                    method = HTTP_METHOD.DEFAULT;
+            }
+
+        }
+
+        return method;
     }
 }

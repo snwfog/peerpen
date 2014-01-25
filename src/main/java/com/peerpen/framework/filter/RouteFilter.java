@@ -51,8 +51,8 @@ public class RouteFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String rURI = httpRequest.getRequestURI();
-        String appPath =
-                fc.getServletContext().getRealPath( "" ); // /Users/snw/Dropbox/prog/java/peerpen/target/peerpen
+        // /Users/snw/Dropbox/prog/java/peerpen/target/peerpen
+        String appPath = fc.getServletContext().getRealPath( "" );
 
         logger.info( "Incoming request for " + ((HttpServletRequest) request).getRequestURL() );
 
@@ -111,8 +111,8 @@ public class RouteFilter implements Filter {
                     logger.info( "Data submitted to servlet is " + " NOT YET IMPLEMENTED" );
                     request.setAttribute( "requestType", "applicationJson" );
                     request.setAttribute( "requestData", sanitizeJsonData( httpRequest ) );
-                    logger.info("requestType: " + "applicationJson");
-                    logger.info("requestData: " + sanitizeJsonData( httpRequest ));
+                    logger.info( "requestType: " + "applicationJson" );
+                    logger.info( "requestData: " + sanitizeJsonData( httpRequest ) );
                 }
 
 
@@ -190,7 +190,8 @@ public class RouteFilter implements Filter {
         Enumeration enumeration = httpRequest.getParameterNames();
         while ( enumeration.hasMoreElements() ) {
             String key = (String) enumeration.nextElement();
-            String oldValue = parametersMap.put( Manager.toCamelCase( key ), httpRequest.getParameter( key ) );
+            String transformKey = key.indexOf( "_" ) != 0 ? Manager.toCamelCase( key ) : key;
+            String oldValue = parametersMap.put( transformKey, httpRequest.getParameter( key ) );
             if ( oldValue != null ) {
                 throw new ParameterCollisionException( key );
             }
@@ -221,11 +222,11 @@ public class RouteFilter implements Filter {
 
     private boolean isAjaxRequest( HttpServletRequest request ) {
         String applicationRequestHeader = request.getHeader( "Content-Type" );
-//        application/x-www-form-urlencoded; charset=UTF-8
+        //        application/x-www-form-urlencoded; charset=UTF-8
         return applicationRequestHeader != null &&
                 "application/json; charset=utf-8".contains( applicationRequestHeader );
-//        return applicationRequestHeader != null &&
-//                "application/x-www-form-urlencoded; charset=UTF-8".contains( applicationRequestHeader );
+        //        return applicationRequestHeader != null &&
+        //                "application/x-www-form-urlencoded; charset=UTF-8".contains( applicationRequestHeader );
     }
 
     @Override
