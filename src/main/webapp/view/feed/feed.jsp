@@ -29,7 +29,10 @@
 
                     <h2>User Name</h2>
 
-                    <p><a class="btn btn-primary" href="/peer/<%=peer.getId()%>/profile.do">View Profile &raquo;</a></p>
+                    <p>
+                      <a class="btn btn-primary" href="/peer/<%=peer.getId()%>/profile.do">View Profile &raquo;</a>
+                      <a class="btn btn-primary" href="/peer/<%=peer.getId()%>/document.do">View Documents &raquo;</a>
+                    </p>
                 </div>
             </div>
             <!-- /.span4 -->
