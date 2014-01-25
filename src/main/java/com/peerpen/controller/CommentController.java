@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.peerpen.framework.InternalHttpServletRequest.HTTP_METHOD.*;
+
 /**
  * Created with IntelliJ IDEA.
  * User: bobbyyit
@@ -29,6 +31,7 @@ import java.util.Map;
 
 public class CommentController extends HttpServlet
 {
+
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
 
@@ -37,58 +40,92 @@ public class CommentController extends HttpServlet
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
+      //super.doPost(request,response);
       InternalHttpServletRequest internalRequest = (InternalHttpServletRequest)request;
       switch (internalRequest.getRequestMethod())
       {
+          //case POST: doPost(request, response);
+
+          case DELETE: doDelete(request,response);
+            break;
+
+          case PATCH: doPatch(request,response);
+            break;
+
+//          case DEFAULT: post(request, response);
+//            break;
+          default: post(request,response);
       }
-      Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
-      if (request.getParameter("method") != null)
-      {
-
-          if(request.getParameter("method").contentEquals("_upVote"))
-          {
-              addUpVote(request, response);
-          }
-          else if (request.getParameter("method").contentEquals("_downVote"))
-          {
-              addDownVote(request,response);
-          }
-          else if (request.getParameter("method").contentEquals("_doPut"))
-          {
-              doPut(request,response);
-          }
-          else if (parameters.get("method").contentEquals("_delete"))
-          {
-              doDelete(request, response);
-          }
-      }
-
-      else
-      {
-
-          Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
-          Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
-
-          Map<String, Object> map = Maps.newHashMap();
-          map.put("message", parameters.get("comment"));
-          map.put("peerId", peer.getId());
-          map.put("documentId", document.getId());
-//      TODO: fix!
-          //map.put("downVote", 0);
-          //map.put("upVote", 0);
-
-          Comment comment = new Comment(map);
-          comment.save();
-
-          List<Comment> comments = document.getOrderedComments();
-
-          request.setAttribute("document", document);
-          //request.getRequestDispatcher("/document").forward(request, response);
-          response.sendRedirect("");
-      }
+//      Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+//      if (request.getParameter("method") != null)
+//      {
+//
+//          if(request.getParameter("method").contentEquals("_upVote"))
+//          {
+//              addUpVote(request, response);
+//          }
+//          else if (request.getParameter("method").contentEquals("_downVote"))
+//          {
+//              addDownVote(request,response);
+//          }
+//          else if (request.getParameter("method").contentEquals("_doPut"))
+//          {
+//              doPut(request,response);
+//          }
+//          else if (parameters.get("method").contentEquals("_delete"))
+//          {
+//              doDelete(request, response);
+//          }
+//      }
+//
+//      else
+     // {
+//
+//          Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
+//          Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
+//
+//          Map<String, Object> map = Maps.newHashMap();
+//          map.put("message", parameters.get("comment"));
+//          map.put("peerId", peer.getId());
+//          map.put("documentId", document.getId());
+//
+//          Comment comment = new Comment(map);
+//          comment.save();
+//
+//          List<Comment> comments = document.getOrderedComments();
+//          //request.setAttribute("comments",comments);
+//          request.setAttribute("document", document);
+//          //request.getRequestDispatcher("/document").forward(request, response);
+//          //response.sendRedirect("");
+//          request.getRequestDispatcher( "/view/document.jsp" ).forward( request, response );
+    //  }
 
 
   }
+
+    private void post(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+        Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
+        Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
+
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("message", parameters.get("comment"));
+        map.put("peerId", peer.getId());
+        map.put("documentId", document.getId());
+
+        Comment comment = new Comment(map);
+        comment.save();
+
+        List<Comment> comments = document.getOrderedComments();
+        //request.setAttribute("comments",comments);
+        request.setAttribute("document", document);
+        //request.getRequestDispatcher("/document").forward(request, response);
+        //response.sendRedirect("");
+        request.getRequestDispatcher( "/view/document.jsp" ).forward( request, response );
+    }
+
+
     protected void addUpVote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
@@ -123,7 +160,7 @@ public class CommentController extends HttpServlet
 
     }
 
-    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+    protected void doPatch(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
         Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
@@ -148,7 +185,7 @@ public class CommentController extends HttpServlet
         request.setAttribute("changeset", changeset);
         //request.getRequestDispatcher("/document").forward(request, response);
         //response.sendRedirect("peer/2/document.do/1");
-        response.sendRedirect("");
+        request.getRequestDispatcher( "/view/document.jsp" ).forward(request, response);
     }
 
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
@@ -167,7 +204,8 @@ public class CommentController extends HttpServlet
         request.setAttribute("comments", comments);
         request.setAttribute("document", document);
         request.setAttribute("user", peer);
-        response.sendRedirect("");
+        //response.sendRedirect("");
+        request.getRequestDispatcher( "/view/document.jsp" ).forward( request, response );
     }
 
 
