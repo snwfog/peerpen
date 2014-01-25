@@ -20,7 +20,7 @@
 - search(\.do)?
 - search_autocomplete_ajax(\.do)?
 - reset(\.do)?
-
+- upload(\.do)?
 
 
 

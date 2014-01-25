@@ -63,10 +63,10 @@ public class AvatarController extends HttpServlet {
             peer.setPersonalWebsite(website);
             peer.update();
 
-        HttpSession session = request.getSession();
-        session.setAttribute("user", peer);
-        session.setAttribute("birth_date", dateOfBirth);
-        session.setAttribute("croppedImage", croppedImage);
+
+        request.setAttribute("user", peer);
+        request.setAttribute("birth_date", dateOfBirth);
+        request.setAttribute("croppedImage", croppedImage);
         response.sendRedirect("/profile");
     }
 

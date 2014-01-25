@@ -58,13 +58,13 @@
                     </div
 
                     <% if ( request.getAttribute( "feedableList" ) != null ) {%>
-                    <%@ include file="/view/feed/_showfeeds.jsp" %>
+                        <%@ include file="/view/feed/_showfeeds.jsp" %>
                     <% } else { %>
-                    <div class="row-fluid">
-                        <div class="card">
-                            <h2 class="card-heading simple">You Got No Feeds</h2>
+                        <div class="row-fluid">
+                            <div class="card">
+                                <h2 class="card-heading simple">You Got No Feeds</h2>
+                            </div>
                         </div>
-                    </div>
                     <%}%>
 
                     <%--<div class="row-fluid">--%>

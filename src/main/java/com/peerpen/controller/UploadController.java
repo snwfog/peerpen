@@ -1,5 +1,6 @@
 package com.peerpen.controller;
 
+import com.peerpen.model.Peer;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -14,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,6 +29,9 @@ public class UploadController extends HttpServlet
 {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
+//    int id =Integer.parseInt(request.getAttribute("id").toString());
+    Map<String, Object> map = (Map<String, Object>) request.getAttribute("parameters");
+    Peer p = new Peer().find(Integer.parseInt(map.get("peerid").toString()));
 //    http://www.tutorialspoint.com/jsp/jsp_file_uploading.htm
     String avatarFolder = request.getSession().getServletContext().getRealPath("/")+"assets/images/profile/";
     System.out.println("context Path "+request.getSession().getServletContext().getRealPath("/") );
@@ -94,7 +99,7 @@ public class UploadController extends HttpServlet
     }else{
       System.out.println("NO file uploaded");
     }
-      response.sendRedirect("/avatar");
+      response.encodeRedirectURL("/peer/" + p.getId() + "/additional");
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
