@@ -1,6 +1,8 @@
 package com.peerpen.model;
 
 import com.sunnyd.Base;
+import com.sunnyd.annotations.ActiveRecordField;
+
 import java.util.Map;
 
 /**
@@ -12,6 +14,16 @@ import java.util.Map;
  */
 public class Taggable extends Base {
 
+    @ActiveRecordField
+    private String type;
+
+    @ActiveRecordField
+    private Integer childId;
+
+    private Taggable trueSelf;
+
+    private String modelPath = "com.peerpen.model.";
+
     public Taggable(){
         super();
     }
@@ -20,16 +32,43 @@ public class Taggable extends Base {
         super(HM);
     }
 
+    @Override
+    public boolean save(){
+        Taggable t = new Taggable(  );
+        super.save(); //this saves the original entity (ie:document)
+        if(this.getId() != null){ //handle err case
+            t.setType( this.getClass().getSimpleName() );
+            t.setChildId( this.getId() );
+            return t.saveTaggable();
+        }else{
+            return false;
+        }
+    }
+
+    public void setType(String type) {
+        this.type = type;
+        setUpdateFlag(true);
+    }
+
+    public void setChildId(Integer childId) {
+        this.childId = childId;
+        setUpdateFlag(true);
+    }
+
+
+    private boolean saveTaggable(){
+        return super.save();
+    }
+
     public boolean addTag(TagDescriptor td){
         Tag tag = new Tag();
         tag.setTagDescriptorId( td );
-        tag.setTaggableId( this );    // ?
-        System.out.println( "before save:" + td.getId() + "&" + this.getId() );
+        tag.setTaggableId( this );
         return tag.save();
     }
 
     public boolean removeTag(TagDescriptor td){
-        // todo
-        return false;
+        Tag t = new Tag().find( td.getId() );
+        return t.destroy();
     }
 }

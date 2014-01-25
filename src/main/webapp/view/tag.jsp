@@ -4,6 +4,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
+<%@ page import="com.peerpen.model.Peer" %>
 <%@ include file="/view/includes/static/header.jsp" %>
 <script src="/assets/js/custom/tag_autocomplete_caller.js"></script>
 
@@ -38,27 +39,19 @@
 
 <%
 
-    // Get a list of all taggables
+    //Get a list of all taggables
     List<Taggable> taggables = new Taggable(  ).findAll( map );
     for(int i=0; i<taggables.size();i++){
         System.out.println( "listing all taggable item: " + taggables.get( i ).getId());
     }
 
+    // proper way to attach a tag to entity:
+    //1) get td
+    TagDescriptor td = new TagDescriptor(  ).getTagDescriptor( "blabla" );
 
-
-
-    // saving a tag
-    TagDescriptor td = new TagDescriptor(  );
-    td.setTagName( "ccc" );
-    td.save();
-    // in case it already exists
-    map.put("tagName", "ccc");
-    td = new TagDescriptor(  ).find( map );
-
-
-
-    Group g = new Group().find(1);
-    //g.addTag(td);                // bug duplicate handling
+    //2) entity.addTag(td)
+    Group g = new Group().find(3);
+    g.addTag(td);
 
 
     // remove a tag
@@ -68,11 +61,6 @@
     // find a taggable item from tag name
     // todo
 
-
-    // find the tagname first
-    Map<String, Object> critera = new HashMap<String, Object>();
-    critera.put( "tagName", "xxxx" );
-    TagDescriptor t = new TagDescriptor(  ).find( critera );
 
 
 

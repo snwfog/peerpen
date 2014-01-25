@@ -38,19 +38,18 @@ public class TagDescriptor extends Base implements IModel {
         this.tagName = tagName;
     }
 
-    @Override
-    public boolean save(){
-        if(!isTagNameExists( this.getTagName())){
-            return super.save();
-        }
-        return true;
-    }
-
-    private static boolean isTagNameExists(String tagName){
+    public TagDescriptor getTagDescriptor(String tagName){
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("tagName", tagName);
         TagDescriptor td = new TagDescriptor(  ).find( map );
-        return td != null;
+        if (td != null){ // tag exists
+            return td;
+        }else{
+            td = new TagDescriptor(  );
+            td.setTagName( tagName );
+            td.save();
+            return td;
+        }
     }
 
     public List<String> getSuggestedTagDescriptors( String keyword, int limit ) {

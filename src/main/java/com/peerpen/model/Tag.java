@@ -36,8 +36,16 @@ public class Tag extends Taggable implements IModel {
         super(HM);
     }
 
+    public Integer getTagDescriptorId (){
+        return this.tagDescriptorId;
+    }
+
     public void setTagDescriptorId(TagDescriptor tagDescriptor){
         this.tagDescriptorId = tagDescriptor.getId();
+    }
+
+    public Integer getTaggableId(){
+        return this.taggableId;
     }
 
     public void setTaggableId(Taggable taggable){
