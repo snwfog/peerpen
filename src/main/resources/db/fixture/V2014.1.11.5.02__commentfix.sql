@@ -61,3 +61,25 @@ INSERT INTO `feedables` (`id`, `child_id`, `user_id`,`type`, `status`,`last_modi
   (4, 1, 2,'Comment','new' ,'2014-01-13 17:57:59','2014-01-13 17:58:59'),
   (5, 2, 2,'Comment','new' ,'2014-01-13 17:52:59','2014-01-13 17:58:59');
 
+
+
+
+INSERT INTO `groups` (`id`, `group_name`, `description`, `creation_date`, `last_modified_date`, `semaphore`, `etag`)
+VALUES
+	(1, 'concordia', 'concordia university group', '2014-01-24 20:02:17', '2014-01-24 20:02:17', 0, NULL),
+	(2, 'mcgill', 'mcgill univ', '2014-01-24 20:02:34', '2014-01-24 20:02:34', 0, NULL);
+
+
+
+INSERT INTO `tag_descriptors` (`id`, `tag_name`, `creation_date`, `last_modified_date`)
+VALUES
+	(1, 'concordia', '2014-01-24 16:27:11', '2014-01-24 16:27:11'),
+	(2, 'mcgill', '2014-01-24 17:40:16', '2014-01-24 17:40:19'),
+	(3, 'test', '2014-01-24 17:40:23', '2014-01-24 17:40:23'),
+	(5, 'ccc', '2014-01-24 17:40:28', '2014-01-24 17:40:28'),
+	(6, 'resume', '2014-01-24 18:46:27', '2014-01-24 18:46:27'),
+	(7, 'montreal', '2014-01-24 18:46:37', '2014-01-24 18:46:37'),
+	(8, 'PEER', '2014-01-24 18:46:48', '2014-01-24 18:46:48'),
+	(9, 'Accounting', '2014-01-24 18:47:04', '2014-01-24 18:47:04');
+
+
