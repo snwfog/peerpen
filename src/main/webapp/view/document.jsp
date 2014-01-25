@@ -47,7 +47,7 @@
               <%= comment.getMessage() %>
             </div>
             <div class="card-actions">
-                <form method="POST" action="/peer/2/document/1/comment.do"  class="AjaxSubmit3">
+                <form method="POST" action="/peer/<%= peer.getId()%>/document/<%= document.getId()%>/comment.do"  class="AjaxSubmit3">
 
                     <input type="hidden" name="docid" value="<%= document.getId()%>"/>
                     <input type="hidden" name="commentid" value="<%= comment.getId()%>"/>
@@ -60,7 +60,7 @@
 
 
                 </form>
-                <form method="POST" action="/peer/2/document/1/comment.do"  id="downvotecomment" class="AjaxSubmit4">
+                <form method="POST" action="/peer/<%= peer.getId()%>/document/<%= document.getId()%>/comment.do"  id="downvotecomment" class="AjaxSubmit4">
 
                     <input type="hidden" name="docid" value="<%= document.getId()%>"/>
                     <input type="hidden" name="commentid" value="<%= comment.getId()%>"/>
@@ -108,7 +108,7 @@
                   <p><%= c.getMessage()%></p>
                 </div>
                   <div class="card-actions">
-                      <form data-id="<%= c.getId()%>" id="upvotechangesetcomment" method="POST" action="/peer/2/document/1/comment.do" class="AjaxSubmit1">
+                      <form data-id="<%= c.getId()%>" id="upvotechangesetcomment" method="POST" action="/peer/<%= peer.getId()%>/document/<%= document.getId()%>/comment.do" class="AjaxSubmit1">
 
                           <input type="hidden" name="docid" value="<%= document.getId()%>"/>
                           <input type="hidden" name="commentid" value="<%= c.getId()%>"/>
@@ -121,7 +121,7 @@
 
                       </form>
 
-                      <form data-id="<%= c.getId()%>" id="downvotechangesetcomment" method="POST" action="/peer/2/document/1/comment.do"  class="AjaxSubmit2" >
+                      <form data-id="<%= c.getId()%>" id="downvotechangesetcomment" method="POST" action="/peer/<%= peer.getId()%>/document/<%= document.getId()%>/comment.do"  class="AjaxSubmit2" >
 
                           <input type="hidden" name="docid" value="<%= document.getId()%>"/>
                           <input type="hidden" name="commentid" value="<%= c.getId()%>"/>
