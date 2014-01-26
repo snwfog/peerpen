@@ -240,3 +240,36 @@ input.parsley-success{
   background-color: #DFF0D8;
   border: 1px solid #D6E9C6;
 }
+
+.register-errorContainer{
+  width:250px;
+  z-index: 3;
+  background-color: #F0E68C;
+  color: #B22222;
+  border-radius:20px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.index-errorContainer{
+  width:322px;
+  z-index: 3;
+  background-color: #F0E68C;
+  color: #B22222;
+  border-radius:20px;
+  position: absolute;
+  right: 145px;
+  top: 45px;
+}
+
+.login-errorContainer{
+  width:250px;
+  z-index: 3;
+  background-color: #F0E68C;
+  color: #B22222;
+  border-radius:20px;
+  position: absolute;
+  right: 340px;
+  top: 100px;
+}

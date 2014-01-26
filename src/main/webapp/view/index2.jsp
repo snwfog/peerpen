@@ -50,10 +50,12 @@
                 </ul>
 
                 <form class="navbar-form pull-right" id="index-form" action="/login" method="post" parsley-validate>
-                    <input class="span2 parsley-validated"  id="parsley-user" type="text" placeholder="Username" name="username" parsley-trigger="keyup" required parsley-user="0"/>
-                    <input class="span2 parsley-validated" id="parsley-pass" type="password" placeholder="Password" name="password" parsley-trigger="keyup" required parsley-pass="6">
-                    <button type="submit" class="btn btn-primary" id="index2">Sign in</button>
+                    <input class="span2 parsley-validated" id="index-username" type="text" placeholder="Username" name="username" parsley-trigger="change keyup" parsley-error-container="#errorContainer" parsley-error-message="User name is empty."/>
+                    <input class="span2 parsley-validated" id="index-password" type="password" placeholder="Password" name="password" parsley-trigger="change keyup" parsley-error-container="#errorContainer" parsley-error-message="Password should contain at least one numeric digit, one upercase letter and one lowercase letter."/>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
                 </form>
+            </div>
+            <div id="errorContainer">
             </div>
             <!--/.nav-collapse -->
         </div>
