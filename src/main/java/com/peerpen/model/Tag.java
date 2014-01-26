@@ -1,5 +1,6 @@
 package com.peerpen.model;
 
+import com.sunnyd.Base;
 import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
@@ -15,18 +16,26 @@ import java.util.Map;
  * Time: 7:15 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Tag extends Taggable implements IModel {
+public class Tag extends Base implements IModel {
     public static final String tableName = "tags";
 
     @ActiveRelationHasMany
     private List<TagDescriptor> tagDescriptors;
-    @ActiveRecordField
-    private Integer tagDescriptorId;
 
     @ActiveRelationHasMany
     private List<Taggable> taggables;
+
+    @ActiveRecordField
+    private Integer tagDescriptorId;
+
     @ActiveRecordField
     private Integer taggableId;
+
+
+    private TagDescriptor tagDescriptor;
+    private Taggable taggable;
+
+
 
     public Tag() {
         super();
@@ -36,21 +45,43 @@ public class Tag extends Taggable implements IModel {
         super(HM);
     }
 
+
+
     public Integer getTagDescriptorId (){
         return this.tagDescriptorId;
     }
 
-    public void setTagDescriptorId(TagDescriptor tagDescriptor){
-        this.tagDescriptorId = tagDescriptor.getId();
+    public void setTagDescriptorId(Integer id){
+        this.tagDescriptorId = id;
     }
+
 
     public Integer getTaggableId(){
         return this.taggableId;
     }
 
-    public void setTaggableId(Taggable taggable){
-        this.taggableId = taggable.getId();
+    public void setTaggableId(Integer id){
+        this.taggableId = id;
     }
+
+
+
+    public TagDescriptor getTagDescriptor() {
+        return tagDescriptor;
+    }
+
+    public void setTagDescriptor( TagDescriptor tagDescriptor ) {
+        this.tagDescriptorId = tagDescriptor.getId();
+        this.tagDescriptor = tagDescriptor;
+    }
+
+    public void setTaggable (Taggable taggable){
+        this.taggableId = taggable.getTaggableId(); //!
+        this.taggable = taggable;
+    }
+
+
+
 
 
 }

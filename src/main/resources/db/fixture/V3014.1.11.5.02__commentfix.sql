@@ -38,18 +38,18 @@ INSERT INTO `changesets` (`id`, `document_id`, `creation_date`, `last_modified_d
 
 INSERT INTO `comments` (`id`, `message`, `document_id`, `peer_id`, `creation_date`, `last_modified_date`, `changeset_id`, `up_vote`, `down_vote`)
 VALUES
-  (1,'My first comment',1,2,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,2,NULL),
-  (2,'Nice resume! :)',1,3,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,3,NULL),
-  (3,'Theres a few spelling mistakes..',1,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,4,NULL),
-  (4,'Thanks! fixed :D',1,2,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,5,NULL),
-  (5,'There a run-on sentence in your first paragraph.',2,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,5,NULL),
-  (6,'Thanks, fixed it! stayed up all night trying to fix it... :/\r\nYou a life saver! ',2,2,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,6,NULL),
-  (7,'No problem :)',2,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,3,NULL),
-  (8,'Nice!',2,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,5,NULL),
-  (9,'Good Luck',1,4,'2014-01-15 23:26:41','2014-01-15 23:26:41',NULL,2,NULL),
-  (10,'True',1,3,'2014-01-15 23:26:35','2014-01-15 23:26:35',5,4,NULL),
-  (11,'Smart',1,4,'2014-01-15 23:27:01','2014-01-15 23:27:01',5,3,NULL),
-  (12,'Hmmm.. I see your point',1,5,'2014-01-15 23:27:48','2014-01-15 23:27:48',6,10,NULL);
+  (1,'My first comment',1,2,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,2,0),
+  (2,'Nice resume! :)',1,3,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,3,0),
+  (3,'Theres a few spelling mistakes..',1,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,4,0),
+  (4,'Thanks! fixed :D',1,2,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,5,0),
+  (5,'There a run-on sentence in your first paragraph.',2,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,5,0),
+  (6,'Thanks, fixed it! stayed up all night trying to fix it... :/\r\nYou a life saver! ',2,2,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,6,0),
+  (7,'No problem :)',2,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,3,0),
+  (8,'Nice!',2,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,5,0),
+  (9,'Good Luck',1,4,'2014-01-15 23:26:41','2014-01-15 23:26:41',NULL,2,0),
+  (10,'True',1,3,'2014-01-15 23:26:35','2014-01-15 23:26:35',5,4,0),
+  (11,'Smart',1,4,'2014-01-15 23:27:01','2014-01-15 23:27:01',5,3,0),
+  (12,'Hmmm.. I see your point',1,5,'2014-01-15 23:27:48','2014-01-15 23:27:48',6,10,0);
 
 
 

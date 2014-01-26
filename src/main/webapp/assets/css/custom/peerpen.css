@@ -61,22 +61,26 @@ div#registrationImage{
     display:block;
     float:left;
     position:relative;
-    background-color:white;
-    background-image: url('http://lerablog.org/wp-content/uploads/2013/05/job-interview-diagram.jpg');
+    /* background-color:white;
+    background-image: url('http://lerablog.org/wp-content/uploads/2013/05/job-interview-diagram.jpg'); */
+    background-color:#fb5324;
+    background-image: url(../../images/begin.jpg);
     background-size: 100% auto;
-    height: 270px;
+    height: 620px;
+    width:416px;
+    /* height: 270px;
     width:112%;
 
     border-radius: 5px;
     border-color: #dcdcdc;
-    box-shadow: 3px #f5f5f5;
+    box-shadow: 3px #f5f5f5; */
 }
 
 div#clear{
     clear: both;
 }
 * {
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
 }
 
 /* Make sure draggable area is whole page */
@@ -151,7 +155,85 @@ h2.description{
 ;
 }
 
+.btn-learn-more{
+    display: block;
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+    border: 0px;
+    font-family:Roboto,arial,sans-serif;
+    font-size: 20px;
+    color: #fff;
+    line-height: 150px;
+    text-align: center;
+    background: #fb5324;
+    margin:auto;
+}
 
+a.btn-learn-more:hover{
+    text-decoration:none;
+    color:#fff;
+}
+
+.card{
+    background-color:#fb5324;
+    color:#fff;
+    border:0px;
+    border-top:25px solid #000;
+    padding-bottom:25px;
+}
+
+.card .card-heading.simple {
+    color: #fff;
+    border-bottom: 1px solid transparent;
+    text-align: center;
+    font-size: 25px;
+}
+
+.navbar .nav>.active>a, .navbar .nav>.active>a:hover, .navbar .nav>li>a:hover {
+    color:#fff;
+    border-color:#fb5324;
+    font-weight:normal;
+}
+
+
+.navbar .nav>li>a{
+    color:#fff;
+}
+
+.navbar-inner {
+    background-color:#000;
+    padding-top:2px;
+    text-transform:uppercase;
+
+}
+
+.navbar-form{
+    padding:15px 30px;
+    text-transform:none;
+}
+
+.hero-unit {
+    margin-top:0px;
+    padding:125px 50px;
+    font-family: 'Quicksand', sans-serif;
+    text-align:center;
+}
+
+.hero-unit h1 {
+    border-bottom:5px solid transparent;
+}
+
+.skin {
+    width: 341px;
+    height: 400px;
+    margin-left: 300px;
+    left: 50%;
+    position: absolute;
+    top: 0px;
+    display: block;
+    background-image: url(../../images/writebg.png);
+}
 
 
 
