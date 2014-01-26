@@ -330,19 +330,19 @@ input.parsley-success{
   color: #B22222;
   border-radius:20px;
   position: absolute;
-  right: 5px;
-  top: 5px;
+  right: 0px;
+  top: 55px;
 }
 
 .index-errorContainer{
-  width:322px;
+  width:357px;
   z-index: 3;
   background-color: #F0E68C;
   color: #B22222;
-  border-radius:20px;
+  border-radius:10px;
   position: absolute;
-  right: 145px;
-  top: 45px;
+  right: 175px;
+  top: 60px;
 }
 
 .login-errorContainer{
