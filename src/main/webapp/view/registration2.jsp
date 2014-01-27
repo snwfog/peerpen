@@ -51,15 +51,15 @@
         <input type="hidden" class="form-control" name="id" value="<%=peer.getId()%>"/>
     </form>
 
-    <form action="/upload.do" method="post" enctype="multipart/form-data">
+    <form action="/upload.do" method="post" id="form_personal" enctype="multipart/form-data">
         <div  class="pull-right">
             <img id="photo" src="/assets/images/profile/256.jpg" style="float:left;" />
             <h3>Upload a picture through browsing...</h3>
-            <input type="hidden" name="peerid" value="<%=peer.getId()%>"/>
+            <input type="hidden" name="peerid" parameter="peerid" value="<%=peer.getId()%>"/>
 
             <input id="uploader" type="file" name="file" size="50" />
             <br />
-            <input type="submit" value="Upload File" />
+            <input type="submit" id="save_personal" value="Upload File" />
         </div>
         <div class="dravatar pull-left" style=" max-width:500px;">
             <h4>Drag & Drop picture <%=request.getAttribute("path")%> <%=peer.getId()%></h4>

@@ -6,13 +6,12 @@
 
 - peer:
   - document:
-    - comment(\.do)?:
+    - comment:
       - like
     - tag
-  - additional
+ - profile:
+    - avatar
   - feed
-  - profile
-  - extra
 - group
 - tag(\.do)?
 - tag_autocomplete_ajax(\.do)?
