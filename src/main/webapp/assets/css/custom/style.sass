@@ -51,9 +51,9 @@ p
   line-height: 1.2em
 
 
-div#resume-regular-size-top
+div.resume-regular
   background: #FFF
-  box-shadow: 0.7em -0.7em rgba(189, 195, 199, 0.5)
+  box-shadow: 0.7em 0.7em rgba(189, 195, 199, 0.5)
   background-image: url("/assets/images/index/creampaper.png")
   background-repeat: repeat-x repeat-y
   border: 1px solid rgba(0, 0, 0, 0.1)
@@ -81,6 +81,9 @@ section
   div.float-glyphs
     float: right
     position: absolute
+  &#signup
+    div.tooltip-inner
+      font-size: 2em
   &#cloud
     background-color: #262626
     div#resume-medium
@@ -123,6 +126,21 @@ section
     div#osx-desktop-notification
       top: 30px
       right: 10px
+  &#twitter
+    min-height: 400px
+    div#carousel-tweets
+      margin: 100px 100px 0
+    a.carousel-control
+      background-image: none
+      width: 10%
+      &.left
+        left: -10%
+      &.right
+        right: -10%
+      i
+        margin: 50% // Put the chevron at the middle
+    div.carousel-inner
+      min-height: 200px
   &#counter
     div#odometer
       font-family: Montserrat, Helvetica, "Courier New", sans-serif

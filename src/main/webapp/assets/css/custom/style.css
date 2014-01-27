@@ -277,23 +277,23 @@ p {
   font-size: 2em;
   line-height: 1.2em; }
 
-div#resume-regular-size-top {
+div.resume-regular {
   background: white;
-  box-shadow: 0.7em -0.7em rgba(189, 195, 199, 0.5);
+  box-shadow: 0.7em 0.7em rgba(189, 195, 199, 0.5);
   background-image: url("/assets/images/index/creampaper.png");
   background-repeat: repeat-x repeat-y;
   border: 1px solid rgba(0, 0, 0, 0.1); }
-  div#resume-regular-size-top h1#owner-name {
+  div.resume-regular h1#owner-name {
     font-family: Lobster, "Courier New", serif;
     text-shadow: rgba(0, 0, 0, 0.3) 1px 1px;
     font-size: 4em;
     opacity: 0.7; }
-  div#resume-regular-size-top div#owner-personal-information {
+  div.resume-regular div#owner-personal-information {
     float: right;
     position: absolute;
     top: 30px;
     right: 10px; }
-    div#resume-regular-size-top div#owner-personal-information p {
+    div.resume-regular div#owner-personal-information p {
       font-size: 1.4em;
       font-family: Roboto, arial, sans-serif; }
 
@@ -305,6 +305,8 @@ section {
   section div.float-glyphs {
     float: right;
     position: absolute; }
+  section#signup div.tooltip-inner {
+    font-size: 2em; }
   section#cloud {
     background-color: #262626; }
     section#cloud div#resume-medium {
@@ -345,6 +347,21 @@ section {
     section#osx-notification div#osx-desktop-notification {
       top: 30px;
       right: 10px; }
+  section#twitter {
+    min-height: 400px; }
+    section#twitter div#carousel-tweets {
+      margin: 100px 100px 0; }
+    section#twitter a.carousel-control {
+      background-image: none;
+      width: 10%; }
+      section#twitter a.carousel-control.left {
+        left: -10%; }
+      section#twitter a.carousel-control.right {
+        right: -10%; }
+      section#twitter a.carousel-control i {
+        margin: 50%; }
+    section#twitter div.carousel-inner {
+      min-height: 200px; }
   section#counter div#odometer {
     font-family: Montserrat, Helvetica, "Courier New", sans-serif;
     font-size: 12em; }

@@ -2,7 +2,7 @@
 
 $(function() {
   var od, played;
-  skrollr.init();
+  $("div#scroll-down a").tooltip("show");
   played = false;
   od = new Odometer({
     el: $('div#odometer')[0],
@@ -14,6 +14,9 @@ $(function() {
     if (vHeight >= 3000 && !played) {
       od.update(Math.floor(Math.random() * 100000));
     }
-    return played = vHeight >= 3000;
+    played = vHeight >= 3000;
+    if (vHeight >= 230) {
+      return $("div#scroll-down a").tooltip("destroy");
+    }
   });
 });
