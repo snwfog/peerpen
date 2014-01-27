@@ -1,7 +1,8 @@
-@import url(http://fonts.googleapis.com/css?family=Leckerli+One|Damion|Roboto:400,300,700|Inconsolata:400);
+@import url(http://fonts.googleapis.com/css?family=Leckerli+One|Damion|Roboto:400,300,700|Inconsolata:400|Lobster|Montserrat);
 body {
-  padding-top: 46px;
-  padding-bottom: 40px; }
+  padding-top: 70px;
+  padding-bottom: 40px;
+  background-color: #ecf0f1; }
 
 .hero-unit {
   background: #00001c url(/assets/images/index/google-strap-hero.jpg) no-repeat top left; }
@@ -269,3 +270,81 @@ i#bug {
 
 div.code pre {
   font-size: 1.5em; }
+
+p {
+  font-family: Roboto, arial, sans-serif;
+  font-weight: lighter;
+  font-size: 2em;
+  line-height: 1.2em; }
+
+div#resume-regular-size-top {
+  background: white;
+  box-shadow: 0.7em -0.7em rgba(189, 195, 199, 0.5);
+  background-image: url("/assets/images/index/creampaper.png");
+  background-repeat: repeat-x repeat-y;
+  border: 1px solid rgba(0, 0, 0, 0.1); }
+  div#resume-regular-size-top h1#owner-name {
+    font-family: Lobster, "Courier New", serif;
+    text-shadow: rgba(0, 0, 0, 0.3) 1px 1px;
+    font-size: 4em;
+    opacity: 0.7; }
+  div#resume-regular-size-top div#owner-personal-information {
+    float: right;
+    position: absolute;
+    top: 30px;
+    right: 10px; }
+    div#resume-regular-size-top div#owner-personal-information p {
+      font-size: 1.4em;
+      font-family: Roboto, arial, sans-serif; }
+
+section {
+  min-height: 600px;
+  padding: 50px;
+  overflow: hidden;
+  position: relative; }
+  section div.float-glyphs {
+    float: right;
+    position: absolute; }
+  section#cloud {
+    background-color: #262626; }
+    section#cloud div#resume-medium {
+      top: 100px;
+      left: 100px; }
+    section#cloud div#resume-cloud {
+      left: 300px;
+      top: 120px; }
+    section#cloud p {
+      color: #ecf0f1; }
+  section#portable div#macbook {
+    left: -200px;
+    top: 275px; }
+  section#portable div#macbook-browser {
+    top: 16px;
+    left: 48px; }
+  section#portable div#imac-browser {
+    top: 31px;
+    left: 94px; }
+  section#handheld div#galaxy {
+    left: 100px;
+    top: 100px; }
+    section#handheld div#galaxy div#galaxy-screen {
+      top: 14px;
+      left: 48px; }
+  section#handheld div#iphone {
+    top: 250px;
+    left: 50px; }
+    section#handheld div#iphone div#iphone-screen {
+      top: 25px;
+      left: 75px; }
+  section#osx-notification {
+    background: url("/assets/images/index/osx-desktop.png");
+    background-size: cover;
+    min-height: 300px; }
+    section#osx-notification p {
+      color: #ecf0f1; }
+    section#osx-notification div#osx-desktop-notification {
+      top: 30px;
+      right: 10px; }
+  section#counter div#odometer {
+    font-family: Montserrat, Helvetica, "Courier New", sans-serif;
+    font-size: 12em; }
