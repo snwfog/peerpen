@@ -6,13 +6,14 @@
 <%@ page import="java.util.List" %>
 
 <%--Declare all request variables here, easy to debug!!!--%>
-<% Peer peer = (Peer) request.getAttribute("sessionUser"); %>
+<% Peer sessionUser = (Peer) request.getAttribute("sessionUser"); %>
+<% Peer urlUser; %>
+<% if (request.getAttribute("urlUser") != null){urlUser= (Peer) request.getAttribute("urlUser");}else{urlUser=sessionUser;} %>
 <% Document document =(Document) request.getAttribute("document");%>
 <% List<Comment> comments = document.getOrderedComments();%>
-<% Changeset changeset = (Changeset) request.getAttribute("changeset");%>
 
 <div class="container">
-  <h1><%= document.getDocName()%></h1>
+  <h1><%= document.getDocName()%> <%= (sessionUser.getId() == urlUser.getId()) ? "" : " (View-only mode)" %></h1>
   <div id="content">
     <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
       <li class="active"><a href="#commentSection" data-toggle="tab">Comments</a></li>
@@ -25,13 +26,13 @@
         <p>
         <div class="caption">
           <div class="card">
-            <h3 class="card-heading simple"><%= peer.getFirstName() %> <%= peer.getLastName() %></h3>
+            <h3 class="card-heading simple"><%= sessionUser.getFirstName() %> <%= sessionUser.getLastName() %></h3>
             <div class="card-body">
-              <form method="POST" action="/peer/<%= peer.getId()%>/document/<%= document.getId()%>/comment">
+              <form method="POST" action="/peer/<%= sessionUser.getId()%>/document/<%= document.getId()%>/comment">
 
                 <textarea name="comment" style="width:100%"></textarea>
                 <input type="hidden" name="docId" value="<%= document.getId()%>"/>
-                <input type="hidden" name="peerId" value="<%= peer.getId()%>"/>
+                <input type="hidden" name="peerId" value="<%= sessionUser.getId()%>"/>
                 <input type="hidden" name="_method" value="POST">
                 <button type="submit" class="btn btn-success ">Post</button>
 
@@ -53,7 +54,7 @@
                     <input type="hidden" name="commentid" value="<%= comment.getId()%>"/>
                     <input type="hidden" name="upvote" value="<%= comment.getUpVote()%>"/>
                     <input type="hidden" name="downvote" value="<%= comment.getDownVote()%>"/>
-                    <input type="hidden" name="_method" value="POST">
+
 
                     <button class="btn" onclick="upVote1();" >
                         <div class="point" id="up-<%= comment.getId()%>" name="point"><%= comment.getUpVote()%></div>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
@@ -66,7 +67,7 @@
                     <input type="hidden" name="commentid" value="<%= comment.getId()%>"/>
                     <input type="hidden" name="upvote" value="<%= comment.getUpVote()%>"/>
                     <input type="hidden" name="downvote" value="<%= comment.getDownVote()%>"/>
-                    <input type="hidden" name="_method" value="_patch"/>
+                    <input type="hidden" name="_method" value="put"/>
 
 
                     <button  class="btn" onclick="downVote1();" >
@@ -74,7 +75,7 @@
 
                 </form>
 
-              <% if(peer.getId() == document.getPeerId() || peer.getId() == comment.getPeerId()){%>
+              <% if(sessionUser.getId() == document.getPeerId() || sessionUser.getId() == comment.getPeerId()){%>
               <a data-toggle="modal" data-id="<%= comment.getId()%>" class="confirmDeleteCommentDialog"
                  href="#deleteDialog">delete</a>
               <% } %>
@@ -115,7 +116,7 @@
                           <input type="hidden" name="commentid" value="<%= c.getId()%>"/>
                           <input type="hidden" name="upvote" value="<%= c.getUpVote()%>"/>
                           <input type="hidden" name="downvote" value="<%= c.getDownVote()%>"/>
-                          <input type="hidden" name="_method" value="POST"/>
+
 
                           <button class="btn" onclick="upVote2();" >
                               <div class="point" id="<%= c.getId()%>" name="point"><%= c.getUpVote()%></div>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
@@ -128,13 +129,13 @@
                           <input type="hidden" name="commentid" value="<%= c.getId()%>"/>
                           <input type="hidden" name="upvote" value="<%= c.getUpVote()%>"/>
                           <input type="hidden" name="downvote" value="<%= c.getDownVote()%>"/>
-                          <input type="hidden" name="_method" value="_patch"/>
+                          <input type="hidden" name="_method" value="put"/>
 
                           <button  class="btn" onclick="downVote2();">
                               <div class="point" id="<%= c.getId()+1%>" name="point"><%= c.getDownVote()%></div>&nbsp; <i class="fa fa-thumbs-down"></i></button>&nbsp;
                       </form>
 
-                      <% if(peer.getId() == ch.getPeerId() || peer.getId() == c.getPeerId()){%>
+                      <% if(sessionUser.getId() == ch.getPeerId() || sessionUser.getId() == c.getPeerId()){%>
                       <a data-toggle="modal" data-id="<%= c.getId()%>" class="confirmDeleteCommentDialog"
                          href="#deleteDialog">delete</a>
                       <% } %>
@@ -149,12 +150,12 @@
                   <%--<h4 class="media-heading">Your Name</h4>--%>
                   <%--<textarea style="width:100%"></textarea>--%>
                   <%--<button class="btn btn-success">Post</button>--%>
-                  <form method="POST" action="/peer/<%= peer.getId()%>/document/<%= document.getId()%>/comment">
+                  <form method="POST" action="/peer/<%= sessionUser.getId()%>/document/<%= document.getId()%>/comment">
 
                       <textarea name="comment" style="width:100%"></textarea>
                       <input type="hidden" name="docid" value="<%= document.getId()%>"/>
                       <input type="hidden" name="changesetid" value="<%= ch.getId()%>"/>
-                      <input type="hidden" name="peerid" value="<%= peer.getId()%>"/>
+                      <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>"/>
                       <input type="hidden" name="_method" value="_patch"/>
 
                       <%--<br />--%>
@@ -183,9 +184,9 @@
     <p>Are you sure you want to delete this comment?</p>
   </div>
   <div class="modal-footer">
-    <form id="deleteComment" method="POST" action="/peer/<%= peer.getId()%>/document/<%= document.getId()%>/comment">
+    <form id="deleteComment" method="POST" action="/peer/<%= sessionUser.getId()%>/document/<%= document.getId()%>/comment">
       <input type="hidden" name="_method" value="_delete"/>
-      <input type="hidden" name="peerid" value="<%= peer.getId()%>"/>
+      <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>"/>
       <input type="hidden" name="commentid" id="commentid" value=""/>
       <input type="hidden" name="docid" value="<%= document.getId()%>"/>
       <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>

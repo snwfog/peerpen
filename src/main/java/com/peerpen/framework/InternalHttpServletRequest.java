@@ -20,6 +20,7 @@ public class InternalHttpServletRequest extends HttpServletRequestWrapper {
     public static enum HTTP_METHOD {
         GET,
         POST,
+        PUT,
         PATCH,
         DELETE,
         DEFAULT
@@ -37,6 +38,30 @@ public class InternalHttpServletRequest extends HttpServletRequestWrapper {
      */
     public InternalHttpServletRequest( HttpServletRequest request ) {
         super( request );
+
+        // Set the type of this request
+        String reqMethod = this.getParameter( "_method" );
+        if ( reqMethod != null ) {
+            switch ( reqMethod.toUpperCase() ) {
+                case "PUT":
+                    method = HTTP_METHOD.PUT;
+                    break;
+                case "PATCH":
+                    method = HTTP_METHOD.PUT;
+                    break;
+                case "DELETE":
+                    method = HTTP_METHOD.DELETE;
+                    break;
+                case "POST":
+                    method = HTTP_METHOD.POST;
+                    break;
+                case "GET":
+                    method = HTTP_METHOD.GET;
+                    break;
+                default:
+                    logger.error( "Unrecognized request method" );
+            }
+        }
     }
 
     public HttpServletRequest injectSecret() {
@@ -109,36 +134,24 @@ public class InternalHttpServletRequest extends HttpServletRequestWrapper {
 
     public Map<String, Object> getParametersMap() {
         Map<String, Object> parameters = null;
-        return (parameters = (Map<String, Object>) this.getAttribute( "parameters" )) != null
-                ? parameters : new HashMap<String, Object>();
+        return (parameters = (Map<String, Object>) this.getAttribute( "parameters" )) != null ? parameters :
+                new HashMap<String, Object>();
     }
 
+    @Override
+    public String getMethod() {
+        if ( method == null ) {
+            return super.getMethod();
+        }
+        return method.toString();
+    }
+
+    @Deprecated
     public HTTP_METHOD getRequestMethod() {
         if ( method != null ) {
             return method;
         }
         String met = this.getParameter( "_method" );
-
-        if ( met != null ) {
-            switch ( met ) {
-                case "_delete":
-                    method = HTTP_METHOD.DELETE;
-                    break;
-                case "_put":
-                case "_patch":
-                    method = HTTP_METHOD.PATCH;
-                    break;
-                case "POST":
-                    method = HTTP_METHOD.POST;
-                    break;
-                case "GET":
-                    method = HTTP_METHOD.GET;
-                    break;
-                default:
-                    method = HTTP_METHOD.DEFAULT;
-            }
-
-        }
 
         return method;
     }

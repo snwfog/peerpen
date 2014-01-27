@@ -32,32 +32,35 @@
  </div>
 
 
-
-<br /><br /><br />
-
-<h1>TESTING:</h1>
-
 <%
 
-    //Get a list of all taggables
-    //List<Taggable> taggables = new Taggable(  ).findAll( map );
-    //for(int i=0; i<taggables.size();i++){
-    //    System.out.println( "listing all taggable item: " + taggables.get( i ).getId());
+    // Creating a taggable entity will write a record into taggable table (works)
+    //Group g = new Group();
+    //g.setGroupName( "mcgill" );
+    //g.setDescription( "this is description of mcgill" );
+    //g.save();
+
+    // Attaching / detaching a tag to entity entity (works)
+    //Group g = new Group(  ).find( 3 );
+    //TagDescriptor td = new TagDescriptor(  ).getTagDescriptor( "university" );
+    //g.addTag( td );
+    //g.removeTag( td );
+
+    // Find a list of taggable items from 1 tag name (works)
+    //Map<String, Object> m = new HashMap<String, Object>();
+    //m.put( "tagName", "concordia" );
+    //List<Taggable> taggables = new Taggable().getTaggables( (TagDescriptor) new TagDescriptor().find( m ) );
+    //if(taggables.size() > 0){
+    //    for(int i=0;i<taggables.size();i++){
+    //        Taggable t = taggables.get( i );
+    //        System.out.println( "taggableid:" + t.getId() + " child_id:" + t.getChildId() + " type:" + t.getType() );
+    //    }
+    //}else{
+    //    System.out.println("no taggable item with this tag");
     //}
 
-    // proper way to attach a tag to entity:
-    //1) get td
-    //TagDescriptor td = new TagDescriptor(  ).getTagDescriptor( "blabla" );
-
-    //2) entity.addTag(td)
-    //Group g = new Group().find(3);
-    //g.addTag(td);
-
-
-    // find a taggable item from tag name
-    //Taggable taggable = new Taggable(  );
-
 %>
+
 
 
 
