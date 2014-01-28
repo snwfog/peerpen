@@ -10,14 +10,28 @@
 
     <form action="/search.do" method="get" class="form-horizontal" role="form">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search" name="search_query" id="search_query" autocomplete="off" />
-            <input type="submit" class="btn btn-default" name="submit" value="GO" />
-        </div>
-        <div>
-            <input type="radio" name="area" value="all" checked /> All
-            <input type="radio" name="area" value="documents" /> Documents
-            <input type="radio" name="area" value="peers" /> Peers
-            <input type="radio" name="area" value="groups" /> Groups
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Start typing ..." name="search_query" id="search_query" autocomplete="off" />
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary" name="submit" />Search</button>
+                </span>
+            </div>
+
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-default">
+                    <input type="radio" name="area" id="all" checked> All
+                </label>
+                <label class="btn btn-default">
+                    <input type="radio" name="area" id="documents"> Documents
+                </label>
+                <label class="btn btn-default">
+                    <input type="radio" name="area" id="peers"> Peers
+                </label>
+                <label class="btn btn-default">
+                    <input type="radio" name="area" id="Groups"> Groups
+                </label>
+            </div>
+
         </div>
         <%--<ul id="suggestion_list" style="background-color:white;width:200px;margin:auto"></ul>--%>
     </form>
