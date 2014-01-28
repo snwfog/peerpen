@@ -63,7 +63,7 @@
                                 </form>
                             </li>
                             <li class="divider"></li>
-                            <li style="text-align:center; text-transform:none">No account? <a href="#" style="text-transform:uppercase; font-weight:bold; color:#fb5324">Sign up now</a></li>
+                            <li style="text-align:center; text-transform:none">No account? <a href="#" style="text-transform:uppercase; font-weight:bold; color:#e74c3c">Sign up now</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -86,6 +86,12 @@
     </div>
 </div>
 
+<div style="width:100%; display:block; background-color:#e74c3c; padding-top:30px;">
+    <div style="width:25%; background-color:#000; float: left; position: relative;">A</div>
+    <div style="width:25%; background-color:#fff; float: left; position: relative;">B</div>
+    <div style="width:25%; background-color:#000; float: left; position: relative;">C</div>
+    <div style="width:25%; background-color:#fff; float: left; position: relative;">D</div>
+</div>
 
 <div class="container">
 
@@ -94,9 +100,9 @@
     <div class="row">
         <div class="span4">
 
-            <div class="card">
+            <div class="card card2">
                 <img src="../assets/images/collab.png" style="height:125px; margin:auto; display:block;">
-                <h2 class="card-heading simple">Collaboration</h2>
+                <h2 class="card-heading card-heading2 simple">Collaboration</h2>
 
                 <div class="card-body">
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -113,9 +119,9 @@
         </div>
         <div class="span4">
 
-            <div class="card">
+            <div class="card card2">
                 <img src="../assets/images/interac.png" style="height:125px; margin:auto; display:block;">
-                <h2 class="card-heading simple">Interactive</h2>
+                <h2 class="card-heading card-heading2 simple">Interactive</h2>
 
                 <div class="card-body">
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -132,9 +138,9 @@
         </div>
         <div class="span4">
 
-            <div class="card">
+            <div class="card card2">
                 <img src="../assets/images/realtime.png" style="height:125px; margin:auto; display:block;" height="100px">
-                <h2 class="card-heading simple">Real-Time</h2>
+                <h2 class="card-heading card-heading2 simple">Real-Time</h2>
 
                 <div class="card-body">
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
