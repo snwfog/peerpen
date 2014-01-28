@@ -1,14 +1,17 @@
 package com.peerpen.controller;
 
 import com.peerpen.model.Document;
+import com.peerpen.model.Group;
 import com.peerpen.model.TagDescriptor;
 import com.peerpen.model.Taggable;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,27 +39,22 @@ public class TagSearchController extends HttpServlet {
         if (request.getParameter( "tag_query" )!= null && !request.getParameter( "tag_query" ).isEmpty()){
             query = request.getParameter( "tag_query" );
         }
-        List<String> tags = Arrays.asList( query.split( "\\s*,\\s*" ) );
-        String delimitedTags = "";
-        for (int i=0;i<tags.size();i++){
-            delimitedTags += "\"" + tags.get( i ).toString() + "\",";
-        }
-        if(delimitedTags.endsWith( "," )){
-            delimitedTags = delimitedTags.substring( 0,delimitedTags.lastIndexOf( "," ) );
-        }
+        List<String> tagNames = Arrays.asList( query.split( "\\s*,\\s*" ) );
 
 
+        List<Group> groups = new ArrayList<>(  );
+        List<Document> documents = new ArrayList<>(  );
         HttpSession session = request.getSession();
+        // for each tagname, get all related entities
+        for (int i=0;i<tagNames.size();i++){
+            TagDescriptor td = new TagDescriptor(  ).getTagDescriptor( tagNames.get( i ) );
+            groups.addAll( new Taggable(  ).getMatchedGroups( td ) );
+            documents.addAll( new Taggable().getMatchedDocuments( td ) );
+        }
+        session.setAttribute("tagSearchResultsGroups", groups);
+        session.setAttribute("tagSearchResults", documents);
 
-        //List<Taggable> taggables = new Taggable().getMatchedTaggables( delimitedTags );
-        //
-        //System.out.println("size:" + taggables.size());
-        //for(int i=0;i<taggables.size();i++){
-        //    System.out.println("----"+ taggables.get( i ).getTaggableId());
-        //}
-
-
-        //session.setAttribute("tagSearchResults", new Taggable().getMatchedTaggables( delimitedTags ));
+        // to be solved: make list unique
 
         response.sendRedirect( "/tag" );
     }

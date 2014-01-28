@@ -35,39 +35,34 @@
         }
     %>
 
-
+    <br /><br /><br /><br />
 
     <!-- Handling search result -->
     <%
-        if(session.getAttribute( "tagSearchResults" ) != null){
-            ArrayList<Object> results = (ArrayList<Object>) session.getAttribute( "tagSearchResults" );
-            for(int i =0;i< results.size();i++){
-                Object resultItem = results.get( i );
-                String itemClass = resultItem.getClass().getCanonicalName();
-                // each result item will have different look based on its obj type
-                if(itemClass.endsWith( "Document" )){
-                    Document document = (Document) resultItem;
+        if(session.getAttribute( "tagSearchResultsGroups" ) != null){
+            ArrayList<Group> groups = (ArrayList<Group>) session.getAttribute( "tagSearchResultsGroups" );
+            for(int i =0;i< groups.size();i++){
+                Group group = groups.get( i );
                 %>
-                    [Document] <a href="/document/<%= document.getId() %>"> <%= document.getDocName() %></a>
-                    by: <a href="/peer/<%= document.getPeerId() %>"> <%= document.getPeer().getUserName() %></a>
-                    last modified: <%= document.getLastModifiedDate() %><br />
+                [Group] <a href="/group/<%= group.getId() %>"><%= group.getGroupName() %></a> - <i><%= group.getDescription() %></i><br />
                 <%
-                }else if(itemClass.endsWith( "Group" )){
-                    Group group = (Group) resultItem;
-                %>
-                    [Group] <a href="/group/<%= group.getId() %>"><%= group.getGroupName() %></a> - <i><%= group.getDescription() %></i><br />
-                <%
-                }
             }
-        }else{
-                    %>
-
-            Nothing found!
-
-    <%
-                }
+        }
     %>
 
+    <%
+        if(session.getAttribute( "tagSearchResultsDocuments" ) != null){
+            ArrayList<Document> documents = (ArrayList<Document>) session.getAttribute( "tagSearchResultsDocuments" );
+            for(int i =0;i< documents.size();i++){
+                Document document = documents.get( i );
+                %>
+                [Document] <a href="/document/<%= document.getId() %>"> <%= document.getDocName() %></a>
+                by: <a href="/peer/<%= document.getPeerId() %>"> <%= document.getPeer().getUserName() %></a>
+                last modified: <%= document.getLastModifiedDate() %><br />
+                <%
+            }
+        }
+    %>
     <br /><br /><br /><br /><br />
  </div>
 <%@ include file="/view/includes/static/footer.jsp" %>
