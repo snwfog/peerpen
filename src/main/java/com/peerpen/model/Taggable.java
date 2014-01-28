@@ -169,39 +169,41 @@ public class Taggable extends Base {
 
         // Creating a taggable entity (tested)
         //Group g1 = new Group();
-        //g1.setGroupName( "concordia" );
-        //g1.setDescription( "this is description of concordia" );
+        //g1.setGroupName( "uqam" );
+        //g1.setDescription( "this is description of uqam" );
         //g1.save();
         //
         //Group g2 = new Group();
-        //g2.setGroupName( "mcgill" );
-        //g2.setDescription( "this is description of mcgill" );
+        //g2.setGroupName( "montreal" );
+        //g2.setDescription( "this is description of montreal" );
         //g2.save();
 
 
 
 
         // Attaching a tag to entity entity (tested)
-        //Group g = new Group(  ).find( 3 );
-        //g.addTag( new TagDescriptor(  ).getTagDescriptor( "test" ) );
-        //g.addTag( new TagDescriptor(  ).getTagDescriptor( "university" ) );
+        //Group g = new Group(  ).find( 4 );
+        //g.addTag( new TagDescriptor(  ).getTagDescriptor( "montreal" ) );
+        ////g.addTag( new TagDescriptor(  ).getTagDescriptor( "university" ) );
         //// Get all tags associated with an entity
         //List<TagDescriptor> tags = g.getTagDescriptors();
+        //System.out.println(g.getGroupName() + " has the following tags: ");
         //for (int i=0;i<tags.size();i++){
-        //    System.out.println("-->" + tags.get( i ).getTagName());
+        //    System.out.println(tags.get( i ).getTagName());
         //}
 
 
 
         // Retrieve a list of taggable items by tag name (tested)
-        //TagDescriptor td = new TagDescriptor(  ).getTagDescriptor( "test" );
+        //TagDescriptor td = new TagDescriptor(  ).getTagDescriptor( "montreal" );
         //List<Group> groups = new Taggable(  ).getMatchedGroups( td );
         //List<Document> documents = new Taggable(  ).getMatchedDocuments( td );
+        //System.out.println("the tag " + td.getTagName() + " is attached to the following entities: ");
         //for(int i =0;i<groups.size();i++){
-        //    System.out.println("-->" + groups.get( i ).getGroupName());
+        //    System.out.println("group: " + groups.get( i ).getGroupName());
         //}
         //for(int i =0;i<documents.size();i++){
-        //    System.out.println("-->" + documents.get( i ).getDocName());
+        //    System.out.println("document: " + documents.get( i ).getDocName());
         //}
 
 
