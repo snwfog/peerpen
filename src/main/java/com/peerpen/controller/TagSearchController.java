@@ -37,15 +37,27 @@ public class TagSearchController extends HttpServlet {
             query = request.getParameter( "tag_query" );
         }
         List<String> tags = Arrays.asList( query.split( "\\s*,\\s*" ) );
-
-        HttpSession session = request.getSession();
-        //session.setAttribute("tagSearchResults", new Taggable().getMatchedTaggables( tags ));
-
-        for(int i=0;i<tags.size();i++){
-            System.out.println(tags.get( i ).toString() + " + ");
+        String delimitedTags = "";
+        for (int i=0;i<tags.size();i++){
+            delimitedTags += "\"" + tags.get( i ).toString() + "\",";
+        }
+        if(delimitedTags.endsWith( "," )){
+            delimitedTags = delimitedTags.substring( 0,delimitedTags.lastIndexOf( "," ) );
         }
 
-        response.sendRedirect( "/tag" );
 
+        HttpSession session = request.getSession();
+
+        //List<Taggable> taggables = new Taggable().getMatchedTaggables( delimitedTags );
+        //
+        //System.out.println("size:" + taggables.size());
+        //for(int i=0;i<taggables.size();i++){
+        //    System.out.println("----"+ taggables.get( i ).getTaggableId());
+        //}
+
+
+        //session.setAttribute("tagSearchResults", new Taggable().getMatchedTaggables( delimitedTags ));
+
+        response.sendRedirect( "/tag" );
     }
 }

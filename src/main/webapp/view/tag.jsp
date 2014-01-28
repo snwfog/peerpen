@@ -69,41 +69,5 @@
     %>
 
     <br /><br /><br /><br /><br />
-
-
  </div>
-
-
-<%
-
-    // Creating a taggable entity will write a record into taggable table (works)
-    //Group g = new Group();
-    //g.setGroupName( "mcgill" );
-    //g.setDescription( "this is description of mcgill" );
-    //g.save();
-
-    // Attaching / detaching a tag to entity entity (works)
-    //Group g = new Group(  ).find( 3 );
-    //TagDescriptor td = new TagDescriptor(  ).getTagDescriptor( "university" );
-    //g.addTag( td );
-    //g.removeTag( td );
-
-    // Find a list of taggable items from 1 tag name (works)
-    //Map<String, Object> m = new HashMap<String, Object>();
-    //m.put( "tagName", "concordia" );
-    //List<Taggable> taggables = new Taggable().getMatchedTaggables( (TagDescriptor) new TagDescriptor().find( m ) );
-    //if(taggables.size() > 0){
-    //    for(int i=0;i<taggables.size();i++){
-    //        Taggable t = taggables.get( i );
-    //        System.out.println( "taggableid:" + t.getId() + " child_id:" + t.getChildId() + " type:" + t.getType() );
-    //    }
-    //}else{
-    //    System.out.println("no taggable item with this tag");
-    //}
-
-%>
-
-
-
-
 <%@ include file="/view/includes/static/footer.jsp" %>
