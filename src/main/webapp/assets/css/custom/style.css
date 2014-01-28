@@ -305,8 +305,37 @@ section {
   section div.float-glyphs {
     float: right;
     position: absolute; }
-  section#signup div.tooltip-inner {
-    font-size: 2em; }
+  section div.form-group {
+    margin-bottom: 5px !important; }
+    section div.form-group .form-control {
+      height: 40px;
+      font-size: 1.2em; }
+    section div.form-group button[type='submit'] {
+      width: 100%; }
+  section#signup {
+    margin-top: -20px;
+    min-height: 800px; }
+    section#signup h1, section#signup h2, section#signup h3, section#signup h4, section#signup h5, section#signup h6 {
+      font-weight: 200;
+      display: none;
+      text-shadow: #ecf0f1 1px 1px 2px; }
+      section#signup h1:last-child, section#signup h2:last-child, section#signup h3:last-child, section#signup h4:last-child, section#signup h5:last-child, section#signup h6:last-child {
+        margin-bottom: 75px; }
+    section#signup div.backstretch img {
+      -webkit-filter: grayscale(40%) blur(3px) brightness(80%);
+      opacity: 0.5; }
+    section#signup div#resume-large img {
+      position: absolute;
+      left: 35%;
+      top: 7; }
+    section#signup div.tooltip-inner {
+      font-size: 1em; }
+    section#signup form {
+      display: none; }
+      section#signup form div.form-group {
+        width: 100%; }
+      section#signup form button[type="submit"] {
+        font-size: 1.3em; }
   section#cloud {
     background-color: #262626; }
     section#cloud div#resume-medium {
@@ -317,15 +346,41 @@ section {
       top: 120px; }
     section#cloud p {
       color: #ecf0f1; }
-  section#portable div#macbook {
-    left: -200px;
-    top: 275px; }
-  section#portable div#macbook-browser {
-    top: 16px;
-    left: 48px; }
-  section#portable div#imac-browser {
-    top: 31px;
-    left: 94px; }
+  section#portable img#mac-blocker {
+    z-index: 10;
+    top: 508px;
+    left: -150px;
+    position: absolute; }
+  section#portable div#macbook-container img {
+    position: absolute; }
+    section#portable div#macbook-container img#macbook {
+      left: -200px;
+      top: 275px;
+      z-index: 6; }
+    section#portable div#macbook-container img#macbook-browser {
+      left: -152px;
+      top: 292px;
+      z-index: 4; }
+    section#portable div#macbook-container img#macbook-resume {
+      width: 250px;
+      left: -125px;
+      top: 450px;
+      z-index: 5; }
+  section#portable div#imac-container img {
+    position: absolute; }
+    section#portable div#imac-container img#imac-browser {
+      width: 582px;
+      left: 92px;
+      height: auto;
+      top: 29px;
+      z-index: 1; }
+    section#portable div#imac-container img#imac-resume {
+      width: 350px;
+      left: 200px;
+      top: 243px;
+      z-index: 2; }
+    section#portable div#imac-container img#imac {
+      z-index: 3; }
   section#handheld div#galaxy {
     left: 100px;
     top: 100px; }
@@ -345,8 +400,8 @@ section {
     section#osx-notification p {
       color: #ecf0f1; }
     section#osx-notification div#osx-desktop-notification {
-      top: 30px;
-      right: 10px; }
+      position: absolute;
+      top: -120px; }
   section#twitter {
     min-height: 400px; }
     section#twitter div#carousel-tweets {
@@ -362,6 +417,13 @@ section {
         margin: 50%; }
     section#twitter div.carousel-inner {
       min-height: 200px; }
-  section#counter div#odometer {
+  section#counter div.odometer {
     font-family: Montserrat, Helvetica, "Courier New", sans-serif;
     font-size: 12em; }
+
+footer {
+  background-color: #222222;
+  min-height: 300px; }
+  footer img#resume-large-bottom {
+    position: absolute;
+    left: 35%; }

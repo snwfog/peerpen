@@ -81,9 +81,37 @@ section
   div.float-glyphs
     float: right
     position: absolute
+  div.form-group
+    margin-bottom: 5px !important
+    .form-control
+      height: 40px
+      font-size: 1.2em
+    button[type='submit']
+      width: 100%
   &#signup
+    margin-top: -20px
+    min-height: 800px
+    h1, h2, h3, h4, h5, h6
+      font-weight: 200
+      display: none
+      text-shadow: #ECF0F1 1px 1px 2px
+      &:last-child
+        margin-bottom: 75px
+    div.backstretch img
+      -webkit-filter: grayscale(40%) blur(3px) brightness(80%)
+      opacity: 0.5
+    div#resume-large img
+      position: absolute
+      left: 35%
+      top: 760px
     div.tooltip-inner
-      font-size: 2em
+      font-size: 1em
+    form
+      display: none
+      div.form-group
+        width: 100%
+      button[type="submit"]
+        font-size: 1.3em
   &#cloud
     background-color: #262626
     div#resume-medium
@@ -95,15 +123,43 @@ section
     p
       color: #ECF0F1
   &#portable
-    div#macbook
-      left: -200px
-      top: 275px
-    div#macbook-browser
-      top: 16px
-      left: 48px
-    div#imac-browser
-      top: 31px
-      left: 94px
+    img#mac-blocker
+      z-index: 10
+      top: 508px
+      left: -150px
+      position: absolute
+    div#macbook-container
+      img
+        position: absolute
+        &#macbook
+          left: -200px
+          top: 275px
+          z-index: 6
+        &#macbook-browser
+          left: -152px
+          top: 292px
+          z-index: 4
+        &#macbook-resume
+          width: 250px
+          left: -125px
+          top: 450px
+          z-index: 5
+    div#imac-container
+      img
+        position: absolute
+        &#imac-browser
+          width: 582px
+          left: 92px
+          height: auto
+          top: 29px
+          z-index: 1
+        &#imac-resume
+          width: 350px
+          left: 200px
+          top: 243px
+          z-index: 2
+        &#imac
+          z-index: 3
   &#handheld
     div#galaxy
       left: 100px
@@ -124,8 +180,8 @@ section
     background-size: cover
     min-height: 300px
     div#osx-desktop-notification
-      top: 30px
-      right: 10px
+      position: absolute
+      top: -120px
   &#twitter
     min-height: 400px
     div#carousel-tweets
@@ -142,79 +198,16 @@ section
     div.carousel-inner
       min-height: 200px
   &#counter
-    div#odometer
+    div.odometer
       font-family: Montserrat, Helvetica, "Courier New", sans-serif
       font-size: 12em
 
-
-
-
-
-//.navbar-brand
-  //font-family: Leckerli One
-  //font-size: 22px
-  //color: #f39c12 !important
-
-//body
-  //padding-top: 50px
-
-//.section
-//  .container
-//    padding: 20px 15px
-//
-//  font-size: 18px
-//  height: 750px
-//  position: relative
-//
-//  &.one
-//    #hero-1
-//      height: 750px
-//      background-image: url("../../images/index/peerpen-hero-1.png")
-//      background-size: 600px 600px
-//      background-repeat: no-repeat
-//    .row div:nth-child(2)
-//      padding-top: 25%
-//
-//    background-color: #2980b9
-//    color: #ecf0f1
-//
-//  &.two
-//    height: 500px
-//    background-image: url("../../images/index/office.jpg")
-//    background-size: 100% auto
-//    -webkit-filter: blur(2px)
-//  &.three
-//    #hero-2
-//      height: 750px
-//      background-image: url("../../images/index/peerpen-hero-2.png")
-//      background-size: 600px 600px
-//      background-repeat: no-repeat
-//      background-position-y: 135px
-//    .row div:nth-child(1)
-//      padding-top: 5%
-//
-//    background-color: #16a085
-//    color: #ecf0f1
-//  &.four
-//    height: 500px
-//    background-image: url("../../images/index/library.png")
-//    background-size: 100% auto
-//    -webkit-filter: blur(2px)
-//  &.five
-//    height: 100%
-//    background-color: #34495e
-//    color: #ecf0f1
-
-//.navbar
-  //background-color: #34495e
-  //a:link, a:visited, a:hover, a:active
-  //  color: #e67e22
-
-//footer
-  //background-color: #2c3e50
-  //padding: 20px 0
-  //text-align: center
-  //color: #e67e22
+footer
+  background-color: #222222
+  min-height: 300px
+  img#resume-large-bottom
+    position: absolute
+    left: 35%
 
 
 

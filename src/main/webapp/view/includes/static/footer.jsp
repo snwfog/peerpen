@@ -6,6 +6,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <%--<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>--%>
 <script src="/assets/js/lib/bootstrap.min.js"></script>
+<script src="/assets/js/lib/jquery.backstretch.min.js"></script>
 <script src="/assets/js/lib/odometer.min.js"></script>
 <script src="/assets/js/lib/skrollr.js"></script>
 <script src="/assets/js/lib/holder.js"></script>
