@@ -14,7 +14,7 @@
     </h1>
 
     <form class="form-inline" name="register" id="register"
-          action="/register" method="post">
+          action="/register" method="post" parsley-validate>
         <div style=" max-width:500px; float:left;">
             <h4>Take a first step in building your career!</h4>
 
@@ -26,30 +26,32 @@
             <h4>Become a member of PeerPen</h4>
 
             <div class="form-group">
-                <input type="text" class="form-control" style="margin:10px 0" id="valid_fname" name="first_name"
+                <input type="text" class="form-control parsley-validated" style="margin:10px 0" id="valid_fname" name="first_name"
                        rel="popover" data-content="<div class='validation'>You need to fill in your first name</div>"
-                       data-html="true" placeholder="First Name"/>
+                       data-html="true" placeholder="First Name" parsley-trigger="change keyup" parsley-error-container="#errorContainer" parsley-error-message="First name is empty."/>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" style="margin:10px 0" id="valid_lname" name="last_name"
+                <input type="text" class="form-control parsley-validated" style="margin:10px 0" id="valid_lname" name="last_name"
                        placeholder="Last Name"
                        data-content="<div class='validation'>You need to fill in your last name</div>"
-                       data-html="true"/>
+                       data-html="true" parsley-trigger="change keyup" parsley-error-container="#errorContainer" parsley-error-message="Last name is empty."/>
             </div>
-            <input type="text" class="form-control" style="margin:10px 0" id="valid_username" name="user_name"
+            <input type="text" class="form-control parsley-validated" style="margin:10px 0" id="valid_username" name="user_name"
                    placeholder="Username"
-                   data-content="<div class='validation'>You need to fill in with a username</div>" data-html="true"/>
-            <input type="password" class="form-control" style="margin:10px 0" id="valid_pass" name="password"
+                   data-content="<div class='validation'>You need to fill in with a username</div>" data-html="true" parsley-trigger="change keyup" parsley-error-container="#errorContainer" parsley-error-message="User name is empty."/>
+            <input type="password" class="form-control parsley-validated" style="margin:10px 0" id="valid_pass" name="password"
                    placeholder="Password"
-                   data-content="<div class='validation'>You need to fill in with a password</div>" data-html="true"/>
-            <input type="password" class="form-control" style="margin:10px 0" id="valid_cpass" name="confirm_password"
+                   data-content="<div class='validation'>You need to fill in with a password</div>" data-html="true" parsley-trigger="change keyup" parsley-error-container="#errorContainer" parsley-error-message="Password should contain at least one numeric digit, one upercase letter and one lowercase letter."/>
+            <input type="password" class="form-control parsley-validated" style="margin:10px 0" id="valid_cpass" name="confirm_password"
                    placeholder="Confirmed Password"
-                   data-content="<div class='validation'>You need to confirm your password</div>" data-html="true"/>
-            <input type="text" class="form-control" style="margin:10px 0" id="valid_email" name="email"
+                   data-content="<div class='validation'>You need to confirm your password</div>" data-html="true" parsley-trigger="change keyup" parsley-error-container="#errorContainer" parsley-error-message="Confirmed password doesn't match your password or is not in the correct format."/>
+            <input type="text" class="form-control parsley-validated" style="margin:10px 0" id="valid_email" name="email"
                    placeholder="Email"
-                   data-content="<div class='validation'>You need to fill in your valid email address</div>"
-                   data-html="true"/>
+                   data-content="<div class='validation parsley-validated'>You need to fill in your valid email address</div>"
+                   data-html="true" parsley-trigger="change keyup" parsley-error-container="#errorContainer" parsley-error-message="Your email is not in the correct form."/>
             <button type="submit" class="btn btn-primary pull-right" value="submit">Sign Up</button>
+            <div id="errorContainer">
+            </div>
         </div>
     </form>
 </div>

@@ -142,24 +142,23 @@
   <!--<url-pattern>/avatar.do</url-pattern>-->
   <!--</servlet-mapping>-->
 
-
   <servlet>
     <servlet-name>profile</servlet-name>
-    <jsp-file>/view/profile.jsp</jsp-file>
+    <servlet-class>com.peerpen.controller.ProfileController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>profile</servlet-name>
     <url-pattern>/profile</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>profile.do</servlet-name>
-    <servlet-class>com.peerpen.controller.ProfileController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>profile.do</servlet-name>
-    <url-pattern>/profile.do</url-pattern>
-  </servlet-mapping>
 
+    <servlet>
+        <servlet-name>avatar</servlet-name>
+        <servlet-class>com.peerpen.controller.AvatarController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>avatar</servlet-name>
+        <url-pattern>/avatar</url-pattern>
+    </servlet-mapping>
 
   <!--<servlet>-->
   <!--<servlet-name>hunk</servlet-name>-->
@@ -204,6 +203,15 @@
     <servlet-mapping>
         <servlet-name>comment</servlet-name>
         <url-pattern>/comment</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>vote</servlet-name>
+        <servlet-class>com.peerpen.ajax.VoteControllerAjax</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>vote</servlet-name>
+        <url-pattern>/vote</url-pattern>
     </servlet-mapping>
 
   <servlet>
@@ -445,7 +453,6 @@
       /login
       /logout
       /register
-      /additional
     </param-value>
   </context-param>
 

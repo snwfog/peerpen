@@ -6,13 +6,12 @@
 
 - peer:
   - document:
-    - comment(\.do)?:
+    - comment:
       - like
     - tag
-  - feed(\.do)?
-  - profile(\.do)?
-  - extra
-  - additional(\.do)?
+  - profile:
+    - avatar
+  - feed
 - group
 - tag(\.do)?
 - tag_autocomplete_ajax(\.do)?
@@ -21,6 +20,7 @@
 - search_autocomplete_ajax(\.do)?
 - reset(\.do)?
 - upload(\.do)?
+- vote(\.do)?
 
 
 

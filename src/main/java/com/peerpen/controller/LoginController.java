@@ -1,5 +1,6 @@
 package com.peerpen.controller;
 
+import com.peerpen.framework.GenericApplicationServlet;
 import com.peerpen.framework.InternalRequestDispatcher;
 import com.peerpen.framework.exception.HttpSessionException;
 import com.peerpen.framework.exception.MissingArgumentException;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LoginController extends HttpServlet {
+public class LoginController extends GenericApplicationServlet {
 
     static final Logger logger = LoggerFactory.getLogger( LoginController.class );
 
@@ -51,5 +52,10 @@ public class LoginController extends HttpServlet {
 
             ((InternalRequestDispatcher) request.getRequestDispatcher( "/error" )).forwardError( request, response, e );
         }
+    }
+
+    @Override
+    protected void doDelete( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
+        logger.warn( "Loggin called delete" );
     }
 }

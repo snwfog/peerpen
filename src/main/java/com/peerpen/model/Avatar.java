@@ -5,6 +5,8 @@ import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasOne;
 
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.sql.Blob;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +33,11 @@ public class Avatar extends Base implements IModel {
 
     @ActiveRecordField
     private Integer peerId;
+
+//    @ActiveRecordField
+    @ActiveRecordField
+    private Rectangle2D area = new Rectangle();
+
 
 
     public Avatar() {
@@ -70,4 +77,9 @@ public class Avatar extends Base implements IModel {
     public void setPeerId(Integer peerId) {
         this.peerId = peerId;
     }
+
+//    public Rectangle getAreaRectange()
+//    {
+//        return new Rectangle (area_x, areay, area_w, area_h);
+//    }
 }

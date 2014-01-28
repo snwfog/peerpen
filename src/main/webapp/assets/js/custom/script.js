@@ -32,7 +32,12 @@ $(document).ready(function () {
             div.css('background-position-y', -selection.y1);
         }
     });
- });
+    $('#save_personal').click(function (){
+        document.getElementById("form_personal").submit();
+        return false;
+    });
+
+});
 
 //*** DO NOT DELETE **
 //Canvass resizing IMG Script

@@ -4,6 +4,7 @@
 package com.peerpen.controller;
 
 import com.peerpen.model.Peer;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.io.File;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class AvatarController extends HttpServlet {
@@ -34,10 +36,10 @@ public class AvatarController extends HttpServlet {
         int y2 = Integer.parseInt(request.getParameter("y2"));
         int yoe = 0;
 
-        String absolutePath = request.getSession().getServletContext().getRealPath("/")+"assets/images/profile/";
+        String absolutePath = request.getSession().getServletContext().getRealPath("/") + "assets/images/profile/";
         String croppedImage = cropImage(x1, y1, x2, y2, absolutePath);
 
-        if(!(yearOfExperience == null || yearOfExperience == ""))
+        if (!(yearOfExperience == null || yearOfExperience == ""))
             yoe = Integer.parseInt(yearOfExperience);
         StringUtils.split(" ");
 
@@ -46,22 +48,22 @@ public class AvatarController extends HttpServlet {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
             dob = formatter.parse(dateOfBirth);
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Unable to parse date stamp");
         }
         dateOfBirth = formatter.format(dob);
         // here we should validate the input...
 
-            Peer peer = new Peer().find(id) ;
-            peer.setDateOfBirth(dob);
-            peer.setGender(gender);
-            peer.setCountry(country);
-            peer.setIndustry(industry);
-            if(yoe != 0)
-                peer.setExperience(yoe);
-            peer.setDescription(description);
-            peer.setPersonalWebsite(website);
-            peer.update();
+        Peer peer = new Peer().find(id);
+        peer.setDateOfBirth(dob);
+        peer.setGender(gender);
+        peer.setCountry(country);
+        peer.setIndustry(industry);
+        if (yoe != 0)
+            peer.setExperience(yoe);
+        peer.setDescription(description);
+        peer.setPersonalWebsite(website);
+        peer.update();
 
 
         request.setAttribute("user", peer);
@@ -74,15 +76,15 @@ public class AvatarController extends HttpServlet {
 
         try {
             BufferedImage originalImgage = ImageIO.read(new File(absolutePath + "256.jpg"));
-            System.out.println("Original image dimension: "+originalImgage.getWidth()+"x1"+originalImgage.getHeight());
+            System.out.println("Original image dimension: " + originalImgage.getWidth() + "x1" + originalImgage.getHeight());
 
             BufferedImage SubImage = originalImgage.getSubimage(x1, y1, x2, y2);
-            System.out.println("Cropped image dimension: "+SubImage.getWidth()+"x"+SubImage.getHeight());
+            System.out.println("Cropped image dimension: " + SubImage.getWidth() + "x" + SubImage.getHeight());
 
             File outputfile = new File(absolutePath + "croppedImage.jpg");
             ImageIO.write(SubImage, "jpg", outputfile);
 
-            System.out.println("Image cropped successfully: "+outputfile.getPath());
+            System.out.println("Image cropped successfully: " + outputfile.getPath());
 
             return outputfile.getName();
 
@@ -93,10 +95,6 @@ public class AvatarController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        // forward to registration jsp
-//        ServletContext context = getServletContext();
-//        RequestDispatcher dispatcher = context.getRequestDispatcher("/view/register.jsp");
-//        dispatcher.forward(request, response);
-
+        request.getRequestDispatcher("/view/avatar.jsp").forward(request, response);
     }
 }
