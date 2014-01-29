@@ -1,3 +1,5 @@
+// this autocomplete is different from the one used in search
+// this allows hitting tab key to add more tag in one type
 $(function() {
     function split( val ) {
         return val.split( /,\s*/ );
@@ -32,6 +34,7 @@ $(function() {
                 return false;
             },
             select: function( event, ui ) {
+                //$(this ).before("<span class='tag'>" + ui.item.value + "</span>"); // ui
                 var terms = split( this.value );
                 // remove the current input
                 terms.pop();

@@ -1,14 +1,17 @@
 package com.peerpen.controller;
 
 import com.peerpen.model.Document;
+import com.peerpen.model.Group;
 import com.peerpen.model.TagDescriptor;
 import com.peerpen.model.Taggable;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,16 +39,23 @@ public class TagSearchController extends HttpServlet {
         if (request.getParameter( "tag_query" )!= null && !request.getParameter( "tag_query" ).isEmpty()){
             query = request.getParameter( "tag_query" );
         }
-        List<String> tags = Arrays.asList( query.split( "\\s*,\\s*" ) );
+        List<String> tagNames = Arrays.asList( query.split( "\\s*,\\s*" ) );
 
+
+        List<Group> groups = new ArrayList<>(  );
+        List<Document> documents = new ArrayList<>(  );
         HttpSession session = request.getSession();
-        //session.setAttribute("tagSearchResults", new Taggable().getMatchedTaggables( tags ));
-
-        for(int i=0;i<tags.size();i++){
-            System.out.println(tags.get( i ).toString() + " + ");
+        // for each tagname, get all related entities
+        for (int i=0;i<tagNames.size();i++){
+            TagDescriptor td = new TagDescriptor(  ).getTagDescriptor( tagNames.get( i ) );
+            groups.addAll( new Taggable(  ).getMatchedGroups( td ) );
+            documents.addAll( new Taggable().getMatchedDocuments( td ) );
         }
+        session.setAttribute("tagSearchResultsGroups", groups);
+        session.setAttribute("tagSearchResults", documents);
+
+        // to be solved: make list unique
 
         response.sendRedirect( "/tag" );
-
     }
 }

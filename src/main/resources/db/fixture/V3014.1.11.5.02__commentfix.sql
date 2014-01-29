@@ -63,13 +63,12 @@ INSERT INTO `feedables` (`id`, `child_id`, `user_id`,`type`, `status`,`last_modi
 
 
 
-
 INSERT INTO `groups` (`id`, `group_name`, `description`, `creation_date`, `last_modified_date`, `semaphore`, `etag`)
 VALUES
-	(1, 'concordia', 'concordia university group', '2014-01-24 20:02:17', '2014-01-24 20:02:17', 0, NULL),
-	(2, 'mcgill', 'mcgill univ', '2014-01-24 20:02:34', '2014-01-24 20:02:34', 0, NULL);
-
-
+	(3, 'concordia', 'this is description of concordia', '2014-01-28 00:40:05', '2014-01-28 00:40:05', 0, 'f8ec4549f8e70824d6c52ce5f548c6e11fc49a67c34fe4036095e48482230cd8'),
+	(4, 'mcgill', 'this is description of mcgill', '2014-01-28 00:40:05', '2014-01-28 00:40:05', 0, '293f83bdd305bcc57a245b5b2b52932f10e4b6db47139b7815e21b72461a4c88'),
+	(5, 'uqam', 'this is description of uqam', '2014-01-28 00:54:28', '2014-01-28 00:54:28', 0, '08d96c81daad331146aa90e468e8a16bfb65f4823ff3e2b269c299083982de3f'),
+	(6, 'montreal', 'this is description of montreal', '2014-01-28 00:54:29', '2014-01-28 00:54:29', 0, 'aa11940a47b156bd4e42adc7444f73bc5a531594005c00d8c96155171a7c4269');
 
 INSERT INTO `tag_descriptors` (`id`, `tag_name`, `creation_date`, `last_modified_date`)
 VALUES
@@ -80,12 +79,25 @@ VALUES
 	(6, 'resume', '2014-01-24 18:46:27', '2014-01-24 18:46:27'),
 	(7, 'montreal', '2014-01-24 18:46:37', '2014-01-24 18:46:37'),
 	(8, 'PEER', '2014-01-24 18:46:48', '2014-01-24 18:46:48'),
-	(9, 'Accounting', '2014-01-24 18:47:04', '2014-01-24 18:47:04');
+	(9, 'Accounting', '2014-01-24 18:47:04', '2014-01-24 18:47:04'),
+	(11, 'blabla', '2014-01-24 20:48:29', '2014-01-24 20:48:29'),
+	(12, 'university', '2014-01-25 19:20:03', '2014-01-25 19:20:03');
 
 INSERT INTO `taggables` (`id`, `child_id`, `type`, `creation_date`, `last_modified_date`)
 VALUES
-	(1, 3, 'Group', '2014-01-24 21:27:18', '2014-01-24 21:27:18'),
-	(2, 1, 'Document', '2014-01-24 21:30:48', '2014-01-24 21:30:48'),
-	(3, 2, 'Document', '2014-01-24 21:31:02', '2014-01-24 21:31:02');
+	(1, 1, 'Group', '2014-01-28 00:39:15', '2014-01-28 00:39:15'),
+	(2, 2, 'Group', '2014-01-28 00:39:15', '2014-01-28 00:39:15'),
+	(5, 3, 'Group', '2014-01-28 00:40:05', '2014-01-28 00:40:05'),
+	(6, 4, 'Group', '2014-01-28 00:40:05', '2014-01-28 00:40:05'),
+	(7, 5, 'Group', '2014-01-28 00:54:29', '2014-01-28 00:54:29'),
+	(8, 6, 'Group', '2014-01-28 00:54:29', '2014-01-28 00:54:29');
+
+INSERT INTO `tags` (`id`, `tag_descriptor_id`, `taggable_id`)
+VALUES
+	(2, 12, 5),
+	(3, 3, 5),
+	(4, 7, 8),
+	(5, 7, 5),
+	(6, 7, 6);
 
 
