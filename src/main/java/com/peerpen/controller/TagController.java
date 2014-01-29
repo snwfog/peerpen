@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 public class TagController extends HttpServlet {
-    private static ArrayList results = new ArrayList(  );
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         doGet( request, response );
@@ -34,10 +33,4 @@ public class TagController extends HttpServlet {
         request.setAttribute( "tagCloud", tagDescriptors );
         request.getRequestDispatcher("/tag").forward(request, response);
     }
-
-    //private List getMatchedTags(String keyword){
-    //    String sql = "SELECT * FROM `tag_descriptors` WHERE `tag_name` LIKE '%" + keyword + "%'";
-    //    List <TagDescriptor> tags = new TagDescriptor().queryAll(sql);
-    //    return tags;
-    //}
 }

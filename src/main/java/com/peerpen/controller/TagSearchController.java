@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -31,7 +32,7 @@ import javax.servlet.http.HttpSession;
 public class TagSearchController extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-
+        doGet( request, response );
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
@@ -41,9 +42,9 @@ public class TagSearchController extends HttpServlet {
         }
         List<String> tagNames = Arrays.asList( query.split( "\\s*,\\s*" ) );
 
-
         List<Group> groups = new ArrayList<>(  );
         List<Document> documents = new ArrayList<>(  );
+
         HttpSession session = request.getSession();
         // for each tagname, get all related entities
         for (int i=0;i<tagNames.size();i++){

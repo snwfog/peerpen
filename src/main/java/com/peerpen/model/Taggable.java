@@ -70,6 +70,7 @@ public class Taggable extends Base {
 
     // business logic
 
+    // adding existing tag will be ignored
     public boolean addTag(TagDescriptor td){
         // check if this tag is already associated with the taggable entity
         String sql = "SELECT * FROM `tags` WHERE `tag_descriptor_id` = " + td.getId() + " AND `taggable_id` = " + getTaggableId();
@@ -83,6 +84,7 @@ public class Taggable extends Base {
         return true;
     }
 
+    // remove the link between entity and tag, not the td itself
     public boolean removeTag(TagDescriptor td){
         String sql = "SELECT * FROM `tags` WHERE tags.`tag_descriptor_id` = " + td.getId() + " AND tags.`taggable_id` = " + getTaggableId();
         System.out.println("sql:" + sql);
@@ -92,6 +94,26 @@ public class Taggable extends Base {
             success = tags.get( i ).destroy();
             if (!success){
                 return false;
+            }
+        }
+        return true;
+    }
+
+    // take care of both removing and adding (Remove whats missing, add whats extra)    (!!to be tested)
+    public boolean updateTags(List<TagDescriptor> newList){
+        List<TagDescriptor> oldList = this.getTagDescriptors();
+
+        // removing tags that dont exist anymore in newlist
+        for (int i=0; i<oldList.size();i++){
+            if (!newList.contains( oldList.get( i ) )){
+                removeTag( oldList.get( i ) );
+            }
+        }
+
+        // adding tags that dont exist in oldlist
+        for (int i=0; i<newList.size();i++){
+            if (!oldList.contains( newList.get( i ) )){
+                addTag( newList.get( i ) );
             }
         }
         return true;
@@ -129,7 +151,7 @@ public class Taggable extends Base {
         return groups;
     }
 
-    // non-tested but should work as above
+    // return all documents that have a given tag (non-tested yet)
     public List<Document> getMatchedDocuments (TagDescriptor tagDescriptor){
         List<Taggable> taggables = new Taggable(  ).getTaggablesFromTagDescriptor( tagDescriptor );
         // loop through all taggables
@@ -151,8 +173,6 @@ public class Taggable extends Base {
         List<Taggable> taggables = new Taggable(  ).queryAll( sql );
         return taggables;
     }
-
-
 
     // helper works
     public Integer getTaggableId(){
@@ -207,10 +227,18 @@ public class Taggable extends Base {
         //}
 
 
+        // Retrieve a list of tags by entity (tested)
+        //Group g = new Group(  ).find( 3 );
+        //List<TagDescriptor> tagDescriptors = g.getTagDescriptors();
+        //System.out.println("Group " + g.getGroupName() + " has the following tags:");
+        //for (int i=0;i<tagDescriptors.size();i++){
+        //    System.out.println(tagDescriptors.get( i ).getTagName());
+        //}
 
         // Delete a tag from entity
         //Group g = new Group(  ).find( 3 );
         //g.removeTag( td );
+
     }
 }
 

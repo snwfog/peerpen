@@ -19,16 +19,16 @@
 
             <div class="btn-group" data-toggle="buttons">
                 <label class="btn btn-default">
-                    <input type="radio" name="area" id="all" checked> All
+                    <input type="radio" name="area" id="all" value="all" checked /> All
                 </label>
                 <label class="btn btn-default">
-                    <input type="radio" name="area" id="documents"> Documents
+                    <input type="radio" name="area" id="documents" value="documents" /> Documents
                 </label>
                 <label class="btn btn-default">
-                    <input type="radio" name="area" id="peers"> Peers
+                    <input type="radio" name="area" id="peers" value="peers" /> Peers
                 </label>
                 <label class="btn btn-default">
-                    <input type="radio" name="area" id="Groups"> Groups
+                    <input type="radio" name="area" id="Groups" value="groups" /> Groups
                 </label>
             </div>
 
