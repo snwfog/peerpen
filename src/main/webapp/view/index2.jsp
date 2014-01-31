@@ -51,7 +51,7 @@
                 </ul>
 
 
-                <form class="navbar-form pull-right" id="index-form" action="/login" method="post" parsley-validate>
+                <form class="navbar-form pull-right" id="index-form1" action="/login" method="post" parsley-validate>
                     <input class="span2 parsley-validated" id="index-username" type="text" placeholder="Username" name="username" parsley-trigger="change keyup" parsley-error-container="#errorContainer" parsley-error-message="User name is empty."/>
                     <input class="span2 parsley-validated" id="index-password" type="password" placeholder="Password" name="password" parsley-trigger="change keyup" parsley-error-container="#errorContainer" parsley-error-message="Password should contain at least one numeric digit, one upercase letter and one lowercase letter."/>
                     <button type="submit" class="btn btn-primary">Sign in</button>
@@ -62,7 +62,7 @@
                         <img src="../assets/images/myaccount.png" width="20px" style="float:left;padding-top:10px; padding-right:5px;"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <form class="navbar-form" id="index-form" action="/login" method="post" parsley-validate>
+                                <form class="navbar-form" id="index-form2" action="/login" method="post" parsley-validate>
                                     Have an account? Sign in now<br />
                                     <input class="span2 parsley-validated" id="parsley-user" type="text" placeholder="Username" name="username" parsley-trigger="keyup" required parsley-user="0"/><br />
                                     <input class="span2 parsley-validated" id="parsley-pass" type="password" placeholder="Password" name="password" parsley-trigger="keyup" required parsley-pass="6"><br />

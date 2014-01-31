@@ -21,12 +21,13 @@ public class FeedController extends HttpServlet {
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        Map<String, Object> map = (Map<String, Object>) request.getAttribute( "parameters" );
-        Integer peerId = Integer.parseInt( (String) map.get( "peer" ) );
+
+        //User can only see their own feed
+        Integer peerId = ((Peer)request.getAttribute("sessionUser")).getId();
         Peer peer = new Peer().find( peerId );
         List<Feedable> data = Feedable.getFeed( peerId );
         request.setAttribute( "feedableList", data );
-        request.setAttribute( "peer", peer );
+        request.setAttribute( "peerObject", peer );
         request.getRequestDispatcher( "/view/feed/feed.jsp" ).forward( request, response );
     }
 

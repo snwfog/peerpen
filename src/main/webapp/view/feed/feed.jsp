@@ -1,6 +1,6 @@
 <%@ include file="/view/includes/static/header.jsp" %>
 
-<% Peer peer = (Peer) request.getAttribute( "peer" ); %>
+<% Peer peer = (Peer) request.getAttribute( "peerObject" ); %>
 
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
