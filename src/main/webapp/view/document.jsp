@@ -17,7 +17,6 @@
   <div id="content">
     <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
       <li class="active"><a href="#commentSection" data-toggle="tab">Comments</a></li>
-      <li><a href="#changesetSection" data-toggle="tab">Changsets</a></li>
     </ul>
 
     <div id="my-tab-content" class="tab-content">
@@ -85,101 +84,91 @@
               </div>
             </div>
            <%}if(o instanceof Changeset) {
-            Changeset cs = (Changeset) o;
+            Changeset ch = (Changeset) o;
             %>
+          <div class="card">
+              <h3 class="card-heading simple"> <%= ch.getContent() %> </h3>
+              <%--<div class="card-body">--%>
+              <%--<p>Change format of Education</p>--%>
+              <%--</div>--%>
+              <div class="card-comments">
+                  <div class="comments-collapse-toggle">
+                      <a data-toggle="collapse" href="#<%= ch.getId()%>-comments"><%= ch.getComments().size()%> Comments<i class="icon-angle-down"></i></a>
+                  </div>
 
-            <h1>this is a changeset!!!!!!! <%= cs.getContent()%></h1>
+                  <div id="<%= ch.getId()%>-comments" class="comments collapse">
+                      <% for (Comment c: ch.getChangesetCommentsByOrder(document.getId(),ch.getId())){%>
+                      <div class="media">
+                          <a class="pull-left" href="#">
+                              <img class="media-object" data-src="holder.js/28x28" alt="avatar"/>
+                          </a>
+                          <div class="media-body">
+                              <%--<h4 class="media-heading"><%= c.getName()%></h4>--%>
+                              <p><%= c.getMessage()%></p>
+                          </div>
+                          <div class="card-actions">
+                              <form  id="upvotechangesetcomment" method="POST" action="/vote" class="AjaxSubmit1">
+
+                                  <input type="hidden" name="docid" value="<%= document.getId()%>"/>
+                                  <input type="hidden" name="commentid" value="<%= c.getId()%>"/>
+                                  <input type="hidden" name="upvote" value="<%= c.getUpVote()%>"/>
+                                  <input type="hidden" name="downvote" value="<%= c.getDownVote()%>"/>
+
+
+                                  <button class="btn" onclick="upVote2();" >
+                                      <div class="point" id="<%= c.getId()%>" name="point"><%= c.getUpVote()%></div>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
+
+                              </form>
+
+                              <form data-id="<%= c.getId()%>" id="downvotechangesetcomment" method="POST" action="/vote"  class="AjaxSubmit2" >
+
+                                  <input type="hidden" name="docid" value="<%= document.getId()%>"/>
+                                  <input type="hidden" name="commentid" value="<%= c.getId()%>"/>
+                                  <input type="hidden" name="upvote" value="<%= c.getUpVote()%>"/>
+                                  <input type="hidden" name="downvote" value="<%= c.getDownVote()%>"/>
+                                  <input type="hidden" name="_method" value="put"/>
+
+                                  <button  class="btn" onclick="downVote2();">
+                                      <div class="point" id="<%= c.getId()+1%>" name="point"><%= c.getDownVote()%></div>&nbsp; <i class="fa fa-thumbs-down"></i></button>&nbsp;
+                              </form>
+
+                              <% if(sessionUser.getId() == ch.getPeerId() || sessionUser.getId() == c.getPeerId()){%>
+                              <a data-toggle="modal" data-id="<%= c.getId()%>" class="confirmDeleteCommentDialog"
+                                 href="#deleteDialog">delete</a>
+                              <% } %>
+                          </div>
+                      </div>
+                      <%}%>
+                      <div class="media">
+                          <a class="pull-left" href="#">
+                              <img class="media-object" data-src="holder.js/28x28" alt="avatar"/>
+                          </a>
+                          <div class="media-body">
+                              <%--<h4 class="media-heading">Your Name</h4>--%>
+                              <%--<textarea style="width:100%"></textarea>--%>
+                              <%--<button class="btn btn-success">Post</button>--%>
+                              <form method="POST" action="/peer/<%= sessionUser.getId()%>/document/<%= document.getId()%>/comment">
+
+                                  <textarea name="comment" style="width:100%"></textarea>
+                                  <input type="hidden" name="docid" value="<%= document.getId()%>"/>
+                                  <input type="hidden" name="changesetid" value="<%= ch.getId()%>"/>
+                                  <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>"/>
+                                  <input type="hidden" name="_method" value="put"/>
+
+                                  <%--<br />--%>
+                                  <button type="submit" class="btn btn-success ">Post</button>
+
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
 
 
            <%} }%>
 
         </div>
-        </p>
-      </div>
-      <div class="tab-pane" id="changesetSection">
-        <h2>Changeset</h2>
-        <p>
-        <% for (Changeset ch: document.getChangesets()){%>
-        <div class="card">
-          <h3 class="card-heading simple"> <%= ch.getContent() %> </h3>
-          <%--<div class="card-body">--%>
-            <%--<p>Change format of Education</p>--%>
-          <%--</div>--%>
-          <div class="card-comments">
-            <div class="comments-collapse-toggle">
-              <a data-toggle="collapse" href="#<%= ch.getId()%>-comments"><%= ch.getComments().size()%> Comments<i class="icon-angle-down"></i></a>
-            </div>
-
-            <div id="<%= ch.getId()%>-comments" class="comments collapse">
-              <% for (Comment c: ch.getChangesetCommentsByOrder(document.getId(),ch.getId())){%>
-              <div class="media">
-                <a class="pull-left" href="#">
-                  <img class="media-object" data-src="holder.js/28x28" alt="avatar"/>
-                </a>
-                <div class="media-body">
-                  <%--<h4 class="media-heading"><%= c.getName()%></h4>--%>
-                  <p><%= c.getMessage()%></p>
-                </div>
-                  <div class="card-actions">
-                      <form  id="upvotechangesetcomment" method="POST" action="/vote" class="AjaxSubmit1">
-
-                          <input type="hidden" name="docid" value="<%= document.getId()%>"/>
-                          <input type="hidden" name="commentid" value="<%= c.getId()%>"/>
-                          <input type="hidden" name="upvote" value="<%= c.getUpVote()%>"/>
-                          <input type="hidden" name="downvote" value="<%= c.getDownVote()%>"/>
-
-
-                          <button class="btn" onclick="upVote2();" >
-                              <div class="point" id="<%= c.getId()%>" name="point"><%= c.getUpVote()%></div>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
-
-                      </form>
-
-                      <form data-id="<%= c.getId()%>" id="downvotechangesetcomment" method="POST" action="/vote"  class="AjaxSubmit2" >
-
-                          <input type="hidden" name="docid" value="<%= document.getId()%>"/>
-                          <input type="hidden" name="commentid" value="<%= c.getId()%>"/>
-                          <input type="hidden" name="upvote" value="<%= c.getUpVote()%>"/>
-                          <input type="hidden" name="downvote" value="<%= c.getDownVote()%>"/>
-                          <input type="hidden" name="_method" value="put"/>
-
-                          <button  class="btn" onclick="downVote2();">
-                              <div class="point" id="<%= c.getId()+1%>" name="point"><%= c.getDownVote()%></div>&nbsp; <i class="fa fa-thumbs-down"></i></button>&nbsp;
-                      </form>
-
-                      <% if(sessionUser.getId() == ch.getPeerId() || sessionUser.getId() == c.getPeerId()){%>
-                      <a data-toggle="modal" data-id="<%= c.getId()%>" class="confirmDeleteCommentDialog"
-                         href="#deleteDialog">delete</a>
-                      <% } %>
-                  </div>
-              </div>
-              <%}%>
-              <div class="media">
-                <a class="pull-left" href="#">
-                  <img class="media-object" data-src="holder.js/28x28" alt="avatar"/>
-                </a>
-                <div class="media-body">
-                  <%--<h4 class="media-heading">Your Name</h4>--%>
-                  <%--<textarea style="width:100%"></textarea>--%>
-                  <%--<button class="btn btn-success">Post</button>--%>
-                  <form method="POST" action="/peer/<%= sessionUser.getId()%>/document/<%= document.getId()%>/comment">
-
-                      <textarea name="comment" style="width:100%"></textarea>
-                      <input type="hidden" name="docid" value="<%= document.getId()%>"/>
-                      <input type="hidden" name="changesetid" value="<%= ch.getId()%>"/>
-                      <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>"/>
-                      <input type="hidden" name="_method" value="_patch"/>
-
-                      <%--<br />--%>
-                      <button type="submit" class="btn btn-success ">Post</button>
-
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <%}%>
-
         </p>
       </div>
     </div>
