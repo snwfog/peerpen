@@ -21,13 +21,14 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <%--<link rel="stylesheet" href="/assets/css/lib/bootstrap.min.css" type="text/css">--%>
     <%--<link rel="stylesheet" href="/assets/css/lib/flat-ui.css" type="text/css">--%>
-
+    <link rel="stylesheet" href="/assets/css/lib/jquery.tagit.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/lib/tagit.ui-zendesk.css" type="text/css">
 
 
     <!-- dont put the following to footer -->
-    <script src="/assets/js/lib/jquery-1.9.1.js"></script>     <!-- for search autocomplete -->
-    <script src="/assets/js/lib/jquery-ui-1.10.4.js"></script> <!-- for search autocomplete -->
-    <%--<script type="text/javascript" src="/assets/js/custom/search_autocomplete.js"></script> custom search autocomplete --%>
+    <script src="/assets/js/lib/jquery-1.9.1.js"></script>      <!-- for search autocomplete -->
+    <script src="/assets/js/lib/jquery-ui-1.10.4.js"></script>  <!-- for search autocomplete -->
+    <script src="/assets/js/lib/tag-it.js"></script>            <!-- this has to be in <head> -->
 
 
 

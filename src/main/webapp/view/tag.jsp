@@ -9,14 +9,15 @@
 <%@ include file="/view/includes/static/header.jsp" %>
 <script src="/assets/js/custom/tag_autocomplete_caller.js"></script>
 
+
 <div class="container">
     <h1>Tag Cloud</h1>
 
     <form action="/tag_search.do" method="get" class="form-horizontal" role="form">
         <div class="form-group">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Start typing ..." name="tag_query" id="tag_query" autocomplete="off" />
-                <span class="input-group-btn">
+                <input type="text" class="form-control" name="tag_query" id="tag_query" autocomplete="off" />
+                <span class="input-group-btn" style="visibility: hidden">
                     <button type="submit" class="btn btn-primary" name="submit" />Search</button>
                 </span>
             </div>
@@ -24,18 +25,26 @@
         </div>
     </form>
 
+
+    <ul class="tagit ui-widget ui-widget-content ui-corner-all" style="border:0">
     <%
         Map<String, Object> map = new HashMap<String, Object>();
         List<TagDescriptor> tagDescriptors = new TagDescriptor().findAll( map );
         for(int i=0;i<tagDescriptors.size();i++){
             TagDescriptor td = tagDescriptors.get( i );
             %>
-    <a href="/tag_search.do?tag_query=<%= td.getTagName() %>"><code><%= td.getTagName() %></code></a>
+        <li class="tagit-choice ui-widget-content ui-state-default ui-corner-all tagit-choice-editable">
+            <span class="tagit-label">
+                <a href="/tag_search.do?tag_query=<%= td.getTagName() %>"><%= td.getTagName() %></a>
+            </span>
+        </li>
     <%
         }
     %>
+    </ul>
 
-    <br /><br /><br /><br />
+    <hr />
+
 
     <!-- Handling search result -->
     <%
