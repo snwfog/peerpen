@@ -1,6 +1,5 @@
 <%@ page import="com.peerpen.model.Group" %>
 <%@ page import="com.peerpen.model.TagDescriptor" %>
-<%@ page import="com.peerpen.model.Taggable" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
