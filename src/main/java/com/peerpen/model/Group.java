@@ -65,4 +65,25 @@ public class Group extends Taggable implements IModel {
         return suggestions;
     }
 
+    @Override
+    public boolean equals (Object other){
+        if (other == null) return false;
+        if (other == this) return true;
+        if (!(other instanceof Group))return false;
+        Group myOther = (Group) other;
+        if (this.getId() == myOther.getId()) return true;
+        return false;
+    }
+
+    public List<Group> removeDuplicates(List<Group> groups){
+        List<Group> set = new ArrayList<>(  );
+        for(int i=0;i<groups.size();i++){
+            if(!set.contains( groups.get( i ) )){
+                set.add( groups.get( i ) );
+            }
+        }
+        return set;
+    }
+
+
 }

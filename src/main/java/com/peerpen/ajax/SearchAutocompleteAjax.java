@@ -8,6 +8,7 @@ import com.peerpen.model.Peer;
 import java.io.IOException;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -28,7 +29,6 @@ public class SearchAutocompleteAjax extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         doGet( request, response );
-
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
@@ -49,19 +49,21 @@ public class SearchAutocompleteAjax extends HttpServlet {
         // Merge all lists into a set (unique)
         Set suggestionPool = new LinkedHashSet(  );
 
-        // Obtains for each searchable model a list of suggestion base on the query
-        if(area.equals( "documents" )){
-            suggestionPool.addAll( new Document().getSuggestedDocuments( q, 5 ) );
-        }else if( area.equals("peers")){
-            suggestionPool.addAll( new Peer().getSuggestedPeers( q, 5 ) );
-        }else if( area.equals("groups")){
-            suggestionPool.addAll( new Group().getSuggestedGroups( q, 5 ) );
-        }else {
-            suggestionPool.addAll( new Document().getSuggestedDocuments( q, 3 ) );
-            suggestionPool.addAll( new Peer().getSuggestedPeers( q, 3 ) );
-            suggestionPool.addAll( new Group().getSuggestedGroups( q, 5 ) );
+        switch(area){
+            case "documents":
+                suggestionPool.addAll( new Document().getSuggestedDocuments( q, 5 ) );
+                break;
+            case "peers":
+                suggestionPool.addAll( new Peer().getSuggestedPeers( q, 5 ) );
+                break;
+            case "groups":
+                suggestionPool.addAll( new Group().getSuggestedGroups( q, 5 ) );
+                break;
+            default:
+                suggestionPool.addAll( new Document().getSuggestedDocuments( q, 3 ) );
+                suggestionPool.addAll( new Peer().getSuggestedPeers( q, 3 ) );
+                suggestionPool.addAll( new Group().getSuggestedGroups( q, 5 ) );
         }
-
 
         // Convert set into json string
         String json = new Gson().toJson( suggestionPool );

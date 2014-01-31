@@ -39,7 +39,7 @@ public class RegistrationController extends HttpServlet {
             if ( (map.get( "password" )).equals( map.get( "confirmPassword" ) ) && p.save() ) {
                 p.setSessionId( request.getSession().getId() );
                 p.update();
-                response.encodeRedirectURL( "/peer/" + p.getId() + "/profile" );
+                response.sendRedirect("/peer/" + p.getId() + "/profile");
             } else {
                 throw new RegistrationFailedException( map );
             }

@@ -42,22 +42,26 @@ public class SearchController extends HttpServlet {
             query = request.getParameter( "search_query" );
         }
 
-        String origin = request.getRequestURI();
+        //String origin = request.getRequestURI();
         HttpSession session = request.getSession();
 
         if (!query.isEmpty()){
-            if(area.equals( "documents" )){
-                session.setAttribute("searchResults", new Document().getMatchedDocuments( query ));
-            }else if(area.equals( "peers" )){
-                session.setAttribute("searchResults", new Peer().getMatchedPeers( query ));
-            }else if(area.equals( "groups" )){
-                session.setAttribute("searchResults", new Group().getMatchedGroups( query ));
-            }else{ // all or not set
-                List<Object> everything = new ArrayList<Object>(  );
-                everything.addAll( new Document().getMatchedDocuments( query ));
-                everything.addAll( new Peer().getMatchedPeers( query ));
-                everything.addAll( new Group().getMatchedGroups( query ));
-                session.setAttribute( "searchResults", everything );
+            switch (area){
+                case "documents":
+                    session.setAttribute("searchResults", new Document().getMatchedDocuments( query ));
+                    break;
+                case "peers":
+                    session.setAttribute("searchResults", new Peer().getMatchedPeers( query ));
+                    break;
+                case "groups":
+                    session.setAttribute("searchResults", new Group().getMatchedGroups( query ));
+                    break;
+                default:
+                    List<Object> everything = new ArrayList<Object>(  );
+                    everything.addAll( new Document().getMatchedDocuments( query ));
+                    everything.addAll( new Peer().getMatchedPeers( query ));
+                    everything.addAll( new Group().getMatchedGroups( query ));
+                    session.setAttribute( "searchResults", everything );
             }
         }
         response.sendRedirect( "/search" );
