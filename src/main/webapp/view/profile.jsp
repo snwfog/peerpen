@@ -184,9 +184,9 @@
             <input type="hidden" class="form-control peerPersonal" name="first_name" value="<%= peer.getFirstName().toString() %>">
             <input type="hidden" class="form-control peerPersonal" name="last_name" value="<%= peer.getLastName().toString() %>" >
             <input type="hidden" class="form-control peerUsername" name="user_name" value="<%= peer.getUserName().toString() %>" >
-            <input type="hidden" class="form-control peerDoB" name="dob" value="<%= peer.getGender() == null ? "" : peer.getGender().toString() %>">
+            <input type="hidden" class="form-control peerDoB" name="dob" value="<%= peer.getDateOfBirth() == null ? "" : peer.getDateOfBirth().toString() %>">
             <input type="hidden" class="form-control peerID" name="id" value="<%= peer.getId().toString()%>">
-            <input type="hidden" class="form-control peerPersonal" name="gender" value="<%=peer.getGender().toString()%>" >
+            <input type="hidden" class="form-control peerPersonal" name="gender" value="<%= peer.getGender() == null ? "" : peer.getGender().toString() %>" >
             <input type="hidden" class="form-control peerPersonal" name="country" value="<%= peer.getCountry().toString()%>" >
             <input type="hidden" class="form-control peerPersonal" name="industry" value="<%=peer.getIndustry().toString()%>">
             <input type="hidden" class="form-control peerPersonal" name="yoe" value="<%=peer.getExperience().toString()%>">
