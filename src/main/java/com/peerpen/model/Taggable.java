@@ -151,6 +151,13 @@ public class Taggable extends Base {
         return groups;
     }
 
+    // return groups that have all given tags (AND query)
+    public List<Group> getMatchedGroups (List<TagDescriptor> tagDescriptors){
+        List<Group> groups = new ArrayList<>(  );
+        // todo
+        return groups;
+    }
+
     // return all documents that have a given tag (non-tested yet)
     public List<Document> getMatchedDocuments (TagDescriptor tagDescriptor){
         List<Taggable> taggables = new Taggable(  ).getTaggablesFromTagDescriptor( tagDescriptor );

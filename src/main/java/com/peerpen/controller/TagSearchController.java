@@ -6,6 +6,7 @@ import com.peerpen.model.TagDescriptor;
 import com.peerpen.model.Taggable;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -32,31 +33,41 @@ import javax.servlet.http.HttpSession;
 public class TagSearchController extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        doGet( request, response );
+        //doGet( request, response );
+
+        // NON-TESTED
+        Integer entityId = Integer.parseInt( request.getParameter( "entityId" ) );
+        Group g = new Group(  ).find( entityId );
+        String query = request.getParameter( "tags" );
+        List<String> tagNames = Arrays.asList( query.split( "\\s*,\\s*" ) );
+        List<TagDescriptor> newTagDescriptors = new ArrayList<>(  );
+        for (String tagName: tagNames){
+            newTagDescriptors.add(new TagDescriptor(  ).getTagDescriptor( tagName ));
+        }
+        g.updateTags( newTagDescriptors );
+
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         String query = "";
         if (request.getParameter( "tag_query" )!= null && !request.getParameter( "tag_query" ).isEmpty()){
             query = request.getParameter( "tag_query" );
+            List<String> tagNames = Arrays.asList( query.split( "\\s*,\\s*" ) );
+            List<Document> documents = new ArrayList<>(  );
+            List<Group> groups = new ArrayList<>(  );
+
+            HttpSession session = request.getSession();
+            // for each tagname, get all related entities
+            for (int i=0;i<tagNames.size();i++){
+                TagDescriptor td = new TagDescriptor(  ).getTagDescriptor( tagNames.get( i ) );
+                groups.addAll( new Taggable().getMatchedGroups( td ) );
+                documents.addAll( new Taggable().getMatchedDocuments( td ) );
+            }
+
+            session.setAttribute("tagSearchResultsGroups", new Group().removeDuplicates( groups ));
+            session.setAttribute("tagSearchResultsDocuments", documents);
+
+            response.sendRedirect( "/tag" );
         }
-        List<String> tagNames = Arrays.asList( query.split( "\\s*,\\s*" ) );
-
-        List<Group> groups = new ArrayList<>(  );
-        List<Document> documents = new ArrayList<>(  );
-
-        HttpSession session = request.getSession();
-        // for each tagname, get all related entities
-        for (int i=0;i<tagNames.size();i++){
-            TagDescriptor td = new TagDescriptor(  ).getTagDescriptor( tagNames.get( i ) );
-            groups.addAll( new Taggable(  ).getMatchedGroups( td ) );
-            documents.addAll( new Taggable().getMatchedDocuments( td ) );
-        }
-        session.setAttribute("tagSearchResultsGroups", groups);
-        session.setAttribute("tagSearchResults", documents);
-
-        // to be solved: make list unique
-
-        response.sendRedirect( "/tag" );
     }
 }

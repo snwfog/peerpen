@@ -38,17 +38,28 @@ public class TagDescriptor extends Base implements IModel {
         this.tagName = tagName;
     }
 
+    // returns the td base on the name, if doesnt exist, it creates it
     public TagDescriptor getTagDescriptor(String tagName){
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("tagName", tagName);
-        TagDescriptor td = new TagDescriptor(  ).find( map );
-        if (td != null){ // tag exists
+        TagDescriptor td = new TagDescriptor(  ).getTagDescriptorIfExists( tagName );
+        if (td != null){
             return td;
         }else{
             td = new TagDescriptor(  );
             td.setTagName( tagName );
             td.save();
             return td;
+        }
+    }
+
+    // like above but do not create if not exists
+    public TagDescriptor getTagDescriptorIfExists (String tagName){
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("tagName", tagName);
+        TagDescriptor td = new TagDescriptor(  ).find( map );
+        if (td != null){ // tag exists
+            return td;
+        } else{
+            return null;
         }
     }
 
@@ -64,5 +75,13 @@ public class TagDescriptor extends Base implements IModel {
         return suggestions;
     }
 
+    public static void main (String[] args){
+        TagDescriptor td = new TagDescriptor(  ).getTagDescriptorIfExists( "qweqwewqeqwewq" );
+        if (td != null){
+            System.out.println(td.getTagName());
+        }else{
+            System.out.println("doesnt exists");
+        }
+    }
 
 }
