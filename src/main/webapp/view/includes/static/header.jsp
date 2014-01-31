@@ -8,7 +8,12 @@
     <meta name="description" content="Peerpen social web application for improving your resume and cover letter.">
     <meta name="author" content="Capstone Sunny Delight 2014">
 
-    <title>PeerPen - A Capstone project by Sunny Delight</title>
+    <title>
+        <%--Last thing should put default title--%>
+        <% String defaultTitle =  "PeerPen - A Capstone project by Sunny Delight";%>
+        <%= request.getParameter("title") == null? "" : request.getParameter("title")%>
+        <%= request.getAttribute("title") == null? defaultTitle : request.getAttribute("title")%>
+    </title>
 
     <link rel="stylesheet" href="/assets/css/lib/bootplus.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/lib/bootplus-responsive.min.css" type="text/css">
