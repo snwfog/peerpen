@@ -9,10 +9,15 @@
     <meta name="author" content="Capstone Sunny Delight 2014">
 
     <title>
-        <%--Last thing should put default title--%>
-        <% String defaultTitle =  "PeerPen - A Capstone project by Sunny Delight";%>
-        <%= request.getParameter("title") == null? "" : request.getParameter("title")%>
-        <%= request.getAttribute("title") == null? defaultTitle : request.getAttribute("title")%>
+        <%
+           String defaultTitle =  "PeerPen - A Capstone project by Sunny Delight";
+           if( request.getParameter("title") != null)
+             out.println(request.getParameter("title"));
+           else if(request.getAttribute("title") != null)
+             out.println(request.getAttribute("title"));
+           else
+             out.println(defaultTitle);
+        %>
     </title>
 
     <link rel="stylesheet" href="/assets/css/lib/bootplus.min.css" type="text/css">
