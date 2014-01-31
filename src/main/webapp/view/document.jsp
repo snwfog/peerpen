@@ -96,7 +96,7 @@
           <%--</div>--%>
           <div class="card-comments">
             <div class="comments-collapse-toggle">
-              <a data-toggle="collapse" data-target="#<%= ch.getId()%>-comments" href="#<%= ch.getId()%>-comments"><%= ch.getComments().size()%> Comments<i class="icon-angle-down"></i></a>
+              <a data-toggle="collapse" href="#<%= ch.getId()%>-comments"><%= ch.getComments().size()%> Comments<i class="icon-angle-down"></i></a>
             </div>
 
             <div id="<%= ch.getId()%>-comments" class="comments collapse">
