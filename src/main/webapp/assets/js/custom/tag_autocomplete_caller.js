@@ -53,6 +53,13 @@
 // below is the improved ("tag-it!") version
 
 $(function(){
+    $('#entityTags').tagit({
+        // configure the name of the input field (will be submitted with form), default: item[tags]
+        singleField: true,
+        itemName: 'item',
+        fieldName: 'tags'
+    });
+
     $('#tag_query').tagit({
         allowSpaces: false,
         singleField: true,

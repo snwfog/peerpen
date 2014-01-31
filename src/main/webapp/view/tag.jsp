@@ -21,7 +21,6 @@
                     <button type="submit" class="btn btn-primary" name="submit" />Search</button>
                 </span>
             </div>
-
         </div>
     </form>
 
@@ -73,5 +72,32 @@
         }
     %>
     <br /><br /><br /><br /><br />
+
+
+
+
+    <hr />
+
+
+    <%
+        Group g = new Group(  ).find( 3 );
+        List<TagDescriptor> tds = g.getTagDescriptors();
+    %>
+    Demo loading tags attached to Group <%=g.getGroupName()%>:
+    <form action="/tag_search.do" method="post" class="form-horizontal" role="form">
+        <ul id="entityTags">
+        <%
+            for (TagDescriptor td : tds){
+        %>
+            <li><%=td.getTagName() %></li>
+        <%
+            }
+        %>
+        </ul>
+        <button type="submit" class="btn btn-primary" name="submit" />OK</button>
+    </form>
+
+
+
  </div>
 <%@ include file="/view/includes/static/footer.jsp" %>
