@@ -195,8 +195,8 @@ $(document).ready(function(){
   $('input#index-username').parsley('addConstraint', 
     {'required': 'true'});
   $('input#index-password').parsley( 'addConstraint', 
-    {'required': 'true',
-      'regexp': '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,20}$'});
+    {'required': 'true'/*,
+      'regexp': '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,20}$'*/});
   $( 'input#valid_fname' ).parsley( 'addConstraint', 
     {'required': 'true'});
   $( 'input#valid_lname' ).parsley( 'addConstraint', 
@@ -204,20 +204,20 @@ $(document).ready(function(){
   $( 'input#valid_username' ).parsley( 'addConstraint', 
     {'required': 'true'});
   $('input#valid_pass').parsley( 'addConstraint', 
-    {'required': 'true',
-     'regexp': "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,20}$"});
+    {'required': 'true'/*,
+     'regexp': "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,20}$"*/});
   $('input#valid_cpass').parsley( 'addConstraint', 
     {'required': 'true',
-      'equalto': '#valid_pass',
-      'regexp': "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,20}$"});
+      'equalto': '#valid_pass'/*,
+      'regexp': "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,20}$"*/});
   $('input#valid_email').parsley( 'addConstraint', 
     {'required': 'true',
       'type': 'email'});
   $('input#login-username').parsley('addConstraint', 
     {'required': 'true'});
   $('input#login-password').parsley( 'addConstraint', 
-    {'required': 'true',
-      'regexp': '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{4,8}$'});
+    {'required': 'true'/*,
+      'regexp': '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{4,8}$'*/});
 
 
 });
