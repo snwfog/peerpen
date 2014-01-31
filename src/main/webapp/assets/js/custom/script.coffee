@@ -18,9 +18,9 @@ $ ->
   $(window).scroll ->
     vHeight = $(this).scrollTop()
     #od.update Math.floor(Math.random() * 100000) if vHeight >= 3910
-    od.update 123456 if vHeight >= 2800
-    if vHeight >= 230
-      $("div#scroll-down a").tooltip("destroy")
+    od.update 123456 if vHeight >= 3040
+    #if vHeight >= 230
+    #  $("div#scroll-down a").tooltip("destroy")
 
 
   # Delay signup with the message

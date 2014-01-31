@@ -176,7 +176,7 @@
         </div>
         <div class="row">
             <div class="col-md-4 col-md-offset-8">
-                <div data-2300="top:-300px" data-2600="top:-120px" class="float-glyphs" id="osx-desktop-notification">
+                <div data-2170="top:-300px" data-2490="top:-120px" class="float-glyphs" id="osx-desktop-notification">
                     <img src="/assets/images/index/osx-notification.png" alt=""/>
                 </div>
             </div>
