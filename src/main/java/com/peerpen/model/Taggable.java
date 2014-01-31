@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReferenceArray;
 
 /**
  * Created with IntelliJ IDEA.
@@ -70,38 +71,28 @@ public class Taggable extends Base {
     }
 
 
+
+
     // business logic
 
-    // adding existing tag will be ignored
-    public boolean addTag(TagDescriptor td){
-        // check if this tag is already associated with the taggable entity
-        String sql = "SELECT * FROM `tags` WHERE `tag_descriptor_id` = " + td.getId() + " AND `taggable_id` = " + getTaggableId();
+
+
+    // entity ---> List<TagDescriptor>
+    public List<TagDescriptor> getTagDescriptors (){
+        List<TagDescriptor> tagDescriptors = new ArrayList<>(  );
+        String taggableId = this.getTaggableId().toString();
+        String sql = "SELECT * FROM `tags` WHERE `taggable_id` = '" + taggableId + "'";
         List<Tag> tags = new Tag().queryAll( sql );
-        if(tags.size() == 0){ // means entity doesnt have the tag yet, can do add now
-            Tag tag = new Tag();
-            tag.setTagDescriptor( td );
-            tag.setTaggable( this );
-            return tag.save();
+        for (int i=0; i<tags.size();i++){
+            Tag tag = tags.get( i );
+            String getTag = "SELECT * FROM `tag_descriptors` WHERE id = '" + tag.getTagDescriptorId().toString() + "'";
+            List<TagDescriptor> td = new TagDescriptor(  ).queryAll( getTag );
+            tagDescriptors.add( td.get( 0 ) );
         }
-        return true;
+        return tagDescriptors;
     }
 
-    // remove the link between entity and tag, not the td itself
-    public boolean removeTag(TagDescriptor td){
-        String sql = "SELECT * FROM `tags` WHERE tags.`tag_descriptor_id` = " + td.getId() + " AND tags.`taggable_id` = " + getTaggableId();
-        //System.out.println("sql:" + sql);
-        List<Tag> tags = new Tag().queryAll( sql );
-        boolean success = false;
-        for(int i=0;i<tags.size();i++){
-            success = tags.get( i ).destroy();
-            if (!success){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    // take care of both removing and adding (Remove whats missing, add whats extra)    (!!to be tested)
+    // updates the tags of an entity (Remove whats missing, add whats extra)
     public boolean updateTags(List<TagDescriptor> newList){
         List<TagDescriptor> oldList = this.getTagDescriptors();
 
@@ -122,30 +113,91 @@ public class Taggable extends Base {
         return true;
     }
 
-    // returns all tags attached to a given entity
-    public List<TagDescriptor> getTagDescriptors (){
-        List<TagDescriptor> tagDescriptors = new ArrayList<>(  );
-        String taggableId = this.getTaggableId().toString();
-        System.out.println(taggableId);
-        String sql = "SELECT * FROM `tags` WHERE `taggable_id` = '" + taggableId + "'";
-        List<Tag> tags = new Tag().queryAll( sql );
-        for (int i=0; i<tags.size();i++){
-            Tag tag = tags.get( i );
-            String getTag = "SELECT * FROM `tag_descriptors` WHERE id = '" + tag.getTagDescriptorId().toString() + "'";
-            List<TagDescriptor> td = new TagDescriptor(  ).queryAll( getTag );
-            tagDescriptors.add( td.get( 0 ) );
-        }
-        return tagDescriptors;
-    }
 
-    // returns all groups that has give tag
+    // 4 public methods for searching taggables items from 1 or more tagdescriptor:
+
+    // TagDescriptor ---> List<Group>
     public List<Group> getMatchedGroups (TagDescriptor tagDescriptor){
         List<Taggable> taggables = new Taggable(  ).getTaggablesFromTagDescriptor( tagDescriptor );
-        // loop through all taggables
+        return getMatchedGroupsFromTaggables( taggables );
+    }
+
+    // List<TagDescriptor> ---> List<Group>
+    public List<Group> getMatchedGroups (List<TagDescriptor> tagDescriptors){
+        List<Taggable> taggables = new Taggable(  ).getTaggablesFromTagDescriptors( tagDescriptors );
+        return getMatchedGroupsFromTaggables( taggables );
+    }
+
+    // TagDescriptor --> List<Group> (non-tested yet)
+    public List<Document> getMatchedDocuments (TagDescriptor tagDescriptor){
+        List<Taggable> taggables = new Taggable(  ).getTaggablesFromTagDescriptor( tagDescriptor );
+        return getMatchedDocumentsFromTaggables( taggables );
+    }
+
+    // List<TagDescriptor> ---> List<Documents>
+    public List<Document> getMatchedDocuments (List<TagDescriptor> tagDescriptors){
+        List<Taggable> taggables = new Taggable(  ).getTaggablesFromTagDescriptors( tagDescriptors );
+        return getMatchedDocumentsFromTaggables( taggables );
+    }
+
+
+
+    // helpers:
+
+    // attach a td to entity (adding existing tag will be ignored)
+    private boolean addTag(TagDescriptor td){
+        // check if this tag is already associated with the taggable entity
+        String sql = "SELECT * FROM `tags` WHERE `tag_descriptor_id` = " + td.getId() + " AND `taggable_id` = " + getTaggableId();
+        List<Tag> tags = new Tag().queryAll( sql );
+        if(tags.size() == 0){ // means entity doesnt have the tag yet, can do add now
+            Tag tag = new Tag();
+            tag.setTagDescriptor( td );
+            tag.setTaggable( this );
+            return tag.save();
+        }
+        return true;
+    }
+
+    // detach a td from entity
+    private boolean removeTag(TagDescriptor td){
+        String sql = "SELECT * FROM `tags` WHERE tags.`tag_descriptor_id` = " + td.getId() + " AND tags.`taggable_id` = " + getTaggableId();
+        //System.out.println("sql:" + sql);
+        List<Tag> tags = new Tag().queryAll( sql );
+        boolean success = false;
+        for(int i=0;i<tags.size();i++){
+            success = tags.get( i ).destroy();
+            if (!success){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // TagDescriptor ---> List<Taggable>
+    private List<Taggable> getTaggablesFromTagDescriptor (TagDescriptor tagDescriptor){
+        String sql = "SELECT taggables.* FROM `tags`, `taggables` WHERE tags.`taggable_id` = taggables.`id` AND tags.`tag_descriptor_id` = "+ tagDescriptor.getId() +";";
+        List<Taggable> taggables = new Taggable(  ).queryAll( sql );
+        return taggables;
+    }
+
+    // List<TagDescriptor> --> List<Taggable>
+    private List<Taggable> getTaggablesFromTagDescriptors (List<TagDescriptor> tagDescriptors){
+        String ids = "";
+        for(TagDescriptor td: tagDescriptors){
+            ids += td.getId() + ",";
+        }
+        ids = ids.substring( 0, ids.length() - 1 );
+        String sql = "SELECT DISTINCT taggables.* FROM `tags`, `taggables` WHERE tags.`taggable_id` = taggables.`id` AND tags.`tag_descriptor_id` IN (" + ids + ")";
+        List<Taggable> taggables = new Taggable(  ).queryAll( sql );
+        return taggables;
+    }
+
+    // List<Taggable> ---> List<Group>
+    private List<Group> getMatchedGroupsFromTaggables(List<Taggable> taggables){
         List<Group> groups = new ArrayList<>(  );
-        for(int i=0;i<taggables.size();i++){
-            Taggable taggable = taggables.get( i );
-            if (taggable.getType().equals( "Group" )){
+        // loop through all taggables
+        for (Taggable taggable: taggables){
+            if (taggable.getType().toLowerCase().equals( "group" )){
                 String getEntity = "SELECT * FROM `groups` WHERE id = '" + taggable.getChildId().toString() + "'";
                 List<Group> g = new Group().queryAll( getEntity );
                 groups.add( g.get( 0 ) ); // assume 1 result could be selected
@@ -154,37 +206,21 @@ public class Taggable extends Base {
         return groups;
     }
 
-    // return groups that have all given tags (AND query)
-    public List<Group> getMatchedGroups (List<TagDescriptor> tagDescriptors){
-        List<Group> groups = new ArrayList<>(  );
-        // todo
-        return groups;
-    }
-
-    // return all documents that have a given tag (non-tested yet)
-    public List<Document> getMatchedDocuments (TagDescriptor tagDescriptor){
-        List<Taggable> taggables = new Taggable(  ).getTaggablesFromTagDescriptor( tagDescriptor );
-        // loop through all taggables
+    // List<Taggable> ---> List<Document>
+    private List<Document> getMatchedDocumentsFromTaggables(List<Taggable> taggables){
         List<Document> documents = new ArrayList<>(  );
-        for(int i=0;i<taggables.size();i++){
-            Taggable taggable = taggables.get( i );
-            if (taggable.getType().equals( "Document" )){
+        // loop through all taggables
+        for (Taggable taggable: taggables){
+            if (taggable.getType().toLowerCase().equals( "document" )){
                 String getEntity = "SELECT * FROM `documents` WHERE id = '" + taggable.getChildId().toString() + "'";
-                List<Document> d = new Document( ).queryAll( getEntity );
-                documents.add( d.get( 0 ) );
+                List<Document> d = new Document().queryAll( getEntity );
+                documents.add( d.get( 0 ) ); // assume 1 result could be selected
             }
         }
         return documents;
     }
 
-    // helper works
-    private List<Taggable> getTaggablesFromTagDescriptor (TagDescriptor tagDescriptor){
-        String sql = "SELECT taggables.* FROM `tags`, `taggables` WHERE tags.`taggable_id` = taggables.`id` AND tags.`tag_descriptor_id` = "+ tagDescriptor.getId() +";";
-        List<Taggable> taggables = new Taggable(  ).queryAll( sql );
-        return taggables;
-    }
-
-    // helper works
+    // taggable entity --> its taggable id
     public Integer getTaggableId(){
         // this.getClass().getSimpleName() // --> Entity Name aka Type
         // this.getId() --> Entity id aka child_id
@@ -193,8 +229,31 @@ public class Taggable extends Base {
         return taggables.get( 0 ).getId();
     }
 
+
+
+
+
+
+
+
     public static void main(String[] args){
         //TESTING
+
+        // test for getTaggablesFromTagDescriptors method
+        //String query = "university,montreal,test2";
+        //List<String> tagNames = Arrays.asList( query.split( "\\s*,\\s*" ) );
+        //List<TagDescriptor> newTagDescriptors = new ArrayList<>(  );
+        //for (String tagName: tagNames){
+        //    TagDescriptor td = new TagDescriptor(  ).getTagDescriptorIfExists( tagName );
+        //    if (td != null){
+        //        newTagDescriptors.add( td );
+        //    }
+        //}
+        //List<Taggable> taggables = new Taggable(  ).getTaggablesFromTagDescriptors( newTagDescriptors );
+        //for (Taggable t: taggables){
+        //    System.out.println(t.getId() + " " + t.getChildId() + " " + t.getType());
+        //}
+
 
 
         // Creating a taggable entity (tested)
@@ -256,7 +315,13 @@ public class Taggable extends Base {
         //List<String> tagNames = Arrays.asList( query.split( "\\s*,\\s*" ) );
         //List<TagDescriptor> newTagDescriptors = new ArrayList<>(  );
         //for (String tagName: tagNames){
-        //    newTagDescriptors.add(new TagDescriptor(  ).getTagDescriptor( tagName ));
+        //    TagDescriptor td = new TagDescriptor(  ).getTagDescriptorIfExists( tagName );
+        //    if (td !=null){
+        //        g.addAll( new Taggable().getMatchedGroups( td ) );
+        //    }
+        //}
+
+
         //}
         //g.updateTags( newTagDescriptors );
     }

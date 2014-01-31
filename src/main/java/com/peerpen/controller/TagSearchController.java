@@ -37,22 +37,19 @@ public class TagSearchController extends HttpServlet {
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         String query = "";
         if (request.getParameter( "tag_query" )!= null && !request.getParameter( "tag_query" ).isEmpty()){
             query = request.getParameter( "tag_query" );
+            // converts tags string into a list
             List<String> tagNames = Arrays.asList( query.split( "\\s*,\\s*" ) );
+            // converts list<string> into list<tagdescriptor>
+            List<TagDescriptor> tagDescriptors = new TagDescriptor(  ).getTagDescriptors(tagNames);
+            // find match
+            List<Group> groups = new Group(  ).getMatchedGroups( tagDescriptors );
             List<Document> documents = new ArrayList<>(  );
-            List<Group> groups = new ArrayList<>(  );
 
-            HttpSession session = request.getSession();
-            // for each tagname, get all related entities
-            for (int i=0;i<tagNames.size();i++){
-                TagDescriptor td = new TagDescriptor(  ).getTagDescriptor( tagNames.get( i ) );
-                groups.addAll( new Taggable().getMatchedGroups( td ) );
-                documents.addAll( new Taggable().getMatchedDocuments( td ) );
-            }
-
-            session.setAttribute("tagSearchResultsGroups", new Group().removeDuplicates( groups ));
+            session.setAttribute("tagSearchResultsGroups", groups);
             session.setAttribute("tagSearchResultsDocuments", documents);
         }
         response.sendRedirect( "/tag" );
