@@ -84,7 +84,9 @@
         List<TagDescriptor> tds = g.getTagDescriptors();
     %>
     Demo loading tags attached to Group <%=g.getGroupName()%>:
-    <form action="/tag_search.do" method="post" class="form-horizontal" role="form">
+    <form action="/tag.do" method="post" class="form-horizontal" role="form">
+        <input type="hidden" name="entityType" value="group" />
+        <input type="hidden" name="entityId" value="3" />
         <ul id="entityTags">
         <%
             for (TagDescriptor td : tds){

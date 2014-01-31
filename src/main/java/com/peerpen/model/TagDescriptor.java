@@ -75,6 +75,16 @@ public class TagDescriptor extends Base implements IModel {
         return suggestions;
     }
 
+    @Override
+    public boolean equals (Object other){
+        if (other == null) return false;
+        if (other == this) return true;
+        if (!(other instanceof TagDescriptor))return false;
+        TagDescriptor myOther = (TagDescriptor) other;
+        if (this.getId() == myOther.getId()) return true;
+        return false;
+    }
+
     public static void main (String[] args){
         TagDescriptor td = new TagDescriptor(  ).getTagDescriptorIfExists( "qweqwewqeqwewq" );
         if (td != null){

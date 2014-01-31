@@ -60,13 +60,10 @@
 
 <br>
 
-  <div class="col-md-3">
-    <div class="bs-sidebar well">
+  <div class="row">
+    <div class="span3">
       <a href="#"><img class="profile2"
                        src="/assets/images/profile/pic.jpg"/></a>
-    </div>
-    <div class="profile">
-      <p>Member Info</p>
     </div>
       <table class="table table-condensed">
         <tr>
@@ -80,15 +77,15 @@
         </tr>
       </table>
   </div>
-  <div class="col-md-9 profile">
-    <div class="col-md-10">
-      <div class="row">
-        <div class="col-md-5">
+  <div class="row profile">
+    <div class="span4">
+      <div class="">
+        <div class="span4">
           <p>Personal Information</p>&nbsp<a id="edit_personal" href="#"><span id="personal_icon" class="glyphicon glyphicon-pencil"></span></a>
         </div>
       </div>
       <div class="well">
-        <div class="row">
+        <div class="">
           <form action="/profile" id="form_personal" method="post">
           <div class="col-md-6">
             <table>
@@ -169,8 +166,8 @@
       </div>
     </div>
 
-    <div class="col-md-10">
-      <div class="row">
+    <div class="span3">
+      <div class="">
         <div class="col-md-5">
           <p>About Me</p>&nbsp<a id="edit_description" href="#"><span id="description_icon" class="glyphicon glyphicon-pencil"></span></a>
         </div>
@@ -184,9 +181,9 @@
             <input type="hidden" class="form-control peerPersonal" name="first_name" value="<%= peer.getFirstName().toString() %>">
             <input type="hidden" class="form-control peerPersonal" name="last_name" value="<%= peer.getLastName().toString() %>" >
             <input type="hidden" class="form-control peerUsername" name="user_name" value="<%= peer.getUserName().toString() %>" >
-            <input type="hidden" class="form-control peerDoB" name="dob" value="<%= peer.getGender() == null ? "" : peer.getGender().toString() %>">
+            <input type="hidden" class="form-control peerDoB" name="dob" value="<%= peer.getDateOfBirth() == null ? "" : peer.getDateOfBirth().toString() %>">
             <input type="hidden" class="form-control peerID" name="id" value="<%= peer.getId().toString()%>">
-            <input type="hidden" class="form-control peerPersonal" name="gender" value="<%=peer.getGender().toString()%>" >
+            <input type="hidden" class="form-control peerPersonal" name="gender" value="<%= peer.getGender() == null ? "" : peer.getGender().toString() %>" >
             <input type="hidden" class="form-control peerPersonal" name="country" value="<%= peer.getCountry().toString()%>" >
             <input type="hidden" class="form-control peerPersonal" name="industry" value="<%=peer.getIndustry().toString()%>">
             <input type="hidden" class="form-control peerPersonal" name="yoe" value="<%=peer.getExperience().toString()%>">
@@ -198,8 +195,8 @@
       </div>
 
     </div>
-    <div class="col-md-10">
-      <div class="row">
+    <div class="span4">
+      <div class="">
         <div class="col-md-5">
           <p>Contact Information</p>&nbsp<a id="edit_contact" href="#"><span id="contact_icon" class="glyphicon glyphicon-pencil"></span></a>
         </div>
@@ -214,7 +211,7 @@
                          readonly></td>
             </tr>
             <input type="hidden" class="form-control peerPoint" name="point"
-                   value="<%= Integer.parseInt(peer.getPoint().toString()) %>"
+                   value=""
                    readonly>
             </tr>
             <tr>
@@ -230,9 +227,9 @@
             <input type="hidden" class="form-control peerPersonal" name="first_name" value="<%= peer.getFirstName().toString() %>">
             <input type="hidden" class="form-control peerPersonal" name="last_name" value="<%= peer.getLastName().toString() %>" >
             <input type="hidden" class="form-control peerUsername" name="user_name" value="<%= peer.getUserName().toString() %>" >
-            <input type="hidden" class="form-control peerPersonal" name="dob" value="<%= peer.getGender() == null ? "" : peer.getGender().toString() %>">
+            <input type="hidden" class="form-control peerPersonal" name="dob" value="<%= peer.getDateOfBirth() == null ? "" : peer.getDateOfBirth().toString() %>">
             <input type="hidden" class="form-control peerID" name="id" value="<%= peer.getId().toString()%>">
-            <input type="hidden" class="form-control peerPersonal" name="gender" value="<%=peer.getGender().toString()%>" >
+            <input type="hidden" class="form-control peerPersonal" name="gender" value="<%= peer.getGender() == null ? "" : peer.getGender().toString() %>\" >
             <input type="hidden" class="form-control peerPersonal" name="country" value="<%= peer.getCountry().toString()%>" >
             <input type="hidden" class="form-control peerPersonal" name="industry" value="<%=peer.getIndustry().toString()%>">
             <input type="hidden" class="form-control peerPersonal" name="yoe" value="<%=peer.getExperience().toString()%>">
@@ -244,7 +241,7 @@
       </div>
     </div>
   </div>
-</div>
+
 
 
 

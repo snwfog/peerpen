@@ -33,18 +33,6 @@ import javax.servlet.http.HttpSession;
 public class TagSearchController extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        //doGet( request, response );
-
-        // NON-TESTED
-        Integer entityId = Integer.parseInt( request.getParameter( "entityId" ) );
-        Group g = new Group(  ).find( entityId );
-        String query = request.getParameter( "tags" );
-        List<String> tagNames = Arrays.asList( query.split( "\\s*,\\s*" ) );
-        List<TagDescriptor> newTagDescriptors = new ArrayList<>(  );
-        for (String tagName: tagNames){
-            newTagDescriptors.add(new TagDescriptor(  ).getTagDescriptor( tagName ));
-        }
-        g.updateTags( newTagDescriptors );
 
     }
 
@@ -66,8 +54,7 @@ public class TagSearchController extends HttpServlet {
 
             session.setAttribute("tagSearchResultsGroups", new Group().removeDuplicates( groups ));
             session.setAttribute("tagSearchResultsDocuments", documents);
-
-            response.sendRedirect( "/tag" );
         }
+        response.sendRedirect( "/tag" );
     }
 }

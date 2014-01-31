@@ -4,6 +4,8 @@ import com.sunnyd.Base;
 import com.sunnyd.annotations.ActiveRecordField;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,7 +89,7 @@ public class Taggable extends Base {
     // remove the link between entity and tag, not the td itself
     public boolean removeTag(TagDescriptor td){
         String sql = "SELECT * FROM `tags` WHERE tags.`tag_descriptor_id` = " + td.getId() + " AND tags.`taggable_id` = " + getTaggableId();
-        System.out.println("sql:" + sql);
+        //System.out.println("sql:" + sql);
         List<Tag> tags = new Tag().queryAll( sql );
         boolean success = false;
         for(int i=0;i<tags.size();i++){
@@ -103,6 +105,7 @@ public class Taggable extends Base {
     public boolean updateTags(List<TagDescriptor> newList){
         List<TagDescriptor> oldList = this.getTagDescriptors();
 
+        // note that the contains uses .equals from TagDescriptor
         // removing tags that dont exist anymore in newlist
         for (int i=0; i<oldList.size();i++){
             if (!newList.contains( oldList.get( i ) )){
@@ -246,6 +249,16 @@ public class Taggable extends Base {
         //Group g = new Group(  ).find( 3 );
         //g.removeTag( td );
 
+
+        // update new tags for an entity (tested)
+        //Group g = new Group(  ).find( 3 );
+        //String query = "university,montreal,test2";
+        //List<String> tagNames = Arrays.asList( query.split( "\\s*,\\s*" ) );
+        //List<TagDescriptor> newTagDescriptors = new ArrayList<>(  );
+        //for (String tagName: tagNames){
+        //    newTagDescriptors.add(new TagDescriptor(  ).getTagDescriptor( tagName ));
+        //}
+        //g.updateTags( newTagDescriptors );
     }
 }
 
