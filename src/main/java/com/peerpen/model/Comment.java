@@ -108,7 +108,7 @@ public class Comment extends Feedable implements IModel
     this.changesetId = changesetId;
   }
 
-  public int getChangesetId()
+  public Integer getChangesetId()
   {
     return this.changesetId;
   }

@@ -10,7 +10,7 @@
 <% Peer urlUser; %>
 <% if (request.getAttribute("urlUser") != null){urlUser= (Peer) request.getAttribute("urlUser");}else{urlUser=sessionUser;} %>
 <% Document document =(Document) request.getAttribute("document");%>
-<% List<Comment> comments = document.getOrderedComments();%>
+<% List<Object> objectList = document.getCommentAndChangeset();%>
 
 <div class="container">
   <h1><%= document.getDocName()%> <%= (sessionUser.getId() == urlUser.getId()) ? "" : " (View-only mode)" %></h1>
@@ -39,49 +39,60 @@
               </form>
             </div>
           </div>
-          <% for (Comment comment : comments)
-          {
-          %>
-          <div class="card">
-            <h3 class="card-heading simple"><%= comment.getPeer().getFirstName() %> <%= comment.getPeer().getLastName() %></h3>
-            <div class="card-body">
-              <%= comment.getMessage() %>
-            </div>
-            <div class="card-actions">
+
+
+          <%for(Object o : objectList){
+            if(o instanceof Comment){
+              Comment c = (Comment) o;%>
+
+              <div class="card">
+              <h3 class="card-heading simple"><%= c.getPeer().getFirstName() %> <%= c.getPeer().getLastName() %></h3>
+              <div class="card-body">
+                <%= c.getMessage() %>
+              </div>
+              <div class="card-actions">
                 <form method="POST" action="/vote"  class="AjaxSubmit3">
 
-                    <input type="hidden" name="docid" value="<%= document.getId()%>"/>
-                    <input type="hidden" name="commentid" value="<%= comment.getId()%>"/>
-                    <input type="hidden" name="upvote" value="<%= comment.getUpVote()%>"/>
-                    <input type="hidden" name="downvote" value="<%= comment.getDownVote()%>"/>
+                  <input type="hidden" name="docid" value="<%= document.getId()%>"/>
+                  <input type="hidden" name="commentid" value="<%= c.getId()%>"/>
+                  <input type="hidden" name="upvote" value="<%= c.getUpVote()%>"/>
+                  <input type="hidden" name="downvote" value="<%= c.getDownVote()%>"/>
 
 
-                    <button class="btn" onclick="upVote1();" >
-                        <div class="point" id="up-<%= comment.getId()%>" name="point"><%= comment.getUpVote()%></div>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
+                  <button class="btn" onclick="upVote1();" >
+                    <div class="point" id="up-<%= c.getId()%>" name="point"><%= c.getUpVote()%></div>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
 
 
                 </form>
                 <form method="POST" action="/vote"  id="downvotecomment" class="AjaxSubmit4">
 
-                    <input type="hidden" name="docid" value="<%= document.getId()%>"/>
-                    <input type="hidden" name="commentid" value="<%= comment.getId()%>"/>
-                    <input type="hidden" name="upvote" value="<%= comment.getUpVote()%>"/>
-                    <input type="hidden" name="downvote" value="<%= comment.getDownVote()%>"/>
-                    <input type="hidden" name="_method" value="put"/>
+                  <input type="hidden" name="docid" value="<%= document.getId()%>"/>
+                  <input type="hidden" name="commentid" value="<%= c.getId()%>"/>
+                  <input type="hidden" name="upvote" value="<%= c.getUpVote()%>"/>
+                  <input type="hidden" name="downvote" value="<%= c.getDownVote()%>"/>
+                  <input type="hidden" name="_method" value="put"/>
 
 
-                    <button  class="btn" onclick="downVote1();" >
-                        <div class="point" id="down-<%= comment.getId()+1%>" name="point"><%= comment.getDownVote()%></div>&nbsp; <i class="fa fa-thumbs-down"></i></button>&nbsp;
+                  <button  class="btn" onclick="downVote1();" >
+                    <div class="point" id="down-<%= c.getId()+1%>" name="point"><%= c.getDownVote()%></div>&nbsp; <i class="fa fa-thumbs-down"></i></button>&nbsp;
 
                 </form>
 
-              <% if(sessionUser.getId() == document.getPeerId() || sessionUser.getId() == comment.getPeerId()){%>
-              <a data-toggle="modal" data-id="<%= comment.getId()%>" class="confirmDeleteCommentDialog"
-                 href="#deleteDialog">delete</a>
-              <% } %>
+                <% if(sessionUser.getId() == document.getPeerId() || sessionUser.getId() == c.getPeerId()){%>
+                <a data-toggle="modal" data-id="<%= c.getId()%>" class="confirmDeleteCommentDialog"
+                   href="#deleteDialog">delete</a>
+                <% } %>
+              </div>
             </div>
-          </div>
-          <% } %>
+           <%}if(o instanceof Changeset) {
+            Changeset cs = (Changeset) o;
+            %>
+
+            <h1>this is a changeset!!!!!!! <%= cs.getContent()%></h1>
+
+
+           <%} }%>
+
         </div>
         </p>
       </div>
