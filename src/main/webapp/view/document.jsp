@@ -70,36 +70,36 @@
               <div class="card-body">
                 <%= c.getMessage() %>
               </div>
-              <div class="card-actions">
-                <form method="POST" action="/vote"  class="AjaxSubmit3">
-
+              <div class="card-actions parent">
+                <form method="POST" action="/vote"  class="AjaxSubmit3 child">
                   <input type="hidden" name="docid" value="<%= document.getId()%>"/>
                   <input type="hidden" name="commentid" value="<%= c.getId()%>"/>
                   <input type="hidden" name="upvote" value="<%= c.getUpVote()%>"/>
                   <input type="hidden" name="downvote" value="<%= c.getDownVote()%>"/>
-
-
                   <button class="btn" id="btn<%= c.getId()%>" onclick="upVote1();" >
-                    <div class="point" id="up-<%= c.getId()%>" name="point"><%= c.getUpVote()%></div>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
-
-
+                    <div class="parent">
+                      <div class="child"><div class="point" id="up-<%= c.getId()%>" name="point"><%= c.getUpVote()%></div></div>
+                      <div class="child">&nbsp;<i class="fa fa-thumbs-up"></i></div>
+                    </div>
+                  </button>
+                  &nbsp;
                 </form>
-                <form method="POST" action="/vote"  id="downvotecomment" class="AjaxSubmit4">
-
+                <form method="POST" action="/vote"  id="downvotecomment" class="AjaxSubmit4 child">
                   <input type="hidden" name="docid" value="<%= document.getId()%>"/>
                   <input type="hidden" name="commentid" value="<%= c.getId()%>"/>
                   <input type="hidden" name="upvote" value="<%= c.getUpVote()%>"/>
                   <input type="hidden" name="downvote" value="<%= c.getDownVote()%>"/>
                   <input type="hidden" name="_method" value="put"/>
-
-
                   <button  class="btn" onclick="downVote1();" >
-                    <div class="point" id="down-<%= c.getId()+1%>" name="point"><%= c.getDownVote()%></div>&nbsp; <i class="fa fa-thumbs-down"></i></button>&nbsp;
-
+                    <div class="parent">
+                      <div class="child"><div class="point" id="down-<%= c.getId()+1%>" name="point"><%= c.getDownVote()%></div></div>
+                      <div class="child">&nbsp; <i class="fa fa-thumbs-down"></i></div>
+                    </div>
+                  </button>
+                  &nbsp;
                 </form>
-
                 <% if(sessionUser.getId() == document.getPeerId() || sessionUser.getId() == c.getPeerId()){%>
-                <a data-toggle="modal" data-id="<%= c.getId()%>" class="confirmDeleteCommentDialog"
+                <a data-toggle="modal" data-id="<%= c.getId()%>" class="confirmDeleteCommentDialog child"
                    href="#deleteDialog">delete</a>
                 <% } %>
               </div>
@@ -108,10 +108,7 @@
             Changeset ch = (Changeset) o;
             %>
           <div class="card2">
-              <h3 class="card-heading simple"> <%= ch.getContent() %> </h3>
-              <%--<div class="card-body">--%>
-              <%--<p>Change format of Education</p>--%>
-              <%--</div>--%>
+              <h3 class="card-heading simple"> <%= ch.getContent() %></h3>
               <div class="card-comments">
                   <div class="comments-collapse-toggle">
                       <a data-toggle="collapse" href="#<%= ch.getId()%>-comments"><%= ch.getComments().size()%> Comments<i class="icon-angle-down"></i></a>
@@ -138,7 +135,8 @@
 
 
                                   <button class="btn" onclick="upVote2();" >
-                                      <div class="point" id="<%= c.getId()%>" name="point"><%= c.getUpVote()%></div>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
+                                      <div class="point" id="<%= c.getId()%>" name="point"><%= c.getUpVote()%></div>&nbsp;<i class="fa fa-thumbs-up"></i>
+                                  </button>&nbsp;
 
                               </form>
 
@@ -186,10 +184,7 @@
                   </div>
               </div>
           </div>
-
-
            <%} }%>
-
         </div>
         </p>
       </div>
