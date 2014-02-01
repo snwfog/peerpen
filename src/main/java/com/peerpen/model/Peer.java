@@ -292,7 +292,7 @@ public class Peer extends Base {
         setUpdateFlag( true );
     }
 
-    public int getAvatarId() {
+    public Integer getAvatarId() {
         return this.avatarId;
     }
 
