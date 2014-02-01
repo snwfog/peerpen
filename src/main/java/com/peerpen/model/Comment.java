@@ -34,6 +34,8 @@ public class Comment extends Feedable implements IModel
   public Comment()
   {
     super();
+    this.upVote=0;
+    this.downVote=0;
   }
 
   public Comment(Map<String, Object> HM)
@@ -156,8 +158,6 @@ public class Comment extends Feedable implements IModel
   @Override
   public boolean save()
   { //use this method for now, until Mike change it in the BASE
-    this.upVote=0;
-    this.downVote=0;
     return super.save();
   }
 
