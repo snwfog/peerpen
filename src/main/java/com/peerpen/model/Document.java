@@ -19,7 +19,7 @@ import com.sunnyd.database.Manager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Document extends Base implements IModel
+public class Document extends Taggable implements IModel
 {
   public static final String tableName = "documents";
 

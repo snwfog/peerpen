@@ -79,25 +79,21 @@
     <hr />
 
 
-    <%
-        Group g = new Group(  ).find( 3 );
-        List<TagDescriptor> tds = g.getTagDescriptors();
-    %>
-    Demo loading tags attached to Group <%=g.getGroupName()%>:
+<% Group g = new Group(  ).find( 3 ); %>
+Tags attached to: <%=g.getGroupName()%> group:
+<div>
+    <% List<TagDescriptor> tds = g.getTagDescriptors(); %>
     <form action="/tag.do" method="post" class="form-horizontal" role="form">
         <input type="hidden" name="entityType" value="group" />
         <input type="hidden" name="entityId" value="3" />
         <ul id="entityTags">
-        <%
-            for (TagDescriptor td : tds){
-        %>
-            <li><%=td.getTagName() %></li>
-        <%
-            }
-        %>
+        <% for (TagDescriptor td : tds){ %>
+        <li><%=td.getTagName() %></li>
+        <% } %>
         </ul>
-        <button type="submit" class="btn btn-primary" name="submit" />OK</button>
+        <button type="submit" class="btn btn-primary" name="submit" />Save Tags</button>
     </form>
+</div>
 
 
 

@@ -75,15 +75,15 @@ public class Group extends Taggable implements IModel {
         return false;
     }
 
-    public List<Group> removeDuplicates(List<Group> groups){
-        List<Group> set = new ArrayList<>(  );
-        for(int i=0;i<groups.size();i++){
-            if(!set.contains( groups.get( i ) )){
-                set.add( groups.get( i ) );
-            }
-        }
-        return set;
-    }
+    //public List<Group> removeDuplicates(List<Group> groups){
+    //    List<Group> set = new ArrayList<>(  );
+    //    for(int i=0;i<groups.size();i++){
+    //        if(!set.contains( groups.get( i ) )){
+    //            set.add( groups.get( i ) );
+    //        }
+    //    }
+    //    return set;
+    //}
 
 
 }

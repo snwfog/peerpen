@@ -4,6 +4,8 @@
 <%@ page import="com.peerpen.model.Comment" %>
 <%@ page import="com.peerpen.model.Changeset" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.peerpen.model.TagDescriptor" %>
+<script src="/assets/js/custom/tag_autocomplete_caller.js"></script>
 
 <%--Declare all request variables here, easy to debug!!!--%>
 <% Peer sessionUser = (Peer) request.getAttribute("sessionUser"); %>
@@ -12,8 +14,27 @@
 <% Document document =(Document) request.getAttribute("document");%>
 <% List<Object> objectList = document.getCommentAndChangeset();%>
 
+
+
 <div class="container">
   <h1><%= document.getDocName()%> <%= (sessionUser.getId() == urlUser.getId()) ? "" : " (View-only mode)" %></h1>
+
+    <!-- this section is for tags -->
+    <div>
+        <% List<TagDescriptor> tds = document.getTagDescriptors(); %>
+        <form action="/tag.do" method="post" class="form-horizontal" role="form">
+            <input type="hidden" name="entityType" value="document" />
+            <input type="hidden" name="entityId" value="<%=document.getId()%>" />
+            <ul id="entityTags">
+                <% for (TagDescriptor td : tds){ %>
+                <li><%=td.getTagName() %></li>
+                <% } %>
+            </ul>
+            <button type="submit" class="btn btn-primary" name="submit" />Save Tags</button>
+        </form>
+    </div>
+
+
   <div id="content">
     <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
       <li class="active"><a href="#commentSection" data-toggle="tab">Comments</a></li>

@@ -48,13 +48,13 @@ public class TagController extends HttpServlet {
                 break;
             case "document":
                 Document document = new Document( ).find( id );
-                //document.updateTags( newTagDescriptors );
+                document.updateTags( newTagDescriptors );
                 break;
             default:
                 System.out.println("type is not specified");
         }
 
-        response.sendRedirect( "/tag" );
+        response.sendRedirect( request.getHeader( "referer" ) );
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
