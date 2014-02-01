@@ -197,25 +197,29 @@
   </div>
 </div>
 
-<div class="modal hide fade" id="deleteDialog">
-  <div class="modal-header">
-    <button class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
-    <h3>Confirm delete</h3>
-  </div>
-  <div class="modal-body">
-    <p>Are you sure you want to delete this comment?</p>
-  </div>
-  <div class="modal-footer">
-    <form id="deleteComment" method="POST" action="/peer/<%= sessionUser.getId()%>/document/<%= document.getId()%>/comment">
-      <input type="hidden" name="_method" value="_delete"/>
-      <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>"/>
-      <input type="hidden" name="commentid" id="commentid" value=""/>
-      <input type="hidden" name="docid" value="<%= document.getId()%>"/>
-      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-      <button type="submit" class="btn btn-primary">Delete</button>
-    </form>
-  </div>
-</div>
+<div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Confirm delete</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this comment?</p>
+      </div>
+      <div class="modal-footer">
+        <form id="deleteComment" method="POST" action="/peer/<%= sessionUser.getId()%>/document/<%= document.getId()%>/comment">
+          <input type="hidden" name="_method" value="delete"/>
+          <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>"/>
+          <input type="hidden" name="commentid" id="commentid" value=""/>
+          <input type="hidden" name="docid" value="<%= document.getId()%>"/>
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+          <button type="submit" class="btn btn-primary">Delete</button>
+        </form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <script src="/assets/js/custom/vote.js"></script>
 <script src="/assets/js/custom/deleteModal.js"></script>
 <%@ include file="/view/includes/static/footer.jsp" %>

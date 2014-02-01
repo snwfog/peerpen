@@ -1,8 +1,10 @@
 jQuery(document).ready(function($) {
   $('#tabs').tab();
 });
-$(document).on("click", ".confirmDeleteCommentDialog", function ()
+$(document).on("click", ".confirmDeleteCommentDialog", function (e)
 {
+  e.preventDefault();
   var commentId = $(this).data('id');
-  $(".modal-footer #commentid").val(commentId);
+  $("#commentid").val(commentId);
+  $($(this).attr('href')).modal('show');
 });
