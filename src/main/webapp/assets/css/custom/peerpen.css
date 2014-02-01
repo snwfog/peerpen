@@ -323,7 +323,7 @@ input.parsley-success{
   border: 1px solid #D6E9C6;
 }
 
-.register-errorContainer{
+/*.register-errorContainer{
   width:250px;
   z-index: 3;
   background-color: #F0E68C;
@@ -354,4 +354,11 @@ input.parsley-success{
   position: absolute;
   right: 340px;
   top: 100px;
+}*/
+
+ul.parsley-error-list {
+  display:none;
+}
+ul.parsley-error-list li {
+display:none;
 }

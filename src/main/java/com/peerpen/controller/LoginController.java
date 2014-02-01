@@ -26,6 +26,7 @@ public class LoginController extends GenericApplicationServlet {
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
+        request.setAttribute("title", "Login In");
         request.getRequestDispatcher( "/view/login.jsp" ).forward( request, response );
     }
 

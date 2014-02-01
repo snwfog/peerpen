@@ -87,14 +87,14 @@
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
 
-  <!--<servlet>-->
-  <!--<servlet-name>logout.do</servlet-name>-->
-  <!--<servlet-class>com.peerpen.controller.LogoutController</servlet-class>-->
-  <!--</servlet>-->
-  <!--<servlet-mapping>-->
-  <!--<servlet-name>logout.do</servlet-name>-->
-  <!--<url-pattern>/logout.do</url-pattern>-->
-  <!--</servlet-mapping>-->
+  <servlet>
+      <servlet-name>logout</servlet-name>
+      <servlet-class>com.peerpen.controller.LogoutController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>logout</servlet-name>
+      <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
 
   <!--<servlet>-->
   <!--<description>First step in the registration</description>-->

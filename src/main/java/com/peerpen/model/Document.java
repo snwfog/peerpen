@@ -177,6 +177,43 @@ public class Document extends Base implements IModel
     }
   }
 
+
+  public List<Object> getCommentAndChangeset()
+  {
+    Integer docId = this.getId();
+    Connection connection = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+
+    List<Comment> comments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE document_id= " + docId + " ORDER BY total_vote DESC, last_modified_date DESC");
+    List<Object> object = new ArrayList();
+    List<Integer> tracker = new ArrayList();
+    Integer cs = null;
+    for(Comment comment: comments)
+    {
+      cs = comment.getChangesetId();
+      if(( cs != null) && !tracker.contains(comment.getChangesetId()))
+      {
+        object.add(new Changeset().find(cs));
+        tracker.add(cs);
+      }
+      else
+      {
+        object.add(comment);
+      }
+    }
+    //Dirty...
+    List<Changeset> changesetList = this.getChangesets();
+    for(Changeset changeset : changesetList )
+    {
+      if (!tracker.contains(changeset.getId())){
+        object.add(changeset);
+        tracker.add(changeset.getId());
+      }
+    }
+    return object;
+  }
+
   public List<Comment> getOrderedComments()
   {
     Integer docId = this.getId();
@@ -187,6 +224,7 @@ public class Document extends Base implements IModel
 
     return comments;
   }
+
 
   // method used by search
   public List<Document> getMatchedDocuments(String keyword)
@@ -209,6 +247,18 @@ public class Document extends Base implements IModel
     }
     return suggestions;
   }
+
+    @Override
+  public boolean equals (Object other)
+  {
+    if (other == null) return false;
+    if (other == this) return true;
+    if (!(other instanceof Document)) return false;
+    Document myOther = (Document) other;
+    if (this.getId() == myOther.getId()) return true;
+    return false;
+  }
+
 
   private static void closeConnection(Connection connection)
   {
