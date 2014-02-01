@@ -248,6 +248,18 @@ public class Document extends Base implements IModel
     return suggestions;
   }
 
+    @Override
+  public boolean equals (Object other)
+  {
+    if (other == null) return false;
+    if (other == this) return true;
+    if (!(other instanceof Document)) return false;
+    Document myOther = (Document) other;
+    if (this.getId() == myOther.getId()) return true;
+    return false;
+  }
+
+
   private static void closeConnection(Connection connection)
   {
     try
