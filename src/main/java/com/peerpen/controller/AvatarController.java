@@ -148,6 +148,7 @@ public class AvatarController extends HttpServlet {
                 Iterator i = fileItems.iterator();
                 File largeAvatarFile = null;
                 String fileName = "";
+                String fileType = "";
                 while ( i.hasNext() ) {
                     // Get the content type of the file
                     FileItem fi = (FileItem) i.next();
@@ -156,7 +157,7 @@ public class AvatarController extends HttpServlet {
                         parameterMaps.put( fi.getFieldName(), fi.getString() );
                     } else if ( !fi.isFormField() ) {
                         String contentType = fi.getContentType();
-                        String fileType = (contentType.lastIndexOf( "/" ) > -1) ?
+                        fileType = (contentType.lastIndexOf( "/" ) > -1) ?
                                 contentType.substring( contentType.lastIndexOf( "/" ) + 1 ) : "";
                         // Get the uploaded file parameters
                         fileName = sessionPeer.getId().toString() + "-" +
@@ -172,7 +173,7 @@ public class AvatarController extends HttpServlet {
                 logger.info( "Image upload properties " + parameterMaps.toString() );
                 Avatar avatar = sessionPeer.getAvatar();
                 avatar.setViewport( parameterMaps );
-                avatar.setFilename( fileName );
+                avatar.setFilename( MessageFormat.format("{0}.{1}", fileName, fileType ));
                 avatar.update(); // FIXME: Does PPAR update relationship?
                 sessionPeer.update();
 

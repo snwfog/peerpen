@@ -45,6 +45,8 @@ public class Avatar extends Base implements IModel {
 
     public static Avatar getDefaultAvatar() {
         Avatar av = new Avatar();
+        av.save();
+
         av.setX1( 0 );
         av.setX2( 256 );
         av.setY1( 0 );
