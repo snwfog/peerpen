@@ -79,7 +79,7 @@
                   <input type="hidden" name="downvote" value="<%= c.getDownVote()%>"/>
 
 
-                  <button class="btn" onclick="upVote1();" >
+                  <button class="btn" data-toggle="button" id="btn<%= c.getId()%>" onclick="upVote1();" >
                     <div class="point" id="up-<%= c.getId()%>" name="point"><%= c.getUpVote()%></div>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
 
 
@@ -124,8 +124,9 @@
                               <img class="media-object" data-src="holder.js/28x28" alt="avatar"/>
                           </a>
                           <div class="media-body">
-                              <%--<h4 class="media-heading"><%= c.getName()%></h4>--%>
-                              <p><%= c.getMessage()%></p>
+                              <%--<h4 class="media-heading"><%= c.getMessage()%></h4>--%>
+                              <%--<p class=""><%= c.getMessage()%></p>--%>
+                              <textarea style="resize: none; width:100%" readonly ><%= c.getMessage()%></textarea>
                           </div>
                           <div class="card-actions">
                               <form  id="upvotechangesetcomment" method="POST" action="/vote" class="AjaxSubmit1">
