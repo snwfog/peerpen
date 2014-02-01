@@ -6,6 +6,8 @@
     <form action="/login" method="post"><input type="hidden" name="username" value="qwe" /><input type="hidden" name="password" value="qwe" /><button class="btn btn-primary" type="submit">Sign in</button></form>
     <h5><a href="/peer/2/profile">Profile</a></h5>
     <h5><a href="/peer/2/profile/avatar">Avatar</a></h5>
+    <h5><a href="/search">Search</a></h5>
+    <h5><a href="/tag">Tag</a></h5>
 </div>
 
 <% if ( request != null ) { %>

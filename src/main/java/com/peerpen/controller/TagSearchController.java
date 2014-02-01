@@ -45,13 +45,15 @@ public class TagSearchController extends HttpServlet {
             List<String> tagNames = Arrays.asList( query.split( "\\s*,\\s*" ) );
             // converts list<string> into list<tagdescriptor>
             List<TagDescriptor> tagDescriptors = new TagDescriptor(  ).getTagDescriptors(tagNames);
-            // find match
-            List<Group> groups = new Group(  ).getMatchedGroups( tagDescriptors );
-            List<Document> documents = new ArrayList<>(  );
 
-            session.setAttribute("tagSearchResultsGroups", groups);
-            session.setAttribute("tagSearchResultsDocuments", documents);
+            // find match
+            if(!tagDescriptors.isEmpty()){
+                List<Group> groups = new Group(  ).getMatchedGroups( tagDescriptors );
+                List<Document> documents = new Document(  ).getMatchedDocuments( tagDescriptors );
+                session.setAttribute("tagSearchResultsGroups", groups);
+                session.setAttribute("tagSearchResultsDocuments", documents);
+            }
         }
-        response.sendRedirect( "/tag" );
+        response.sendRedirect( request.getHeader( "referer" ) );
     }
 }

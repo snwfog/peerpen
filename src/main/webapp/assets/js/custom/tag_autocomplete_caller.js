@@ -57,7 +57,9 @@ $(function(){
         // configure the name of the input field (will be submitted with form), default: item[tags]
         itemName: 'item',
         fieldName: 'tags',
+        caseSensitive: false,
         allowSpaces: false,
+        tagLimit: 5,
         singleField: true,
         autocomplete: ({
             source: function (request, response) {
@@ -85,6 +87,8 @@ $(function(){
     $('#tag_query').tagit({
         allowSpaces: false,
         singleField: true,
+        caseSensitive: false,
+        tagLimit: 3,
         placeholderText: 'Find goodies by tag(s)',
         autocomplete: ({
             source: function (request, response) {
