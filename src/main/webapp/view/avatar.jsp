@@ -18,8 +18,8 @@
                         <input type="hidden" id="avatar-crop-width" name="width" value="">
                         <input type="hidden" id="avatar-crop-height" name="height" value="">
 
+                        <button class="btn btn-large" type="submit">Accept</button>
 
-                        <input type="submit" value="Confirm" />
                     </form>
                 </div>
             </div>
@@ -31,7 +31,5 @@
         </div>
 </div>
 
-<!-- avatar dragging part-->
-<%--<script src="/assets/js/custom/resample.js"></script>--%>
-<%--<script src="/assets/js/custom/avatar.coffee"></script>--%>
+<script src="/assets/js/custom/avatar.min.js"></script>
 <%@ include file="/view/includes/static/footer.jsp" %>
