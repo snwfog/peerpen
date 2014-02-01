@@ -22,7 +22,7 @@
 
     <!-- this section is for tags -->
     <div>
-        <form action="/tag.do" method="post" class="form-horizontal" role="form">
+        <form action="/tag" method="post" class="form-horizontal" role="form">
             <input type="hidden" name="entityType" value="document" />
             <input type="hidden" name="entityId" value="<%=document.getId()%>" />
             <ul id="entityTags">

@@ -27,10 +27,6 @@ import javax.servlet.http.HttpSession;
 public class SearchController extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        doGet( request, response );
-    }
-
-    protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         String query = "";
         String area = "";
 
@@ -65,5 +61,9 @@ public class SearchController extends HttpServlet {
             }
         }
         response.sendRedirect( "/search" );
+    }
+
+    protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+        request.getRequestDispatcher("/view/search.jsp").forward(request, response);
     }
 }

@@ -28,13 +28,6 @@ import javax.servlet.http.HttpServletResponse;
 public class SearchAutocompleteAjax extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        doGet( request, response );
-    }
-
-    protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-
-        // http://localhost:8080/search_autocomplete_ajax.do?term=resu
-
         String q = " ";
         if( request.getParameter("term")!= null){
             q = request.getParameter( "term" );
@@ -44,7 +37,6 @@ public class SearchAutocompleteAjax extends HttpServlet {
         if (request.getParameter( "area" )!= null){
             area = request.getParameter( "area" );
         }
-
 
         // Merge all lists into a set (unique)
         Set suggestionPool = new LinkedHashSet(  );
@@ -72,6 +64,10 @@ public class SearchAutocompleteAjax extends HttpServlet {
         response.setContentType( "application/json" );
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
+
+    }
+
+    protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 
     }
 }

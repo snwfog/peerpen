@@ -13,11 +13,11 @@
     - avatar
   - feed
 - group
-- tag(\.do)?
-- tag_autocomplete_ajax(\.do)?
-- tag_search(\.do)?
-- search(\.do)?
-- search_autocomplete_ajax(\.do)?
+- tag
+- tag_autocomplete_ajax
+- tagsearch
+- search
+- search_autocomplete_ajax
 - reset(\.do)?
 - upload(\.do)?
 - vote(\.do)?

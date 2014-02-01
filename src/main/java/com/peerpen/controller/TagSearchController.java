@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -33,10 +34,6 @@ import javax.servlet.http.HttpSession;
 public class TagSearchController extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-
-    }
-
-    protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String query = "";
         if (request.getParameter( "tags" )!= null && !request.getParameter( "tags" ).isEmpty()){
@@ -55,5 +52,13 @@ public class TagSearchController extends HttpServlet {
             }
         }
         response.sendRedirect( request.getHeader( "referer" ) );
+    }
+
+    protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+        // Get a list of all tag descriptors
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<TagDescriptor> tagDescriptors = new TagDescriptor().findAll( map );
+        request.setAttribute( "tagCloud", tagDescriptors );
+        request.getRequestDispatcher("/view/tagsearch.jsp").forward(request, response);
     }
 }
