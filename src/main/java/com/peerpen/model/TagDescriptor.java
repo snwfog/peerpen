@@ -63,6 +63,19 @@ public class TagDescriptor extends Base implements IModel {
         }
     }
 
+    // List<String> ---> List<TagDescriptors>
+    public List<TagDescriptor> getTagDescriptors (List<String> tagNames){
+        List<TagDescriptor> tagDescriptors = new ArrayList<>(  );
+        for (String tagName: tagNames){
+            TagDescriptor td = new TagDescriptor(  ).getTagDescriptorIfExists( tagName );
+            if (td !=null){
+                tagDescriptors.add( td );
+            }
+        }
+        return tagDescriptors;
+    }
+
+    // autocomplete
     public List<String> getSuggestedTagDescriptors( String keyword, int limit ) {
         String sql = "SELECT `tag_name` FROM `tag_descriptors` WHERE `tag_name` LIKE '%" + keyword + "%' LIMIT " + limit;
         List<TagDescriptor> tagDesc = new TagDescriptor().queryAll( sql );
