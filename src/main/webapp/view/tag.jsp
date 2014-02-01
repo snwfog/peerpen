@@ -15,7 +15,8 @@
     <form action="/tag_search.do" method="get" class="form-horizontal" role="form">
         <div class="form-group">
             <div class="input-group">
-                <input type="text" class="form-control" name="tag_query" id="tag_query" autocomplete="off" />
+                <%--<input type="text" class="form-control" name="tag_query" id="tag_query" autocomplete="off" />--%>
+                <ul id="tag_query"></ul>
                 <span class="input-group-btn" style="visibility: hidden">
                     <button type="submit" class="btn btn-primary" name="submit" />Search</button>
                 </span>
