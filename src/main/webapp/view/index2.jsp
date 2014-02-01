@@ -52,8 +52,8 @@
 
 
                 <form class="navbar-form pull-right" id="index-form" action="/login" method="post" parsley-validate>
-                    <input class="span2 parsley-validated" id="index-username" type="text" placeholder="Username" name="username" parsley-trigger="change keyup" parsley-error-container="#errorContainer" parsley-error-message="User name is empty."/>
-                    <input class="span2 parsley-validated" id="index-password" type="password" placeholder="Password" name="password" parsley-trigger="change keyup" parsley-error-container="#errorContainer" parsley-error-message="Password should contain at least one numeric digit, one upercase letter and one lowercase letter."/>
+                    <input class="span2 parsley-validated" id="index-username" type="text" placeholder="Username" name="username" parsley-trigger="change keyup"/>
+                    <input class="span2 parsley-validated" id="index-password" type="password" placeholder="Password" name="password" parsley-trigger="change keyup"/>
                     <button type="submit" class="btn btn-primary">Sign in</button>
                 </form>
 
@@ -64,8 +64,8 @@
                             <li>
                                 <form class="navbar-form" id="index-form" action="/login" method="post" parsley-validate>
                                     Have an account? Sign in now<br />
-                                    <input class="span2 parsley-validated" id="parsley-user" type="text" placeholder="Username" name="username" parsley-trigger="keyup" required parsley-user="0"/><br />
-                                    <input class="span2 parsley-validated" id="parsley-pass" type="password" placeholder="Password" name="password" parsley-trigger="keyup" required parsley-pass="6"><br />
+                                    <input class="span2 parsley-validated" id="parsley-user" type="text" placeholder="Username" name="username" parsley-trigger="keyup change"/><br />
+                                    <input class="span2 parsley-validated" id="parsley-pass" type="password" placeholder="Password" name="password" parsley-trigger="keyup change"><br />
                                     <button type="submit" class="btn btn-warning" style="float:right" id="index2">Sign in</button>
                                 </form>
                             </li>
