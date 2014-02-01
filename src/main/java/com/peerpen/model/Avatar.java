@@ -7,8 +7,6 @@ import com.sunnyd.annotations.ActiveRelationHasOne;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
-import java.sql.Blob;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -23,10 +21,7 @@ public class Avatar extends Base implements IModel {
     public static final String tableName = "avatars";
 
     @ActiveRecordField
-    private String imgTitle;
-
-    @ActiveRecordField
-    private Blob imgData;
+    private String avatarFilename;
 
     @ActiveRelationHasOne
     private Peer peer;
@@ -34,11 +29,17 @@ public class Avatar extends Base implements IModel {
     @ActiveRecordField
     private Integer peerId;
 
-//    @ActiveRecordField
     @ActiveRecordField
-    private Rectangle2D area = new Rectangle();
+    private Integer x1;
 
+    @ActiveRecordField
+    private Integer x2;
 
+    @ActiveRecordField
+    private Integer y1;
+
+    @ActiveRecordField
+    private Integer y2;
 
     public Avatar() {
         super();
@@ -49,20 +50,12 @@ public class Avatar extends Base implements IModel {
     }
 
 
-    public String getImgTitle() {
-        return imgTitle;
+    public String getAvatarFileName() {
+        return avatarFilename;
     }
 
-    public void setImgTitle(String imgTitle) {
-        this.imgTitle = imgTitle;
-    }
-
-    public Blob getImgData() {
-        return imgData;
-    }
-
-    public void setImgData(Blob imgData) {
-        this.imgData = imgData;
+    public void setAvatarFileName(String avatarFileName) {
+        this.avatarFilename = avatarFileName;
     }
 
     public Peer getPeer(){
@@ -78,8 +71,46 @@ public class Avatar extends Base implements IModel {
         this.peerId = peerId;
     }
 
-//    public Rectangle getAreaRectange()
-//    {
-//        return new Rectangle (area_x, areay, area_w, area_h);
-//    }
+    public Rectangle getAvatarViewport() { return new Rectangle(x1, y1, x2 - x1, y2 - y1); }
+
+    public String getAvatarFilename() {
+        return avatarFilename;
+    }
+
+    public void setAvatarFilename(String avatarFilename) {
+        this.avatarFilename = avatarFilename;
+    }
+
+    public Integer getX1() {
+        return x1;
+    }
+
+    public void setX1(Integer x1) {
+        this.x1 = x1;
+    }
+
+    public Integer getX2() {
+        return x2;
+    }
+
+    public void setX2(Integer x2) {
+        this.x2 = x2;
+    }
+
+    public Integer getY1() {
+        return y1;
+    }
+
+    public void setY1(Integer y1) {
+        this.y1 = y1;
+    }
+
+    public Integer getY2() {
+        return y2;
+    }
+
+    public void setY2(Integer y2) {
+        this.y2 = y2;
+    }
 }
+

@@ -20,15 +20,6 @@ import java.util.Map;
 
 import static com.peerpen.framework.InternalHttpServletRequest.HTTP_METHOD.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: bobbyyit
- * Date: 2014-01-05
- * Time: 8:59 PM
- * To change this template use File | Settings | File Templates.
- */
-
-
 public class CommentController extends HttpServlet
 {
 
@@ -37,71 +28,58 @@ public class CommentController extends HttpServlet
 
   }
 
-
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
-      Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
-      Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
-      Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
+    Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+    Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
+    Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
 
-      Map<String, Object> map = Maps.newHashMap();
-      map.put("message", parameters.get("comment"));
-      map.put("peerId", peer.getId());
-      map.put("documentId", document.getId());
+    Map<String, Object> map = Maps.newHashMap();
+    map.put("message", parameters.get("comment"));
+    map.put("peerId", peer.getId());
+    map.put("documentId", document.getId());
 
-      Comment comment = new Comment(map);
-      comment.save();
+    Comment comment = new Comment(map);
+    comment.save();
 
-      List<Comment> comments = document.getOrderedComments();
-
-      request.setAttribute("document", document);
-      request.getRequestDispatcher( "/view/document.jsp" ).forward( request, response );
+    request.setAttribute("document", document);
+    response.sendRedirect(request.getHeader("referer"));
   }
 
-    protected void doPut(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
-        Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
-        Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
-        Changeset changeset = new Changeset().find(Integer.parseInt(parameters.get("changesetid")));
+  protected void doPut(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException
+  {
+    Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+    Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
+    Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
+    Changeset changeset = new Changeset().find(Integer.parseInt(parameters.get("changesetid")));
 
-        Comment comment = new Comment();
-        comment.setMessage(request.getParameter("comment").toString());
-        comment.setName(peer.getFirstName() + " " + peer.getLastName());
-        comment.setPeerId(peer.getId());
-        comment.setDocumentId(document.getId());
-        comment.setChangesetId(changeset.getId());
-        comment.save();
+    Map<String, Object> map = Maps.newHashMap();
+    map.put("message", request.getParameter("comment").toString());
+    map.put("name", peer.getFirstName() + " " + peer.getLastName());
+    map.put("peerId", peer.getId());
+    map.put("documentId", document.getId());
+    map.put("changesetId", changeset.getId());
+    Comment comment = new Comment(map);
+    comment.save();
 
-        List<Comment> comments = document.getOrderedComments();
-//
-//        request.setAttribute("comments", comments);
-        request.setAttribute("document", document);
-//        request.setAttribute("changeset", changeset);
+    request.setAttribute("document", document);
+    response.sendRedirect(request.getHeader("referer"));
+  }
 
-        request.getRequestDispatcher( "/view/document.jsp" ).forward(request, response);
-    }
+  protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException
+  {
+    Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
 
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+    Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
+    Document document = new Document().find(Integer.parseInt(request.getParameter("docid")));
 
-        Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
-        Document document = new Document().find(Integer.parseInt(request.getParameter("docid")));
+    Comment comment = new Comment().find(Integer.parseInt(request.getParameter("commentid")));
+    comment.destroy();
 
-        Comment comment = new Comment().find(Integer.parseInt(request.getParameter("commentid")));
-        comment.destroy();
-
-        List<Comment> comments = document.getOrderedComments();
-
-        request.setAttribute("comments", comments);
-        request.setAttribute("document", document);
-        request.setAttribute("user", peer);
-        request.getRequestDispatcher( "/view/document.jsp" ).forward( request, response );
-    }
-
-
-
+    request.setAttribute("document", document);
+    request.setAttribute("user", peer);
+    response.sendRedirect(request.getHeader("referer"));
+  }
 }

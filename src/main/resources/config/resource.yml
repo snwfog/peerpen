@@ -9,6 +9,7 @@
       - like
     - tag
   - profile:
+    - full
     - avatar
   - feed
 - group

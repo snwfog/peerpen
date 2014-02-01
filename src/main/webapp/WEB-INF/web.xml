@@ -469,6 +469,13 @@
     <param-value>true</param-value>
   </context-param>
 
+  <context-param>
+      <description>Upload image relative path to the webapp dir</description>
+      <param-name>avatar-dir</param-name>
+      <param-value>assets/images/peers/avatars</param-value>
+
+  </context-param>
+
   <!--
       ERROR HANDLING
   ================== -->

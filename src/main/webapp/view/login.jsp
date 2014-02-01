@@ -20,8 +20,8 @@
 <div class="container" parsley-validate>
     <form id="login-form" style="max-width:330px; margin:0 auto" action="/login" method="post" parsley-validate>
         <h2>Please sign in</h2>
-        <input type="text" class="form-control parsley-validated" name="username" id="login-username" style="margin:10px 0" placeholder="Username" autofocus="" parsley-trigger="change keyup" parsley-error-container="#errorContainer" parsley-error-message="User name is empty."/>
-        <input type="password" class="form-control parsley-validated" id="login-password" name="password" style="margin:10px 0" placeholder="Password" parsley-trigger="change keyup" parsley-error-container="#errorContainer" parsley-error-message="Password should contain at least one numeric digit, one upercase letter and one lowercase letter."/>
+        <input type="text" class="form-control parsley-validated" name="username" id="login-username" style="margin:10px 0" placeholder="Username" autofocus="" parsley-trigger="change keyup"/>
+        <input type="password" class="form-control parsley-validated" id="login-password" name="password" style="margin:10px 0" placeholder="Password" parsley-trigger="change keyup"/>
         <div >
           <% if (error){ %>
             <div class="alert alert-danger">
