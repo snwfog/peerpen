@@ -39,8 +39,8 @@ public class TagSearchController extends HttpServlet {
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String query = "";
-        if (request.getParameter( "tag_query" )!= null && !request.getParameter( "tag_query" ).isEmpty()){
-            query = request.getParameter( "tag_query" );
+        if (request.getParameter( "tags" )!= null && !request.getParameter( "tags" ).isEmpty()){
+            query = request.getParameter( "tags" );
             // converts tags string into a list
             List<String> tagNames = Arrays.asList( query.split( "\\s*,\\s*" ) );
             // converts list<string> into list<tagdescriptor>
