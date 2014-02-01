@@ -36,21 +36,21 @@
 
 
   <div id="content">
-    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-      <li class="active"><a href="#commentSection" data-toggle="tab">Comments</a></li>
-    </ul>
+    <%--<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">--%>
+      <%--<li class="active"><a href="#commentSection" data-toggle="tab">Comments</a></li>--%>
+    <%--</ul>--%>
 
-    <div id="my-tab-content" class="tab-content">
-      <div class="tab-pane active" id="commentSection">
-        <h2>Comments</h2>
-        <p>
+    <%--<div id="my-tab-content" class="tab-content2">--%>
+      <%--<div class="tab-pane active" id="commentSection">--%>
+        <%--<h2>Comments</h2>--%>
+        <%--<p>--%>
         <div class="caption">
-          <div class="card">
+          <div class="card2">
             <h3 class="card-heading simple"><%= sessionUser.getFirstName() %> <%= sessionUser.getLastName() %></h3>
             <div class="card-body">
               <form method="POST" action="/peer/<%= sessionUser.getId()%>/document/<%= document.getId()%>/comment">
 
-                <textarea name="comment" style="width:100%"></textarea>
+                <input name="comment" style="width:100%"></textarea>
                 <input type="hidden" name="docId" value="<%= document.getId()%>"/>
                 <input type="hidden" name="peerId" value="<%= sessionUser.getId()%>"/>
                 <input type="hidden" name="_method" value="POST">
@@ -65,7 +65,7 @@
             if(o instanceof Comment){
               Comment c = (Comment) o;%>
 
-              <div class="card">
+              <div class="card2">
               <h3 class="card-heading simple"><%= c.getPeer().getFirstName() %> <%= c.getPeer().getLastName() %></h3>
               <div class="card-body">
                 <%= c.getMessage() %>
@@ -107,7 +107,7 @@
            <%}if(o instanceof Changeset) {
             Changeset ch = (Changeset) o;
             %>
-          <div class="card">
+          <div class="card2">
               <h3 class="card-heading simple"> <%= ch.getContent() %> </h3>
               <%--<div class="card-body">--%>
               <%--<p>Change format of Education</p>--%>
@@ -125,8 +125,8 @@
                           </a>
                           <div class="media-body">
                               <%--<h4 class="media-heading"><%= c.getMessage()%></h4>--%>
-                              <%--<p class=""><%= c.getMessage()%></p>--%>
-                              <textarea style="resize: none; width:100%" readonly ><%= c.getMessage()%></textarea>
+                              <p class=""><%= c.getMessage()%></p>
+                              <%--<textarea style="resize: none; width:100%" readonly ><%= c.getMessage()%></textarea>--%>
                           </div>
                           <div class="card-actions">
                               <form  id="upvotechangesetcomment" method="POST" action="/vote" class="AjaxSubmit1">
