@@ -6,69 +6,97 @@
 <script src="/assets/js/custom/search_autocomplete_caller.js"></script>
 
 <div class="container">
-    <h1>Search</h1>
 
+    <!-- SEARCH FORM -->
     <form action="/search.do" method="get" class="form-horizontal" role="form">
-        <div class="form-group">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Start typing ..." name="search_query" id="search_query" autocomplete="off" />
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-primary" name="submit" />Search</button>
-                </span>
-            </div>
+        <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-default active">
+                <input type="radio" name="area" id="all" value="all" checked /> Search All
+            </label>
+            <label class="btn btn-default">
+                <input type="radio" name="area" id="documents" value="documents" /> Documents
+            </label>
+            <label class="btn btn-default">
+                <input type="radio" name="area" id="peers" value="peers" /> Peers
+            </label>
+            <label class="btn btn-default">
+                <input type="radio" name="area" id="Groups" value="groups" /> Groups
+            </label>
+        </div>
 
-            <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-default">
-                    <input type="radio" name="area" id="all" value="all" checked /> All
-                </label>
-                <label class="btn btn-default">
-                    <input type="radio" name="area" id="documents" value="documents" /> Documents
-                </label>
-                <label class="btn btn-default">
-                    <input type="radio" name="area" id="peers" value="peers" /> Peers
-                </label>
-                <label class="btn btn-default">
-                    <input type="radio" name="area" id="Groups" value="groups" /> Groups
-                </label>
-            </div>
-
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Start typing ..." name="search_query" id="search_query" autocomplete="off" />
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary" name="submit" />Search</button>
+            </span>
         </div>
         <%--<ul id="suggestion_list" style="background-color:white;width:200px;margin:auto"></ul>--%>
     </form>
 
 
-    <!-- Handling search result -->
-    <%
-        if(session.getAttribute( "searchResults" ) != null){
-            ArrayList<Object> results = (ArrayList<Object>) session.getAttribute( "searchResults" );
-            for(int i =0;i< results.size();i++){
-                Object resultItem = results.get( i );
-                String itemClass = resultItem.getClass().getCanonicalName();
-                // each result item will have different look based on its obj type
-                if(itemClass.endsWith( "Document" )){
-                    Document document = (Document) resultItem;
-                    %>
-                    [Document] <a href="/document/<%= document.getId() %>"> <%= document.getDocName() %></a>
-                    by: <a href="/peer/<%= document.getPeerId() %>"> <%= document.getPeer().getUserName() %></a>
-                    last modified: <%= document.getLastModifiedDate() %><br />
-                    <%
-                }else if(itemClass.endsWith( "Peer" )){
-                    Peer peer = (Peer) resultItem;
-                    %>
-                    [Peer] <a href="/peer/<%= peer.getId() %>"> <%= peer.getUserName() %></a>
-                    (<%= peer.getFirstName() %> <%= peer.getLastName() %>)
-                    point: <%= peer.getPoint() %><br />
-                    <%
-                }else if(itemClass.endsWith( "Group" )){
-                    Group group = (Group) resultItem;
-                    %>
-                    [Group] <a href="/group/<%= group.getId() %>"><%= group.getGroupName() %></a>
-                    - <i><%= group.getDescription() %></i><br />
-                    <%
-                }
+
+
+
+    <br /><br /><br /><br /><br />
+
+
+
+
+
+<!-- SEARCH RESULT -->
+<%
+    if(session.getAttribute( "searchResults" ) != null){
+    ArrayList<Object> results = (ArrayList<Object>) session.getAttribute( "searchResults" );
+    if (!results.isEmpty()){
+%>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Search Results</div>
+        <!-- Table -->
+        <table class="table table-hover">
+            <%--<tr><th>Type</th><th>Item</th></tr>--%>
+<%
+    for(int i =0;i< results.size();i++){
+        Object resultItem = results.get( i );
+        String itemClass = resultItem.getClass().getCanonicalName();
+        // each result item will have different look based on its obj type
+        if(itemClass.endsWith( "Document" )){
+            Document document = (Document) resultItem;
+            %>
+            <tr><td>Document</td><td><a href="/document/<%= document.getId() %>"> <%= document.getDocName() %></a>
+            by: <a href="/peer/<%= document.getPeerId() %>"> <%= document.getPeer().getUserName() %></a>
+            last modified: <%= document.getLastModifiedDate() %></td></tr>
+
+            <%
+            }else if(itemClass.endsWith( "Peer" )){
+                Peer peer = (Peer) resultItem;
+            %>
+
+            <tr><td>Peer</td><td><a href="/peer/<%= peer.getId() %>"> <%= peer.getUserName() %></a>
+            (<%= peer.getFirstName() %> <%= peer.getLastName() %>)
+            point: <%= peer.getPoint() %></td></tr>
+
+            <%
+            }else if(itemClass.endsWith( "Group" )){
+                Group group = (Group) resultItem;
+            %>
+
+            <tr><td>Group</td><td><a href="/group/<%= group.getId() %>"><%= group.getGroupName() %></a>
+            - <i><%= group.getDescription() %></i></td></tr>
+
+            <%
             }
-        }
-    %>
+    }
+%>
+        </table>
+    </div>
+
+<%
+        }}
+%>
+
+
+
 
     <br /><br /><br /><br /><br /><br /><br /><br />
 </div>

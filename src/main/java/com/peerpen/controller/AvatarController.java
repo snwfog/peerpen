@@ -7,6 +7,9 @@ import com.google.common.collect.Maps;
 import com.peerpen.model.Avatar;
 import com.peerpen.model.Peer;
 
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
@@ -16,6 +19,7 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -89,27 +93,48 @@ public class AvatarController extends HttpServlet {
         //        response.sendRedirect("/profile");
     }
 
-    //    public String cropImage(int x1, int y1, int x2, int y2, String absolutePath) {
+        private void cropImage(Avatar avatar, String absolutePath, String fileName, String fileType, HttpServletResponse response) {
 
-    //        try {
-    //            BufferedImage originalImgage = ImageIO.read(new File(absolutePath + "256.jpg"));
-    //            System.out.println("Original image dimension: " + originalImgage.getWidth() + "x1" + originalImgage.getHeight());
-    //
-    //            BufferedImage SubImage = originalImgage.getSubimage(x1, y1, x2, y2);
-    //            System.out.println("Cropped image dimension: " + SubImage.getWidth() + "x" + SubImage.getHeight());
-    //
-    //            File outputfile = new File(absolutePath + "croppedImage.jpg");
-    //            ImageIO.write(SubImage, "jpg", outputfile);
-    //
-    //            System.out.println("Image cropped successfully: " + outputfile.getPath());
-    //
-    //            return outputfile.getName();
-    //
-    //        } catch (IOException e) {
-    //            e.printStackTrace();
-    //            return "";
-    //        }
-    //    }
+            int x1 = avatar.getX1();
+            int y1 = avatar.getY1();
+            int width = avatar.getX2() - x1;
+            int height = avatar.getY2() - y1;
+            try{
+                BufferedImage outImage = ImageIO.read(new File(absolutePath+System.getProperty("file.separator")+fileName+"."+fileType));
+                BufferedImage cropped = outImage.getSubimage(x1, y1, width, height);
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                ImageIO.write(cropped,fileType, out);
+
+                ImageIO.write(cropped, fileType, new File(absolutePath+System.getProperty("file.separator")+fileName+"_cropped."+fileType));
+
+                ServletOutputStream wrt = response.getOutputStream();
+                wrt.write(out.toByteArray());
+                wrt.flush();
+                wrt.close();
+
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+
+//            try {
+//                BufferedImage originalImgage = ImageIO.read(new File(absolutePath + "256.jpg"));
+//                System.out.println("Original image dimension: " + originalImgage.getWidth() + "x1" + originalImgage.getHeight());
+//
+//                BufferedImage SubImage = originalImgage.getSubimage(x1, y1, x2, y2);
+//                System.out.println("Cropped image dimension: " + SubImage.getWidth() + "x" + SubImage.getHeight());
+//
+//                File outputfile = new File(absolutePath + "croppedImage.jpg");
+//                ImageIO.write(SubImage, "jpg", outputfile);
+//
+//                System.out.println("Image cropped successfully: " + outputfile.getPath());
+//
+//                return outputfile.getName();
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                return "";
+//            }
+        }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
@@ -130,6 +155,9 @@ public class AvatarController extends HttpServlet {
 
         int maxFileSize = 5000 * 1024; // 5 MB file size
         int maxMemSize = 5000 * 1024;
+        String fileName = "";
+        String fileType = "";
+        String absolutePath = "";
         // Verify the content type
         if ( isMultipart ) {
 
@@ -147,8 +175,6 @@ public class AvatarController extends HttpServlet {
                 // Process the uploaded file items
                 Iterator i = fileItems.iterator();
                 File largeAvatarFile = null;
-                String fileName = "";
-                String fileType = "";
                 while ( i.hasNext() ) {
                     // Get the content type of the file
                     FileItem fi = (FileItem) i.next();
@@ -166,6 +192,8 @@ public class AvatarController extends HttpServlet {
                         largeAvatarFile = new File(
                                 MessageFormat.format( "{0}/{1}/{2}/{3}.{4}", ctx.getRealPath( "" ), avatarDir,
                                         LARGE_FOLDER, fileName, fileType ) );
+                        absolutePath = ctx.getRealPath("")+System.getProperty("file.separator")+avatarDir+System.getProperty("file.separator")+
+                                SMALL_FOLDER+System.getProperty("file.separator");
                         fi.write( largeAvatarFile );
                     }
                 }
@@ -176,6 +204,9 @@ public class AvatarController extends HttpServlet {
                 avatar.setFilename( MessageFormat.format("{0}.{1}", fileName, fileType ));
                 avatar.update(); // FIXME: Does PPAR update relationship?
                 sessionPeer.update();
+
+//                this.cropImage(avatar, absolutePath, fileName, fileType, response );
+
 
             } catch ( FileUploadException e ) {
                 logger.error( "Something went wrong with image upload ", e );
