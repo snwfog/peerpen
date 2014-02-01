@@ -54,6 +54,7 @@
                 <form class="navbar-form pull-right" id="index-form" action="/login" method="post" parsley-validate>
                     <input class="span2 parsley-validated" id="index-username" type="text" placeholder="Username" name="username" parsley-trigger="change keyup"/>
                     <input class="span2 parsley-validated" id="index-password" type="password" placeholder="Password" name="password" parsley-trigger="change keyup"/>
+
                     <button type="submit" class="btn btn-primary">Sign in</button>
                 </form>
 

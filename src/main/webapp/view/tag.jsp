@@ -1,6 +1,5 @@
 <%@ page import="com.peerpen.model.Group" %>
 <%@ page import="com.peerpen.model.TagDescriptor" %>
-<%@ page import="com.peerpen.model.Taggable" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
@@ -16,7 +15,8 @@
     <form action="/tag_search.do" method="get" class="form-horizontal" role="form">
         <div class="form-group">
             <div class="input-group">
-                <input type="text" class="form-control" name="tag_query" id="tag_query" autocomplete="off" />
+                <%--<input type="text" class="form-control" name="tag_query" id="tag_query" autocomplete="off" />--%>
+                <ul id="tag_query"></ul>
                 <span class="input-group-btn" style="visibility: hidden">
                     <button type="submit" class="btn btn-primary" name="submit" />Search</button>
                 </span>
@@ -84,7 +84,9 @@
         List<TagDescriptor> tds = g.getTagDescriptors();
     %>
     Demo loading tags attached to Group <%=g.getGroupName()%>:
-    <form action="/tag_search.do" method="post" class="form-horizontal" role="form">
+    <form action="/tag.do" method="post" class="form-horizontal" role="form">
+        <input type="hidden" name="entityType" value="group" />
+        <input type="hidden" name="entityId" value="3" />
         <ul id="entityTags">
         <%
             for (TagDescriptor td : tds){

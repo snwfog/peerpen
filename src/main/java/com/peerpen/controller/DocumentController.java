@@ -41,7 +41,7 @@ public class DocumentController extends GenericApplicationServlet
       {
        if(document.getPeerId() == sessionUser.getId())
        {
-         request.setAttribute("urlUser", urlUser);
+        request.setAttribute("urlUser", urlUser);
         request.setAttribute("document", modelMap.get("document"));
         request.getRequestDispatcher("/view/document.jsp").forward(request, response);
        }
@@ -57,7 +57,6 @@ public class DocumentController extends GenericApplicationServlet
     }
     else//        if viewing someone elses doc, show 'view only' mode
     {
-
       if ((document = (Document) modelMap.get("document")) == null)
       {
         request.setAttribute("peer", modelMap.get("peer"));

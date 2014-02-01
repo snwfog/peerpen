@@ -34,6 +34,8 @@ public class Comment extends Feedable implements IModel
   public Comment()
   {
     super();
+    this.upVote=0;
+    this.downVote=0;
   }
 
   public Comment(Map<String, Object> HM)
@@ -108,7 +110,7 @@ public class Comment extends Feedable implements IModel
     this.changesetId = changesetId;
   }
 
-  public int getChangesetId()
+  public Integer getChangesetId()
   {
     return this.changesetId;
   }
@@ -155,7 +157,7 @@ public class Comment extends Feedable implements IModel
 
   @Override
   public boolean save()
-  {
+  { //use this method for now, until Mike change it in the BASE
     return super.save();
   }
 

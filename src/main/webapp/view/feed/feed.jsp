@@ -1,19 +1,10 @@
-<%@ include file="/view/includes/static/header.jsp" %>
 
-<% Peer peer = (Peer) request.getAttribute( "peer" ); %>
+<jsp:include page="/view/includes/static/header.jsp">
+    <jsp:param name="title" value="FEED ME" />
+</jsp:include>
 
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="#">PeerPen</a>
-        </div>
-    </div>
-</div>
+
+<% Peer peer = (Peer) request.getAttribute( "peerObject" ); %>
 
 <br>
 

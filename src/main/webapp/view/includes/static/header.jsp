@@ -8,7 +8,17 @@
     <meta name="description" content="Peerpen social web application for improving your resume and cover letter.">
     <meta name="author" content="Capstone Sunny Delight 2014">
 
-    <title>PeerPen - A Capstone project by Sunny Delight</title>
+    <title>
+        <%
+           String defaultTitle =  "PeerPen - A Capstone project by Sunny Delight";
+           if( request.getParameter("title") != null)
+             out.println(request.getParameter("title"));
+           else if(request.getAttribute("title") != null)
+             out.println(request.getAttribute("title"));
+           else
+             out.println(defaultTitle);
+        %>
+    </title>
 
     <link rel="stylesheet" href="/assets/css/lib/bootplus.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/lib/bootplus-responsive.min.css" type="text/css">
@@ -47,3 +57,18 @@
 
 </head>
 <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="#">PeerPen</a>
+                <a class="pull-right" href="/logout">LOGOUT</a>
+
+
+            </div>
+        </div>
+    </div>
