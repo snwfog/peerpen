@@ -79,7 +79,7 @@
                   <input type="hidden" name="downvote" value="<%= c.getDownVote()%>"/>
 
 
-                  <button class="btn" data-toggle="button" id="btn<%= c.getId()%>" onclick="upVote1();" >
+                  <button class="btn" id="btn<%= c.getId()%>" onclick="upVote1();" >
                     <div class="point" id="up-<%= c.getId()%>" name="point"><%= c.getUpVote()%></div>&nbsp;<i class="fa fa-thumbs-up"></i></button>&nbsp;
 
 

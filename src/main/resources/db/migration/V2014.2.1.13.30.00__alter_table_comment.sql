@@ -1,0 +1,1 @@
+ALTER TABLE comments ADD semaphore int(1) NOT NULL DEFAULT '0';
