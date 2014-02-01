@@ -75,10 +75,10 @@ public class CommentController extends HttpServlet
         comment.save();
 
         List<Comment> comments = document.getOrderedComments();
-
-        request.setAttribute("comments", comments);
+//
+//        request.setAttribute("comments", comments);
         request.setAttribute("document", document);
-        request.setAttribute("changeset", changeset);
+//        request.setAttribute("changeset", changeset);
 
         request.getRequestDispatcher( "/view/document.jsp" ).forward(request, response);
     }
