@@ -1,7 +1,9 @@
-@import url(http://fonts.googleapis.com/css?family=Leckerli+One|Damion|Roboto:400,300,700|Inconsolata:400);
+@import url(http://fonts.googleapis.com/css?family=Leckerli+One|Damion|Roboto:100,300,400,700|Inconsolata:400);
 body {
   padding-top: 46px;
-  padding-bottom: 40px; }
+  padding-bottom: 40px;
+  font-family: Roboto, arial, sans-serif;
+  font-weight: lighter; }
 
 .hero-unit {
   background: #00001c url(/assets/images/index/google-strap-hero.jpg) no-repeat top left; }
