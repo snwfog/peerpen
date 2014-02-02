@@ -3,10 +3,11 @@ $(function() {
     $( "#search_query" ).autocomplete({
         source: function(request, response) {
             $.ajax({
-                type: "post",
-                url: "/search_autocomplete_ajax",
+                type: "POST",
+                url: "/search",
                 dataType: "json",
                 data: {
+                    format: "json",
                     term: request.term,
                     area: $("input[type='radio'][name='area']:checked").val()
                 },

@@ -5,7 +5,6 @@
 <%@ page import="com.peerpen.model.Changeset" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.peerpen.model.TagDescriptor" %>
-<script src="/assets/js/custom/tag_autocomplete_caller.js"></script>
 
 <%--Declare all request variables here, easy to debug!!!--%>
 <% Peer sessionUser = (Peer) request.getAttribute("sessionUser"); %>

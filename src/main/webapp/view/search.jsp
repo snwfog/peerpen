@@ -3,7 +3,6 @@
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="com.peerpen.model.Group" %>
 <%@ include file="/view/includes/static/header.jsp" %>
-<script src="/assets/js/custom/search_autocomplete_caller.js"></script>
 
 <div class="container">
 

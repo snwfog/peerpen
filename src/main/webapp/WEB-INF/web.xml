@@ -235,25 +235,6 @@
 
 
   <servlet>
-    <servlet-name>search_autocomplete_ajax</servlet-name>
-    <servlet-class>com.peerpen.ajax.SearchAutocompleteAjax</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>search_autocomplete_ajax</servlet-name>
-    <url-pattern>/search_autocomplete_ajax</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>tag_autocomplete_ajax</servlet-name>
-    <servlet-class>com.peerpen.ajax.TagAutocompleteAjax</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>tag_autocomplete_ajax</servlet-name>
-    <url-pattern>/tag_autocomplete_ajax</url-pattern>
-  </servlet-mapping>
-
-
-  <servlet>
     <servlet-name>tag</servlet-name>
     <servlet-class>com.peerpen.controller.TagController</servlet-class>
   </servlet>

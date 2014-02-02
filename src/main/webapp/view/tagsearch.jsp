@@ -6,7 +6,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.peerpen.model.Document" %>
 <%@ include file="/view/includes/static/header.jsp" %>
-<script src="/assets/js/custom/tag_autocomplete_caller.js"></script>
 
 <div class="container">
 

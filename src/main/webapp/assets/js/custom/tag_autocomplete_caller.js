@@ -12,7 +12,7 @@ $(function(){
         autocomplete: ({
             source: function (request, response) {
                 $.ajax({
-                    url: "/tag_autocomplete_ajax",
+                    url: "/tagsearch",
                     data: { format: "json", term: request.term },
                     dataType: 'json',
                     type: 'POST',
@@ -41,9 +41,10 @@ $(function(){
         autocomplete: ({
             source: function (request, response) {
                 $.ajax({
-                    url: "/tag_autocomplete_ajax",
+                    url: "/tagsearch",
                     data: { format: "json", term: request.term },
                     dataType: 'json',
+                    //contentType: 'application/json; charset=utf-8',
                     type: 'POST',
                     success: function (data) {
                         response($.map(data, function (item) {
