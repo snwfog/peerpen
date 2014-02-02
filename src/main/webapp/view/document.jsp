@@ -85,6 +85,8 @@
               </button>
               &nbsp;
             </form>
+            <span class="child" style="font-style: italic;font-size: small;"><%= comment.getTimesAgo()%></span>
+            &nbsp;&nbsp;
             <% if(sessionUser.getId() == document.getPeerId() || sessionUser.getId() == comment.getPeerId()){%>
             <a data-toggle="modal" data-id="<%= comment.getId()%>" class="confirmDeleteCommentDialog child"
                href="#deleteDialog">delete</a>
@@ -95,7 +97,7 @@
         Changeset changeset = (Changeset) o;
         %>
       <div class="card2">
-        <h3 class="card-heading simple"><%= changeset.getContent() %></h3>
+        <h3 class="card-heading simple"><%= changeset.getContent() %> - <span class="child" style="font-style: italic;font-size: small;"><%= changeset.getTimesAgo()%></span></h3>
         <div class="card-comments">
           <div class="comments-collapse-toggle">
             <a data-toggle="collapse" href="#<%= changeset.getId()%>-comments"><%= changeset.getComments().size()%> Comments<i class="icon-angle-down"></i></a>
@@ -133,6 +135,8 @@
                     </button>
                     &nbsp;
                   </form>
+                  <span class="child" style="font-style: italic;font-size: small;"><%= c.getTimesAgo()%></span>
+                  &nbsp;&nbsp;
                   <% if(sessionUser.getId() == changeset.getPeerId() || sessionUser.getId() == c.getPeerId()){%>
                   <a data-toggle="modal" data-id="<%= c.getId()%>" class="confirmDeleteCommentDialog child"
                      href="#deleteDialog">delete</a>
@@ -185,6 +189,4 @@
     </div>
   </div>
 </div>
-<script src="/assets/js/custom/vote.js"></script>
-<script src="/assets/js/custom/deleteModal.js"></script>
 <%@ include file="/view/includes/static/footer.jsp" %>

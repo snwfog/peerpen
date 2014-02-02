@@ -20,5 +20,4 @@
     </form>
 </div>
 
-<script src="/assets/js/custom/reset.js"></script>
 <%@ include file="/view/includes/static/footer.jsp" %>

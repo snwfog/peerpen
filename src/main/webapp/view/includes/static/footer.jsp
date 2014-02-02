@@ -20,5 +20,9 @@
 <script src="/assets/js/custom/validation.js"></script>
 <script src="/assets/js/custom/search_autocomplete_caller.js"></script>
 <script src="/assets/js/custom/tag_autocomplete_caller.js"></script>
+<script src="/assets/js/custom/vote.js"></script>
+<script src="/assets/js/custom/confirm_delete_comment.js"></script>
+<script src="/assets/js/custom/reset.js"></script>
+
 </body>
 </html>
