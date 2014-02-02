@@ -13,6 +13,7 @@
     - avatar
   - feed
 - group
+- tag
 - tagsearch
 - search
 - reset(\.do)?
