@@ -1,14 +1,11 @@
 package com.peerpen.model;
 
-import com.sunnyd.Base;
 import com.sunnyd.IModel;
 import com.sunnyd.annotations.*;
-import com.sunnyd.database.Manager;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -149,8 +146,10 @@ public class Changeset extends Feedable implements IModel {
 
     }
 
-    public List<Comment> getChangesetCommentsByOrder(Integer docId, Integer changesetId)
+    public List<Comment> getOrderedComments()
     {
+      Integer docId = this.getDocumentId();
+      Integer changesetId = this.getId();
         Connection connection = null;
         Statement stmt = null;
         ResultSet rs = null;

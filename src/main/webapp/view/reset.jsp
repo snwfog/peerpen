@@ -3,7 +3,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand">PeerPen</a>
+            <a class="navbar-brand" href="/">PeerPen</a>
         </div>
     </div>
 </div>
@@ -20,5 +20,4 @@
     </form>
 </div>
 
-<script src="/assets/js/custom/reset.js"></script>
 <%@ include file="/view/includes/static/footer.jsp" %>

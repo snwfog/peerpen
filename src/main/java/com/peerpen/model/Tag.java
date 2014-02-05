@@ -45,8 +45,6 @@ public class Tag extends Base implements IModel {
         super(HM);
     }
 
-
-
     public Integer getTagDescriptorId (){
         return this.tagDescriptorId;
     }

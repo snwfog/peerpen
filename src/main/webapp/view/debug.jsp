@@ -1,6 +1,15 @@
 <%@ page import="java.util.Enumeration" %>
 <%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
 
+<div class="container well">
+    <h1>Debug Quick Link</h1>
+    <form action="/login" method="post"><input type="hidden" name="username" value="qwe" /><input type="hidden" name="password" value="qwe" /><button class="btn btn-primary" type="submit">Sign in</button></form>
+    <h5><a href="/peer/2/profile">Profile</a></h5>
+    <h5><a href="/peer/2/profile/avatar">Avatar</a></h5>
+    <h5><a href="/search">Search</a></h5>
+    <h5><a href="/tagsearch">Tagsearch</a></h5>
+</div>
+
 <% if ( request != null ) { %>
 <div class="container code" id="debug">
     <div class="well">

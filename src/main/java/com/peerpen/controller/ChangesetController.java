@@ -24,40 +24,9 @@ public class ChangesetController extends HttpServlet
 {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        HttpSession session = request.getSession();
-        Peer peer = (Peer)session.getAttribute("user");
-        Document document = new Document().find(Integer.parseInt(request.getParameter("docId")));
-        Changeset changeset = new Changeset().find(Integer.parseInt(request.getParameter("changesetId")));
-
-        List<Comment> comments = changeset.getChangesetCommentsByOrder(document.getId(),changeset.getId());
-
-        request.setAttribute("comments", comments);
-        request.setAttribute("document", document);
-        request.setAttribute("changeset", changeset);
-
-        request.getRequestDispatcher("/changeset").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        HttpSession session = request.getSession();
-        Peer peer = (Peer)session.getAttribute("user");
-        Document document = new Document().find(Integer.parseInt(request.getParameter("docId")));
-        Changeset changeset = new Changeset().find(Integer.parseInt(request.getParameter("changesetId")));
-
-        Comment comment = new Comment();
-        comment.setMessage(request.getParameter("comment").toString());
-        comment.setName(peer.getFirstName() + " " +peer.getLastName());
-        comment.setPeerId(peer.getId());
-        comment.setDocumentId(document.getId());
-        comment.setChangesetId(changeset.getId());
-        comment.save();
-
-        List<Comment> comments = changeset.getChangesetCommentsByOrder(document.getId(),changeset.getId());
-
-        request.setAttribute("comments", comments);
-        request.setAttribute("document", document);
-        request.setAttribute("changeset", changeset);
-        request.getRequestDispatcher("/changeset").forward(request, response);
     }
 }

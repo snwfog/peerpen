@@ -1,5 +1,6 @@
 package com.peerpen.controller;
 
+import com.google.gson.Gson;
 import com.peerpen.framework.InternalHttpServletRequest;
 import com.peerpen.framework.exception.MissingArgumentException;
 import com.peerpen.model.Document;
@@ -8,7 +9,9 @@ import com.peerpen.model.Peer;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -27,39 +30,89 @@ import javax.servlet.http.HttpSession;
 public class SearchController extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        doGet( request, response );
+        String requestType = request.getParameter( "format" );
+        // ajax autocomplete request
+        if (requestType != null && requestType.equals( "json" )){ // request.getAttribute ("applicationJson") doesnt work
+            String q = " ";
+            if( request.getParameter("term")!= null){
+                q = request.getParameter( "term" );
+            }
+
+            String area = "";
+            if (request.getParameter( "area" )!= null){
+                area = request.getParameter( "area" );
+            }
+
+            // Merge all lists into a set (unique)
+            Set suggestionPool = new LinkedHashSet(  );
+
+            switch(area){
+                case "documents":
+                    suggestionPool.addAll( new Document().getSuggestedDocuments( q, 5 ) );
+                    break;
+                case "peers":
+                    suggestionPool.addAll( new Peer().getSuggestedPeers( q, 5 ) );
+                    break;
+                case "groups":
+                    suggestionPool.addAll( new Group().getSuggestedGroups( q, 5 ) );
+                    break;
+                default:
+                    suggestionPool.addAll( new Document().getSuggestedDocuments( q, 3 ) );
+                    suggestionPool.addAll( new Peer().getSuggestedPeers( q, 3 ) );
+                    suggestionPool.addAll( new Group().getSuggestedGroups( q, 5 ) );
+            }
+
+            // Convert set into json string
+            String json = new Gson().toJson( suggestionPool );
+
+            // Return json string as response
+            response.setContentType( "application/json" );
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+
+
+        }else{  // normal post request from jsp
+
+
+            String query = "";
+            String area = "";
+
+            if (request.getParameter( "area" )!= null){
+                area = request.getParameter( "area" );
+            }
+
+            if (request.getParameter( "search_query" )!= null && !request.getParameter( "search_query" ).isEmpty()){
+                query = request.getParameter( "search_query" );
+            }
+
+            //String origin = request.getRequestURI();
+            HttpSession session = request.getSession();
+
+            if (!query.isEmpty()){
+                switch (area){
+                    case "documents":
+                        session.setAttribute("searchResults", new Document().getMatchedDocuments( query ));
+                        break;
+                    case "peers":
+                        session.setAttribute("searchResults", new Peer().getMatchedPeers( query ));
+                        break;
+                    case "groups":
+                        session.setAttribute("searchResults", new Group().getMatchedGroups( query ));
+                        break;
+                    default:
+                        List<Object> everything = new ArrayList<Object>(  );
+                        everything.addAll( new Document().getMatchedDocuments( query ));
+                        everything.addAll( new Peer().getMatchedPeers( query ));
+                        everything.addAll( new Group().getMatchedGroups( query ));
+                        session.setAttribute( "searchResults", everything );
+                }
+            }
+            response.sendRedirect( "/search" );
+        }
+
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        String query = "";
-        String area = "";
-
-        if (request.getParameter( "area" )!= null){
-            area = request.getParameter( "area" );
-        }
-
-        if (request.getParameter( "search_query" )!= null && !request.getParameter( "search_query" ).isEmpty()){
-            query = request.getParameter( "search_query" );
-        }
-
-        String origin = request.getRequestURI();
-        HttpSession session = request.getSession();
-
-        if (!query.isEmpty()){
-            if(area.equals( "documents" )){
-                session.setAttribute("searchResults", new Document().getMatchedDocuments( query ));
-            }else if(area.equals( "peers" )){
-                session.setAttribute("searchResults", new Peer().getMatchedPeers( query ));
-            }else if(area.equals( "groups" )){
-                session.setAttribute("searchResults", new Group().getMatchedGroups( query ));
-            }else{ // all or not set
-                List<Object> everything = new ArrayList<Object>(  );
-                everything.addAll( new Document().getMatchedDocuments( query ));
-                everything.addAll( new Peer().getMatchedPeers( query ));
-                everything.addAll( new Group().getMatchedGroups( query ));
-                session.setAttribute( "searchResults", everything );
-            }
-        }
-        response.sendRedirect( "/search" );
+        request.getRequestDispatcher("/view/search.jsp").forward(request, response);
     }
 }

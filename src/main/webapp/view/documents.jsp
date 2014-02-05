@@ -21,7 +21,7 @@
     <div class="row-fluid">
         <% } %>
         <div class="span4">
-            <div class="card">
+            <div class="card2">
                 <h2 class="card-heading simple"><%= document.getDocName() %>
                 </h2>
 

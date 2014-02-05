@@ -3,24 +3,23 @@
 # is assigned to the resources
 # Controller with a (.do) is only for backward compatibility
 # Stick with resources that are domain models only
-
 - peer:
   - document:
     - comment:
       - like
     - tag
   - profile:
+    - full
     - avatar
   - feed
 - group
-- tag(\.do)?
-- tag_autocomplete_ajax(\.do)?
-- tag_search(\.do)?
-- search(\.do)?
-- search_autocomplete_ajax(\.do)?
+- tag
+- tagsearch
+- search
 - reset(\.do)?
 - upload(\.do)?
 - vote(\.do)?
+- logout
 
 
 
