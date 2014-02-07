@@ -307,6 +307,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>group</servlet-name>
+    <servlet-class>com.peerpen.controller.GroupController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>group</servlet-name>
+    <url-pattern>/group</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>about</servlet-name>
     <jsp-file>/view/about.jsp</jsp-file>
   </servlet>

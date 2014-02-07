@@ -53,6 +53,12 @@ public class Group extends Taggable implements IModel {
         return groups;
     }
 
+
+  public List<Group> getGroups()
+  {
+    return new Group().queryAll("SELECT * FROM `groups`");
+  }
+
     // method used for search autocomplete
     //public List<String> getSuggestedGroups(String keyword, int limit){
     //    String sql = "SELECT `group_name` FROM `groups` WHERE `group_name` LIKE '%" + keyword + "%' LIMIT " + limit;
