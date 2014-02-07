@@ -65,7 +65,7 @@
         if(itemClass.endsWith( "Document" )){
             Document document = (Document) resultItem;
             %>
-            <tr><td>Document</td><td><a href="/document/<%= document.getId() %>"> <%= document.getDocName() %></a>
+            <tr><td>Document</td><td><a href="/peer/<%= document.getPeerId() %>/document/<%= document.getId() %>"> <%= document.getDocName() %></a>
             by: <a href="/peer/<%= document.getPeerId() %>"> <%= document.getPeer().getUserName() %></a>
             last modified: <%= document.getLastModifiedDate() %></td></tr>
 
