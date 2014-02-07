@@ -149,13 +149,6 @@ public class Comment extends Feedable implements IModel
     setUpdateFlag(true);
   }
 
-  public Integer getTotalVote(Integer upVote, Integer downVote)
-  {
-//    WAIS: change the method such that it retrieves the number of votes from the object itself, not from the paramaters sent to the method
-    totalVote = upVote - downVote;
-    return totalVote;
-  }
-
   @Override
   public boolean save()
   { //use this method for now, until Mike change it in the BASE
