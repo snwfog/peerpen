@@ -151,6 +151,7 @@ public class Comment extends Feedable implements IModel
 
   public Integer getTotalVote(Integer upVote, Integer downVote)
   {
+//    WAIS: change the method such that it retrieves the number of votes from the object itself, not from the paramaters sent to the method
     totalVote = upVote - downVote;
     return totalVote;
   }
