@@ -24,13 +24,16 @@
         </div>
 
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Start typing ..." name="search_query" id="search_query" autocomplete="off" />
+            <input type="text" class="form-control" placeholder="Search for documents, people and groups" name="search_query" id="search_query" autocomplete="off" />
             <span class="input-group-btn">
                 <button type="submit" class="btn btn-primary" name="submit" />Search</button>
             </span>
         </div>
-        <%--<ul id="suggestion_list" style="background-color:white;width:200px;margin:auto"></ul>--%>
     </form>
+
+
+
+
 
 
 
@@ -71,7 +74,7 @@
                 Peer peer = (Peer) resultItem;
             %>
 
-            <tr><td>Peer</td><td><a href="/peer/<%= peer.getId() %>"> <%= peer.getUserName() %></a>
+            <tr><td>Peer</td><td><a href="/peer/<%= peer.getId() %>/profile"> <%= peer.getUserName() %></a>
             (<%= peer.getFirstName() %> <%= peer.getLastName() %>)
             point: <%= peer.getPoint() %></td></tr>
 

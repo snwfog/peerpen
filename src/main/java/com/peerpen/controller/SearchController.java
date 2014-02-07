@@ -1,18 +1,22 @@
 package com.peerpen.controller;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.peerpen.framework.InternalHttpServletRequest;
 import com.peerpen.framework.exception.MissingArgumentException;
+import com.peerpen.model.Avatar;
 import com.peerpen.model.Document;
 import com.peerpen.model.Group;
 import com.peerpen.model.Peer;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.json.JsonObject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,27 +47,25 @@ public class SearchController extends HttpServlet {
                 area = request.getParameter( "area" );
             }
 
-            // Merge all lists into a set (unique)
-            Set suggestionPool = new LinkedHashSet(  );
-
+            String json = ""; // json format [{"value":"resue", "desc":"document"}]
             switch(area){
                 case "documents":
-                    suggestionPool.addAll( new Document().getSuggestedDocuments( q, 5 ) );
+                    json = getJsonForDocuments( new Document().getSuggestions( q, 5 ) );
                     break;
                 case "peers":
-                    suggestionPool.addAll( new Peer().getSuggestedPeers( q, 5 ) );
+                    json = getJsonForPeers( new Peer().getSuggestions( q, 5 ) );
                     break;
                 case "groups":
-                    suggestionPool.addAll( new Group().getSuggestedGroups( q, 5 ) );
+                    json = getJsonForGroups( new Group(  ).getSuggestions( q, 5 ) );
                     break;
                 default:
-                    suggestionPool.addAll( new Document().getSuggestedDocuments( q, 3 ) );
-                    suggestionPool.addAll( new Peer().getSuggestedPeers( q, 3 ) );
-                    suggestionPool.addAll( new Group().getSuggestedGroups( q, 5 ) );
+                    json = getJsonForDocuments( new Document().getSuggestions( q, 5 ) );
+                    json += getJsonForPeers( new Peer().getSuggestions( q, 5 ) );
+                    json += getJsonForGroups( new Group(  ).getSuggestions( q, 5 ) );
             }
 
-            // Convert set into json string
-            String json = new Gson().toJson( suggestionPool );
+            json = "[" + removeTrailingComma( json ) + "]";
+            System.out.println(json);
 
             // Return json string as response
             response.setContentType( "application/json" );
@@ -107,6 +109,7 @@ public class SearchController extends HttpServlet {
                         session.setAttribute( "searchResults", everything );
                 }
             }
+
             response.sendRedirect( "/search" );
         }
 
@@ -114,5 +117,37 @@ public class SearchController extends HttpServlet {
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         request.getRequestDispatcher("/view/search.jsp").forward(request, response);
+    }
+
+    private static String removeTrailingComma(String s){
+        if (s.endsWith( "," )){
+            s = s.substring( 0, s.lastIndexOf( "," ) );
+        }
+        return s;
+    }
+
+    // below methods are to generate specific json string for each of the searchables
+    private static String getJsonForDocuments(List<Document> list){
+        String json = "";
+        for (Document d : list){
+            json += "{\"value\":\"" + d.getDocName() + "\",\"desc\":\"Document\"},";
+        }
+        return json;
+    }
+
+    private static String getJsonForPeers(List<Peer> list){
+        String json = "";
+        for (Peer p : list){
+            json += "{\"value\":\"" + p.getUserName() + "\",\"desc\":\"" + p.getFirstName() + " " + p.getLastName() + "\"},";
+        }
+        return json;
+    }
+
+    private static String getJsonForGroups(List<Group> list){
+        String json = "";
+        for (Group g : list){
+            json += "{\"value\":\"" + g.getGroupName() + "\",\"desc\":\"Group\"},";
+        }
+        return json;
     }
 }

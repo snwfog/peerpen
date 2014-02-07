@@ -235,18 +235,25 @@ public class Document extends Taggable implements IModel
   }
 
   // method used for search autocomplete
-  public List<String> getSuggestedDocuments(String keyword, int limit)
-  {
-    String sql = "SELECT `doc_name` FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%' LIMIT " + limit;
-    List<Document> documents = new Document().queryAll(sql);
-    // store only doc_name to list
-    List<String> suggestions = new ArrayList<String>();
-    for (int i = 0; i < documents.size(); i++)
+  //public List<String> getSuggestedDocuments(String keyword, int limit)
+  //{
+  //  String sql = "SELECT `doc_name` FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%' LIMIT " + limit;
+  //  List<Document> documents = new Document().queryAll(sql);
+  //  // store only doc_name to list
+  //  List<String> suggestions = new ArrayList<String>();
+  //  for (int i = 0; i < documents.size(); i++)
+  //  {
+  //    suggestions.add(documents.get(i).getDocName());
+  //  }
+  //  return suggestions;
+  //}
+
+    public List<Document> getSuggestions(String keyword, int limit)
     {
-      suggestions.add(documents.get(i).getDocName());
+        String sql = "SELECT * FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%' LIMIT " + limit;
+        return new Document().queryAll(sql);
     }
-    return suggestions;
-  }
+
 
     @Override
   public boolean equals (Object other)
