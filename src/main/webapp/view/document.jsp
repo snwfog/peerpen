@@ -77,7 +77,7 @@
               <input type="hidden" name="upvote" value="<%= comment.getUpVote()%>"/>
               <input type="hidden" name="downvote" value="<%= comment.getDownVote()%>"/>
               <input type="hidden" name="_method" value="put"/>
-              <button  class="btn" id="btn2<%= comment.getId()%>" onclick="downVote1();" >
+              <button  class="btn" id="btn2<%= comment.getId()+1%>" onclick="downVote1();" >
                 <div class="parent">
                   <div class="child point" id="down-<%= comment.getId()+1%>" name="point"><%= comment.getDownVote()%></div>
                   <div class="child">&nbsp; <i class="fa fa-thumbs-down"></i></div>
@@ -123,13 +123,13 @@
                       <div class="child">&nbsp;<i class="fa fa-thumbs-up"></i></div>
                     </button>&nbsp;
                   </form>
-                  <form data-id="<%= c.getId()%>" id="downvotechangesetcomment" method="POST" action="/vote" class="AjaxSubmit2 child" >
+                  <form id="downvotechangesetcomment" method="POST" action="/vote" class="AjaxSubmit2 child" >
                     <input type="hidden" name="docid" value="<%= document.getId()%>"/>
                     <input type="hidden" name="commentid" value="<%= c.getId()%>"/>
                     <input type="hidden" name="upvote" value="<%= c.getUpVote()%>"/>
                     <input type="hidden" name="downvote" value="<%= c.getDownVote()%>"/>
                     <input type="hidden" name="_method" value="put"/>
-                    <button  class="parent btn" id="btn4<%= c.getId()%>" onclick="downVote2();">
+                    <button  class="parent btn" id="btn4<%= c.getId()+1%>" onclick="downVote2();">
                       <div class="child point" id="<%= c.getId()+1%>" name="point"><%= c.getDownVote()%></div>
                       <div class="child">&nbsp;<i class="fa fa-thumbs-down"></i></div>
                     </button>
