@@ -15,8 +15,6 @@
     <h2>Number of documents: <%= peer.getDocuments().size()%>
     </h2>
 
-
-
     <div id="contentFlow" class="ContentFlow">
         <!-- should be place before flow so that contained images will be loaded first -->
         <div class="loadIndicator"><div class="indicator"></div></div>
@@ -25,8 +23,14 @@
 
             <% for(Document d : documents) {%>
                 <div class="item">
-                    <img class="content" src="/assets/images/clipart-document-management.png" title="Your_Image_Title"/>
-                    <div class="caption"><%=d.getDocName()%></div>
+
+                        <img class="content" src="/assets/images/clipart-document-management.png"/>
+
+                    <div class="caption">
+                        <a href="/peer/<%= peer.getId() %>/document/<%= d.getId()%>">
+                            <%=d.getDocName()%>
+                        </a>
+                    </div>
                 </div>
             <%}%>
 
@@ -41,5 +45,5 @@
     </div>
 </div>
 
-
+<script src="/assets/js/lib/contentflow/contentflow_src.js"></script>
 <%@ include file="/view/includes/static/footer.jsp" %>

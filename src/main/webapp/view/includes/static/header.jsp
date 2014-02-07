@@ -24,27 +24,16 @@
     <link rel="stylesheet" href="/assets/css/lib/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/lib/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/lib/jquery.Jcrop.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/lib/jquery.tagit.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/lib/tagit.ui-zendesk.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/lib/jquery-ui-1.10.4-smoothness.css" type="text/css">
+
     <link rel="stylesheet" href="/assets/css/custom/style.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/custom/avatar.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/custom/peerpen.css" type="text/css">
 
 
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="/assets/css/lib/jquery.tagit.css" type="text/css">
-    <link rel="stylesheet" href="/assets/css/lib/tagit.ui-zendesk.css" type="text/css">
-
-
-    <link rel="stylesheet" title="Standard" href="/assets/css/js/lib/contentflow/contentflow_src.css" type="text/css" media="screen" />
-    <script language="JavaScript" type="text/javascript" src="/assets/js/lib/contentflow/contentflow_src.js"></script>
-
-    <!-- dont put the following to footer -->
-    <script src="/assets/js/lib/jquery-1.9.1.js"></script>
-    <!-- for search autocomplete -->
-    <script src="/assets/js/lib/jquery-ui-1.10.4.js"></script>
-    <!-- for search autocomplete -->
-    <script src="/assets/js/lib/tag-it.js"></script>
-    <!-- this has to be in <head> -->
-
+    <link rel="stylesheet" title="Standard" href="/assets/css/js/lib/contentflow/contentflow_src.css" type="text/css" />
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>

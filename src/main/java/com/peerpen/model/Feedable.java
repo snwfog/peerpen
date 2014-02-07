@@ -5,6 +5,7 @@ import com.sunnyd.annotations.ActiveRecordField;
 import org.jooq.DSLContext;
 import org.jooq.Field;
 import org.jooq.impl.DSL;
+import org.ocpsoft.prettytime.PrettyTime;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -226,4 +227,9 @@ public class Feedable extends Base {
         reveal();
         return trueSelf;
     }
+
+  public String getTimesAgo()
+  {
+    return new PrettyTime().format(getCreationDate());
+  }
 }

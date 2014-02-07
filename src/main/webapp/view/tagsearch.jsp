@@ -6,12 +6,11 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.peerpen.model.Document" %>
 <%@ include file="/view/includes/static/header.jsp" %>
-<script src="/assets/js/custom/tag_autocomplete_caller.js"></script>
 
 <div class="container">
 
     <!-- SEARCH FORM -->
-    <form action="/tag_search.do" method="get" class="form-horizontal" role="form">
+    <form action="/tagsearch" method="post" class="form-horizontal" role="form">
         <div class="input-group">
             <%--<input type="text" class="form-control" name="tag_query" id="tag_query" autocomplete="off" />--%>
             <ul id="tag_query" class="form-control" style="overflow-y:hidden"></ul>
@@ -36,7 +35,7 @@
             %>
         <li class="tagit-choice ui-widget-content ui-state-default ui-corner-all tagit-choice-editable">
             <span class="tagit-label">
-                <a href="/tag_search.do?tags=<%= td.getTagName() %>"><%= td.getTagName() %></a>
+                <%= td.getTagName() %>
             </span>
         </li>
     <%

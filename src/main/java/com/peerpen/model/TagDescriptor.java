@@ -1,5 +1,6 @@
 package com.peerpen.model;
 
+import com.google.common.collect.Maps;
 import com.sunnyd.Base;
 import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
@@ -107,4 +108,9 @@ public class TagDescriptor extends Base implements IModel {
         }
     }
 
+    public static List<TagDescriptor> getTagCloud()
+    {
+        // Return the query from database of all the tag descriptor;
+        return new TagDescriptor().findAll( new HashMap<String, Object>() );
+    }
 }

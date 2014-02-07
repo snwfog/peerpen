@@ -21,7 +21,7 @@
 <%--</style>--%>
 
 <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
+    <div class="navbar-inverse">
         <div class="container">
             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
@@ -30,9 +30,9 @@
             </button>
             <!--<a class="brand" href="#">PeerPen<a>-->
 
-            <div class="nav-collapse collapse">
+            <div class="collapse navbar-collapse">
                 <a href="#"><img src="../assets/images/PPLogo-01.png" width="35px" style="float:left;padding-top:5px;"></a>
-                <ul class="nav">
+                <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
@@ -58,12 +58,13 @@
                     <button type="submit" class="btn btn-primary">Sign in</button>
                 </form>
 
-                <ul class="nav pull-right">
+                <ul class="nav navbar-nav pull-right">
+                        <a href="#"><img src="../assets/images/myaccount.png" width="20px" style="float:left;padding-top:10px; padding-right:5px;"></a>
                     <li class="dropdown">
-                        <img src="../assets/images/myaccount.png" width="20px" style="float:left;padding-top:10px; padding-right:5px;"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <form class="navbar-form" id="index-form" action="/login" method="post" parsley-validate>
+                                <form class="navbar-form" id="" action="/login" method="post" parsley-validate>
                                     Have an account? Sign in now<br />
                                     <input class="span2 parsley-validated" id="parsley-user" type="text" placeholder="Username" name="username" parsley-trigger="keyup change"/><br />
                                     <input class="span2 parsley-validated" id="parsley-pass" type="password" placeholder="Password" name="password" parsley-trigger="keyup change"><br />

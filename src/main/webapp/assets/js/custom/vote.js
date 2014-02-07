@@ -30,7 +30,7 @@ function upVote1() {
                 $(".AjaxSubmit3 #commentPoint").val(commentId);
                 var a = response.split("|");
                 var b = "up-"+a[0];
-
+                $("#btn1"+a[0]).attr("disabled", true);
                 $(".AjaxSubmit3 #"+b).html(a[1]);   //select the id and put the response in the html
             },
 error: function(jqXHR, textStatus, errorThrown){
@@ -65,7 +65,7 @@ function downVote1() {
                 $(".AjaxSubmit4 #commentPoint").val(commentId);
                 var a = response.split("|");
                 var b = "down-"+a[0];
-
+                $("#btn2"+a[0]).attr("disabled", true);
                 $(".AjaxSubmit4 #"+b).html(a[1]);   //select the id and put the response in the html
             },
 error: function(jqXHR, textStatus, errorThrown){
@@ -99,6 +99,8 @@ function upVote2() {
             success: function(response, textStatus, jqXHR){
                 $(".AjaxSubmit1 #commentPoint").val(commentId);
                 var a = response.split("|");
+                var b = "down-"+a[0];
+                $("#btn3"+a[0]).attr("disabled", true);
 
                 $(".AjaxSubmit1 #"+a[0]).html(a[1]);   //select the id and put the response in the html
             },
@@ -134,6 +136,8 @@ function downVote2() {
 //                    alert(commentId);
                 $(".AjaxSubmit2 #commentPoint").val(commentId);
                 var a = response.split("|");
+                var b = "down-"+a[0];
+                $("#btn4"+a[0]).attr("disabled", true);
                 $(".AjaxSubmit2 #"+a[0]).html(a[1]);   //select the id and put the response in the html
             },
 error: function(jqXHR, textStatus, errorThrown){

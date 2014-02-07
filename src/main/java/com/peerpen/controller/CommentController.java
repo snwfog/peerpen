@@ -1,24 +1,17 @@
 package com.peerpen.controller;
 
 import com.google.common.collect.Maps;
-import com.peerpen.framework.InternalHttpServletRequest;
 import com.peerpen.model.Comment;
 import com.peerpen.model.Document;
 import com.peerpen.model.Peer;
 import com.peerpen.model.Changeset;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-
-import static com.peerpen.framework.InternalHttpServletRequest.HTTP_METHOD.*;
 
 public class CommentController extends HttpServlet
 {

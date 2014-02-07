@@ -149,12 +149,6 @@ public class Comment extends Feedable implements IModel
     setUpdateFlag(true);
   }
 
-  public Integer getTotalVote(Integer upVote, Integer downVote)
-  {
-    totalVote = upVote - downVote;
-    return totalVote;
-  }
-
   @Override
   public boolean save()
   { //use this method for now, until Mike change it in the BASE

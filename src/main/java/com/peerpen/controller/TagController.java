@@ -58,10 +58,6 @@ public class TagController extends HttpServlet {
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        // Get a list of all tag descriptors
-        Map<String, Object> map = new HashMap<String, Object>();
-        List<TagDescriptor> tagDescriptors = new TagDescriptor().findAll( map );
-        request.setAttribute( "tagCloud", tagDescriptors );
-        request.getRequestDispatcher("/tag").forward(request, response);
+
     }
 }

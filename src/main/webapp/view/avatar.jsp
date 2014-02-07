@@ -18,7 +18,7 @@
                     <input type="hidden" id="avatar-crop-width" name="width" value="">
                     <input type="hidden" id="avatar-crop-height" name="height" value="">
 
-                    <button class="btn btn-large" type="submit">Accept</button>
+                    <button class="btn btn-large btn-success" type="submit">Accept</button>
 
                 </form>
             </div>
@@ -31,6 +31,4 @@
     </div>
 </div>
 
-<script src="/assets/js/lib/dropzone.min.js"></script>
-<script src="/assets/js/custom/avatar.js"></script>
 <%@ include file="/view/includes/static/footer.jsp" %>

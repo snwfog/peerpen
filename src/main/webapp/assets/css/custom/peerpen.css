@@ -689,3 +689,17 @@ display:none;
 }
 
 /*BOOTPLUS CARDS WHITE*/
+
+/* Used to keep DIVs in one line */
+.parent{
+  white-space:nowrap;
+}
+.child{
+  display:inline-block;
+  *display:inline; /* for IE7*/
+  *zoom:1;/* for IE7*/
+  /*margin-right:0px;*/
+  /*min-width:px;*/
+  /*min-height:50px;*/
+
+}

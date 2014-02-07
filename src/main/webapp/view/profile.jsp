@@ -46,12 +46,15 @@
         </ul>
       </li>
     </ul>
-    <form class="navbar-form navbar-right" action="/search" method="get" role="form">
-      <div class="form-group">
-        <input type="text" id="search_query" name="search_query" class="form-control" placeholder="Search" autocomplete="off" />
-        <input type="submit" class="btn btn-default" name="submit" value="GO" />
-      </div>
-      <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+      <!-- SEARCH FORM -->
+      <form action="/search" method="post" class="navbar-form navbar-right" role="form">
+          <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search for documents, people and groups" name="search_query" id="search_query" autocomplete="off" />
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary" name="submit" />Search</button>
+            </span>
+          </div>
+      </form>
       &nbsp &nbsp<a href="/logout">Logout</a>
 
     </form>

@@ -1,12 +1,15 @@
 package com.peerpen.model;
 
+import com.google.gson.Gson;
 import com.sunnyd.Base;
 import com.sunnyd.IModel;
 import com.sunnyd.annotations.*;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Group extends Taggable implements IModel {
 
@@ -50,19 +53,30 @@ public class Group extends Taggable implements IModel {
         return groups;
     }
 
-    // method used for search autocomplete
-    public List<String> getSuggestedGroups(String keyword, int limit){
-        String sql = "SELECT `group_name` FROM `groups` WHERE `group_name` LIKE '%" + keyword + "%' LIMIT " + limit;
-        List<Group> groups = new Group().queryAll(sql);
-        List<String> suggestions = new ArrayList<String>();
 
-        if(groups.size() > 0){
-            for(int i=0;i<groups.size();i++){
-                suggestions.add(groups.get(i).getGroupName());
-            }
-        }
-        //
-        return suggestions;
+  public List<Group> getGroups()
+  {
+    return new Group().queryAll("SELECT * FROM `groups`");
+  }
+
+    // method used for search autocomplete
+    //public List<String> getSuggestedGroups(String keyword, int limit){
+    //    String sql = "SELECT `group_name` FROM `groups` WHERE `group_name` LIKE '%" + keyword + "%' LIMIT " + limit;
+    //    List<Group> groups = new Group().queryAll(sql);
+    //    List<String> suggestions = new ArrayList<String>();
+    //
+    //    if(groups.size() > 0){
+    //        for(int i=0;i<groups.size();i++){
+    //            suggestions.add(groups.get(i).getGroupName());
+    //        }
+    //    }
+    //    //
+    //    return suggestions;
+    //}
+
+    public List<Group> getSuggestions(String keyword, int limit){
+        String sql = "SELECT * FROM `groups` WHERE `group_name` LIKE '%" + keyword + "%' LIMIT " + limit;
+        return new Group().queryAll(sql);
     }
 
     @Override
@@ -74,6 +88,12 @@ public class Group extends Taggable implements IModel {
         if (this.getId() == myOther.getId()) return true;
         return false;
     }
+
+
+    public static void main (String[] args){
+
+    }
+
 
     //public List<Group> removeDuplicates(List<Group> groups){
     //    List<Group> set = new ArrayList<>(  );
