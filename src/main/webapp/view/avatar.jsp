@@ -31,6 +31,4 @@
     </div>
 </div>
 
-<script src="/assets/js/lib/dropzone.min.js"></script>
-<script src="/assets/js/custom/avatar.js"></script>
 <%@ include file="/view/includes/static/footer.jsp" %>
