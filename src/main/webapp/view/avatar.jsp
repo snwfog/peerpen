@@ -18,7 +18,7 @@
                     <input type="hidden" id="avatar-crop-width" name="width" value="">
                     <input type="hidden" id="avatar-crop-height" name="height" value="">
 
-                    <button class="btn btn-large" type="submit">Accept</button>
+                    <button class="btn btn-large btn-success" type="submit">Accept</button>
 
                 </form>
             </div>
