@@ -64,7 +64,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <form class="navbar-form" id="index-form" action="/login" method="post" parsley-validate>
+                                <form class="navbar-form" id="" action="/login" method="post" parsley-validate>
                                     Have an account? Sign in now<br />
                                     <input class="span2 parsley-validated" id="parsley-user" type="text" placeholder="Username" name="username" parsley-trigger="keyup change"/><br />
                                     <input class="span2 parsley-validated" id="parsley-pass" type="password" placeholder="Password" name="password" parsley-trigger="keyup change"><br />
