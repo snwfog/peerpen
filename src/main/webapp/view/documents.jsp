@@ -15,26 +15,31 @@
     <h2>Number of documents: <%= peer.getDocuments().size()%>
     </h2>
 
-    <% for ( int i = 1; i < documents.size() + 1; i++ ) { %>
-    <% Document document = documents.get( i - 1 ); %>
-    <% if ( (i % 3) == 1 ) { %>
-    <div class="row-fluid">
-        <% } %>
-        <div class="span4">
-            <div class="card">
-                <h2 class="card-heading simple"><%= document.getDocName() %>
-                </h2>
 
-                <div class="card-body">
-                    <%--<p>isus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>--%>
-                    <p><a class="btn" href="/peer/<%= peer.getId() %>/document/<%= document.getId()%>">View
-                        document &raquo;</a></p>
+
+    <div id="contentFlow" class="ContentFlow">
+        <!-- should be place before flow so that contained images will be loaded first -->
+        <div class="loadIndicator"><div class="indicator"></div></div>
+
+        <div class="flow">
+
+            <% for(Document d : documents) {%>
+                <div class="item">
+                    <img class="content" src="/assets/images/clipart-document-management.png" title="Your_Image_Title"/>
+                    <div class="caption"><%=d.getDocName()%></div>
                 </div>
-            </div>
+            <%}%>
+
+
+
         </div>
-        <% if ( (i % 3) == 0 ) { %>
+        <div class="globalCaption"></div>
+        <div class="scrollbar">
+            <div class="slider"><div class="position"></div></div>
+        </div>
+
     </div>
-    <% } %>
-    <% } %>
 </div>
+
+
 <%@ include file="/view/includes/static/footer.jsp" %>
