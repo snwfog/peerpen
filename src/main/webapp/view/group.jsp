@@ -15,7 +15,7 @@
   Time: 7:42 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%if (sessionUser.getId()==peersGroup.getPeerId()){%>
+<%if (group.getIsJoined(sessionUser.getId())){%>
 <h1><%= group.getGroupName()%></h1>
 <div class="container-fluid">
     <div class="row">

@@ -29,7 +29,8 @@ public class GroupController extends GenericApplicationServlet
     List<Group> group = new Group().getGroups();
     if(urlGroup!=null)
     {
-       request.setAttribute("group", group);
+
+       request.setAttribute("group", urlGroup);
        request.getRequestDispatcher("/view/group.jsp").forward(request, response);
     }else {
         request.setAttribute("groups", group);
