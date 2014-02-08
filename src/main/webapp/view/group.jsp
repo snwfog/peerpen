@@ -15,13 +15,19 @@
     <h1> Join a group ! </h1>
     <!-- this section is for tags -->
     <div>
-        <form action="/group" method="post" class="form-horizontal" role="form">
-            <select class="form-control">
-                <%for (Group g:groups) {
-                    %><option><%= g.getGroupName()%></option>
+
+                <%for (Group g:groups) { %>
+                    <form action="/group" method="post" class="form-horizontal" role="form">
+
+                        <input type="text" value="<%= g.getGroupName()%>">
+                        <input type="hidden" name="groupid" value="<%= g.getId()%>">
+                        <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>">
+                        <button type="submit" class="btn btn-primary" name="submit" />Choose Group</button>
+
+                     </form>
                 <%}%>
-            </select>
-            <button type="submit" class="btn btn-primary" name="submit" />Save Tags</button>
+
+
         </form>
     </div>
 

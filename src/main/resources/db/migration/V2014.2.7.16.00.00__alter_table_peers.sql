@@ -1,2 +1,0 @@
-ALTER TABLE peers ADD group_id int DEFAULT NULL;
-ALTER TABLE peers ADD FOREIGN KEY(group_id) REFERENCES `groups` (`id`) ON DELETE CASCADE;
