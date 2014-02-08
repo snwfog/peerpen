@@ -24,6 +24,9 @@ public class Group extends Taggable implements IModel {
     @ActiveRelationManyToMany(relationTable = "peers_groups")
     private List<Peer> peers;
 
+    @ActiveRelationHasMany
+    private List<Broadcast> broadcasts;
+
     public Group() {
         super();
     }
@@ -112,6 +115,12 @@ public class Group extends Taggable implements IModel {
         this.peers = peers;
         this.setUpdateFlag(true);
         return this;
+    }
+
+    public List<Broadcast> getBroadcasts()
+    {
+        initRelation("broadcasts");
+        return this.broadcasts;
     }
 
 

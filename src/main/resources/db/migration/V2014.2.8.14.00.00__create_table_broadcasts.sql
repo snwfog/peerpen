@@ -1,4 +1,4 @@
-CREATE TABLE `discussions` (
+CREATE TABLE `broadcasts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `message` varchar(255) DEFAULT NULL,
   `group_id` int(11) DEFAULT NULL,
@@ -10,6 +10,6 @@ CREATE TABLE `discussions` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`),
   KEY `peer_id` (`peer_id`),
-  CONSTRAINT `discussions_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`),
-  CONSTRAINT `discussions_ibfk_2` FOREIGN KEY (`peer_id`) REFERENCES `peers` (`id`) ON DELETE SET NULL
+  CONSTRAINT `broadcasts_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`),
+  CONSTRAINT `broadcasts_ibfk_2` FOREIGN KEY (`peer_id`) REFERENCES `peers` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

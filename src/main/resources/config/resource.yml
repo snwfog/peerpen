@@ -13,7 +13,8 @@
     - avatar:
       - upload
   - feed
-- group
+- group:
+  - broadcast
 - tag
 - tagsearch
 - search
