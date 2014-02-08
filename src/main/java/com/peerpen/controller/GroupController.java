@@ -36,14 +36,14 @@ public class GroupController extends HttpServlet
       map.put("groupId", Integer.parseInt(parameters.get("groupid")));
 
       PeersGroup pg = new PeersGroup(map);
-      for(PeersGroup p: existingPeerGroups)
-      {
-          if(p.getPeerId()!=pg.getPeerId() && p.getGroupId()!= pg.getGroupId())
-          {
-             pg.save();
-          }
-      }
-
+//      for(PeersGroup p: existingPeerGroups)
+//      {
+//          if(p.getPeerId()!=pg.getPeerId() && p.getGroupId()!= pg.getGroupId())
+//          {
+//             pg.save();
+//          }
+//      }
+          pg.save();
       request.setAttribute("peersGroup", pg);
       request.setAttribute("group", group);
       request.getRequestDispatcher("/view/group.jsp").forward(request, response);
