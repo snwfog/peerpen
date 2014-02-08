@@ -20,4 +20,7 @@ Dropzone.options.avatarUpload =
     this.on "success", (file) ->
       console.log "successfully uploaded"
       window.location.reload()
+    this.on "thumbnail", (file, dataUrl) ->
+      console.log file.size
+      console.log dataUrl
 

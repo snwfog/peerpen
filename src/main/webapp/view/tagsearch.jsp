@@ -10,7 +10,7 @@
 <%@ include file="/view/includes/static/navbar_profile.jsp" %>
 
 
-
+<br /><br /><br />
 <div class="container">
     <!-- SEARCH FORM -->
     <form action="/tagsearch" method="post" class="form-horizontal" role="form">

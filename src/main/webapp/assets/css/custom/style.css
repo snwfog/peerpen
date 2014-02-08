@@ -276,7 +276,8 @@ div#dropzone-container {
   display: none;
   position: fixed;
   bottom: 0px;
-  width: 100%; }
+  width: 100%;
+  z-index: 999; }
   div#dropzone-container .dropzone {
     background-color: #cbd0d3;
     border: 5px dashed #a0aeaf;

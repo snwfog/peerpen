@@ -130,5 +130,9 @@ public class Avatar extends Base implements IModel {
         this.y2 = y2;
         setUpdateFlag( true );
     }
+
+    public void rescaleAvatar(Object parameters) {
+        
+    }
 }
 
