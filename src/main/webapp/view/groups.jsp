@@ -1,11 +1,11 @@
 <%@ page import="com.peerpen.model.Peer" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="com.peerpen.model.Group" %>
+<%@ page import="java.util.List" %>
 <%@ include file="/view/includes/static/header.jsp" %>
 
 <%--Declare all request variables here, easy to debug!!!--%>
 <% Peer sessionUser = (Peer) request.getAttribute("sessionUser"); %>
-<% ArrayList<Group> groups = (ArrayList<Group>) request.getAttribute("groups"); %>
+<% List<Group> groups = (List<Group>) request.getAttribute("groups"); %>
 
 <div class="container">
   <div class="row row-offcanvas row-offcanvas-right">
@@ -27,7 +27,7 @@
               <button type="submit" class="btn btn-primary btn-success" name="submit"/><i class="fa fa-check-circle"></i> Joined!</button>
             </form>
           <%}else{%>
-            <form action="/group" method="post" class="form-horizontal" role="form">
+            <form action="/group/<%= group.getId()%>" method="post" class="form-horizontal" role="form">
               <input type="hidden" name="groupid" value="<%= group.getId()%>">
               <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>">
               <button type="submit" class="btn btn-primary" name="submit"/>Join!</button>
