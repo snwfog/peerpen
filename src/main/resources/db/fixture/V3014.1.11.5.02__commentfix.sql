@@ -65,10 +65,10 @@ INSERT INTO `feedables` (`id`, `child_id`, `user_id`,`type`, `status`,`last_modi
 
 INSERT INTO `groups` (`id`, `group_name`, `description`, `creation_date`, `last_modified_date`, `semaphore`, `etag`)
 VALUES
-	(3, 'concordia', 'this is description of concordia', '2014-01-28 00:40:05', '2014-01-28 00:40:05', 0, 'f8ec4549f8e70824d6c52ce5f548c6e11fc49a67c34fe4036095e48482230cd8'),
-	(4, 'mcgill', 'this is description of mcgill', '2014-01-28 00:40:05', '2014-01-28 00:40:05', 0, '293f83bdd305bcc57a245b5b2b52932f10e4b6db47139b7815e21b72461a4c88'),
-	(5, 'uqam', 'this is description of uqam', '2014-01-28 00:54:28', '2014-01-28 00:54:28', 0, '08d96c81daad331146aa90e468e8a16bfb65f4823ff3e2b269c299083982de3f'),
-	(6, 'montreal', 'this is description of montreal', '2014-01-28 00:54:29', '2014-01-28 00:54:29', 0, 'aa11940a47b156bd4e42adc7444f73bc5a531594005c00d8c96155171a7c4269');
+	(3, 'Finance', 'Financial economics is the branch of economics studying the interrelation of financial variables, such as prices, interest rates and shares, as opposed to those concerning the real economy', '2014-01-28 00:40:05', '2014-01-28 00:40:05', 0, 'f8ec4549f8e70824d6c52ce5f548c6e11fc49a67c34fe4036095e48482230cd8'),
+	(4, 'Marketing', 'Marketing is the process of communicating the value of a product or service to customers, for selling that product or service', '2014-01-28 00:40:05', '2014-01-28 00:40:05', 0, '293f83bdd305bcc57a245b5b2b52932f10e4b6db47139b7815e21b72461a4c88'),
+	(5, 'International Business', 'International business comprises all commercial transactions (private and governmental, sales, investments, logistics, and transportation) that take place between two or more regions, countries and nations beyond their political boundaries', '2014-01-28 00:54:28', '2014-01-28 00:54:28', 0, '08d96c81daad331146aa90e468e8a16bfb65f4823ff3e2b269c299083982de3f'),
+	(6, 'Arts', 'liberal arts education is a term that can be interpreted in different ways. It can refer to certain areas of literature, languages, philosophy, history, mathematics, psychology, and science. It can also refer to studies on a liberal arts degree program', '2014-01-28 00:54:29', '2014-01-28 00:54:29', 0, 'aa11940a47b156bd4e42adc7444f73bc5a531594005c00d8c96155171a7c4269');
 
 INSERT INTO `tag_descriptors` (`id`, `tag_name`, `creation_date`, `last_modified_date`)
 VALUES

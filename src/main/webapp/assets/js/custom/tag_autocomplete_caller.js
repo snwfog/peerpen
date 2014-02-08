@@ -1,7 +1,8 @@
 // below is the improved ("tag-it!") version for autocomplete on tags
 // entityTags is for load, tag_query is for search bar
 $(function(){
-    $('#entityTags').tagit({
+    var entityTags = $('#entityTags');
+    entityTags.tagit({
         // configure the name of the input field (will be submitted with form), default: item[tags]
         itemName: 'item',
         fieldName: 'tags',
@@ -29,6 +30,16 @@ $(function(){
                     }})},
             minLength: 2
         })
+        // below is for save/remove based on event instead of on save button
+        //afterTagAdded: function(event, ui) {
+        //    if (!ui.duringInitialization) {
+        //        //addEvent('afterTagAdded: ' + eventTags.tagit('tagLabel', ui.tag));
+        //        alert('added: ' + entityTags.tagit('tagLabel', ui.tag));
+        //    }
+        //},
+        //afterTagRemoved: function(event, ui) {
+        //    alert('removed: ' + entityTags.tagit('tagLabel', ui.tag));
+        //}
     });
 
 

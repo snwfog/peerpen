@@ -1,34 +1,52 @@
+<%@ page import="com.peerpen.model.Group" %>
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.peerpen.model.Group" %>
+<%@ page import="com.peerpen.model.PeersGroup" %>
 <%@ include file="/view/includes/static/header.jsp" %>
+<% Peer sessionUser = (Peer) request.getAttribute("sessionUser"); %>
+<% PeersGroup peersGroup = (PeersGroup) request.getAttribute("peersGroup"); %>
+<% Group group = (Group) request.getAttribute("group"); %>
+<% ArrayList<Peer> peers = (ArrayList<Peer>)peersGroup.getMembers();%>
+
 <%--
   Created by IntelliJ IDEA.
   User: waisk
   Date: 07/02/14
-  Time: 4:29 PM
+  Time: 7:42 PM
   To change this template use File | Settings | File Templates.
 --%>
-<% Peer sessionUser = (Peer) request.getAttribute("sessionUser"); %>
-<% ArrayList<Group> groups = (ArrayList<Group>) request.getAttribute("groups"); %>
-<div class="container">
-    <h1> Join a group ! </h1>
-    <!-- this section is for tags -->
-    <div>
+<%if (sessionUser.getId()==peersGroup.getPeerId()){%>
+<h1><%= group.getGroupName()%></h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <h2> Members of this group </h2>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
 
-                <%for (Group g:groups) { %>
-                    <form action="/group" method="post" class="form-horizontal" role="form">
-
-                        <input type="text" value="<%= g.getGroupName()%>">
-                        <input type="hidden" name="groupid" value="<%= g.getId()%>">
-                        <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>">
-                        <button type="submit" class="btn btn-primary" name="submit" />Choose Group</button>
-
-                     </form>
+                </tr>
+                </thead>
+                <tbody>
+                <% for (Peer p:peers){%>
+                <tr>
+                    <td><%=p.getFirstName()%></td>
+                    <td><%=p.getLastName()%></td>
+                    <td><%=p.getUserName()%></td>
+                    <td><%=p.getEmail()%></td>
+                </tr>
                 <%}%>
-
-
-        </form>
+                </tbody>
+            </table>
+         </div>
     </div>
-
+</div>
+<%}else
+{%>
+    <h1> You are not registered to this group.</h1>
+<%}%>
 <%@ include file="/view/includes/static/footer.jsp" %>
