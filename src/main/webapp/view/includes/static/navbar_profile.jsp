@@ -1,3 +1,8 @@
+<%
+    Peer peer = (Peer) request.getAttribute("sessionUser");
+    ArrayList<Group> groups =(ArrayList<Group>) peer.getGroups();
+%>
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -6,7 +11,7 @@
         <ul class="nav navbar-nav">
             <li><a href="#"><img class="profile"
                                  src="/assets/images/profile/pic2.jpg"/></a></li>
-            <li><a><%= peer.getFirstName().toString() %>
+            <li><%= peer.getFirstName().toString() %>
             </a></li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
@@ -23,14 +28,30 @@
                         class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="/peer/<%= peer.getId()%>/document">Documents</a></li>
-                    <li><a href="/group">Groups</a></li>
-                    <li><a href="#">Something else here</a></li>
+            <%--<li><a href="/group/<%= %>">Groups</a></li>--%>
+
+            <li><a href="#">Something else here</a></li>
                     <li class="divider"></li>
                     <li><a href="#">Separated link</a></li>
                     <li class="divider"></li>
                     <li><a href="#">One more separated link</a></li>
                 </ul>
             </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Groups
+                    <%if (groups.size() > 0) {%><b
+                        class="caret"></b><%}%></a>
+
+                <%if (groups.size() > 0) {%>
+                <ul class="dropdown-menu" role="menu">
+                    <% for(Group g: groups){%>
+                    <li class="list-group">
+                        <a href="/group/<%=g.getId() %>"><%=g.getGroupName()%></a>
+                    </li>
+                <%}%>
+                </ul>
+                <%}%>
+             </li>
         </ul>
         <!-- SEARCH FORM -->
         <form action="/search" method="post" class="navbar-form navbar-right" role="form">

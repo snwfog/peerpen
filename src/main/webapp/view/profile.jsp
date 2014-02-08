@@ -4,11 +4,6 @@
 <%@ page import="com.peerpen.model.Group" %>
 <%@ include file="/view/includes/static/header.jsp" %>
 <script src="/assets/js/custom/search_autocomplete_caller.js"></script>
-<%
-    Peer peer = (Peer) request.getAttribute("user");
-    ArrayList<Group> groups =(ArrayList<Group>) peer.getGroups();
-%>
-
 
 <%--Cropped image :<%= session.getAttribute("croppedImage") %>--%>
 <%--<br />--%>
