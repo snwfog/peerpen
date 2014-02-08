@@ -493,6 +493,8 @@ ContentFlowItem.prototype = {
     /*
      * add reflection to item
      */
+
+
     addReflection: function() {
         var CFobj = this.CFobj;
         var reflection;
@@ -641,17 +643,26 @@ ContentFlowItem.prototype = {
                 $(canvas).removeAttr("src");
                 $(canvas).bind("click", function(e){
                     var doc = $(canvas).attr("id");
-                    $.ajax({
-                        type: "GET",
-                        url: "/DocumentAjax",
-                        contentType: "application/json; charset=utf-8",
-                        data: ({doc: doc}),
-                        success: function(response){
-                            alert("hold up let me insert it in you");
-                            $("#currentDocument").append(response);
-                        }
-                    });
-                }) ;
+                    $("#currentDocument").css('background-image', "url('/assets/images/loader.gif')");
+                    $("#currentDocument").css('background-position', "center");
+                    $("#currentDocument").css('background-repeat', "no-repeat");
+
+                    setTimeout(function(){
+                        $.ajax({
+                            type: "GET",
+                            url: "/DocumentAjax",
+                            contentType: "application/json; charset=utf-8",
+                            data: ({doc: doc}),
+                            success: function(response){
+                                $("#currentDocument").empty();
+                                $("#currentDocument").append(response);
+                            }
+                        });
+                        $("#currentDocument").css('background-image', "");
+                    }
+                    ,1000);
+
+                });
 
 
                 
@@ -672,7 +683,11 @@ ContentFlowItem.prototype = {
     }
 
 
- };
+
+
+
+
+};
 
 /*
  * ============================================================

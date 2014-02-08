@@ -43,7 +43,9 @@
 
     <div class="row">
         <div id="currentDocument">
-
+            <p>Default document to show aka firsr</p>
+            <p> I love this game</p>
+            <p> super duper super</p>
         </div>
     </div>
 </div>
