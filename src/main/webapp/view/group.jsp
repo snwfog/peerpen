@@ -1,11 +1,11 @@
-<%@ page import="com.peerpen.model.Group" %>
-<%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.peerpen.model.*" %>
 <%@ include file="/view/includes/static/header.jsp" %>
 <%@ include file="/view/includes/static/navbar_profile.jsp" %>
 
 <% Group group = (Group) request.getAttribute("group"); %>
 <% ArrayList<Peer> peers = (ArrayList<Peer>)group.getPeers();%>
+<% ArrayList<Broadcast> broadcasts = (ArrayList<Broadcast>)group.getBroadcasts();%>
 
 <%--
   Created by IntelliJ IDEA.
@@ -46,24 +46,35 @@
 
         <div id="row">
             <div class="col-md-4">
-                <h2> Tips from <%= group.getGroupName()%> peers </h2>
+                <h2> Broadcasts from <%= group.getGroupName()%> peers </h2>
                     <div class="caption">
                         <div class="card2">
                             <h3 class="card-heading simple"><%= sessionUser.getFirstName() %> <%= sessionUser.getLastName() %></h3>
                             <div class="card-body">
-                                <form method="POST" id="comment1" action="/group/<%= group.getId()%>" parsley-validate>
-                                    <textarea id="textComment1" class="parsley-validated" name="comment" style="width:100%" parsley-trigger="change keyup"></textarea>
-                                    <%--<input type="hidden" name="docId" value="<%= document.getId()%>"/>--%>
-                                    <%--<input type="hidden" name="peerId" value="<%= sessionUser.getId()%>"/>--%>
+                                <form method="POST" action="/group/<%= group.getId()%>/broadcast" parsley-validate>
+                                    <textarea id="broadcast" class="parsley-validated" name="broadcast" style="width:100%" parsley-trigger="change keyup"></textarea>
+                                    <input type="hidden" name="groupid" value="<%= group.getId()%>"/>
+                                    <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>"/>
                                     <input type="hidden" name="_method" value="POST">
                                     <button type="submit" class="btn btn-success ">Post</button>
                                 </form>
                             </div>
                         </div>
                     </div>
+
+
+                <%for(Broadcast broadcast : broadcasts ){%>
+                <div class="card2">
+                    <h3 class="card-heading simple"><%= broadcast.getPeer().getFirstName() %> <%= broadcast.getPeer().getLastName() %></h3>
+                    <div class="card-body">
+                        <%= broadcast.getMessage() %>
+                    </div>
+
+                 </div>
+                <%}%>
+
              </div>
          </div>
-
 
     </div>
 </div>

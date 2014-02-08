@@ -317,6 +317,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>broadcast</servlet-name>
+        <servlet-class>com.peerpen.controller.BroadcastController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>broadcast</servlet-name>
+        <url-pattern>/broadcast</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>about</servlet-name>
         <jsp-file>/view/about.jsp</jsp-file>
     </servlet>

@@ -19,19 +19,13 @@
             <li><a href="/search">Search</a></li>
             <li><a href="/tagsearch">Tags</a></li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Groups
-                    <%if (navGroups.size() > 0) {%><b
-                        class="caret"></b><%}%></a>
-
-                <%if (navGroups.size() > 0) {%>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Groups <b class="caret"></b></a>
                 <ul class="dropdown-menu" role="menu">
+                    <li><a href="/group">Browse All Groups</a></li>
                     <% for(Group g: navGroups){%>
-                    <li class="list-group">
-                        <a href="/group/<%=g.getId() %>"><%=g.getGroupName()%></a>
-                    </li>
-                <%}%>
+                    <li class="list-group"><a href="/group/<%=g.getId() %>"><%=g.getGroupName()%></a></li>
+                    <%}%>
                 </ul>
-                <%}%>
              </li>
             <li><a href="/logout">Logout</a></li>
         </ul>
