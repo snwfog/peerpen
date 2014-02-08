@@ -182,6 +182,37 @@ $(document).ready(function(){
     }
   });
 
+  $('form#comment1').parsley({
+    listeners: {
+        onFieldError: function(elem, ParsleyField) {
+          var fieldType = elem.attr('id'); 
+          switch (fieldType){
+            case 'text1':
+              console.log('Comment is empty.');
+              break;
+            case 'parsley-user':
+              console.log('Usename is empty.');
+              break;
+            case 'index-password':
+              console.log('Password is invalid or empty.');
+              break;
+            case 'parsley-pass':
+              console.log('Password is invalid or empty.');
+              break;
+            default:
+              console.log('Error!!!');
+          }
+
+        }
+
+    }
+  });
+
+  $('textarea#textComment1').parsley('addConstraint', 
+    {'required': 'true'});
+  $('textarea#textComment2').parsley('addConstraint', 
+    {'required': 'true'});
+
   $('input#index-username').parsley('addConstraint', 
     {'required': 'true'});
   $('input#index-password').parsley( 'addConstraint', 

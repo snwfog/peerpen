@@ -13,13 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Mike
- * Date: 1/10/14
- * Time: 1:27 PM
- * To change this template use File | Settings | File Templates.
- */
 public class Feedable extends Base {
     @ActiveRecordField
     private String type;

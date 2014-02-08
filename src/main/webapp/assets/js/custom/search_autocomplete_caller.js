@@ -24,28 +24,29 @@
 
 // with descriptions
 $(function() {
-    $( "#search_query" ).autocomplete({
-        source: function(request, response) {
-            $.ajax({
-                type: "POST",
-                url: "/search",
-                dataType: "json",
-                data: {
-                    format: "json",
-                    term: request.term,
-                    area: $("input[type='radio'][name='area']:checked").val()
-                },
-                success: function(data) {
-                    response(data);
-                }
-            });
-        },
-        minLength: 3
-    })
-    .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-        return $( "<li>" )
-            //.append( "<a><img src=\"" + item.label + "\" /> <strong>" + item.value + "</strong> - " + item.desc + "</a>" )
-            .append( "<a><strong>" + item.value + "</strong> - " + item.desc + "</a>" ) // json:[{"value":"burger","desc":"doooc"},{}]
-            .appendTo( ul );
-    };
+    if ($("#search_query" ).length > 0){
+        $( "#search_query" ).autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    type: "POST",
+                    url: "/search",
+                    dataType: "json",
+                    data: {
+                        format: "json",
+                        term: request.term,
+                        area: $("input[type='radio'][name='area']:checked").val()
+                    },
+                    success: function(data) {
+                        response(data);
+                    }
+                });
+            },
+            minLength: 3
+        })
+        .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+            return $( "<li></li>" )
+                .append( "<a><strong>" + item.value + "</strong> - " + item.desc + "</a>" ) // json:[{"value":"burger","desc":"doooc"},{}]
+                .appendTo( ul );
+        };
+    }
 });

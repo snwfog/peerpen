@@ -21,6 +21,9 @@ public class Group extends Taggable implements IModel {
     @ActiveRecordField
     private String description;
 
+    @ActiveRelationManyToMany(relationTable = "peers_groups")
+    private List<Peer> peers;
+
     public Group() {
         super();
     }
@@ -93,6 +96,24 @@ public class Group extends Taggable implements IModel {
     public static void main (String[] args){
 
     }
+
+  public boolean getIsJoined(Integer sessionUserId)
+  {
+//    List<PeersGroup> peersGroup = new PeersGroup().queryAll(String.format("SELECT * FROM `peers_groups` WHERE `peer_id` = %s AND `group_id` = %s", sessionUserId, this.getId()));
+    return  this.getPeers().contains(new Peer().find(sessionUserId));
+  }
+    public List<Peer> getPeers()
+    {
+        initRelation("peers");
+        return this.peers;
+    }
+
+    public Group setPeers( List<Peer> peers ) {
+        this.peers = peers;
+        this.setUpdateFlag(true);
+        return this;
+    }
+
 
 
     //public List<Group> removeDuplicates(List<Group> groups){

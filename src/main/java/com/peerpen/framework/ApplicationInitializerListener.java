@@ -19,6 +19,7 @@ import org.yaml.snakeyaml.Yaml;
 public class ApplicationInitializerListener implements ServletContextListener {
 
     static final Logger logger = LoggerFactory.getLogger( ApplicationInitializerListener.class );
+    private ServletContextEvent avatarPath;
 
     @Override
     public void contextInitialized( ServletContextEvent event ) {
@@ -31,6 +32,13 @@ public class ApplicationInitializerListener implements ServletContextListener {
         logger.warn( "Set application secret" );
         setApplicationSecret( event );
         //setJspGlobalVariables( event );
+        logger.warn( "Set avatar directory" );
+        setAvatarDir( event );
+    }
+
+    private void setAvatarDir( ServletContextEvent event ) {
+        String avatarDir = event.getServletContext().getInitParameter("avatar-dir");
+        event.getServletContext().setAttribute( "avatarDir", avatarDir );
     }
 
     /**

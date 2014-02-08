@@ -2,11 +2,10 @@
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.peerpen.model.Document" %>
-
+<%@ include file="/view/includes/static/navbar_profile.jsp" %>
 <%--Declare all request variables here, easy to debug!!!--%>
 <% Peer peer = (Peer) request.getAttribute( "peer" ); %>
-<% Peer sessionUser = (Peer) request.getAttribute( "sessionUser" ); %>
-<% List<Document> documents = peer.getDocuments(); %>
+<% List<Document> documents = sessionUser.getDocuments(); %>
 
 <div class="container-fluid">
     <div class="row">
@@ -33,7 +32,6 @@
                         </div>
                     </div>
                 <%}%>
-
             </div>
             <div class="globalCaption"></div>
             <div class="scrollbar">
@@ -50,6 +48,5 @@
     </div>
 </div>
 
-
-
+<script src="/assets/js/lib/contentflow/contentflow_src.js"></script>
 <%@ include file="/view/includes/static/footer.jsp" %>

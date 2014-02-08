@@ -16,17 +16,14 @@
 <script src="/assets/js/lib/parsley.js"></script>
 
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="/assets/js/custom/script.bare.js"></script>
+<script src="/assets/js/custom/script.js"></script>
 <script src="/assets/js/custom/validation.js"></script>
 <script src="/assets/js/custom/search_autocomplete_caller.js"></script>
 <script src="/assets/js/custom/tag_autocomplete_caller.js"></script>
 <script src="/assets/js/custom/vote.js"></script>
 <script src="/assets/js/custom/confirm_delete_comment.js"></script>
 <script src="/assets/js/custom/reset.js"></script>
-<script src="/assets/js/lib/dropzone.min.js"></script>
 <script src="/assets/js/custom/avatar.js"></script>
-
-<script src="/assets/js/lib/contentflow/contentflow_src.js"></script>
 
 </body>
 </html>

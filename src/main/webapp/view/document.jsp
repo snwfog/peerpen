@@ -5,41 +5,55 @@
 <%@ page import="com.peerpen.model.Changeset" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.peerpen.model.TagDescriptor" %>
+<%@ page import="com.peerpen.model.Hunk" %>
+<%@ include file="/view/includes/static/navbar_profile.jsp" %>
 
 <%--Declare all request variables here, easy to debug!!!--%>
-<% Peer sessionUser = (Peer) request.getAttribute("sessionUser"); %>
 <% Peer urlUser; %>
 <% if (request.getAttribute("urlUser") != null){urlUser= (Peer) request.getAttribute("urlUser");}else{urlUser=sessionUser;} %>
 <% Document document =(Document) request.getAttribute("document");%>
 <% List<Object> objectList = document.getCommentAndChangeset();%>
 <% List<TagDescriptor> tds = document.getTagDescriptors(); %>
+<% List<Hunk> hunks = document.getHunks(); %>
 
 
 
 <div class="container">
   <h1><%= document.getDocName()%> <%= (sessionUser.getId() == urlUser.getId()) ? "" : " (View-only mode)" %></h1>
 
+    <div style="border:1px solid black">
+        <%
+            for(Hunk hunk: hunks){
+        %>
+        <textarea name=""><%= hunk.getContent()%></textarea>
+        <%
+            }
+        %>
+    </div>
+    <br /><br />
     <!-- this section is for tags -->
     <div>
         <form action="/tag" method="post" class="form-horizontal" role="form">
             <input type="hidden" name="entityType" value="document" />
             <input type="hidden" name="entityId" value="<%=document.getId()%>" />
-            <ul id="entityTags">
+            <ul id="entityTags" style="float:left;width:600px;">
                 <% for (TagDescriptor td : tds){ %>
                 <li><%=td.getTagName() %></li>
                 <% } %>
             </ul>
-            <button type="submit" class="btn btn-primary" name="submit" />Save Tags</button>
+            <button type="submit" class="btn btn-primary" name="submit" style="margin-left:10px" />Save Tags</button>
         </form>
     </div>
+
+    <br /><br /><br /><br />
 
   <div id="content">
     <div class="caption">
       <div class="card2">
         <h3 class="card-heading simple"><%= sessionUser.getFirstName() %> <%= sessionUser.getLastName() %></h3>
         <div class="card-body">
-          <form method="POST" action="/peer/<%= sessionUser.getId()%>/document/<%= document.getId()%>/comment">
-            <input name="comment" style="width:100%"></textarea>
+          <form method="POST" id="comment1" action="/peer/<%= sessionUser.getId()%>/document/<%= document.getId()%>/comment" parsley-validate>
+            <textarea id="textComment1" class="parsley-validated" name="comment" style="width:100%" parsley-trigger="change keyup"></textarea>
             <input type="hidden" name="docId" value="<%= document.getId()%>"/>
             <input type="hidden" name="peerId" value="<%= sessionUser.getId()%>"/>
             <input type="hidden" name="_method" value="POST">
@@ -149,8 +163,8 @@
                   <img class="media-object" data-src="holder.js/28x28" alt="avatar"/>
                 </a>
                 <div class="media-body">
-                  <form method="POST" action="/peer/<%= sessionUser.getId()%>/document/<%= document.getId()%>/comment">
-                    <textarea name="comment" style="width:100%"></textarea>
+                  <form method="POST" id="comment2" action="/peer/<%= sessionUser.getId()%>/document/<%= document.getId()%>/comment" parsley-validate>
+                    <textarea name="comment" id="textComment2" class="parsely-validated" style="width:100%" parsley-trigger="change keyup"></textarea>
                     <input type="hidden" name="docid" value="<%= document.getId()%>"/>
                     <input type="hidden" name="changesetid" value="<%= changeset.getId()%>"/>
                     <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>"/>

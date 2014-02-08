@@ -22,6 +22,7 @@ import javax.naming.OperationNotSupportedException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.sunnyd.annotations.ActiveRelationManyToMany;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,6 +69,8 @@ public class Peer extends Base {
     private Integer avatarId;
     @ActiveRecordField
     private String sessionId;
+    @ActiveRelationManyToMany(relationTable = "peers_groups")
+    private List<Group> groups;
 
     public Peer() {
         super();
@@ -205,6 +208,20 @@ public class Peer extends Base {
         this.changesets = changeSets;
     }
 
+    public List<Group> getGroups()
+    {
+        initRelation("groups");
+        return this.groups;
+    }
+
+    public Peer setGroups( List<Group> groups ) {
+        this.groups = groups;
+        this.setUpdateFlag(true);
+        return this;
+    }
+
+
+
     public static void main( String[] args ) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put( "email", "asn.brotha@gmail.com" );
@@ -276,12 +293,19 @@ public class Peer extends Base {
         this.gender = gender;
     }
 
+    public boolean hasAvatar()
+    {
+        return this.avatar != null && !this.avatar.getFilename().equalsIgnoreCase(Avatar.DEFAULT_AVATAR_FILENAME);
+    }
+
     public Avatar getAvatar() {
         initRelation( "avatar" );
 
         if ( this.avatar == null ) {
             this.avatar = Avatar.getDefaultAvatar();
             this.avatar.setPeerId( this.getId() );
+            if (this.avatar.save())
+                this.setAvatarId( this.avatar.getId() );
         }
 
         return this.avatar;
@@ -376,4 +400,5 @@ public class Peer extends Base {
 
         return document;
     }
+
 }
