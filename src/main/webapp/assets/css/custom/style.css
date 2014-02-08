@@ -271,3 +271,14 @@ i#bug {
 
 div.code pre {
   font-size: 1.5em; }
+
+div#dropzone-container {
+  display: none;
+  position: fixed;
+  bottom: 0px;
+  width: 100%; }
+  div#dropzone-container .dropzone {
+    background-color: #cbd0d3;
+    border: 5px dashed #a0aeaf;
+    border-radius: 30px;
+    margin: 30px; }

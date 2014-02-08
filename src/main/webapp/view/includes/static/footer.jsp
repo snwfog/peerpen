@@ -23,6 +23,8 @@
 <script src="/assets/js/custom/vote.js"></script>
 <script src="/assets/js/custom/confirm_delete_comment.js"></script>
 <script src="/assets/js/custom/reset.js"></script>
+<script src="/assets/js/custom/avatar.js"></script>
+
 
 </body>
 </html>

@@ -17,3 +17,7 @@ Dropzone.options.avatarUpload =
     this.on "addedfile", (file) ->
       console.log "#{file.name} added"
       this.removeFile(this.files[0]) if this.files.length > 1
+    this.on "success", (file) ->
+      console.log "successfully uploaded"
+      window.location.reload()
+
