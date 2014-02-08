@@ -68,6 +68,13 @@ public class Feedable extends Base {
                     }
                 }
             }
+            if(this instanceof Broadcast){
+                Broadcast bc = (Broadcast) this;
+                if(bc.getGroup() != null){
+                    a.setUserId(bc.getPeerId());
+                }
+            }
+
            return a.saveFeedable();
         }else{
             return false;
@@ -106,6 +113,12 @@ public class Feedable extends Base {
                     if(com.getChangeset() != null){
                         a.setUserId(com.getChangeset().getPeerId());
                     }
+                }
+            }
+            if(this instanceof Broadcast){
+                Broadcast bc = (Broadcast) this;
+                if(bc.getGroup()!=null){
+                    a.setUserId(bc.getPeerId());
                 }
             }
            return a.updateFeedable();
