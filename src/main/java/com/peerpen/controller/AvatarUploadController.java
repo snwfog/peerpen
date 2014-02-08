@@ -55,7 +55,6 @@ public class AvatarUploadController extends HttpServlet {
         int maxMemSize = 5000 * 1024;
         String fileName = "";
         String fileType = "";
-        String absolutePath = "";
         // Verify the content type
         if (isMultipart) {
 
@@ -90,7 +89,6 @@ public class AvatarUploadController extends HttpServlet {
                         largeAvatarFile = new File(
                                 MessageFormat.format("{0}/{1}/{2}/{3}.{4}", ctx.getRealPath(""), avatarDir,
                                         Avatar.LARGE_FOLDER, fileName, fileType));
-                        absolutePath = ctx.getRealPath("") + System.getProperty("file.separator") + avatarDir + System.getProperty("file.separator");
                         fi.write(largeAvatarFile);
                     }
                 }
@@ -100,7 +98,6 @@ public class AvatarUploadController extends HttpServlet {
                 avatar.setFilename(MessageFormat.format("{0}.{1}", fileName, fileType));
                 avatar.update(); // FIXME: Does PPAR update relationship?
                 sessionPeer.update();
-
             } catch (FileUploadException e) {
                 logger.error("Something went wrong with image upload ", e);
             } catch (Exception e) {
