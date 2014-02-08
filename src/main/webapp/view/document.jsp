@@ -39,7 +39,7 @@
         <h3 class="card-heading simple"><%= sessionUser.getFirstName() %> <%= sessionUser.getLastName() %></h3>
         <div class="card-body">
           <form method="POST" id="comment1" action="/peer/<%= sessionUser.getId()%>/document/<%= document.getId()%>/comment" parsley-validate>
-            <textarea id="text98" name="comment" style="width:100%" parsley-trigger="change keyup" required></textarea>
+            <textarea id="textComment1" class="parsley-validated" name="comment" style="width:100%" parsley-trigger="change keyup"></textarea>
             <input type="hidden" name="docId" value="<%= document.getId()%>"/>
             <input type="hidden" name="peerId" value="<%= sessionUser.getId()%>"/>
             <input type="hidden" name="_method" value="POST">
@@ -150,7 +150,7 @@
                 </a>
                 <div class="media-body">
                   <form method="POST" id="comment2" action="/peer/<%= sessionUser.getId()%>/document/<%= document.getId()%>/comment" parsley-validate>
-                    <textarea name="comment" id="text99" style="width:100%" parsley-trigger="change keyup" required></textarea>
+                    <textarea name="comment" id="textComment2" class="parsely-validated" style="width:100%" parsley-trigger="change keyup"></textarea>
                     <input type="hidden" name="docid" value="<%= document.getId()%>"/>
                     <input type="hidden" name="changesetid" value="<%= changeset.getId()%>"/>
                     <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>"/>
