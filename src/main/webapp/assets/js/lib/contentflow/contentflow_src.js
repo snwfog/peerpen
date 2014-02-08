@@ -635,6 +635,25 @@ ContentFlowItem.prototype = {
                     delete this.image;// = true;
 
                 }
+
+
+                //Bind Event PEERPEN
+                $(canvas).removeAttr("src");
+                $(canvas).bind("click", function(e){
+                    var doc = $(canvas).attr("id");
+                    $.ajax({
+                        type: "GET",
+                        url: "/DocumentAjax",
+                        contentType: "application/json; charset=utf-8",
+                        data: ({doc: doc}),
+                        success: function(response){
+                            alert("hold up let me insert it in you");
+                            $("#currentDocument").append(response);
+                        }
+                    });
+                }) ;
+
+
                 
             } else {
                 CFobj._reflectionWithinImage = false;

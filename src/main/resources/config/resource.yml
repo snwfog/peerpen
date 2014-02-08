@@ -19,6 +19,7 @@
 - reset(\.do)?
 - upload(\.do)?
 - vote(\.do)?
+- DocumentAjax(.do)?
 - logout
 
 

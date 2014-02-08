@@ -26,7 +26,7 @@
 <script src="/assets/js/lib/dropzone.min.js"></script>
 <script src="/assets/js/custom/avatar.js"></script>
 
-
+<script src="/assets/js/lib/contentflow/contentflow_src.js"></script>
 
 </body>
 </html>
