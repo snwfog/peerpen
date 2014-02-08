@@ -4,7 +4,6 @@
 <%@ page import="com.peerpen.model.PeersGroup" %>
 <%@ include file="/view/includes/static/header.jsp" %>
 <% Peer sessionUser = (Peer) request.getAttribute("sessionUser"); %>
-<% PeersGroup peersGroup = (PeersGroup) request.getAttribute("peersGroup"); %>
 <% Group group = (Group) request.getAttribute("group"); %>
 <% ArrayList<Peer> peers = (ArrayList<Peer>)group.getMembers();%>
 

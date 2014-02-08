@@ -16,10 +16,10 @@
           for (Group group : groups){
         %>
         <div class="col-6 col-sm-6 col-lg-4">
-          <h2><%= group.getGroupName()%> <span style="font-size: medium;"><i class="fa fa-users"></i>&nbsp;<%= group.getMembers().size()%></span></h2>
+          <h2><%= group.getGroupName()%> <span style="font-size: medium;"><i class="fa fa-users"></i>&nbsp;<%= group.getPeers().size()%></span></h2>
           <p>hallo, willkommen in kanada, hier sind wir gerne Bier mit Kaffee und Ahornsirup gemischt zu trinken. bitte vorbei tims hortons, es selbst zu versuchen!</p>
           <p>
-          <% if(group.getIsJoined(sessionUser.getId())){%>
+          <% if(group.getPeers().contains(sessionUser)){%>
             <form action="/group" method="post" class="form-horizontal" role="form">
               <input type="hidden" name="groupid" value="<%= group.getId()%>">
               <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>">
