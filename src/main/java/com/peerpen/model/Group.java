@@ -99,9 +99,9 @@ public class Group extends Taggable implements IModel {
 
   public boolean getIsJoined(Integer sessionUserId)
   {
-//    List<PeersGroup> peersGroup = new PeersGroup().queryAll(String.format("SELECT * FROM `peers_groups` WHERE `peer_id` = %s AND `group_id` = %s", sessionUserId, this.getId()));
-    return  this.getPeers().contains(new Peer().find(sessionUserId));
-  }
+    List<Peer> peers = new Peer().queryAll(String.format("SELECT * FROM `peers_groups` WHERE `peer_id` = %s AND `group_id` = %s", sessionUserId, this.getId()));
+    return peers.size()==1;
+}
     public List<Peer> getPeers()
     {
         initRelation("peers");

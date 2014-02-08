@@ -46,7 +46,7 @@
 
         <div id="row">
             <div class="col-md-4">
-                <h2> Tips from <%= group.getGroupName()%> member </h2>
+                <h2> Tips from <%= group.getGroupName()%> peers </h2>
                     <div class="caption">
                         <div class="card2">
                             <h3 class="card-heading simple"><%= sessionUser.getFirstName() %> <%= sessionUser.getLastName() %></h3>
