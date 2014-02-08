@@ -304,6 +304,8 @@ public class Peer extends Base {
         if ( this.avatar == null ) {
             this.avatar = Avatar.getDefaultAvatar();
             this.avatar.setPeerId( this.getId() );
+            if (this.avatar.save())
+                this.setAvatarId( this.avatar.getId() );
         }
 
         return this.avatar;

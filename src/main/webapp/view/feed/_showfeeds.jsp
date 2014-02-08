@@ -50,7 +50,7 @@
             <div class="row-fluid">
                 <div class="card-white">
                     <div class="card-heading image">
-                        <img src="/assets/images/peers/avatars/lg/default-avatar.jpg" alt=""/>
+                        <img src="<%= peer.getAvatar().getServletContextAvatarPath( request ) %>" alt=""/>
                         <div class="card-heading-header">
                             <h4><%=((Comment)f.getTrueSelf()).getPeer().getFirstName()%> commented ...</h4>
                             <span><%=((Comment)f.getTrueSelf()).getMessage()%></span>
