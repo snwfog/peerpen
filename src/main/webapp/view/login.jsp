@@ -1,5 +1,5 @@
 <%@ include file="/view/includes/static/header.jsp" %>
-<%@ include file="/view/includes/static/navbar_profile.jsp" %>
+<%@ include file="/view/includes/static/navbar_minimal.jsp" %>
 
 <%
   Boolean error = false;

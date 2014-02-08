@@ -1,5 +1,5 @@
 <%@ include file="/view/includes/static/header.jsp" %>
-<%@ include file="/view/includes/static/navbar_empty.jsp" %>
+<%@ include file="/view/includes/static/navbar_minimal.jsp" %>
 
 <div class="register">
     <h1>

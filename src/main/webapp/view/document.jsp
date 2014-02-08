@@ -6,9 +6,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.peerpen.model.TagDescriptor" %>
 <%@ page import="com.peerpen.model.Hunk" %>
+<%@ include file="/view/includes/static/navbar_profile.jsp" %>
 
 <%--Declare all request variables here, easy to debug!!!--%>
-<% Peer sessionUser = (Peer) request.getAttribute("sessionUser"); %>
 <% Peer urlUser; %>
 <% if (request.getAttribute("urlUser") != null){urlUser= (Peer) request.getAttribute("urlUser");}else{urlUser=sessionUser;} %>
 <% Document document =(Document) request.getAttribute("document");%>

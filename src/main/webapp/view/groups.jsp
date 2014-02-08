@@ -2,9 +2,9 @@
 <%@ page import="com.peerpen.model.Group" %>
 <%@ page import="java.util.List" %>
 <%@ include file="/view/includes/static/header.jsp" %>
+<%@ include file="/view/includes/static/navbar_profile.jsp" %>
 
 <%--Declare all request variables here, easy to debug!!!--%>
-<% Peer sessionUser = (Peer) request.getAttribute("sessionUser"); %>
 <% List<Group> groups = (List<Group>) request.getAttribute("groups"); %>
 
 <div class="container">

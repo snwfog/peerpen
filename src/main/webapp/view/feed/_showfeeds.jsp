@@ -37,7 +37,7 @@
 
                         <div class="clearfix"></div>
                         <%Integer documentId = ((Changeset)f.getTrueSelf()).getDocumentId();%>
-                        <p><a class="btn" href="/peer/<%=peer.getId()%>/document/<%=documentId%>">View Document &raquo;</a></p>
+                        <p><a class="btn" href="/peer/<%=sessionUser.getId()%>/document/<%=documentId%>">View Document &raquo;</a></p>
                     </div>
                 </div>
             </div>

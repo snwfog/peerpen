@@ -1,11 +1,11 @@
 <%@ page import="com.peerpen.model.Group" %>
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.peerpen.model.PeersGroup" %>
 <%@ include file="/view/includes/static/header.jsp" %>
-<% Peer sessionUser = (Peer) request.getAttribute("sessionUser"); %>
+<%@ include file="/view/includes/static/navbar_profile.jsp" %>
+
 <% Group group = (Group) request.getAttribute("group"); %>
-<% ArrayList<Peer> peers = (ArrayList<Peer>)group.getMembers();%>
+<% ArrayList<Peer> peers = (ArrayList<Peer>)group.getPeers();%>
 
 <%--
   Created by IntelliJ IDEA.

@@ -2,9 +2,8 @@
 <jsp:include page="/view/includes/static/header.jsp">
     <jsp:param name="title" value="FEED ME" />
 </jsp:include>
+<%@ include file="/view/includes/static/navbar_profile.jsp" %>
 
-
-<% Peer peer = (Peer) request.getAttribute( "peerObject" ); %>
 
 
 <div class="container-fluids greyish">
@@ -16,7 +15,7 @@
                 <img style="background-color:#fb5324;"/>
                 <div class="avatar">
                     <img class="img-circle"
-                         src=<%= peer.getAvatarId() != null ? peer.getAvatar() : "/assets/images/peers/avatars/lg/default-avatar.jpg" %>>
+                         src=<%= sessionUser.getAvatarId() != null ? sessionUser.getAvatar() : "/assets/images/peers/avatars/lg/default-avatar.jpg" %>>
                 </div>
 
                 <div class="info">
@@ -25,8 +24,8 @@
 
                 <div class="bottom">
                     <p>
-                        <a class="btn btn-primary" href="/peer/<%=peer.getId()%>/profile">View Profile &raquo;</a>
-                        <a class="btn btn-primary" href="/peer/<%=peer.getId()%>/document">View Documents &raquo;</a>
+                        <a class="btn btn-primary" href="/peer/<%=sessionUser.getId()%>/profile">View Profile &raquo;</a>
+                        <a class="btn btn-primary" href="/peer/<%=sessionUser.getId()%>/document">View Documents &raquo;</a>
                     </p>
                 </div>
             </div>

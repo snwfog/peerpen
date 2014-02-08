@@ -1,17 +1,20 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.peerpen.model.Peer" %>
+<%@ page import="com.peerpen.model.Group" %>
 <%
-    Peer peer = (Peer) request.getAttribute("sessionUser");
-    ArrayList<Group> groups =(ArrayList<Group>) peer.getGroups();
+    Peer sessionUser = (Peer) request.getAttribute("sessionUser");
+    ArrayList<Group> navGroups =(ArrayList<Group>) sessionUser.getGroups();
 %>
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">PeerPen</a>
+            <a class="navbar-brand" href="/">PeerPen</a>
         </div>
         <ul class="nav navbar-nav">
             <li><a href="#"><img class="profile"
                                  src="/assets/images/profile/pic2.jpg"/></a></li>
-            <li><%= peer.getFirstName().toString() %>
+            <li><%= sessionUser.getFirstName().toString() %>
             </a></li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
@@ -27,7 +30,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b
                         class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="/peer/<%= peer.getId()%>/document">Documents</a></li>
+                    <li><a href="/peer/<%= sessionUser.getId()%>/document">Documents</a></li>
             <%--<li><a href="/group/<%= %>">Groups</a></li>--%>
 
             <li><a href="#">Something else here</a></li>
@@ -39,12 +42,12 @@
             </li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Groups
-                    <%if (groups.size() > 0) {%><b
+                    <%if (navGroups.size() > 0) {%><b
                         class="caret"></b><%}%></a>
 
-                <%if (groups.size() > 0) {%>
+                <%if (navGroups.size() > 0) {%>
                 <ul class="dropdown-menu" role="menu">
-                    <% for(Group g: groups){%>
+                    <% for(Group g: navGroups){%>
                     <li class="list-group">
                         <a href="/group/<%=g.getId() %>"><%=g.getGroupName()%></a>
                     </li>
@@ -54,16 +57,17 @@
              </li>
         </ul>
         <!-- SEARCH FORM -->
-        <form action="/search" method="post" class="navbar-form navbar-right" role="form">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for documents, people and groups" name="search_query" id="search_query" autocomplete="off" />
-            <span class="input-group-btn">
-                <button type="submit" class="btn btn-primary" name="submit" />Search</button>
-            </span>
-            </div>
-        </form>
-        &nbsp &nbsp<a href="/logout">Logout</a>
-
-        </form>
+        <%--<form action="/search" method="post" class="navbar-form navbar-right" role="form">--%>
+            <%--<div class="input-group">--%>
+                <%--<input type="text" class="form-control" placeholder="Search for documents, people and groups" name="search_query" id="search_query" autocomplete="off" />--%>
+            <%--<span class="input-group-btn">--%>
+                <%--<button type="submit" class="btn btn-primary" name="submit" />Search</button>--%>
+            <%--</span>--%>
+            <%--</div>--%>
+        <%--</form>--%>
+        <%--&nbsp &nbsp<a href="/logout">Logout</a>--%>
+        <%--</form>--%>
     </div>
 </nav>
+
+<br /><br /><br/>

@@ -1,16 +1,9 @@
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ include file="/view/includes/static/header.jsp" %>
+<%@ include file="/view/includes/static/navbar_minimal.jsp" %>
 
 <%Peer peer = (Peer) request.getAttribute("user");%>
 
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand">PeerPen</a>
-        </div>
-    </div>
-
-</div>
 <div class="register">
     <form class="form-inline" name="register" id ="additional" action="/additional" method="post">
     <h1>Complete your profile <button class="pull-right btn btn-primary" type="submit">Next (1/2)</button></h1>
