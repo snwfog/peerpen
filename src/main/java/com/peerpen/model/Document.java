@@ -96,18 +96,11 @@ public class Document extends Taggable implements IModel
 
   public static void main(String[] args)
   {
-    //Document d = new Document();
-    //d.setDocName("mydoc");
-    //d.setPeerId(4);
-    //System.out.println(d.save());
-
-    Document d = new Document().find(16);
-    System.out.println(d.getPeer());
-    System.out.println(d.getPeer().getLastName());
-    System.out.println(d.getHunks());
-    System.out.println(d.getChangesets());
-
-    //System.out.println(d.getPeer().getCreationDate());
+    Document d = new Document().find(2);
+    System.out.println("doc test");
+    System.out.println("username:" + d.getPeer().getUserName());
+    System.out.println("hunks:" + d.getHunks());
+    System.out.println("changeset:" + d.getChangesets());
   }
 
   public Date getLastModifiedDate()

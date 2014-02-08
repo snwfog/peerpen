@@ -5,6 +5,7 @@
 <%@ page import="com.peerpen.model.Changeset" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.peerpen.model.TagDescriptor" %>
+<%@ page import="com.peerpen.model.Hunk" %>
 
 <%--Declare all request variables here, easy to debug!!!--%>
 <% Peer sessionUser = (Peer) request.getAttribute("sessionUser"); %>
@@ -13,25 +14,38 @@
 <% Document document =(Document) request.getAttribute("document");%>
 <% List<Object> objectList = document.getCommentAndChangeset();%>
 <% List<TagDescriptor> tds = document.getTagDescriptors(); %>
+<% List<Hunk> hunks = document.getHunks(); %>
 
 
 
 <div class="container">
   <h1><%= document.getDocName()%> <%= (sessionUser.getId() == urlUser.getId()) ? "" : " (View-only mode)" %></h1>
 
+    <div style="border:1px solid black">
+        <%
+            for(Hunk hunk: hunks){
+        %>
+        <textarea name=""><%= hunk.getContent()%></textarea>
+        <%
+            }
+        %>
+    </div>
+    <br /><br />
     <!-- this section is for tags -->
     <div>
         <form action="/tag" method="post" class="form-horizontal" role="form">
             <input type="hidden" name="entityType" value="document" />
             <input type="hidden" name="entityId" value="<%=document.getId()%>" />
-            <ul id="entityTags">
+            <ul id="entityTags" style="float:left;width:600px;">
                 <% for (TagDescriptor td : tds){ %>
                 <li><%=td.getTagName() %></li>
                 <% } %>
             </ul>
-            <button type="submit" class="btn btn-primary" name="submit" />Save Tags</button>
+            <button type="submit" class="btn btn-primary" name="submit" style="margin-left:10px" />Save Tags</button>
         </form>
     </div>
+
+    <br /><br /><br /><br />
 
   <div id="content">
     <div class="caption">
