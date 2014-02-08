@@ -5,6 +5,7 @@ import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -68,4 +69,23 @@ public class PeersGroup extends Base implements IModel {
         this.peerId = peer.getId(); //!
         this.peer = peer;
     }
+
+    public List<Peer> getParticipants()
+    {
+        return new Peer().queryAll("SELECT * FROM `peers_groups` WHERE `group_id` = "+this.groupId);
+    }
+
+    public List<Peer> getMembers (){
+        List<Peer> peers = new ArrayList<>(  );
+        String sql =("SELECT * FROM `peers_groups` WHERE `group_id` = "+this.groupId);
+        List<PeersGroup> peersGroups = new PeersGroup().queryAll( sql );
+        for (int i=0; i<peersGroups.size();i++){
+            PeersGroup peersGroup = peersGroups.get( i );
+            String getPeers = "SELECT * FROM `peers` WHERE id = '" + peersGroup.getPeerId().toString() + "'";
+            List<Peer> groupMember = new Peer(  ).queryAll( getPeers );
+            peers.add( groupMember.get( 0 ) );
+        }
+        return peers;
+    }
+
 }
