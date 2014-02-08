@@ -21,6 +21,9 @@ public class Group extends Taggable implements IModel {
     @ActiveRecordField
     private String description;
 
+    @ActiveRelationManyToMany(relationTable = "peers_groups")
+    private List<Peer> peers;
+
     public Group() {
         super();
     }
@@ -106,8 +109,21 @@ public class Group extends Taggable implements IModel {
     return peerList;  //To change body of created methods use File | Settings | File Templates.
   }
 
+    public List<Peer> getPeers()
+    {
+        initRelation("peers");
+        return this.peers;
+    }
 
-  //public List<Group> removeDuplicates(List<Group> groups){
+    public Group setPeers( List<Peer> peers ) {
+        this.peers = peers;
+        this.setUpdateFlag(true);
+        return this;
+    }
+
+
+
+    //public List<Group> removeDuplicates(List<Group> groups){
     //    List<Group> set = new ArrayList<>(  );
     //    for(int i=0;i<groups.size();i++){
     //        if(!set.contains( groups.get( i ) )){

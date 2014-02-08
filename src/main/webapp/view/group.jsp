@@ -38,11 +38,34 @@
                     <td><%=p.getLastName()%></td>
                     <td><%=p.getUserName()%></td>
                     <td><%=p.getEmail()%></td>
+                    <td><a href="/peer/<%=p.getId()%>/document"> Documents </a></td>
                 </tr>
                 <%}%>
                 </tbody>
             </table>
          </div>
+
+        <div id="row">
+            <div class="col-md-4">
+                <h2> Tips from <%= group.getGroupName()%> member </h2>
+                    <div class="caption">
+                        <div class="card2">
+                            <h3 class="card-heading simple"><%= sessionUser.getFirstName() %> <%= sessionUser.getLastName() %></h3>
+                            <div class="card-body">
+                                <form method="POST" id="comment1" action="/group/<%= group.getId()%>" parsley-validate>
+                                    <textarea id="textComment1" class="parsley-validated" name="comment" style="width:100%" parsley-trigger="change keyup"></textarea>
+                                    <%--<input type="hidden" name="docId" value="<%= document.getId()%>"/>--%>
+                                    <%--<input type="hidden" name="peerId" value="<%= sessionUser.getId()%>"/>--%>
+                                    <input type="hidden" name="_method" value="POST">
+                                    <button type="submit" class="btn btn-success ">Post</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+             </div>
+         </div>
+
+
     </div>
 </div>
 <%}else

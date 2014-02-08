@@ -22,6 +22,7 @@ import javax.naming.OperationNotSupportedException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.sunnyd.annotations.ActiveRelationManyToMany;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,6 +69,8 @@ public class Peer extends Base {
     private Integer avatarId;
     @ActiveRecordField
     private String sessionId;
+    @ActiveRelationManyToMany(relationTable = "peers_groups")
+    private List<Group> groups;
 
     public Peer() {
         super();
@@ -204,6 +207,20 @@ public class Peer extends Base {
     public void setChangesets( List<Changeset> changeSets ) {
         this.changesets = changeSets;
     }
+
+    public List<Group> getGroups()
+    {
+        initRelation("groups");
+        return this.groups;
+    }
+
+    public Peer setGroups( List<Group> groups ) {
+        this.groups = groups;
+        this.setUpdateFlag(true);
+        return this;
+    }
+
+
 
     public static void main( String[] args ) {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -382,9 +399,11 @@ public class Peer extends Base {
         return document;
     }
 
-    public List<Group> getGroups()
-    {
-        List<Group> groupList = new Group().queryAll(String.format("SELECT * FROM groups g , peers_groups pg where g.id = pg.group_id and pg.peer_id= %s", this.getId()));
-        return groupList;  //To change body of created methods use File | Settings | File Templates.
-    }
+//    public List<Group> getGroups()
+//    {
+//        List<Group> groupList = new Group().queryAll(String.format("SELECT * FROM groups g , peers_groups pg where g.id = pg.group_id and pg.peer_id= %s", this.getId()));
+//        return groupList;  //To change body of created methods use File | Settings | File Templates.
+//    }
+
+
 }

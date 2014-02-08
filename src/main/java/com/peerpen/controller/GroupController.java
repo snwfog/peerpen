@@ -42,24 +42,12 @@ public class GroupController extends GenericApplicationServlet
   {
       Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
       Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
-      ArrayList<PeersGroup> existingPeerGroups =(ArrayList)new PeersGroup().findAll(null);
       Group group = new Group().find(Integer.parseInt(parameters.get("groupid")));
-      System.out.println(existingPeerGroups);
+      group.getPeers().add(peer);
+      group.setUpdateFlag(true);
+      group.update();
 
-      Map<String, Object> map = Maps.newHashMap();
-      map.put("peerId", peer.getId());
-      map.put("groupId", Integer.parseInt(parameters.get("groupid")));
-
-      PeersGroup pg = new PeersGroup(map);
-//      for(PeersGroup p: existingPeerGroups)
-//      {
-//          if(p.getPeerId()!=pg.getPeerId() && p.getGroupId()!= pg.getGroupId())
-//          {
-//             pg.save();
-//          }
-//      }
-          pg.save();
-      request.setAttribute("peersGroup", pg);
+      request.setAttribute("peer", peer);
       request.setAttribute("group", group);
       response.sendRedirect(request.getHeader("referer"));
 //      request.getRequestDispatcher("/view/group.jsp").forward(request, response);
