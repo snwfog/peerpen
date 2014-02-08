@@ -187,7 +187,7 @@ $(document).ready(function(){
         onFieldError: function(elem, ParsleyField) {
           var fieldType = elem.attr('id'); 
           switch (fieldType){
-            case 'text99':
+            case 'text1':
               console.log('Comment is empty.');
               break;
             case 'parsley-user':
@@ -208,10 +208,10 @@ $(document).ready(function(){
     }
   });
 
-  /*$('textarea#text99').parsley('addConstraint', 
+  $('textarea#textComment1').parsley('addConstraint', 
     {'required': 'true'});
-  $('textarea#text2').parsley('addConstraint', 
-    {'required': 'true'});*/
+  $('textarea#textComment2').parsley('addConstraint', 
+    {'required': 'true'});
 
   $('input#index-username').parsley('addConstraint', 
     {'required': 'true'});

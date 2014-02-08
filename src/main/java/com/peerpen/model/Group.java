@@ -94,8 +94,20 @@ public class Group extends Taggable implements IModel {
 
     }
 
+  public boolean getIsJoined(Integer sessionUserId)
+  {
+    List<PeersGroup> peersGroup = new PeersGroup().queryAll(String.format("SELECT * FROM `peers_groups` WHERE `peer_id` = %s AND `group_id` = %s", sessionUserId, this.getId()));
+    return peersGroup.size() == 1;
+  }
 
-    //public List<Group> removeDuplicates(List<Group> groups){
+  public List<Peer> getMembers()
+  {
+    List<Peer> peerList = new Peer().queryAll(String.format("SELECT * FROM peers p , peers_groups pg where p.id = pg.peer_id and pg.group_id= %s", this.getId()));
+    return peerList;  //To change body of created methods use File | Settings | File Templates.
+  }
+
+
+  //public List<Group> removeDuplicates(List<Group> groups){
     //    List<Group> set = new ArrayList<>(  );
     //    for(int i=0;i<groups.size();i++){
     //        if(!set.contains( groups.get( i ) )){
