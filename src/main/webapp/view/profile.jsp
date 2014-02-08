@@ -1,9 +1,12 @@
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="java.util.Date"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.peerpen.model.Group" %>
 <%@ include file="/view/includes/static/header.jsp" %>
 <script src="/assets/js/custom/search_autocomplete_caller.js"></script>
 <%
     Peer peer = (Peer) request.getAttribute("user");
+    ArrayList<Group> groups =(ArrayList<Group>) peer.getGroups();
 %>
 
 
@@ -37,7 +40,14 @@
             class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a href="/peer/<%= peer.getId()%>/document">Documents</a></li>
-          <li><a href="/group">Groups</a></li>
+           <li><a> My groups </a>
+            <% for(Group g: groups){%>
+               <li class="list-group">
+               <a href="/group/<%=g.getId() %>"><%=g.getGroupName()%></a>
+                </li>
+            <%}%>
+            </li>
+            <%--<li><a href="/group/<%= %>">Groups</a></li>--%>
           <li><a href="#">Something else here</a></li>
           <li class="divider"></li>
           <li><a href="#">Separated link</a></li>

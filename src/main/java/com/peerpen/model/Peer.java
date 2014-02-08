@@ -381,4 +381,10 @@ public class Peer extends Base {
 
         return document;
     }
+
+    public List<Group> getGroups()
+    {
+        List<Group> groupList = new Group().queryAll(String.format("SELECT * FROM groups g , peers_groups pg where g.id = pg.group_id and pg.peer_id= %s", this.getId()));
+        return groupList;  //To change body of created methods use File | Settings | File Templates.
+    }
 }

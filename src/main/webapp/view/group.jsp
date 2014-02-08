@@ -6,7 +6,7 @@
 <% Peer sessionUser = (Peer) request.getAttribute("sessionUser"); %>
 <% PeersGroup peersGroup = (PeersGroup) request.getAttribute("peersGroup"); %>
 <% Group group = (Group) request.getAttribute("group"); %>
-<% ArrayList<Peer> peers = (ArrayList<Peer>)peersGroup.getMembers();%>
+<% ArrayList<Peer> peers = (ArrayList<Peer>)group.getMembers();%>
 
 <%--
   Created by IntelliJ IDEA.
