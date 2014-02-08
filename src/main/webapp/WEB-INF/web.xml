@@ -325,6 +325,15 @@
         <url-pattern>/about</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>DocumentAjax.do</servlet-name>
+        <servlet-class>com.peerpen.ajax.DocumentAjaxController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DocumentAjax.do</servlet-name>
+        <url-pattern>/DocumentAjax</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>72</session-timeout>
     </session-config>
@@ -434,5 +443,4 @@
         <exception-type>java.lang.Exception</exception-type>
         <location>/error</location>
     </error-page>
-
 </web-app>
