@@ -1,12 +1,5 @@
 <%@ include file="/view/includes/static/header.jsp" %>
-
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">PeerPen</a>
-        </div>
-    </div>
-</div>
+<%@ include file="/view/includes/static/navbar_minimal.jsp" %>
 
 <div class="container">
     <form action="" style="max-width:330px; margin:0 auto" >

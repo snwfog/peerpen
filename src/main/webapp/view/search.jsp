@@ -3,9 +3,10 @@
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="com.peerpen.model.Group" %>
 <%@ include file="/view/includes/static/header.jsp" %>
+<%@ include file="/view/includes/static/navbar_profile.jsp" %>
+
 
 <div class="container">
-
     <!-- SEARCH FORM -->
     <form action="/search" method="post" class="form-horizontal" role="form">
         <div class="btn-group" data-toggle="buttons">
@@ -71,12 +72,12 @@
 
             <%
             }else if(itemClass.endsWith( "Peer" )){
-                Peer peer = (Peer) resultItem;
+                Peer p = (Peer) resultItem;
             %>
 
-            <tr><td>Peer</td><td><a href="/peer/<%= peer.getId() %>/profile"> <%= peer.getUserName() %></a>
-            (<%= peer.getFirstName() %> <%= peer.getLastName() %>)
-            point: <%= peer.getPoint() %></td></tr>
+            <tr><td>Peer</td><td><a href="/peer/<%= p.getId() %>/profile"> <%= p.getUserName() %></a>
+            (<%= p.getFirstName() %> <%= p.getLastName() %>)
+            point: <%= p.getPoint() %></td></tr>
 
             <%
             }else if(itemClass.endsWith( "Group" )){

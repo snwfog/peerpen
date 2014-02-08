@@ -2,15 +2,14 @@
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.peerpen.model.Document" %>
-
+<%@ include file="/view/includes/static/navbar_profile.jsp" %>
 <%--Declare all request variables here, easy to debug!!!--%>
 <% Peer peer = (Peer) request.getAttribute( "peer" ); %>
-<% Peer sessionUser = (Peer) request.getAttribute( "sessionUser" ); %>
-<% List<Document> documents = peer.getDocuments(); %>
+<% List<Document> documents = sessionUser.getDocuments(); %>
 
 <div class="container-fluid">
 
-    <h1>You are viewing <%= (sessionUser.getId() == peer.getId())  ? "your own" : peer.getFirstName()+"&#39;s" %> documents</h1>
+    <h1>You are viewing <%= (sessionUser.getId() == sessionUser.getId())  ? "your own" : peer.getFirstName()+"&#39;s" %> documents</h1>
 
     <h2>Number of documents: <%= peer.getDocuments().size()%>
     </h2>

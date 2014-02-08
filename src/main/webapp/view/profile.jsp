@@ -3,13 +3,13 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.peerpen.model.Group" %>
 <%@ include file="/view/includes/static/header.jsp" %>
-<script src="/assets/js/custom/search_autocomplete_caller.js"></script>
+<%@ include file="/view/includes/static/navbar_profile.jsp" %>
 
 <%--Cropped image :<%= session.getAttribute("croppedImage") %>--%>
 <%--<br />--%>
 <%--<img src="/assets/images/profile/<%= session.getAttribute("croppedImage") %>" />--%>
 
-<%@ include file="/view/includes/static/navbar_profile.jsp" %>
+
 
 <br>
 
@@ -46,32 +46,32 @@
                 <td><h6>First name</h6></td>
                 <td><input type="text" class="form-control peerPersonal"
                            name="first_name"
-                           value="<%= peer.getFirstName().toString() %>" readonly>
+                           value="<%= sessionUser.getFirstName().toString() %>" readonly>
                 </td>
               </tr>
               <tr>
                 <td><h6>Last name</h6></td>
                 <td><input type="text" class="form-control peerPersonal"
                            name="last_name"
-                           value="<%= peer.getLastName().toString() %>" readonly>
+                           value="<%= sessionUser.getLastName().toString() %>" readonly>
                 </td>
               </tr>
               <tr>
                 <td><h6>Username</h6></td>
                 <td><input type="text" class="form-control peerUsername"
                            name="user_name"
-                           value="<%= peer.getUserName().toString() %>" readonly>
+                           value="<%= sessionUser.getUserName().toString() %>" readonly>
                 </td>
               </tr>
               <tr>
                 <td><h6>Date of Birth &nbsp</h6></td>
                 <td><input type="text" class="form-control peerPersonal"
                            name="dob"
-                           value="<%= peer.getDateOfBirth() == null ? "" : peer.getDateOfBirth().toString()%>" readonly>
+                           value="<%= sessionUser.getDateOfBirth() == null ? "" : sessionUser.getDateOfBirth().toString()%>" readonly>
                 </td>
               </tr>
               <input type="hidden" class="form-control peerID" name="id"
-                     value="<%= peer.getId().toString()%>">
+                     value="<%= sessionUser.getId().toString()%>">
             </table>
           </div>
           <div class="col-md-6">
@@ -80,35 +80,35 @@
                 <td><h6>Gender</h6></td>
                 <td><input type="text" class="form-control peerPersonal"
                            name="gender"
-                           value="<%= peer.getGender() == null ? "" : peer.getGender().toString() %>" readonly>
+                           value="<%= sessionUser.getGender() == null ? "" : sessionUser.getGender().toString() %>" readonly>
                 </td>
               </tr>
               <tr>
                 <td><h6>Country</h6></td>
                 <td><input type="text" class="form-control peerPersonal"
                            name="country"
-                           value="<%= peer.getCountry().toString()%>" readonly>
+                           value="<%= sessionUser.getCountry().toString()%>" readonly>
                 </td>
               </tr>
               <tr>
                 <td><h6>Industry</h6></td>
                 <td><input type="text" class="form-control peerPersonal"
                            name="industry"
-                           value="<%=peer.getIndustry().toString()%>" readonly>
+                           value="<%=sessionUser.getIndustry().toString()%>" readonly>
                 </td>
               </tr>
               <tr>
                 <td><h6>Years of Experience &nbsp</h6></td>
                 <td><input type="text" class="form-control peerPersonal"
                            name="yoe"
-                           value="<%= peer.getExperience() == 0 ? "" : peer.getExperience().toString() %>" readonly>
+                           value="<%= sessionUser.getExperience() == 0 ? "" : sessionUser.getExperience().toString() %>" readonly>
                 </td>
               </tr>
               <input type="hidden" class="form-control peerID" name="id"
-                     value="<%= Integer.parseInt(peer.getId().toString())%>">
-              <input type="hidden" name ="description" value ="<%= peer.getDescription()%>" >
-              <input type="hidden" name ="email" value ="<%= peer.getEmail()%>" >
-              <input type="hidden" name ="personal_website" value ="<%= peer.getPersonalWebsite()%>" >
+                     value="<%= Integer.parseInt(sessionUser.getId().toString())%>">
+              <input type="hidden" name ="description" value ="<%= sessionUser.getDescription()%>" >
+              <input type="hidden" name ="email" value ="<%= sessionUser.getEmail()%>" >
+              <input type="hidden" name ="personal_website" value ="<%= sessionUser.getPersonalWebsite()%>" >
             </table>
           </div>
           </form>
@@ -127,19 +127,19 @@
       </div>
       <div class="well">
         <form action="/profile" id="form_description" method="post">
-            <textarea class ="peerDescription well form-control" name ="description" style="resize:none" rows="3" readonly><%= peer.getDescription().toString() %></textarea>
-            <input type="hidden" class="form-control peerID" name="id" value="<%= Integer.parseInt(peer.getId().toString())%>"/>
-            <input type="hidden" name ="email" value ="<%= peer.getEmail()%>" >
-            <input type="hidden" name ="personal_website" value ="<%= peer.getPersonalWebsite()%>" >
-            <input type="hidden" class="form-control peerPersonal" name="first_name" value="<%= peer.getFirstName().toString() %>">
-            <input type="hidden" class="form-control peerPersonal" name="last_name" value="<%= peer.getLastName().toString() %>" >
-            <input type="hidden" class="form-control peerUsername" name="user_name" value="<%= peer.getUserName().toString() %>" >
-            <input type="hidden" class="form-control peerDoB" name="dob" value="<%= peer.getDateOfBirth() == null ? "" : peer.getDateOfBirth().toString() %>">
-            <input type="hidden" class="form-control peerID" name="id" value="<%= peer.getId().toString()%>">
-            <input type="hidden" class="form-control peerPersonal" name="gender" value="<%= peer.getGender() == null ? "" : peer.getGender().toString() %>" >
-            <input type="hidden" class="form-control peerPersonal" name="country" value="<%= peer.getCountry().toString()%>" >
-            <input type="hidden" class="form-control peerPersonal" name="industry" value="<%=peer.getIndustry().toString()%>">
-            <input type="hidden" class="form-control peerPersonal" name="yoe" value="<%=peer.getExperience().toString()%>">
+            <textarea class ="peerDescription well form-control" name ="description" style="resize:none" rows="3" readonly><%= sessionUser.getDescription().toString() %></textarea>
+            <input type="hidden" class="form-control peerID" name="id" value="<%= Integer.parseInt(sessionUser.getId().toString())%>"/>
+            <input type="hidden" name ="email" value ="<%= sessionUser.getEmail()%>" >
+            <input type="hidden" name ="personal_website" value ="<%= sessionUser.getPersonalWebsite()%>" >
+            <input type="hidden" class="form-control peerPersonal" name="first_name" value="<%= sessionUser.getFirstName().toString() %>">
+            <input type="hidden" class="form-control peerPersonal" name="last_name" value="<%= sessionUser.getLastName().toString() %>" >
+            <input type="hidden" class="form-control peerUsername" name="user_name" value="<%= sessionUser.getUserName().toString() %>" >
+            <input type="hidden" class="form-control peerDoB" name="dob" value="<%= sessionUser.getDateOfBirth() == null ? "" : sessionUser.getDateOfBirth().toString() %>">
+            <input type="hidden" class="form-control peerID" name="id" value="<%= sessionUser.getId().toString()%>">
+            <input type="hidden" class="form-control peerPersonal" name="gender" value="<%= sessionUser.getGender() == null ? "" : sessionUser.getGender().toString() %>" >
+            <input type="hidden" class="form-control peerPersonal" name="country" value="<%= sessionUser.getCountry().toString()%>" >
+            <input type="hidden" class="form-control peerPersonal" name="industry" value="<%=sessionUser.getIndustry().toString()%>">
+            <input type="hidden" class="form-control peerPersonal" name="yoe" value="<%=sessionUser.getExperience().toString()%>">
 
         </form>
         <a class ="pull-right" type="submit" class="pull-right" style="visibility:hidden"x
@@ -160,7 +160,7 @@
             <tr>
               <td><h6>Email</h6></td>
               <td><input type="text" class="form-control peerContact"
-                         name="email" value="<%= peer.getEmail() == null ? "" : peer.getEmail().toString() %>"
+                         name="email" value="<%= sessionUser.getEmail() == null ? "" : sessionUser.getEmail().toString() %>"
                          readonly></td>
             </tr>
             <input type="hidden" class="form-control peerPoint" name="point"
@@ -171,22 +171,22 @@
               <td><h6>Website &nbsp</h6></td>
               <td><input type="text" class="form-control peerContact"
                          name="personal_website"
-                         value="<%= peer.getPersonalWebsite().toString() %>"
+                         value="<%= sessionUser.getPersonalWebsite().toString() %>"
                          readonly></td>
             </tr>
             <input type="hidden" class="form-control peerID" name="id"
-                   value="<%= Integer.parseInt(peer.getId().toString())%>">
+                   value="<%= Integer.parseInt(sessionUser.getId().toString())%>">
           </table>
-            <input type="hidden" class="form-control peerPersonal" name="first_name" value="<%= peer.getFirstName().toString() %>">
-            <input type="hidden" class="form-control peerPersonal" name="last_name" value="<%= peer.getLastName().toString() %>" >
-            <input type="hidden" class="form-control peerUsername" name="user_name" value="<%= peer.getUserName().toString() %>" >
-            <input type="hidden" class="form-control peerPersonal" name="dob" value="<%= peer.getDateOfBirth() == null ? "" : peer.getDateOfBirth().toString() %>">
-            <input type="hidden" class="form-control peerID" name="id" value="<%= peer.getId().toString()%>">
-            <input type="hidden" class="form-control peerPersonal" name="gender" value="<%= peer.getGender() == null ? "" : peer.getGender().toString() %>\" >
-            <input type="hidden" class="form-control peerPersonal" name="country" value="<%= peer.getCountry().toString()%>" >
-            <input type="hidden" class="form-control peerPersonal" name="industry" value="<%=peer.getIndustry().toString()%>">
-            <input type="hidden" class="form-control peerPersonal" name="yoe" value="<%=peer.getExperience().toString()%>">
-            <input type="hidden" name ="description" value ="<%= peer.getDescription()%>" >
+            <input type="hidden" class="form-control peerPersonal" name="first_name" value="<%= sessionUser.getFirstName().toString() %>">
+            <input type="hidden" class="form-control peerPersonal" name="last_name" value="<%= sessionUser.getLastName().toString() %>" >
+            <input type="hidden" class="form-control peerUsername" name="user_name" value="<%= sessionUser.getUserName().toString() %>" >
+            <input type="hidden" class="form-control peerPersonal" name="dob" value="<%= sessionUser.getDateOfBirth() == null ? "" : sessionUser.getDateOfBirth().toString() %>">
+            <input type="hidden" class="form-control peerID" name="id" value="<%= sessionUser.getId().toString()%>">
+            <input type="hidden" class="form-control peerPersonal" name="gender" value="<%= sessionUser.getGender() == null ? "" : sessionUser.getGender().toString() %>\" >
+            <input type="hidden" class="form-control peerPersonal" name="country" value="<%= sessionUser.getCountry().toString()%>" >
+            <input type="hidden" class="form-control peerPersonal" name="industry" value="<%=sessionUser.getIndustry().toString()%>">
+            <input type="hidden" class="form-control peerPersonal" name="yoe" value="<%=sessionUser.getExperience().toString()%>">
+            <input type="hidden" name ="description" value ="<%= sessionUser.getDescription()%>" >
         </form>
         <a class ="pull-right" type="submit" class="pull-right" style="visibility:hidden"
            id="save_contact" value="Save" href="#">Save

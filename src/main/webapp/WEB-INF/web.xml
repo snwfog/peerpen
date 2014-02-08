@@ -390,6 +390,7 @@
             /assets
             /routes
             /reset
+            /about
         </param-value>
     </context-param>
 
