@@ -36,4 +36,3 @@
 
 }).call(this);
 
-//# sourceMappingURL=upload.bare.map
