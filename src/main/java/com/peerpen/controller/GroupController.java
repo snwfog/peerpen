@@ -23,29 +23,43 @@ public class GroupController extends GenericApplicationServlet
     Peer sessionUser = (Peer) request.getAttribute("sessionUser");
     Group urlGroup = (Group) modelMap.get("group");
     List<Group> groups = new Group().getGroups();
-    if(urlGroup!=null)
+    if (urlGroup != null)
     {
-       request.setAttribute("group", urlGroup);
-       request.getRequestDispatcher("/view/group.jsp").forward(request, response);
-    }else
+      request.setAttribute("group", urlGroup);
+      request.getRequestDispatcher("/view/group.jsp").forward(request, response);
+    }
+    else
     {
-        request.setAttribute("groups", groups);
-        request.getRequestDispatcher("/view/groups.jsp").forward(request, response);
+      request.setAttribute("groups", groups);
+      request.getRequestDispatcher("/view/groups.jsp").forward(request, response);
     }
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
-      Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
-      Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
-      Group group = new Group().find(Integer.parseInt(parameters.get("groupid")));
-      group.getPeers().add(peer);
-      group.setUpdateFlag(true);
-      group.update();
+    Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+    Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
+    Group group = new Group().find(Integer.parseInt(parameters.get("groupid")));
+    group.getPeers().add(peer);
+    group.setUpdateFlag(true);
+    group.update();
 
-      request.setAttribute("peer", peer);
-      request.setAttribute("group", group);
-      response.sendRedirect(request.getHeader("referer"));
-//      request.getRequestDispatcher("/view/group.jsp").forward(request, response);
+    request.setAttribute("peer", peer);
+    request.setAttribute("group", group);
+    response.sendRedirect(request.getHeader("referer"));
   }
+
+  protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+  {
+    Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+    Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
+    Group group = new Group().find(Integer.parseInt(parameters.get("groupid")));
+    group.removePeer(peer);
+    group.update();
+
+    request.setAttribute("peer", peer);
+    request.setAttribute("group", group);
+    response.sendRedirect(request.getHeader("referer"));
+  }
+
 }
