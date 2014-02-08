@@ -2,7 +2,7 @@
 (function() {
   Dropzone.options.avatarUpload = {
     maxFilesize: 3,
-    autoProcessQueue: true,
+    autoProcessQueue: false,
     maxFiles: 1,
     thumbnailWidth: 512,
     thumbnailHeight: 512,
@@ -27,8 +27,9 @@
         return window.location.reload();
       });
       return this.on("thumbnail", function(file, dataUrl) {
-        console.log(file.size);
-        return console.log(dataUrl);
+        $("input#avatar-original-width").val(file.width);
+        $("input#avatar-original-height").val(file.height);
+        return this.processQueue();
       });
     }
   };
