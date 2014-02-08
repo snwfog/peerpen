@@ -276,6 +276,11 @@ public class Peer extends Base {
         this.gender = gender;
     }
 
+    public boolean hasAvatar()
+    {
+        return this.avatar != null && !this.avatar.getFilename().equalsIgnoreCase(Avatar.DEFAULT_AVATAR_FILENAME);
+    }
+
     public Avatar getAvatar() {
         initRelation( "avatar" );
 

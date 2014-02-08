@@ -1,7 +1,7 @@
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ include file="/view/includes/static/header.jsp" %>
 
-<% Peer sessionPeer = (Peer) request.getAttribute( "sessionUser" ); %>
+<% Peer sessionPeer = (Peer) request.getAttribute("sessionUser"); %>
 
 <div class="container">
     <div class="row">
@@ -18,6 +18,10 @@
                     <input type="hidden" id="avatar-crop-width" name="width" value="">
                     <input type="hidden" id="avatar-crop-height" name="height" value="">
 
+                    <div id="avatar-original-area">
+                        <img id="avatar" src="/assets/images/peers/avatars/lg/grid.png" alt=""/>
+                    </div>
+
                     <button class="btn btn-large btn-success" type="submit">Accept</button>
 
                 </form>
@@ -25,10 +29,9 @@
         </div>
         <div class="col-md-4">
             <div id="avatar-preview-container">
-                <img id="avatar-preview"/>
+                <img id="avatar-preview" src="/assets/images/peers/avatars/lg/grid.png"/>
             </div>
         </div>
     </div>
 </div>
-
 <%@ include file="/view/includes/static/footer.jsp" %>

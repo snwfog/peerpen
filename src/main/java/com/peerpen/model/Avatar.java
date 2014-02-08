@@ -12,7 +12,9 @@ public class Avatar extends Base implements IModel {
 
     public static final String tableName = "avatars";
 
-    private static String DEFAULT_AVATAR_FILENAME = "default-avatar.jpg";
+    public static String DEFAULT_AVATAR_FILENAME = "default-avatar.jpg";
+    public static final String SMALL_FOLDER = "sm";
+    public static final String LARGE_FOLDER = "lg";
 
     @ActiveRecordField
     private String filename;
@@ -55,8 +57,6 @@ public class Avatar extends Base implements IModel {
 
         return av;
     }
-
-
 
     public Peer getPeer() {
         initRelation( "peer" );
