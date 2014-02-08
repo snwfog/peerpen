@@ -2,7 +2,7 @@
 (function() {
   Dropzone.options.avatarUpload = {
     maxFilesize: 3,
-    autoProcessQueue: false,
+    autoProcessQueue: true,
     maxFiles: 1,
     thumbnailWidth: 512,
     thumbnailHeight: 512,

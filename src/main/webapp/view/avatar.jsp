@@ -5,12 +5,10 @@
 
 <div class="container">
     <div class="row">
+        <a href="/peer/<%= sessionPeer.getId() %>/profile/avatar/upload" class="btn btn-info">Upload New Avatar</a>
         <div class="col-md-8">
             <div id="avatar-original-container">
-                <%--<img id="avatar-original" src="/assets/images/browser-icon-chrome.png"--%>
-                <%--name="avatar-original" alt="Image for Profile">--%>
-                <form enctype="multipart/form-data" class="dropzone" id="avatar-upload"
-                      action="/peer/<%= sessionPeer.getId() %>/profile/avatar" method="post">
+                <form  action="/peer/<%= sessionPeer.getId() %>/profile/avatar" method="post">
                     <input type="hidden" id="avatar-crop-x1" name="x1" value="">
                     <input type="hidden" id="avatar-crop-x2" name="x2" value="">
                     <input type="hidden" id="avatar-crop-y1" name="y1" value="">

@@ -1,6 +1,7 @@
 package com.peerpen.controller;
 
 import com.google.common.collect.Maps;
+import com.peerpen.framework.InternalHttpServletRequest;
 import com.peerpen.model.Avatar;
 import com.peerpen.model.Peer;
 import org.apache.commons.fileupload.FileItem;
@@ -26,14 +27,16 @@ import java.util.Map;
 public class AvatarUploadController extends HttpServlet {
     static final Logger logger = LoggerFactory.getLogger(AvatarUploadController.class);
 
-    protected void doGet( HttpServletRequest request, HttpServletResponse response )
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher( "/view/upload.jsp" ).forward( request, response );
+        request.getRequestDispatcher("/view/upload.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         this.storeAvatar(request, response);
+        Peer sessionPeer = (Peer) request.getAttribute("sessionUser");
+        request.getRequestDispatcher("/peer/" + sessionPeer.getId() + "/profile/avatar").forward(request, response);
     }
 
     private void storeAvatar(HttpServletRequest request, HttpServletResponse response)
@@ -93,7 +96,7 @@ public class AvatarUploadController extends HttpServlet {
                 }
                 logger.info("Image upload properties " + parameterMaps.toString());
                 Avatar avatar = sessionPeer.getAvatar();
-                avatar.setViewport(parameterMaps);
+//                avatar.setViewport(parameterMaps);
                 avatar.setFilename(MessageFormat.format("{0}.{1}", fileName, fileType));
                 avatar.update(); // FIXME: Does PPAR update relationship?
                 sessionPeer.update();
