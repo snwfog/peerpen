@@ -8,3 +8,4 @@ target/
 classes/
 .DS_Store
 out
+*.map
