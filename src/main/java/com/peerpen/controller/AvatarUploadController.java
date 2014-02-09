@@ -88,13 +88,14 @@ public class AvatarUploadController extends HttpServlet {
                         // Write the file
                         largeAvatarFile = new File(
                                 MessageFormat.format("{0}/{1}/{2}/{3}.{4}", ctx.getRealPath(""), avatarDir,
-                                        Avatar.LARGE_FOLDER, fileName, fileType));
+                                        Avatar.Size.LARGE.getFolderName(), fileName, fileType));
                         fi.write(largeAvatarFile);
                     }
                 }
                 logger.info("Image upload properties " + parameterMaps.toString());
                 Avatar avatar = sessionPeer.getAvatar();
 //                avatar.setViewport(parameterMaps);
+                avatar.setOriginalSize(parameterMaps);
                 avatar.setFilename(MessageFormat.format("{0}.{1}", fileName, fileType));
                 avatar.update(); // FIXME: Does PPAR update relationship?
                 sessionPeer.update();

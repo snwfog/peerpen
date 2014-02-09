@@ -9,7 +9,8 @@
 <div id="dropzone-container">
     <form enctype="multipart/form-data" class="dropzone" id="avatar-upload"
           action="/peer/<%= sessionPeer.getId() %>/profile/avatar/upload" method="post">
-        <%--<button id='avatar-upload-submit' class="btn btn-large btn-success" type="submit">Accept</button>--%>
+        <input type="hidden" id="avatar-original-width" name="original-width" value="">
+        <input type="hidden" id="avatar-original-height" name="original-height" value="">
     </form>
 </div>
 

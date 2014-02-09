@@ -68,6 +68,16 @@ public class Feedable extends Base {
                     }
                 }
             }
+            if(this instanceof Broadcast){
+                Broadcast bc = (Broadcast) this;
+                if(bc.getGroup() != null){
+                    for(Peer p: bc.getGroup().getPeers())
+                    {
+                    a.setUserId(p.getId());
+                    }
+                }
+            }
+
            return a.saveFeedable();
         }else{
             return false;
@@ -105,6 +115,15 @@ public class Feedable extends Base {
                 }else{
                     if(com.getChangeset() != null){
                         a.setUserId(com.getChangeset().getPeerId());
+                    }
+                }
+            }
+            if(this instanceof Broadcast){
+                Broadcast bc = (Broadcast) this;
+                if(bc.getGroup()!=null){
+                    for(Peer p: bc.getGroup().getPeers())
+                    {
+                        a.setUserId(p.getId());
                     }
                 }
             }

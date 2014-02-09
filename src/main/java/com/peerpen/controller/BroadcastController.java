@@ -43,4 +43,20 @@ public class BroadcastController extends HttpServlet
             response.sendRedirect(request.getHeader("referer"));
         }
 
+        protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException
+        {
+            Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+
+            Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
+            Group group = new Group().find(Integer.parseInt(request.getParameter("groupid")));
+
+            Broadcast broadcast = new Broadcast().find(Integer.parseInt(request.getParameter("broadcastid")));
+            broadcast.destroy();
+
+            request.setAttribute("group", group);
+            request.setAttribute("user", peer);
+            response.sendRedirect(request.getHeader("referer"));
+        }
+
     }
