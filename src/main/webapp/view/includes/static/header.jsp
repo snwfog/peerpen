@@ -8,7 +8,6 @@
     <meta name="description" content="Peerpen social web application for improving your resume and cover letter.">
     <meta name="author" content="Capstone Sunny Delight 2014">
 
-<<<<<<< HEAD
     <title>
         <%
             String defaultTitle = "PeerPen - A Capstone project by Sunny Delight";
@@ -39,7 +38,7 @@
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <!--<script src="../assets/js/html5shiv.js"></script>-->
-    <![endif]-->
+    <!--[endif]-->
 
     <!-- Fav and touch icons -->
     <%--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">--%>

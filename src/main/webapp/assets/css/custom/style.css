@@ -1,24 +1,10 @@
-<<<<<<< HEAD
-@import url(http://fonts.googleapis.com/css?family=Leckerli+One|Damion|Roboto:100,300,400,700|Inconsolata:400);
-body {
-  padding-top: 46px;
-  padding-bottom: 40px;
-  font-family: Roboto, arial, sans-serif;
-  font-weight: lighter; }
-=======
 @import url(http://fonts.googleapis.com/css?family=Leckerli+One|Damion|Roboto:400,300,700|Inconsolata:400|Lobster|Montserrat);
 body {
   padding-top: 70px;
   padding-bottom: 40px;
+  font-family: Roboto, arial, sans-serif;
+  font-weight: lighter;
   background-color: #ecf0f1; }
->>>>>>> secret
-
-.hero-unit {
-  background: #00001c url(/assets/images/index/google-strap-hero.jpg) no-repeat top left; }
-  .hero-unit h1 {
-    color: white; }
-  .hero-unit p {
-    color: whitesmoke; }
 
 pre {
   margin: 30px 0; }
@@ -280,7 +266,6 @@ i#bug {
 div.code pre {
   font-size: 1.5em; }
 
-<<<<<<< HEAD
 div#dropzone-container {
   display: none;
   position: fixed;
@@ -292,7 +277,7 @@ div#dropzone-container {
     border: 5px dashed #a0aeaf;
     border-radius: 30px;
     margin: 30px; }
-=======
+
 p {
   font-family: Roboto, arial, sans-serif;
   font-weight: lighter;
@@ -349,7 +334,7 @@ section {
     section#signup div#resume-large img {
       position: absolute;
       left: 35%;
-      top: 7; }
+      top: 760px; }
     section#signup div.tooltip-inner {
       font-size: 1em; }
     section#signup form {
@@ -449,4 +434,3 @@ footer {
   footer img#resume-large-bottom {
     position: absolute;
     left: 35%; }
->>>>>>> secret
