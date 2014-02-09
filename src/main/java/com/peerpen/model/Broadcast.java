@@ -4,6 +4,10 @@ import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasOne;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -75,4 +79,5 @@ public class Broadcast extends Feedable implements IModel {
         initRelation("group");
         return group;
     }
+
 }

@@ -54,6 +54,7 @@ public class Feedable extends Base {
                if(ch.getDocument() != null){
                    a.setUserId(ch.getDocument().getPeerId());
                }
+               a.saveFeedable();
            }
 
             if(this instanceof Comment){
@@ -67,21 +68,28 @@ public class Feedable extends Base {
                         a.setUserId(com.getChangeset().getPeerId());
                     }
                 }
+                a.saveFeedable();
             }
+
             if(this instanceof Broadcast){
                 Broadcast bc = (Broadcast) this;
                 if(bc.getGroup() != null){
                     for(Peer p: bc.getGroup().getPeers())
                     {
-                    a.setUserId(p.getId());
+                        Feedable feedable = new Feedable();
+                        feedable.setType(this.getClass().getSimpleName());
+                        feedable.setChildId(this.getId());
+                        feedable.setStatus("new");
+                        feedable.setUserId(p.getId());
+                        feedable.saveFeedable();
                     }
                 }
+                return true;
             }
 
-           return a.saveFeedable();
-        }else{
-            return false;
         }
+        return false;
+
     }
 
     private boolean saveFeedable(){
@@ -105,6 +113,7 @@ public class Feedable extends Base {
                if(ch.getDocument() != null){
                    a.setUserId(ch.getDocument().getPeerId());
                }
+               a.updateFeedable();
            }
             if(this instanceof Comment){
                 Comment com = (Comment) this;
@@ -116,18 +125,13 @@ public class Feedable extends Base {
                     if(com.getChangeset() != null){
                         a.setUserId(com.getChangeset().getPeerId());
                     }
+                    a.updateFeedable();
                 }
             }
             if(this instanceof Broadcast){
-                Broadcast bc = (Broadcast) this;
-                if(bc.getGroup()!=null){
-                    for(Peer p: bc.getGroup().getPeers())
-                    {
-                        a.setUserId(p.getId());
-                    }
-                }
+                return  a.updateFeedable();
             }
-           return a.updateFeedable();
+           return true;
         }
     }
 

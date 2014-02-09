@@ -125,6 +125,12 @@ public class Group extends Taggable implements IModel
     return this.broadcasts;
   }
 
+  public List<Broadcast> getOrderedBroadcast()
+  {
+      List<Broadcast> broadcasts = new Broadcast().queryAll("SELECT * FROM `broadcasts` WHERE group_id= "+ this.getId() +" ORDER BY last_modified_date DESC");
+      return broadcasts;
+  }
+
   //public List<Group> removeDuplicates(List<Group> groups){
   //    List<Group> set = new ArrayList<>(  );
   //    for(int i=0;i<groups.size();i++){

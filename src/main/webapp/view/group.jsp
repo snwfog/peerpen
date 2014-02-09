@@ -5,7 +5,7 @@
 
 <% Group group = (Group) request.getAttribute("group"); %>
 <% ArrayList<Peer> peers = (ArrayList<Peer>)group.getPeers();%>
-<% ArrayList<Broadcast> broadcasts = (ArrayList<Broadcast>)group.getBroadcasts();%>
+<% ArrayList<Broadcast> broadcasts = (ArrayList<Broadcast>)group.getOrderedBroadcast();%>
 
 <%--
   Created by IntelliJ IDEA.
