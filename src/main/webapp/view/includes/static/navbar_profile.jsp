@@ -7,7 +7,8 @@
     ArrayList<Group> navGroups =(ArrayList<Group>) sessionUser.getGroups();
 %>
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<!-- must set navbar z-index to be <= 100 otherwise search autocomplete box will be hidden under navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="z-index:100 !important;">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">PeerPen</a>
@@ -32,8 +33,7 @@
         </ul>
         <!-- SEARCH FORM -->
         <form action="/search" method="post" class="navbar-form navbar-right" id="search_form" role="form" style="margin:0;padding:10px 0 0 0;">
-            <input type="text" class="form-control" placeholder="Search for documents, people and groups" name="search_query" id="nav_search" autocomplete="off" style="width:300px;z-index: 999
-            !important" />
+            <input type="text" class="form-control" placeholder="Search for documents, people and groups" name="search_query" id="nav_search" autocomplete="off" style="width:300px;z-index:1111 !important" />
         </form>
     </div>
 </nav>
