@@ -38,9 +38,9 @@ public class Avatar extends Base implements IModel {
 
     // Avatar size
     public static enum Size {
-        SMALL( 16 ),
-        MEDIUM( 32 ),
-        LARGE( 128 ),
+        SMALL( 32 ),
+        MEDIUM( 64 ),
+        LARGE( 256 ),
         ORIGINAL( 0 );
 
         private int dimension;

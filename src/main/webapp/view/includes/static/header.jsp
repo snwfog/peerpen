@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="/assets/css/lib/jquery-ui-1.10.4-smoothness.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/lib/tagit.ui-zendesk.css" type="text/css">
 
-    <link rel="stylesheet" href="/assets/css/custom/style.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/custom/style.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/custom/avatar.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/custom/peerpen.css" type="text/css">
 

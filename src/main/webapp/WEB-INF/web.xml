@@ -59,7 +59,7 @@
     <servlet>
         <description>Application root</description>
         <servlet-name>index</servlet-name>
-        <jsp-file>/view/index.jsp</jsp-file>
+        <servlet-class>com.peerpen.controller.IndexController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>index</servlet-name>
