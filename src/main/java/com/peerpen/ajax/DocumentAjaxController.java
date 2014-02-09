@@ -27,9 +27,12 @@ public class DocumentAjaxController extends HttpServlet {
         String peer = parameters.get("peer");
         String[] document = parameters.get("doc").split("-");
 
+        Document doc = new Document().find(Integer.parseInt(document[1]));
+
+        req.setAttribute("doc", doc);
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
-        req.getRequestDispatcher( "/view/ajaxtest.jsp" ).forward( req, resp );
+        req.getRequestDispatcher( "/view/ajaxDocument.jsp" ).forward( req, resp );
     }
 
 
