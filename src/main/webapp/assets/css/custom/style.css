@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 @import url(http://fonts.googleapis.com/css?family=Leckerli+One|Damion|Roboto:100,300,400,700|Inconsolata:400);
 body {
   padding-top: 46px;
   padding-bottom: 40px;
   font-family: Roboto, arial, sans-serif;
   font-weight: lighter; }
+=======
+@import url(http://fonts.googleapis.com/css?family=Leckerli+One|Damion|Roboto:400,300,700|Inconsolata:400|Lobster|Montserrat);
+body {
+  padding-top: 70px;
+  padding-bottom: 40px;
+  background-color: #ecf0f1; }
+>>>>>>> secret
 
 .hero-unit {
   background: #00001c url(/assets/images/index/google-strap-hero.jpg) no-repeat top left; }
@@ -272,6 +280,7 @@ i#bug {
 div.code pre {
   font-size: 1.5em; }
 
+<<<<<<< HEAD
 div#dropzone-container {
   display: none;
   position: fixed;
@@ -283,3 +292,161 @@ div#dropzone-container {
     border: 5px dashed #a0aeaf;
     border-radius: 30px;
     margin: 30px; }
+=======
+p {
+  font-family: Roboto, arial, sans-serif;
+  font-weight: lighter;
+  font-size: 2em;
+  line-height: 1.2em; }
+
+div.resume-regular {
+  background: white;
+  box-shadow: 0.7em 0.7em rgba(189, 195, 199, 0.5);
+  background-image: url("/assets/images/index/creampaper.png");
+  background-repeat: repeat-x repeat-y;
+  border: 1px solid rgba(0, 0, 0, 0.1); }
+  div.resume-regular h1#owner-name {
+    font-family: Lobster, "Courier New", serif;
+    text-shadow: rgba(0, 0, 0, 0.3) 1px 1px;
+    font-size: 4em;
+    opacity: 0.7; }
+  div.resume-regular div#owner-personal-information {
+    float: right;
+    position: absolute;
+    top: 30px;
+    right: 10px; }
+    div.resume-regular div#owner-personal-information p {
+      font-size: 1.4em;
+      font-family: Roboto, arial, sans-serif; }
+
+section {
+  min-height: 600px;
+  padding: 50px;
+  overflow: hidden;
+  position: relative; }
+  section div.float-glyphs {
+    float: right;
+    position: absolute; }
+  section div.form-group {
+    margin-bottom: 5px !important; }
+    section div.form-group .form-control {
+      height: 40px;
+      font-size: 1.2em; }
+    section div.form-group button[type='submit'] {
+      width: 100%; }
+  section#signup {
+    margin-top: -20px;
+    min-height: 800px; }
+    section#signup h1, section#signup h2, section#signup h3, section#signup h4, section#signup h5, section#signup h6 {
+      font-weight: 200;
+      display: none;
+      text-shadow: #ecf0f1 1px 1px 2px; }
+      section#signup h1:last-child, section#signup h2:last-child, section#signup h3:last-child, section#signup h4:last-child, section#signup h5:last-child, section#signup h6:last-child {
+        margin-bottom: 75px; }
+    section#signup div.backstretch img {
+      -webkit-filter: grayscale(40%) blur(3px) brightness(80%);
+      opacity: 0.5; }
+    section#signup div#resume-large img {
+      position: absolute;
+      left: 35%;
+      top: 7; }
+    section#signup div.tooltip-inner {
+      font-size: 1em; }
+    section#signup form {
+      display: none; }
+      section#signup form div.form-group {
+        width: 100%; }
+      section#signup form button[type="submit"] {
+        font-size: 1.3em; }
+  section#cloud {
+    background-color: #262626; }
+    section#cloud div#resume-medium {
+      top: 100px;
+      left: 100px; }
+    section#cloud div#resume-cloud {
+      left: 300px;
+      top: 120px; }
+    section#cloud p {
+      color: #ecf0f1; }
+  section#portable img#mac-blocker {
+    z-index: 10;
+    top: 508px;
+    left: -150px;
+    position: absolute; }
+  section#portable div#macbook-container img {
+    position: absolute; }
+    section#portable div#macbook-container img#macbook {
+      left: -200px;
+      top: 275px;
+      z-index: 6; }
+    section#portable div#macbook-container img#macbook-browser {
+      left: -152px;
+      top: 292px;
+      z-index: 4; }
+    section#portable div#macbook-container img#macbook-resume {
+      width: 250px;
+      left: -125px;
+      top: 450px;
+      z-index: 5; }
+  section#portable div#imac-container img {
+    position: absolute; }
+    section#portable div#imac-container img#imac-browser {
+      width: 582px;
+      left: 92px;
+      height: auto;
+      top: 29px;
+      z-index: 1; }
+    section#portable div#imac-container img#imac-resume {
+      width: 350px;
+      left: 200px;
+      top: 243px;
+      z-index: 2; }
+    section#portable div#imac-container img#imac {
+      z-index: 3; }
+  section#handheld div#galaxy {
+    left: 100px;
+    top: 100px; }
+    section#handheld div#galaxy div#galaxy-screen {
+      top: 14px;
+      left: 48px; }
+  section#handheld div#iphone {
+    top: 250px;
+    left: 50px; }
+    section#handheld div#iphone div#iphone-screen {
+      top: 25px;
+      left: 75px; }
+  section#osx-notification {
+    background: url("/assets/images/index/osx-desktop.png");
+    background-size: cover;
+    min-height: 300px; }
+    section#osx-notification p {
+      color: #ecf0f1; }
+    section#osx-notification div#osx-desktop-notification {
+      position: absolute;
+      top: -120px; }
+  section#twitter {
+    min-height: 400px; }
+    section#twitter div#carousel-tweets {
+      margin: 100px 100px 0; }
+    section#twitter a.carousel-control {
+      background-image: none;
+      width: 10%; }
+      section#twitter a.carousel-control.left {
+        left: -10%; }
+      section#twitter a.carousel-control.right {
+        right: -10%; }
+      section#twitter a.carousel-control i {
+        margin: 50%; }
+    section#twitter div.carousel-inner {
+      min-height: 200px; }
+  section#counter div.odometer {
+    font-family: Montserrat, Helvetica, "Courier New", sans-serif;
+    font-size: 12em; }
+
+footer {
+  background-color: #222222;
+  min-height: 300px; }
+  footer img#resume-large-bottom {
+    position: absolute;
+    left: 35%; }
+>>>>>>> secret

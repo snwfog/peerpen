@@ -8,6 +8,7 @@
     <meta name="description" content="Peerpen social web application for improving your resume and cover letter.">
     <meta name="author" content="Capstone Sunny Delight 2014">
 
+<<<<<<< HEAD
     <title>
         <%
             String defaultTitle = "PeerPen - A Capstone project by Sunny Delight";
@@ -20,18 +21,18 @@
             }
         %>
     </title>
-
     <link rel="stylesheet" href="/assets/css/lib/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/lib/bootstrap-responsive.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/lib/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/lib/odometer-theme-default.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/lib/jquery.Jcrop.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/lib/jquery.tagit.css" type="text/css">
-    <link rel="stylesheet" href="/assets/css/lib/tagit.ui-zendesk.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/lib/jquery-ui-1.10.4-smoothness.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/lib/tagit.ui-zendesk.css" type="text/css">
 
     <link rel="stylesheet" href="/assets/css/custom/style.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/custom/avatar.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/custom/peerpen.css" type="text/css">
-
 
     <link rel="stylesheet" title="Standard" href="/assets/css/js/lib/contentflow/contentflow_src.css" type="text/css" />
 
