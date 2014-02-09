@@ -8,7 +8,9 @@ import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasOne;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
@@ -277,6 +279,11 @@ public class Avatar extends Base implements IModel {
         Graphics2D g = scaledImage.createGraphics();
         g.drawImage( resizeImageCopy, 0, 0, size.getDimension(), size.getDimension(), null );
         g.dispose();
+        g.setComposite( AlphaComposite.Src );
+
+        g.setRenderingHint( RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR );
+        g.setRenderingHint( RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY );
+        g.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
 
         String resizeImageAbsolutePath =
                 MessageFormat.format( "{0}/{1}", request.getSession().getServletContext().getRealPath( "" ),
