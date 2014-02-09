@@ -71,7 +71,10 @@ public class Feedable extends Base {
             if(this instanceof Broadcast){
                 Broadcast bc = (Broadcast) this;
                 if(bc.getGroup() != null){
-                    a.setUserId(bc.getPeerId());
+                    for(Peer p: bc.getGroup().getPeers())
+                    {
+                    a.setUserId(p.getId());
+                    }
                 }
             }
 
@@ -118,7 +121,10 @@ public class Feedable extends Base {
             if(this instanceof Broadcast){
                 Broadcast bc = (Broadcast) this;
                 if(bc.getGroup()!=null){
-                    a.setUserId(bc.getPeerId());
+                    for(Peer p: bc.getGroup().getPeers())
+                    {
+                        a.setUserId(p.getId());
+                    }
                 }
             }
            return a.updateFeedable();

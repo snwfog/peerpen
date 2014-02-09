@@ -68,10 +68,13 @@
                 <div class="card2">
                     <h3 class="card-heading simple"><%= broadcast.getPeer().getFirstName() %> <%= broadcast.getPeer().getLastName() %></h3>
                     <div class="card-body">
-                        <%= broadcast.getMessage() %>
+                        <strong><%= broadcast.getMessage() %></strong>
+
+                        <span class="child" style="font-style: italic;font-size: small;">
+                            <p class="text-right"><%= broadcast.getTimesAgo()%></p></span>
                     </div>
 
-                    <span class="child" style="font-style: italic;font-size: small;"><%= broadcast.getTimesAgo()%></span>
+                    <%--<span class="child" style="font-style: italic;font-size: small;"><%= broadcast.getTimesAgo()%></span>--%>
                     &nbsp;&nbsp;
                     <% if(sessionUser.getId() == broadcast.getPeerId() || sessionUser.getId() == broadcast.getPeerId()){%>
                     <a data-toggle="modal" data-id="<%= broadcast.getId()%>" class="confirmDeleteBroadcastDialog child"
@@ -87,6 +90,7 @@
 </div>
 <%}else
 {%>
+    <br>
     <h1> You are not registered to this group.</h1>
 <%}%>
 
