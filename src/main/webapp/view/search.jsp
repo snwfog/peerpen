@@ -9,7 +9,7 @@
 <br /><br /><br />
 <div class="container">
     <!-- SEARCH FORM -->
-    <form action="/search" method="post" class="form-horizontal" role="form">
+    <form action="/search" method="post" class="form-horizontal" role="form" id="search_form">
         <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-default active">
                 <input type="radio" name="area" id="all" value="all" checked /> Search All
@@ -68,7 +68,7 @@
             Document document = (Document) resultItem;
             %>
             <tr><td>Document</td><td><a href="/peer/<%= document.getPeerId() %>/document/<%= document.getId() %>"> <%= document.getDocName() %></a>
-            by: <a href="/peer/<%= document.getPeerId() %>"> <%= document.getPeer().getUserName() %></a>
+            by: <a href="/peer/<%= document.getPeerId() %>/profile"> <%= document.getPeer().getUserName() %></a>
             last modified: <%= document.getLastModifiedDate() %></td></tr>
 
             <%
