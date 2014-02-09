@@ -40,11 +40,9 @@ public class GroupController extends GenericApplicationServlet
     Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
     Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
     Group group = new Group().find(Integer.parseInt(parameters.get("groupid")));
-    group.getPeers().add(peer);
-    group.setUpdateFlag(true);
+    group.addPeer(peer);
     group.update();
 
-    request.setAttribute("peer", peer);
     request.setAttribute("group", group);
     response.sendRedirect(request.getHeader("referer"));
   }
@@ -57,7 +55,6 @@ public class GroupController extends GenericApplicationServlet
     group.removePeer(peer);
     group.update();
 
-    request.setAttribute("peer", peer);
     request.setAttribute("group", group);
     response.sendRedirect(request.getHeader("referer"));
   }

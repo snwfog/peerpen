@@ -119,6 +119,12 @@ public class Group extends Taggable implements IModel
     setUpdateFlag(true);
   }
 
+  public void addPeer(Peer peer)
+  {
+    this.getPeers().add(peer);
+    setUpdateFlag(true);
+  }
+
   public List<Broadcast> getBroadcasts()
   {
     initRelation("broadcasts");

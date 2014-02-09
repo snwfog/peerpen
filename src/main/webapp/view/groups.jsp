@@ -1,5 +1,3 @@
-<%@ page import="com.peerpen.model.Peer" %>
-<%@ page import="com.peerpen.model.Group" %>
 <%@ page import="java.util.List" %>
 <%@ include file="/view/includes/static/header.jsp" %>
 <%@ include file="/view/includes/static/navbar_profile.jsp" %>
@@ -16,8 +14,8 @@
           for (Group group : groups){
         %>
         <div class="col-6 col-sm-6 col-lg-4">
-          <h2><%= group.getGroupName()%> <span style="font-size: medium;"><i class="fa fa-users"></i>&nbsp;<%= group.getPeers().size()%></span></h2>
-          <p>hallo, willkommen in kanada, hier sind wir gerne Bier mit Kaffee und Ahornsirup gemischt zu trinken. bitte vorbei tims hortons, es selbst zu versuchen!</p>
+          <h2><a href="group/<%= group.getId()%>" style="text-decoration: none"><%= group.getGroupName()%></a> <span style="font-size: medium;"><i class="fa fa-users"></i>&nbsp;<%= group.getPeers().size()%></span></h2>
+          <p><%= group.getDescription().toString().substring(0, 50)%>...
           <p>
           <% if(group.getIsJoined(sessionUser.getId())){%>
             <form action="/group" method="post" class="form-horizontal" role="form">
