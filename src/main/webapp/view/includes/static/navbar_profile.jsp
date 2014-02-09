@@ -1,6 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="com.peerpen.model.Group" %>
+<%@ page import="com.peerpen.model.Avatar" %>
 <%
     Peer sessionUser = (Peer) request.getAttribute("sessionUser");
     ArrayList<Group> navGroups =(ArrayList<Group>) sessionUser.getGroups();
@@ -13,7 +14,8 @@
         </div>
         <ul class="nav navbar-nav">
             <li><a href="/peer/<%=sessionUser.getId()%>/profile">
-                <img class="profile" src="<%= sessionUser.getAvatar().getServletContextAvatarPath( request ) %>" /></a></li>
+                <img class="profile"
+                     src="<%= sessionUser.getAvatar().getRelativeServletContextAvatarPathForSize( request, Avatar.Size.SMALL ) %>" /></a></li>
             <li><a href="/peer/<%=sessionUser.getId()%>/profile"><%= sessionUser.getUserName() %></a></li>
             <li><a href="/peer/<%=sessionUser.getId()%>/feed">Feeds</a></li>
             <li><a href="/tagsearch">Tags</a></li>

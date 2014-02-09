@@ -88,7 +88,7 @@ public class AvatarUploadController extends HttpServlet {
                         // Write the file
                         largeAvatarFile = new File(
                                 MessageFormat.format("{0}/{1}/{2}/{3}.{4}", ctx.getRealPath(""), avatarDir,
-                                        Avatar.Size.LARGE.getFolderName(), fileName, fileType));
+                                        Avatar.Size.ORIGINAL.getFolderName(), fileName, fileType));
                         fi.write(largeAvatarFile);
                     }
                 }
