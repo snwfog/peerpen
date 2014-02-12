@@ -65,10 +65,21 @@ INSERT INTO `feedables` (`id`, `child_id`, `user_id`,`type`, `status`,`last_modi
 
 INSERT INTO `groups` (`id`, `group_name`, `description`, `creation_date`, `last_modified_date`, `semaphore`, `etag`)
 VALUES
-	(3, 'Finance', 'Financial economics is the branch of economics studying the interrelation of financial variables, such as prices, interest rates and shares, as opposed to those concerning the real economy', '2014-01-28 00:40:05', '2014-01-28 00:40:05', 0, 'f8ec4549f8e70824d6c52ce5f548c6e11fc49a67c34fe4036095e48482230cd8'),
-	(4, 'Marketing', 'Marketing is the process of communicating the value of a product or service to customers, for selling that product or service', '2014-01-28 00:40:05', '2014-01-28 00:40:05', 0, '293f83bdd305bcc57a245b5b2b52932f10e4b6db47139b7815e21b72461a4c88'),
-	(5, 'International Business', 'International business comprises all commercial transactions (private and governmental, sales, investments, logistics, and transportation) that take place between two or more regions, countries and nations beyond their political boundaries', '2014-01-28 00:54:28', '2014-01-28 00:54:28', 0, '08d96c81daad331146aa90e468e8a16bfb65f4823ff3e2b269c299083982de3f'),
-	(6, 'Arts', 'liberal arts education is a term that can be interpreted in different ways. It can refer to certain areas of literature, languages, philosophy, history, mathematics, psychology, and science. It can also refer to studies on a liberal arts degree program', '2014-01-28 00:54:29', '2014-01-28 00:54:29', 0, 'aa11940a47b156bd4e42adc7444f73bc5a531594005c00d8c96155171a7c4269');
+(3,'Finance','Financial economics is the branch of economics studying the interrelation of financial variables, such as prices, interest rates and shares,','2014-01-28 00:40:05','2014-02-08 20:30:07',0,NULL),
+(4,'Marketing','Marketing is the process of communicating the value of a product or service to customers, for selling that product or service','2014-01-28 00:40:05','2014-02-08 20:29:48',0,NULL),
+(5,'International Business','International business comprises all commercial transactions (private and governmental, sales, investments, logistics, and transportation) ','2014-01-28 00:54:28','2014-02-08 20:30:09',0,NULL),
+(6,'Arts','liberal arts education is a term that can be interpreted in different ways. It can refer to certain areas of literature, languages, philosophy, history, mathematics, psycho','2014-01-28 00:54:29','2014-02-08 20:29:29',0,NULL),
+(7,'Software Engineer','Software Engineering is the study and application of engineering to the design, development, and maintenance of software','2014-02-08 20:10:02','2014-02-08 20:30:07',0,NULL),
+(8,'Mechanical Engineer','Mechanical engineering is a discipline of engineering that applies the principles of engineering, physics and','2014-02-08 20:11:01','2014-02-08 20:29:31',0,NULL),
+(9,'Computer Engineer','Computer engineering is a discipline that integrates several fields of electrical engineering and computer science required to develop computer hardware and software.','2014-02-08 20:11:27','2014-02-08 20:30:08',0,NULL),
+(10,'Accounting','Accounting, or accountancy, is the measurement, processing and communication of financial information about economic entities.','2014-02-08 20:12:04','2014-02-08 20:29:50',0,NULL),
+(11,'Actuary','An actuary is a business professional who deals with the financial impact of risk and uncertainty. Actuaries provide assessments of financial security systems, with a focus on their complexity,','2014-02-08 20:12:32','2014-02-08 20:30:06',0,NULL),
+(12,'Business Administration','The administration of a business includes the performance or management of business operations and decision making as well as the efficient organization of people ','2014-02-08 20:13:09','2014-02-08 20:28:45',0,NULL),
+(13,'Education','Education in its general sense is a form of learning in which the knowledge, skills, and habits of a group of people are transferred from one generation to the next through teaching, training, or research','2014-02-08 20:18:16','2014-02-08 20:29:50',0,NULL),
+(14,'Social Science','Social science is an academic discipline concerned with society and the relationships among individuals within a society. ','2014-02-08 20:18:16','2014-02-08 20:30:13',0,NULL),
+(15,'Entrepreneurship','In political economics, entrepreneurship is a process of identifying ','2014-02-08 20:18:16','2014-02-08 20:30:11',0,NULL),
+(16,'Communism','Communism s a classless, moneyless,[1][2] and stateless social order structured upon common ownership of the means of production.','2014-02-08 20:18:16','2014-02-08 20:28:53',0,NULL),
+(17,'Mafia','Mafia is a blanket term used to describe a type of organized crime syndicate that primarily practices protection racketeering ? the use of violent intimidation to manipulate local economic activity, ','2014-02-08 20:18:59','2014-02-08 20:28:51',0,NULL);
 
 INSERT INTO `tag_descriptors` (`id`, `tag_name`, `creation_date`, `last_modified_date`)
 VALUES
