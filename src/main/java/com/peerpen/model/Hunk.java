@@ -1,5 +1,9 @@
 package com.peerpen.model;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.sunnyd.Base;
 import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
@@ -7,6 +11,8 @@ import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.annotations.ActiveRelationHasOne;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -82,15 +88,55 @@ public class Hunk extends Base implements IModel {
         initRelation( "changesets" );
         return this.changesets;
     }
-    public static void main(String[] args) {
-        Hunk h = new Hunk();
-        h.setContent("ababaabbbabbababb");
-        h.setDocumentId(4);
-        System.out.println(h.save());
 
-//        Hunk a = Hunk.find(h.getId());
-//        System.out.println("lplplplp"+a.getContent());
-//        System.out.println(a.getDocument().getDocName());
+    public List<Hunk> getHunksFromIdView(Integer idView){
+        String sql = "SELECT * FROM `hunks` WHERE `id_view` = " + idView;
+        return new Hunk().queryAll( sql );
+    }
+
+
+
+
+
+
+
+    public static void main(String[] args) {
+        String input = "{\n" +
+                "    \"modified\": [],\n" +
+                "    \"removed\": [],\n" +
+                "    \"created\": [\n" +
+                "        [\n" +
+                "            {\n" +
+                "                \"id\": \"1391820471425\",\n" +
+                "                \"html\": \"<div class=\\\"ppedit-box\\\" contenteditable=\\\"true\\\" id=\\\"1391820471425\\\" style=\\\"left: 50px; top: 50px; width: 75px; height: 50px; color: black; font-family: 'Times New Roman'; font-size: 12pt; font-weight: normal; text-decoration: none; font-style: normal; z-index: 0; text-align: left; vertical-align: bottom;\\\"></div>\"\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"id\": \"1391820471440\",\n" +
+                "                \"html\": \"<div class=\\\"ppedit-box\\\" contenteditable=\\\"true\\\" id=\\\"1391820471440\\\" style=\\\"left: 50px; top: 50px; width: 75px; height: 50px; color: black; font-family: 'Times New Roman'; font-size: 12pt; font-weight: normal; text-decoration: none; font-style: normal; z-index: 1; text-align: left; vertical-align: bottom;\\\"></div>\"\n" +
+                "            }\n" +
+                "        ],\n" +
+                "        []\n" +
+                "    ],\n" +
+                "    \"etag\": \"429a8768235e551541c2538787d4f065c350fdb1c57e0235e45572828cbbe32c\"\n" +
+                "}";
+        System.out.println(input);
+
+
+        JsonObject rootObj = new JsonParser().parse( input ).getAsJsonObject();
+
+        JsonArray createdList = rootObj.getAsJsonArray( "created" );
+        JsonArray modifiedList = rootObj.getAsJsonArray( "modified" );
+        JsonArray deletedList = rootObj.getAsJsonArray( "removed" );
+        String etagObj = rootObj.get("etag").getAsString();
+
+        // creation list
+        for (JsonElement j: createdList){
+            for (JsonElement e: j.getAsJsonArray()){
+                String id = e.getAsJsonObject().get("id").getAsString();
+                String html = e.getAsJsonObject().get("html").getAsString();
+                System.out.println(id + "->" + html);
+            }
+        }
 
     }
 

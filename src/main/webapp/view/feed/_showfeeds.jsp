@@ -1,8 +1,5 @@
-<%@ page import="com.peerpen.model.Feedable" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.peerpen.model.Changeset" %>
-<%@ page import="com.peerpen.model.Comment" %>
-<%@ page import="com.peerpen.model.Peer" %>
+<%@ page import="com.peerpen.model.*" %>
 
 <div class="span4">
     <% for(Feedable f : (List<Feedable>)request.getAttribute("feedableList")){ %>
@@ -37,7 +34,7 @@
 
                         <div class="clearfix"></div>
                         <%Integer documentId = ((Changeset)f.getTrueSelf()).getDocumentId();%>
-                        <p><a class="btn" href="/peer/<%=peer.getId()%>/document/<%=documentId%>">View Document &raquo;</a></p>
+                        <p><a class="btn" href="/peer/<%=sessionUser.getId()%>/document/<%=documentId%>">View Document &raquo;</a></p>
                     </div>
                 </div>
             </div>
@@ -50,10 +47,26 @@
             <div class="row-fluid">
                 <div class="card-white">
                     <div class="card-heading image">
-                        <img src="/assets/images/peers/avatars/lg/default-avatar.jpg" alt=""/>
+                        <img src="<%= peer.getAvatar().getServletContextAvatarPath( request ) %>" alt=""/>
                         <div class="card-heading-header">
                             <h4><%=((Comment)f.getTrueSelf()).getPeer().getFirstName()%> commented ...</h4>
                             <span><%=((Comment)f.getTrueSelf()).getMessage()%></span>
+                        </div>
+                        <div> &nbsp</div>
+                    </div>
+                </div>
+            </div>
+
+        <% } %>
+
+        <% if (f.getType().equalsIgnoreCase("Broadcast")){%>
+            <div class="row-fluid">
+                    <div class="card-white">
+                    <div class="card-heading image">
+                        <img src="<%= peer.getAvatar().getServletContextAvatarPath( request ) %>" alt=""/>
+                        <div class="card-heading-header">
+                            <h4><%=((Broadcast)f.getTrueSelf()).getPeer().getFirstName()%> broadcasted ...</h4>
+                            <span><%=((Broadcast)f.getTrueSelf()).getMessage()%></span>
                         </div>
                         <div> &nbsp</div>
                     </div>

@@ -10,15 +10,18 @@
     - tag
   - profile:
     - full
-    - avatar
+    - avatar:
+      - upload
   - feed
-- group
+- group:
+  - broadcast
 - tag
 - tagsearch
 - search
 - reset(\.do)?
 - upload(\.do)?
 - vote(\.do)?
+- DocumentAjax(.do)?
 - logout
 
 

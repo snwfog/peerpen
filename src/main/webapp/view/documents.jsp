@@ -2,39 +2,53 @@
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.peerpen.model.Document" %>
-
+<%@ include file="/view/includes/static/navbar_profile.jsp" %>
 <%--Declare all request variables here, easy to debug!!!--%>
 <% Peer peer = (Peer) request.getAttribute( "peer" ); %>
-<% Peer sessionUser = (Peer) request.getAttribute( "sessionUser" ); %>
-<% List<Document> documents = peer.getDocuments(); %>
+<% List<Document> documents = sessionUser.getDocuments(); %>
 
 <div class="container-fluid">
+    <div class="row">
+        <h1>You are viewing <%= (sessionUser.getId() == peer.getId())  ? "your own" : peer.getFirstName()+"&#39;s" %> documents</h1>
 
-    <h1>You are viewing <%= (sessionUser.getId() == peer.getId())  ? "your own" : peer.getFirstName()+"&#39;s" %> documents</h1>
+        <h2>Number of documents: <%= peer.getDocuments().size()%>
+        </h2>
 
-    <h2>Number of documents: <%= peer.getDocuments().size()%>
-    </h2>
+        <div id="contentFlow" class="ContentFlow">
+            <!-- should be place before flow so that contained images will be loaded first -->
+            <div class="loadIndicator"><div class="indicator"></div></div>
 
-    <% for ( int i = 1; i < documents.size() + 1; i++ ) { %>
-    <% Document document = documents.get( i - 1 ); %>
-    <% if ( (i % 3) == 1 ) { %>
-    <div class="row-fluid">
-        <% } %>
-        <div class="span4">
-            <div class="card2">
-                <h2 class="card-heading simple"><%= document.getDocName() %>
-                </h2>
+            <div class="flow">
 
-                <div class="card-body">
-                    <%--<p>isus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>--%>
-                    <p><a class="btn" href="/peer/<%= peer.getId() %>/document/<%= document.getId()%>">View
-                        document &raquo;</a></p>
-                </div>
+                <% for(Document d : documents) {%>
+                    <div class="item">
+
+                            <img class="content" src="/assets/images/clipart-document-management.png" id="document-<%=d.getId()%>"/>
+
+                        <div class="caption">
+                            <a href="/peer/<%= peer.getId() %>/document/<%= d.getId()%>">
+                                <%=d.getDocName()%>
+                            </a>
+                        </div>
+                    </div>
+                <%}%>
             </div>
+            <div class="globalCaption"></div>
+            <div class="scrollbar">
+                <div class="slider"><div class="position"></div></div>
+            </div>
+
         </div>
-        <% if ( (i % 3) == 0 ) { %>
     </div>
-    <% } %>
-    <% } %>
+
+    <div class="row">
+        <div id="currentDocument">
+            <p>Default document to show aka firsr</p>
+            <p> I love this game</p>
+            <p> super duper super</p>
+        </div>
+    </div>
 </div>
+
+<script src="/assets/js/lib/contentflow/contentflow_src.js"></script>
 <%@ include file="/view/includes/static/footer.jsp" %>

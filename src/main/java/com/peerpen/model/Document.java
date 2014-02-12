@@ -96,18 +96,11 @@ public class Document extends Taggable implements IModel
 
   public static void main(String[] args)
   {
-    //Document d = new Document();
-    //d.setDocName("mydoc");
-    //d.setPeerId(4);
-    //System.out.println(d.save());
-
-    Document d = new Document().find(16);
-    System.out.println(d.getPeer());
-    System.out.println(d.getPeer().getLastName());
-    System.out.println(d.getHunks());
-    System.out.println(d.getChangesets());
-
-    //System.out.println(d.getPeer().getCreationDate());
+    Document d = new Document().find(2);
+    System.out.println("doc test");
+    System.out.println("username:" + d.getPeer().getUserName());
+    System.out.println("hunks:" + d.getHunks());
+    System.out.println("changeset:" + d.getChangesets());
   }
 
   public Date getLastModifiedDate()
@@ -235,18 +228,25 @@ public class Document extends Taggable implements IModel
   }
 
   // method used for search autocomplete
-  public List<String> getSuggestedDocuments(String keyword, int limit)
-  {
-    String sql = "SELECT `doc_name` FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%' LIMIT " + limit;
-    List<Document> documents = new Document().queryAll(sql);
-    // store only doc_name to list
-    List<String> suggestions = new ArrayList<String>();
-    for (int i = 0; i < documents.size(); i++)
+  //public List<String> getSuggestedDocuments(String keyword, int limit)
+  //{
+  //  String sql = "SELECT `doc_name` FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%' LIMIT " + limit;
+  //  List<Document> documents = new Document().queryAll(sql);
+  //  // store only doc_name to list
+  //  List<String> suggestions = new ArrayList<String>();
+  //  for (int i = 0; i < documents.size(); i++)
+  //  {
+  //    suggestions.add(documents.get(i).getDocName());
+  //  }
+  //  return suggestions;
+  //}
+
+    public List<Document> getSuggestions(String keyword, int limit)
     {
-      suggestions.add(documents.get(i).getDocName());
+        String sql = "SELECT * FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%' LIMIT " + limit;
+        return new Document().queryAll(sql);
     }
-    return suggestions;
-  }
+
 
     @Override
   public boolean equals (Object other)

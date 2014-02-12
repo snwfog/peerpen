@@ -1,3 +1,4 @@
+<%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="com.peerpen.model.Group" %>
 <%@ page import="com.peerpen.model.TagDescriptor" %>
 <%@ page import="java.util.List" %>
@@ -6,9 +7,11 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.peerpen.model.Document" %>
 <%@ include file="/view/includes/static/header.jsp" %>
+<%@ include file="/view/includes/static/navbar_profile.jsp" %>
 
+
+<br /><br /><br />
 <div class="container">
-
     <!-- SEARCH FORM -->
     <form action="/tagsearch" method="post" class="form-horizontal" role="form">
         <div class="input-group">
@@ -50,9 +53,9 @@
 <!-- SEARCH RESULT -->
 <%
     if(session.getAttribute( "tagSearchResultsGroups" ) != null && session.getAttribute( "tagSearchResultsDocuments" ) != null){
-        ArrayList<Group> groups = (ArrayList<Group>) session.getAttribute( "tagSearchResultsGroups" );
+        ArrayList<Group> gs = (ArrayList<Group>) session.getAttribute( "tagSearchResultsGroups" );
         ArrayList<Document> documents = (ArrayList<Document>) session.getAttribute( "tagSearchResultsDocuments" );
-    if (!groups.isEmpty() || !documents.isEmpty()){
+    if (!gs.isEmpty() || !documents.isEmpty()){
 %>
     <div class="panel panel-default">
         <!-- Default panel contents -->
@@ -61,8 +64,8 @@
         <table class="table table-hover">
             <%--<tr><th>Type</th><th>Item</th></tr>--%>
 <%
-    for(int i =0;i< groups.size();i++){
-        Group group = groups.get( i );
+    for(int i =0;i< gs.size();i++){
+        Group group = gs.get( i );
         %>
         <tr><td>Group</td><td><a href="/group/<%= group.getId() %>"><%= group.getGroupName() %></a> - <i><%= group.getDescription() %></i></td></tr>
         <%

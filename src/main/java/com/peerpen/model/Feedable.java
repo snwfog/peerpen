@@ -13,13 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Mike
- * Date: 1/10/14
- * Time: 1:27 PM
- * To change this template use File | Settings | File Templates.
- */
 public class Feedable extends Base {
     @ActiveRecordField
     private String type;
@@ -75,6 +68,13 @@ public class Feedable extends Base {
                     }
                 }
             }
+            if(this instanceof Broadcast){
+                Broadcast bc = (Broadcast) this;
+                if(bc.getGroup() != null){
+                    a.setUserId(bc.getPeerId());
+                }
+            }
+
            return a.saveFeedable();
         }else{
             return false;
@@ -113,6 +113,12 @@ public class Feedable extends Base {
                     if(com.getChangeset() != null){
                         a.setUserId(com.getChangeset().getPeerId());
                     }
+                }
+            }
+            if(this instanceof Broadcast){
+                Broadcast bc = (Broadcast) this;
+                if(bc.getGroup()!=null){
+                    a.setUserId(bc.getPeerId());
                 }
             }
            return a.updateFeedable();

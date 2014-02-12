@@ -33,6 +33,8 @@
     <link rel="stylesheet" href="/assets/css/custom/peerpen.css" type="text/css">
 
 
+    <link rel="stylesheet" title="Standard" href="/assets/css/js/lib/contentflow/contentflow_src.css" type="text/css" />
+
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <!--<script src="../assets/js/html5shiv.js"></script>-->
@@ -44,23 +46,5 @@
     <%--<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">--%>
     <%--<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">--%>
     <%--<link rel="shortcut icon" href="../assets/ico/favicon.png">--%>
-
-
 </head>
 <body>
-
-<%--<div class="navbar navbar-inverse navbar-fixed-top">--%>
-    <%--<div class="navbar-inner">--%>
-        <%--<div class="container-fluid">--%>
-            <%--<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">--%>
-                <%--<span class="icon-bar"></span>--%>
-                <%--<span class="icon-bar"></span>--%>
-                <%--<span class="icon-bar"></span>--%>
-            <%--</button>--%>
-            <%--<a class="brand" href="#">PeerPen</a>--%>
-            <%--<a class="pull-right" href="/logout">LOGOUT</a>--%>
-
-
-        <%--</div>--%>
-    <%--</div>--%>
-<%--</div>--%>
