@@ -15,8 +15,7 @@
 
                 <div class="avatar">
                     <a href="/peer/<%=sessionUser.getId()%>/profile">
-                        <img class="img-circle"
-                             src="<%= peer.getAvatar().getServletContextAvatarPath( request ) %>">
+                        <img class="img-circle" src="<%= peer.getAvatar().getDefaultAvatarSource( request ) %>">
                     </a>
                 </div>
                 <div class="info">

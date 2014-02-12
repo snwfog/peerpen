@@ -9,11 +9,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <h1>You are viewing <%= (sessionUser.getId() == peer.getId())  ? "your own" : peer.getFirstName()+"&#39;s" %> documents</h1>
-
-        <h2>Number of documents: <%= peer.getDocuments().size()%>
-        </h2>
-
+        <br/>
         <div id="contentFlow" class="ContentFlow">
             <!-- should be place before flow so that contained images will be loaded first -->
             <div class="loadIndicator"><div class="indicator"></div></div>
@@ -22,9 +18,7 @@
 
                 <% for(Document d : documents) {%>
                     <div class="item">
-
-                            <img class="content" src="/assets/images/clipart-document-management.png" id="document-<%=d.getId()%>"/>
-
+                        <img class="content" src="/assets/images/clipart-document-management.png" id="document-<%=d.getId()%>"/>
                         <div class="caption">
                             <a href="/peer/<%= peer.getId() %>/document/<%= d.getId()%>">
                                 <%=d.getDocName()%>
@@ -40,12 +34,34 @@
 
         </div>
     </div>
-
     <div class="row">
-        <div id="currentDocument">
-            <p>Default document to show aka firsr</p>
-            <p> I love this game</p>
-            <p> super duper super</p>
+        <div class="col-md-4">
+        </div>
+
+        <div class="col-md-4">
+            <div class="row text-center" id="documentBar">
+                <input type="hidden" value="<%=peer.getId()%>" id="ajaxPeer">
+                <a class="btn btn-primary" href="#" id="viewDocument" disabled>View Detail Document</a>
+                <a class="btn btn-primary" href="#" id="editDocument" disabled>Edit Document</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+        </div>
+    </div>
+
+
+    <div class="row top-buffer">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            <div id="currentDocument">
+                <div class="row text-center">
+                    <h2> SELECT A DOCUMENT </h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
         </div>
     </div>
 </div>

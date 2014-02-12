@@ -20,25 +20,25 @@
             }
         %>
     </title>
-
     <link rel="stylesheet" href="/assets/css/lib/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/lib/bootstrap-responsive.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/lib/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/lib/odometer-theme-default.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/lib/jquery.Jcrop.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/lib/jquery.tagit.css" type="text/css">
-    <link rel="stylesheet" href="/assets/css/lib/tagit.ui-zendesk.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/lib/jquery-ui-1.10.4-smoothness.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/lib/tagit.ui-zendesk.css" type="text/css">
 
-    <link rel="stylesheet" href="/assets/css/custom/style.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/custom/style.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/custom/avatar.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/custom/peerpen.css" type="text/css">
-
 
     <link rel="stylesheet" title="Standard" href="/assets/css/js/lib/contentflow/contentflow_src.css" type="text/css" />
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <!--<script src="../assets/js/html5shiv.js"></script>-->
-    <![endif]-->
+    <!--[endif]-->
 
     <!-- Fav and touch icons -->
     <%--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">--%>

@@ -1,3 +1,4 @@
+<%@ page import="com.peerpen.model.Avatar" %>
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ include file="/view/includes/static/header.jsp" %>
 
@@ -9,7 +10,8 @@
 <div id="dropzone-container">
     <form enctype="multipart/form-data" class="dropzone" id="avatar-upload"
           action="/peer/<%= sessionPeer.getId() %>/profile/avatar/upload" method="post">
-        <%--<button id='avatar-upload-submit' class="btn btn-large btn-success" type="submit">Accept</button>--%>
+        <input type="hidden" id="avatar-original-width" name="original-width" value="">
+        <input type="hidden" id="avatar-original-height" name="original-height" value="">
     </form>
 </div>
 
@@ -33,8 +35,8 @@
 
                     <div id="avatar-original-area">
                         <img id="avatar"
-                             src="<%= sessionPeer.getAvatar().getServletContextAvatarPath(request)%>"
-                             alt="<%= sessionPeer.getFirstName() %>" />
+                             src="<%= sessionPeer.getAvatar().getServletContextAvatarPathForSize( request, Avatar.Size.ORIGINAL ) %>"
+                             alt="<%= sessionPeer.getFirstName() %>"/>
                     </div>
 
                     <button class="btn btn-large btn-success" type="submit">Accept</button>
@@ -45,8 +47,8 @@
         <div class="col-md-4">
             <div id="avatar-preview-container">
                 <img id="avatar-preview"
-                     src="<%= sessionPeer.getAvatar().getServletContextAvatarPath(request)%>"
-                     alt="<%= sessionPeer.getFirstName() %>" />
+                     src="<%= sessionPeer.getAvatar().getRelativeServletContextAvatarPathForSize( request, Avatar.Size.ORIGINAL )%>"
+                     alt="<%= sessionPeer.getFirstName() %>"/>
             </div>
         </div>
     </div>
