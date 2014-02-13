@@ -25,5 +25,7 @@
 <script src="/assets/js/custom/reset.js"></script>
 <script src="/assets/js/custom/avatar.js"></script>
 
+<script src="/assets/js/custom/slideDiv.js"></script>
+
 </body>
 </html>
