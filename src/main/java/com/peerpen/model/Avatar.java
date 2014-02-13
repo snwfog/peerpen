@@ -8,7 +8,12 @@ import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasOne;
 
+import java.awt.AlphaComposite;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
@@ -29,15 +34,14 @@ public class Avatar extends Base implements IModel {
     public static String AVATAR_DEFAULT_PATH = "";
 
     // Defined inside of JSP
-    public static final int VIEWPORT_WIDTH = 512;
-    public static final int VIEWPORT_HEIGHT = 512;
+    public static final int VIEWPORT_DIMENSION = 512;
 
     // Avatar size
     public static enum Size {
-        SMALL( 16 ),
-        MEDIUM( 32 ),
-        LARGE( 64 ),
-        HUGE( 128 );
+        SMALL( 32 ),
+        MEDIUM( 64 ),
+        LARGE( 256 ),
+        ORIGINAL( 0 );
 
         private int dimension;
 
@@ -135,6 +139,10 @@ public class Avatar extends Base implements IModel {
         return this.getServletContextAvatarPathForSize( request, size );
     }
 
+    public String getDefaultAvatarSource( HttpServletRequest request ) {
+        return this.getRelativeServletContextAvatarPathForSize( request, Size.MEDIUM );
+    }
+
     public void setFilename( String avatarFilename ) {
         this.filename = avatarFilename;
         setUpdateFlag( true );
@@ -176,10 +184,6 @@ public class Avatar extends Base implements IModel {
         setUpdateFlag( true );
     }
 
-    public void rescaleAvatar( Object parameters ) {
-
-    }
-
     public Double getOriginalWidth() {
         return originalWidth;
     }
@@ -208,10 +212,6 @@ public class Avatar extends Base implements IModel {
         this.setOriginalHeight( Double.parseDouble( map.get( "original-height" ) ) );
     }
 
-    public void cropAvatarFromParameter( HttpServletRequest request ) {
-
-    }
-
     public String getAvatarExtension( String path ) {
         ContentInfo info = ContentInfoUtil.findExtensionMatch( path );
         return info.getFileExtensions().length > 0 ? info.getFileExtensions()[0] : "";
@@ -219,36 +219,78 @@ public class Avatar extends Base implements IModel {
 
     public void cropAvatar( HttpServletRequest request ) {
         this.setCoordinate( request );
-        double inversedX1 = this.originalWidth / this.VIEWPORT_WIDTH * this.x1;
-        double inversedX2 = this.originalWidth / this.VIEWPORT_WIDTH * this.x2;
-        double inversedY1 = this.originalWidth / this.VIEWPORT_HEIGHT * this.y1;
-        double inversedY2 = this.originalWidth / this.VIEWPORT_HEIGHT * this.y2;
+        double ratio = Math.max( this.originalHeight, originalWidth ) / this.VIEWPORT_DIMENSION;
+
+        double scaledX1 = this.x1 * ratio;
+        double scaledX2 = this.x2 * ratio;
+        double scaledY1 = this.y1 * ratio;
+        double scaledY2 = this.y2 * ratio;
 
         try {
             // FIXME: Better pathing
-            File largeAvatarFile = new File(
+            String originalImageRelativePath =
+                    this.getRelativeServletContextAvatarPathForSize( request, Size.ORIGINAL );
+            File originalAvatarFile = new File(
                     MessageFormat.format( "{0}/{1}", request.getSession().getServletContext().getRealPath( "" ),
-                            this.getServletContextAvatarPath( request ) ) );
-            BufferedImage outImage = ImageIO.read( largeAvatarFile );
+                            originalImageRelativePath ) );
+            BufferedImage outImage = ImageIO.read( originalAvatarFile );
             BufferedImage croppedImageBuffer =
-                    outImage.getSubimage( (int) inversedX1, (int) inversedY1, (int) (inversedX2 - inversedX1),
-                            (int) (inversedY2 - inversedY1) );
+                    outImage.getSubimage( (int) scaledX1, (int) scaledY1, (int) (scaledX2 - scaledX1),
+                            (int) (scaledY2 - scaledY1) );
 
-            String originalImageRelativePath = this.getRelativeServletContextAvatarPath( request );
             String fileExtension = this.getAvatarExtension( originalImageRelativePath );
-            File croppedImage = new File( MessageFormat.format( "{0}/{1}"
-                    , request.getSession().getServletContext().getRealPath( "" )
-                    , this.getRelativeServletContextAvatarPathForSize( request, Size.MEDIUM ) ) );
+            File croppedImage = new File(
+                    MessageFormat.format( "{0}/{1}", request.getSession().getServletContext().getRealPath( "" ),
+                            this.getRelativeServletContextAvatarPathForSize( request, Size.LARGE ) ) );
 
             ImageIO.write( croppedImageBuffer, fileExtension, croppedImage );
             logger.info( "Success saving cropped image for size " + "large" + " at " + croppedImage.getPath() );
+
+
+            // Resize the avatar
+            this.resizeAvatar( request, Size.LARGE );
+            this.resizeAvatar( request, Size.MEDIUM );
+            this.resizeAvatar( request, Size.SMALL );
 
         } catch ( IOException e ) {
             logger.error( "Error copping avatar for " + this.getPeer() );
         } finally {
             this.update();
         }
+    }
 
+    public void resizeAvatar( HttpServletRequest request, Size size ) throws IOException {
+        File largeAvatarFile = new File(
+                MessageFormat.format( "{0}/{1}", request.getSession().getServletContext().getRealPath( "" ),
+                        this.getServletContextAvatarPathForSize( request, Size.LARGE ) ) );
+        BufferedImage croppedImage = ImageIO.read( largeAvatarFile );
+        ColorModel cm = croppedImage.getColorModel();
+
+        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+        WritableRaster raster = croppedImage.copyData( null );
+        BufferedImage resizeImageCopy = new BufferedImage( cm, raster, isAlphaPremultiplied, null );
+        int type = resizeImageCopy.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : croppedImage.getType();
+
+
+        String originalImageRelativePath = this.getRelativeServletContextAvatarPath( request );
+        String fileExtension = this.getAvatarExtension( originalImageRelativePath );
+
+        BufferedImage scaledImage = new BufferedImage( size.getDimension(), size.getDimension(), type );
+        Graphics2D g = scaledImage.createGraphics();
+        g.drawImage( resizeImageCopy, 0, 0, size.getDimension(), size.getDimension(), null );
+        g.dispose();
+        g.setComposite( AlphaComposite.Src );
+
+        g.setRenderingHint( RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR );
+        g.setRenderingHint( RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY );
+        g.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
+
+        String resizeImageAbsolutePath =
+                MessageFormat.format( "{0}/{1}", request.getSession().getServletContext().getRealPath( "" ),
+                        this.getServletContextAvatarPathForSize( request, size ) );
+        ImageIO.write( scaledImage, fileExtension, new File( resizeImageAbsolutePath ) );
+
+        logger.warn( "Finish resize image for size " + size );
     }
 
     private void setCoordinate( HttpServletRequest request ) {
