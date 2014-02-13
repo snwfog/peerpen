@@ -124,10 +124,10 @@ public class SearchController extends HttpServlet {
     }
 
     private static void doSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //boolean doTagMatching = false;
+        boolean doTagMatching = false;
         String query = "";
         String area = "";
-        List<String> tagNames = null;
+        List<String> tagNames;
         List<TagDescriptor> tagDescriptors = null;
 
         if (request.getParameter( "area" )!= null){
@@ -138,17 +138,25 @@ public class SearchController extends HttpServlet {
             query = request.getParameter( "search_query" );
         }
 
-        //if (doTagMatching) {
-        //    tagNames = Arrays.asList( query.split( "\\s* \\s*" ) );
-        //    tagDescriptors = new TagDescriptor(  ).getTagDescriptors(tagNames);
-        //}
+        if (request.getParameter( "searchTags" ) != null){
+            if (request.getParameter( "searchTags" ).equals( "on" )){
+                doTagMatching = true;
+            };
+        }
+
+        if (doTagMatching) {
+            tagNames = Arrays.asList( query.split( "\\s* \\s*" ) );
+            tagDescriptors = new TagDescriptor(  ).getTagDescriptors(tagNames);
+        }
 
         if (!query.isEmpty()){
             switch (area){
                 case "documents":
                     List<Document> documents = new ArrayList<>(  );
                     documents.addAll( new Document(  ).getMatchedDocuments( query ) );
-                    //if (doTagMatching) {documents.addAll( new Document(  ).getMatchedDocuments( tagDescriptors ) );}
+                    if (doTagMatching && tagDescriptors.size() > 0) {
+                        documents.addAll( new Document(  ).getMatchedDocuments( tagDescriptors ) );
+                    }
                     request.setAttribute( "searchResults", documents );
                     break;
                 case "peers":
@@ -157,7 +165,9 @@ public class SearchController extends HttpServlet {
                 case "groups":
                     List<Group> groups = new ArrayList<>(  );
                     groups.addAll( new Group().getMatchedGroups( query ) );
-                    //if (doTagMatching) {groups.addAll( new Group().getMatchedGroups( tagDescriptors ) );}
+                    if (doTagMatching && tagDescriptors.size() > 0) {
+                        groups.addAll( new Group().getMatchedGroups( tagDescriptors ) );
+                    }
                     request.setAttribute( "searchResults", groups );
                     break;
                 default:
@@ -165,10 +175,10 @@ public class SearchController extends HttpServlet {
                     everything.addAll( new Document().getMatchedDocuments( query ));
                     everything.addAll( new Peer().getMatchedPeers( query ));
                     everything.addAll( new Group().getMatchedGroups( query ));
-                    //if (doTagMatching) {
-                    //    everything.addAll( new Document().getMatchedDocuments( tagDescriptors ) );
-                    //    everything.addAll( new Group().getMatchedGroups( tagDescriptors ) );
-                    //}
+                    if (doTagMatching && tagDescriptors.size() > 0) {
+                        everything.addAll( new Document().getMatchedDocuments( tagDescriptors ) );
+                        everything.addAll( new Group().getMatchedGroups( tagDescriptors ) );
+                    }
                     request.setAttribute( "searchResults", everything );
             }
         }

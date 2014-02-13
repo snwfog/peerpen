@@ -31,6 +31,12 @@
                 <button type="submit" class="btn btn-primary" name="submit" />Search</button>
             </span>
         </div>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="searchTags"> Look in tags too
+            </label>
+        </div>
     </form>
 
 
