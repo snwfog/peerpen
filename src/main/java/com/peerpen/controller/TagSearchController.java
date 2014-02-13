@@ -38,42 +38,9 @@ public class TagSearchController extends HttpServlet {
         String requestType = request.getParameter( "format" );
         // ajax autocomplete request
         if (requestType != null && requestType.equals( "json" )){ // request.getAttribute ("applicationJson") doesnt work
-            String q = " ";
-            if( request.getParameter("term")!= null){
-                q = request.getParameter( "term" );
-            }
-
-            Set suggestionPool = new LinkedHashSet(  );
-            suggestionPool.addAll( new TagDescriptor(  ).getSuggestedTagDescriptors(q, 3) );
-
-            // Convert set into json string
-            String json = new Gson().toJson( suggestionPool );
-
-            // Return json string as response
-            response.setContentType( "application/json" );
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(json);
-
+            doAutocomplete( request, response );
         }else{ // normal post request from jsp
-
-            HttpSession session = request.getSession();
-            String query = "";
-            if (request.getParameter( "tags" )!= null && !request.getParameter( "tags" ).isEmpty()){
-                query = request.getParameter( "tags" );
-                // converts tags string into a list
-                List<String> tagNames = Arrays.asList( query.split( "\\s*,\\s*" ) );
-                // converts list<string> into list<tagdescriptor>
-                List<TagDescriptor> tagDescriptors = new TagDescriptor(  ).getTagDescriptors(tagNames);
-
-                // find match
-                if(!tagDescriptors.isEmpty()){
-                    List<Group> groups = new Group(  ).getMatchedGroups( tagDescriptors );
-                    List<Document> documents = new Document(  ).getMatchedDocuments( tagDescriptors );
-                    session.setAttribute("tagSearchResultsGroups", groups);
-                    session.setAttribute("tagSearchResultsDocuments", documents);
-                }
-            }
-            response.sendRedirect( request.getHeader( "referer" ) );
+            doSearch( request, response );
         }
     }
 
@@ -81,5 +48,46 @@ public class TagSearchController extends HttpServlet {
         // Get a list of all tag descriptors
         request.setAttribute( "tagCloud", TagDescriptor.getTagCloud() );
         request.getRequestDispatcher("/view/tagsearch.jsp").forward(request, response);
+    }
+
+    private static void doAutocomplete (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        int numOfSuggestions = 3;
+        String q = " ";
+        if( request.getParameter("term")!= null){
+            q = request.getParameter( "term" );
+        }
+
+        Set suggestionPool = new LinkedHashSet(  );
+        suggestionPool.addAll( new TagDescriptor(  ).getSuggestedTagDescriptors(q, numOfSuggestions) );
+        // Convert set into json string
+        String json = new Gson().toJson( suggestionPool );
+
+        // Return json string as response
+        response.setContentType( "application/json" );
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
+    }
+
+    private static void doSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String query = "";
+        if (request.getParameter( "tags" )!= null && !request.getParameter( "tags" ).isEmpty()){
+            query = request.getParameter( "tags" );
+            // converts tags string into a list
+            List<String> tagNames = Arrays.asList( query.split( "\\s*,\\s*" ) );
+            // converts list<string> into list<tagdescriptor>
+            List<TagDescriptor> tagDescriptors = new TagDescriptor(  ).getTagDescriptors(tagNames);
+
+            // find match
+            if(!tagDescriptors.isEmpty()){
+                List<Group> groups = new Group(  ).getMatchedGroups( tagDescriptors );
+                List<Document> documents = new Document(  ).getMatchedDocuments( tagDescriptors );
+                request.setAttribute( "tagSearchResultsGroups", groups );
+                request.setAttribute( "tagSearchResultsDocuments", documents );
+            }
+        }
+        request.getRequestDispatcher( "/view/tagsearch.jsp" ).forward( request, response );
+        //response.sendRedirect( request.getHeader( "referer" ) );
+
     }
 }

@@ -52,9 +52,9 @@
 
 <!-- SEARCH RESULT -->
 <%
-    if(session.getAttribute( "tagSearchResultsGroups" ) != null && session.getAttribute( "tagSearchResultsDocuments" ) != null){
-        ArrayList<Group> gs = (ArrayList<Group>) session.getAttribute( "tagSearchResultsGroups" );
-        ArrayList<Document> documents = (ArrayList<Document>) session.getAttribute( "tagSearchResultsDocuments" );
+    if(request.getAttribute( "tagSearchResultsGroups" ) != null && request.getAttribute( "tagSearchResultsDocuments" ) != null){
+        ArrayList<Group> gs = (ArrayList<Group>) request.getAttribute( "tagSearchResultsGroups" );
+        ArrayList<Document> documents = (ArrayList<Document>) request.getAttribute( "tagSearchResultsDocuments" );
     if (!gs.isEmpty() || !documents.isEmpty()){
 %>
     <div class="panel panel-default">

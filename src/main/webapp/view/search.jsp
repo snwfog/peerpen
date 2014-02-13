@@ -49,8 +49,8 @@
 
 <!-- SEARCH RESULT -->
 <%
-    if(session.getAttribute( "searchResults" ) != null){
-    ArrayList<Object> results = (ArrayList<Object>) session.getAttribute( "searchResults" );
+    if(request.getAttribute( "searchResults" ) != null){
+    ArrayList<Object> results = (ArrayList<Object>) request.getAttribute( "searchResults" );
     if (!results.isEmpty()){
 %>
     <div class="panel panel-default">
@@ -96,7 +96,12 @@
     </div>
 
 <%
-        }}
+        }else{
+            %>
+    Sorry, couldn't find any <%=request.getParameter("search_query")%> in <%=request.getParameter("area")%>  :(
+    <%
+        }
+    }
 %>
 
 
