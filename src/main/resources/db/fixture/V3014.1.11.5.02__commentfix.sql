@@ -7,8 +7,8 @@ INSERT INTO `peers` (`id`, `first_name`, `last_name`, `email`, `user_name`, `pas
   (4,'Jane','Smith','info@peerpen.com','bob','bob',10,'peerpen.com','2014-01-13 17:56:48','2014-02-08 20:29:43',NULL,0,'I am newly graduate',NULL,'2014-01-13','Australia','FINANCE',0,'F',NULL,NULL),
   (5,'John ','Smith','John.Smith@google.com','jon','jon',20,'google.com','2014-01-13 17:58:22','2014-02-08 20:29:25',NULL,0,'I am a fake person',NULL,'2014-01-13','China','OIL',4,'F',NULL,NULL),
   (6,'Mark','Zane','mark@peerpen.com','mar','mar',4,'google.com','2014-02-08 19:15:39','2014-02-08 20:29:04',NULL,0,'Hi, my name is Mark',NULL,'2014-02-08','Canada','ACCO',3,'M',NULL,NULL),
-  (7,'Brad','Zimmer','brad@peer.ca','bra','bra',5,'google.com','2014-02-08 19:17:45','2014-02-08 20:28:33',NULL,0,'Hi, I\'m Brad, pleasure to meet you',NULL,'2014-02-08','US of A','FINA',5,'M',NULL,NULL),
-  (8,'Melissa','Margerat','mel@stdlife.ca','mel','mel',7,'google.com','2014-02-08 19:19:18','2014-02-08 20:28:14',NULL,0,'Hello, is it me you\'re looking for?',NULL,'2014-02-08','Australia','MECH',5,'F',NULL,NULL),
+  (7,'Brad','Zimmer','brad@peer.ca','bra','bra',5,'google.com','2014-02-08 19:17:45','2014-02-08 20:28:33',NULL,0,'Hi, Im Brad, pleasure to meet you',NULL,'2014-02-08','US of A','FINA',5,'M',NULL,NULL),
+  (8,'Melissa','Margerat','mel@stdlife.ca','mel','mel',7,'google.com','2014-02-08 19:19:18','2014-02-08 20:28:14',NULL,0,'Hello, is it me youre looking for?',NULL,'2014-02-08','Australia','MECH',5,'F',NULL,NULL),
   (9,'Meg','Griffin','meg@facebook.com','meg','meg',6,'google.com','2014-02-08 19:20:09','2014-02-08 20:27:41',NULL,0,'Meg.',NULL,'2014-02-08','Germany','BIOL',2,'F',NULL,NULL),
   (10,'James','DeSanta','james.desenta@getalife.com','jam','jam',3,'google.com','2014-02-08 19:21:05','2014-02-08 20:27:17',NULL,0,'I am looking for a exciting positiong',NULL,'2014-02-08','France','BIOT',3,'M',NULL,NULL);
 
