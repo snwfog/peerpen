@@ -19,7 +19,7 @@
     <ul class="nav navbar-nav">
         <li><a href="/peer/<%=sessionUser.getId()%>/feed">Feeds</a></li>
         <li><a href="/peer/<%=sessionUser.getId()%>/document">Documents</a></li>
-        <li><a href="/peer/<%=sessionUser.getId()%>/group">Groups</a></li>
+        <li><a href="/group">Groups</a></li>
     </ul>
     <!-- SEARCH FORM -->
     <ul class="nav navbar-nav navbar-right">
