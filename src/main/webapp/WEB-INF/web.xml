@@ -116,12 +116,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>additional</servlet-name>
+        <servlet-name>full</servlet-name>
         <servlet-class>com.peerpen.controller.AdditionalController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>additional</servlet-name>
-        <url-pattern>/additional</url-pattern>
+        <servlet-name>full</servlet-name>
+        <url-pattern>/full</url-pattern>
     </servlet-mapping>
 
 

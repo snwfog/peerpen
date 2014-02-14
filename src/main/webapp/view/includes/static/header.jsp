@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="/assets/css/custom/avatar.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/custom/peerpen.css" type="text/css">
 
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
     <link rel="stylesheet" title="Standard" href="/assets/css/js/lib/contentflow/contentflow_src.css" type="text/css" />
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
