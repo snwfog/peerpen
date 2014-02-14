@@ -1,21 +1,12 @@
 package com.peerpen.controller;
-
-import com.google.common.collect.ImmutableMap;
 import com.peerpen.model.Peer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.text.DateFormat;
 /**
  * Created with IntelliJ IDEA.
  * User: momoking
@@ -25,18 +16,18 @@ import java.text.DateFormat;
  */
 public class ProfileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // get all profile input
         final String FORM_PERSONAL = "personal";
         final String FORM_DESCRIPTION = "description";
         final String FORM_CONTACT = "contact";
 
 
+        // get all specific profile form inputs
         Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
         System.out.println(parameters);
         String form = parameters.get("form").toString();
         Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
         if(form.equals(FORM_PERSONAL)){
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
             peer.setFirstName(parameters.get("firstName"));
             peer.setLastName(parameters.get("lastName"));
             try {
@@ -64,10 +55,6 @@ public class ProfileController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Map<String, Object> map = (Map<String, Object>) request.getAttribute("parameters");
-        Peer p = new Peer().find(Integer.parseInt(map.get("peer").toString()));
-        System.out.println("been here"+ p.getFirstName());
-        request.setAttribute("user", p);
         request.getRequestDispatcher("/view/profile.jsp").forward(request, response);
 
     }

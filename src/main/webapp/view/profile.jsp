@@ -2,7 +2,7 @@
 <%@ include file="/view/includes/static/header.jsp" %>
 <%@ include file="/view/includes/static/navbar_profile.jsp" %>
 
-<% SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");%>
+<% SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");%>
 
 <div class="container-fluids greyish">
   <div class="row col-md-offset-0">
@@ -18,8 +18,8 @@
           <p>Personal Information</p>&nbsp<a id="edit_personal" href="#"><span id="personal_icon" class="glyphicon glyphicon-pencil"></span></a>
       </div>
       <div class="well">
-      <div class="row">
           <form action="/peer/<%=sessionUser.getId()%>/profile" id="form_personal" method="post">
+      <div class="row">
           <div class="col-md-6">
             <table>
               <tr>
@@ -88,10 +88,10 @@
             </table>
           </div>
           </form>
+      </div>
         <a class ="pull-right" type="submit" class="pull-right" style="visibility:hidden"
         id="save_personal" value="Save" href="#">Save
           Changes</a>
-      </div>
       </div>
         </div>
         <div class="col-md-10">

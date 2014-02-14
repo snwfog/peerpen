@@ -117,7 +117,7 @@
 
     <servlet>
         <servlet-name>full</servlet-name>
-        <servlet-class>com.peerpen.controller.AdditionalController</servlet-class>
+        <servlet-class>com.peerpen.controller.FullController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>full</servlet-name>
