@@ -1,5 +1,5 @@
 <%--Including the debug information--%>
-<%@ include file="/view/debug.jsp" %>
+
 
 <!-- Le javascript
 ================================================== -->
@@ -36,4 +36,5 @@
 
 
 </body>
+<%@ include file="/view/debug.jsp" %>
 </html>

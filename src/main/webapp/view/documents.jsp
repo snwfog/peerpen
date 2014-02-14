@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="row">
-            <div id="documentsFlow" >
+            <div id="documentsFlow">
                 <div id="contentFlow" class="ContentFlow" style="background-color:white;">
                     <div class="top-buffer">
                         <p>&nbsp</p>
