@@ -34,6 +34,5 @@
 <script src="/assets/js/custom/confirm_delete_dialog.js"></script>
 <script src="/assets/js/custom/reset.js"></script>
 
-
 </body>
 </html>

@@ -1,5 +1,5 @@
 $ ->
-  
+
   # Upload the avatar in the avatar upload
   #$('button#avatar-upload-submit').click (e) ->
   #  e.preventDefault()
@@ -22,8 +22,9 @@ $ ->
       $("section#signup form").fadeIn 'slow'
 
   # Create the odometer counter
-  od = new Odometer
-    el: $('div.odometer')[0]
+  if $('div.odometer').length > 0
+    od = new Odometer
+      el: $('div.odometer')[0]
 
   $(window).scroll ->
     vHeight = $(this).scrollTop()
