@@ -46,15 +46,16 @@ public class GroupController extends GenericApplicationServlet
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
+    //create a group
+
     Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
     Peer sessionUser = (Peer) request.getAttribute("sessionUser");
     Group group = new Group();
     group.setGroupName(parameters.get("name"));
     group.setDescription(parameters.get("description"));
+    group.setAdminId(sessionUser.getId());
     group.addPeer(sessionUser);
     group.save();
-
-
 
     request.setAttribute("group", group);
     request.getRequestDispatcher("/view/group.jsp").forward(request, response);

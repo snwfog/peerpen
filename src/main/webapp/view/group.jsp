@@ -6,6 +6,7 @@
 <% Group group = (Group) request.getAttribute("group"); %>
 <% ArrayList<Peer> peers = (ArrayList<Peer>)group.getPeers();%>
 <% ArrayList<Broadcast> broadcasts = (ArrayList<Broadcast>)group.getOrderedBroadcast();%>
+<% ArrayList<Joingroup> joingroups = (ArrayList<Joingroup>)group.getRequests();%>
 
 <%--
   Created by IntelliJ IDEA.
@@ -16,7 +17,7 @@
 --%>
 <%if (group.getIsJoined(sessionUser.getId())){%>
 <br>
-<h1><%= group.getGroupName()%> Group</h1>
+<h1><%= group.getGroupName()%> Group Created by <%= group.getAdminId()%> </h1>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
@@ -87,6 +88,57 @@
 
              </div>
          </div>
+
+
+
+
+
+
+
+        <div id="row">
+            <div class="col-md-4">
+                <h2> User Request to join your <%= group.getGroupName()%> group </h2>
+                <div class="caption">
+                    <div class="card2">
+                        <h3 class="card-heading simple"><%= sessionUser.getFirstName() %> <%= sessionUser.getLastName() %></h3>
+                        <div class="card-body">
+                            <% if (joingroups!=null){
+                                        for (Joingroup jp:joingroups){
+                                            %>
+                                            <div class="card2">
+
+                                                <div class="card-body">
+                                                    <strong> Peer <%= jp.getPeer().getUserName() %> wants to join your group</strong>
+                                        <%}
+                                    }%>
+                                        <%--else--%>
+                                        <%--{ %>--%>
+                                                    <%--<h2> No user request to join your group  </h2> --%>
+                                        <%--<%}--%>
+
+
+
+
+                            <%--<form method="POST" action="/group/<%= group.getId()%>/broadcast" parsley-validate>--%>
+                                <%--<textarea id="broadcast" class="parsley-validated" name="broadcast" style="width:100%" parsley-trigger="change keyup"></textarea>--%>
+                                <%--<input type="hidden" name="groupid" value="<%= group.getId()%>"/>--%>
+                                <%--<input type="hidden" name="peerid" value="<%= sessionUser.getId()%>"/>--%>
+                                <%--<input type="hidden" name="_method" value="POST">--%>
+                                <%--<button type="submit" class="btn btn-success ">Post</button>--%>
+                            <%--</form>--%>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+
+
 
     </div>
 </div>

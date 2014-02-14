@@ -1,6 +1,7 @@
 package com.peerpen.model;
 
 import com.sunnyd.IModel;
+import com.sunnyd.annotations.ActiveRelationHasOne;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
@@ -12,10 +13,14 @@ import java.util.Map;
 public class Group extends Taggable implements IModel
 {
 
+
   public static final String tableName = "groups";
 
   @ActiveRecordField
   private String groupName;
+
+  @ActiveRecordField
+  private Integer adminId;
 
   @ActiveRecordField
   private String description;
@@ -46,6 +51,15 @@ public class Group extends Taggable implements IModel
     this.groupName = groupName;
     setUpdateFlag(true);
   }
+
+    public Integer getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(Integer adminId) {
+        this.adminId = adminId;
+        setUpdateFlag(true);
+    }
 
   public String getDescription()
   {
@@ -162,6 +176,12 @@ public class Group extends Taggable implements IModel
       List<Broadcast> broadcasts = new Broadcast().queryAll("SELECT * FROM `broadcasts` WHERE group_id= "+ this.getId() +" ORDER BY last_modified_date DESC");
       return broadcasts;
   }
+
+    public List<Joingroup> getRequests()
+    {
+        List<Joingroup> joingroups = new Joingroup().queryAll("SELECT * FROM `joingroups` WHERE group_id= "+ this.getId() +" ORDER BY last_modified_date DESC");
+        return joingroups;
+    }
 
   //public List<Group> removeDuplicates(List<Group> groups){
   //    List<Group> set = new ArrayList<>(  );
