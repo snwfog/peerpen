@@ -27,6 +27,12 @@
                           href="/peer/<%=sessionUser.getId()%>/document">View Documents &raquo;</a></p>
                 </div>
             </div>
+            <div class="col-md-offset-1">
+                <h3>Groups you have joined</h3>
+                <% for(Group g: navGroups){%>
+                <h4><a href="/group/<%=g.getId() %>"><%=g.getGroupName()%></a></h4>
+                <%}%>
+            </div>
         </div>
 
         <div class="col-md-8">
