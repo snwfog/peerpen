@@ -28,6 +28,7 @@
                     <th>Last Name</th>
                     <th>Username</th>
                     <th>Email</th>
+                    <th>Industry</th>
 
                 </tr>
                 </thead>
@@ -38,6 +39,7 @@
                     <td><%=p.getLastName()%></td>
                     <td><%=p.getUserName()%></td>
                     <td><%=p.getEmail()%></td>
+                    <td><%=p.getIndustry()%></td>
                     <td><a href="/peer/<%=p.getId()%>/document"> Documents </a></td>
                 </tr>
                 <%}%>

@@ -14,6 +14,7 @@
         <h5><a href="/search">Search</a></h5>
         <h5><a href="/tagsearch">Tagsearch</a></h5>
         <h5><a href="/group">Group</a></h5>
+        <h5><a href="/peer/2/profile/full">Full</a></h5>
     </div>
 </div>
 

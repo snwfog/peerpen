@@ -117,7 +117,7 @@
 
     <servlet>
         <servlet-name>full</servlet-name>
-        <servlet-class>com.peerpen.controller.AdditionalController</servlet-class>
+        <servlet-class>com.peerpen.controller.FullController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>full</servlet-name>
@@ -233,12 +233,12 @@
 
 
     <servlet>
-        <servlet-name>tagsearch</servlet-name>
-        <servlet-class>com.peerpen.controller.TagSearchController</servlet-class>
+        <servlet-name>tagcloud</servlet-name>
+        <servlet-class>com.peerpen.controller.TagCloudController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>tagsearch</servlet-name>
-        <url-pattern>/tagsearch</url-pattern>
+        <servlet-name>tagcloud</servlet-name>
+        <url-pattern>/tagcloud</url-pattern>
     </servlet-mapping>
 
 
@@ -306,14 +306,23 @@
         <url-pattern>/feed</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>group</servlet-name>
-        <servlet-class>com.peerpen.controller.GroupController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>group</servlet-name>
-        <url-pattern>/group</url-pattern>
-    </servlet-mapping>
+  <servlet>
+    <servlet-name>group.do</servlet-name>
+    <servlet-class>com.peerpen.ajax.GroupControllerAjax</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>group.do</servlet-name>
+    <url-pattern>/group.do</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>group</servlet-name>
+    <servlet-class>com.peerpen.controller.GroupController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>group</servlet-name>
+    <url-pattern>/group</url-pattern>
+  </servlet-mapping>
 
     <servlet>
         <servlet-name>broadcast</servlet-name>

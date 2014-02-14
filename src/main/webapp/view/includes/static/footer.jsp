@@ -20,7 +20,9 @@
 
 <!-- Placed at the end of the document so the pages load faster -->
 
+
 <script src="/assets/js/custom/slideDiv.js"></script>
+<script src="/assets/js/custom/groups.js"></script>
 <script src="/assets/js/custom/profile.js"></script>
 <script src="/assets/js/custom/script.js"></script>
 <script src="/assets/js/custom/script.bare.js"></script>

@@ -13,10 +13,10 @@
     - avatar:
       - upload
   - feed
-- group:
+- group(\.do)?:
   - broadcast
 - tag
-- tagsearch
+- tagcloud
 - search
 - reset(\.do)?
 - upload(\.do)?

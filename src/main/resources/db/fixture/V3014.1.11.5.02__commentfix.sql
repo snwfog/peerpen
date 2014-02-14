@@ -1,12 +1,16 @@
 
 
-
-INSERT INTO `peers` (`id`, `first_name`, `last_name`, `email`, `user_name`, `password`, `point`, `personal_website`, `creation_date`, `last_modified_date`, `etag`, `semaphore`, `description`, `rank_id`, `date_of_birth`, `country`, `industry`, `experience`, `gender`, `avatar_id`)
-VALUES
-	(2,'Bobby','Yit','hello@gmail.com','qwe','qwe',9000,'peerpen.com','2014-01-11 13:04:33','2014-01-11 13:04:33',NULL,0,'this is a description',NULL,'2014-01-11','Canada','SOEN',2,'M',NULL),
-	(3,'John','Doe','hello@gmail.cm','asd','asd',1000,'google.com','2014-01-13 17:55:28','2014-01-13 17:55:28',NULL,0,'this is a description',NULL,'2014-01-13','US of A','MECH',3,'M',NULL),
-	(4,'Jane','Smith','info@peerpen.com','bob','bob',10,'peerpen.com','2014-01-13 17:56:48','2014-01-13 17:56:48',NULL,0,'I am newly graduate',NULL,'2014-01-13','Australia','FINANCE',0,'F',NULL),
-	(5,'John ','Smith','John.Smith@google.com','jon','jon',20,'google.com','2014-01-13 17:58:22','2014-01-13 17:58:22',NULL,0,'I am a fake person',NULL,'2014-01-13','China','OIL',4,'F',NULL);
+INSERT INTO `peers` (`id`, `first_name`, `last_name`, `email`, `user_name`, `password`, `point`, `personal_website`, `creation_date`, `last_modified_date`, `etag`, `semaphore`, `description`, `rank_id`, `date_of_birth`, `country`, `industry`, `experience`, `gender`, `avatar_id`, `session_id`)
+  VALUES
+  (2,'Ron','Hagen','hello@gmail.com','qwe','qwe',9000,'peerpen.com','2014-01-11 13:04:33','2014-02-08 20:30:52',NULL,0,'this is a description',NULL,'2014-01-11','Canada','SOEN',2,'M',NULL,NULL),
+  (3,'John','Doe','hello@gmail.cm','asd','asd',1000,'google.com','2014-01-13 17:55:28','2014-02-08 20:30:00',NULL,0,'this is a description',NULL,'2014-01-13','US of A','MECH',3,'M',NULL,NULL),
+  (4,'Jane','Smith','info@peerpen.com','bob','bob',10,'peerpen.com','2014-01-13 17:56:48','2014-02-08 20:29:43',NULL,0,'I am newly graduate',NULL,'2014-01-13','Australia','FINANCE',0,'F',NULL,NULL),
+  (5,'John ','Smith','John.Smith@google.com','jon','jon',20,'google.com','2014-01-13 17:58:22','2014-02-08 20:29:25',NULL,0,'I am a fake person',NULL,'2014-01-13','China','OIL',4,'F',NULL,NULL),
+  (6,'Mark','Zane','mark@peerpen.com','mar','mar',4,'google.com','2014-02-08 19:15:39','2014-02-08 20:29:04',NULL,0,'Hi, my name is Mark',NULL,'2014-02-08','Canada','ACCO',3,'M',NULL,NULL),
+  (7,'Brad','Zimmer','brad@peer.ca','bra','bra',5,'google.com','2014-02-08 19:17:45','2014-02-08 20:28:33',NULL,0,'Hi, Im Brad, pleasure to meet you',NULL,'2014-02-08','US of A','FINA',5,'M',NULL,NULL),
+  (8,'Melissa','Margerat','mel@stdlife.ca','mel','mel',7,'google.com','2014-02-08 19:19:18','2014-02-08 20:28:14',NULL,0,'Hello, is it me youre looking for?',NULL,'2014-02-08','Australia','MECH',5,'F',NULL,NULL),
+  (9,'Meg','Griffin','meg@facebook.com','meg','meg',6,'google.com','2014-02-08 19:20:09','2014-02-08 20:27:41',NULL,0,'Meg.',NULL,'2014-02-08','Germany','BIOL',2,'F',NULL,NULL),
+  (10,'James','DeSanta','james.desenta@getalife.com','jam','jam',3,'google.com','2014-02-08 19:21:05','2014-02-08 20:27:17',NULL,0,'I am looking for a exciting positiong',NULL,'2014-02-08','France','BIOT',3,'M',NULL,NULL);
 
 
 
@@ -62,24 +66,25 @@ INSERT INTO `feedables` (`id`, `child_id`, `user_id`,`type`, `status`,`last_modi
   (5, 2, 2,'Comment','new' ,'2014-01-13 17:52:59','2014-01-13 17:58:59');
 
 
-
 INSERT INTO `groups` (`id`, `group_name`, `description`, `creation_date`, `last_modified_date`, `semaphore`, `etag`)
-VALUES
-(3,'Finance','Financial economics is the branch of economics studying the interrelation of financial variables, such as prices, interest rates and shares,','2014-01-28 00:40:05','2014-02-08 20:30:07',0,NULL),
-(4,'Marketing','Marketing is the process of communicating the value of a product or service to customers, for selling that product or service','2014-01-28 00:40:05','2014-02-08 20:29:48',0,NULL),
-(5,'International Business','International business comprises all commercial transactions (private and governmental, sales, investments, logistics, and transportation) ','2014-01-28 00:54:28','2014-02-08 20:30:09',0,NULL),
-(6,'Arts','liberal arts education is a term that can be interpreted in different ways. It can refer to certain areas of literature, languages, philosophy, history, mathematics, psycho','2014-01-28 00:54:29','2014-02-08 20:29:29',0,NULL),
-(7,'Software Engineer','Software Engineering is the study and application of engineering to the design, development, and maintenance of software','2014-02-08 20:10:02','2014-02-08 20:30:07',0,NULL),
-(8,'Mechanical Engineer','Mechanical engineering is a discipline of engineering that applies the principles of engineering, physics and','2014-02-08 20:11:01','2014-02-08 20:29:31',0,NULL),
-(9,'Computer Engineer','Computer engineering is a discipline that integrates several fields of electrical engineering and computer science required to develop computer hardware and software.','2014-02-08 20:11:27','2014-02-08 20:30:08',0,NULL),
-(10,'Accounting','Accounting, or accountancy, is the measurement, processing and communication of financial information about economic entities.','2014-02-08 20:12:04','2014-02-08 20:29:50',0,NULL),
-(11,'Actuary','An actuary is a business professional who deals with the financial impact of risk and uncertainty. Actuaries provide assessments of financial security systems, with a focus on their complexity,','2014-02-08 20:12:32','2014-02-08 20:30:06',0,NULL),
-(12,'Business Administration','The administration of a business includes the performance or management of business operations and decision making as well as the efficient organization of people ','2014-02-08 20:13:09','2014-02-08 20:28:45',0,NULL),
-(13,'Education','Education in its general sense is a form of learning in which the knowledge, skills, and habits of a group of people are transferred from one generation to the next through teaching, training, or research','2014-02-08 20:18:16','2014-02-08 20:29:50',0,NULL),
-(14,'Social Science','Social science is an academic discipline concerned with society and the relationships among individuals within a society. ','2014-02-08 20:18:16','2014-02-08 20:30:13',0,NULL),
-(15,'Entrepreneurship','In political economics, entrepreneurship is a process of identifying ','2014-02-08 20:18:16','2014-02-08 20:30:11',0,NULL),
-(16,'Communism','Communism s a classless, moneyless,[1][2] and stateless social order structured upon common ownership of the means of production.','2014-02-08 20:18:16','2014-02-08 20:28:53',0,NULL),
-(17,'Mafia','Mafia is a blanket term used to describe a type of organized crime syndicate that primarily practices protection racketeering ? the use of violent intimidation to manipulate local economic activity, ','2014-02-08 20:18:59','2014-02-08 20:28:51',0,NULL);
+  VALUES
+  (3,'Finance','Financial economics is the branch of economics studying the interrelation of financial variables, such as prices, interest rates and shares,','2014-01-28 00:40:05','2014-02-08 20:30:07',0,NULL),
+  (4,'Marketing','Marketing is the process of communicating the value of a product or service to customers, for selling that product or service','2014-01-28 00:40:05','2014-02-08 20:29:48',0,NULL),
+  (5,'International Business','International business comprises all commercial transactions (private and governmental, sales, investments, logistics, and transportation) ','2014-01-28 00:54:28','2014-02-08 20:30:09',0,NULL),
+  (6,'Arts','liberal arts education is a term that can be interpreted in different ways. It can refer to certain areas of literature, languages, philosophy, history, mathematics, psycho','2014-01-28 00:54:29','2014-02-08 20:29:29',0,NULL),
+  (7,'Education','Education in its general sense is a form of learning in which the knowledge, skills, and habits of a group of people are transferred from one generation to the next through teaching, training, or rese','2014-02-13 23:28:42','2014-02-13 23:28:42',0,'7a96cd60217b8e49821c5e9fe3dce9d3d9e44ae7848711f1b1da76668d0f7617'),
+  (10,'Int Business','International business comprises all commercial transactions (private and governmental, sales, investments, logistics, and transportation) ','2014-02-13 23:28:42','2014-02-13 23:28:42',0,'19f5f4e7ca135006240fe67a9dd59cca426dd6da68eb1bd2c6d22b3f9745de76'),
+  (12,'Software Engineer','Software Engineering is the study and application of engineering to the design, development, and maintenance of software','2014-02-13 23:28:42','2014-02-13 23:28:42',0,'2f708070ecec7d81414c16dada6df8c8768f0716cdb36b9d3f280faefab80f69'),
+  (13,'Mechanical Engineer','Mechanical engineering is a discipline of engineering that applies the principles of engineering, physics and','2014-02-13 23:28:42','2014-02-13 23:28:42',0,'4799a334b3db606e65a56f0a26f944f736a97802c8b37731d20d0f511956a188'),
+  (14,'Computer Engineer','Computer engineering is a discipline that integrates several fields of electrical engineering and computer science required to develop computer hardware and software.','2014-02-13 23:28:42','2014-02-13 23:28:42',0,'3f40bac4ba0722873e9ef348b34d6fc669aa53b21163bf321e1cb1b6314efb8d'),
+  (15,'Accounting','Accounting, or accountancy, is the measurement, processing and communication of financial information about economic entities.','2014-02-13 23:28:42','2014-02-13 23:28:42',0,'6721ed662ca15e11e4159329f7c303cd5654a2457ca077ff31510f1cc2364e6d'),
+  (16,'Actuary','An actuary is a business professional who deals with the financial impact of risk and uncertainty. Actuaries provide assessments of financial security systems, with a focus on their complexity','2014-02-13 23:28:42','2014-02-13 23:28:42',0,'1146a02634caa4b199925d7555cecf939c2c7155660fc41cfeddc4ad2feb2b51'),
+  (17,'Business Administration','The administration of a business includes the performance or management of business operations and decision making as well as the efficient organization of people ','2014-02-13 23:28:42','2014-02-13 23:28:42',0,'8e02a506c3806cf1ea55bf5dc0604f3502d91c987f2a51d9dc523579c06e44a9'),
+  (18,'The Mafia','Mafia is a blanket term used to describe a type of organized crime syndicate that primarily practices protection racketeering ? the use of violent intimidation to manipulate local economic activity, ','2014-02-13 23:31:26','2014-02-13 23:31:26',0,'fb7e3d165ab51412b4c1c53fbb9a33b06efb10e4088817efc1f4dda21c5de17a'),
+  (19,'Social Science','Social science is an academic discipline concerned with society and the relationships among individuals within a society. ','2014-02-13 23:31:26','2014-02-13 23:31:26',0,'02bfe9989e72ba7b3f99ff75989de57f673d63b537912b66ccf0c6eb085d302d'),
+  (20,'Political Science','In political economics, entrepreneurship is a process of identifying ','2014-02-13 23:31:26','2014-02-13 23:31:26',0,'5af2b873e1353216a2b9487ca92ee14834283201fb71c2dfa573c9298d9f3ad0'),
+  (21,'Communism','Communism s a classless, moneyless,[1][2] and stateless social order structured upon common ownership of the means of production.','2014-02-13 23:31:26','2014-02-13 23:31:26',0,'18dd36c530c83f5b437b06de63befd65f016e96349d52efbf223251a3fca2ffd'),
+  (22,'Architect','An architect is a person trained and licensed to plan, design, and oversee the construction of buildings. To practice architecture means to provide services in connection with the design and construct','2014-02-14 10:31:54','2014-02-14 10:31:54',0,'c646c28629c8532f123c871c04854926cb5c1d02f6d919c3fa61eef0d6f958ab');
 
 INSERT INTO `tag_descriptors` (`id`, `tag_name`, `creation_date`, `last_modified_date`)
 VALUES
@@ -95,23 +100,38 @@ VALUES
 	(12, 'university', '2014-01-25 19:20:03', '2014-01-25 19:20:03');
 
 INSERT INTO `taggables` (`id`, `child_id`, `type`, `creation_date`, `last_modified_date`)
-VALUES
-	(1, 1, 'Group', '2014-01-28 00:39:15', '2014-01-28 00:39:15'),
-	(2, 2, 'Group', '2014-01-28 00:39:15', '2014-01-28 00:39:15'),
-	(5, 3, 'Group', '2014-01-28 00:40:05', '2014-01-28 00:40:05'),
-	(6, 4, 'Group', '2014-01-28 00:40:05', '2014-01-28 00:40:05'),
-	(7, 5, 'Group', '2014-01-28 00:54:29', '2014-01-28 00:54:29'),
-	(8, 6, 'Group', '2014-01-28 00:54:29', '2014-01-28 00:54:29'),
-	(9, 1, 'Document', '2014-01-31 20:50:47', '2014-01-31 20:50:47'),
-	(10, 2, 'Document', '2014-01-31 20:50:56', '2014-01-31 20:50:56'),
-	(11, 3, 'Document', '2014-01-31 20:51:10', '2014-01-31 20:51:10'),
-	(12, 4, 'Document', '2014-01-31 20:51:27', '2014-01-31 20:51:27'),
-	(13, 5, 'Document', '2014-01-31 20:51:38', '2014-01-31 20:51:38'),
-	(14, 6, 'Document', '2014-01-31 20:51:48', '2014-01-31 20:51:48'),
-	(15, 7, 'Document', '2014-01-31 20:51:59', '2014-01-31 20:51:59'),
-	(16, 8, 'Document', '2014-01-31 20:52:13', '2014-01-31 20:52:13'),
-	(17, 9, 'Document', '2014-01-31 20:52:23', '2014-01-31 20:52:23');
-
+  VALUES
+  (1,1,'Group','2014-01-28 00:39:15','2014-01-28 00:39:15'),
+  (2,2,'Group','2014-01-28 00:39:15','2014-01-28 00:39:15'),
+  (5,3,'Group','2014-01-28 00:40:05','2014-01-28 00:40:05'),
+  (6,4,'Group','2014-01-28 00:40:05','2014-01-28 00:40:05'),
+  (7,5,'Group','2014-01-28 00:54:29','2014-01-28 00:54:29'),
+  (8,6,'Group','2014-01-28 00:54:29','2014-01-28 00:54:29'),
+  (9,1,'Document','2014-01-31 20:50:47','2014-01-31 20:50:47'),
+  (10,2,'Document','2014-01-31 20:50:56','2014-01-31 20:50:56'),
+  (11,3,'Document','2014-01-31 20:51:10','2014-01-31 20:51:10'),
+  (12,4,'Document','2014-01-31 20:51:27','2014-01-31 20:51:27'),
+  (13,5,'Document','2014-01-31 20:51:38','2014-01-31 20:51:38'),
+  (14,6,'Document','2014-01-31 20:51:48','2014-01-31 20:51:48'),
+  (15,7,'Document','2014-01-31 20:51:59','2014-01-31 20:51:59'),
+  (16,8,'Document','2014-01-31 20:52:13','2014-01-31 20:52:13'),
+  (17,9,'Document','2014-01-31 20:52:23','2014-01-31 20:52:23'),
+  (18,7,'Group','2014-02-13 23:28:42','2014-02-13 23:28:42'),
+  (19,8,'Group','2014-02-13 23:28:42','2014-02-13 23:28:42'),
+  (20,9,'Group','2014-02-13 23:28:42','2014-02-13 23:28:42'),
+  (21,10,'Group','2014-02-13 23:28:42','2014-02-13 23:28:42'),
+  (22,11,'Group','2014-02-13 23:28:42','2014-02-13 23:28:42'),
+  (23,12,'Group','2014-02-13 23:28:42','2014-02-13 23:28:42'),
+  (24,13,'Group','2014-02-13 23:28:42','2014-02-13 23:28:42'),
+  (25,14,'Group','2014-02-13 23:28:42','2014-02-13 23:28:42'),
+  (26,15,'Group','2014-02-13 23:28:42','2014-02-13 23:28:42'),
+  (27,16,'Group','2014-02-13 23:28:42','2014-02-13 23:28:42'),
+  (28,17,'Group','2014-02-13 23:28:42','2014-02-13 23:28:42'),
+  (29,18,'Group','2014-02-13 23:31:26','2014-02-13 23:31:26'),
+  (30,19,'Group','2014-02-13 23:31:26','2014-02-13 23:31:26'),
+  (31,20,'Group','2014-02-13 23:31:26','2014-02-13 23:31:26'),
+  (32,21,'Group','2014-02-13 23:31:26','2014-02-13 23:31:26'),
+  (33,22,'Group','2014-02-14 10:31:54','2014-02-14 10:31:54');
 
 INSERT INTO `tags` (`id`, `tag_descriptor_id`, `taggable_id`)
 VALUES
@@ -121,4 +141,57 @@ VALUES
 	(5, 7, 5),
 	(6, 7, 6);
 
+INSERT INTO `peers_groups` (`peer_id`, `group_id`)
+  VALUES
+  (2,3),
+  (2,4),
+  (2,5),
+  (2,10),
+  (2,13),
+  (2,20),
+  (3,5),
+  (3,6),
+  (3,7),
+  (3,10),
+  (3,12),
+  (3,13),
+  (3,14),
+  (3,16),
+  (3,17),
+  (8,3),
+  (8,4),
+  (8,6),
+  (8,7),
+  (8,10),
+  (8,13),
+  (8,14),
+  (8,16),
+  (8,17),
+  (8,20),
+  (8,21),
+  (9,3),
+  (9,5),
+  (9,6),
+  (9,7),
+  (9,10),
+  (9,14),
+  (9,16),
+  (9,17),
+  (9,18),
+  (9,19),
+  (9,21),
+  (10,3),
+  (10,4),
+  (10,5),
+  (10,6),
+  (10,7),
+  (10,10),
+  (10,12),
+  (10,14),
+  (10,15),
+  (10,16),
+  (10,17),
+  (10,18),
+  (10,20),
+  (10,21);
 
