@@ -233,12 +233,12 @@
 
 
     <servlet>
-        <servlet-name>tagsearch</servlet-name>
-        <servlet-class>com.peerpen.controller.TagSearchController</servlet-class>
+        <servlet-name>tagcloud</servlet-name>
+        <servlet-class>com.peerpen.controller.TagCloudController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>tagsearch</servlet-name>
-        <url-pattern>/tagsearch</url-pattern>
+        <servlet-name>tagcloud</servlet-name>
+        <url-pattern>/tagcloud</url-pattern>
     </servlet-mapping>
 
 

@@ -22,7 +22,6 @@
                  src="<%= sessionUser.getAvatar().getRelativeServletContextAvatarPathForSize( request, Avatar.Size.SMALL ) %>" /></a></li>
         <li><a href="/peer/<%=sessionUser.getId()%>/profile"><%= sessionUser.getUserName() %></a></li>
         <li><a href="/peer/<%=sessionUser.getId()%>/feed">Feeds</a></li>
-        <li><a href="/tagsearch">Tags</a></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documents<b class="caret"></b></a>
         <ul class="dropdown-menu" role="menu">

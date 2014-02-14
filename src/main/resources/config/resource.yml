@@ -16,7 +16,7 @@
 - group:
   - broadcast
 - tag
-- tagsearch
+- tagcloud
 - search
 - reset(\.do)?
 - upload(\.do)?

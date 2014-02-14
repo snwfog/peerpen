@@ -32,7 +32,7 @@ import javax.servlet.http.HttpSession;
  * To change this template use File | Settings | File Templates.
  */
 
-public class TagSearchController extends HttpServlet {
+public class TagCloudController extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         String requestType = request.getParameter( "format" );
@@ -47,7 +47,7 @@ public class TagSearchController extends HttpServlet {
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         // Get a list of all tag descriptors
         request.setAttribute( "tagCloud", TagDescriptor.getTagCloud() );
-        request.getRequestDispatcher("/view/tagsearch.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/tagcloud.jsp").forward(request, response);
     }
 
     private static void doAutocomplete (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -86,7 +86,7 @@ public class TagSearchController extends HttpServlet {
                 request.setAttribute( "tagSearchResultsDocuments", documents );
             }
         }
-        request.getRequestDispatcher( "/view/tagsearch.jsp" ).forward( request, response );
+        request.getRequestDispatcher( "/view/tagcloud.jsp" ).forward( request, response );
         //response.sendRedirect( request.getHeader( "referer" ) );
 
     }

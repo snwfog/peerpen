@@ -13,7 +13,7 @@
 <br /><br /><br />
 <div class="container">
     <!-- SEARCH FORM -->
-    <form action="/tagsearch" method="post" class="form-horizontal" role="form">
+    <form action="/tagcloud" method="post" class="form-horizontal" role="form">
         <div class="input-group">
             <%--<input type="text" class="form-control" name="tag_query" id="tag_query" autocomplete="off" />--%>
             <ul id="tag_query" class="form-control" style="overflow-y:hidden"></ul>
