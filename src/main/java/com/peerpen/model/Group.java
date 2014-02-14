@@ -79,6 +79,7 @@ public class Group extends Taggable implements IModel
 
   public List<Group> getSortedGroups(String sort)
   {
+// todo: work in progess, dont touch
     switch(sort)
     {
       case "az" :

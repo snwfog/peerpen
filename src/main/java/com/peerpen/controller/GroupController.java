@@ -37,7 +37,8 @@ public class GroupController extends GenericApplicationServlet
 
   protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
-// todo: WIP
+// todo: work in progess, dont touch
+
     String sort = (String) request.getAttribute("sort");
     List<Group> groups = new Group().getSortedGroups(sort);
     request.setAttribute("groups", groups);
