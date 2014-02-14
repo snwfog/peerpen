@@ -137,20 +137,40 @@ public class Feedable extends Base {
 
     @Override
     public boolean destroy(){
-        Feedable a = new Feedable().find(this.getId());
-        super.destroy();
-        if(this.getId() == null){
-            if(a != null){
-                return a.destroyFeedable();
-            }else{
-                System.out.println("NO FEEDABLE FOR OBJECT!!!!");
-                return false;
+        Map<String, Object> map = new HashMap<>();
+        map.put("childId", this.getId());
+
+        if(this instanceof Broadcast){
+            List<Feedable> feeds = new Feedable().findAll(map);
+            boolean deletedAllFeedable = false;
+            for(Feedable a : feeds){
+                deletedAllFeedable = a.baseDestroy();
+                if(!deletedAllFeedable){
+                    System.out.println("CANNOT DELETE FEEDABLE");
+                    break;
+
+                }
+
+            }
+
+            return this.baseDestroy() && deletedAllFeedable;
+
+        }else{
+            Feedable a = new Feedable().find(map);
+            super.destroy();
+            if(this.getId() == null){
+                if(a != null){
+                    return a.baseDestroy();
+                }else{
+                    System.out.println("NO FEEDABLE FOR OBJECT!!!!");
+                    return false;
+                }
             }
         }
         return false;
     }
 
-    public boolean destroyFeedable(){
+    public boolean baseDestroy(){
         return super.destroy();
     }
 

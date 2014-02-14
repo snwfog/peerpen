@@ -13,7 +13,7 @@
 <br /><br /><br />
 <div class="container">
     <!-- SEARCH FORM -->
-    <form action="/tagsearch" method="post" class="form-horizontal" role="form">
+    <form action="/tagcloud" method="post" class="form-horizontal" role="form">
         <div class="input-group">
             <%--<input type="text" class="form-control" name="tag_query" id="tag_query" autocomplete="off" />--%>
             <ul id="tag_query" class="form-control" style="overflow-y:hidden"></ul>
@@ -52,9 +52,9 @@
 
 <!-- SEARCH RESULT -->
 <%
-    if(session.getAttribute( "tagSearchResultsGroups" ) != null && session.getAttribute( "tagSearchResultsDocuments" ) != null){
-        ArrayList<Group> gs = (ArrayList<Group>) session.getAttribute( "tagSearchResultsGroups" );
-        ArrayList<Document> documents = (ArrayList<Document>) session.getAttribute( "tagSearchResultsDocuments" );
+    if(request.getAttribute( "tagSearchResultsGroups" ) != null && request.getAttribute( "tagSearchResultsDocuments" ) != null){
+        ArrayList<Group> gs = (ArrayList<Group>) request.getAttribute( "tagSearchResultsGroups" );
+        ArrayList<Document> documents = (ArrayList<Document>) request.getAttribute( "tagSearchResultsDocuments" );
     if (!gs.isEmpty() || !documents.isEmpty()){
 %>
     <div class="panel panel-default">
