@@ -32,11 +32,13 @@
             <li>
                 <a href="/peer/<%=sessionUser.getId()%>/document">My Documents</a>
             </li>
-            <li><a href="/logout">Logout</a></li>
         </ul>
         <!-- SEARCH FORM -->
-        <form action="/search" method="post" class="navbar-form navbar-right" id="search_form" role="form" style="margin:0;padding:10px 0 0 0;">
-            <input type="text" class="form-control" placeholder="Search for documents, people and groups" name="search_query" id="nav_search" autocomplete="off" style="width:300px;z-index:1111 !important" />
-        </form>
+        <ul class="nav navbar-nav navbar-right">
+            <form action="/search" class="navbar-form navbar-left" method="post" id="search_form" role="form" style="margin:0;padding:10px 0 0 0;">
+                   <input type="text" class="form-control" placeholder="Search for documents, people and groups" name="search_query" id="nav_search" autocomplete="off" style="width:300px;z-index:1111 !important" />
+            </form>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
     </div>
 </nav>
