@@ -13,7 +13,7 @@ $(function(){
         autocomplete: ({
             source: function (request, response) {
                 $.ajax({
-                    url: "/tagsearch",
+                    url: "/tagcloud",
                     data: { format: "json", term: request.term },
                     dataType: 'json',
                     type: 'POST',
@@ -52,7 +52,7 @@ $(function(){
         autocomplete: ({
             source: function (request, response) {
                 $.ajax({
-                    url: "/tagsearch",
+                    url: "/tagcloud",
                     data: { format: "json", term: request.term },
                     dataType: 'json',
                     //contentType: 'application/json; charset=utf-8',
