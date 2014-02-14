@@ -30,5 +30,7 @@
 <script src="/assets/js/custom/confirm_delete_dialog.js"></script>
 <script src="/assets/js/custom/reset.js"></script>
 
+<script src="/assets/js/custom/slideDiv.js"></script>
+
 </body>
 </html>
