@@ -35,28 +35,31 @@ public class GroupController extends GenericApplicationServlet
     }
   }
 
+  protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+  {
+// todo: WIP
+    String sort = (String) request.getAttribute("sort");
+    List<Group> groups = new Group().getSortedGroups(sort);
+    request.setAttribute("groups", groups);
+  }
+
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
     Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
-    Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
-    Group group = new Group().find(Integer.parseInt(parameters.get("groupid")));
-    group.addPeer(peer);
-    group.update();
+    Peer sessionUser = (Peer) request.getAttribute("sessionUser");
+    Group group = new Group();
+    group.setGroupName(parameters.get("name"));
+    group.setDescription(parameters.get("description"));
+    group.addPeer(sessionUser);
+    group.save();
+
+
 
     request.setAttribute("group", group);
-    response.sendRedirect(request.getHeader("referer"));
-  }
+    request.getRequestDispatcher("/view/group.jsp").forward(request, response);
+// todo: make it such at it redirects to group/ID
+//    response.sendRedirect(request.getHeader("referer"));
 
-  protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-  {
-    Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
-    Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
-    Group group = new Group().find(Integer.parseInt(parameters.get("groupid")));
-    group.removePeer(peer);
-    group.update();
-
-    request.setAttribute("group", group);
-    response.sendRedirect(request.getHeader("referer"));
   }
 
 }

@@ -306,14 +306,23 @@
         <url-pattern>/feed</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>group</servlet-name>
-        <servlet-class>com.peerpen.controller.GroupController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>group</servlet-name>
-        <url-pattern>/group</url-pattern>
-    </servlet-mapping>
+  <servlet>
+    <servlet-name>group.do</servlet-name>
+    <servlet-class>com.peerpen.ajax.GroupControllerAjax</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>group.do</servlet-name>
+    <url-pattern>/group.do</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>group</servlet-name>
+    <servlet-class>com.peerpen.controller.GroupController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>group</servlet-name>
+    <url-pattern>/group</url-pattern>
+  </servlet-mapping>
 
     <servlet>
         <servlet-name>broadcast</servlet-name>

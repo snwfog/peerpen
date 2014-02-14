@@ -58,6 +58,13 @@ public class Group extends Taggable implements IModel
     setUpdateFlag(true);
   }
 
+  public String getShortDescription()
+  {
+    if(this.getDescription().length() >= 100 )
+      return this.getDescription().substring(0,100)+"...";
+    else return this.getDescription();
+  }
+
   public List<Group> getMatchedGroups(String keyword)
   {
     String sql = "SELECT * FROM `groups` WHERE `group_name` LIKE '%" + keyword + "%'";
@@ -68,6 +75,24 @@ public class Group extends Taggable implements IModel
   public List<Group> getGroups()
   {
     return new Group().queryAll("SELECT * FROM `groups`");
+  }
+
+  public List<Group> getSortedGroups(String sort)
+  {
+    switch(sort)
+    {
+      case "az" :
+        return new Group().queryAll("SELECT * FROM `groups` ORDER BY group_name ASC;");
+      case "za" :
+        return new Group().queryAll("SELECT * FROM `groups` ORDER BY group_name DESC;");
+    case "fd" :
+      return new Group().queryAll("SELECT * FROM `groups` ORDER BY creation_date ASC;");
+    case "df" :
+      return new Group().queryAll("SELECT * FROM `groups` ORDER BY creation_date DESC;");
+      default:
+        return getGroups();
+
+    }
   }
 
   // method used for search autocomplete
