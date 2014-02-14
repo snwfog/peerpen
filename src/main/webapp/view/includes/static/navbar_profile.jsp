@@ -29,6 +29,9 @@
                     <%}%>
                 </ul>
              </li>
+            <li>
+                <a href="/peer/<%=sessionUser.getId()%>/document">My Documents</a>
+            </li>
             <li><a href="/logout">Logout</a></li>
         </ul>
         <!-- SEARCH FORM -->
