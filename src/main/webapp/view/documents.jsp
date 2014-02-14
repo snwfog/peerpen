@@ -2,6 +2,8 @@
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.peerpen.model.Document" %>
+<%@ include file="/view/includes/static/navbar_profile.jsp" %>
+
 
 <%--Declare all request variables here, easy to debug!!!--%>
 <% Peer peer = (Peer) request.getAttribute( "peer" ); %>
