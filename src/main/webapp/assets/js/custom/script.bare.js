@@ -7,5 +7,3 @@
   });
 
 }).call(this);
-
-//# sourceMappingURL=script.bare.map
