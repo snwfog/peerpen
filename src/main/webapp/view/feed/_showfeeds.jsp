@@ -47,7 +47,7 @@
             <div class="row-fluid">
                 <div class="card-white">
                     <div class="card-heading image">
-                        <img src="<%= peer.getAvatar().getDefaultAvatarSource( request ) %>" alt=""/>
+                        <img src="<%= ((Comment)f.getTrueSelf()).getPeer().getAvatar().getDefaultAvatarSource( request ) %>" alt=""/>
                         <div class="card-heading-header">
                             <h4><%=((Comment)f.getTrueSelf()).getPeer().getFirstName()%> commented ...</h4>
                             <span><%=((Comment)f.getTrueSelf()).getMessage()%></span>
@@ -63,7 +63,7 @@
             <div class="row-fluid">
                     <div class="card-white">
                     <div class="card-heading image">
-                        <img src="<%= peer.getAvatar().getServletContextAvatarPath( request ) %>" alt=""/>
+                        <img src="<%= ((Broadcast)f.getTrueSelf()).getPeer().getAvatar().getServletContextAvatarPath( request ) %>" alt=""/>
                         <div class="card-heading-header">
                             <h4><%=((Broadcast)f.getTrueSelf()).getPeer().getFirstName()%> broadcasted ...</h4>
                             <span><%=((Broadcast)f.getTrueSelf()).getMessage()%></span>

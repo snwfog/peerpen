@@ -1,6 +1,6 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ include file="/view/includes/static/header.jsp" %>
-<%@ include file="/view/includes/static/navbar_profile.jsp" %>
+<%@ include file="/view/includes/static/navbar.jsp" %>
 
 <% SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");%>
 

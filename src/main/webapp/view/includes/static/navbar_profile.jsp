@@ -4,11 +4,6 @@
 <%@ page import="com.peerpen.model.Avatar" %>
 <%@ page import="com.peerpen.model.Document" %>
 <%@ page import="java.util.List" %>
-<%
-    Peer sessionUser = (Peer) request.getAttribute("sessionUser");
-    ArrayList<Group> navGroups =(ArrayList<Group>) sessionUser.getGroups();
-  List<Document> documentList = sessionUser.getDocuments();
-%>
 
 <!-- must set navbar z-index to be <= 100 otherwise search autocomplete box will be hidden under navbar -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="z-index:100 !important;">

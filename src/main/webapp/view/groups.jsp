@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ include file="/view/includes/static/header.jsp" %>
-<%@ include file="/view/includes/static/navbar_profile.jsp" %>
+<%@ include file="/view/includes/static/navbar.jsp" %>
 
 <%--Declare all request variables here, easy to debug!!!--%>
 <% List<Group> groups = (List<Group>) request.getAttribute("groups"); %>

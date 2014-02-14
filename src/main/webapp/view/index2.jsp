@@ -1,8 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="twitter4j.Status" %>
 <%@ include file="/view/includes/static/header.jsp" %>
-
-<%@ include file="/view/includes/static/navbar_index.jsp" %>
+<%@ include file="/view/includes/static/navbar.jsp" %>
 
 <section id="signup">
     <div class="container">

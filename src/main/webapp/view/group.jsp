@@ -1,7 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.peerpen.model.*" %>
 <%@ include file="/view/includes/static/header.jsp" %>
-<%@ include file="/view/includes/static/navbar_profile.jsp" %>
+<%@ include file="/view/includes/static/navbar.jsp" %>
 
 <% Group group = (Group) request.getAttribute("group"); %>
 <% ArrayList<Peer> peers = (ArrayList<Peer>)group.getPeers();%>

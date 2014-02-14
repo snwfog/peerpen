@@ -7,7 +7,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.peerpen.model.Document" %>
 <%@ include file="/view/includes/static/header.jsp" %>
-<%@ include file="/view/includes/static/navbar_profile.jsp" %>
+<%@ include file="/view/includes/static/navbar.jsp" %>
 
 
 <br /><br /><br />
