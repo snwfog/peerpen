@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import com.peerpen.model.serializer.Ppedit;
 import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
@@ -150,6 +151,19 @@ public class Document extends Taggable implements IModel {
         }
     }
 
+    /**
+     * Will update the document from the latest information from Ppedit,
+     * this will not create changesets, hence why is private.
+     * @param jsonString
+     * @return
+     */
+    private boolean commitDocument(String jsonString)
+    {
+        Ppedit ppedit = Ppedit.serializeFromJsonString( jsonString );
+
+
+        return false;
+    }
 
     public List<Object> getCommentAndChangeset() {
         Integer docId = this.getId();

@@ -1,0 +1,1 @@
+ALTER TABLE hunks ADD page_number int(8) DEFAULT NULL;

@@ -14,6 +14,8 @@ import java.util.Map;
 public class Changeset extends Feedable implements IModel {
     public static final String tableName = "changesets";
 
+    public static enum HunkState { REMOVED, MODIFIED, CREATED };
+
     @ActiveRecordField
     private String content;
 
@@ -34,6 +36,9 @@ public class Changeset extends Feedable implements IModel {
 
     @ActiveRecordField
     private Integer hunkId;
+
+    @ActiveRecordField
+    private Integer state;
 
     @ActiveRelationHasMany
     private List<Comment> comments;

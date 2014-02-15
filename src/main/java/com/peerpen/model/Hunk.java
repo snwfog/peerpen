@@ -38,6 +38,8 @@ public class Hunk extends Base implements IModel {
     @ActiveRecordField
     private String content;
     @ActiveRecordField
+    private int pageNumber;
+    @ActiveRecordField
     private Integer documentId;
     @ActiveRelationHasOne
     private Document document;
@@ -98,6 +100,15 @@ public class Hunk extends Base implements IModel {
     public List<Hunk> getHunksFromIdView(Integer idView){
         String sql = "SELECT * FROM `hunks` WHERE `id_view` = " + idView;
         return new Hunk().queryAll( sql );
+    }
+
+    public int getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber( int pageNumber ) {
+        this.pageNumber = pageNumber;
+        this.setUpdateFlag( true );
     }
 
     public static class HunkSerializer implements JsonSerializer<Hunk> {
