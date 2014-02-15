@@ -112,6 +112,11 @@ public class Hunk extends Base implements IModel {
         this.setUpdateFlag( true );
     }
 
+    public boolean spawnChangeset(Changeset.ChangesetState state)
+    {
+        return Changeset.getInstanceFromHunk( this, state ).save();
+    }
+
     public static class HunkSerializer implements JsonSerializer<Hunk> {
 
         @Override

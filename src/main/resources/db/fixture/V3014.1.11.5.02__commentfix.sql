@@ -29,15 +29,15 @@ INSERT INTO `documents` (`id`, `doc_name`, `thumbnail_path`, `peer_id`, `last_mo
 
 INSERT INTO `hunks` (`id`, `id_view`, `document_id`, `content`, `creation_date`, `last_modified_date`)
   VALUES
-  (1, NUll,'2','something about something about something','2014-01-13 17:58:59','2014-01-13 17:58:59'),
-  (2, NUll,'2','bloooood','2014-01-13 17:58:59','2014-01-13 17:58:59'),
-  (3, NUll,'2','power','2014-01-13 17:58:59','2014-01-13 17:58:59');
+  (1, '123123123','2','something about something about something','2014-01-13 17:58:59','2014-01-13 17:58:59'),
+  (2, '123123124','2','bloooood','2014-01-13 17:58:59','2014-01-13 17:58:59'),
+  (3, '123123125','2','power','2014-01-13 17:58:59','2014-01-13 17:58:59');
 
-INSERT INTO `changesets` (`id`, `document_id`, `creation_date`, `last_modified_date`, `peer_id`, `content`, `hunk_id`)
+INSERT INTO `changesets` (`id`, `creation_date`, `last_modified_date`, `content`, `hunk_id`, `state`)
   VALUES
-  (5,1,'2014-01-15 23:24:05','2014-01-15 23:24:05',2,'Changed the format of Education\n',1),
-  (6,1,'2014-01-15 23:24:48','2014-01-15 23:24:48',2,'Added Leasure section',2),
-  (7,1,'2014-01-15 23:25:24','2014-01-15 23:25:24',2,'Remove High School in Education',3);
+  (5,'2014-01-15 23:24:05','2014-01-15 23:24:05','Changed the format of Education\n',1,0),
+  (6,'2014-01-15 23:24:48','2014-01-15 23:24:48','Added Leasure section',2,0),
+  (7,'2014-01-15 23:25:24','2014-01-15 23:25:24','Remove High School in Education',3,0);
 
 
 INSERT INTO `comments` (`id`, `message`, `document_id`, `peer_id`, `creation_date`, `last_modified_date`, `changeset_id`, `up_vote`, `down_vote`)

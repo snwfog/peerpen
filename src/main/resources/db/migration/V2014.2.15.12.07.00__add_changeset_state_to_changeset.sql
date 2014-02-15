@@ -1,1 +1,1 @@
-ALTER TABLE changesets ADD state int(1) DEFAULT NULL;
+ALTER TABLE changesets ADD state int(1) DEFAULT 0;
