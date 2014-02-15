@@ -147,8 +147,9 @@
                             if (p.getId()!=group.getAdminId()){%>
 
                           <div class="card-body">
-                              <div class="card-actions parent">
-                                  <%=p.getUserName()%>
+                              <div class="input-append">
+                                  <%--<div class="span8 child"><%=p.getUserName()%></div>--%>
+                                  <input class="input-medium" placeholder=".input-medium" disabled  value="<%=p.getUserName()%>">
                                   <form action="/group" method="POST" class="form-horizontal child">
                                       <input type="hidden" name="groupid" value="<%= group.getId()%>">
                                       <input type="hidden" name="peerid" value="<%= p.getId()%>">

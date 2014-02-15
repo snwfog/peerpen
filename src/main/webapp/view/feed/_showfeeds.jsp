@@ -65,7 +65,7 @@
                     <div class="card-heading image">
                         <img src="<%= ((Broadcast)f.getTrueSelf()).getPeer().getAvatar().getServletContextAvatarPath( request ) %>" alt=""/>
                         <div class="card-heading-header">
-                            <h4><%=((Broadcast)f.getTrueSelf()).getPeer().getFirstName()%> broadcasted ...</h4>
+                            <h4><%=((Broadcast)f.getTrueSelf()).getPeer().getFirstName()%> broadcasted from <%=((Broadcast)f.getTrueSelf()).getGroup().getGroupName()%>...</h4>
                             <span><%=((Broadcast)f.getTrueSelf()).getMessage()%></span>
                         </div>
                         <div> &nbsp</div>
