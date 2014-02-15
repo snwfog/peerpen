@@ -1,6 +1,7 @@
 package com.peerpen.model.serializer;
 
-import com.google.common.collect.Lists;
+import com.google.common.base.Function;
+import com.google.common.collect.Maps;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -15,6 +16,9 @@ import com.peerpen.model.Hunk;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Nullable;
 
 /**
  * Author: Charles Chao Yang (http://github.com/snwfog)
@@ -24,7 +28,12 @@ import java.util.List;
  */
 public class Page {
 
-    List<Hunk> hunks;
+    // A map from viewId to actual hunk object
+    Map<Long, Hunk> hunks;
+
+    public Map<Long, Hunk> getHunks() {
+        return hunks;
+    }
 
     public static class PageSerializer implements JsonSerializer<Page> {
 
@@ -45,10 +54,16 @@ public class Page {
             JsonArray pageArray = json.getAsJsonArray();
             GsonBuilder builder = new GsonBuilder();
             builder.registerTypeAdapter( Hunk.class, new Hunk.HunkDeserializer() );
-            Type hunkList = new TypeToken<List<Hunk>>() {}.getType();
+            Type hunkListType = new TypeToken<List<Hunk>>() { }.getType();
             Gson gson = builder.create();
-            List<Page> pageList = Lists.newArrayList();
-            aPage.hunks = gson.fromJson( pageArray.toString(), hunkList );
+            List<Hunk> hunkList = gson.fromJson( pageArray.toString(), hunkListType );
+            aPage.hunks = Maps.uniqueIndex( hunkList, new Function<Hunk, Long>() {
+                @Nullable
+                @Override
+                public Long apply( @Nullable Hunk input ) {
+                    return Long.parseLong( input.getIdView() );
+                }
+            } );
             return aPage;
         }
     }

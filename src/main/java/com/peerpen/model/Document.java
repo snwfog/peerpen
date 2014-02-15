@@ -1,11 +1,15 @@
 package com.peerpen.model;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import com.peerpen.model.serializer.Page;
 import com.peerpen.model.serializer.Ppedit;
 import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
@@ -23,6 +27,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import javax.annotation.Nullable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,10 +62,7 @@ public class Document extends Taggable implements IModel {
     @ActiveRelationHasMany
     private List<Comment> comments;
 
-
-    public Document() {
-        super();
-    }
+    public Document() { super(); }
 
     public Document( Map<String, Object> HM ) {
         super( HM );
@@ -140,15 +144,31 @@ public class Document extends Taggable implements IModel {
         return this.comments;
     }
 
-    private static Connection connection;
-    static final Logger logger = LoggerFactory.getLogger( Manager.class );
+    /**
+     * Helper method that will create a map of viewId long vs. hunk object itself
+     *
+     * @return
+     */
+    public Map<Long, Hunk> getHunkAsMap()
+    {
+        return Maps.uniqueIndex(getHunks(), new Function<Hunk, Long>() {
+            @Nullable
+            @Override
+            public Long apply( @Nullable Hunk input ) {
+                return Long.parseLong( input.getIdView() );
+            }
+        } );
+    }
 
-    static {
-        try {
-            connection = Connector.getConnection();
-        } catch ( SQLException e ) {
-            logger.error( "Failed statically initiate database connection." );
+    private boolean removeHunkRaw(Set<Long> hunkViewId)
+    {
+        Map<Long, Hunk> hunkMap = this.getHunkAsMap();
+        // FIXME: Using something for fun, but not too efficient
+        for (Long viewId : Sets.intersection( keySet(), hunkViewId))
+        {
+            this.hunks.
         }
+
     }
 
     /**
@@ -157,12 +177,20 @@ public class Document extends Taggable implements IModel {
      * @param jsonString
      * @return
      */
-    private boolean commitDocument(String jsonString)
-    {
+    public boolean commitDocumentFromRawJson( String jsonString ) {
         Ppedit ppedit = Ppedit.serializeFromJsonString( jsonString );
+        Map<Long, Hunk> hunkMap = this.getHunkAsMap();
+        boolean successful = true;
+        for (Page page : ppedit.getRemoved())
+        {
+            for (Long viewId : page.getHunks().keySet())
+            {
+                successful = successful && hunkMap.get( viewId ).destroy();
+            }
+        }
 
-
-        return false;
+        // FIXME: This is wrong
+        return successful;
     }
 
     public List<Object> getCommentAndChangeset() {

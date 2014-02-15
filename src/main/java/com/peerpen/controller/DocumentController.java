@@ -1,16 +1,13 @@
 package com.peerpen.controller;
 
-import com.google.gson.Gson;
 import com.peerpen.framework.GenericApplicationServlet;
 import com.peerpen.framework.InternalRequestDispatcher;
 import com.peerpen.framework.ModelHierarchyUtil;
 import com.peerpen.framework.exception.PermissionDeniedException;
 import com.peerpen.model.Document;
 import com.peerpen.model.Peer;
-import com.peerpen.model.serializer.Ppedit;
 import com.sunnyd.Base;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Map;
 
@@ -18,7 +15,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class DocumentController extends GenericApplicationServlet {
+
+    static final Logger logger = LoggerFactory.getLogger( DocumentController.class );
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
@@ -77,10 +79,24 @@ public class DocumentController extends GenericApplicationServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        BufferedReader reader = request.getReader();
-        Gson gson = new Gson();
-        Ppedit data = gson.fromJson( request.getParameter( "data" ), Ppedit.class );
-        System.out.println( data );
+        try {
+            int documentId = 2;
+            Document doc = new Document().find( documentId );
+            if ( doc == null ) {
+                throw new Exception();
+            }
+
+            String jsonObjectAsString = request.getParameter( "data" );
+            doc.commitDocumentFromRawJson( jsonObjectAsString );
+            logger.info( "Document updated for " + doc.getId() );
+        } catch ( Exception e ) {
+            System.out.println( "Problem" );
+        }
+
+
+        //Gson gson = new Gson();
+        //Ppedit data = gson.fromJson( request.getParameter( "data" ), Ppedit.class );
+        //System.out.println( data );
     }
 
 }

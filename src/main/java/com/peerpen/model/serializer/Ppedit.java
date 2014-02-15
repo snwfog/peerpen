@@ -33,6 +33,22 @@ public class Ppedit {
     List<Page> removed;
     List<Page> created;
 
+    public List<Page> getCreated() {
+        return created;
+    }
+
+    public List<Page> getRemoved() {
+        return removed;
+    }
+
+    public List<Page> getModified() {
+        return modified;
+    }
+
+    public String getEtag() {
+        return etag;
+    }
+
     public static Ppedit serializeFromJsonString( String jsonString )
     {
         GsonBuilder gBuilder = new GsonBuilder();
@@ -62,7 +78,7 @@ public class Ppedit {
             builder.registerTypeAdapter( Hunk.class, new Hunk.HunkDeserializer() );
             builder.registerTypeAdapter( Page.class, new Page.PageDeserializer() );
             Gson gson = builder.create();
-            Type listType = new TypeToken<List<Page>>() {}.getType();
+            Type listType = new TypeToken<List<Page>>(){}.getType();
             Ppedit ppedit = new Ppedit();
 
             ppedit.modified = gson.fromJson( modified, listType );
