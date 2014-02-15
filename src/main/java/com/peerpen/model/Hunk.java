@@ -38,7 +38,7 @@ public class Hunk extends Base implements IModel {
     @ActiveRecordField
     private String content;
     @ActiveRecordField
-    private int pageNumber;
+    private Integer pageNumber;
     @ActiveRecordField
     private Integer documentId;
     @ActiveRelationHasOne
@@ -68,9 +68,10 @@ public class Hunk extends Base implements IModel {
         return content;
     }
 
-    public void setContent( String content ) {
+    public Hunk setContent( String content ) {
         this.content = content;
         setUpdateFlag( true );
+        return this;
     }
 
     public Integer getDocumentId() {
@@ -102,11 +103,11 @@ public class Hunk extends Base implements IModel {
         return new Hunk().queryAll( sql );
     }
 
-    public int getPageNumber() {
+    public Integer getPageNumber() {
         return pageNumber;
     }
 
-    public void setPageNumber( int pageNumber ) {
+    public void setPageNumber( Integer pageNumber ) {
         this.pageNumber = pageNumber;
         this.setUpdateFlag( true );
     }

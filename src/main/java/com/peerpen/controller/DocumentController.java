@@ -8,6 +8,7 @@ import com.peerpen.model.Document;
 import com.peerpen.model.Peer;
 import com.sunnyd.Base;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Map;
 
@@ -92,11 +93,6 @@ public class DocumentController extends GenericApplicationServlet {
         } catch ( Exception e ) {
             System.out.println( "Problem" );
         }
-
-
-        //Gson gson = new Gson();
-        //Ppedit data = gson.fromJson( request.getParameter( "data" ), Ppedit.class );
-        //System.out.println( data );
     }
 
 }

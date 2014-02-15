@@ -1,6 +1,7 @@
 package com.peerpen.model;
 
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
@@ -15,13 +16,10 @@ import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.annotations.ActiveRelationHasOne;
-import com.sunnyd.database.Connector;
-import com.sunnyd.database.Manager;
 
 import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,9 +28,6 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Nullable;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class Document extends Taggable implements IModel {
 
@@ -62,7 +57,9 @@ public class Document extends Taggable implements IModel {
     @ActiveRelationHasMany
     private List<Comment> comments;
 
-    public Document() { super(); }
+    public Document() {
+        super();
+    }
 
     public Document( Map<String, Object> HM ) {
         super( HM );
@@ -149,9 +146,8 @@ public class Document extends Taggable implements IModel {
      *
      * @return
      */
-    public Map<Long, Hunk> getHunkAsMap()
-    {
-        return Maps.uniqueIndex(getHunks(), new Function<Hunk, Long>() {
+    public Map<Long, Hunk> getHunkAsMap() {
+        return Maps.uniqueIndex( getHunks(), new Function<Hunk, Long>() {
             @Nullable
             @Override
             public Long apply( @Nullable Hunk input ) {
@@ -160,16 +156,62 @@ public class Document extends Taggable implements IModel {
         } );
     }
 
-    private boolean removeHunkRaw(Set<Long> hunkViewId)
-    {
+    /**
+     * Given a set of hunk view Id, this method will remove all the hunk from the database
+     * without creating a corresponding changeset object
+     *
+     * @param hunkViewId
+     * @return
+     */
+    private boolean removeHunkRaw( Set<Long> hunkViewId ) {
         Map<Long, Hunk> hunkMap = this.getHunkAsMap();
-        // FIXME: Using something for fun, but not too efficient
-        for (Long viewId : Sets.intersection( keySet(), hunkViewId))
-        {
-            this.hunks.
+        boolean successful = true;
+        // FIXME: Using set operation for fun, not too efficient...
+        for ( Long viewId : Sets.intersection( hunkMap.keySet(), hunkViewId ) ) {
+            successful = successful && hunkMap.get( viewId ).destroy();
         }
 
+        return successful;
     }
+
+    /**
+     * Candy wrapper
+     *
+     * @param removeHunks
+     */
+    private boolean removeHunkRaw( Map<Long, Hunk> removeHunks ) {
+        return this.removeHunkRaw( removeHunks.keySet() );
+    }
+
+    /**
+     * Given a map of hunk, this method will create hunks from the database
+     * without creating a corresponding changeset object
+     *
+     * @param newHunks
+     */
+    private boolean createHunkRaw( Map<Long, Hunk> newHunks ) {
+        boolean successful = true;
+        for (Hunk h : newHunks.values())
+            successful = successful && h.save();
+
+        return successful;
+    }
+
+    /**
+     * Given a map of hunks, this method will update previous hunk from the database
+     * without creating a corresponding changeset object
+     *
+     */
+    private boolean updateHunkRaw( Map<Long, Hunk> modifiedHunks) {
+        boolean successful = true;
+        Map<Long, Hunk> hunkMap = this.getHunkAsMap();
+        for (Hunk h : modifiedHunks.values())
+            successful = successful
+                    && (hunkMap.get(h.getIdView())).setContent(h.getContent()).update();
+
+        return successful;
+    }
+
 
     /**
      * Will update the document from the latest information from Ppedit,
@@ -179,14 +221,18 @@ public class Document extends Taggable implements IModel {
      */
     public boolean commitDocumentFromRawJson( String jsonString ) {
         Ppedit ppedit = Ppedit.serializeFromJsonString( jsonString );
-        Map<Long, Hunk> hunkMap = this.getHunkAsMap();
+
         boolean successful = true;
-        for (Page page : ppedit.getRemoved())
-        {
-            for (Long viewId : page.getHunks().keySet())
-            {
-                successful = successful && hunkMap.get( viewId ).destroy();
-            }
+        for ( Page page : ppedit.getRemoved() ) {
+            successful = successful && this.removeHunkRaw( page.getHunks() );
+        }
+
+        for ( Page page : ppedit.getModified() ) {
+            successful = successful && this.updateHunkRaw( page.getHunks() );
+        }
+
+        for ( Page page : ppedit.getCreated() ) {
+            successful = successful && this.createHunkRaw( page.getHunks() );
         }
 
         // FIXME: This is wrong

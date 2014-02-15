@@ -82,8 +82,8 @@ public class Ppedit {
             Ppedit ppedit = new Ppedit();
 
             ppedit.modified = gson.fromJson( modified, listType );
-            ppedit.created = gson.fromJson( removed, listType );
-            ppedit.removed = gson.fromJson( created, listType );
+            ppedit.created = gson.fromJson( created, listType );
+            ppedit.removed = gson.fromJson( removed, listType );
             ppedit.etag = jsonObject.get( "etag" ).getAsString();
 
             return ppedit;
