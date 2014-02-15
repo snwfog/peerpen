@@ -88,58 +88,45 @@
 
              </div>
          </div>
-
-
-
-
-
-
-
         <div id="row">
             <div class="col-md-4">
                 <h2> User Request to join your <%= group.getGroupName()%> group </h2>
                 <div class="caption">
-                    <div class="card2">
-                        <h3 class="card-heading simple"><%= sessionUser.getFirstName() %> <%= sessionUser.getLastName() %></h3>
-                        <div class="card-body">
                             <% if (joingroups!=null){
-                                        for (Joingroup jp:joingroups){
-                                            %>
-                                            <div class="card2">
+                                    for (Joingroup jg:joingroups){
+                                        if((group.getPeers().contains(jg.getPeer()))==false)
+                                        {
+                                        %>
+                                        <%--<div class="card2">--%>
 
-                                                <div class="card-body">
-                                                    <strong> Peer <%= jp.getPeer().getUserName() %> wants to join your group</strong>
+                                            <div class="card-body">
+                                                <strong> Peer <%= jg.getPeer().getUserName() %> wants to join your group</strong>
+                                                <span class="child" style="font-style: italic;font-size: small;">
+                                                 <p class="text-right"><%= jg.getTimesAgo()%></p></span>
+                                                <div class="card-actions parent">
+                                                    <form action="/joingroup" method="POST" class="form-horizontal child">
+                                                        <input type="hidden" name="groupid" value="<%= jg.getGroupId()%>">
+                                                        <input type="hidden" name="jgid" value="<%= jg.getId()%>">
+                                                        <input type="hidden" name="peerid" value="<%= jg.getPeerId()%>">
+                                                        <input type="hidden" name="_method" value="POST">
+                                                        <button type="submit" class="btn btn-primary" >Accept!</button>
+                                                    </form>
+
+                                                    <form action="/joingroup" method="POST" class="form-horizontal child">
+                                                        <input type="hidden" name="groupid" value="<%= jg.getGroupId()%>">
+                                                        <input type="hidden" name="jgid" value="<%= jg.getId()%>">
+                                                        <input type="hidden" name="peerid" value="<%= jg.getPeerId()%>">
+                                                        <input type="hidden" name="_method" value="delete"/>
+                                                        <button type="submit" class="btn btn-primary" >Refuse!</button>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         <%}
-                                    }%>
-                                        <%--else--%>
-                                        <%--{ %>--%>
-                                                    <%--<h2> No user request to join your group  </h2> --%>
-                                        <%--<%}--%>
-
-
-
-
-                            <%--<form method="POST" action="/group/<%= group.getId()%>/broadcast" parsley-validate>--%>
-                                <%--<textarea id="broadcast" class="parsley-validated" name="broadcast" style="width:100%" parsley-trigger="change keyup"></textarea>--%>
-                                <%--<input type="hidden" name="groupid" value="<%= group.getId()%>"/>--%>
-                                <%--<input type="hidden" name="peerid" value="<%= sessionUser.getId()%>"/>--%>
-                                <%--<input type="hidden" name="_method" value="POST">--%>
-                                <%--<button type="submit" class="btn btn-success ">Post</button>--%>
-                            <%--</form>--%>
-                        </div>
-                    </div>
+                                    }
+                                }%>
+                            <%--</div>--%>
+                      </div>
                 </div>
-
-
-            </div>
-        </div>
-
-
-
-
-
-
-
     </div>
 </div>
 <%}else

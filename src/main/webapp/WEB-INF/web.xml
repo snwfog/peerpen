@@ -315,6 +315,15 @@
     <url-pattern>/group.do</url-pattern>
   </servlet-mapping>
 
+    <servlet>
+        <servlet-name>joingroup</servlet-name>
+        <servlet-class>com.peerpen.controller.JoinGroupController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>joingroup</servlet-name>
+        <url-pattern>/joingroup</url-pattern>
+    </servlet-mapping>
+
   <servlet>
     <servlet-name>group</servlet-name>
     <servlet-class>com.peerpen.controller.GroupController</servlet-class>

@@ -87,6 +87,14 @@ public class Feedable extends Base {
                 return true;
             }
 
+            if(this instanceof Joingroup){
+                Joingroup jg = (Joingroup) this;
+                if(jg.getGroup() != null){
+                    a.setUserId(jg.getGroup().getAdminId());
+                }
+                a.saveFeedable();
+            }
+
         }
         return false;
 
@@ -131,6 +139,10 @@ public class Feedable extends Base {
             if(this instanceof Broadcast){
                 return  a.updateFeedable();
             }
+
+            if(this instanceof Joingroup){
+                return a.updateFeedable();
+            }
            return true;
         }
     }
@@ -139,6 +151,7 @@ public class Feedable extends Base {
     public boolean destroy(){
         Map<String, Object> map = new HashMap<>();
         map.put("childId", this.getId());
+        map.put("type",this.getClass().getSimpleName());
 
         if(this instanceof Broadcast){
             List<Feedable> feeds = new Feedable().findAll(map);
@@ -155,7 +168,8 @@ public class Feedable extends Base {
 
             return this.baseDestroy() && deletedAllFeedable;
 
-        }else{
+        }
+        else{
             Feedable a = new Feedable().find(map);
             super.destroy();
             if(this.getId() == null){

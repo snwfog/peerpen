@@ -66,3 +66,4 @@ $(document).ready(function($) {
   $('.group-description').change(updateCountdown);
   $('.group-description').keyup(updateCountdown);
 });
+

@@ -15,6 +15,7 @@
   - feed
 - group(\.do)?:
   - broadcast
+- joingroup
 - tag
 - tagcloud
 - search
