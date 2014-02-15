@@ -1,0 +1,1 @@
+ALTER TABLE hunks ADD UNIQUE INDEX idx_view_id (id_view)
