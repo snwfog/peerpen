@@ -12,8 +12,13 @@
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/about">About</a></li>
-                <li><a href="/register">Register</a></li>
+                <% String jspPageName = request.getServletPath();%>
+                <li>
+                    <a href="/about">About</a>
+                </li>
+                <li  <%= jspPageName.contentEquals("/view/register.jsp")  ? "class=\"active\"" : "" %>>
+                    <a href="/register">Register</a>
+                </li>
             </ul>
 
             <form class="navbar-form navbar-right" role="form" style="margin:0 auto 0 auto;" action="/login" method="post" parsley-validate>
