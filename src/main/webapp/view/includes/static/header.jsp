@@ -24,7 +24,8 @@
             } else if ( request.getAttribute( "title" ) != null ) {
                 out.println( request.getAttribute( "title" ) );
             } else if ( explode.find() ){
-                if(explode.group(0) != null){
+
+                if( explode != null && explode.group(0) != null){
                     String formatIt = explode.group(0).replace(".jsp", "").replace("/", "");
                     out.println(StringUtils.capitaliseAllWords(formatIt));
                 }
