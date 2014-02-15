@@ -58,11 +58,10 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div id="documentsFlow">
-                <div id="contentFlow" class="ContentFlow" style="background-color:white;">
-                    <div class="top-buffer">
-                        <p>&nbsp</p>
+        <div class="row" style="background-color:black;">
+            <div id="documentsFlow" style="float: right; width: 70%; margin:0 15% 0 0;">
+                <div id="contentFlow" class="ContentFlow ContentFlowAddOn_black">
+                    <div style="margin-top:10px;">
                     </div>
                     <!-- should be place before flow so that contained images will be loaded first -->
                     <div class="loadIndicator"><div class="indicator"></div></div>

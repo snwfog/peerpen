@@ -24,7 +24,7 @@
             /*border: 1px solid yellow;*/
             width: 100%;
         }
-        .ContentFlow .flow .item img.reflection, 
+        .ContentFlow .flow .item img.reflection,
         .ContentFlow .flow .item canvas.reflection {
             width: 100%;
         }
@@ -80,7 +80,7 @@
             background: url(img/slider_black.png) center center no-repeat;
             cursor: move;
         }
-        
+
         /* only for IE <= 6 and a alphatransparent slider image */
         * html .ContentFlow .scrollbar .slider { background-image: none; }
         * html .ContentFlow .scrollbar .slider .virtualSlider {
@@ -142,7 +142,7 @@
 
 
 /* ========== ContentFlow ========== */
-/* 
+/*
  * This is the basic CSS file needed for the correct functioning of ContentFlow.
  * DON'T CHANGE IT.
  *
