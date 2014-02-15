@@ -88,10 +88,17 @@
 
              </div>
          </div>
+        <%if (group.getAdminId()==sessionUser.getId()){%>
         <div id="row">
-            <div class="col-md-4">
-                <h2> User Request to join your <%= group.getGroupName()%> group </h2>
-                <div class="caption">
+            <div class="accordion" id="accordion2">
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                           <h2> User Request to join your <%= group.getGroupName()%> group </h2>
+                        </a>
+                    </div>
+                    <div id="collapseOne" class="accordion-body collapse in">
+                        <div class="accordion-inner">
                             <% if (joingroups!=null){
                                     for (Joingroup jg:joingroups){
                                         if((group.getPeers().contains(jg.getPeer()))==false)
@@ -124,11 +131,40 @@
                                         <%}
                                     }
                                 }%>
-                            <%--</div>--%>
-                      </div>
+                            </div>
+                    </div>
                 </div>
+
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                        <h2>Reject Member from your <%=group.getGroupName()%></h2>
+                    </a>
+                </div>
+                <div id="collapseTwo" class="accordion-body collapse in">
+                    <div class="accordion-inner">
+                        <% for (Peer p:peers){
+                            if (p.getId()!=group.getAdminId()){%>
+
+                          <div class="card-body">
+                              <div class="card-actions parent">
+                                  <%=p.getUserName()%>
+                                  <form action="/group" method="POST" class="form-horizontal child">
+                                      <input type="hidden" name="groupid" value="<%= group.getId()%>">
+                                      <input type="hidden" name="peerid" value="<%= p.getId()%>">
+                                      <input type="hidden" name="_method" value="delete"/>
+                                      <button type="submit" class="btn btn-primary" >Reject!</button>
+                                  </form>
+                               </div>
+                           </div>
+                        <%}}%>
+                    </div>
+                </div>
+               </div>
+            </div>
+         </div>
+        <%}%>
     </div>
-</div>
 <%}else
 {%>
     <br>

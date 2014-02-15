@@ -3,6 +3,7 @@ package com.peerpen.controller;
 import com.peerpen.framework.GenericApplicationServlet;
 import com.peerpen.framework.ModelHierarchyUtil;
 import com.peerpen.model.Group;
+import com.peerpen.model.Joingroup;
 import com.peerpen.model.Peer;
 import com.sunnyd.Base;
 
@@ -63,5 +64,16 @@ public class GroupController extends GenericApplicationServlet
 //    response.sendRedirect(request.getHeader("referer"));
 
   }
+
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+        Group group = new Group().find(Integer.parseInt(parameters.get("groupid")));
+        Peer p = new Peer().find(Integer.parseInt(parameters.get("peerid")));
+
+        group.removePeer(p);
+        group.update();
+        response.sendRedirect(request.getHeader("referer"));
+    }
 
 }
