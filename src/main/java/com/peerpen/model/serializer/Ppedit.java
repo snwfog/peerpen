@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
@@ -32,29 +33,17 @@ public class Ppedit {
 
     public static void main( String[] args ) {
         GsonBuilder gBuilder = new GsonBuilder();
-        gBuilder.registerTypeAdapter( Ppedit.class, new PpeditSerializer() );
         gBuilder.registerTypeAdapter( Ppedit.class, new PpeditDeserializer() );
 
         Gson gson = gBuilder.create();
         gson.toJson( new Ppedit(), System.out );
     }
 
-    public static class PpeditSerializer implements JsonSerializer<Ppedit> {
-
-        @Override
-        public JsonElement serialize( Ppedit src, Type typeOfSrc, JsonSerializationContext context ) {
-            return null;
-        }
-    }
-
     public static class PpeditDeserializer implements JsonDeserializer<Ppedit> {
-
         @Override
         public Ppedit deserialize( JsonElement json, Type typeOfT, JsonDeserializationContext context )
                 throws JsonParseException {
             return null;
         }
     }
-
-
 }

@@ -1,15 +1,21 @@
 package com.peerpen.model;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.sunnyd.Base;
 import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.annotations.ActiveRelationHasOne;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -94,6 +100,34 @@ public class Hunk extends Base implements IModel {
         return new Hunk().queryAll( sql );
     }
 
+    public static class HunkSerializer implements JsonSerializer<Hunk> {
+
+        @Override
+        public JsonElement serialize( Hunk src, Type typeOfSrc
+                , JsonSerializationContext context ) {
+            JsonObject hunkJson = new JsonObject();
+            hunkJson.addProperty( "id", src.getIdView() );
+            hunkJson.addProperty( "html", src.getContent() );
+
+            return hunkJson;
+        }
+    }
+
+    public static class HunkDeserializer implements JsonDeserializer<Hunk> {
+
+        @Override
+        public Hunk deserialize( JsonElement json, Type typeOfT, JsonDeserializationContext context )
+                throws JsonParseException {
+            String viewId = json.getAsJsonObject().get("id").getAsString();
+            String content = json.getAsJsonObject().get("html").getAsString();
+
+            Hunk hunk = new Hunk();
+            hunk.setIdView( viewId );
+            hunk.setContent( content );
+
+            return hunk;
+        }
+    }
 
 
 
