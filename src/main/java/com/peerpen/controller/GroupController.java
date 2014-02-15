@@ -3,7 +3,6 @@ package com.peerpen.controller;
 import com.peerpen.framework.GenericApplicationServlet;
 import com.peerpen.framework.ModelHierarchyUtil;
 import com.peerpen.model.Group;
-import com.peerpen.model.Joingroup;
 import com.peerpen.model.Peer;
 import com.sunnyd.Base;
 
@@ -16,6 +15,7 @@ import java.util.Map;
 
 public class GroupController extends GenericApplicationServlet
 {
+
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
     super.doGet(request, response);
@@ -23,7 +23,7 @@ public class GroupController extends GenericApplicationServlet
     Map<String, Base> modelMap = ModelHierarchyUtil.parameterAsMap(parameters);
     Peer sessionUser = (Peer) request.getAttribute("sessionUser");
     Group urlGroup = (Group) modelMap.get("group");
-    List<Group> groups = new Group().getGroups();
+    List<Group> groups = new Group().getSortedGroups("az", sessionUser.getId());
     if (urlGroup != null)
     {
       request.setAttribute("group", urlGroup);
@@ -32,23 +32,24 @@ public class GroupController extends GenericApplicationServlet
     else
     {
       request.setAttribute("groups", groups);
+      request.setAttribute("sort", "az");
       request.getRequestDispatcher("/view/groups.jsp").forward(request, response);
     }
   }
 
   protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
-// todo: work in progess, dont touch
-
-    String sort = (String) request.getAttribute("sort");
-    List<Group> groups = new Group().getSortedGroups(sort);
+    Peer sessionUser = (Peer) request.getAttribute("sessionUser");
+    Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+    String sort = parameters.get("sort");
+    List<Group> groups = new Group().getSortedGroups(sort, sessionUser.getId());
     request.setAttribute("groups", groups);
+    request.setAttribute("sort", sort);
+    request.getRequestDispatcher("/view/groups.jsp").forward(request, response);
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
-    //create a group
-
     Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
     Peer sessionUser = (Peer) request.getAttribute("sessionUser");
     Group group = new Group();
@@ -59,21 +60,18 @@ public class GroupController extends GenericApplicationServlet
     group.save();
 
     request.setAttribute("group", group);
-    request.getRequestDispatcher("/view/group.jsp").forward(request, response);
-// todo: make it such at it redirects to group/ID
-//    response.sendRedirect(request.getHeader("referer"));
-
+    response.sendRedirect("/group/"+group.getId());
   }
 
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-        Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
-        Group group = new Group().find(Integer.parseInt(parameters.get("groupid")));
-        Peer p = new Peer().find(Integer.parseInt(parameters.get("peerid")));
+  protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+  {
+    Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+    Group group = new Group().find(Integer.parseInt(parameters.get("groupid")));
+    Peer p = new Peer().find(Integer.parseInt(parameters.get("peerid")));
 
-        group.removePeer(p);
-        group.update();
-        response.sendRedirect(request.getHeader("referer"));
-    }
+    group.removePeer(p);
+    group.update();
+    response.sendRedirect(request.getHeader("referer"));
+  }
 
 }

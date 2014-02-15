@@ -1,5 +1,6 @@
 package com.peerpen.model;
 
+import com.google.common.collect.Maps;
 import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRelationHasOne;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -52,14 +53,16 @@ public class Group extends Taggable implements IModel
     setUpdateFlag(true);
   }
 
-    public Integer getAdminId() {
-        return adminId;
-    }
+  public Integer getAdminId()
+  {
+    return adminId;
+  }
 
-    public void setAdminId(Integer adminId) {
-        this.adminId = adminId;
-        setUpdateFlag(true);
-    }
+  public void setAdminId(Integer adminId)
+  {
+    this.adminId = adminId;
+    setUpdateFlag(true);
+  }
 
   public String getDescription()
   {
@@ -74,8 +77,8 @@ public class Group extends Taggable implements IModel
 
   public String getShortDescription()
   {
-    if(this.getDescription().length() >= 100 )
-      return this.getDescription().substring(0,100)+"...";
+    if (this.getDescription().length() >= 100)
+      return this.getDescription().substring(0, 100) + "...";
     else return this.getDescription();
   }
 
@@ -91,22 +94,37 @@ public class Group extends Taggable implements IModel
     return new Group().queryAll("SELECT * FROM `groups`");
   }
 
-  public List<Group> getSortedGroups(String sort)
+  public List<Group> getSortedGroups(String sort, Integer userId)
   {
-// todo: work in progess, dont touch
-    switch(sort)
+    switch (sort)
     {
-      case "az" :
-        return new Group().queryAll("SELECT * FROM `groups` ORDER BY group_name ASC;");
-      case "za" :
-        return new Group().queryAll("SELECT * FROM `groups` ORDER BY group_name DESC;");
-    case "fd" :
-      return new Group().queryAll("SELECT * FROM `groups` ORDER BY creation_date ASC;");
-    case "df" :
+    case "az": // sort A - Z
+      return new Group().queryAll("SELECT * FROM `groups` ORDER BY group_name ASC;");
+    case "za": // sort Z - A
+      return new Group().queryAll("SELECT * FROM `groups` ORDER BY group_name DESC;");
+    case "fc": // sort first creation date
       return new Group().queryAll("SELECT * FROM `groups` ORDER BY creation_date DESC;");
-      default:
-        return getGroups();
-
+    case "lc": // sort last creation date
+      return new Group().queryAll("SELECT * FROM `groups` ORDER BY creation_date ASC;");
+    case "mp": // sort greater number of people
+      return new Group().queryAll("SELECT *\n" +
+          "FROM (SELECT * FROM groups) g\n" +
+          "LEFT JOIN (SELECT group_id, count(*) AS `num` FROM peers_groups GROUP BY group_id) pg\n" +
+          "ON g.id = pg.group_id\n" +
+          "ORDER BY num DESC");
+    case "lp": // sort least number of people
+      return new Group().queryAll("SELECT *\n" +
+          "FROM (SELECT * FROM groups) g\n" +
+          "LEFT JOIN (SELECT group_id, count(*) AS `num` FROM peers_groups GROUP BY group_id) pg\n" +
+          "ON g.id = pg.group_id\n" +
+          "ORDER BY num ASC");
+    case "pd":
+      return new Group().queryAll(String.format("SELECT * \n" +
+          "FROM groups g \n" +
+          "INNER JOIN joingroups jg\n" +
+          "ON g.id=jg.group_id AND jg.peer_id = %s", userId));
+    default:
+      return new Group().queryAll("SELECT * FROM `groups` ORDER BY group_name ASC;");
     }
   }
 
@@ -173,15 +191,25 @@ public class Group extends Taggable implements IModel
 
   public List<Broadcast> getOrderedBroadcast()
   {
-      List<Broadcast> broadcasts = new Broadcast().queryAll("SELECT * FROM `broadcasts` WHERE group_id= "+ this.getId() +" ORDER BY last_modified_date DESC");
-      return broadcasts;
+    List<Broadcast> broadcasts = new Broadcast().queryAll("SELECT * FROM `broadcasts` WHERE group_id= " + this.getId() + " ORDER BY last_modified_date DESC");
+    return broadcasts;
   }
 
-    public List<Joingroup> getRequests()
-    {
-        List<Joingroup> joingroups = new Joingroup().queryAll("SELECT * FROM `joingroups` WHERE group_id= "+ this.getId() +" ORDER BY last_modified_date DESC");
-        return joingroups;
-    }
+  public boolean getPending(Integer sessionUserId)
+  {
+    Map<String, Object> hm = Maps.newHashMap();
+    hm.put("peerId", sessionUserId);
+    hm.put("groupId", this.getId());
+    Joingroup joingroup = new Joingroup().find(hm);
+
+    return joingroup != null;
+  }
+
+  public List<Joingroup> getRequests()
+  {
+    List<Joingroup> joingroups = new Joingroup().queryAll("SELECT * FROM `joingroups` WHERE group_id= " + this.getId() + " ORDER BY last_modified_date DESC");
+    return joingroups;
+  }
 
   //public List<Group> removeDuplicates(List<Group> groups){
   //    List<Group> set = new ArrayList<>(  );
@@ -205,7 +233,8 @@ public class Group extends Taggable implements IModel
   }
 
   @Override
-  public int hashCode() {
+  public int hashCode()
+  {
     return new HashCodeBuilder().append(this.getId()).toHashCode();
   }
 }
