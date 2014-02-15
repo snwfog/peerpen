@@ -80,7 +80,7 @@
         <div class="row-fluid">
             <div class="card-white">
                 <div class="card-heading image">
-                    <img src="<%= peer.getAvatar().getServletContextAvatarPath( request ) %>" alt=""/>
+                    <img src="<%= ((Joingroup)f.getTrueSelf()).getPeer().getAvatar().getServletContextAvatarPath( request ) %>" alt=""/>
                     <div class="card-heading-header">
                         <h4><%=((Joingroup)f.getTrueSelf()).getPeer().getFirstName()%> Request to join your group ...</h4>
                         <span>Peer <%=((Joingroup)f.getTrueSelf()).getPeer().getUserName()%> wants to join your <%=((Joingroup)f.getTrueSelf()).getGroup().getGroupName()%> group</span>
