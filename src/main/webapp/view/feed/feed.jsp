@@ -2,7 +2,6 @@
     <jsp:param name="title" value="FEED ME"/>
 </jsp:include>
 <%@ include file="/view/includes/static/navbar.jsp" %>
-
 <% ArrayList<Group> navGroups =(ArrayList<Group>) sessionUser.getGroups();%>
 
 <div class="container-fluids greyish">
