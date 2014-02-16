@@ -89,7 +89,7 @@ public class Feedable extends Base {
                         feedable.setChildId(this.getId());
                         feedable.setStatus("new");
                         feedable.setUserId(p.getId());
-                        a.saveFeedable();
+                        feedable.saveFeedable();
                     }
                 }
                 return true;
