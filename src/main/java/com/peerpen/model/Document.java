@@ -165,12 +165,10 @@ public class Document extends Taggable implements IModel, Commentable
   {
     Integer docId = this.getId();
     List<Hunk> hunks1 = this.getHunks();
-    List<Object> object = new ArrayList();
+    List<Object> objects = new ArrayList();
     List<Integer> tracker = new ArrayList();
+    List<Integer> tracker2 = new ArrayList();
     Integer cs = null;
-
-
-//      SELECT *  FROM `comments` WHERE `type` IN ('Document','Changeset') AND `object_id` IN (2,5)
 
     for (Hunk hunk:hunks1)
     {
@@ -178,79 +176,33 @@ public class Document extends Taggable implements IModel, Commentable
         for (Changeset changeset: changesets1)
         {
             Integer chId = changeset.getId();
-            List<Comment> ChaComments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE type='Changeset' AND object_id= " + chId + " ORDER BY total_vote DESC, last_modified_date DESC");
+            List<Comment> ChaComments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote`  FROM `comments` WHERE `type` IN ('Document','Changeset') AND `object_id` IN ("+chId+","+docId+") ORDER BY total_vote DESC, last_modified_date DESC");
 
-
-            //try this
-            //List<Comment> ChaComments = new Comment().queryAll("SELECT *  FROM `comments` WHERE `type` IN ('Document','Changeset') AND `object_id` IN ("+chId+","+docId+") ORDER BY total_vote DESC, last_modified_date DESC");
-
-
-//            List<Object> object = new ArrayList();
-//            List<Integer> tracker = new ArrayList();
-//            Integer cs = null;
             for(Comment comment: ChaComments)
             {
-//                Document document = new Document().find(comment.getObjectId());
                 cs = comment.getObjectId();
-                if(!tracker.contains(comment.getObjectId()))
+                if((comment.getType()=="Changeset")&&!tracker.contains(comment.getObjectId()))
                 {
-                    object.add(new Changeset().find(cs));
+                    objects.add(new Changeset().find(cs));
                     tracker.add(cs);
+                }else {
+                    if (!tracker2.contains(cs)){
+                        objects.add(comment);
+                        tracker2.add(cs);
+                    }
                 }
 
             }
 
             if (!tracker.contains(chId)){
-                object.add(changeset);
+                objects.add(changeset);
                 tracker.add(chId);
             }
 
-
         }
     }
-
-    List<Comment> docComments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE type='Document' AND object_id= " + docId + " ORDER BY total_vote DESC, last_modified_date DESC");
-
-//    List<Comment> ChaComments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE type='Changeset' AND object_id= " + chId + " ORDER BY total_vote DESC, last_modified_date DESC");
-
-//    List<Object> object = new ArrayList();
-//    List<Integer> tracker = new ArrayList();
-//    Integer cs = null;
-
-
-    for(Comment comment: docComments)
-    {
-         object.add(comment);
-    }
-
-
-
-
-
-//    //Dirty...
-//    List<Changeset> changesetList = this.getChangesets();
-//    for(Changeset changeset : changesetList )
-//    {
-//      if (!tracker.contains(changeset.getId())){
-//        object.add(changeset);
-//        tracker.add(changeset.getId());
-//      }
-//    }
-//    return new ArrayList<Object>();
-      return object;
+      return objects;
   }
-
-  public List<Comment> getOrderedComments()
-  {
-    Integer docId = this.getId();
-    Connection connection = null;
-    Statement stmt = null;
-    ResultSet rs = null;
-    List<Comment> comments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE document_id= " + docId + " AND changeset_id IS NULL ORDER BY total_vote DESC, last_modified_date DESC");
-
-    return comments;
-  }
-
 
   // method used by search
   public List<Document> getMatchedDocuments(String keyword)

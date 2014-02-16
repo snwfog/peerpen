@@ -116,7 +116,7 @@
         <h3 class="card-heading simple"><%= changeset.getContent() %> - <span class="child" style="font-style: italic;font-size: small;"><%= changeset.getTimesAgo()%></span></h3>
         <div class="card-comments">
           <div class="comments-collapse-toggle">
-            <a data-toggle="collapse" href="#<%= changeset.getId()%>-comments">??? Comments<i class="icon-angle-down"></i></a>
+            <a data-toggle="collapse" href="#<%= changeset.getId()%>-comments"> <%=changeset.getOrderedComments().size()%> Comments<i class="icon-angle-down"></i></a>
           </div>
           <div id="<%= changeset.getId()%>-comments" class="comments collapse">
             <% for (Comment c: changeset.getOrderedComments()){%>
