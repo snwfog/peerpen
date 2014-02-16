@@ -308,13 +308,8 @@ public class Document extends Taggable implements IModel, Commentable
   }
 
     @Override
-     public void createComment(String message) {
-    Comment.createComment(this, message);
-    }
-
-    @Override
-    public void deleteComment(Integer commentId) {
-        Comment.deleteComment(commentId);
+    public void createComment(String message, Peer peer) {
+    Comment.createComment(this, message, peer);
     }
 
     @Override

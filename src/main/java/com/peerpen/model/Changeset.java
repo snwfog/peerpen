@@ -81,7 +81,7 @@ public class Changeset extends Feedable implements IModel, Commentable {
     public static void main(String[] args) {
 
         Changeset c = new Changeset().find(5);
-        c.createComment("bitch3");
+//        c.createComment("bitch3");
 
 //        //Changeset c = new Changeset();
 //        /*c.setContent("aaaaaaaaaaa");
@@ -136,13 +136,8 @@ public class Changeset extends Feedable implements IModel, Commentable {
 
 
     @Override
-    public void createComment(String message) {
-        Comment.createComment(this, message);
-    }
-
-    @Override
-    public void deleteComment(Integer commentId) {
-        Comment.deleteComment(commentId);
+    public void createComment(String message, Peer peer) {
+        Comment.createComment(this, message,peer);
     }
 
     @Override

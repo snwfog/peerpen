@@ -16,7 +16,6 @@ import java.util.Map;
  */
 public interface Commentable{
 
-    public void createComment(String Message);
-    public void deleteComment(Integer commentId);
+    public void createComment(String Message, Peer peer);
     public void findComments();
 }

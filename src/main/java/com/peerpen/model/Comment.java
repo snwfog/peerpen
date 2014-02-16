@@ -138,13 +138,13 @@ public class Comment extends Feedable implements IModel
         setUpdateFlag(true);
     }
 
-    public static void createComment(Object object, String message){
+    public static void createComment(Commentable commentable, String message, Peer posterPeer){
         Comment comment = new Comment();
 
-        comment.setType(object.getClass().getSimpleName());
-        comment.setObjectId(((Base) object).getId());
+        comment.setType(commentable.getClass().getSimpleName());
+        comment.setObjectId(((Base) commentable).getId());
         comment.setMessage(message);
-        comment.setPosterPeerId(comment.getPosterPeerId());
+        comment.setPosterPeerId(posterPeer.getId());
         comment.save();
     }
 
