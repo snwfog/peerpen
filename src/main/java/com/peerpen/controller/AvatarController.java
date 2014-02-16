@@ -24,7 +24,7 @@ public class AvatarController extends HttpServlet {
             throws ServletException, IOException {
         Peer sessionPeer = (Peer) request.getAttribute( "sessionUser" );
         sessionPeer.getAvatar().cropAvatar( request );
-        request.getRequestDispatcher( "/peer/" + sessionPeer.getId() + "/profile" ).forward( request, response );
+        request.getRequestDispatcher( "/view/profile.jsp" ).forward( request, response );
     }
 
 

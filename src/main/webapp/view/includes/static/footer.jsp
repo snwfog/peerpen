@@ -20,16 +20,15 @@
 
 <!-- Placed at the end of the document so the pages load faster -->
 
-
 <script src="/assets/js/custom/slideDiv.js"></script>
 <script src="/assets/js/custom/groups.js"></script>
 <script src="/assets/js/custom/profile.js"></script>
+<script src="/assets/js/custom/avatar.js"></script>
+<script src="/assets/js/custom/script.js"></script>
+<script src="/assets/js/custom/script.bare.js"></script>
 <script src="/assets/js/custom/notification.js"></script>
 <script src="/assets/js/custom/search_autocomplete_caller.js"></script>
 <script src="/assets/js/custom/tag_autocomplete_caller.js"></script>
-<script src="/assets/js/custom/script.js"></script>
-<script src="/assets/js/custom/script.bare.js"></script>
-<script src="/assets/js/custom/avatar.js"></script>
 <script src="/assets/js/custom/validation.js"></script>
 <script src="/assets/js/custom/vote.js"></script>
 <script src="/assets/js/custom/confirm_delete_dialog.js"></script>
