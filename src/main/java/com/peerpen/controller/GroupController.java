@@ -15,6 +15,7 @@ import java.util.Map;
 
 public class GroupController extends GenericApplicationServlet
 {
+
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
     super.doGet(request, response);
@@ -22,7 +23,7 @@ public class GroupController extends GenericApplicationServlet
     Map<String, Base> modelMap = ModelHierarchyUtil.parameterAsMap(parameters);
     Peer sessionUser = (Peer) request.getAttribute("sessionUser");
     Group urlGroup = (Group) modelMap.get("group");
-    List<Group> groups = new Group().getGroups();
+    List<Group> groups = new Group().getSortedGroups("az", sessionUser.getId());
     if (urlGroup != null)
     {
       request.setAttribute("group", urlGroup);
@@ -31,31 +32,45 @@ public class GroupController extends GenericApplicationServlet
     else
     {
       request.setAttribute("groups", groups);
+      request.setAttribute("sort", "az");
       request.getRequestDispatcher("/view/groups.jsp").forward(request, response);
     }
+  }
+
+  protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+  {
+    Peer sessionUser = (Peer) request.getAttribute("sessionUser");
+    Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+    String sort = parameters.get("sort");
+    List<Group> groups = new Group().getSortedGroups(sort, sessionUser.getId());
+    request.setAttribute("groups", groups);
+    request.setAttribute("sort", sort);
+    request.getRequestDispatcher("/view/groups.jsp").forward(request, response);
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
     Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
-    Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
-    Group group = new Group().find(Integer.parseInt(parameters.get("groupid")));
-    group.addPeer(peer);
-    group.update();
+    Peer sessionUser = (Peer) request.getAttribute("sessionUser");
+    Group group = new Group();
+    group.setGroupName(parameters.get("name"));
+    group.setDescription(parameters.get("description"));
+    group.setAdminId(sessionUser.getId());
+    group.addPeer(sessionUser);
+    group.save();
 
     request.setAttribute("group", group);
-    response.sendRedirect(request.getHeader("referer"));
+    response.sendRedirect("/group/"+group.getId());
   }
 
   protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
     Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
-    Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
     Group group = new Group().find(Integer.parseInt(parameters.get("groupid")));
-    group.removePeer(peer);
-    group.update();
+    Peer p = new Peer().find(Integer.parseInt(parameters.get("peerid")));
 
-    request.setAttribute("group", group);
+    group.removePeer(p);
+    group.update();
     response.sendRedirect(request.getHeader("referer"));
   }
 

@@ -40,9 +40,9 @@ public class Document extends Taggable implements IModel
   //private String class;
   @ActiveRelationHasMany
   private List<Hunk> hunks;
-  @ActiveRelationHasMany
-  private List<Changeset> changesets;
-  @ActiveRelationHasMany
+      @ActiveRelationHasMany
+      private List<Changeset> changesets;
+      @ActiveRelationHasMany
   private List<Comment> comments;
 
 

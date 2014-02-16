@@ -12,6 +12,7 @@
  * ============================================================
  */
 var ContentFlowGlobal = {
+
     Flows: new Array,
     AddOns: {}, 
     scriptName: 'contentflow.js',
@@ -721,6 +722,7 @@ ContentFlow.prototype = {
     _millisecondsPerStep: 40, 
     _reflectionWithinImage: true,
     Browser: ContentFlowGlobal.Browser,
+    mouseWheelCounter: 0,
     
     _defaultConf: { 
         /* pre conf */
@@ -730,7 +732,7 @@ ContentFlow.prototype = {
         loadingTimeout: 30000, //milliseconds
         activeElement: 'content', // item or content
 
-        maxItemHeight: 0,
+        maxItemHeight: 180,
         scaleFactor: 1,
         scaleFactorLandscape: 1.33,
         scaleFactorPortrait: 1.0,
@@ -1539,7 +1541,8 @@ ContentFlow.prototype = {
         // mousewheel
         if (this.conf.scrollWheelSpeed != 0) {
             var wheel = this._wheel.bind(this);
-            if(window.addEventListener) this.Container.addEventListener('DOMMouseScroll', wheel, false);
+
+            if(window.addEventListener) this.Container.addEventListener("DOMMouseScroll", wheel, false);
             this.Container.onmousewheel = wheel;
         }
 
@@ -1851,7 +1854,6 @@ ContentFlow.prototype = {
 
         this.ContainerOldDim = "auto";
         this.FlowOldDim = "auto";
-        
 
         /* calc maxHeight */
         if (this.conf.maxItemHeight <= 0) {
@@ -1972,23 +1974,61 @@ ContentFlow.prototype = {
      */
 
     _wheel: function (event) {
+
         if (!event) var event = window.event; // MS
-        
         var delta = 0;
-        if (event.wheelDelta) {
-            delta = event.wheelDelta/120; 
-        } else if (event.detail) {
-            delta = -event.detail/3;
+        if ( event.detail) {
+            delta = -event.detail;
+
+        } else  if (event.wheelDelta) {
+            delta = event.wheelDelta;
+
+        } else if(event.axis){
+            delta = event.axis;
         }
 
-        if (delta) {
-            var target = this._targetPosition ;
-            if (delta < 0 ) {
-                target += (1 * this.conf.scrollWheelSpeed);
-            } else {
-                target -= (1 * this.conf.scrollWheelSpeed);
-            } 
-            this.moveToPosition(Math.round(target));
+
+        //PEERPEN
+//        console.log("detail:"+event.detail);
+        //HORIZONTAL SCROLL HANDLING
+        if( event.wheelDeltaY>0 || event.deltaY > 0 || event.detail){
+//            console.log("realbitches"+delta) ;
+            if(!event.detail){
+                //Normalize different swipe speed for non-FF
+                if( 121 <= Math.abs(delta) && Math.abs(delta) <= 600 ){
+                    delta =  delta/6;
+                }
+                if( 601 <= Math.abs(delta) && Math.abs(delta) <= 900 ){
+                    delta =  delta/10;
+                }
+                if( 900 <= Math.abs(delta)  ){
+                    delta =  delta/100;
+                }
+                var thres = 1000;
+            }else{
+                var thres = 50;
+            }
+
+//            console.log( this.mouseWheelCounter );
+            if( this.mouseWheelCounter >= thres){
+                this.mouseWheelCounter = 0;
+                if (delta) {
+
+                    var target = this._targetPosition ;
+                    if (delta < 0 ) {
+                        target += (1 * this.conf.scrollWheelSpeed);
+                    } else {
+                        target -= (1 * this.conf.scrollWheelSpeed);
+                    }
+                    this.moveToPosition(Math.round(target));
+                }
+            }else{
+                this.mouseWheelCounter = this.mouseWheelCounter + Math.abs(delta);
+            }
+        }
+
+        if(event.wheelDeltaX >0 || event.deltaX > 0){
+           //disable horizontal
         }
 
         return Event.stop(event);

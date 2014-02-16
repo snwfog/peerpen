@@ -1,5 +1,5 @@
 <%@ include file="/view/includes/static/header.jsp" %>
-<%@ include file="/view/includes/static/navbar_minimal.jsp" %>
+<%@ include file="/view/includes/static/navbar.jsp" %>
 <div class="container">
     <% String errorCode = String.valueOf( request.getAttribute( "errorCode" ) ); %>
     <h1>Oh Snap! - <%= (errorCode != null ? errorCode :

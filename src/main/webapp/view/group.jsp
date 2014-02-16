@@ -1,11 +1,12 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.peerpen.model.*" %>
 <%@ include file="/view/includes/static/header.jsp" %>
-<%@ include file="/view/includes/static/navbar_profile.jsp" %>
+<%@ include file="/view/includes/static/navbar.jsp" %>
 
 <% Group group = (Group) request.getAttribute("group"); %>
 <% ArrayList<Peer> peers = (ArrayList<Peer>)group.getPeers();%>
 <% ArrayList<Broadcast> broadcasts = (ArrayList<Broadcast>)group.getOrderedBroadcast();%>
+<% ArrayList<Joingroup> joingroups = (ArrayList<Joingroup>)group.getRequests();%>
 
 <%--
   Created by IntelliJ IDEA.
@@ -16,7 +17,7 @@
 --%>
 <%if (group.getIsJoined(sessionUser.getId())){%>
 <br>
-<h1><%= group.getGroupName()%> Group</h1>
+<h1><%= group.getGroupName()%> Group Created by <%= group.getAdminId()%> </h1>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
@@ -87,9 +88,84 @@
 
              </div>
          </div>
+        <%if (group.getAdminId()==sessionUser.getId()){%>
+        <div id="row">
+            <div class="accordion" id="accordion2">
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                           <h2> User Request to join your <%= group.getGroupName()%> group </h2>
+                        </a>
+                    </div>
+                    <div id="collapseOne" class="accordion-body collapse in">
+                        <div class="accordion-inner">
+                            <% if (joingroups!=null){
+                                    for (Joingroup jg:joingroups){
+                                        if((group.getPeers().contains(jg.getPeer()))==false)
+                                        {
+                                        %>
+                                        <%--<div class="card2">--%>
 
+                                            <div class="card-body">
+                                                <strong> Peer <%= jg.getPeer().getUserName() %> wants to join your group</strong>
+                                                <span class="child" style="font-style: italic;font-size: small;">
+                                                 <p class="text-right"><%= jg.getTimesAgo()%></p></span>
+                                                <div class="card-actions parent">
+                                                    <form action="/joingroup" method="POST" class="form-horizontal child">
+                                                        <input type="hidden" name="groupid" value="<%= jg.getGroupId()%>">
+                                                        <input type="hidden" name="jgid" value="<%= jg.getId()%>">
+                                                        <input type="hidden" name="peerid" value="<%= jg.getPeerId()%>">
+                                                        <input type="hidden" name="_method" value="POST">
+                                                        <button type="submit" class="btn btn-primary" >Accept!</button>
+                                                    </form>
+
+                                                    <form action="/joingroup" method="POST" class="form-horizontal child">
+                                                        <input type="hidden" name="groupid" value="<%= jg.getGroupId()%>">
+                                                        <input type="hidden" name="jgid" value="<%= jg.getId()%>">
+                                                        <input type="hidden" name="peerid" value="<%= jg.getPeerId()%>">
+                                                        <input type="hidden" name="_method" value="delete"/>
+                                                        <button type="submit" class="btn btn-primary" >Refuse!</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        <%}
+                                    }
+                                }%>
+                            </div>
+                    </div>
+                </div>
+
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                        <h2>Reject Member from your <%=group.getGroupName()%></h2>
+                    </a>
+                </div>
+                <div id="collapseTwo" class="accordion-body collapse in">
+                    <div class="accordion-inner">
+                        <% for (Peer p:peers){
+                            if (p.getId()!=group.getAdminId()){%>
+
+                          <div class="card-body">
+                              <div class="input-append">
+                                  <%--<div class="span8 child"><%=p.getUserName()%></div>--%>
+                                  <input class="input-medium" placeholder=".input-medium" disabled  value="<%=p.getUserName()%>">
+                                  <form action="/group" method="POST" class="form-horizontal child">
+                                      <input type="hidden" name="groupid" value="<%= group.getId()%>">
+                                      <input type="hidden" name="peerid" value="<%= p.getId()%>">
+                                      <input type="hidden" name="_method" value="delete"/>
+                                      <button type="submit" class="btn btn-primary" >Reject!</button>
+                                  </form>
+                               </div>
+                           </div>
+                        <%}}%>
+                    </div>
+                </div>
+               </div>
+            </div>
+         </div>
+        <%}%>
     </div>
-</div>
 <%}else
 {%>
     <br>

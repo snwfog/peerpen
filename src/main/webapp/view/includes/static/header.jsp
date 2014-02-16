@@ -1,3 +1,6 @@
+<%@ page import="java.util.regex.Pattern" %>
+<%@ page import="java.util.regex.Matcher" %>
+<%@ page import="org.codehaus.plexus.util.StringUtils" %>
 <!DOCTYPE html>
 <html>
 <%@ page language="java" %>
@@ -10,11 +13,21 @@
 
     <title>
         <%
+
+            String jspPageNAme = request.getServletPath();
+            Pattern regx = Pattern.compile("/[A-Za-z1-9]*\\.jsp");
+            Matcher explode = regx.matcher(jspPageNAme);
+
             String defaultTitle = "PeerPen - A Capstone project by Sunny Delight";
             if ( request.getParameter( "title" ) != null ) {
                 out.println( request.getParameter( "title" ) );
             } else if ( request.getAttribute( "title" ) != null ) {
                 out.println( request.getAttribute( "title" ) );
+            } else if ( explode !=null && explode.find() ){
+                if(explode.group(0) != null){
+                    String formatIt = explode.group(0).replace(".jsp", "").replace("/", "");
+                    out.println(StringUtils.capitaliseAllWords(formatIt));
+                }
             } else {
                 out.println( defaultTitle );
             }

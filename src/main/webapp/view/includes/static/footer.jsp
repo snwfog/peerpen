@@ -1,5 +1,5 @@
 <%--Including the debug information--%>
-<%@ include file="/view/debug.jsp" %>
+
 
 <!-- Le javascript
 ================================================== -->
@@ -19,6 +19,10 @@
 <script src="/assets/js/lib/parsley.js"></script>
 
 <!-- Placed at the end of the document so the pages load faster -->
+
+
+<script src="/assets/js/custom/slideDiv.js"></script>
+<script src="/assets/js/custom/groups.js"></script>
 <script src="/assets/js/custom/profile.js"></script>
 <script src="/assets/js/custom/script.js"></script>
 <script src="/assets/js/custom/script.bare.js"></script>
@@ -30,7 +34,7 @@
 <script src="/assets/js/custom/confirm_delete_dialog.js"></script>
 <script src="/assets/js/custom/reset.js"></script>
 
-<script src="/assets/js/custom/slideDiv.js"></script>
 
 </body>
+<%@ include file="/view/debug.jsp" %>
 </html>
