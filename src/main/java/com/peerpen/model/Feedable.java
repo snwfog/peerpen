@@ -21,6 +21,9 @@ public class Feedable extends Base {
     private String status;
 
     @ActiveRecordField
+    private String notifyStatus;
+
+    @ActiveRecordField
     private Integer childId;
 
     @ActiveRecordField
@@ -282,4 +285,13 @@ public class Feedable extends Base {
   {
     return new PrettyTime().format(getCreationDate());
   }
+
+    public String getNotifyStatus(){
+        return notifyStatus;
+    }
+    public void setNotifyStatus(String notifyStatus){
+
+        this.notifyStatus = notifyStatus;
+        setUpdateFlag(true);
+    }
 }

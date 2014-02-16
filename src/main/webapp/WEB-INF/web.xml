@@ -352,6 +352,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>notification</servlet-name>
+        <servlet-class>com.peerpen.controller.NotificationController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>notification</servlet-name>
+        <url-pattern>/notification</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>DocumentAjax.do</servlet-name>
         <servlet-class>com.peerpen.ajax.DocumentAjaxController</servlet-class>
     </servlet>

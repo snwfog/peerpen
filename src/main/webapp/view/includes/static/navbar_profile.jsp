@@ -8,7 +8,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="z-index:100 !important;">
   <div class="container">
     <div class="navbar-header">
-        <a class="navbar-brand" href="/">PeerPen</a>
+        <a class="navbar-brand" href="/peer/<%=sessionUser.getId()%>/feed">PeerPen</a>
     </div>
 
     <ul class="nav navbar-nav">
@@ -41,3 +41,4 @@
     </ul>
   </div>
 </nav>
+<div id="enableNotification"></div>
