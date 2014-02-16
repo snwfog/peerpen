@@ -1,15 +1,12 @@
 package com.peerpen.model;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.sunnyd.Base;
 import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.annotations.ActiveRelationHasOne;
@@ -103,6 +100,11 @@ public class Document extends Taggable implements IModel, Commentable
 //     d.deleteComment(2);
       d.findComments();
 
+      List<Comment> comments = d.getComments();
+      for (Comment comment: comments){
+          System.out.println(comment.getMessage());
+      }
+
   }
 
   public Date getLastModifiedDate()
@@ -161,47 +163,13 @@ public class Document extends Taggable implements IModel, Commentable
   }
 
 
-  public List<Object> getCommentAndChangeset()
+  public List<Comment> getComments()
   {
     Integer docId = this.getId();
-    List<Hunk> hunks1 = this.getHunks();
-    List<Object> objects = new ArrayList();
-    List<Integer> tracker = new ArrayList();
-    List<Integer> tracker2 = new ArrayList();
-    Integer cs = null;
 
-    for (Hunk hunk:hunks1)
-    {
-        List<Changeset> changesets1= hunk.getChangesets();
-        for (Changeset changeset: changesets1)
-        {
-            Integer chId = changeset.getId();
-            List<Comment> ChaComments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote`  FROM `comments` WHERE `type` IN ('Document','Changeset') AND `object_id` IN ("+chId+","+docId+") ORDER BY total_vote DESC, last_modified_date DESC");
+      List<Comment> comments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote`  FROM `comments` WHERE type='Document' AND object_id= "+ docId +" ORDER BY total_vote DESC, last_modified_date DESC");
 
-            for(Comment comment: ChaComments)
-            {
-                cs = comment.getObjectId();
-                if((comment.getType()=="Changeset")&&!tracker.contains(comment.getObjectId()))
-                {
-                    objects.add(new Changeset().find(cs));
-                    tracker.add(cs);
-                }else {
-                    if (!tracker2.contains(cs)){
-                        objects.add(comment);
-                        tracker2.add(cs);
-                    }
-                }
-
-            }
-
-            if (!tracker.contains(chId)){
-                objects.add(changeset);
-                tracker.add(chId);
-            }
-
-        }
-    }
-      return objects;
+      return comments;
   }
 
   // method used by search
