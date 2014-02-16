@@ -10,7 +10,8 @@
     - tag
   - profile:
     - full
-    - avatar
+    - avatar:
+      - upload
   - feed
 - group(\.do)?:
   - broadcast
