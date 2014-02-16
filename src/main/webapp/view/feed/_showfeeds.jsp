@@ -10,7 +10,7 @@
                     <h2 class="card-heading simple">
                         <b><%=((Changeset)f.getTrueSelf()).getPeer().getFirstName()%></b>
                         suggested changes to
-                        <b><%=((Changeset)f.getTrueSelf()).getDocument().getDocName()%></b>
+                        <b><%=((Changeset)f.getTrueSelf()).getHunk().getDocument().getDocName()%></b>
                     </h2>
                     <div class="card-body">
 
@@ -33,7 +33,7 @@
 
 
                         <div class="clearfix"></div>
-                        <%Integer documentId = ((Changeset)f.getTrueSelf()).getDocumentId();%>
+                        <%Integer documentId = ((Changeset)f.getTrueSelf()).getHunk().getDocumentId();%>
                         <p><a class="btn" href="/peer/<%=sessionUser.getId()%>/document/<%=documentId%>">View Document &raquo;</a></p>
                     </div>
                 </div>

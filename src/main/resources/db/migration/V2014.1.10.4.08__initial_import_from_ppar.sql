@@ -106,15 +106,12 @@ CREATE TABLE `documents_taggables` (
 CREATE TABLE `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `message` varchar(255) DEFAULT NULL,
-  `document_id` int(11) DEFAULT NULL,
-  `peer_id` int(11) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `object_id` int(11) DEFAULT NULL,
+  `poster_peer_id` int(11) DEFAULT NULL,
   `creation_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `last_modified_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  KEY `document_id` (`document_id`),
-  KEY `peer_id` (`peer_id`),
-  CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`document_id`) REFERENCES `documents` (`id`),
-  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`peer_id`) REFERENCES `peers` (`id`) ON DELETE SET NULL
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 # Dump of table feedables
@@ -195,18 +192,15 @@ CREATE TABLE `logs` (
 
 CREATE TABLE `changesets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `document_id` int(11) DEFAULT NULL,
   `creation_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `last_modified_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `peer_id` int(11) DEFAULT NULL,
   `content` text,
   `hunk_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `document_id` (`document_id`),
   KEY `peer_id` (`peer_id`),
   KEY `hunk_id` (`hunk_id`),
   CONSTRAINT `changesets_ibfk_3` FOREIGN KEY (`hunk_id`) REFERENCES `hunks` (`id`) ON DELETE SET NULL,
-  CONSTRAINT `changesets_ibfk_1` FOREIGN KEY (`document_id`) REFERENCES `documents` (`id`) ON DELETE SET NULL,
   CONSTRAINT `changesets_ibfk_2` FOREIGN KEY (`peer_id`) REFERENCES `peers` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

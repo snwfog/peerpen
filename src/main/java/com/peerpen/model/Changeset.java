@@ -11,14 +11,11 @@ import java.util.Map;
 
 
 //Feedable model will not avoided by base and any parent of Feedable
-public class Changeset extends Feedable implements IModel {
+public class Changeset extends Feedable implements IModel, Commentable {
     public static final String tableName = "changesets";
 
     @ActiveRecordField
     private String content;
-
-    @ActiveRelationHasOne
-    private Document document;
 
     @ActiveRelationHasOne
     private Peer peer;
@@ -26,17 +23,11 @@ public class Changeset extends Feedable implements IModel {
     @ActiveRecordField
     private Integer peerId;
 
-    @ActiveRecordField
-    private Integer documentId;
-
     @ActiveRelationHasOne
     private Hunk hunk;
 
     @ActiveRecordField
     private Integer hunkId;
-
-    @ActiveRelationHasMany
-    private List<Comment> comments;
 
     public Changeset() {
         super();
@@ -55,23 +46,6 @@ public class Changeset extends Feedable implements IModel {
         setUpdateFlag(true);
     }
 
-    public void setDocumentId(Integer documentId){
-        this.documentId = documentId;
-        setUpdateFlag(true);
-    }
-
-    public Integer getDocumentId(){
-        return this.documentId;
-    }
-
-    public void setDocument(Document document){
-        this.document = document;
-    }
-
-    public Document getDocument(){
-        initRelation("document");
-        return document;
-    }
 
     public void setPeerId(Integer peerId){
         this.peerId = peerId;
@@ -88,10 +62,15 @@ public class Changeset extends Feedable implements IModel {
 
     public void setHunkId(Integer hunkId){
         this.hunkId = hunkId;
+        setUpdateFlag(true);
     }
 
     public int getHunkId(){
         return this.hunkId;
+    }
+
+    public void setHunk(Hunk hunk){
+        this.hunk = hunk;
     }
 
     public Hunk getHunk(){
@@ -99,13 +78,11 @@ public class Changeset extends Feedable implements IModel {
         return hunk;
     }
 
-    public List<Comment> getComments()
-    {
-        initRelation("comments");
-        return this.comments;
-    }
-
     public static void main(String[] args) {
+
+        Changeset c = new Changeset().find(5);
+        c.createComment("bitch3");
+
 //        //Changeset c = new Changeset();
 //        /*c.setContent("aaaaaaaaaaa");
 //        c.setHunkId(27);
@@ -131,11 +108,11 @@ public class Changeset extends Feedable implements IModel {
 //            a.setContent("DONT DO IT");
 //            a.save();
 
-          Comment com = new Comment();
-          com.setMessage("faggot stick");
-          com.setDocumentId(1);
-          com.setPeerId(1);
-          com.save();
+//          Comment com = new Comment();
+//          com.setMessage("faggot stick");
+//          com.setDocumentId(1);
+//          com.setPeerId(1);
+//          com.save();
 
 
 //        for( Feedable f : Feedable.getFeed(1)){
@@ -148,19 +125,28 @@ public class Changeset extends Feedable implements IModel {
 
     public List<Comment> getOrderedComments()
     {
-      Integer docId = this.getDocumentId();
       Integer changesetId = this.getId();
         Connection connection = null;
         Statement stmt = null;
         ResultSet rs = null;
-        List<Comment> comments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE document_id= "+ docId +" AND changeset_id= "+ changesetId +" ORDER BY total_vote DESC, last_modified_date DESC");
+        List<Comment> comments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE type='Changeset' AND object_id= "+ changesetId +" ORDER BY total_vote DESC, last_modified_date DESC");
 
         return comments;
     }
 
 
+    @Override
+    public void createComment(String message) {
+        Comment.createComment(this, message);
+    }
 
+    @Override
+    public void deleteComment(Integer commentId) {
+        Comment.deleteComment(commentId);
+    }
 
-
-
+    @Override
+    public void findComments() {
+        Comment.findComments(this,this.getId());
+    }
 }

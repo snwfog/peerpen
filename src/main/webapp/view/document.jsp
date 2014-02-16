@@ -64,10 +64,12 @@
 
       <%for(Object o : objectList){
         if(o instanceof Comment){
-          Comment comment = (Comment) o;%>
+          Comment comment = (Comment) o;
+          Peer p = new Peer().find(comment.getPosterPeerId());
+            %>
 
           <div class="card2">
-          <h3 class="card-heading simple"><%= comment.getPeer().getFirstName() %> <%= comment.getPeer().getLastName() %></h3>
+          <h3 class="card-heading simple"><%= p.getFirstName() %> <%= p.getLastName() %></h3>
           <div class="card-body">
             <%= comment.getMessage() %>
           </div>
@@ -101,7 +103,7 @@
             </form>
             <span class="child" style="font-style: italic;font-size: small;"><%= comment.getTimesAgo()%></span>
             &nbsp;&nbsp;
-            <% if(sessionUser.getId() == document.getPeerId() || sessionUser.getId() == comment.getPeerId()){%>
+            <% if(sessionUser.getId() == document.getPeerId() || sessionUser.getId() == comment.getPosterPeerId()){%>
             <a data-toggle="modal" data-id="<%= comment.getId()%>" class="confirmDeleteCommentDialog child"
                href="#deleteDialog">delete</a>
             <% } %>
@@ -114,7 +116,7 @@
         <h3 class="card-heading simple"><%= changeset.getContent() %> - <span class="child" style="font-style: italic;font-size: small;"><%= changeset.getTimesAgo()%></span></h3>
         <div class="card-comments">
           <div class="comments-collapse-toggle">
-            <a data-toggle="collapse" href="#<%= changeset.getId()%>-comments"><%= changeset.getComments().size()%> Comments<i class="icon-angle-down"></i></a>
+            <a data-toggle="collapse" href="#<%= changeset.getId()%>-comments">??? Comments<i class="icon-angle-down"></i></a>
           </div>
           <div id="<%= changeset.getId()%>-comments" class="comments collapse">
             <% for (Comment c: changeset.getOrderedComments()){%>
@@ -151,7 +153,7 @@
                   </form>
                   <span class="child" style="font-style: italic;font-size: small;"><%= c.getTimesAgo()%></span>
                   &nbsp;&nbsp;
-                  <% if(sessionUser.getId() == changeset.getPeerId() || sessionUser.getId() == c.getPeerId()){%>
+                  <% if(sessionUser.getId() == changeset.getPeerId() || sessionUser.getId() == c.getPosterPeerId()){%>
                   <a data-toggle="modal" data-id="<%= c.getId()%>" class="confirmDeleteCommentDialog child"
                      href="#deleteDialog">delete</a>
                   <% } %>

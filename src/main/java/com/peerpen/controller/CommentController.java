@@ -26,11 +26,12 @@ public class CommentController extends HttpServlet
     Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
     Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
     Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
-
+    String type = "Document";
     Map<String, Object> map = Maps.newHashMap();
     map.put("message", parameters.get("comment"));
-    map.put("peerId", peer.getId());
-    map.put("documentId", document.getId());
+    map.put("posterPeerId", peer.getId());
+    map.put("objectId", document.getId());
+    map.put("type", type);
 
     Comment comment = new Comment(map);
     comment.save();
@@ -47,12 +48,14 @@ public class CommentController extends HttpServlet
     Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
     Changeset changeset = new Changeset().find(Integer.parseInt(parameters.get("changesetid")));
 
+    String type ="Changeset";
+
     Map<String, Object> map = Maps.newHashMap();
     map.put("message", request.getParameter("comment").toString());
     map.put("name", peer.getFirstName() + " " + peer.getLastName());
-    map.put("peerId", peer.getId());
-    map.put("documentId", document.getId());
-    map.put("changesetId", changeset.getId());
+    map.put("posterPeerId", peer.getId());
+    map.put("objectId", changeset.getId());
+    map.put("type", type);
     Comment comment = new Comment(map);
     comment.save();
 
