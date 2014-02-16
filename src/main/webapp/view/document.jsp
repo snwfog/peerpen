@@ -12,7 +12,7 @@
 <% Peer urlUser; %>
 <% if (request.getAttribute("urlUser") != null){urlUser= (Peer) request.getAttribute("urlUser");}else{urlUser=sessionUser;} %>
 <% Document document =(Document) request.getAttribute("document");%>
-<% List<Comment> objectList = document.getComments();%>
+<% List<Comment> comments = document.getComments();%>
 <% List<Changeset> changesets = document.getChangeset();%>
 <% List<TagDescriptor> tds = document.getTagDescriptors(); %>
 <% List<Hunk> hunks = document.getHunks(); %>
@@ -56,7 +56,7 @@
               </form>
             </div>
           </div>
-          <%for(Comment comment: objectList){ Peer p = new Peer().find(comment.getPosterPeerId()); %>
+          <%for(Comment comment: comments){ Peer p = new Peer().find(comment.getPosterPeerId()); %>
           <div class="card2">
             <h3 class="card-heading simple"><%= p.getFirstName() %> <%= p.getLastName() %></h3>
             <div class="card-body">
