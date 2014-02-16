@@ -59,6 +59,6 @@ $(function () {
 
     if ($("#enableNotification" ).length > 0){
         fetchNotification();
-        setInterval(fetchNotification, 5000);
+        setInterval(fetchNotification, 500000);
     }
 });

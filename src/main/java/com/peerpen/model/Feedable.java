@@ -54,25 +54,25 @@ public class Feedable extends Base {
 
            if(this instanceof Changeset){
                Changeset ch = (Changeset) this;
-               if(ch.getDocument() != null){
-                   a.setUserId(ch.getDocument().getPeerId());
+               if(ch.getHunk() != null){
+                   a.setUserId(ch.getPeerId());
                }
                a.saveFeedable();
            }
 
-            if(this instanceof Comment){
-                Comment com = (Comment) this;
-                if(com.getDocumentId() != 0){
-                    if(com.getDocument() != null){
-                        a.setUserId(com.getDocument().getPeerId());
-                    }
-                }else{
-                    if(com.getChangeset() != null){
-                        a.setUserId(com.getChangeset().getPeerId());
-                    }
-                }
-                a.saveFeedable();
-            }
+//            if(this instanceof Comment){
+//                Comment com = (Comment) this;
+//                if(com.getDocumentId() != 0){
+//                    if(com.getDocument() != null){
+//                        a.setUserId(com.getDocument().getPeerId());
+//                    }
+//                }else{
+//                    if(com.getChangeset() != null){
+//                        a.setUserId(com.getChangeset().getPeerId());
+//                    }
+//                }
+//                a.saveFeedable();
+//            }
 
             if(this instanceof Broadcast){
                 Broadcast bc = (Broadcast) this;
@@ -121,24 +121,24 @@ public class Feedable extends Base {
            a.setStatus("update");
            if(this instanceof Changeset){
                Changeset ch = (Changeset) this;
-               if(ch.getDocument() != null){
-                   a.setUserId(ch.getDocument().getPeerId());
+               if(ch.getHunk() != null){
+                   a.setUserId(ch.getPeerId());
                }
                a.updateFeedable();
            }
-            if(this instanceof Comment){
-                Comment com = (Comment) this;
-                if(com.getDocumentId() != 0){
-                    if(com.getDocument() != null){
-                        a.setUserId(com.getDocument().getPeerId());
-                    }
-                }else{
-                    if(com.getChangeset() != null){
-                        a.setUserId(com.getChangeset().getPeerId());
-                    }
-                    a.updateFeedable();
-                }
-            }
+//            if(this instanceof Comment){
+//                Comment com = (Comment) this;
+//                if(com.getDocumentId() != 0){
+//                    if(com.getDocument() != null){
+//                        a.setUserId(com.getDocument().getPeerId());
+//                    }
+//                }else{
+//                    if(com.getChangeset() != null){
+//                        a.setUserId(com.getChangeset().getPeerId());
+//                    }
+//                    a.updateFeedable();
+//                }
+//            }
             if(this instanceof Broadcast){
                 return  a.updateFeedable();
             }

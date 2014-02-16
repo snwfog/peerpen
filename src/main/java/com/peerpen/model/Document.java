@@ -19,7 +19,7 @@ import com.sunnyd.database.Manager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Document extends Taggable implements IModel
+public class Document extends Taggable implements IModel, Commentable
 {
   public static final String tableName = "documents";
 
@@ -40,11 +40,6 @@ public class Document extends Taggable implements IModel
   //private String class;
   @ActiveRelationHasMany
   private List<Hunk> hunks;
-      @ActiveRelationHasMany
-      private List<Changeset> changesets;
-      @ActiveRelationHasMany
-  private List<Comment> comments;
-
 
   public Document()
   {
@@ -96,11 +91,18 @@ public class Document extends Taggable implements IModel
 
   public static void main(String[] args)
   {
+      String comm = "content of comment";
+
     Document d = new Document().find(2);
-    System.out.println("doc test");
-    System.out.println("username:" + d.getPeer().getUserName());
-    System.out.println("hunks:" + d.getHunks());
-    System.out.println("changeset:" + d.getChangesets());
+//    System.out.println("doc test");
+//    System.out.println("username:" + d.getPeer().getUserName());
+//    System.out.println("hunks:" + d.getHunks());
+//    System.out.println("changeset:" + d.getChangesets());
+//
+//     d.createComment("bitch5");
+//     d.deleteComment(2);
+      d.findComments();
+
   }
 
   public Date getLastModifiedDate()
@@ -143,18 +145,6 @@ public class Document extends Taggable implements IModel
     return this.hunks;
   }
 
-  public List<Changeset> getChangesets()
-  {
-    initRelation("changesets");
-    return this.changesets;
-  }
-
-  public List<Comment> getComments()
-  {
-    initRelation("comments");
-    return this.comments;
-  }
-
   private static Connection connection;
   static final Logger logger = LoggerFactory.getLogger(Manager.class);
 
@@ -174,50 +164,45 @@ public class Document extends Taggable implements IModel
   public List<Object> getCommentAndChangeset()
   {
     Integer docId = this.getId();
-    Connection connection = null;
-    Statement stmt = null;
-    ResultSet rs = null;
-
-    List<Comment> comments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE document_id= " + docId + " ORDER BY total_vote DESC, last_modified_date DESC");
-    List<Object> object = new ArrayList();
+    List<Hunk> hunks1 = this.getHunks();
+    List<Object> objects = new ArrayList();
     List<Integer> tracker = new ArrayList();
+    List<Integer> tracker2 = new ArrayList();
     Integer cs = null;
-    for(Comment comment: comments)
+
+    for (Hunk hunk:hunks1)
     {
-      cs = comment.getChangesetId();
-      if(( cs != null) && !tracker.contains(comment.getChangesetId()))
-      {
-        object.add(new Changeset().find(cs));
-        tracker.add(cs);
-      }
-      else
-      {
-        object.add(comment);
-      }
+        List<Changeset> changesets1= hunk.getChangesets();
+        for (Changeset changeset: changesets1)
+        {
+            Integer chId = changeset.getId();
+            List<Comment> ChaComments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote`  FROM `comments` WHERE `type` IN ('Document','Changeset') AND `object_id` IN ("+chId+","+docId+") ORDER BY total_vote DESC, last_modified_date DESC");
+
+            for(Comment comment: ChaComments)
+            {
+                cs = comment.getObjectId();
+                if((comment.getType()=="Changeset")&&!tracker.contains(comment.getObjectId()))
+                {
+                    objects.add(new Changeset().find(cs));
+                    tracker.add(cs);
+                }else {
+                    if (!tracker2.contains(cs)){
+                        objects.add(comment);
+                        tracker2.add(cs);
+                    }
+                }
+
+            }
+
+            if (!tracker.contains(chId)){
+                objects.add(changeset);
+                tracker.add(chId);
+            }
+
+        }
     }
-    //Dirty...
-    List<Changeset> changesetList = this.getChangesets();
-    for(Changeset changeset : changesetList )
-    {
-      if (!tracker.contains(changeset.getId())){
-        object.add(changeset);
-        tracker.add(changeset.getId());
-      }
-    }
-    return object;
+      return objects;
   }
-
-  public List<Comment> getOrderedComments()
-  {
-    Integer docId = this.getId();
-    Connection connection = null;
-    Statement stmt = null;
-    ResultSet rs = null;
-    List<Comment> comments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE document_id= " + docId + " AND changeset_id IS NULL ORDER BY total_vote DESC, last_modified_date DESC");
-
-    return comments;
-  }
-
 
   // method used by search
   public List<Document> getMatchedDocuments(String keyword)
@@ -273,5 +258,16 @@ public class Document extends Taggable implements IModel
     {
     }
   }
+
+    @Override
+    public void createComment(String message, Peer peer) {
+    Comment.createComment(this, message, peer);
+    }
+
+    @Override
+    public void findComments() {
+       Comment.findComments(this,this.getId());
+    }
+
 
 }
