@@ -18,7 +18,11 @@ function popNotification(message){
     }
     return;
 }
-
+//*Leave there for now
+//function baseUrl() {
+//    var href = window.location.href.split('/');
+//    return href[0]+'//'+href[2]+'/';
+//}
 $(function () {
 
     var fetchNotification = function (){
