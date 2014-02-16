@@ -2,33 +2,26 @@ package com.peerpen.model;
 
 import com.google.common.collect.Maps;
 import com.sunnyd.IModel;
-import com.sunnyd.annotations.ActiveRelationHasOne;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.annotations.ActiveRelationManyToMany;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.List;
 import java.util.Map;
 
 public class Group extends Taggable implements IModel
 {
-
-
   public static final String tableName = "groups";
 
   @ActiveRecordField
   private String groupName;
-
   @ActiveRecordField
   private Integer adminId;
-
   @ActiveRecordField
   private String description;
-
   @ActiveRelationManyToMany(relationTable = "peers_groups")
   private List<Peer> peers;
-
   @ActiveRelationHasMany
   private List<Broadcast> broadcasts;
 

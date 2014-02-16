@@ -10,7 +10,6 @@ import java.util.Map;
 
 public class Comment extends Feedable implements IModel
 {
-
   public static final String tableName = "comments";
 
   @ActiveRecordField
@@ -25,38 +24,40 @@ public class Comment extends Feedable implements IModel
   private Integer downVote;
   @ActiveRecordField
   private Integer posterPeerId;
-
   @ActiveRelationHasOne(idFieldName = "posterPeerId")
   private Peer posterPeer;
 
-  public Integer getPosterPeerId() {
-      return posterPeerId;
+  public Integer getPosterPeerId()
+  {
+    return posterPeerId;
   }
 
-  public void setPosterPeerId(Integer posterPeerId) {
-      this.posterPeerId = posterPeerId;
-      setUpdateFlag(true);
+  public void setPosterPeerId(Integer posterPeerId)
+  {
+    this.posterPeerId = posterPeerId;
+    setUpdateFlag(true);
   }
 
-    public Peer getPosterPeer()
-    {
-      initRelation("posterPeer");
-      return posterPeer;
-    }
+  public Peer getPosterPeer()
+  {
+    initRelation("posterPeer");
+    return posterPeer;
+  }
 
-    public Peer setPosterPeer(Peer peer)
-    {
-        posterPeer = peer;
-        this.setUpdateFlag(true);
-        return posterPeer;
-    }
+  public Peer setPosterPeer(Peer peer)
+  {
+    posterPeer = peer;
+    this.setUpdateFlag(true);
+    return posterPeer;
+  }
+
   private Integer totalVote;
 
   public Comment()
   {
     super();
-    this.upVote=0;
-    this.downVote=0;
+    this.upVote = 0;
+    this.downVote = 0;
   }
 
   public Comment(Map<String, Object> HM)
@@ -128,52 +129,59 @@ public class Comment extends Feedable implements IModel
     return super.save();
   }
 
-    public String getType() {
-        return type;
-    }
+  public String getType()
+  {
+    return type;
+  }
 
-    public void setType(String type) {
-        this.type = type;
-        setUpdateFlag(true);
-    }
+  public void setType(String type)
+  {
+    this.type = type;
+    setUpdateFlag(true);
+  }
 
-    public Integer getObjectId() {
-        return objectId;
-    }
+  public Integer getObjectId()
+  {
+    return objectId;
+  }
 
-    public void setObjectId(Integer objectId) {
-        this.objectId = objectId;
-        setUpdateFlag(true);
-    }
+  public void setObjectId(Integer objectId)
+  {
+    this.objectId = objectId;
+    setUpdateFlag(true);
+  }
 
-    public static void createComment(Commentable commentable, String message, Peer posterPeer){
-        Comment comment = new Comment();
+  public static void createComment(Commentable commentable, String message, Peer posterPeer)
+  {
+    Comment comment = new Comment();
 
-        comment.setType(commentable.getClass().getSimpleName());
-        comment.setObjectId(((Base) commentable).getId());
-        comment.setMessage(message);
-        comment.setPosterPeerId(posterPeer.getId());
-        comment.save();
-    }
+    comment.setType(commentable.getClass().getSimpleName());
+    comment.setObjectId(((Base) commentable).getId());
+    comment.setMessage(message);
+    comment.setPosterPeerId(posterPeer.getId());
+    comment.save();
+  }
 
 
-    public static void deleteComment(Integer commentId){
-        Comment comment = new Comment().find(commentId);
-        comment.destroy();
-    }
+  public static void deleteComment(Integer commentId)
+  {
+    Comment comment = new Comment().find(commentId);
+    comment.destroy();
+  }
 
-    public static List<Comment> findComments(Object object, Integer objectId) {
+  public static List<Comment> findComments(Object object, Integer objectId)
+  {
 
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        map.put("type", object.getClass().getSimpleName());
-        map.put("object_id",objectId);
-        List<Comment> comments = new Comment().findAll(map);
-        return  comments;
+    HashMap<String, Object> map = new HashMap<String, Object>();
+    map.put("type", object.getClass().getSimpleName());
+    map.put("object_id", objectId);
+    List<Comment> comments = new Comment().findAll(map);
+    return comments;
 
-    }
+  }
 
-    public static void main(String[] args)
-    {
-    }
+  public static void main(String[] args)
+  {
+  }
 
 }

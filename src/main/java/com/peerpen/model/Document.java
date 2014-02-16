@@ -1,20 +1,20 @@
 package com.peerpen.model;
 
+import com.sunnyd.IModel;
+import com.sunnyd.annotations.ActiveRecordField;
+import com.sunnyd.annotations.ActiveRelationHasMany;
+import com.sunnyd.annotations.ActiveRelationHasOne;
+import com.sunnyd.database.Connector;
+import com.sunnyd.database.Manager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import com.sunnyd.IModel;
-import com.sunnyd.annotations.ActiveRelationHasMany;
-import com.sunnyd.annotations.ActiveRelationHasOne;
-import com.sunnyd.annotations.ActiveRecordField;
-import com.sunnyd.database.Connector;
-import com.sunnyd.database.Manager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class Document extends Taggable implements IModel, Commentable
 {
@@ -28,13 +28,10 @@ public class Document extends Taggable implements IModel, Commentable
   private Date lastModifiedDate;
   @ActiveRecordField
   private Date creationDate;
-
   @ActiveRelationHasOne
   private Peer peer;
   @ActiveRecordField
   private Integer peerId;
-  //@ActiveRecordField
-  //private String class;
   @ActiveRelationHasMany
   private List<Hunk> hunks;
 
@@ -88,7 +85,7 @@ public class Document extends Taggable implements IModel, Commentable
 
   public static void main(String[] args)
   {
-      String comm = "content of comment";
+    String comm = "content of comment";
 
     Document d = new Document().find(2);
 //    System.out.println("doc test");
@@ -98,12 +95,13 @@ public class Document extends Taggable implements IModel, Commentable
 //
 //     d.createComment("bitch5");
 //     d.deleteComment(2);
-      d.findComments();
+    d.findComments();
 
-      List<Comment> comments = d.getComments();
-      for (Comment comment: comments){
-          System.out.println(comment.getMessage());
-      }
+    List<Comment> comments = d.getComments();
+    for (Comment comment : comments)
+    {
+      System.out.println(comment.getMessage());
+    }
 
   }
 
@@ -167,9 +165,9 @@ public class Document extends Taggable implements IModel, Commentable
   {
     Integer docId = this.getId();
 
-      List<Comment> comments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote`  FROM `comments` WHERE type='Document' AND object_id= "+ docId +" ORDER BY total_vote DESC, last_modified_date DESC");
+    List<Comment> comments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote`  FROM `comments` WHERE type='Document' AND object_id= " + docId + " ORDER BY total_vote DESC, last_modified_date DESC");
 
-      return comments;
+    return comments;
   }
 
   // method used by search
@@ -194,24 +192,11 @@ public class Document extends Taggable implements IModel, Commentable
   //  return suggestions;
   //}
 
-    public List<Document> getSuggestions(String keyword, int limit)
-    {
-        String sql = "SELECT * FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%' LIMIT " + limit;
-        return new Document().queryAll(sql);
-    }
-
-
-    @Override
-  public boolean equals (Object other)
+  public List<Document> getSuggestions(String keyword, int limit)
   {
-    if (other == null) return false;
-    if (other == this) return true;
-    if (!(other instanceof Document)) return false;
-    Document myOther = (Document) other;
-    if (this.getId() == myOther.getId()) return true;
-    return false;
+    String sql = "SELECT * FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%' LIMIT " + limit;
+    return new Document().queryAll(sql);
   }
-
 
   private static void closeConnection(Connection connection)
   {
@@ -227,15 +212,42 @@ public class Document extends Taggable implements IModel, Commentable
     }
   }
 
-    @Override
-    public void createComment(String message, Peer peer) {
+  @Override
+  public void createComment(String message, Peer peer)
+  {
     Comment.createComment(this, message, peer);
+  }
+
+  @Override
+  public void findComments()
+  {
+    Comment.findComments(this, this.getId());
+  }
+
+  /*
+    Used for displaying purposes
+   */
+  public List<Changeset> getChangeset()
+  {
+    List<Changeset> changesetList = new ArrayList<>();
+    List<Hunk> hunkList = getHunks();
+
+    for (Hunk hunk : hunkList)
+    {
+      changesetList.addAll(hunk.getChangesets());
     }
 
-    @Override
-    public void findComments() {
-       Comment.findComments(this,this.getId());
-    }
+    return changesetList;
+  }
 
-
+  @Override
+  public boolean equals(Object other)
+  {
+    if (other == null) return false;
+    if (other == this) return true;
+    if (!(other instanceof Document)) return false;
+    Document myOther = (Document) other;
+    if (this.getId() == myOther.getId()) return true;
+    return false;
+  }
 }
