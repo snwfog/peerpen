@@ -47,9 +47,9 @@
             <div class="row-fluid">
                 <div class="card-white">
                     <div class="card-heading image">
-                        <img src="<%= ((Comment)f.getTrueSelf()).getPeer().getAvatar().getDefaultAvatarSource( request ) %>" alt=""/>
+                        <img src="<%= ((Comment)f.getTrueSelf()).getPosterPeer().getAvatar().getDefaultAvatarSource( request ) %>" alt=""/>
                         <div class="card-heading-header">
-                            <h4><%=((Comment)f.getTrueSelf()).getPeer().getFirstName()%> commented ...</h4>
+                            <h4><%=((Comment)f.getTrueSelf()).getPosterPeer().getFirstName()%> commented ...</h4>
                             <span><%=((Comment)f.getTrueSelf()).getMessage()%></span>
                         </div>
                         <div> &nbsp</div>

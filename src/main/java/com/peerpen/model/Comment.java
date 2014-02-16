@@ -25,8 +25,9 @@ public class Comment extends Feedable implements IModel
   private Integer downVote;
   @ActiveRecordField
   private Integer posterPeerId;
-  @ActiveRelationHasOne
-  private Peer peer;
+
+  @ActiveRelationHasOne(idFieldName = "posterPeerId")
+  private Peer posterPeer;
 
   public Integer getPosterPeerId() {
       return posterPeerId;
@@ -36,12 +37,19 @@ public class Comment extends Feedable implements IModel
       this.posterPeerId = posterPeerId;
       setUpdateFlag(true);
   }
-  public Peer getPeer()
-  {
-      initRelation("peer");
-      return peer;
-  }
 
+    public Peer getPosterPeer()
+    {
+      initRelation("posterPeer");
+      return posterPeer;
+    }
+
+    public Peer setPosterPeer(Peer peer)
+    {
+        posterPeer = peer;
+        this.setUpdateFlag(true);
+        return posterPeer;
+    }
   private Integer totalVote;
 
   public Comment()
@@ -157,7 +165,7 @@ public class Comment extends Feedable implements IModel
     public static List<Comment> findComments(Object object, Integer objectId) {
 
         HashMap<String, Object> map = new HashMap<String, Object>();
-        map.put("type",object.getClass().getSimpleName());
+        map.put("type", object.getClass().getSimpleName());
         map.put("object_id",objectId);
         List<Comment> comments = new Comment().findAll(map);
         return  comments;
@@ -166,9 +174,6 @@ public class Comment extends Feedable implements IModel
 
     public static void main(String[] args)
     {
-        Comment c = new Comment().find(1);
-//        System.out.println(c.getPeer());
-        System.out.println(c.getPosterPeerId());
     }
 
 }
