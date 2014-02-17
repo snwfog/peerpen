@@ -91,9 +91,26 @@ html, body {
   height: 100%;
 }
 
-body.droppable .dravatar-avatar-wrap {
-  border: 5px dashed lightblue;
-  z-index: 9999;
+div.profile-set{
+    width: 70%;
+}
+
+.public-profile{
+    float: left;
+    margin: 0 20px 5px 0;
+    position: relative;
+    border: 5px solid transparent;
+}
+.public-profile img {
+    width: 100%;
+    display: block;
+}
+
+.description{
+    letter-spacing: 1px;
+    font-size: 70%;
+    margin: 0 0 10px 0;
+    font-size: 100%;
 }
 
 .page-wrap {
@@ -120,14 +137,7 @@ h2.description{
   margin: 0 0 10px 0;
   font-size: 70%;
 }
-.field{
-    letter-spacing: 1px;
-    font-size: 90%;
-}
-.description{
-    letter-spacing: 1px;
-    font-size: 70%;
-}
+
 .validation{
     color:#CC3300;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

@@ -30,18 +30,13 @@
                        data-html="true" parsley-trigger="change keyup"/>
             </div>
             <input type="text" class="form-control parsley-validated" style="margin:10px 0" id="valid_username" name="user_name"
-                   placeholder="Username"
-                   data-content="<div class='validation'>You need to fill in with a username</div>" data-html="true" parsley-trigger="change keyup"/>
+                   placeholder="Username" parsley-trigger="change keyup"/>
             <input type="password" class="form-control parsley-validated" style="margin:10px 0" id="valid_pass" name="password"
-                   placeholder="Password"
-                   data-content="<div class='validation'>You need to fill in with a password</div>" data-html="true" parsley-trigger="change keyup"/>
+                   placeholder="Password" parsley-trigger="change keyup"/>
             <input type="password" class="form-control parsley-validated" style="margin:10px 0" id="valid_cpass" name="confirm_password"
-                   placeholder="Confirmed Password"
-                   data-content="<div class='validation'>You need to confirm your password</div>" data-html="true" parsley-trigger="change keyup"/>
+                   placeholder="Confirmed Password" parsley-trigger="change keyup"/>
             <input type="text" class="form-control parsley-validated" style="margin:10px 0" id="valid_email" name="email"
-                   placeholder="Email"
-                   data-content="<div class='validation parsley-validated'>You need to fill in your valid email address</div>"
-                   data-html="true" parsley-trigger="change keyup"/>
+                   placeholder="Email"  parsley-trigger="change keyup"/>
             <button type="submit" class="btn btn-primary pull-right" value="submit">Sign Up</button>
             <div id="errorContainer">
             </div>

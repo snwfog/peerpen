@@ -2,7 +2,7 @@
 <%@ include file="/view/includes/static/header.jsp" %>
 <%@ include file="/view/includes/static/navbar.jsp" %>
 
-<% SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");%>
+<% SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");%>
 
 <div class="container-fluids greyish">
   <div class="row col-md-offset-0">
@@ -45,7 +45,7 @@
               </tr>
               <tr>
                 <td><h6>Date of Birth &nbsp</h6></td>
-                <td><input type="text" class="form-control peerPersonal"
+                <td><input type="text" class="form-control <%= sessionUser.getCompleteProfile() == 0 ? "peerDob" : "peerPersonal"%>"
                            name="dob"
                            value="<%= sessionUser.getDateOfBirth() == null ? "" : formatter.format(sessionUser.getDateOfBirth())%>" readonly>
                 </td>
@@ -56,30 +56,30 @@
             <table>
               <tr>
                 <td><h6>Gender</h6></td>
-                <td><input type="text" class="form-control peerPersonal"
+                <td><input type="text" class="form-control <%= sessionUser.getCompleteProfile() == 0 ? "peerGender" : "peerPersonal"%>"
                            name="gender"
                            value="<%= sessionUser.getGender() == null ? "" : sessionUser.getGender().toString() %>" readonly>
                 </td>
               </tr>
               <tr>
                 <td><h6>Country</h6></td>
-                <td><input type="text" class="form-control peerPersonal"
+                <td><input type="text" class="form-control <%= sessionUser.getCompleteProfile() == 0 ? "peerCountry" : "peerPersonal"%>"
                            name="country"
                            value="<%= sessionUser.getCountry().toString()%>" readonly>
                 </td>
               </tr>
               <tr>
                 <td><h6>Industry</h6></td>
-                <td><input type="text" class="form-control peerPersonal"
+                <td><input type="text" class="form-control <%= sessionUser.getCompleteProfile() == 0 ? "peerIndustry" : "peerPersonal"%>"
                            name="industry"
                            value="<%=sessionUser.getIndustry().toString()%>" readonly>
                 </td>
               </tr>
               <tr>
                 <td><h6>Years of Experience &nbsp</h6></td>
-                <td><input type="text" class="form-control peerPersonal"
+                <td><input type="text" class="form-control <%= sessionUser.getCompleteProfile() == 0 ? "peerYoe" : "peerPersonal"%>"
                            name="yoe"
-                           value="<%= sessionUser.getExperience() == 0 ? "" : sessionUser.getExperience()%>" readonly>
+                           value="<%= sessionUser.getExperience() == null ? 0 : sessionUser.getExperience()%>" readonly>
                 </td>
               </tr>
               <input type="hidden" class="form-control peerID" name="peerId"
@@ -100,7 +100,7 @@
             </div>
       <div class="well">
         <form action="/peer/<%=sessionUser.getId()%>/profile" id="form_description" method="post">
-            <textarea class ="peerDescription well form-control" name ="description" style="resize:none" rows="3" readonly><%= sessionUser.getDescription().toString() %></textarea>
+            <textarea class ="<%= sessionUser.getCompleteProfile() == 0 ? "peerDesc" : "peerDescription"%> well form-control" name ="description" style="resize:none" rows="3" readonly><%= sessionUser.getDescription().toString() %></textarea>
             <input type="hidden" class="form-control peerID" name="peerId" value="<%= sessionUser.getId()%>"/>
             <input type="hidden" name ="personal_website" value ="<%= sessionUser.getPersonalWebsite()%>" >
             <input type="hidden" name="form" value="description">
@@ -127,7 +127,7 @@
                 </tr>
                 <tr>
                     <td><h6>Website &nbsp</h6></td>
-                    <td><input type="text" class="form-control peerContact"
+                    <td><input type="text" class="form-control <%= sessionUser.getCompleteProfile() == 0 ? "peerEmail" : "peerContact"%>"
                                name="personal_website"
                                value="<%= sessionUser.getPersonalWebsite().toString() %>"
                                readonly></td>

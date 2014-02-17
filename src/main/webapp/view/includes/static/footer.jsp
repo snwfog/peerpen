@@ -26,9 +26,9 @@
 <script src="/assets/js/custom/tag_autocomplete_caller.js"></script>
 <script src="/assets/js/custom/profile.js"></script>
 <script src="/assets/js/custom/avatar.js"></script>
+<script src="/assets/js/custom/notification.js"></script>
 <script src="/assets/js/custom/script.js"></script>
 <script src="/assets/js/custom/script.bare.js"></script>
-<script src="/assets/js/custom/notification.js"></script>
 <script src="/assets/js/custom/validation.js"></script>
 <script src="/assets/js/custom/vote.js"></script>
 <script src="/assets/js/custom/confirm_delete_dialog.js"></script>

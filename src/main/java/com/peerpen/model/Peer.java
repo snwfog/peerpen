@@ -67,6 +67,8 @@ public class Peer extends Base
   private Integer avatarId;
   @ActiveRecordField
   private String sessionId;
+  @ActiveRecordField
+  private Integer completeProfile;
   @ActiveRelationManyToMany(relationTable = "peers_groups")
   private List<Group> groups;
 
@@ -280,6 +282,7 @@ public class Peer extends Base
   public void setDateOfBirth(Date dateOfBirth)
   {
     this.dateOfBirth = dateOfBirth;
+    setUpdateFlag(true);
   }
 
   public Integer getExperience()
@@ -297,6 +300,7 @@ public class Peer extends Base
   public void setExperience(Integer experience)
   {
     this.experience = experience;
+    setUpdateFlag(true);
   }
 
   public String getCountry()
@@ -313,7 +317,8 @@ public class Peer extends Base
 
   public void setCountry(String country)
   {
-    this.country = country;
+      this.country = country;
+      setUpdateFlag(true);
   }
 
   public String getIndustry()
@@ -331,6 +336,7 @@ public class Peer extends Base
   public void setIndustry(String industry)
   {
     this.industry = industry;
+    setUpdateFlag(true);
   }
 
   public String getGender()
@@ -341,6 +347,7 @@ public class Peer extends Base
   public void setGender(String gender)
   {
     this.gender = gender;
+    setUpdateFlag(true);
   }
 
   public boolean hasAvatar()
@@ -373,6 +380,13 @@ public class Peer extends Base
   {
     return this.avatarId;
   }
+
+  public void setCompleteProfile(Integer completeProfile) {
+      this.completeProfile = completeProfile;
+      setUpdateFlag(true);
+  }
+
+  public Integer getCompleteProfile() { return this.completeProfile; }
 
   public List<Peer> getMatchedPeers(String keyword)
   {
