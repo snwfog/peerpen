@@ -58,11 +58,11 @@ public class RouteFilter implements Filter {
         logger.info("Incoming request for " + ((HttpServletRequest) request).getRequestURL());
 
         // FIXME: Quick hax for testing ppeditor
-        if (!(httpRequest.getParameter("appId") != null
-                && httpRequest.getParameter("appId").equals("0e04d8638c7cd715a1b2d6000433b8fe78422708")))
-        {
-            request.getRequestDispatcher("/document").forward(request, response);
-        }
+        //if (!(httpRequest.getParameter("appId") != null
+        //        && httpRequest.getParameter("appId").equals("0e04d8638c7cd715a1b2d6000433b8fe78422708")))
+        //{
+        //    request.getRequestDispatcher("/document").forward(request, response);
+        //}
 
         try {
 
