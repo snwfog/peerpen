@@ -43,6 +43,8 @@ public class Hunk extends Base implements IModel {
     private Integer documentId;
     @ActiveRelationHasOne
     private Document document;
+    @ActiveRecordField
+    private String hunkName;
     @ActiveRelationHasMany
     private ArrayList<Changeset> changesets;
 
@@ -146,10 +148,14 @@ public class Hunk extends Base implements IModel {
         }
     }
 
+    public String getHunkName() {
+        return hunkName;
+    }
 
-
-
-
+    public void setHunkName(String hunkName) {
+        this.hunkName = hunkName;
+        setUpdateFlag(true);
+    }
 
     public static void main(String[] args) {
         String input = "{\n" +
