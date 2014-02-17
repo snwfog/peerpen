@@ -1,9 +1,8 @@
 <jsp:include page="/view/includes/static/header.jsp">
     <jsp:param name="title" value="FEED ME"/>
 </jsp:include>
-<%@ include file="/view/includes/static/navbar_profile.jsp" %>
-
-<% Peer peer = (Peer) request.getAttribute( "peerObject" ); %>
+<%@ include file="/view/includes/static/navbar.jsp" %>
+<% ArrayList<Group> navGroups =(ArrayList<Group>) sessionUser.getGroups();%>
 
 <div class="container-fluids greyish">
     <br/>
@@ -15,7 +14,7 @@
 
                 <div class="avatar">
                     <a href="/peer/<%=sessionUser.getId()%>/profile">
-                        <img class="img-circle" src="<%= peer.getAvatar().getDefaultAvatarSource( request ) %>">
+                        <img class="img-circle" src="<%= sessionUser.getAvatar().getDefaultAvatarSource( request ) %>">
                     </a>
                 </div>
                 <div class="info">

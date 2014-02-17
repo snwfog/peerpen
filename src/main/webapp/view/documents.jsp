@@ -2,7 +2,7 @@
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.peerpen.model.Document" %>
-<%@ include file="/view/includes/static/navbar_profile.jsp" %>
+<%@ include file="/view/includes/static/navbar.jsp" %>
 
 
 <%--Declare all request variables here, easy to debug!!!--%>
@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="row">
-            <div id="documentsFlow" >
+            <div id="documentsFlow">
                 <div id="contentFlow" class="ContentFlow" style="background-color:white;">
                     <div class="top-buffer">
                         <p>&nbsp</p>

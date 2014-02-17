@@ -4,6 +4,7 @@ import com.peerpen.framework.GenericApplicationServlet;
 import com.peerpen.framework.InternalRequestDispatcher;
 import com.peerpen.framework.exception.ServletPathDontExistException;
 import com.peerpen.model.Group;
+import com.peerpen.model.Joingroup;
 import com.peerpen.model.Peer;
 
 import javax.servlet.ServletException;
@@ -19,8 +20,10 @@ public class GroupControllerAjax extends GenericApplicationServlet
     Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
     Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
     Group group = new Group().find(Integer.parseInt(parameters.get("groupid")));
-    group.addPeer(peer);
-    group.update();
+    Joingroup jg = new Joingroup();
+    jg.setPeerId(peer.getId());
+    jg.setGroupId(group.getId());
+    jg.save();
 
     response.setContentType("text/plain");
     response.setCharacterEncoding("UTF-8");

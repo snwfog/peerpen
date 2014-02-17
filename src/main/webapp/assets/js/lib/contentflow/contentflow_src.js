@@ -1854,7 +1854,9 @@ ContentFlow.prototype = {
 
         this.ContainerOldDim = "auto";
         this.FlowOldDim = "auto";
-        
+
+        //PeerPen
+        this.conf.maxItemHeight =  $("body").height() * 0.25;
 
         /* calc maxHeight */
         if (this.conf.maxItemHeight <= 0) {

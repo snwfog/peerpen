@@ -1,5 +1,5 @@
 <%--Including the debug information--%>
-<%@ include file="/view/debug.jsp" %>
+
 
 <!-- Le javascript
 ================================================== -->
@@ -35,4 +35,5 @@
 <script src="/assets/js/custom/reset.js"></script>
 
 </body>
+<%@ include file="/view/debug.jsp" %>
 </html>

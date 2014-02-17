@@ -6,7 +6,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.peerpen.model.TagDescriptor" %>
 <%@ page import="com.peerpen.model.Hunk" %>
-<%@ include file="/view/includes/static/navbar_profile.jsp" %>
+<%@ include file="/view/includes/static/navbar.jsp" %>
 
 <%--Declare all request variables here, easy to debug!!!--%>
 <% Peer urlUser; %>

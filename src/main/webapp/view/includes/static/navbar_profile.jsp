@@ -4,22 +4,24 @@
 <%@ page import="com.peerpen.model.Avatar" %>
 <%@ page import="com.peerpen.model.Document" %>
 <%@ page import="java.util.List" %>
-<%
-    Peer sessionUser = (Peer) request.getAttribute("sessionUser");
-    ArrayList<Group> navGroups =(ArrayList<Group>) sessionUser.getGroups();
-  List<Document> documentList = sessionUser.getDocuments();
-%>
-
 <!-- must set navbar z-index to be <= 100 otherwise search autocomplete box will be hidden under navbar -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="z-index:100 !important;">
   <div class="container">
     <div class="navbar-header">
         <a class="navbar-brand" href="/">PeerPen</a>
     </div>
+
     <ul class="nav navbar-nav">
-        <li><a href="/peer/<%=sessionUser.getId()%>/feed">Feeds</a></li>
-        <li><a href="/peer/<%=sessionUser.getId()%>/document">Documents</a></li>
-        <li><a href="/group">Groups</a></li>
+        <% String jspPageName = request.getServletPath(); %>
+        <li   <%= jspPageName.contentEquals("/view/feed/feed.jsp")  ? "class=\"active\"" : "" %>>
+            <a href="/peer/<%=sessionUser.getId()%>/feed">Feeds</a>
+        </li>
+        <li   <%= jspPageName.contentEquals("/view/documents.jsp") ? "class=\"active\"" : "" %>>
+            <a href="/peer/<%=sessionUser.getId()%>/document">Documents</a>
+        </li>
+        <li <%= jspPageName.contentEquals("/view/groups.jsp") ? "class=\"active\"" : "" %>>
+            <a href="/group">Groups</a>
+        </li>
     </ul>
     <!-- SEARCH FORM -->
     <ul class="nav navbar-nav navbar-right">
