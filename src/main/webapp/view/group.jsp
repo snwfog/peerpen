@@ -7,6 +7,7 @@
 <% ArrayList<Peer> peers = (ArrayList<Peer>)group.getPeers();%>
 <% ArrayList<Broadcast> broadcasts = (ArrayList<Broadcast>)group.getOrderedBroadcast();%>
 <% ArrayList<Joingroup> joingroups = (ArrayList<Joingroup>)group.getRequests();%>
+<% List<TagDescriptor> tds = group.getTagDescriptors(); %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -164,6 +165,23 @@
                 </div>
                </div>
             </div>
+
+            <br /><br />
+            <!-- this section is for tags -->
+            <div>
+                <form action="/tag" method="post" class="form-horizontal" role="form">
+                    <input type="hidden" name="entityType" value="group" />
+                    <input type="hidden" name="entityId" value="<%=group.getId()%>" />
+                    <ul id="entityTags" style="float:left;width:600px;">
+                        <% for (TagDescriptor td : tds){ %>
+                        <li><%=td.getTagName() %></li>
+                        <% } %>
+                    </ul>
+                    <button type="submit" class="btn btn-primary" name="submit" style="margin-left:10px" />Save Tags</button>
+                </form>
+            </div>
+
+
          </div>
         <%}%>
     </div>
