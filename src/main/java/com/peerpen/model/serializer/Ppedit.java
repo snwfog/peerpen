@@ -28,6 +28,7 @@ import java.util.List;
 public class Ppedit {
 
     String etag;
+    int pageNumber;
 
     List<Page> modified;
     List<Page> removed;
@@ -49,8 +50,11 @@ public class Ppedit {
         return etag;
     }
 
-    public static Ppedit serializeFromJsonString( String jsonString )
-    {
+    public int getPageNumber() {
+        return pageNumber;
+    }
+
+    public static Ppedit serializeFromJsonString( String jsonString ) {
         GsonBuilder gBuilder = new GsonBuilder();
         gBuilder.registerTypeAdapter( Ppedit.class, new PpeditDeserializer() );
         Gson gson = gBuilder.create();
@@ -78,13 +82,15 @@ public class Ppedit {
             builder.registerTypeAdapter( Hunk.class, new Hunk.HunkDeserializer() );
             builder.registerTypeAdapter( Page.class, new Page.PageDeserializer() );
             Gson gson = builder.create();
-            Type listType = new TypeToken<List<Page>>(){}.getType();
+            Type listType = new TypeToken<List<Page>>() {
+            }.getType();
             Ppedit ppedit = new Ppedit();
 
             ppedit.modified = gson.fromJson( modified, listType );
             ppedit.created = gson.fromJson( created, listType );
             ppedit.removed = gson.fromJson( removed, listType );
             ppedit.etag = jsonObject.get( "etag" ).getAsString();
+            //ppedit.pageNumber = jsonObject.get( "pageNumber" ).getAsInt();
 
             return ppedit;
         }

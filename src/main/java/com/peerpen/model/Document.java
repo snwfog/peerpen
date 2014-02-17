@@ -1,7 +1,6 @@
 package com.peerpen.model;
 
 import com.google.common.base.Function;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
@@ -163,11 +162,16 @@ public class Document extends Taggable implements IModel {
      * @param hunkViewId
      * @return
      */
-    private boolean removeHunkRaw( Set<Long> hunkViewId ) {
+    private boolean removeHunk( Set<Long> hunkViewId, boolean createChangeset ) {
         Map<Long, Hunk> hunkMap = this.getHunkAsMap();
         boolean successful = true;
         // FIXME: Using set operation for fun, not too efficient...
         for ( Long viewId : Sets.intersection( hunkMap.keySet(), hunkViewId ) ) {
+            Hunk h = hunkMap.get( viewId );
+            if ( createChangeset ) {
+                h.getChangesets().add( Changeset.getInstanceFromHunk( h, Changeset.ChangesetState.REMOVED ) );
+            }
+
             successful = successful && hunkMap.get( viewId ).destroy();
         }
 
@@ -179,8 +183,8 @@ public class Document extends Taggable implements IModel {
      *
      * @param removeHunks
      */
-    private boolean removeHunkRaw( Map<Long, Hunk> removeHunks ) {
-        return this.removeHunkRaw( removeHunks.keySet() );
+    private boolean removeHunk( Map<Long, Hunk> removeHunks, boolean createChangeset ) {
+        return this.removeHunk( removeHunks.keySet(), createChangeset );
     }
 
     /**
@@ -189,10 +193,17 @@ public class Document extends Taggable implements IModel {
      *
      * @param newHunks
      */
-    private boolean createHunkRaw( Map<Long, Hunk> newHunks ) {
+    private boolean createHunk( Map<Long, Hunk> newHunks, boolean createChangeset ) {
         boolean successful = true;
-        for (Hunk h : newHunks.values())
-            successful = successful && h.save();
+        for ( Hunk h : newHunks.values() ) {
+            if ( h.save() ) {
+                if ( createChangeset ) {
+                    h.getChangesets().add( Changeset.getInstanceFromHunk( h, Changeset.ChangesetState.REMOVED ) );
+                }
+
+                successful = successful && h.save();
+            }
+        }
 
         return successful;
     }
@@ -202,12 +213,15 @@ public class Document extends Taggable implements IModel {
      * without creating a corresponding changeset object
      *
      */
-    private boolean updateHunkRaw( Map<Long, Hunk> modifiedHunks) {
+    private boolean updateHunk( Map<Long, Hunk> modifiedHunks, boolean createChangeset ) {
         boolean successful = true;
         Map<Long, Hunk> hunkMap = this.getHunkAsMap();
-        for (Hunk h : modifiedHunks.values())
-            successful = successful
-                    && (hunkMap.get(h.getIdView())).setContent(h.getContent()).update();
+        for ( Hunk h : modifiedHunks.values() ) {
+            if ( createChangeset ) {
+                h.getChangesets().add( Changeset.getInstanceFromHunk( h, Changeset.ChangesetState.MODIFIED ) );
+            }
+            successful = successful && (hunkMap.get( h.getIdView() )).setContent( h.getContent() ).update();
+        }
 
         return successful;
     }
@@ -223,16 +237,20 @@ public class Document extends Taggable implements IModel {
         Ppedit ppedit = Ppedit.serializeFromJsonString( jsonString );
 
         boolean successful = true;
+
+        // FIXME: Turn off when finish debugging
+        boolean createChangeset = true;
+
         for ( Page page : ppedit.getRemoved() ) {
-            successful = successful && this.removeHunkRaw( page.getHunks() );
+            successful = successful && this.removeHunk( page.getHunks(), createChangeset );
         }
 
         for ( Page page : ppedit.getModified() ) {
-            successful = successful && this.updateHunkRaw( page.getHunks() );
+            successful = successful && this.updateHunk( page.getHunks(), createChangeset );
         }
 
         for ( Page page : ppedit.getCreated() ) {
-            successful = successful && this.createHunkRaw( page.getHunks() );
+            successful = successful && this.createHunk( page.getHunks(), createChangeset );
         }
 
         // FIXME: This is wrong
@@ -241,9 +259,6 @@ public class Document extends Taggable implements IModel {
 
     public List<Object> getCommentAndChangeset() {
         Integer docId = this.getId();
-        Connection connection = null;
-        Statement stmt = null;
-        ResultSet rs = null;
 
         List<Comment> comments = new Comment().queryAll(
                 "SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE document_id= " + docId +
@@ -260,6 +275,7 @@ public class Document extends Taggable implements IModel {
                 object.add( comment );
             }
         }
+
         //Dirty...
         List<Changeset> changesetList = this.getChangesets();
         for ( Changeset changeset : changesetList ) {

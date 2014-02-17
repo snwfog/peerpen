@@ -10,7 +10,7 @@ import java.util.Map;
 
 
 //Feedable model will not avoided by base and any parent of Feedable
-public class Changeset extends Feedable implements IModel {
+public class Changeset extends Feedable implements IModel{
 
     public static final String tableName = "changesets";
 
@@ -42,6 +42,9 @@ public class Changeset extends Feedable implements IModel {
     @ActiveRecordField
     private Integer state;
 
+    @ActiveRecordField
+    private Boolean isApplied;
+
     @ActiveRelationHasMany
     private List<Comment> comments;
 
@@ -60,6 +63,14 @@ public class Changeset extends Feedable implements IModel {
     public void setContent( String content ) {
         this.content = content;
         setUpdateFlag( true );
+    }
+
+    public Boolean getIsApplied() {
+        return isApplied;
+    }
+
+    public void setIsApplied( Boolean isApplied ) {
+        this.isApplied = isApplied;
     }
 
     public void setHunkId( Integer hunkId ) {
@@ -108,6 +119,8 @@ public class Changeset extends Feedable implements IModel {
         changeset.setHunkId( h.getId() );
 
         changeset.setState( state.getValue() );
-        return new Changeset();
+        changeset.setIsApplied( false );
+        changeset.save();
+        return changeset;
     }
 }

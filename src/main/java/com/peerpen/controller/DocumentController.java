@@ -8,7 +8,6 @@ import com.peerpen.model.Document;
 import com.peerpen.model.Peer;
 import com.sunnyd.Base;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Map;
 
@@ -34,7 +33,7 @@ public class DocumentController extends GenericApplicationServlet {
         Peer urlUser = (Peer) modelMap.get( "peer" );
         Document document;
         if ( sessionUser.getId() == urlUser.getId() ) {
-            //        View documents
+            // View documents
             if ( (document = (Document) modelMap.get( "document" )) == null ) {
                 request.setAttribute( "peer", modelMap.get( "peer" ) );
                 request.getRequestDispatcher( "/view/documents.jsp" ).forward( request, response );
@@ -54,7 +53,8 @@ public class DocumentController extends GenericApplicationServlet {
                     }
                 }
             }
-        } else//        if viewing someone elses doc, show 'view only' mode
+        }
+        else // If viewing someone else doc, show 'view only' mode
         {
             if ( (document = (Document) modelMap.get( "document" )) == null ) {
                 request.setAttribute( "peer", modelMap.get( "peer" ) );
@@ -75,7 +75,6 @@ public class DocumentController extends GenericApplicationServlet {
             }
 
         }
-
     }
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
