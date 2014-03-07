@@ -91,9 +91,26 @@ html, body {
   height: 100%;
 }
 
-body.droppable .dravatar-avatar-wrap {
-  border: 5px dashed lightblue;
-  z-index: 9999;
+div.profile-set{
+    width: 70%;
+}
+
+.public-profile{
+    float: left;
+    margin: 0 20px 5px 0;
+    position: relative;
+    border: 5px solid transparent;
+}
+.public-profile img {
+    width: 100%;
+    display: block;
+}
+
+.description{
+    letter-spacing: 1px;
+    font-size: 70%;
+    margin: 0 0 10px 0;
+    font-size: 100%;
 }
 
 .page-wrap {
@@ -120,14 +137,7 @@ h2.description{
   margin: 0 0 10px 0;
   font-size: 70%;
 }
-.field{
-    letter-spacing: 1px;
-    font-size: 90%;
-}
-.description{
-    letter-spacing: 1px;
-    font-size: 70%;
-}
+
 .validation{
     color:#CC3300;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -190,8 +200,8 @@ a.btn-learn-more:hover{
 }
 
 .navbar-form{
-    padding:15px 30px;
-    text-transform:none;
+    /*padding:15px 30px;*/
+    /*text-transform:none;*/
 }
 
 .hero-unit {
@@ -370,12 +380,40 @@ display:none;
     margin: 0;
 }
 
-.card2 .card-heading.simple {
-    font-size: 20px;
-    font-weight: 300;
-    color: #777;
-    border-bottom: 1px solid #e5e5e5;
+.card2 .card-heading.image img {
+  display: inline-block;
+  margin-right: 15px;
+  vertical-align: top;
+  border: 1;
+
 }
+
+
+.card2 .card-heading.image {
+  color: #777;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.card2 .card-heading.image .card-heading-header {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 13px;
+}
+
+.card2 .card-heading.image .card-heading-header h3 {
+  margin: 0;
+  font-size: 14px;
+  line-height: 16px;
+  color: #262626;
+}
+
+/*.card2 .card-heading.simple {*/
+    /*font-size: 20px;*/
+    /*font-weight: 300;*/
+    /*color: #777;*/
+    /*border-bottom: 1px solid #e5e5e5;*/
+
+/*}*/
 .card2 .card-body {
     padding: 0 20px;
     margin-top: 20px;

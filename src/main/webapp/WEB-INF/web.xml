@@ -143,6 +143,15 @@
     <!--</servlet-mapping>-->
 
     <servlet>
+        <servlet-name>peer</servlet-name>
+        <servlet-class>com.peerpen.controller.PublicProfileController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>peer</servlet-name>
+        <url-pattern>/peer</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>profile</servlet-name>
         <servlet-class>com.peerpen.controller.ProfileController</servlet-class>
     </servlet>
@@ -349,6 +358,15 @@
     <servlet-mapping>
         <servlet-name>about</servlet-name>
         <url-pattern>/about</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>notification</servlet-name>
+        <servlet-class>com.peerpen.controller.NotificationController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>notification</servlet-name>
+        <url-pattern>/notification</url-pattern>
     </servlet-mapping>
 
     <servlet>

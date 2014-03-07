@@ -21,6 +21,9 @@ public class Feedable extends Base {
     private String status;
 
     @ActiveRecordField
+    private String notifyStatus;
+
+    @ActiveRecordField
     private Integer childId;
 
     @ActiveRecordField
@@ -51,24 +54,29 @@ public class Feedable extends Base {
 
            if(this instanceof Changeset){
                Changeset ch = (Changeset) this;
-               if(ch.getDocument() != null){
-                   a.setUserId(ch.getDocument().getPeerId());
+               if(ch.getHunk() != null){
+                   a.setUserId(ch.getPeerId());
+                   return a.saveFeedable();
                }
-               a.saveFeedable();
+
            }
 
             if(this instanceof Comment){
                 Comment com = (Comment) this;
-                if(com.getDocumentId() != 0){
-                    if(com.getDocument() != null){
-                        a.setUserId(com.getDocument().getPeerId());
+                if(com.getType().contentEquals("Document")){
+                    Document doc = new Document().find(com.getObjectId());
+                    if(doc != null){
+                        a.setUserId(doc.getPeerId());
+                        return a.saveFeedable();
                     }
-                }else{
-                    if(com.getChangeset() != null){
-                        a.setUserId(com.getChangeset().getPeerId());
+                }else if(com.getType().contentEquals("Changeset")){
+                    Changeset cs = new Changeset().find(com.getObjectId());
+                    if(cs != null){
+                        a.setUserId(cs.getPeerId());
+                        return a.saveFeedable();
                     }
                 }
-                a.saveFeedable();
+
             }
 
             if(this instanceof Broadcast){
@@ -92,7 +100,7 @@ public class Feedable extends Base {
                 if(jg.getGroup() != null){
                     a.setUserId(jg.getGroup().getAdminId());
                 }
-                a.saveFeedable();
+                return a.saveFeedable();
             }
 
         }
@@ -114,29 +122,16 @@ public class Feedable extends Base {
             System.out.println("NO FEEDABLE FOR OBJECT!!!!");
             return false;
         }else{
-           System.out.println("FOUND FEEDABLE");
            a.setStatus("update");
+           a.setNotifyStatus("UNSEND");
            if(this instanceof Changeset){
-               Changeset ch = (Changeset) this;
-               if(ch.getDocument() != null){
-                   a.setUserId(ch.getDocument().getPeerId());
-               }
                a.updateFeedable();
            }
             if(this instanceof Comment){
-                Comment com = (Comment) this;
-                if(com.getDocumentId() != 0){
-                    if(com.getDocument() != null){
-                        a.setUserId(com.getDocument().getPeerId());
-                    }
-                }else{
-                    if(com.getChangeset() != null){
-                        a.setUserId(com.getChangeset().getPeerId());
-                    }
                     a.updateFeedable();
-                }
             }
             if(this instanceof Broadcast){
+                //TODO: if user update his broadcast then you need to set all feedable to update status
                 return  a.updateFeedable();
             }
 
@@ -145,6 +140,13 @@ public class Feedable extends Base {
             }
            return true;
         }
+    }
+
+
+    public boolean updateFeedable(){
+        System.out.println(this.getStatus());
+        System.out.println("updating feedable");
+        return super.update();
     }
 
     @Override
@@ -188,11 +190,6 @@ public class Feedable extends Base {
         return super.destroy();
     }
 
-    public boolean updateFeedable(){
-        System.out.println(this.getStatus());
-        System.out.println("updating feedable");
-        return super.update();
-    }
 
 
     private Feedable reveal(){
@@ -282,4 +279,13 @@ public class Feedable extends Base {
   {
     return new PrettyTime().format(getCreationDate());
   }
+
+    public String getNotifyStatus(){
+        return notifyStatus;
+    }
+    public void setNotifyStatus(String notifyStatus){
+
+        this.notifyStatus = notifyStatus;
+        setUpdateFlag(true);
+    }
 }

@@ -2,11 +2,10 @@
 <%@ include file="/view/includes/static/header.jsp" %>
 <%@ include file="/view/includes/static/navbar.jsp" %>
 
-<%Peer peer = (Peer) request.getAttribute("sessionUser");%>
 
 <div class="register">
-    <form class="form-inline" name="register" id ="additional" action="/additional" method="post">
-    <h1>Complete your profile <button class="pull-right btn btn-primary" type="submit">Next (1/2)</button></h1>
+    <form class="form-inline" name="register"  action="/peer/<%=sessionUser.getId()%>/profile/full" method="post">
+    <h1>Complete your profile</h1>
     <div class="row">
             <div class="col-md-6">
                 <textarea class="form-control" style="resize:none;" name="description" rows="9" placeholder="Present your experience, skills and expertise"></textarea>
@@ -29,7 +28,8 @@
                 <input type="text" class="form-control" name="industry" style="margin:10px 0" placeholder="Industry">
                 <input type="text" class="form-control" name="yoe" style="margin:10px 0" id="valid_yoe" placeholder="Years of Experience" data-content="<div class='validation'>The years of experience must be in integer(s) format (eg. 12)</div>" data-html="true">
                 <input type="text" class="form-control" name="personal_website" style="margin:10px 0" placeholder="Personal Website">
-                <input type="hidden" class="form-control" name="peerId" value="<%=peer.getId()%>">
+                <input type="hidden" class="form-control" name="peerId" value="<%=sessionUser.getId()%>">
+                <button class="pull-right btn btn-primary" type="submit">Done</button>
             </div>
     </div>
     </form>

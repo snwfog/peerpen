@@ -1,6 +1,7 @@
 <%@ page import="com.peerpen.model.Avatar" %>
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ include file="/view/includes/static/header.jsp" %>
+<%@ include file="/view/includes/static/navbar.jsp" %>
 
 <% Peer sessionPeer = (Peer) request.getAttribute( "sessionUser" ); %>
 

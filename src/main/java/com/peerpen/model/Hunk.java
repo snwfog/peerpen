@@ -35,6 +35,8 @@ public class Hunk extends Base implements IModel {
     private Integer documentId;
     @ActiveRelationHasOne
     private Document document;
+    @ActiveRecordField
+    private String hunkName;
     @ActiveRelationHasMany
     private ArrayList<Changeset> changesets;
 
@@ -92,6 +94,15 @@ public class Hunk extends Base implements IModel {
     public List<Hunk> getHunksFromIdView(Integer idView){
         String sql = "SELECT * FROM `hunks` WHERE `id_view` = " + idView;
         return new Hunk().queryAll( sql );
+    }
+
+    public String getHunkName() {
+        return hunkName;
+    }
+
+    public void setHunkName(String hunkName) {
+        this.hunkName = hunkName;
+        setUpdateFlag(true);
     }
 
 

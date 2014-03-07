@@ -29,14 +29,14 @@ public class AvatarUploadController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/view/upload.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/avatar.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         this.storeAvatar(request, response);
         Peer sessionPeer = (Peer) request.getAttribute("sessionUser");
-        request.getRequestDispatcher("/peer/" + sessionPeer.getId() + "/profile/avatar").forward(request, response);
+        request.getRequestDispatcher( "/view/avatar.jsp" ).forward( request, response );
     }
 
     private void storeAvatar(HttpServletRequest request, HttpServletResponse response)

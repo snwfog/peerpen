@@ -26,15 +26,8 @@ public class CommentController extends HttpServlet
     Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
     Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
     Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
-
-    Map<String, Object> map = Maps.newHashMap();
-    map.put("message", parameters.get("comment"));
-    map.put("peerId", peer.getId());
-    map.put("documentId", document.getId());
-
-    Comment comment = new Comment(map);
-    comment.save();
-
+    String message = parameters.get("comment");
+    document.createComment(message,peer);
     request.setAttribute("document", document);
     response.sendRedirect(request.getHeader("referer"));
   }
@@ -47,15 +40,8 @@ public class CommentController extends HttpServlet
     Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
     Changeset changeset = new Changeset().find(Integer.parseInt(parameters.get("changesetid")));
 
-    Map<String, Object> map = Maps.newHashMap();
-    map.put("message", request.getParameter("comment").toString());
-    map.put("name", peer.getFirstName() + " " + peer.getLastName());
-    map.put("peerId", peer.getId());
-    map.put("documentId", document.getId());
-    map.put("changesetId", changeset.getId());
-    Comment comment = new Comment(map);
-    comment.save();
-
+    String message = parameters.get("comment");
+    changeset.createComment(message,peer);
     request.setAttribute("document", document);
     response.sendRedirect(request.getHeader("referer"));
   }

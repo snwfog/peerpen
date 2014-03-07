@@ -1,0 +1,1 @@
+ALTER TABLE peers ADD complete_profile int(1) NOT NULL DEFAULT '0';
