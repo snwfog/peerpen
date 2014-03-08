@@ -87,8 +87,8 @@
               <input type="hidden" name="form" value="personal">
             </table>
           </div>
-          </form>
       </div>
+          </form>
         <a class ="pull-right" type="submit" class="pull-right" style="visibility:hidden"
         id="save_personal" value="Save" href="#">Save
           Changes</a>
