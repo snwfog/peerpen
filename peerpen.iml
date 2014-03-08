@@ -93,6 +93,8 @@
     <orderEntry type="library" name="Maven: org.ocpsoft.prettytime:prettytime:3.2.4.Final" level="project" />
     <orderEntry type="library" name="Maven: com.j256.simplemagic:simplemagic:1.5" level="project" />
     <orderEntry type="library" name="Maven: org.twitter4j:twitter4j-core:3.0.5" level="project" />
+    <orderEntry type="library" name="Maven: com.thetransactioncompany:cors-filter:1.9" level="project" />
+    <orderEntry type="library" name="Maven: com.thetransactioncompany:java-property-utils:1.9.1" level="project" />
   </component>
 </module>
 

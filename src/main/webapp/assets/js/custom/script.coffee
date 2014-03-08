@@ -45,3 +45,5 @@ $ ->
     $("h1#msg-jumpstart").html("Your career is in good hands").fadeIn()
     setTimeout ( -> parentForm.submit() ), 2000
 
+  console.log("Loading ppedit")
+  $('.editor').ppedit()

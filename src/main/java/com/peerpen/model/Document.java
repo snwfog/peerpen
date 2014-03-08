@@ -189,13 +189,16 @@ public class Document extends Taggable implements IModel {
 
     /**
      * Given a map of hunk, this method will create hunks from the database
-     * without creating a corresponding changeset object
      *
      * @param newHunks
      */
     private boolean createHunk( Map<Long, Hunk> newHunks, boolean createChangeset ) {
         boolean successful = true;
         for ( Hunk h : newHunks.values() ) {
+
+            h.setDocumentId(this.getId());
+            // h.setDocument(this);
+
             if ( h.save() ) {
                 if ( createChangeset ) {
                     h.getChangesets().add( Changeset.getInstanceFromHunk( h, Changeset.ChangesetState.REMOVED ) );

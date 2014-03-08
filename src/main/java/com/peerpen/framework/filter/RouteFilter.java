@@ -64,6 +64,9 @@ public class RouteFilter implements Filter {
         //    request.getRequestDispatcher("/document").forward(request, response);
         //}
 
+        //String r = setInternalForwardServlet(request, rURI);
+        //request.getRequestDispatcher(r).forward(request, response);
+
         try {
 
             if (isSafeRoutes(rURI)) {
@@ -160,6 +163,8 @@ public class RouteFilter implements Filter {
                 this.redirectError(httpRequest, (HttpServletResponse) response);
             }
         } catch (MissingArgumentException | NonPermissibleRoute | TooManyUrlNestingException | NotLoggedInException e) {
+            // FIXME: 1. If it is cors ajax, ignore the forward, and return 404 instead
+            // FIXME: 2. Have a better JSON api handling
             this.redirectError((HttpServletRequest) request, (HttpServletResponse) response, e);
         }
 

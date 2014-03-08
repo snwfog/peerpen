@@ -53,8 +53,7 @@ public class DocumentController extends GenericApplicationServlet {
                     }
                 }
             }
-        }
-        else // If viewing someone else doc, show 'view only' mode
+        } else // If viewing someone else doc, show 'view only' mode
         {
             if ( (document = (Document) modelMap.get( "document" )) == null ) {
                 request.setAttribute( "peer", modelMap.get( "peer" ) );
@@ -73,7 +72,6 @@ public class DocumentController extends GenericApplicationServlet {
                     }
                 }
             }
-
         }
     }
 

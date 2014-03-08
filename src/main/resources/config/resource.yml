@@ -5,6 +5,7 @@
 # Stick with resources that are domain models only
 - peer:
   - document:
+    - edit
     - comment:
       - like
     - tag
