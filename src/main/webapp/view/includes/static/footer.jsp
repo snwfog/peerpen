@@ -5,11 +5,11 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <%--<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>--%>
-<script src="/assets/js/lib/jquery-1.9.1.js"></script>
+<script src="/assets/js/lib/jquery-2.0.3.min.js"></script>
 <script src="/assets/js/lib/jquery-ui-1.10.4.js"></script>
-<script src="/assets/js/custom/ppeditor.min.js"></script>
 <script src="/assets/js/lib/tag-it.js"></script>
 <script src="/assets/js/lib/bootstrap.min.js"></script>
+<script src="/assets/js/custom/ppeditor.min.js"></script>
 <script src="/assets/js/lib/jquery.color.js"></script>
 <script src="/assets/js/lib/jquery.stellar.min.js"></script>
 <script src="/assets/js/lib/jquery.Jcrop.min.js"></script>
