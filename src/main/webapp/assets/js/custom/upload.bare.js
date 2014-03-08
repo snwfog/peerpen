@@ -6,7 +6,7 @@ Dropzone.options.avatarUpload = {
   maxFiles: 1,
   thumbnailWidth: 512,
   thumbnailHeight: 512,
-  acceptedFiles: 'image/*',
+  acceptedFiles: '.jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF',
   uploadMultiple: false,
   accept: function(file, done) {
     console.log("Uploaded");

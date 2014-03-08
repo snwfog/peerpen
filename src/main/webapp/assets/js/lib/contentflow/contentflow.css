@@ -69,7 +69,7 @@
     margin: 0px auto;
     margin-top: 10px;
     height: 16px;
-    background: url(img/scrollbar_black.png) left center repeat-x;
+    background: url(img/scrollbar_white.png) left center repeat-x;
     position: relative;
     overflow: visible;
 }
@@ -77,7 +77,7 @@
 .ContentFlow .scrollbar .slider {
     width: 16px;
     height: 16px;
-    background: url(img/slider_black.png) center center no-repeat;
+    background: url(img/slider_white.png) center center no-repeat;
     cursor: move;
 }
 
@@ -110,7 +110,7 @@
 .ContentFlow .globalCaption .caption a:active,
 .ContentFlow .globalCaption .caption a:hover {
     text-decoration: none;
-    color: black;
+    color: white;
     font-style: italic;
     font-size: 0.8em;
 }

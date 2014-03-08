@@ -3,12 +3,11 @@ package com.peerpen.model;
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import com.mysql.jdbc.Statement;
 import com.peerpen.model.serializer.Page;
 import com.peerpen.model.serializer.Ppedit;
 import com.sunnyd.IModel;
@@ -19,7 +18,6 @@ import com.sunnyd.annotations.ActiveRelationHasOne;
 import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +26,7 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
-public class Document extends Taggable implements IModel {
+public class Document extends Taggable implements IModel, Commentable {
 
     public static final String tableName = "documents";
 
@@ -45,8 +43,6 @@ public class Document extends Taggable implements IModel {
     private Peer peer;
     @ActiveRecordField
     private Integer peerId;
-    //@ActiveRecordField
-    //private String class;
     @ActiveRelationHasMany
     private List<Hunk> hunks;
 
@@ -113,18 +109,6 @@ public class Document extends Taggable implements IModel {
         setUpdateFlag( true );
     }
 
-    //
-    //public String getDocType() {
-    //    return docType;
-    //}
-    //
-    //public void setDocType(String type) {
-    //    if(type.toLowerCase().trim().contentEquals("resume") | type.toLowerCase().trim().contentEquals("coverLetter")){
-    //        this.docType = type;
-    //        setUpdateFlag(true);
-    //    }
-    //}
-
     public List<Hunk> getHunks() {
         initRelation( "hunks" );
         return this.hunks;
@@ -139,6 +123,7 @@ public class Document extends Taggable implements IModel {
         initRelation( "comments" );
         return this.comments;
     }
+
 
     /**
      * Helper method that will create a map of viewId long vs. hunk object itself
@@ -196,7 +181,7 @@ public class Document extends Taggable implements IModel {
         boolean successful = true;
         for ( Hunk h : newHunks.values() ) {
 
-            h.setDocumentId(this.getId());
+            h.setDocumentId( this.getId() );
             // h.setDocument(this);
 
             if ( h.save() ) {
@@ -260,36 +245,6 @@ public class Document extends Taggable implements IModel {
         return successful;
     }
 
-    public List<Object> getCommentAndChangeset() {
-        Integer docId = this.getId();
-
-        List<Comment> comments = new Comment().queryAll(
-                "SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE document_id= " + docId +
-                        " ORDER BY total_vote DESC, last_modified_date DESC" );
-        List<Object> object = new ArrayList();
-        List<Integer> tracker = new ArrayList();
-        Integer cs = null;
-        for ( Comment comment : comments ) {
-            cs = comment.getChangesetId();
-            if ( (cs != null) && !tracker.contains( comment.getChangesetId() ) ) {
-                object.add( new Changeset().find( cs ) );
-                tracker.add( cs );
-            } else {
-                object.add( comment );
-            }
-        }
-
-        //Dirty...
-        List<Changeset> changesetList = this.getChangesets();
-        for ( Changeset changeset : changesetList ) {
-            if ( !tracker.contains( changeset.getId() ) ) {
-                object.add( changeset );
-                tracker.add( changeset.getId() );
-            }
-        }
-        return object;
-    }
-
     public List<Comment> getOrderedComments() {
         Integer docId = this.getId();
         Connection connection = null;
@@ -310,23 +265,33 @@ public class Document extends Taggable implements IModel {
         return documents;
     }
 
-    // method used for search autocomplete
-    //public List<String> getSuggestedDocuments(String keyword, int limit)
-    //{
-    //  String sql = "SELECT `doc_name` FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%' LIMIT " + limit;
-    //  List<Document> documents = new Document().queryAll(sql);
-    //  // store only doc_name to list
-    //  List<String> suggestions = new ArrayList<String>();
-    //  for (int i = 0; i < documents.size(); i++)
-    //  {
-    //    suggestions.add(documents.get(i).getDocName());
-    //  }
-    //  return suggestions;
-    //}
-
     public List<Document> getSuggestions( String keyword, int limit ) {
         String sql = "SELECT * FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%' LIMIT " + limit;
         return new Document().queryAll( sql );
+    }
+
+    @Override
+    public void createComment( String message, Peer peer ) {
+        Comment.createComment( this, message, peer );
+    }
+
+    @Override
+    public void findComments() {
+        Comment.findComments( this, this.getId() );
+    }
+
+    /*
+      Used for displaying purposes
+     */
+    public List<Changeset> getChangeset() {
+        List<Changeset> changesetList = new ArrayList<>();
+        List<Hunk> hunkList = getHunks();
+
+        for ( Hunk hunk : hunkList ) {
+            changesetList.addAll( hunk.getChangesets() );
+        }
+
+        return changesetList;
     }
 
 
@@ -349,7 +314,6 @@ public class Document extends Taggable implements IModel {
         return false;
     }
 
-
     public static class DocumentDeserializer implements JsonSerializer<Document> {
 
         @Override
@@ -359,19 +323,5 @@ public class Document extends Taggable implements IModel {
 
             return jsonObject;
         }
-    }
-
-    public static void main( String[] args ) {
-        Document d = new Document().find( 2 );
-        d.getHunks();
-
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter( Document.class, new DocumentDeserializer() );
-        builder.registerTypeAdapter( Hunk.class, new Hunk.HunkSerializer() );
-
-        Gson gson = builder.create();
-
-        gson.toJson( d, System.out );
-
     }
 }

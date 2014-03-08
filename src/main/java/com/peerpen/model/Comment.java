@@ -1,158 +1,159 @@
 package com.peerpen.model;
 
+import com.sunnyd.Base;
 import com.sunnyd.IModel;
-import com.sunnyd.annotations.*;
+import com.sunnyd.annotations.ActiveRecordField;
+import com.sunnyd.annotations.ActiveRelationHasOne;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class Comment extends Feedable implements IModel
-{
+public class Comment extends Feedable implements IModel {
 
-  public static final String tableName = "comments";
+    public static final String tableName = "comments";
 
-  @ActiveRecordField
-  private String message;
-  @ActiveRecordField
-  private Integer peerId;
-  @ActiveRelationHasOne
-  private Peer peer;
-  @ActiveRecordField
-  private Integer documentId;
-  @ActiveRelationHasOne
-  private Document document;
-  @ActiveRecordField
-  private Integer changesetId;
-  @ActiveRelationHasOne
-  private Changeset changeset;
-  @ActiveRecordField
-  private Integer upVote;
-  @ActiveRecordField
-  private Integer downVote;
+    @ActiveRecordField
+    private String message;
+    @ActiveRecordField
+    private Integer objectId;
+    @ActiveRecordField
+    private String type;
+    @ActiveRecordField
+    private Integer upVote;
+    @ActiveRecordField
+    private Integer downVote;
+    @ActiveRecordField
+    private Integer posterPeerId;
+    @ActiveRelationHasOne(idFieldName = "posterPeerId")
+    private Peer posterPeer;
 
-  private Integer totalVote;
+    public Integer getPosterPeerId() {
+        return posterPeerId;
+    }
 
-  public Comment()
-  {
-    super();
-    this.upVote=0;
-    this.downVote=0;
-  }
+    public void setPosterPeerId( Integer posterPeerId ) {
+        this.posterPeerId = posterPeerId;
+        setUpdateFlag( true );
+    }
 
-  public Comment(Map<String, Object> HM)
-  {
-    super(HM);
-  }
+    public Peer getPosterPeer() {
+        initRelation( "posterPeer" );
+        return posterPeer;
+    }
 
-  public String getMessage()
-  {
-    return message;
-  }
+    public Peer setPosterPeer( Peer peer ) {
+        posterPeer = peer;
+        this.setUpdateFlag( true );
+        return posterPeer;
+    }
 
-  public void setMessage(String message)
-  {
-    this.message = message;
-    setUpdateFlag(true);
-  }
+    private Integer totalVote;
 
-  //testing purposes only
-  private String name;
+    public Comment() {
+        super();
+        this.upVote = 0;
+        this.downVote = 0;
+    }
 
-  public void setName(String name)
-  {
-    this.name = name;
-  }
+    public Comment( Map<String, Object> HM ) {
+        super( HM );
+    }
 
-  public String getName()
-  {
-    return name;
-  }
+    public String getMessage() {
+        return message;
+    }
 
-  public Peer getPeer()
-  {
-    initRelation("peer");
-    return peer;
-  }
+    public void setMessage( String message ) {
+        this.message = message;
+        setUpdateFlag( true );
+    }
 
-  public void setPeerId(Integer peerId)
-  {
-    this.peerId = peerId;
-  }
+    //testing purposes only
+    private String name;
 
-  public int getPeerId()
-  {
-    return this.peerId;
-  }
+    public void setName( String name ) {
+        this.name = name;
+    }
 
-  public Document getDocument()
-  {
-    initRelation("document");
-    return document;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public void setDocumentId(Integer documentId)
-  {
-    this.documentId = documentId;
-  }
+    public Integer getUpVote() {
+        return upVote;
+    }
 
-  public int getDocumentId()
-  {
-    return this.documentId;
-  }
+    public void setUpVote( Integer upVote ) {
+        this.upVote = upVote;
+        setUpdateFlag( true );
+    }
 
-  public Changeset getChangeset()
-  {
-    initRelation("changeset");
-    return changeset;
-  }
+    public void upVote() {
+        this.upVote++;
+        setUpdateFlag( true );
+    }
 
-  public void setChangesetId(Integer changesetId)
-  {
-    this.changesetId = changesetId;
-  }
+    public Integer getDownVote() {
+        return downVote;
+    }
 
-  public Integer getChangesetId()
-  {
-    return this.changesetId;
-  }
+    public void setDownVote( Integer downVote ) {
+        this.downVote = downVote;
+        setUpdateFlag( true );
+    }
 
-  public Integer getUpVote()
-  {
-    return upVote;
-  }
+    public void downVote() {
+        this.downVote++;
+        setUpdateFlag( true );
+    }
 
-  public void setUpVote(Integer upVote)
-  {
-    this.upVote = upVote;
-    setUpdateFlag(true);
-  }
+    @Override
+    public boolean save() { //use this method for now, until Mike change it in the BASE
+        return super.save();
+    }
 
-  public void upVote()
-  {
-    this.upVote++;
-    setUpdateFlag(true);
-  }
+    public String getType() {
+        return type;
+    }
 
-  public Integer getDownVote()
-  {
-    return downVote;
-  }
+    public void setType( String type ) {
+        this.type = type;
+        setUpdateFlag( true );
+    }
 
-  public void setDownVote(Integer downVote)
-  {
-    this.downVote = downVote;
-    setUpdateFlag(true);
-  }
+    public Integer getObjectId() {
+        return objectId;
+    }
 
-  public void downVote()
-  {
-    this.downVote++;
-    setUpdateFlag(true);
-  }
+    public void setObjectId( Integer objectId ) {
+        this.objectId = objectId;
+        setUpdateFlag( true );
+    }
 
-  @Override
-  public boolean save()
-  { //use this method for now, until Mike change it in the BASE
-    return super.save();
-  }
+    public static void createComment( Commentable commentable, String message, Peer posterPeer ) {
+        Comment comment = new Comment();
 
+        comment.setType( commentable.getClass().getSimpleName() );
+        comment.setObjectId( ((Base) commentable).getId() );
+        comment.setMessage( message );
+        comment.setPosterPeerId( posterPeer.getId() );
+        comment.save();
+    }
+
+
+    public static void deleteComment( Integer commentId ) {
+        Comment comment = new Comment().find( commentId );
+        comment.destroy();
+    }
+
+    public static List<Comment> findComments( Object object, Integer objectId ) {
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put( "type", object.getClass().getSimpleName() );
+        map.put( "object_id", objectId );
+        List<Comment> comments = new Comment().findAll( map );
+        return comments;
+
+    }
 }

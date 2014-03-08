@@ -23,6 +23,9 @@ public class Feedable extends Base {
     private String status;
 
     @ActiveRecordField
+    private String notifyStatus;
+
+    @ActiveRecordField
     private Integer childId;
 
     @ActiveRecordField
@@ -53,24 +56,29 @@ public class Feedable extends Base {
 
             if ( this instanceof Changeset ) {
                 Changeset ch = (Changeset) this;
-                if ( ch.getHunk().getDocument() != null ) {
-                    a.setUserId( ch.getHunk().getDocument().getPeerId() );
+                if ( ch.getHunk() != null ) {
+                    a.setUserId( ch.getPeerId() );
+                    return a.saveFeedable();
                 }
-                a.saveFeedable();
+
             }
 
             if ( this instanceof Comment ) {
                 Comment com = (Comment) this;
-                if ( com.getDocumentId() != 0 ) {
-                    if ( com.getDocument() != null ) {
-                        a.setUserId( com.getDocument().getPeerId() );
+                if ( com.getType().contentEquals( "Document" ) ) {
+                    Document doc = new Document().find( com.getObjectId() );
+                    if ( doc != null ) {
+                        a.setUserId( doc.getPeerId() );
+                        return a.saveFeedable();
                     }
-                } else {
-                    if ( com.getChangeset() != null ) {
-                        a.setUserId( com.getChangeset().getHunk().getDocument().getPeerId() );
+                } else if ( com.getType().contentEquals( "Changeset" ) ) {
+                    Changeset cs = new Changeset().find( com.getObjectId() );
+                    if ( cs != null ) {
+                        a.setUserId( cs.getPeerId() );
+                        return a.saveFeedable();
                     }
                 }
-                a.saveFeedable();
+
             }
 
             if ( this instanceof Broadcast ) {
@@ -86,6 +94,14 @@ public class Feedable extends Base {
                     }
                 }
                 return true;
+            }
+
+            if ( this instanceof Joingroup ) {
+                Joingroup jg = (Joingroup) this;
+                if ( jg.getGroup() != null ) {
+                    a.setUserId( jg.getGroup().getAdminId() );
+                }
+                return a.saveFeedable();
             }
 
         }
@@ -107,40 +123,40 @@ public class Feedable extends Base {
             System.out.println( "NO FEEDABLE FOR OBJECT!!!!" );
             return false;
         } else {
-            System.out.println( "FOUND FEEDABLE" );
             a.setStatus( "update" );
+            a.setNotifyStatus( "UNSEND" );
             if ( this instanceof Changeset ) {
-                Changeset ch = (Changeset) this;
-                if ( ch.getHunk().getDocument() != null ) {
-                    a.setUserId( ch.getHunk().getDocument().getPeerId() );
-                }
                 a.updateFeedable();
             }
             if ( this instanceof Comment ) {
-                Comment com = (Comment) this;
-                if ( com.getDocumentId() != 0 ) {
-                    if ( com.getDocument() != null ) {
-                        a.setUserId( com.getDocument().getPeerId() );
-                    }
-                } else {
-                    if ( com.getChangeset() != null ) {
-                        a.setUserId( com.getChangeset().getHunk().getDocument().getPeerId() );
-                    }
-                    a.updateFeedable();
-                }
+                a.updateFeedable();
             }
+
             if ( this instanceof Broadcast ) {
+                //TODO: if user update his broadcast then you need to set all feedable to update status
+                return a.updateFeedable();
+            }
+
+            if ( this instanceof Joingroup ) {
                 return a.updateFeedable();
             }
             return true;
         }
     }
 
+
+    public boolean updateFeedable() {
+        System.out.println( this.getStatus() );
+        System.out.println( "updating feedable" );
+        return super.update();
+    }
+
     @Override
     public boolean destroy() {
         Map<String, Object> map = new HashMap<>();
-        map.put( "childId", this.getId() );
 
+        map.put( "childId", this.getId() );
+        map.put( "type", this.getClass().getSimpleName() );
         if ( this instanceof Broadcast ) {
             List<Feedable> feeds = new Feedable().findAll( map );
             boolean deletedAllFeedable = false;
@@ -155,7 +171,6 @@ public class Feedable extends Base {
             }
 
             return this.baseDestroy() && deletedAllFeedable;
-
         } else {
             Feedable a = new Feedable().find( map );
             super.destroy();
@@ -174,13 +189,6 @@ public class Feedable extends Base {
     public boolean baseDestroy() {
         return super.destroy();
     }
-
-    public boolean updateFeedable() {
-        System.out.println( this.getStatus() );
-        System.out.println( "updating feedable" );
-        return super.update();
-    }
-
 
     private Feedable reveal() {
         if ( trueSelf == null ) {
@@ -273,5 +281,15 @@ public class Feedable extends Base {
 
     public String getTimesAgo() {
         return new PrettyTime().format( getCreationDate() );
+    }
+
+    public String getNotifyStatus() {
+        return notifyStatus;
+    }
+
+    public void setNotifyStatus( String notifyStatus ) {
+
+        this.notifyStatus = notifyStatus;
+        setUpdateFlag( true );
     }
 }

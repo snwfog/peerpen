@@ -27,7 +27,7 @@ public class ProfileController extends HttpServlet {
         String form = parameters.get("form").toString();
         Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
         if(form.equals(FORM_PERSONAL)){
-            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             peer.setFirstName(parameters.get("firstName"));
             peer.setLastName(parameters.get("lastName"));
             try {

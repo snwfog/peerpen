@@ -1,9 +1,11 @@
-<%@ page import="java.util.List" %>
 <%@ include file="/view/includes/static/header.jsp" %>
 <%@ include file="/view/includes/static/navbar.jsp" %>
 
 <%--Declare all request variables here, easy to debug!!!--%>
-<% List<Group> groups = (List<Group>) request.getAttribute("groups"); %>
+<%
+  List<Group> groups = (List<Group>) request.getAttribute("groups");
+  String sort = (String) request.getAttribute("sort");
+%>
 
 <div class="container">
   <div class="row row-offcanvas row-offcanvas-right">
@@ -18,13 +20,20 @@
           <p style="font-size: medium;"><%= group.getShortDescription()%>
           <p>
           <div class="group-<%= group.getId()%>">
-          <% if(group.getIsJoined(sessionUser.getId())){%>
-            <form action="" class="form-horizontal" id="<%= group.getId()%>" role="form">
-              <input type="hidden" name="groupid" value="<%= group.getId()%>">
-              <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>">
-              <input type="hidden" name="_method" value="delete"/>
-              <button type="button" class="btn btn-success" onclick="leave(<%= group.getId()%>);"><i class="fa fa-check-circle"></i> Joined!</button>
-            </form>
+          <% if(group.getIsJoined(sessionUser.getId())){ %>
+          <form action="" class="form-horizontal" id="<%= group.getId()%>" role="form">
+            <input type="hidden" name="groupid" value="<%= group.getId()%>">
+            <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>">
+            <input type="hidden" name="_method" value="delete"/>
+            <button type="button" class="btn btn-success" onclick="leave(<%= group.getId()%>);"><i class="fa fa-check-circle"></i> Joined!</button>
+          </form>
+          <% }else if(group.getPending(sessionUser.getId())){%>
+          <form action="" class="form-horizontal" id="<%= group.getId()%>" role="form">
+            <input type="hidden" name="groupid" value="<%= group.getId()%>">
+            <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>">
+            <input type="hidden" name="_method" value="put"/>
+            <button type="button" class="btn btn-default" onclick="cancel(<%= group.getId()%>);">Pending request</button>
+          </form>
           <%}else{%>
             <form action="" class="form-horizontal" id="<%= group.getId()%>" role="form">
               <input type="hidden" name="groupid" value="<%= group.getId()%>">
@@ -38,9 +47,23 @@
         <%}%>
       </div>
     </div>
+    <p>sort by:
+    <form action="/group" method="post">
+      <select name="sort" onchange="this.form.submit()">
+        <option value="az" <%= (sort.contentEquals("az") ? "selected=\"selected\"" : "")%>>A-Z</option>
+        <option value="za" <%= (sort.contentEquals("za") ? "selected=\"selected\"" : "")%>>Z-A</option>
+        <option value="fc" <%= (sort.contentEquals("fc") ? "selected=\"selected\"" : "")%>>Newest</option>
+        <option value="lc" <%= (sort.contentEquals("lc") ? "selected=\"selected\"" : "")%>>Oldest</option>
+        <option value="mp" <%= (sort.contentEquals("mp") ? "selected=\"selected\"" : "")%>>Most popular</option>
+        <option value="lp" <%= (sort.contentEquals("lp") ? "selected=\"selected\"" : "")%>>Least popular</option>
+        <option value="pd" <%= (sort.contentEquals("pd") ? "selected=\"selected\"" : "")%>>Pending</option>
+      </select>
+      <input type="hidden" name="_method" value="put" />
+    </form>
+    </p>
     <h1>Your desired group not enlisted? Create your own!</h1>
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Create a new group</button>
-  </div>
+    </div>
 </div>
 
 <%--modal--%>
@@ -66,5 +89,4 @@
     </div>
   </div>
 </div>
-
 <%@ include file="/view/includes/static/footer.jsp" %>

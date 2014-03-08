@@ -8,7 +8,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="z-index:100 !important;">
   <div class="container">
     <div class="navbar-header">
-        <a class="navbar-brand" href="/">PeerPen</a>
+        <a class="navbar-brand" href="/peer/<%=sessionUser.getId()%>/feed">PeerPen</a>
     </div>
 
     <ul class="nav navbar-nav">
@@ -24,16 +24,25 @@
         </li>
     </ul>
     <!-- SEARCH FORM -->
+
     <ul class="nav navbar-nav navbar-right">
-      <form action="/search" class="navbar-form navbar-left" method="post" id="search_form" role="form" style="margin:0 10px;padding:10px 0 0 0;">
-             <input type="text" class="form-control" placeholder="Search for documents, people and groups" name="search_query" id="nav_search" autocomplete="off" style="width:300px;z-index:1111 !important" />
-      </form>
+        <form action="/search" class="navbar-form navbar-left" method="post" id="search_form" role="form">
+            <input type="text" class="form-control" placeholder="Search for documents, people and groups" name="search_query" id="nav_search" autocomplete="off" style="min-width:300px;
+            z-index:1111 !important" />
+          </form>
+
+
         <li class="dropdown">
             <a href="/peer/<%=sessionUser.getId()%>/profile" class="dropdown-toggle" data-toggle="dropdown">
                 <%= sessionUser.getUserName() %> <img style="margin:0 10px;" class="profile"
-                     src="<%= sessionUser.getAvatar().getRelativeServletContextAvatarPathForSize( request, Avatar.Size.SMALL ) %>"/><b class="caret"></b></a>
+                     src="<%= sessionUser.getAvatar().getRelativeServletContextAvatarPathForSize( request, Avatar.Size.SMALL ) %>"/>
+                <%if(sessionUser.getCompleteProfile()==0){%><span class="glyphicon glyphicon-exclamation-sign"></span><%}%>
+            </a>
+
             <ul class="dropdown-menu" role="menu">
-                <li><a href="/peer/<%=sessionUser.getId()%>/profile">Profile</a></li>
+                <li><a href="/peer/<%=sessionUser.getId()%>">Profile</a></li>
+                <li><a href="/peer/<%=sessionUser.getId()%>/profile">Edit Profile</a></li>
+                <%if(sessionUser.getCompleteProfile()==0){%> <li><a href="/peer/<%=sessionUser.getId()%>/profile/full">Complete Profile <span class="glyphicon glyphicon-arrow-left"></span></a></li><%}%>
                 <li class="divider"></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
@@ -41,3 +50,4 @@
     </ul>
   </div>
 </nav>
+<div id="enableNotification"></div>

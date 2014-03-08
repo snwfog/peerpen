@@ -8,10 +8,8 @@ import com.sunnyd.annotations.ActiveRelationHasOne;
 import java.util.List;
 import java.util.Map;
 
-
 //Feedable model will not avoided by base and any parent of Feedable
-public class Changeset extends Feedable implements IModel{
-
+public class Changeset extends Feedable implements IModel, Commentable {
     public static final String tableName = "changesets";
 
     public static enum ChangesetState {
@@ -32,6 +30,16 @@ public class Changeset extends Feedable implements IModel{
 
     @ActiveRecordField
     private String content;
+
+
+    /**
+     * Author of this changeset
+     */
+    @ActiveRelationHasOne
+    private Peer peer;
+
+    @ActiveRecordField
+    private Integer peerId;
 
     @ActiveRelationHasOne
     private Hunk hunk;
@@ -63,6 +71,23 @@ public class Changeset extends Feedable implements IModel{
     public void setContent( String content ) {
         this.content = content;
         setUpdateFlag( true );
+    }
+
+    public void setPeerId(Integer peerId)
+    {
+        this.peerId = peerId;
+        setUpdateFlag( true );
+    }
+
+    public Integer getPeerId()
+    {
+        return this.peerId;
+    }
+
+    public Peer getPeer()
+    {
+        initRelation("peer");
+        return peer;
     }
 
     public Boolean getIsApplied() {
@@ -122,5 +147,15 @@ public class Changeset extends Feedable implements IModel{
         changeset.setIsApplied( false );
         changeset.save();
         return changeset;
+    }
+
+    @Override
+    public void createComment( String message, Peer peer ) {
+        Comment.createComment( this, message, peer );
+    }
+
+    @Override
+    public void findComments() {
+        Comment.findComments( this, this.getId() );
     }
 }

@@ -732,7 +732,7 @@ ContentFlow.prototype = {
         loadingTimeout: 30000, //milliseconds
         activeElement: 'content', // item or content
 
-        maxItemHeight: 0,
+        maxItemHeight: 180,
         scaleFactor: 1,
         scaleFactorLandscape: 1.33,
         scaleFactorPortrait: 1.0,
@@ -1855,9 +1855,6 @@ ContentFlow.prototype = {
         this.ContainerOldDim = "auto";
         this.FlowOldDim = "auto";
 
-        //PeerPen
-        this.conf.maxItemHeight =  $("body").height() * 0.25;
-
         /* calc maxHeight */
         if (this.conf.maxItemHeight <= 0) {
 
@@ -1990,10 +1987,12 @@ ContentFlow.prototype = {
             delta = event.axis;
         }
 
-        console.log("detail:"+event.detail);
+
+        //PEERPEN
+//        console.log("detail:"+event.detail);
         //HORIZONTAL SCROLL HANDLING
         if( event.wheelDeltaY>0 || event.deltaY > 0 || event.detail){
-            console.log("realbitches"+delta) ;
+//            console.log("realbitches"+delta) ;
             if(!event.detail){
                 //Normalize different swipe speed for non-FF
                 if( 121 <= Math.abs(delta) && Math.abs(delta) <= 600 ){
@@ -2010,7 +2009,7 @@ ContentFlow.prototype = {
                 var thres = 50;
             }
 
-            console.log( this.mouseWheelCounter );
+//            console.log( this.mouseWheelCounter );
             if( this.mouseWheelCounter >= thres){
                 this.mouseWheelCounter = 0;
                 if (delta) {

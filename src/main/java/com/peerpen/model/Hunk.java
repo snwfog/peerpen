@@ -110,8 +110,25 @@ public class Hunk extends Base implements IModel {
         this.setUpdateFlag( true );
     }
 
+    public String getHunkName() {
+        return hunkName;
+    }
+
+    public void setHunkName(String hunkName) {
+        this.hunkName = hunkName;
+        setUpdateFlag(true);
+    }
+
     public boolean spawnChangeset( Changeset.ChangesetState state ) {
         return Changeset.getInstanceFromHunk( this, state ).save();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder( getContent() );
+        sb.replace( 0, 1, "" );
+        sb.replace( sb.length() - 1, sb.length(), "" );
+        return getIdView() + ":\"" + StringEscapeUtils.escapeJava( sb.toString() ) + "\"";
     }
 
     public static class HunkSerializer implements JsonSerializer<Hunk> {
@@ -144,20 +161,4 @@ public class Hunk extends Base implements IModel {
         }
     }
 
-    public String getHunkName() {
-        return hunkName;
-    }
-
-    public void setHunkName( String hunkName ) {
-        this.hunkName = hunkName;
-        setUpdateFlag( true );
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder( getContent() );
-        sb.replace( 0, 1, "" );
-        sb.replace( sb.length() - 1, sb.length(), "" );
-        return getIdView() + ":\"" + StringEscapeUtils.escapeJava( sb.toString() ) + "\"";
-    }
 }

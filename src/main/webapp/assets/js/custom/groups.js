@@ -10,7 +10,31 @@ function join(formId)
         data : postData,
         success:function(data, textStatus, jqXHR)
         {
-          $(".joined-"+formId).text(parseInt($(".joined-"+formId).text(),10)+1);
+          $(".group-"+formId).html(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+          //if fails
+        }
+      });
+    e.preventDefault(); //STOP default action
+  });
+
+  $("form#"+formId).submit();
+}
+
+function cancel(formId)
+{
+  $("form#"+formId).submit(function(e)
+  {
+    var postData = $(this).serializeArray();
+    $.ajax(
+      {
+        url : "/group.do",
+        type: "POST",
+        data : postData,
+        success:function(data, textStatus, jqXHR)
+        {
           $(".group-"+formId).html(data);
         },
         error: function(jqXHR, textStatus, errorThrown)

@@ -10,7 +10,7 @@
                     <h2 class="card-heading simple">
                         <b><%=((Changeset)f.getTrueSelf()).getPeer().getFirstName()%></b>
                         suggested changes to
-                        <b><%=((Changeset)f.getTrueSelf()).getDocument().getDocName()%></b>
+                        <b><%=((Changeset)f.getTrueSelf()).getHunk().getDocument().getDocName()%></b>
                     </h2>
                     <div class="card-body">
 
@@ -33,7 +33,7 @@
 
 
                         <div class="clearfix"></div>
-                        <%Integer documentId = ((Changeset)f.getTrueSelf()).getDocumentId();%>
+                        <%Integer documentId = ((Changeset)f.getTrueSelf()).getHunk().getDocumentId();%>
                         <p><a class="btn" href="/peer/<%=sessionUser.getId()%>/document/<%=documentId%>">View Document &raquo;</a></p>
                     </div>
                 </div>
@@ -47,9 +47,9 @@
             <div class="row-fluid">
                 <div class="card-white">
                     <div class="card-heading image">
-                        <img src="<%= ((Comment)f.getTrueSelf()).getPeer().getAvatar().getDefaultAvatarSource( request ) %>" alt=""/>
+                        <img src="<%= ((Comment)f.getTrueSelf()).getPosterPeer().getAvatar().getDefaultAvatarSource( request ) %>" alt=""/>
                         <div class="card-heading-header">
-                            <h4><%=((Comment)f.getTrueSelf()).getPeer().getFirstName()%> commented ...</h4>
+                            <h4><%=((Comment)f.getTrueSelf()).getPosterPeer().getFirstName()%> commented ...</h4>
                             <span><%=((Comment)f.getTrueSelf()).getMessage()%></span>
                         </div>
                         <div> &nbsp</div>
@@ -65,13 +65,30 @@
                     <div class="card-heading image">
                         <img src="<%= ((Broadcast)f.getTrueSelf()).getPeer().getAvatar().getServletContextAvatarPath( request ) %>" alt=""/>
                         <div class="card-heading-header">
-                            <h4><%=((Broadcast)f.getTrueSelf()).getPeer().getFirstName()%> broadcasted ...</h4>
+                            <h4><%=((Broadcast)f.getTrueSelf()).getPeer().getFirstName()%> broadcasted from <%=((Broadcast)f.getTrueSelf()).getGroup().getGroupName()%>...</h4>
                             <span><%=((Broadcast)f.getTrueSelf()).getMessage()%></span>
                         </div>
                         <div> &nbsp</div>
                     </div>
                 </div>
             </div>
+
+        <% } %>
+
+
+        <% if (f.getType().equalsIgnoreCase("Joingroup")){%>
+        <div class="row-fluid">
+            <div class="card-white">
+                <div class="card-heading image">
+                    <img src="<%= ((Joingroup)f.getTrueSelf()).getPeer().getAvatar().getServletContextAvatarPath( request ) %>" alt=""/>
+                    <div class="card-heading-header">
+                        <h4><%=((Joingroup)f.getTrueSelf()).getPeer().getFirstName()%> Request to join your group ...</h4>
+                        <span>Peer <%=((Joingroup)f.getTrueSelf()).getPeer().getUserName()%> wants to join your <%=((Joingroup)f.getTrueSelf()).getGroup().getGroupName()%> group</span>
+                    </div>
+                    <div> &nbsp</div>
+                </div>
+            </div>
+        </div>
 
         <% } %>
 

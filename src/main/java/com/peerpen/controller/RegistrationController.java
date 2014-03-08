@@ -27,16 +27,17 @@ public class RegistrationController extends HttpServlet {
             throws ServletException, IOException {
         try {
             InternalHttpServletRequest internalRequest = InternalHttpServletRequest.transform( request );
-            internalRequest.expectPresenceOf( "first_name", "last_name", "user_name", "email", "password" );
+            internalRequest.expectPresenceOf( "first_name", "last_name", "user_name", "email", "password", "confirm_password");
             Map<String, Object> map = (Map<String, Object>) request.getAttribute( "parameters" );
             Peer peer = (new Peer()).find( ImmutableMap.of( "userName", map.get( "userName" ) ) );
             if ( peer != null ) {
                 throw new RegistrationFailedException( "User already exists " + map.get( "userName" ) );
             }
             Peer p = new Peer( map );
+            p.setCompleteProfile(0);
             // TODO: Validate uniqueness either using Java, or database constraint
             // Create the user unquestionably given that this user does not exists already
-            if ( (map.get( "password" )).equals( map.get( "confirmPassword" ) ) && p.save() ) {
+            if ( (map.get( "password" )).equals( map.get( "confirmPassword" ) )&& p.save()) {
                 p.setSessionId( request.getSession().getId() );
                 p.update();
                 response.sendRedirect("/peer/" + p.getId() + "/profile");

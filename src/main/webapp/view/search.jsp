@@ -82,7 +82,7 @@
                 Peer p = (Peer) resultItem;
             %>
 
-            <tr><td>Peer</td><td><a href="/peer/<%= p.getId() %>/profile"> <%= p.getUserName() %></a>
+            <tr><td>Peer</td><td><a href="/peer/<%= p.getId() %>"> <%= p.getUserName() %></a>
             (<%= p.getFirstName() %> <%= p.getLastName() %>)
             point: <%= p.getPoint() %></td></tr>
 

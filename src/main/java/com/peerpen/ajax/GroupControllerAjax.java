@@ -1,5 +1,6 @@
 package com.peerpen.ajax;
 
+import com.google.common.collect.Maps;
 import com.peerpen.framework.GenericApplicationServlet;
 import com.peerpen.framework.InternalRequestDispatcher;
 import com.peerpen.framework.exception.ServletPathDontExistException;
@@ -15,6 +16,7 @@ import java.util.Map;
 
 public class GroupControllerAjax extends GenericApplicationServlet
 {
+  // join
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
     Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
@@ -27,9 +29,10 @@ public class GroupControllerAjax extends GenericApplicationServlet
 
     response.setContentType("text/plain");
     response.setCharacterEncoding("UTF-8");
-    response.getWriter().write(String.format(getLeaveForm(), group.getId(), group.getId(), peer.getId(), group.getId()));
+    response.getWriter().write(String.format(getPendingForm(), group.getId(), group.getId(), peer.getId(), group.getId()));
   }
 
+  // leave
   protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
     Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
@@ -37,6 +40,24 @@ public class GroupControllerAjax extends GenericApplicationServlet
     Group group = new Group().find(Integer.parseInt(parameters.get("groupid")));
     group.removePeer(peer);
     group.update();
+
+    response.setContentType("text/plain");
+    response.setCharacterEncoding("UTF-8");
+    response.getWriter().write(String.format(getJoinForm(), group.getId(), group.getId(), peer.getId(), group.getId()));
+  }
+
+  // cancel
+  protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+  {
+    Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
+    Peer peer = new Peer().find(Integer.parseInt(parameters.get("peerid")));
+    Group group = new Group().find(Integer.parseInt(parameters.get("groupid")));
+
+    Map<String, Object> hm = Maps.newHashMap();
+    hm.put("peerId", peer.getId());
+    hm.put("groupId", group.getId());
+    Joingroup joingroup = new Joingroup().find(hm);
+    joingroup.destroy();
 
     response.setContentType("text/plain");
     response.setCharacterEncoding("UTF-8");
@@ -64,13 +85,13 @@ public class GroupControllerAjax extends GenericApplicationServlet
         "            </form>";
   }
 
-  private String getLeaveForm()
+  private String getPendingForm()
   {
     return "<form action=\"\" class=\"form-horizontal\" id=\"%s\" role=\"form\">\n" +
         "              <input type=\"hidden\" name=\"groupid\" value=\"%s\">\n" +
         "              <input type=\"hidden\" name=\"peerid\" value=\"%s\">\n" +
-        "              <input type=\"hidden\" name=\"_method\" value=\"delete\">\n" +
-        "              <button type=\"button\" class=\"btn btn-success\" onclick=\"leave(%s);\" ><i class=\"fa fa-check-circle\"></i> Joined!</button>\n" +
+        "              <input type=\"hidden\" name=\"_method\" value=\"put\"/>\n" +
+        "              <button type=\"button\" class=\"btn btn-default\" onclick=\"cancel(%s);\" >Pending request</button>\n" +
         "            </form>";
   }
 

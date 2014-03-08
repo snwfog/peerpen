@@ -18,7 +18,7 @@
                     </a>
                 </div>
                 <div class="info">
-                    <h4>User Name</h4>
+                    <h4><%=sessionUser.getFirstName()%> <%=sessionUser.getLastName()%></h4>
                 </div>
 
                 <div class="bottom">
