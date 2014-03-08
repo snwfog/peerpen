@@ -24,7 +24,7 @@ public class NotificationController extends HttpServlet {
                 Peer sessionUser = (Peer) request.getAttribute("sessionUser");
                 Notification notification = new Notification();
                 String json = new Gson().toJson(notification.getNotification(sessionUser));
-//                notification.updateNotification(sessionUser);
+                notification.updateNotification(sessionUser);
 
 
                 response.setContentType("application/json");
