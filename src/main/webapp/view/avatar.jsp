@@ -20,38 +20,35 @@
 <script src="/assets/js/lib/dropzone/dropzone-amd-module.min.js"></script>
 <script src="/assets/js/custom/upload.bare.js"></script>
 
-<div class="container">
-    <div class="row">
-        <a id="upload-new-avatar" href="#" class="btn btn-info">Upload New Avatar</a>
+<div class="wrap-container">
 
-        <div class="col-md-8">
-            <div id="avatar-original-container">
-                <form action="/peer/<%= sessionPeer.getId() %>/profile/avatar" method="post">
-                    <input type="hidden" id="avatar-crop-x1" name="x1" value="">
-                    <input type="hidden" id="avatar-crop-x2" name="x2" value="">
-                    <input type="hidden" id="avatar-crop-y1" name="y1" value="">
-                    <input type="hidden" id="avatar-crop-y2" name="y2" value="">
-                    <input type="hidden" id="avatar-crop-width" name="width" value="">
-                    <input type="hidden" id="avatar-crop-height" name="height" value="">
+    <div class="img-circle avatar-thumb" id="avatar-preview-container">
+        <img id="avatar-preview"
+             src="<%= sessionPeer.getAvatar().getRelativeServletContextAvatarPathForSize( request, Avatar.Size.ORIGINAL )%>"
+             alt="<%= sessionPeer.getFirstName() %>" width="200px"/>
+    </div>
 
-                    <div id="avatar-original-area">
-                        <img id="avatar"
-                             src="<%= sessionPeer.getAvatar().getServletContextAvatarPathForSize( request, Avatar.Size.ORIGINAL ) %>"
-                             alt="<%= sessionPeer.getFirstName() %>"/>
-                    </div>
+    <div id="avatar-original-container" class="avatar-main">
+        <form action="/peer/<%= sessionPeer.getId() %>/profile/avatar" method="post">
+            <input type="hidden" id="avatar-crop-x1" name="x1" value="">
+            <input type="hidden" id="avatar-crop-x2" name="x2" value="">
+            <input type="hidden" id="avatar-crop-y1" name="y1" value="">
+            <input type="hidden" id="avatar-crop-y2" name="y2" value="">
+            <input type="hidden" id="avatar-crop-width" name="width" value="">
+            <input type="hidden" id="avatar-crop-height" name="height" value="">
 
-                    <button class="btn btn-large btn-success" type="submit">Accept</button>
-
-                </form>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div id="avatar-preview-container">
-                <img id="avatar-preview"
-                     src="<%= sessionPeer.getAvatar().getRelativeServletContextAvatarPathForSize( request, Avatar.Size.ORIGINAL )%>"
+            <div id="avatar-original-area" class="avatar-box">
+                <img id="avatar" src="<%= sessionPeer.getAvatar().getServletContextAvatarPathForSize( request, Avatar.Size.ORIGINAL ) %>"
                      alt="<%= sessionPeer.getFirstName() %>"/>
             </div>
-        </div>
+
+            <div class="avatar-buttons">
+                <a id="upload-new-avatar" href="#" class="btn btn-info">Upload New Avatar</a>
+
+                <button class="btn btn-large btn-success" type="submit">Accept</button>
+            </div>
+
+        </form>
     </div>
 </div>
 <%@ include file="/view/includes/static/footer.jsp" %>
