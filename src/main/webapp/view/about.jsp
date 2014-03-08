@@ -211,7 +211,7 @@
             <img src="/assets/images/logo55x55.png"><br />
             Peter Trang
             <span class="muted founder-head-master">Young Visionary</span></h2>
-        <p class="lead founder-header"><i>"Peerpen’s vision is to change the way people share advice"</i>
+        <p class="lead founder-header"><i>"Peerpen&#39;s vision is to change the way people share advice"</i>
             <br /><br />
             PeerPen is a socially driven community that allows its members to correct resumes and cover letters by providing feedback and advice on an interactive platform. It revolves around a social and dynamic environment with an intuitive web interface, user friendly functions, and provides an intrinsic satisfaction through collaboration.
         </p></div>

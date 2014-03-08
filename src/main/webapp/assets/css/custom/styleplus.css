@@ -1,5 +1,8 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,300|Quicksand:300,400,700);
+
 body {
-    background-color:#fff;
+    font-family: Quicksand, sans-serif;
+    background-color:#ecf0f1;
 }
 
 /* BEGINING OF FEED STYLE */
@@ -269,6 +272,74 @@ body {
 }
 
 /* END OF ABOUT US STYLE */
+
+/* BEGINNING OF AVATAR STYLE */
+#avatar-original-area.avatar-box {
+    background-color:#fff;
+    text-align:center;
+    margin:auto;
+    padding: 25px 25px 25px 50px;
+    -webkit-box-shadow: 10px 10px 0px 0px rgba(127, 140, 141, 1);
+    -moz-box-shadow: 10px 10px 0px 0px rgba(127, 140, 141, 1);
+    box-shadow: 10px 10px 0px 0px rgba(127, 140, 141, 1);
+}
+
+.avatar-buttons {
+    text-align:center;
+    position:relative; top:25px;
+}
+
+.avatar-main {
+    position:relative;
+    top:-100px;
+}
+#avatar-preview-container.avatar-thumb {
+    width:200px;
+    height:200px;
+    margin:auto;
+    position:relative;
+    left:-250px; z-index:5;
+}
+/* END OF AVATAR STYLE */
+
+/* BEGINNING OF DOCUMENTS STYLE */
+.documents-clear-box {
+    margin-top:10px;
+}
+
+.documents-slider {
+    float:right;
+    width:70%;
+    margin:0 15% 0 0;
+}
+
+.documents-slider-content {
+    background-color:#ecf0f1;
+    padding-top:50px;
+    box-shadow:
+        0 0 0 15px #bdc3c7,
+        0 0 0 30px #95a5a6,
+        0 0 0 45px #7f8c8d;
+    -webkit-box-shadow: inset 0px 10px 150px 0px rgba(127,140,141,0.5);
+    -moz-box-shadow: inset 0px 10px 150px 0px rgba(127,140,141,0.5);
+    box-shadow: inset 0px 10px 150px 0px rgba(127,140,141,0.5);
+}
+
+.documents-slider-header {
+    background-color:#bdc3c7;
+    padding:5px;
+    font-family: 'Oswald', sans-serif;
+    font-weight:400;
+    box-shadow: 0 0 0 15px #95a5a6,
+    0 0 0 30px #7f8c8d;
+}
+
+#documentsFlow.documents-slider-header-text {
+    font-size:18px;
+    color:#fff;
+}
+
+/* END OF DOCUMENTS STYLE */
 
 /* BEGINNING OF PROFILE STYLE */
 .profile-about-me-body {
