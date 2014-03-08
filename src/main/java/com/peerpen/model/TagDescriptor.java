@@ -100,12 +100,10 @@ public class TagDescriptor extends Base implements IModel {
     }
 
     public static void main (String[] args){
-        TagDescriptor td = new TagDescriptor(  ).getTagDescriptorIfExists( "qweqwewqeqwewq" );
-        if (td != null){
-            System.out.println(td.getTagName());
-        }else{
-            System.out.println("doesnt exists");
-        }
+        TagDescriptor td1 = new TagDescriptor(  );
+        td1.setTagName( "ccc" );
+
+        //td1.save();
     }
 
     public static List<TagDescriptor> getTagCloud()
