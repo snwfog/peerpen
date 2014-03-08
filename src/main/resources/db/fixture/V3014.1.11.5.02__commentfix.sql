@@ -187,7 +187,6 @@ INSERT INTO `peers_groups` (`peer_id`, `group_id`)
   (2,13),
   (2,18),
   (2,20),
-  (3,2),
   (3,5),
   (3,6),
   (3,7),

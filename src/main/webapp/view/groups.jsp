@@ -25,7 +25,12 @@
             <input type="hidden" name="groupid" value="<%= group.getId()%>">
             <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>">
             <input type="hidden" name="_method" value="delete"/>
-            <button type="button" class="btn btn-success" onclick="leave(<%= group.getId()%>);"><i class="fa fa-check-circle"></i> Joined!</button>
+            <% if(group.getAdminId()!=sessionUser.getId()){%>
+            <button type="button" class="btn btn-danger" onclick="leave(<%= group.getId()%>);"><i class="fa fa-times-circle"></i> Leave Group!</button>
+            <%}else
+            {%>
+              <button type="button" class="btn btn-default"><i class="fa fa-times-circle"></i> My Group!</button>
+              <%}%>
           </form>
           <% }else if(group.getPending(sessionUser.getId())){%>
           <form action="" class="form-horizontal" id="<%= group.getId()%>" role="form">
