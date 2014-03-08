@@ -1,6 +1,12 @@
-### Concordia Capstone 2013
+# Peerpen
 
-##### Setting up a Tomcat web application project in IntelliJ
+## About
+
+PeerPen is a socially driven community that allows its members to correct resumes and cover letters by providing feedback and advice on an interactive platform. It revolves around a social and dynamic environment with an intuitive web interface, user friendly functions, and provides an intrinsic satisfaction through collaboration.
+
+## Development environment installation
+
+### Setting up a Tomcat web application project in IntelliJ
 
 Without generalizing, here is the folder structure that you are suppose to see when opening up (or importing in) the project into IntelliJ.
 
@@ -32,5 +38,17 @@ Finally, you need to add a running configuration from:
 ![add tomcat](http://cdn.charlescy.com/blog/img/add-tomcat.png)
 ![add deploy artifact](http://cdn.charlescy.com/blog/img/add-deploy-artifact.png)
 
+## Contributors	
 
-
+- Peter Trang : He is motivated by success
+- Michelle Hui : Peter's girlfriend
+- Wais Khedri : He just likes to gym, nothing more
+- Mike Pham : He is an alcorexic
+- Bobby Yit : He loves long walk on the beach
+- Charles Yang : His favourite colour is orange
+- Saud Musafer : He is brown
+- Quang Tran : He loves his BMW 335i more than his girlfriend
+- Harry Haiyaya : He has an large Panda with a hole in its bumbum
+- Joe Zhou : He's from China
+- Robson Razafindramary : He loves watching movies
+- Sulong Ly : He loves japan
