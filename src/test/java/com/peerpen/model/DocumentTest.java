@@ -90,7 +90,8 @@ public class DocumentTest
   @Test
   public void testGetHunks() throws Exception
   {
-
+     Hunk hunk;
+    assert ()
   }
 
   @Test
