@@ -102,8 +102,9 @@ public class Changeset extends Feedable implements IModel, Commentable
   }
 
   @Override
-  public void findComments()
+  public List<Comment> findComments()
   {
     Comment.findComments(this, this.getId());
+    return null;
   }
 }
