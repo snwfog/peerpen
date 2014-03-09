@@ -83,28 +83,6 @@ public class Document extends Taggable implements IModel, Commentable
     setUpdateFlag(true);
   }
 
-  public static void main(String[] args)
-  {
-    String comm = "content of comment";
-
-    Document d = new Document().find(2);
-//    System.out.println("doc test");
-//    System.out.println("username:" + d.getPeer().getUserName());
-//    System.out.println("hunks:" + d.getHunks());
-//    System.out.println("changeset:" + d.getChangesets());
-//
-//     d.createComment("bitch5");
-//     d.deleteComment(2);
-    d.findComments();
-
-    List<Comment> comments = d.getComments();
-    for (Comment comment : comments)
-    {
-      System.out.println(comment.getMessage());
-    }
-
-  }
-
   public Date getLastModifiedDate()
   {
     return lastModifiedDate;
@@ -219,9 +197,9 @@ public class Document extends Taggable implements IModel, Commentable
   }
 
   @Override
-  public void findComments()
+  public List<Comment> findComments()
   {
-    Comment.findComments(this, this.getId());
+    return Comment.findComments(this, this.getId());
   }
 
   /*
@@ -249,5 +227,10 @@ public class Document extends Taggable implements IModel, Commentable
     Document myOther = (Document) other;
     if (this.getId() == myOther.getId()) return true;
     return false;
+  }
+
+  public static void main(String[] args)
+  {
+
   }
 }
