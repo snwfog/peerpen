@@ -29,7 +29,7 @@ public class Feedable extends Base {
     @ActiveRecordField
     private Integer userId;
 
-    private Feedable trueSelf;
+    private Feedable trueSelf;  //Actual Object that feedable is attached to
 
     private String modelPath = "com.peerpen.model.";
 
