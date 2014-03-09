@@ -10,7 +10,7 @@ public class FeedableTest {
     @Test
     public void commentCreateFeedableTest()
     {
-        Integer oldHighestID = (Integer) Manager.find("SELECT max(id) as id FROM feedables").get("id");
+        Integer nextId = (Integer) Manager.find("SELECT Auto_increment FROM information_schema.tables WHERE table_schema = 'peerpendb' AND table_name='feedables'").get("autoIncrement");
         Comment c = new Comment();
         c.setMessage("Unit Testing");
         c.setObjectId(1);
@@ -18,15 +18,19 @@ public class FeedableTest {
         c.save();
         c.setPosterPeerId(1);
         Integer currentHighestID = (Integer) Manager.find("SELECT max(id) as id FROM feedables").get("id");
-        Integer ExpectedId = oldHighestID+1;
-        Assert.assertEquals(currentHighestID, ExpectedId);
+        Assert.assertEquals(currentHighestID, nextId);
 
+        Document d = new Document().find(1);
         Feedable f = new Feedable().find(currentHighestID);
         Assert.assertNotNull(f);
         Assert.assertEquals(f.getType(), "Comment");
         Assert.assertEquals(f.getChildId(), c.getId());
+        Assert.assertEquals(f.getStatus(), "new");
+        Assert.assertEquals(f.getUserId(), (Integer) d.getPeerId());
         Assert.assertTrue(c.destroy());
-        Assert.assertTrue(f.destroy());
+
+        f = new Feedable().find(currentHighestID);
+        Assert.assertNull(f);
     }
 
     @Test
