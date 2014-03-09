@@ -1,11 +1,6 @@
 package com.peerpen.model;
 
 import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotSame;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import org.testng.annotations.Test;
 
