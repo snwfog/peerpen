@@ -2,6 +2,9 @@ package com.peerpen.model;
 
 import static org.testng.AssertJUnit.assertEquals;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -32,6 +35,13 @@ public class TagDescriptorTest {
     {
         td1.destroy();
         td2.destroy();
+    }
+
+    @Test
+    public void constructorTest(){
+        Map<String, Object> populate = new HashMap<>();
+        populate.put("tagName", "testtag");
+        TagDescriptor t = new TagDescriptor(populate);
     }
 
     @Test
