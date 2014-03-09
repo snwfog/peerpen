@@ -303,8 +303,34 @@ body {
 /* END OF AVATAR STYLE */
 
 /* BEGINNING OF DOCUMENTS STYLE */
+.documents-body-item {
+    font-style:normal;
+    font-weight:normal;
+    font-size:25px;
+}
+
+a.documents-body-item-text {
+    font-style:normal;
+    color:#000;
+    font-weight:400;
+}
+
 .documents-clear-box {
     margin-top:10px;
+}
+
+.documents-indicator {
+    background-color:transparent;
+}
+
+#documents-scrollbar-main {
+    width:48px; !important
+height:16px; !important
+cursor: pointer;
+}
+
+#documents-scrollbar-position {
+    color:transparent;
 }
 
 .documents-slider {
@@ -315,7 +341,6 @@ body {
 
 .documents-slider-content {
     background-color:#ecf0f1;
-    padding-top:50px;
     box-shadow:
         0 0 0 15px #bdc3c7,
         0 0 0 30px #95a5a6,
@@ -334,7 +359,7 @@ body {
     0 0 0 30px #7f8c8d;
 }
 
-#documentsFlow.documents-slider-header-text {
+a.documents-slider-header-text {
     font-size:18px;
     color:#fff;
 }

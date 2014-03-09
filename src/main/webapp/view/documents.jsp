@@ -17,15 +17,14 @@
         <div class="col-md-4">
             <div class="row text-center" id="documentBar">
                 <input type="hidden" value="<%=peer.getId()%>" id="ajaxPeer">
-                <a class="btn btn-primary" href="#" id="viewDocument" disabled>View Detail Document</a>
-                <a class="btn btn-primary" href="#" id="editDocument" disabled>Edit Document</a>
+                <a class="btn btn-warning btn-sm" href="#" id="viewDocument" disabled>View Detail Document</a>
+                <a class="btn btn-warning btn-sm" href="#" id="editDocument" disabled>Edit Document</a>
             </div>
         </div>
 
         <div class="col-md-4">
         </div>
     </div>
-
 
     <div class="row top-buffer">
         <div class="col-md-2">
@@ -52,26 +51,27 @@
 <div class="navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="row">
-            <div class="navbar-inverse">
+            <div class="navbar-inverse documents-slider-header">
                 <div class="row text-center">
-                    <a href="documentsFlow" id="slideDiv" class="">Slide Document Navigator</a>
+                    <a href="documentsFlow" class="" style="font-size:18px;
+    color:#fff;" id="slideDiv">Slide Document Navigator</a>
                 </div>
             </div>
         </div>
-        <div class="row" style="background-color:black;">
-            <div id="documentsFlow" style="float: right; width: 70%; margin:0 15% 0 0;">
+        <div class="row documents-slider-content">
+            <div id="documentsFlow" class="documents-slider">
                 <div id="contentFlow" class="ContentFlow ContentFlowAddOn_black">
-                    <div style="margin-top:10px;">
+                    <div class="documents-clear-box">
                     </div>
                     <!-- should be place before flow so that contained images will be loaded first -->
-                    <div class="loadIndicator"><div class="indicator"></div></div>
+                    <div class="loadIndicator documents-indicator" style="background-color:transparent;"><div class="indicator"></div></div>
 
                     <div class="flow">
                         <% for(Document d : documents) {%>
                         <div class="item">
                             <img class="content" src="/assets/images/clipart-document-management.png" id="document-<%=d.getId()%>"/>
-                            <div class="caption">
-                                <a href="/peer/<%= peer.getId() %>/document/<%= d.getId()%>">
+                            <div class="caption documents-body-item">
+                                <a href="/peer/<%= peer.getId() %>/document/<%= d.getId()%>" class="documents-body-item-text" style="font-style:normal; color:#000; font-weight:400;">
                                     <%=d.getDocName()%>
                                 </a>
                             </div>
@@ -80,7 +80,7 @@
                     </div>
                     <div class="globalCaption"></div>
                     <div class="scrollbar">
-                        <div class="slider"><div class="position"></div></div>
+                        <div class="slider" style="width:48px; height:16px; cursor: pointer;"><div class="position" style="color:transparent;"></div></div>
                     </div>
 
                 </div>
