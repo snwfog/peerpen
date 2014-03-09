@@ -1,10 +1,15 @@
 package com.peerpen.model;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import com.sunnyd.database.Manager;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import javax.servlet.http.HttpServletRequest;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +34,23 @@ public class PeerTest {
         Assert.assertFalse(a.getUpdateFlag());
         a.setFirstName("a");
         a.setLastName("b");
+        a.setCountry("canada");
+        a.setEmail("wais@hotmail.com");
+        a.setExperience(3);
+        a.setUserName("w");
+        a.setPassword("w");
+        a.setPoint(0);
+        a.setDescription("fitness");
+        a.setIndustry("software");
+        a.setGender("M");
+        a.setPersonalWebsite("www.wais.com");
         a.setCompleteProfile(0);
-
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        try{
+        a.setDateOfBirth(formatter.parse("12-12-1990"));
+        }catch(Exception e) {
+            System.out.println("Unable to parse date stamp");
+        }
 
         Document d = new Document();
         d.setDocName("aiodjoadjoia");
@@ -69,6 +89,19 @@ public class PeerTest {
         Peer peer = new Peer().find(peerId);
         Assert.assertEquals("a", peer.getFirstName());
         Assert.assertEquals("b", peer.getLastName());
+        Assert.assertEquals("canada", peer.getCountry());
+        Assert.assertEquals("fitness", peer.getDescription());
+        Assert.assertEquals("wais@hotmail.com", peer.getEmail());
+        Assert.assertEquals("software", peer.getIndustry());
+        Assert.assertEquals("M", peer.getGender());
+        Assert.assertEquals("w", peer.getUserName());
+        Assert.assertEquals("w", peer.getPassword());
+        Assert.assertEquals("www.wais.com", peer.getPersonalWebsite());
+        Assert.assertEquals((Object) 0, peer.getPoint());
+        Assert.assertEquals((Object) 3, peer.getExperience());
+        Assert.assertEquals((Object) 0, peer.getCompleteProfile());
+        Assert.assertNull(peer.getAvatarId());
+
         Integer a = 1;
         Integer b = 1;
         Integer c = 1;
@@ -123,17 +156,6 @@ public class PeerTest {
     }
 
 
-    @Test(dependsOnMethods = { "TestUpdate" })
-    public void TestDestroy() {
-        Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
-        Peer p = new Peer().find(peerId);
-        Assert.assertEquals("john", p.getFirstName());
-        Assert.assertEquals("malkovich", p.getLastName());
-        Assert.assertTrue(p.destroy());
-        Assert.assertNull(p.getId());
-    }
-
-
     @Test(dependsOnMethods = { "TestFind"})
     public void testGetDocuments() throws Exception {
         Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
@@ -145,35 +167,23 @@ public class PeerTest {
 
     }
 
-    @Test
-    public void testSetDocuments() throws Exception {
-
+    @AfterClass
+    public void TestDestroy() {
+        Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
+        Peer p = new Peer().find(peerId);
+        Assert.assertEquals("john", p.getFirstName());
+        Assert.assertEquals("malkovich", p.getLastName());
+        Assert.assertTrue(p.destroy());
+        Assert.assertNull(p.getId());
     }
 
-    @Test
-    public void testGetChangesets() throws Exception {
 
-    }
-
-    @Test
-    public void testSetChangesets() throws Exception {
-
-    }
-
-    @Test
-    public void testGetGroups() throws Exception {
-
-    }
-
-    @Test
-    public void testSetGroups() throws Exception {
-
-    }
-
-    @Test
-    public void testHasAvatar() throws Exception {
-
-    }
+//    @Test
+//    public void testHasAvatar() throws Exception {
+//        Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
+//        Peer p = new Peer().find(peerId);
+//        Assert.assertFalse(p.hasAvatar());
+//    }
 
     @Test
     public void testGetAvatar() throws Exception {
@@ -182,12 +192,21 @@ public class PeerTest {
 
     @Test
     public void testGetMatchedPeers() throws Exception {
+        Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
 
+        Peer p = new Peer().find(peerId);
+        List<Peer>peers = new ArrayList<>();
+        peers.add(p);
+        Assert.assertEquals(peers,p.getMatchedPeers(p.getFirstName()));
     }
 
     @Test
     public void testGetSuggestions() throws Exception {
-
+        Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
+        Peer p = new Peer().find(peerId);
+        List<Peer>peers = new ArrayList<>();
+        peers.add(p);
+        Assert.assertEquals(peers,p.getSuggestions(p.getUserName(),1));
     }
 
     @Test
@@ -195,13 +214,17 @@ public class PeerTest {
 
     }
 
-    @Test
-    public void testIsValidLogin() throws Exception {
-
-    }
+//    @Test
+//    public void testIsValidLogin() throws Exception {
+//        Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
+//        Peer p = new Peer().find(peerId);
+//        p.isValidLogin();
+//    }
 
     @Test
     public void testEquals() throws Exception {
-
+        Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
+        Peer p = new Peer().find(peerId);
+        Assert.assertTrue(p.equals(p));
     }
 }
