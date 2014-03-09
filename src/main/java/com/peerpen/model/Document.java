@@ -156,20 +156,6 @@ public class Document extends Taggable implements IModel, Commentable
     return documents;
   }
 
-  // method used for search autocomplete
-  //public List<String> getSuggestedDocuments(String keyword, int limit)
-  //{
-  //  String sql = "SELECT `doc_name` FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%' LIMIT " + limit;
-  //  List<Document> documents = new Document().queryAll(sql);
-  //  // store only doc_name to list
-  //  List<String> suggestions = new ArrayList<String>();
-  //  for (int i = 0; i < documents.size(); i++)
-  //  {
-  //    suggestions.add(documents.get(i).getDocName());
-  //  }
-  //  return suggestions;
-  //}
-
   public List<Document> getSuggestions(String keyword, int limit)
   {
     String sql = "SELECT * FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%' LIMIT " + limit;
@@ -229,8 +215,4 @@ public class Document extends Taggable implements IModel, Commentable
     return false;
   }
 
-  public static void main(String[] args)
-  {
-
-  }
 }
