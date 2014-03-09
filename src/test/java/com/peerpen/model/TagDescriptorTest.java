@@ -2,6 +2,12 @@ package com.peerpen.model;
 
 import static org.testng.AssertJUnit.assertEquals;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -14,31 +20,43 @@ import org.testng.annotations.Test;
 
 public class TagDescriptorTest {
 
+    private TagDescriptor td1;
+    private TagDescriptor td2;
+
+    @BeforeMethod
+    public void setUp() throws Exception
+    {
+        td1 = new TagDescriptor(  ).getTagDescriptor( "concordia" );
+        td2 = new TagDescriptor(  ).getTagDescriptor( "CONCORDIA" );
+    }
+
+    @AfterMethod
+    public void tearDown() throws Exception
+    {
+        td1.destroy();
+        td2.destroy();
+    }
+
+    @Test
+    public void constructorTest(){
+        Map<String, Object> populate = new HashMap<>();
+        populate.put("tagName", "testtag");
+        TagDescriptor t = new TagDescriptor(populate);
+    }
+
     @Test
     public void equalsTest(){
-        TagDescriptor td1 = new TagDescriptor(  );
-        TagDescriptor td2 = new TagDescriptor(  );
-        td1.setTagName( "concordia" );
-        td2.setTagName( "CONCORDIA" );
         assertEquals( td1.equals( td2), true );
-
-        td1.setTagName( "concordia " );
-        //System.out.println(td1.equals( td2 ));
-        assertEquals( td1.equals( td2 ), false );
     }
 
     @Test
     public void createTagDescriptorTest(){
-        String tagName = "commerce";
-        TagDescriptor td = new TagDescriptor(  );
-        td.setTagName( tagName );
-        assertEquals(td.getTagName(), "commerce");
+        assertEquals(td1.getTagName(), "concordia");
     }
 
     @Test
     public void getTagDescriptorIfExistsTest(){
-        TagDescriptor td1 = new TagDescriptor(  );
-        assertEquals( td1.getTagDescriptorIfExists( "ccc" ).getTagName(), "ccc" );
+        assertEquals( td1.getTagDescriptorIfExists( td1.getTagName() ).getTagName(), td1.getTagName() );
 
         TagDescriptor td2 = new TagDescriptor(  );
         assertEquals( td2.getTagDescriptorIfExists( "nonexistingtag" ), null );
@@ -46,8 +64,7 @@ public class TagDescriptorTest {
 
     @Test
     public void getTagDescriptorTest(){
-        TagDescriptor td = new TagDescriptor( ).getTagDescriptor( "1234567890" );
-        assertEquals( td.getTagName(), "1234567890" );
+        assertEquals( td2.getTagName(), "concordia" );
     }
 
 }

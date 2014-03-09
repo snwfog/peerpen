@@ -4,7 +4,9 @@ import static org.testng.AssertJUnit.assertEquals;
 import com.sunnyd.database.Manager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -42,6 +44,13 @@ public class TaggableTest {
         td2.destroy();
     }
 
+    @Test
+    public void constructorTest(){
+        Map<String, Object> populate = new HashMap<>();
+        populate.put("childId", 1);
+        populate.put("type", "Group");
+        Taggable t = new Taggable(populate);
+    }
 
     @Test
     public void testGetTagDescriptors() throws Exception {
