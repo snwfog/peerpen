@@ -36,9 +36,9 @@
                     for (Group group : groups){
                 %>
                 <div class="col-4 col-sm-3 col-lg-4" >
-                    <div style="height:300px; display:block; background-color:#fff; margin:10px; -webkit-box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
+                    <div style="height:325px; display:block; background-color:#fff; margin:10px; -webkit-box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
 				-moz-box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
-				box-shadow: 10px 10px 0px 0px rgba(149,165,166,1); padding:0px;">
+				box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);">
                         <h2 style="background-color:#e74c3c; color:#fff; margin:0px; padding:15px;"><a href="group/<%= group.getId()%>" style="text-decoration: none; font-family:'Oswald', sans-serif; color:#fff;"><%= group.getGroupName()%></a></h2>
                         <p style="font-size: medium; padding:10px;">
                             <span style="width:100%; display:block;  text-align:right; padding-bottom:10px;">&nbsp;&nbsp;<span style="font-size: medium;"><i class="fa fa-users"></i>&nbsp;<span class="joined-<%=group.getId()%>"><%= group.getPeers().size()%></span></span></span>
