@@ -66,13 +66,6 @@ public class SearchController extends HttpServlet {
         }
     }
 
-
-
-
-
-
-
-
     /**
      * doAutocomplete returns a json containing a list of suggested entity to the js so it can fill the suggestion dropdown box
      * @param request
@@ -120,7 +113,7 @@ public class SearchController extends HttpServlet {
 
 
     /**
-     *
+     * doSearch returns matching entities as a list to the view
      * @param request
      * @param response
      * @throws ServletException

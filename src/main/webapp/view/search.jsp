@@ -40,17 +40,7 @@
     </form>
 
 
-
-
-
-
-
-
-
     <br /><br /><br /><br /><br />
-
-
-
 
 
 <!-- SEARCH RESULT -->
@@ -109,8 +99,6 @@
         }
     }
 %>
-
-
 
 
     <br /><br /><br /><br /><br /><br /><br /><br />

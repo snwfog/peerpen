@@ -39,7 +39,6 @@ public class Autocomplete {
         return json;
     }
 
-
     public static String getSuggestedGroups(String keyword, int limit){
         String sql = "SELECT * FROM `groups` WHERE `group_name` LIKE '%" + keyword + "%' LIMIT " + limit;
         List<Group> list = new Group().queryAll(sql);
@@ -66,11 +65,5 @@ public class Autocomplete {
             }
         }
         return suggestions;
-    }
-
-    public static void main (String[] args){
-        System.out.println(getSuggestedDocuments( "res", 100 ));
-
-
     }
 }

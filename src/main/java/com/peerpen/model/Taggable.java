@@ -131,7 +131,6 @@ public class Taggable extends Base {
         return true;
     }
 
-
     /*
         ==============  HELPER METHODS ==================
      */
