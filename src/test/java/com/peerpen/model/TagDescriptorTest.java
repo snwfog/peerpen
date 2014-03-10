@@ -2,9 +2,13 @@ package com.peerpen.model;
 
 import static org.testng.AssertJUnit.assertEquals;
 
+import com.sunnyd.database.Manager;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -45,11 +49,6 @@ public class TagDescriptorTest {
     }
 
     @Test
-    public void equalsTest(){
-        assertEquals( td1.equals( td2), true );
-    }
-
-    @Test
     public void createTagDescriptorTest(){
         assertEquals(td1.getTagName(), "concordia");
     }
@@ -57,7 +56,6 @@ public class TagDescriptorTest {
     @Test
     public void getTagDescriptorIfExistsTest(){
         assertEquals( td1.getTagDescriptorIfExists( td1.getTagName() ).getTagName(), td1.getTagName() );
-
         TagDescriptor td2 = new TagDescriptor(  );
         assertEquals( td2.getTagDescriptorIfExists( "nonexistingtag" ), null );
     }
@@ -66,5 +64,22 @@ public class TagDescriptorTest {
     public void getTagDescriptorTest(){
         assertEquals( td2.getTagName(), "concordia" );
     }
+
+    @Test
+    public void getTagCloudTest(){
+        List<TagDescriptor> actual = TagDescriptor.getTagCloud();
+        List<TagDescriptor> expected = new TagDescriptor().queryAll( "SELECT * FROM tag_descriptors" );
+        assertEquals( actual.size(), expected.size());
+    }
+
+    @Test
+    public void equalsTest(){
+        Integer id = (Integer) Manager.find("SELECT max(id) as id FROM tag_descriptors").get("id");
+        TagDescriptor td = new TagDescriptor( ).find( id );
+        assertEquals( td.getId(), id );
+        assertEquals( td1.getId(), id );
+        assertEquals( td2.getId(), id );
+    }
+
 
 }

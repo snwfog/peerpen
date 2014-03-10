@@ -4,7 +4,6 @@ import com.sunnyd.Base;
 import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
-import com.sunnyd.annotations.ActiveRelationHasOne;
 
 import java.util.List;
 import java.util.Map;
@@ -31,7 +30,6 @@ public class Tag extends Base implements IModel {
     @ActiveRecordField
     private Integer taggableId;
 
-
     private TagDescriptor tagDescriptor;
     private Taggable taggable;
 
@@ -53,7 +51,6 @@ public class Tag extends Base implements IModel {
         this.tagDescriptorId = id;
     }
 
-
     public Integer getTaggableId(){
         return this.taggableId;
     }
@@ -61,8 +58,6 @@ public class Tag extends Base implements IModel {
     public void setTaggableId(Integer id){
         this.taggableId = id;
     }
-
-
 
     public TagDescriptor getTagDescriptor() {
         return tagDescriptor;
@@ -74,12 +69,7 @@ public class Tag extends Base implements IModel {
     }
 
     public void setTaggable (Taggable taggable){
-        this.taggableId = taggable.getTaggableId(); //!
+        this.taggableId = taggable.getTaggableId();
         this.taggable = taggable;
     }
-
-
-
-
-
 }

@@ -69,33 +69,15 @@ public class TaggableTest {
         expected.add( td2 );
         g.updateTags( expected );
         List<TagDescriptor> actual = g.getTagDescriptors();
+        System.out.println("expected:");
+        for(TagDescriptor t : expected){
+            System.out.println(t.getTagName());
+        }
+        System.out.println("actual:");
+        for(TagDescriptor t : actual){
+            System.out.println(t.getTagName());
+        }
         assertEquals( expected, actual );
-    }
-
-    @Test
-    public void testGetMatchedGroups() throws Exception {
-        List<TagDescriptor> tds = new ArrayList<>(  );
-        tds.add( td1 );
-        g.updateTags( tds );
-        List<Group> actual = new Group( ).getMatchedGroups( td1 );
-        assertEquals( g.getGroupName(), actual.get( 0 ).getGroupName() );
-        //List<Group> expected = new Group().queryAll( "SELECT taggables.* FROM `tags`, `groups`, `taggables` WHERE tags.`taggable_id` = taggables.`id` AND tags.`tag_descriptor_id` = " + td1.getId()
-        //        + " AND taggables.`type` = 'group' AND groups.`id` = taggables.`child_id`;" );
-    }
-
-    @Test
-    public void testGetMatchedGroupsList() throws Exception {
-
-    }
-
-    @Test
-    public void testGetMatchedDocuments() throws Exception {
-
-    }
-
-    @Test
-    public void testGetMatchedDocumentsList() throws Exception {
-
     }
 
     @Test
