@@ -6,9 +6,10 @@
     ArrayList<Group> navGroups =(ArrayList<Group>) sessionUser.getGroups();
 %>
 
+<div class="cover-container" style="padding:60px;"> </div>
 <div class="container-fluid wrap-container">
 
-    <h1 style="font-family:'Oswald', sans-serif; border-bottom:5px solid #bdc3c7;"><%=viewedUser.getFirstName()%> <%=viewedUser.getLastName()%>'s Profile</h1>
+    <h1 style="font-family:'Oswald', sans-serif; border-bottom:0px solid #bdc3c7;"><%=viewedUser.getFirstName()%> <%=viewedUser.getLastName()%>'s Profile</h1>
 
     <div class="row">
 
