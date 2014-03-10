@@ -4,54 +4,59 @@
 <%@ include file="/view/includes/static/navbar.jsp" %>
 <% ArrayList<Group> navGroups =(ArrayList<Group>) sessionUser.getGroups();%>
 
-<div class="container-fluids greyish">
-    <br/>
+<div class="cover-container"> </div>
 
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card-white hovercard big">
-                <img style="background-color:#fb5324;"/>
+<div id="feed-container" class="container-fluid wrap-container">
 
-                <div class="avatar">
-                    <a href="/peer/<%=sessionUser.getId()%>/profile">
-                        <img class="img-circle" src="<%= sessionUser.getAvatar().getDefaultAvatarSource( request ) %>">
-                    </a>
-                </div>
-                <div class="info">
+    <img />
+    <div class="avatar avatar-container" style="top:-25px; position:relative;">
+		<span class="info user-details-feed">
+		        <a href="/peer/<%=sessionUser.getId()%>/profile" style="color:#fff;">
                     <h4><%=sessionUser.getFirstName()%> <%=sessionUser.getLastName()%></h4>
-                </div>
-
-                <div class="bottom">
-                    <p><a class="btn btn-primary"
-                          href="/peer/<%=sessionUser.getId()%>/document">View Documents &raquo;</a></p>
-                </div>
-            </div>
-            <div class="col-md-offset-1">
-                <h3>Groups you have joined</h3>
-                <% for(Group g: navGroups){%>
-                <h4><a href="/group/<%=g.getId() %>"><%=g.getGroupName()%></a></h4>
-                <%}%>
-            </div>
-        </div>
-
-        <div class="col-md-8">
-            <% if ( request.getAttribute( "feedableList" ) != null ) {%>
-            <%@ include file="/view/feed/_showfeeds.jsp" %>
-            <% } else { %>
-            <div class="row-fluid">
-                <div class="card">
-                    <h2 class="card-heading simple">You Got No Feeds</h2>
-                </div>
-            </div>
-            <%}%>
-        </div>
-
-        <div class="col-md-1">
-        </div>
+                </a>
+		</span>
+        <a href="/peer/<%=sessionUser.getId()%>/profile">
+            <img class="img-circle" src="<%= sessionUser.getAvatar().getDefaultAvatarSource( request ) %>" width="230px">
+        </a>
 
     </div>
+
+    <br />
+
+    <div class="bottom" style="text-align:right; top:-25px; position:relative;">
+        <p>
+            <a class="btn btn-warning btn-sm" href="/peer/<%=sessionUser.getId()%>/profile">View Profile</a>
+            <a class="btn btn-warning btn-sm" href="/peer/<%=sessionUser.getId()%>/document">View Documents</a>
+        </p>
+    </div>
+
+    <h1 style="font-family:'Oswald', sans-serif; text-align:center; border-bottom:1px solid #bdc3c7;">Feeds</h1>
+
+    <!-- BEGINNING of _showfeed -->
+
+        <% if ( request.getAttribute( "feedableList" ) != null ) {%>
+    <%@ include file="/view/feed/_showfeeds.jsp" %>
+        <% } else { %>
+    <!-- WHEN NO FEEDS -->
+
+    <div class="row-fluid">
+        <div class="card">
+            <h2 class="card-heading simple">You Got No Feeds</h2>
+        </div>
+    </div>
+    <%}%>
+
 </div>
 
-<hr>
+</div>
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="/assets/js/lib/sticky/jquery.sticky.js"></script>
+<script>
+    $(document).ready(function()
+    {
+        $("#doc-changes-sticker").width($("#feed-container").width());
+        $("#doc-changes-sticker").sticky({topSpacing:0});
+    });
 
 <%@ include file="/view/includes/static/footer.jsp" %>
