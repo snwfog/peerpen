@@ -148,19 +148,19 @@ public class Document extends Taggable implements IModel, Commentable
     return comments;
   }
 
-  // method used by search
-  public List<Document> getMatchedDocuments(String keyword)
-  {
-    String sql = "SELECT * FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%'";
-    List<Document> documents = new Document().queryAll(sql);
-    return documents;
-  }
-
-  public List<Document> getSuggestions(String keyword, int limit)
-  {
-    String sql = "SELECT * FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%' LIMIT " + limit;
-    return new Document().queryAll(sql);
-  }
+  //// method used by search
+  //public List<Document> getMatchedDocuments(String keyword)
+  //{
+  //  String sql = "SELECT * FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%'";
+  //  List<Document> documents = new Document().queryAll(sql);
+  //  return documents;
+  //}
+  //
+  //public List<Document> getSuggestions(String keyword, int limit)
+  //{
+  //  String sql = "SELECT * FROM `documents` WHERE `doc_name` LIKE '%" + keyword + "%' LIMIT " + limit;
+  //  return new Document().queryAll(sql);
+  //}
 
   private static void closeConnection(Connection connection)
   {

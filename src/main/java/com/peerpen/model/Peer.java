@@ -388,14 +388,14 @@ public class Peer extends Base
 
   public Integer getCompleteProfile() { return this.completeProfile; }
 
-  public List<Peer> getMatchedPeers(String keyword)
-  {
-    String sql =
-        "SELECT * FROM `peers` WHERE `user_name` LIKE '%" + keyword + "%' OR `first_name` LIKE '%" + keyword +
-            "%' OR `last_name` LIKE '%" + keyword + "%'";
-    List<Peer> peers = new Peer().queryAll(sql);
-    return peers;
-  }
+  //public List<Peer> getMatchedPeers(String keyword)
+  //{
+  //  String sql =
+  //      "SELECT * FROM `peers` WHERE `user_name` LIKE '%" + keyword + "%' OR `first_name` LIKE '%" + keyword +
+  //          "%' OR `last_name` LIKE '%" + keyword + "%'";
+  //  List<Peer> peers = new Peer().queryAll(sql);
+  //  return peers;
+  //}
 
   //public List<String> getSuggestedPeers( String keyword, int limit ) {
   //    String sql = "SELECT `user_name` FROM `peers` WHERE `user_name` LIKE '%" + keyword + "%' LIMIT " + limit;
@@ -409,11 +409,11 @@ public class Peer extends Base
   //    return suggestions;
   //}
 
-  public List<Peer> getSuggestions(String keyword, int limit)
-  {
-    String sql = "SELECT * FROM `peers` WHERE `user_name` LIKE '%" + keyword + "%' LIMIT " + limit;
-    return new Peer().queryAll(sql);
-  }
+  //public List<Peer> getSuggestions(String keyword, int limit)
+  //{
+  //  String sql = "SELECT * FROM `peers` WHERE `user_name` LIKE '%" + keyword + "%' LIMIT " + limit;
+  //  return new Peer().queryAll(sql);
+  //}
 
   public static Peer instantiateFromSessionId(HttpServletRequest httpRequest)
   {

@@ -107,27 +107,27 @@ public class DocumentTest
     Assert.assertTrue(list.get(1) instanceof Comment, "Check list if contains object type Comment");
   }
 
-  @Test
-  public void testGetMatchedDocuments() throws Exception
-  {
-    Assert.assertTrue(document.getMatchedDocuments("resume") instanceof List<?>, "Check if return object is type List");
-    List<?> list = document.getMatchedDocuments("resume");
-    Assert.assertTrue(list.get(1) instanceof Document, "Check list if contains object type Document");
-    Assert.assertTrue(document.getMatchedDocuments("dsfgsadfdsfdsfwef").isEmpty(), "Check list if contains object type Document");
-  }
-
-  @Test
-  public void testGetSuggestions() throws Exception
-  {
-    Assert.assertTrue(document.getSuggestions("res", 100) instanceof List<?>, "Check if return object is type List");
-    List<Document> list = document.getSuggestions("res", 100);
-    for (Document document1 : list)
-    {
-      Assert.assertTrue(document1.getDocName().toLowerCase().contains("res"), "Check in result contains keyword");
-    }
-    Assert.assertTrue(list.get(1) instanceof Document, "Check list if contains object type Document");
-    Assert.assertTrue(document.getSuggestions("dsfgsadfdsfdsfwef", 3).isEmpty(), "Check list if contains object type Document");
-  }
+  //@Test
+  //public void testGetMatchedDocuments() throws Exception
+  //{
+  //  Assert.assertTrue(document.getMatchedDocuments("resume") instanceof List<?>, "Check if return object is type List");
+  //  List<?> list = document.getMatchedDocuments("resume");
+  //  Assert.assertTrue(list.get(1) instanceof Document, "Check list if contains object type Document");
+  //  Assert.assertTrue(document.getMatchedDocuments("dsfgsadfdsfdsfwef").isEmpty(), "Check list if contains object type Document");
+  //}
+  //
+  //@Test
+  //public void testGetSuggestions() throws Exception
+  //{
+  //  Assert.assertTrue(document.getSuggestions("res", 100) instanceof List<?>, "Check if return object is type List");
+  //  List<Document> list = document.getSuggestions("res", 100);
+  //  for (Document document1 : list)
+  //  {
+  //    Assert.assertTrue(document1.getDocName().toLowerCase().contains("res"), "Check in result contains keyword");
+  //  }
+  //  Assert.assertTrue(list.get(1) instanceof Document, "Check list if contains object type Document");
+  //  Assert.assertTrue(document.getSuggestions("dsfgsadfdsfdsfwef", 3).isEmpty(), "Check list if contains object type Document");
+  //}
 
   @Test
   public void testCreateComment() throws Exception

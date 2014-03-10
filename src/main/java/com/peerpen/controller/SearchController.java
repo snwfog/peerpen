@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.peerpen.framework.InternalHttpServletRequest;
 import com.peerpen.framework.exception.MissingArgumentException;
+import com.peerpen.helper.Autocomplete;
+import com.peerpen.helper.Search;
 import com.peerpen.model.Avatar;
 import com.peerpen.model.Document;
 import com.peerpen.model.Group;
@@ -36,6 +38,24 @@ import javax.servlet.http.HttpSession;
  */
 public class SearchController extends HttpServlet {
 
+    /**
+     * doGet method simply forwards the request to search.jsp
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+        request.getRequestDispatcher("/view/search.jsp").forward(request, response);
+    }
+
+    /**
+     * doPost delegates its work to either doAutocomplete or doSearch based on the request source
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         String requestType = request.getParameter( "format" );
         // ajax autocomplete request
@@ -46,45 +66,20 @@ public class SearchController extends HttpServlet {
         }
     }
 
-    protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        request.getRequestDispatcher("/view/search.jsp").forward(request, response);
-    }
-
-
-
-
-    // below methods are to generate specific json string for each of the searchables
-    private static String getJsonForDocuments(List<Document> list){
-        String json = "";
-        for (Document d : list){
-            String docName = d.getDocName();
-            String author = d.getPeer().getUserName();
-            json += "{\"value\":\"" + docName + "\",\"desc\":\"Document by " + author + "\"},";
-        }
-        return json;
-    }
-
-    private static String getJsonForPeers(List<Peer> list){
-        String json = "";
-        for (Peer p : list){
-            json += "{\"value\":\"" + p.getUserName() + "\",\"desc\":\"" + p.getFirstName() + " " + p.getLastName() + "\"},";
-        }
-        return json;
-    }
-
-    private static String getJsonForGroups(List<Group> list){
-        String json = "";
-        for (Group g : list){
-            json += "{\"value\":\"" + g.getGroupName() + "\",\"desc\":\"Group\"},";
-        }
-        return json;
-    }
 
 
 
 
 
-    // worker
+
+
+    /**
+     * doAutocomplete returns a json containing a list of suggested entity to the js so it can fill the suggestion dropdown box
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     private static void doAutocomplete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         String q = " ";
         if( request.getParameter("term")!= null){
@@ -98,18 +93,18 @@ public class SearchController extends HttpServlet {
         String json = ""; // json format [{"value":"resue", "desc":"document"}]
         switch(area){
             case "documents":
-                json = getJsonForDocuments( new Document().getSuggestions( q, 5 ) );
+                json = Autocomplete.getSuggestedDocuments( q, 5 );
                 break;
             case "peers":
-                json = getJsonForPeers( new Peer().getSuggestions( q, 5 ) );
+                json = Autocomplete.getSuggestedPeers( q, 5 ); //getJsonForPeers( new Peer().getSuggestions( q, 5 ) );
                 break;
             case "groups":
-                json = getJsonForGroups( new Group(  ).getSuggestions( q, 5 ) );
+                json = Autocomplete.getSuggestedGroups( q, 5 );
                 break;
             default:
-                json = getJsonForDocuments( new Document().getSuggestions( q, 5 ) );
-                json += getJsonForPeers( new Peer().getSuggestions( q, 5 ) );
-                json += getJsonForGroups( new Group(  ).getSuggestions( q, 5 ) );
+                json = Autocomplete.getSuggestedDocuments( q, 5 );
+                json += Autocomplete.getSuggestedPeers( q, 5 );
+                json += Autocomplete.getSuggestedGroups( q, 5 );
         }
         // remove trailling comma
         if (json.endsWith( "," )){
@@ -123,6 +118,14 @@ public class SearchController extends HttpServlet {
         response.getWriter().write(json);
     }
 
+
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     private static void doSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean doTagMatching = false;
         String query = "";
@@ -153,31 +156,31 @@ public class SearchController extends HttpServlet {
             switch (area){
                 case "documents":
                     List<Document> documents = new ArrayList<>(  );
-                    documents.addAll( new Document(  ).getMatchedDocuments( query ) );
+                    documents.addAll( Search.getMatchedDocuments( query ) );
                     if (doTagMatching && tagDescriptors.size() > 0) {
-                        documents.addAll( new Document(  ).getMatchedDocuments( tagDescriptors ) );
+                        documents.addAll( Search.getMatchedDocuments( tagDescriptors ) );
                     }
                     request.setAttribute( "searchResults", documents );
                     break;
                 case "peers":
-                    request.setAttribute( "searchResults", new Peer().getMatchedPeers( query ));
+                    request.setAttribute( "searchResults", Search.getMatchedPeers( query ) );
                     break;
                 case "groups":
                     List<Group> groups = new ArrayList<>(  );
-                    groups.addAll( new Group().getMatchedGroups( query ) );
+                    groups.addAll( Search.getMatchedGroups( query ) );
                     if (doTagMatching && tagDescriptors.size() > 0) {
-                        groups.addAll( new Group().getMatchedGroups( tagDescriptors ) );
+                        groups.addAll( Search.getMatchedGroups( tagDescriptors ) );
                     }
                     request.setAttribute( "searchResults", groups );
                     break;
                 default:
                     List<Object> everything = new ArrayList<Object>(  );
-                    everything.addAll( new Document().getMatchedDocuments( query ));
-                    everything.addAll( new Peer().getMatchedPeers( query ));
-                    everything.addAll( new Group().getMatchedGroups( query ));
+                    everything.addAll( Search.getMatchedDocuments( query ) );
+                    everything.addAll( Search.getMatchedPeers( query ) );
+                    everything.addAll( Search.getMatchedGroups( query ) );
                     if (doTagMatching && tagDescriptors.size() > 0) {
-                        everything.addAll( new Document().getMatchedDocuments( tagDescriptors ) );
-                        everything.addAll( new Group().getMatchedGroups( tagDescriptors ) );
+                        everything.addAll( Search.getMatchedDocuments( tagDescriptors ) );
+                        everything.addAll( Search.getMatchedGroups( tagDescriptors ) );
                     }
                     request.setAttribute( "searchResults", everything );
             }
