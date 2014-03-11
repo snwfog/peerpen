@@ -50,7 +50,6 @@ public class CommentTest
     Assert.assertEquals(comment1.getType(), "Document");
     Assert.assertEquals(comment1.getPosterPeerId(), peer.getId());
 
-
   }
 
   @Test
