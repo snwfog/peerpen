@@ -34,19 +34,21 @@
 
     <!-- BEGINNING of _showfeed -->
 
-        <% if ( request.getAttribute( "feedableList" ) != null ) {%>
+        <% if ( ((ArrayList)request.getAttribute( "feedableList" )).size() != 0 ) {%>
     <%@ include file="/view/feed/_showfeeds.jsp" %>
         <% } else { %>
     <!-- WHEN NO FEEDS -->
 
-    <div class="row-fluid">
-        <div class="card">
-            <h2 class="card-heading simple">You Got No Feeds</h2>
-        </div>
+    <div class="profile" style="position:relative; top:30px; background-color:#fff; padding:35px;
+                padding:0px;
+                text-align:center;
+                -webkit-box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
+				-moz-box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
+				box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);">
+        <h2 style="background-color:#e74c3c; color:#fff; margin:0px; padding:15px; font-family:'Oswald', sans-serif; text-align:left; font-size:18px;">Important Notice</h2>
+        <span style="display:block; padding:25px;">Sorry, you have no feeds yet.</span>
     </div>
     <%}%>
-
-</div>
 
 </div>
 
@@ -58,5 +60,5 @@
         $("#doc-changes-sticker").width($("#feed-container").width());
         $("#doc-changes-sticker").sticky({topSpacing:0});
     });
-
+</script>
 <%@ include file="/view/includes/static/footer.jsp" %>

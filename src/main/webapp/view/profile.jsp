@@ -208,4 +208,5 @@
 
         </div>
 </div>
+</div>
 <%@ include file="/view/includes/static/footer.jsp" %>

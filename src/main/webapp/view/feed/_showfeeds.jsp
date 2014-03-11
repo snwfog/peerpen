@@ -53,10 +53,10 @@
 
 <% if (f.getType().equalsIgnoreCase("Comment")){%>
 <img src="<%= ((Comment)f.getTrueSelf()).getPosterPeer().getAvatar().getDefaultAvatarSource( request ) %>" width="30px">
-<span class="feed-comment-commentor;"><%=((Comment)f.getTrueSelf()).getPosterPeer().getFirstName()%> commented</span>
+<span class="feed-comment-commentor"><%=((Comment)f.getTrueSelf()).getPosterPeer().getFirstName()%> commented</span>
 
 <span class="feed-comment-date">
-14 February 2014
+Published <%= ((Comment)f.getTrueSelf()).getTimesAgo()%>
 </span>
 <br /><br />
 <div class="feed-comment-pointer"></div>
@@ -72,10 +72,10 @@
 
 <% if (f.getType().equalsIgnoreCase("Broadcast")){%>
 <img src="<%= ((Broadcast)f.getTrueSelf()).getPeer().getAvatar().getServletContextAvatarPath( request ) %>" width="30px">
-<span class="feed-comment-commentor;"><%=((Broadcast)f.getTrueSelf()).getPeer().getFirstName()%> broadcasted from <%=((Broadcast)f.getTrueSelf()).getGroup().getGroupName()%></span>
+<span class="feed-comment-commentor"><%=((Broadcast)f.getTrueSelf()).getPeer().getFirstName()%> broadcasted from <%=((Broadcast)f.getTrueSelf()).getGroup().getGroupName()%></span>
 
     <span class="feed-comment-date">
-        14 February 2014
+        Published <%= ((Broadcast)f.getTrueSelf()).getTimesAgo()%>
     </span>
 <br /><br />
 <div class="feed-comment-pointer"></div>
@@ -93,10 +93,10 @@
 
 <% if (f.getType().equalsIgnoreCase("Joingroup")){%>
 <img src="<%= ((Joingroup)f.getTrueSelf()).getPeer().getAvatar().getServletContextAvatarPath( request ) %>" width="30px">
-<span class="feed-comment-commentor;"><%=((Joingroup)f.getTrueSelf()).getPeer().getFirstName()%> requests to join your group</span>
+<span class="feed-comment-commentor"><%=((Joingroup)f.getTrueSelf()).getPeer().getFirstName()%> requests to join your group</span>
 
     <span class="feed-comment-date">
-        14 February 2014
+        Published <%= ((Joingroup)f.getTrueSelf()).getTimesAgo()%>
     </span>
 <br /><br />
 <div class="feed-comment-pointer"></div>

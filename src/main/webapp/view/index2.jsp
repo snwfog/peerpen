@@ -11,25 +11,25 @@
         </div>
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
-                <form class="form-inline" name="register" id="register" action="/register" method="post" role="form">
+                <form class="form-inline" name="register" id="register" action="/register" method="post" role="form" style="text-align:center;">
                     <div class="form-group">
                         <input type="text" class="form-control" name="last_name" id="lastName"
-                               placeholder="Your name">
+                               placeholder="Your name" style="width:300px;">
                     </div>
 
                     <div class="form-group">
                         <input type="email" class="form-control" name="email" id="inputEmail"
-                               placeholder="Your email">
+                               placeholder="Your email" style="width:300px;">
                     </div>
 
 
                     <div class="form-group">
                         <input type="password" class="form-control" name="password" id="inputPassword"
-                               placeholder="Choose a password">
+                               placeholder="Choose a password" style="width:300px;">
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-default btn-success">Sign up for Peerpen</button>
+                        <button type="submit" class="btn btn-default btn-success" style="width:300px;">Sign up for Peerpen</button>
                     </div>
                 </form>
             </div>
@@ -200,11 +200,6 @@
         </div>
     </div>
 </section>
-<footer>
-    <div class="container">
-        <img id="resume-large-bottom" src="/assets/images/index/resume-large-bottom.png" alt=""/>
-    </div>
-</footer>
 
 <!-- /container -->
 <%@ include file="/view/includes/static/footer.jsp" %>

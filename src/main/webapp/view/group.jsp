@@ -26,7 +26,7 @@
 
     <img src="<%= sessionUser.getAvatar().getRelativeServletContextAvatarPathForSize( request,
                     Avatar.Size.LARGE ) %>" width="30px">
-    <span class="feed-comment-commentor;"><%= sessionUser.getFirstName() %> <%= sessionUser.getLastName() %> broadcasts from <%= group.getGroupName()%> peers</span>
+    <span class="feed-comment-commentor"><%= sessionUser.getFirstName() %> <%= sessionUser.getLastName() %> broadcasts from <%= group.getGroupName()%> peers</span>
 
     <br /><br />
     <div class="feed-comment-pointer"></div>
@@ -188,7 +188,7 @@
                 -webkit-box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
 				-moz-box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
 				box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);">
-        <h2 style="background-color:#e74c3c; color:#fff; margin:0px; padding:15px; font-family:'Oswald', sans-serif; color:#fff; text-align:left; font-size:18px;">Important Notice</h2>
+        <h2 style="background-color:#e74c3c; color:#fff; margin:0px; padding:15px; font-family:'Oswald', sans-serif; text-align:left; font-size:18px;">Important Notice</h2>
     <span style="display:block; padding:25px;">You are not registered to this group.</span>
     </div>
 <%}%>
