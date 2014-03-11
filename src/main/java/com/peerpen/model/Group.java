@@ -75,12 +75,12 @@ public class Group extends Taggable implements IModel
     else return this.getDescription();
   }
 
-  public List<Group> getMatchedGroups(String keyword)
-  {
-    String sql = "SELECT * FROM `groups` WHERE `group_name` LIKE '%" + keyword + "%'";
-    List<Group> groups = new Group().queryAll(sql);
-    return groups;
-  }
+  //public List<Group> getMatchedGroups(String keyword)
+  //{
+  //  String sql = "SELECT * FROM `groups` WHERE `group_name` LIKE '%" + keyword + "%'";
+  //  List<Group> groups = new Group().queryAll(sql);
+  //  return groups;
+  //}
 
   public List<Group> getGroups()
   {
@@ -121,11 +121,34 @@ public class Group extends Taggable implements IModel
     }
   }
 
+<<<<<<< HEAD
   public List<Group> getSuggestions(String keyword, int limit)
   {
     String sql = "SELECT * FROM `groups` WHERE `group_name` LIKE '%" + keyword + "%' LIMIT " + limit;
     return new Group().queryAll(sql);
   }
+=======
+  // method used for search autocomplete
+  //public List<String> getSuggestedGroups(String keyword, int limit){
+  //    String sql = "SELECT `group_name` FROM `groups` WHERE `group_name` LIKE '%" + keyword + "%' LIMIT " + limit;
+  //    List<Group> groups = new Group().queryAll(sql);
+  //    List<String> suggestions = new ArrayList<String>();
+  //
+  //    if(groups.size() > 0){
+  //        for(int i=0;i<groups.size();i++){
+  //            suggestions.add(groups.get(i).getGroupName());
+  //        }
+  //    }
+  //    //
+  //    return suggestions;
+  //}
+
+  //public List<Group> getSuggestions(String keyword, int limit)
+  //{
+  //  String sql = "SELECT * FROM `groups` WHERE `group_name` LIKE '%" + keyword + "%' LIMIT " + limit;
+  //  return new Group().queryAll(sql);
+  //}
+>>>>>>> 890e7c2657bf46bdfbc057d39c994555b2dc3e88
 
   public boolean getIsJoined(Integer sessionUserId)
   {

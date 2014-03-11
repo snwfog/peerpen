@@ -1,5 +1,6 @@
 package com.peerpen.model;
 
+import com.google.common.collect.Maps;
 import com.sunnyd.Base;
 import com.sunnyd.IModel;
 import com.sunnyd.annotations.*;
@@ -7,6 +8,7 @@ import com.sunnyd.annotations.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class Comment extends Feedable implements IModel
 {
@@ -26,6 +28,8 @@ public class Comment extends Feedable implements IModel
   private Integer posterPeerId;
   @ActiveRelationHasOne(idFieldName = "posterPeerId")
   private Peer posterPeer;
+
+  private Integer totalVote;
 
   public Integer getPosterPeerId()
   {
@@ -50,8 +54,6 @@ public class Comment extends Feedable implements IModel
     this.setUpdateFlag(true);
     return posterPeer;
   }
-
-  private Integer totalVote;
 
   public Comment()
   {
@@ -178,10 +180,6 @@ public class Comment extends Feedable implements IModel
     List<Comment> comments = new Comment().findAll(map);
     return comments;
 
-  }
-
-  public static void main(String[] args)
-  {
   }
 
 }

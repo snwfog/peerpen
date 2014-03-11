@@ -190,24 +190,24 @@ public class PeerTest {
 
     }
 
-    @Test
-    public void testGetMatchedPeers() throws Exception {
-        Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
-
-        Peer p = new Peer().find(peerId);
-        List<Peer>peers = new ArrayList<>();
-        peers.add(p);
-        Assert.assertEquals(peers,p.getMatchedPeers(p.getFirstName()));
-    }
-
-    @Test
-    public void testGetSuggestions() throws Exception {
-        Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
-        Peer p = new Peer().find(peerId);
-        List<Peer>peers = new ArrayList<>();
-        peers.add(p);
-        Assert.assertEquals(peers,p.getSuggestions(p.getUserName(),1));
-    }
+    //@Test
+    //public void testGetMatchedPeers() throws Exception {
+    //    Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
+    //
+    //    Peer p = new Peer().find(peerId);
+    //    List<Peer>peers = new ArrayList<>();
+    //    peers.add(p);
+    //    Assert.assertEquals(peers,p.getMatchedPeers(p.getFirstName()));
+    //}
+    //
+    //@Test
+    //public void testGetSuggestions() throws Exception {
+    //    Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
+    //    Peer p = new Peer().find(peerId);
+    //    List<Peer>peers = new ArrayList<>();
+    //    peers.add(p);
+    //    Assert.assertEquals(peers,p.getSuggestions(p.getUserName(),1));
+    //}
 
     @Test
     public void testIsValidSession() throws Exception {

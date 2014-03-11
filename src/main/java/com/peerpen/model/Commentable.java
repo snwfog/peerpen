@@ -1,11 +1,6 @@
 package com.peerpen.model;
 
-import com.sunnyd.Base;
-import com.sunnyd.annotations.ActiveRecordField;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.

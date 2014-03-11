@@ -87,31 +87,7 @@
     }}
 %>
 
-
-
-
-
-
     <br /><br /><br /><br /><br />
-
-    <!-- SAMPLE CODE -->
-<%--<% Group g = new Group(  ).find( 3 ); %>--%>
-<%--Tags attached to: <%=g.getGroupName()%> group:--%>
-<%--<div>--%>
-    <%--<% List<TagDescriptor> tds = g.getTagDescriptors(); %>--%>
-    <%--<form action="/tag.do" method="post" class="form-horizontal" role="form">--%>
-        <%--<input type="hidden" name="entityType" value="group" />--%>
-        <%--<input type="hidden" name="entityId" value="3" />--%>
-        <%--<ul id="entityTags">--%>
-        <%--<% for (TagDescriptor td : tds){ %>--%>
-        <%--<li><%=td.getTagName() %></li>--%>
-        <%--<% } %>--%>
-        <%--</ul>--%>
-        <%--<button type="submit" class="btn btn-primary" name="submit" />Save Tags</button>--%>
-    <%--</form>--%>
-<%--</div>--%>
-
-
 
  </div>
 <%@ include file="/view/includes/static/footer.jsp" %>

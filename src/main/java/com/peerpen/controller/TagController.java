@@ -1,15 +1,13 @@
 package com.peerpen.controller;
+
 import com.peerpen.model.Document;
 import com.peerpen.model.Group;
 import com.peerpen.model.TagDescriptor;
-import com.peerpen.model.Taggable;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,21 +24,31 @@ import javax.servlet.http.HttpServletResponse;
 
 public class TagController extends HttpServlet {
 
+    /**
+     * doPost method updates the tags associated with a given taggable entity (ie: group)
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        Integer id = Integer.parseInt( request.getParameter( "entityId" ) ); // id
+        // Client data handling
+        Integer id = Integer.parseInt( request.getParameter( "entityId" ) );
         String type = request.getParameter( "entityType" ).toLowerCase();
         String query = request.getParameter( "tags" );
 
+        // Processing
         List<String> tagNames = Arrays.asList( query.split( "\\s*,\\s*" ) );
         List<TagDescriptor> newTagDescriptors = new ArrayList<>(  );
 
-        // case where user removes all tags hence query is empty
         if (!query.isEmpty()){
             for (String tagName: tagNames){
                 newTagDescriptors.add(new TagDescriptor(  ).getTagDescriptor( tagName ));
             }
         }
 
+        // alternatively use reflection but it is slow
         switch ( type ){
             case "group":
                 Group group = new Group(  ).find( id );

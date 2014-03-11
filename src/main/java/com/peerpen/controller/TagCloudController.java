@@ -1,28 +1,22 @@
 package com.peerpen.controller;
 
 import com.google.gson.Gson;
+import com.peerpen.helper.Autocomplete;
+import com.peerpen.helper.Search;
 import com.peerpen.model.Document;
 import com.peerpen.model.Group;
 import com.peerpen.model.TagDescriptor;
-import com.peerpen.model.Taggable;
 
 import java.io.IOException;
-import java.net.SocketTimeoutException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * Created with IntelliJ IDEA.
@@ -34,6 +28,26 @@ import javax.servlet.http.HttpSession;
 
 public class TagCloudController extends HttpServlet {
 
+    /**
+     * doGet method gets the tagCloud and redirect to tagcloud.jsp
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+        // Get a list of all tag descriptors
+        request.setAttribute( "tagCloud", TagDescriptor.getTagCloud() );
+        request.getRequestDispatcher("/view/tagcloud.jsp").forward(request, response);
+    }
+
+    /**
+     * doPost method delegates its work to doAutocomplete or doSearch based on the request
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         String requestType = request.getParameter( "format" );
         // ajax autocomplete request
@@ -44,21 +58,21 @@ public class TagCloudController extends HttpServlet {
         }
     }
 
-    protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        // Get a list of all tag descriptors
-        request.setAttribute( "tagCloud", TagDescriptor.getTagCloud() );
-        request.getRequestDispatcher("/view/tagcloud.jsp").forward(request, response);
-    }
-
+    /**
+     * doAutocomplete returns a json containing a list of suggested tds on each request
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     private static void doAutocomplete (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        int numOfSuggestions = 3;
         String q = " ";
         if( request.getParameter("term")!= null){
             q = request.getParameter( "term" );
         }
 
         Set suggestionPool = new LinkedHashSet(  );
-        suggestionPool.addAll( new TagDescriptor(  ).getSuggestedTagDescriptors(q, numOfSuggestions) );
+        suggestionPool.addAll( Autocomplete.getSuggestedTagDescriptors( q, 3) );
         // Convert set into json string
         String json = new Gson().toJson( suggestionPool );
 
@@ -68,8 +82,14 @@ public class TagCloudController extends HttpServlet {
         response.getWriter().write(json);
     }
 
+    /**
+     * doSearch handles a string list of tds from user, searches and return matching entities to view
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     private static void doSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String query = "";
         if (request.getParameter( "tags" )!= null && !request.getParameter( "tags" ).isEmpty()){
             query = request.getParameter( "tags" );
@@ -80,14 +100,12 @@ public class TagCloudController extends HttpServlet {
 
             // find match
             if(!tagDescriptors.isEmpty()){
-                List<Group> groups = new Group(  ).getMatchedGroups( tagDescriptors );
-                List<Document> documents = new Document(  ).getMatchedDocuments( tagDescriptors );
+                List<Group> groups = Search.getMatchedGroups( tagDescriptors );
+                List<Document> documents = Search.getMatchedDocuments( tagDescriptors );
                 request.setAttribute( "tagSearchResultsGroups", groups );
                 request.setAttribute( "tagSearchResultsDocuments", documents );
             }
         }
         request.getRequestDispatcher( "/view/tagcloud.jsp" ).forward( request, response );
-        //response.sendRedirect( request.getHeader( "referer" ) );
-
     }
 }

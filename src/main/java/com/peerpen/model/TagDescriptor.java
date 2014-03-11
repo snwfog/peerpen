@@ -1,6 +1,5 @@
 package com.peerpen.model;
 
-import com.google.common.collect.Maps;
 import com.sunnyd.Base;
 import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
@@ -39,7 +38,12 @@ public class TagDescriptor extends Base implements IModel {
         this.tagName = tagName;
     }
 
-    // returns the td base on the name, if doesnt exist, it creates it
+    /**
+     * Save: Returns TagDescriptor based on tagName. If does not already exist, creates it and return it.
+     * This is to make sure no duplicate td in db
+     * @param tagName
+     * @return TagDescriptor
+     */
     public TagDescriptor getTagDescriptor(String tagName){
         TagDescriptor td = new TagDescriptor(  ).getTagDescriptorIfExists( tagName );
         if (td != null){
@@ -52,7 +56,11 @@ public class TagDescriptor extends Base implements IModel {
         }
     }
 
-    // like above but do not create if not exists
+    /**
+     * Returns TagDescriptor based on tagName. If does not already exist returns null
+     * @param tagName
+     * @return TagDescriptor or null
+     */
     public TagDescriptor getTagDescriptorIfExists (String tagName){
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("tagName", tagName);
@@ -64,7 +72,11 @@ public class TagDescriptor extends Base implements IModel {
         }
     }
 
-    // List<String> ---> List<TagDescriptors>
+    /**
+     * Returns a list of existing TagDescriptors based on a list of tagNames that might not all exist
+     * @param tagNames
+     * @return
+     */
     public List<TagDescriptor> getTagDescriptors (List<String> tagNames){
         List<TagDescriptor> tagDescriptors = new ArrayList<>(  );
         for (String tagName: tagNames){
@@ -76,19 +88,6 @@ public class TagDescriptor extends Base implements IModel {
         return tagDescriptors;
     }
 
-    // autocomplete
-    public List<String> getSuggestedTagDescriptors( String keyword, int limit ) {
-        String sql = "SELECT `tag_name` FROM `tag_descriptors` WHERE `tag_name` LIKE '%" + keyword + "%' LIMIT " + limit;
-        List<TagDescriptor> tagDesc = new TagDescriptor().queryAll( sql );
-        List<String> suggestions = new ArrayList<String>();
-        if ( tagDesc.size() > 0 ) {
-            for ( int i = 0; i < tagDesc.size(); i++ ) {
-                suggestions.add( tagDesc.get( i ).getTagName() );
-            }
-        }
-        return suggestions;
-    }
-
     @Override
     public boolean equals (Object other){
         if (other == null) return false;
@@ -96,21 +95,15 @@ public class TagDescriptor extends Base implements IModel {
         if (!(other instanceof TagDescriptor))return false;
         TagDescriptor myOther = (TagDescriptor) other;
         if (this.getId() == myOther.getId()) return true;
+        if (this.getTagName().equals( myOther.getTagName() )) return true;
         return false;
     }
 
-    public static void main (String[] args){
-        TagDescriptor td = new TagDescriptor(  ).getTagDescriptorIfExists( "qweqwewqeqwewq" );
-        if (td != null){
-            System.out.println(td.getTagName());
-        }else{
-            System.out.println("doesnt exists");
-        }
-    }
-
-    public static List<TagDescriptor> getTagCloud()
-    {
-        // Return the query from database of all the tag descriptor;
+    /**
+     * Get all tagDescriptors
+     * @return
+     */
+    public static List<TagDescriptor> getTagCloud(){
         return new TagDescriptor().findAll( new HashMap<String, Object>() );
     }
 }
