@@ -1,10 +1,9 @@
 package com.peerpen.controller;
 
-import com.google.common.collect.Maps;
+import com.peerpen.model.Changeset;
 import com.peerpen.model.Comment;
 import com.peerpen.model.Document;
 import com.peerpen.model.Peer;
-import com.peerpen.model.Changeset;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +20,7 @@ public class CommentController extends HttpServlet
 
   }
 
+//  Create a comment
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
     Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
@@ -31,7 +31,7 @@ public class CommentController extends HttpServlet
     request.setAttribute("document", document);
     response.sendRedirect(request.getHeader("referer"));
   }
-
+//  Create changeset comment
   protected void doPut(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException
   {
@@ -45,7 +45,7 @@ public class CommentController extends HttpServlet
     request.setAttribute("document", document);
     response.sendRedirect(request.getHeader("referer"));
   }
-
+//  Delete comment
   protected void doDelete(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException
   {

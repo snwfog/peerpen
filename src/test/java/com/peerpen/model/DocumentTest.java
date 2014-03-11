@@ -176,7 +176,7 @@ public class DocumentTest
     newDocument.setDocName("TestDocument:" + randomString);
 //    newDocument.setType("Document");
 
-    newDocument.save();
+    Assert.assertTrue(newDocument.save());
 
     Map<String, Object> hm = Maps.newHashMap();
     hm.put("docName", "TestDocument:" + randomString);

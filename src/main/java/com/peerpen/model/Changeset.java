@@ -82,11 +82,6 @@ public class Changeset extends Feedable implements IModel, Commentable
     return hunk;
   }
 
-  public static void main(String[] args)
-  {
-
-  }
-
   public List<Comment> getOrderedComments()
   {
     Integer changesetId = this.getId();

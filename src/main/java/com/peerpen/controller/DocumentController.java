@@ -20,10 +20,10 @@ public class DocumentController extends GenericApplicationServlet
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException
   {
-    // FIXME: This is bad, but okay for now I guess... - snw
     super.doGet(request, response);
+//     Organize all parameters into a map
     Map<String, Object> parameters = internalRequest.getParametersMap();
-    // FIXME: parameters is not garantee to be clean, need distinguish between parameters and URL parameters
+//    Auto assign models into map
     Map<String, Base> modelMap = ModelHierarchyUtil.parameterAsMap(parameters);
     Peer sessionUser = (Peer) request.getAttribute("sessionUser");
     Peer urlUser = (Peer) modelMap.get("peer");

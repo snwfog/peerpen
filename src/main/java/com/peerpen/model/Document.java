@@ -123,21 +123,20 @@ public class Document extends Taggable implements IModel, Commentable
     return this.hunks;
   }
 
-  private static Connection connection;
-  static final Logger logger = LoggerFactory.getLogger(Manager.class);
-
-  static
-  {
-    try
-    {
-      connection = Connector.getConnection();
-    }
-    catch (SQLException e)
-    {
-      logger.error("Failed statically initiate database connection.");
-    }
-  }
-
+//  private static Connection connection;
+//  static final Logger logger = LoggerFactory.getLogger(Manager.class);
+//
+//  static
+//  {
+//    try
+//    {
+//      connection = Connector.getConnection();
+//    }
+//    catch (SQLException e)
+//    {
+//      logger.error("Failed statically initiate database connection.");
+//    }
+//  }
 
   public List<Comment> getComments()
   {
@@ -162,19 +161,19 @@ public class Document extends Taggable implements IModel, Commentable
   //  return new Document().queryAll(sql);
   //}
 
-  private static void closeConnection(Connection connection)
-  {
-    try
-    {
-      if (!connection.isClosed())
-      {
-        connection.close();
-      }
-    }
-    catch (SQLException e)
-    {
-    }
-  }
+//  private static void closeConnection(Connection connection)
+//  {
+//    try
+//    {
+//      if (!connection.isClosed())
+//      {
+//        connection.close();
+//      }
+//    }
+//    catch (SQLException e)
+//    {
+//    }
+//  }
 
   @Override
   public void createComment(String message, Peer peer)

@@ -1,14 +1,13 @@
 package com.peerpen.model;
 
-import com.google.common.collect.Maps;
 import com.sunnyd.Base;
 import com.sunnyd.IModel;
-import com.sunnyd.annotations.*;
+import com.sunnyd.annotations.ActiveRecordField;
+import com.sunnyd.annotations.ActiveRelationHasOne;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 public class Comment extends Feedable implements IModel
 {
@@ -78,18 +77,18 @@ public class Comment extends Feedable implements IModel
     setUpdateFlag(true);
   }
 
-  //testing purposes only
-  private String name;
-
-  public void setName(String name)
-  {
-    this.name = name;
-  }
-
-  public String getName()
-  {
-    return name;
-  }
+//  //testing purposes only
+//  private String name;
+//
+//  public void setName(String name)
+//  {
+//    this.name = name;
+//  }
+//
+//  public String getName()
+//  {
+//    return name;
+//  }
 
   public Integer getUpVote()
   {
