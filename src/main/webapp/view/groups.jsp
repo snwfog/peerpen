@@ -44,22 +44,22 @@
                             <span style="width:100%; display:block;  text-align:right; padding-bottom:10px;">&nbsp;&nbsp;<span style="font-size: medium;"><i class="fa fa-users"></i>&nbsp;<span class="joined-<%=group.getId()%>"><%= group.getPeers().size()%></span></span></span>
                                 <%= group.getShortDescription()%>
                         <p>
-                        <div class="group-<%= group.getId()%>" style="padding-bottom:15px;">
+                        <div class="group-<%= group.getId()%>" style="padding-bottom:15px; text-align:center;">
 
                             <% if(group.getIsJoined(sessionUser.getId())){ %>
-                            <form action="" class="form-horizontal" id="<%= group.getId()%>" role="form" style="text-align:center;">
+                            <form action="" class="form-horizontal" id="<%= group.getId()%>" role="form">
                                 <input type="hidden" name="groupid" value="<%= group.getId()%>">
                                 <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>">
                                 <input type="hidden" name="_method" value="delete"/>
                                 <% if(group.getAdminId()!=sessionUser.getId()){%>
-                                <button type="button" class="btn btn-danger" onclick="leave(<%= group.getId()%>);"><i class="fa fa-times-circle"></i> Leave Group!</button>
+                                <button type="button" class="btn btn-danger" onclick="leave(<%= group.getId()%>);">Leave Group!</button>
                                 <%}else
                                 {%>
-                                <button type="button" class="btn btn-default"><i class="fa fa-times-circle"></i> My Group!</button>
+                                <button type="button" class="btn btn-default">My Group!</button>
                                 <%}%>
                             </form>
                             <% }else if(group.getPending(sessionUser.getId())){%>
-                            <form action="" class="form-horizontal" id="<%= group.getId()%>" role="form" style="text-align:center;">
+                            <form action="" class="form-horizontal" id="<%= group.getId()%>" role="form">
                                 <input type="hidden" name="groupid" value="<%= group.getId()%>">
                                 <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>">
                                 <input type="hidden" name="_method" value="put"/>

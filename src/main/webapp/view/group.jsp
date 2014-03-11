@@ -16,13 +16,105 @@
   Time: 7:42 PM
   To change this template use File | Settings | File Templates.
 --%>
+
+<div class="cover-container" style="padding:60px;"> </div>
+<div class="container-fluid wrap-container">
+
+<h1 style="font-family:'Oswald', sans-serif; border-bottom:0px solid #bdc3c7;"><%= group.getGroupName()%> Group</h1>
+
 <%if (group.getIsJoined(sessionUser.getId())){%>
-<br>
-<h1><%= group.getGroupName()%> Group</h1>
-<div class="container-fluid greyish">
+
+    <img src="<%= sessionUser.getAvatar().getRelativeServletContextAvatarPathForSize( request,
+                    Avatar.Size.LARGE ) %>" width="30px">
+    <span class="feed-comment-commentor;"><%= sessionUser.getFirstName() %> <%= sessionUser.getLastName() %> broadcasts from <%= group.getGroupName()%> peers</span>
+
+    <br /><br />
+    <div class="feed-comment-pointer"></div>
+    <div class="feed-comment-body" style="padding:0px; -webkit-box-shadow: 10px 10px 0px 0px rgba(149, 165, 166, 1);
+	-moz-box-shadow: 10px 10px 0px 0px rgba(149, 165, 166, 1);
+	box-shadow: 10px 10px 0px 0px rgba(149, 165, 166, 1)">
+        <span class="feed-comment-body-text" style="margin:0px; padding:25px 25px 0px 25px;">
+            <form method="POST" action="/group/<%= group.getId()%>/broadcast" parsley-validate style="text-align:right;">
+                <textarea id="broadcast" class="parsley-validated" name="broadcast" style="width:100%; height:100px; resize: none; border:1px solid #bdc3c7;" parsley-trigger="change keyup"></textarea>
+                <input type="hidden" name="groupid" value="<%= group.getId()%>"/>
+                <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>"/>
+                <input type="hidden" name="_method" value="POST">
+                <button type="submit" class="btn btn-warning " style="margin-top:5px;">Post</button>
+            </form>
+
+            <br />
+        </span>
+
+        <div style="background-color:#e74c3c; border-radius:0px 0px 25px 25px; color:#fff; text-align:center; padding:15px 25px 5px 25px;">
+            <form action="/tag" method="post" class="form-horizontal" role="form">
+                <input type="hidden" name="entityType" value="group" />
+                <input type="hidden" name="entityId" value="<%=group.getId()%>" />
+                <table cellspacing="0" cellpadding="0" style="width:100%;">
+                    <tr>
+                        <td style="width:95%; vertical-align:top;">
+                            <ul id="entityTags" style="background-color:#fff;">
+                                <% for (TagDescriptor td : tds){ %>
+                                <li><%=td.getTagName() %></li>
+                                <% } %>
+                            </ul>
+                        </td>
+
+                        <td style="width:5%; vertical-align:top; padding:0px;">
+                            <button type="submit" class="btn btn-info" name="submit" style="margin-left:5px" />Save Tags</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <br />
+
+    <div class="profile" style="position:relative; top:30px; background-color:#fff; padding:35px;">
+
+        <%if (group.getAdminId()==sessionUser.getId() && joingroups!=null && joingroups.size()!=0){%>
+        <div class="row">
+            <div class="col-md-12">
+                <h2 style="font-family:'Oswald', sans-serif; font-weight:400; border-bottom:1px solid #bdc3c7; margin-bottom:25px;">User Request to join your <%= group.getGroupName()%> group</h2>
+                <%
+                    for (Joingroup jg:joingroups){
+                        if((group.getPeers().contains(jg.getPeer()))==false)
+                        {
+                %>
+                <%--<div class="card2">--%>
+
+                <div class="card-body">
+                    <strong> Peer <%= jg.getPeer().getUserName() %> wants to join your group</strong>
+                                                <span class="child" style="font-style: italic;font-size: small;">
+                                                 <p class="text-right"><%= jg.getTimesAgo()%></p></span>
+                    <div class="card-actions parent">
+                        <form action="/joingroup" method="POST" class="form-horizontal child">
+                            <input type="hidden" name="groupid" value="<%= jg.getGroupId()%>">
+                            <input type="hidden" name="jgid" value="<%= jg.getId()%>">
+                            <input type="hidden" name="peerid" value="<%= jg.getPeerId()%>">
+                            <input type="hidden" name="_method" value="POST">
+                            <button type="submit" class="btn btn-success" >Accept!</button>
+                        </form>
+
+                        <form action="/joingroup" method="POST" class="form-horizontal child">
+                            <input type="hidden" name="groupid" value="<%= jg.getGroupId()%>">
+                            <input type="hidden" name="jgid" value="<%= jg.getId()%>">
+                            <input type="hidden" name="peerid" value="<%= jg.getPeerId()%>">
+                            <input type="hidden" name="_method" value="delete"/>
+                            <button type="submit" class="btn btn-danger" >Refuse!</button>
+                        </form>
+                    </div>
+                </div>
+                <br />
+                <%}
+                }
+                %>
+            </div>
+        </div>
+        <%}%>
+
     <div class="row">
-        <div class="col-md-4 pull-left">
-            <h2> Members of this group </h2>
+        <div class="col-md-12">
+            <h2 style="font-family:'Oswald', sans-serif; font-weight:400; border-bottom:1px solid #bdc3c7; margin-bottom:25px;">Members of this group</h2>
 
             <table class="table table-striped table-condensed">
                 <thead>
@@ -30,6 +122,8 @@
                     <th>Username</th>
                     <th>Email</th>
                     <th>Industry</th>
+                    <th></th>
+                    <th></th>
 
                 </tr>
                 </thead>
@@ -41,6 +135,17 @@
                     <td><%=p.getEmail()%></td>
                     <td><%=p.getIndustry()%></td>
                     <td><a href="/peer/<%=p.getId()%>/document"> Documents </a></td>
+                    <td>
+                        <% if (p.getId()!=group.getAdminId()){ %>
+                                <%--<div class="span8 child"><%=p.getUserName()%></div>--%>
+                                <form action="/group" method="POST" class="form-horizontal child">
+                                    <input type="hidden" name="groupid" value="<%= group.getId()%>">
+                                    <input type="hidden" name="peerid" value="<%= p.getId()%>">
+                                    <input type="hidden" name="_method" value="delete"/>
+                                    <button type="submit" class="btn btn-danger" >Reject!</button>
+                                </form>
+                        <% } %>
+                    </td>
                 </tr>
                 <%}%>
                     </div>
@@ -50,23 +155,6 @@
          </div>
 
         <%--<div id="row">--%>
-            <div class="col-md-4 col-md-offset-0">
-                <h2> Broadcasts from <%= group.getGroupName()%> peers </h2>
-                    <div class="caption">
-                        <div class="card2">
-                            <h3 class="card-heading simple"><%= sessionUser.getFirstName() %> <%= sessionUser.getLastName() %></h3>
-                            <div class="card-body">
-                                <form method="POST" action="/group/<%= group.getId()%>/broadcast" parsley-validate>
-                                    <textarea id="broadcast" class="parsley-validated" name="broadcast" style="width:100%" parsley-trigger="change keyup"></textarea>
-                                    <input type="hidden" name="groupid" value="<%= group.getId()%>"/>
-                                    <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>"/>
-                                    <input type="hidden" name="_method" value="POST">
-                                    <button type="submit" class="btn btn-success ">Post</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
 
                 <%for(Broadcast broadcast : broadcasts ){%>
                 <div class="card2">
@@ -89,108 +177,22 @@
 
              </div>
          <%--</div>--%>
-        <%if (group.getAdminId()==sessionUser.getId()){%>
-        <%--<div id="row">--%>
-        <div class="col-md-4 pull-right">
-            <div class="accordion" id="accordion2">
-                <div class="accordion-group">
-                    <div class="accordion-heading">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                           <h2> User Request to join your <%= group.getGroupName()%> group </h2>
-                        </a>
-                    </div>
-                    <div id="collapseOne" class="accordion-body collapse in">
-                        <div class="accordion-inner">
-                            <% if (joingroups!=null){
-                                    for (Joingroup jg:joingroups){
-                                        if((group.getPeers().contains(jg.getPeer()))==false)
-                                        {
-                                        %>
-                                        <%--<div class="card2">--%>
 
-                                            <div class="card-body">
-                                                <strong> Peer <%= jg.getPeer().getUserName() %> wants to join your group</strong>
-                                                <span class="child" style="font-style: italic;font-size: small;">
-                                                 <p class="text-right"><%= jg.getTimesAgo()%></p></span>
-                                                <div class="card-actions parent">
-                                                    <form action="/joingroup" method="POST" class="form-horizontal child">
-                                                        <input type="hidden" name="groupid" value="<%= jg.getGroupId()%>">
-                                                        <input type="hidden" name="jgid" value="<%= jg.getId()%>">
-                                                        <input type="hidden" name="peerid" value="<%= jg.getPeerId()%>">
-                                                        <input type="hidden" name="_method" value="POST">
-                                                        <button type="submit" class="btn btn-primary" >Accept!</button>
-                                                    </form>
-
-                                                    <form action="/joingroup" method="POST" class="form-horizontal child">
-                                                        <input type="hidden" name="groupid" value="<%= jg.getGroupId()%>">
-                                                        <input type="hidden" name="jgid" value="<%= jg.getId()%>">
-                                                        <input type="hidden" name="peerid" value="<%= jg.getPeerId()%>">
-                                                        <input type="hidden" name="_method" value="delete"/>
-                                                        <button type="submit" class="btn btn-primary" >Refuse!</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        <%}
-                                    }
-                                }%>
-                            </div>
-                    </div>
-                </div>
-
-            <div class="accordion-group">
-                <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                        <h2>Reject Member from your <%=group.getGroupName()%></h2>
-                    </a>
-                </div>
-                <div id="collapseTwo" class="accordion-body collapse in">
-                    <div class="accordion-inner">
-                        <% for (Peer p:peers){
-                            if (p.getId()!=group.getAdminId()){%>
-
-                          <div class="card-body">
-                              <div class="input-append">
-                                  <%--<div class="span8 child"><%=p.getUserName()%></div>--%>
-                                  <input class="input-medium" placeholder=".input-medium" disabled  value="<%=p.getUserName()%>">
-                                  <form action="/group" method="POST" class="form-horizontal child">
-                                      <input type="hidden" name="groupid" value="<%= group.getId()%>">
-                                      <input type="hidden" name="peerid" value="<%= p.getId()%>">
-                                      <input type="hidden" name="_method" value="delete"/>
-                                      <button type="submit" class="btn btn-primary" >Reject!</button>
-                                  </form>
-                               </div>
-                           </div>
-                        <%}}%>
-                    </div>
-                </div>
-               </div>
-            </div>
-
-            <br /><br />
-            <!-- this section is for tags -->
-            <div>
-                <form action="/tag" method="post" class="form-horizontal" role="form">
-                    <input type="hidden" name="entityType" value="group" />
-                    <input type="hidden" name="entityId" value="<%=group.getId()%>" />
-                    <ul id="entityTags" style="float:left;width:600px;">
-                        <% for (TagDescriptor td : tds){ %>
-                        <li><%=td.getTagName() %></li>
-                        <% } %>
-                    </ul>
-                    <button type="submit" class="btn btn-primary" name="submit" style="margin-left:10px" />Save Tags</button>
-                </form>
-            </div>
-
-
-         </div>
-        <%}%>
     </div>
- </div>
+
 <%}else
 {%>
-    <br>
-    <h1> You are not registered to this group.</h1>
+    <div class="profile" style="position:relative; top:30px; background-color:#fff; padding:35px;
+                padding:0px;
+                text-align:center;
+                -webkit-box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
+				-moz-box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
+				box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);">
+        <h2 style="background-color:#e74c3c; color:#fff; margin:0px; padding:15px; font-family:'Oswald', sans-serif; color:#fff; text-align:left; font-size:18px;">Important Notice</h2>
+    <span style="display:block; padding:25px;">You are not registered to this group.</span>
+    </div>
 <%}%>
+</div>
 
 <div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
