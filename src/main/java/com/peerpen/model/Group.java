@@ -121,29 +121,10 @@ public class Group extends Taggable implements IModel
     }
   }
 
-  // method used for search autocomplete
-  //public List<String> getSuggestedGroups(String keyword, int limit){
-  //    String sql = "SELECT `group_name` FROM `groups` WHERE `group_name` LIKE '%" + keyword + "%' LIMIT " + limit;
-  //    List<Group> groups = new Group().queryAll(sql);
-  //    List<String> suggestions = new ArrayList<String>();
-  //
-  //    if(groups.size() > 0){
-  //        for(int i=0;i<groups.size();i++){
-  //            suggestions.add(groups.get(i).getGroupName());
-  //        }
-  //    }
-  //    //
-  //    return suggestions;
-  //}
-
   public List<Group> getSuggestions(String keyword, int limit)
   {
     String sql = "SELECT * FROM `groups` WHERE `group_name` LIKE '%" + keyword + "%' LIMIT " + limit;
     return new Group().queryAll(sql);
-  }
-
-  public static void main(String[] args)
-  {
   }
 
   public boolean getIsJoined(Integer sessionUserId)
@@ -203,16 +184,6 @@ public class Group extends Taggable implements IModel
     List<Joingroup> joingroups = new Joingroup().queryAll("SELECT * FROM `joingroups` WHERE group_id= " + this.getId() + " ORDER BY last_modified_date DESC");
     return joingroups;
   }
-
-  //public List<Group> removeDuplicates(List<Group> groups){
-  //    List<Group> set = new ArrayList<>(  );
-  //    for(int i=0;i<groups.size();i++){
-  //        if(!set.contains( groups.get( i ) )){
-  //            set.add( groups.get( i ) );
-  //        }
-  //    }
-  //    return set;
-  //}
 
   @Override
   public boolean equals(Object other)
