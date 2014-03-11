@@ -55,11 +55,11 @@ public class GroupTest {
         Assert.assertEquals(3, group.getAdminId().intValue());
 
         Integer a = 1;
-        List<Group> groups = group.getMatchedGroups("fitness");
+        //List<Group> groups = group.getMatchedGroups("fitness");
         Assert.assertEquals(groupId.intValue(), group.getId().intValue());
         Assert.assertEquals(a.intValue(), group.getBroadcasts().size());
         Assert.assertEquals(a.intValue(),group.getPeers().size());
-        Assert.assertEquals(a.intValue(),groups.size());
+        //Assert.assertEquals(a.intValue(),groups.size());
         Assert.assertEquals(a.intValue(), group.getOrderedBroadcast().size());
 
     }
