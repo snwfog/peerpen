@@ -255,25 +255,6 @@ public class Peer extends Base
     return this;
   }
 
-  public static void main(String[] args)
-  {
-    Map<String, Object> map = new HashMap<String, Object>();
-    map.put("email", "asn.brotha@gmail.com");
-
-    List<Peer> matches = new Peer().findAll(map);
-
-    System.out.println(matches.get(0));
-    Peer pear = matches.get(0);
-    pear.setRankId(null);
-    pear.setPassword("HAHAHAHA");
-    pear.update();
-    //        Peer a = new Peer().find(3);
-    //        System.out.println(a.getFirstName());
-    //        a.setFirstName("dsfdsaf");
-    //        a.update();
-
-  }
-
   public Date getDateOfBirth()
   {
     return dateOfBirth;

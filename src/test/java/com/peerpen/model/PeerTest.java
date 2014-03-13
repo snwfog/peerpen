@@ -1,5 +1,6 @@
 package com.peerpen.model;
 
+import com.peerpen.framework.exception.PermissionDeniedException;
 import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import com.sunnyd.database.Manager;
 import org.testng.Assert;
@@ -31,7 +32,13 @@ public class PeerTest {
         Assert.assertNull(a.getLastModifiedDate());
         Assert.assertNull(a.getFirstName());
         Assert.assertNull(a.getLastName());
+        Assert.assertEquals("", a.getPersonalWebsite());
+        Assert.assertEquals("", a.getDescription());
+        Assert.assertEquals(0, a.getExperience().intValue());
+        Assert.assertEquals("", a.getCountry());
+        Assert.assertEquals("", a.getIndustry());
         Assert.assertFalse(a.getUpdateFlag());
+        Assert.assertTrue(a.getChangesets().isEmpty());
         a.setFirstName("a");
         a.setLastName("b");
         a.setCountry("canada");
@@ -58,6 +65,10 @@ public class PeerTest {
         docArray.add(d);
         a.setDocuments(docArray);
         Assert.assertTrue(d.save());
+
+//        Changeset changeset = new Changeset().find(5);
+//        List<Changeset> changesets = a.getChangesets();
+//        changesets.add(changeset);
 
 //        Changeset ch = new Changeset();
 //        ch.setContent("changeset");
@@ -86,6 +97,7 @@ public class PeerTest {
     @Test (dependsOnMethods = { "TestSave" })
     public static void TestFind(){
         Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
+
         Peer peer = new Peer().find(peerId);
         Assert.assertEquals("a", peer.getFirstName());
         Assert.assertEquals("b", peer.getLastName());
@@ -101,7 +113,12 @@ public class PeerTest {
         Assert.assertEquals((Object) 3, peer.getExperience());
         Assert.assertEquals((Object) 0, peer.getCompleteProfile());
         Assert.assertNull(peer.getAvatarId());
-
+        Assert.assertFalse(peer.getAvatar().equals(Avatar.getDefaultAvatar()));
+        try {
+            Assert.assertNull(peer.getDocument(2));
+        } catch (PermissionDeniedException e) {
+            e.printStackTrace();
+        }
         Integer a = 1;
         Integer b = 1;
         Integer c = 1;
@@ -171,19 +188,17 @@ public class PeerTest {
     public void TestDestroy() {
         Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
         Peer p = new Peer().find(peerId);
-        Assert.assertEquals("john", p.getFirstName());
-        Assert.assertEquals("malkovich", p.getLastName());
         Assert.assertTrue(p.destroy());
         Assert.assertNull(p.getId());
     }
 
 
-//    @Test
-//    public void testHasAvatar() throws Exception {
-//        Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
-//        Peer p = new Peer().find(peerId);
-//        Assert.assertFalse(p.hasAvatar());
-//    }
+    @Test
+    public void testHasAvatar() throws Exception {
+        Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
+        Peer p = new Peer().find(peerId);
+        Assert.assertFalse(p.hasAvatar());
+    }
 
     @Test
     public void testGetAvatar() throws Exception {
