@@ -51,6 +51,7 @@ public class Feedable extends Base {
            a.setType(this.getClass().getSimpleName());
            a.setChildId(this.getId());
            a.setStatus("new");
+           a.setNotifyStatus("UNSEND");
 
            if(this instanceof Changeset){
                Changeset ch = (Changeset) this;
