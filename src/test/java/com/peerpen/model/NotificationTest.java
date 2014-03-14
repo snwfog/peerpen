@@ -16,8 +16,8 @@ import java.util.List;
 public class NotificationTest {
     @Test
     public void relationTest(){
-        Feedable f1 = new Feedable().find(1);
-        Feedable f2 = new Feedable().find(2);
+        Feedable f1 = new Feedable().find(8);
+        Feedable f2 = new Feedable().find(9);
 
         f1.setNotifyStatus("UNSEND");
         f2.setNotifyStatus("UNSEND");
@@ -25,7 +25,7 @@ public class NotificationTest {
         Assert.assertTrue(f2.updateFeedable());
 
         Notification nf = new Notification();
-        Peer p = new Peer().find(2);
+        Peer p = new Peer().find(5);
 
         List<Feedable> fs = nf.getNotification(p);
         Assert.assertEquals(fs.size(), 2);
@@ -38,10 +38,10 @@ public class NotificationTest {
         f1 = new Feedable().find(1);
         f2 = new Feedable().find(11);
 
-        f1.setNotifyStatus("UNSEND");
-        f2.setNotifyStatus("UNSEND");
-        Assert.assertTrue(f1.updateFeedable());
-        Assert.assertTrue(f2.updateFeedable());
-
+        List<Feedable> fa =  Feedable.getFeed(p);
+        for(Feedable f : fa )  {
+            f.setNotifyStatus(null);
+            f.updateFeedable();
+        }
     }
 }
