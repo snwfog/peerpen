@@ -79,9 +79,7 @@ Published <%= ((Comment)f.getTrueSelf()).getTimesAgo()%>
     </span>
 <br /><br />
 <div class="feed-comment-pointer"></div>
-<div class="feed-comment-body" style="-webkit-box-shadow: 10px 10px 0px 0px rgba(149, 165, 166, 1);
-	-moz-box-shadow: 10px 10px 0px 0px rgba(149, 165, 166, 1);
-	box-shadow: 10px 10px 0px 0px rgba(149, 165, 166, 1)">
+<div class="feed-comment-body feed-broadcast-body">
         <span class="feed-comment-body-text">
             <%=((Broadcast)f.getTrueSelf()).getMessage()%>
         </span>
@@ -100,9 +98,7 @@ Published <%= ((Comment)f.getTrueSelf()).getTimesAgo()%>
     </span>
 <br /><br />
 <div class="feed-comment-pointer"></div>
-<div class="feed-comment-body" style="-webkit-box-shadow: 10px 10px 0px 0px rgba(189, 195, 199, 1);
-	-moz-box-shadow: 10px 10px 0px 0px rgba(189, 195, 199, 1);
-	box-shadow: 10px 10px 0px 0px rgba(189, 195, 199, 1)">
+<div class="feed-comment-body feed-joingroup-body">
         <span class="feed-comment-body-text">
             Peer <%=((Joingroup)f.getTrueSelf()).getPeer().getUserName()%> wants to join your <%=((Joingroup)f.getTrueSelf()).getGroup().getGroupName()%> group
         </span>

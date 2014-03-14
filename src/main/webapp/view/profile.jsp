@@ -7,7 +7,7 @@
 <div class="cover-container"> </div>
 <div id="feed-container" class="wrap-container" >
     <img />
-    <div class="avatar avatar-container" style="top:-25px; position:relative;">
+    <div class="avatar avatar-container profile-avatar-body">
         <a href="/peer/<%= sessionUser.getId() %>/profile/avatar">
             <img class="img-circle" src="<%= sessionUser.getAvatar().getRelativeServletContextAvatarPathForSize( request,
                     Avatar.Size.LARGE ) %>" width="230px">
@@ -18,13 +18,13 @@
 
 <div class="wrap-container container-fluids">
 
-    <div class="profile-about-me-pointer" style="left:855px;"></div>
-    <div class="profile-about-me-body" style="background-color:#fff;">
+    <div class="profile-about-me-pointer profile-about-me-pointer-left"></div>
+    <div class="profile-about-me-body profile-about-me-body-bg">
 				<span class=".profile-about-me-text">
-					<span style="font-family:'Oswald', sans-serif; font-weight:400; display:block; padding:25px 0px 0px 25px;">
+					<span class="profile-about-me-content-text">
 						ABOUT ME
 
-						<span style="float:right; padding-right:25px;">
+						<span class="profile-about-me-edit-body">
 							<a id="edit_description" href="#" style="color:#000;">
                                 Edit
 
@@ -34,7 +34,7 @@
 						</span>
 
 					<br />
-					<span style="display:block; padding:0px 25px 25px 25px;">
+					<span class="profile-desc-body">
 						<form action="/peer/<%=sessionUser.getId()%>/profile" id="form_description" method="post">
                             <textarea class ="<%= sessionUser.getCompleteProfile() == 0 ? "peerDesc" : "peerDescription"%> well form-control" name ="description" style="resize:none" rows="3" readonly><%= sessionUser.getDescription().toString() %></textarea>
                             <input type="hidden" class="form-control peerID" name="peerId" value="<%= sessionUser.getId()%>"/>
@@ -50,7 +50,7 @@
 				</span>
 				</span>
 
-        <div style="height:40px; background-color:#e74c3c; border-radius:0px 0px 25px 25px; color:#fff; text-align:center;">
+        <div class="profile-extra-body">
             <table class="table table-condensed">
                 <tr>
                     <td>Member Type: Regular Member</td>
@@ -67,8 +67,8 @@
 
         <div class="row">
 
-            <div class="col-md-4" style="padding:0px;">
-<span style="height:25px; width:100%; display:block; float:left; font-family:'Oswald', sans-serif; font-weight:400; font-size:15px; color:#000; border-bottom:1px solid #bdc3c7;">
+            <div class="col-md-4 profile-perso-info-body">
+<span class="profile-perso-info-header">
 	Personal Information <a id="edit_personal" href="#"><span id="personal_icon" class="glyphicon glyphicon-pencil" style="color:#000;"></span></a>
 	</span>
 
@@ -108,37 +108,37 @@
                     </table>
             </div>
 
-            <div class="col-md-4"  style="padding:0px;">
-                <span style="height:25px; width:100%; display:block; float:left; font-family:'Oswald', sans-serif; font-weight:400; font-size:15px; color:#000; border-bottom:1px solid #bdc3c7; border-right:1px solid #fff;"></span>
+            <div class="col-md-4 profile-perso-info-body">
+                <span class="profile-perso-info-header2"></span>
 
-                <div style="border-right:1px solid #bdc3c7;">
+                <div class="profile-perso-info-body2">
                     <br /><br />
 
                     <table>
                         <tr>
                             <td><h6>Gender</h6></td>
-                            <td style="padding-bottom:10px;"><input type="text" class="form-control <%= sessionUser.getCompleteProfile() == 0 ? "peerGender" : "peerPersonal"%>"
+                            <td class="profile-perso-info-body2-push"><input type="text" class="form-control <%= sessionUser.getCompleteProfile() == 0 ? "peerGender" : "peerPersonal"%>"
                                                                     name="gender"
                                                                     value="<%= sessionUser.getGender() == null ? "" : sessionUser.getGender().toString() %>" readonly>
                             </td>
                         </tr>
                         <tr>
                             <td><h6>Country</h6></td>
-                            <td style="padding-bottom:10px;"><input type="text" class="form-control <%= sessionUser.getCompleteProfile() == 0 ? "peerCountry" : "peerPersonal"%>"
+                            <td class="profile-perso-info-body2-push"><input type="text" class="form-control <%= sessionUser.getCompleteProfile() == 0 ? "peerCountry" : "peerPersonal"%>"
                                                                     name="country"
                                                                     value="<%= sessionUser.getCountry().toString()%>" readonly>
                             </td>
                         </tr>
                         <tr>
                             <td><h6>Industry</h6></td>
-                            <td style="padding-bottom:10px;"><input type="text" class="form-control <%= sessionUser.getCompleteProfile() == 0 ? "peerIndustry" : "peerPersonal"%>"
+                            <td class="profile-perso-info-body2-push"><input type="text" class="form-control <%= sessionUser.getCompleteProfile() == 0 ? "peerIndustry" : "peerPersonal"%>"
                                                                     name="industry"
                                                                     value="<%=sessionUser.getIndustry().toString()%>" readonly>
                             </td>
                         </tr>
                         <tr>
                             <td><h6>Years <br />of Experience &nbsp</h6></td>
-                            <td style="padding-bottom:10px;"><input type="text" class="form-control <%= sessionUser.getCompleteProfile() == 0 ? "peerYoe" : "peerPersonal"%>"
+                            <td class="profile-perso-info-body2-push"><input type="text" class="form-control <%= sessionUser.getCompleteProfile() == 0 ? "peerYoe" : "peerPersonal"%>"
                                                                     name="yoe"
                                                                     value="<%= sessionUser.getExperience() == null ? 0 : sessionUser.getExperience()%>" readonly>
                             </td>
@@ -161,26 +161,26 @@
             </form>
 
 
-            <div class="col-md-4"  style="padding-left:0px; padding-right:0px;">
-	<span style="height:25px; width:100%; display:block; float:left; font-family:'Oswald', sans-serif; font-weight:400; font-size:15px; color:#000; border-bottom:1px solid #bdc3c7; padding-left:10px;">
+            <div class="col-md-4 profile-contact-body">
+	<span class="profile-contact-header">
 		Contact Information <a id="edit_contact" href="#"><span id="contact_icon" class="glyphicon glyphicon-pencil" style="color:#000;"></span></a>
 	</span>
 
                 <br /><br />
 
-                <div style="padding-left:10px;">
+                <div class="profile-contact-body-push">
                     <form action="/peer/<%=sessionUser.getId()%>/profile" id="form_contact" method="post">
                         <table>
                             <tr>
                                 <td><h6>Email</h6></td>
-                                <td style="padding-bottom:10px;"><input type="text" class="form-control peerContact"
+                                <td class="profile-perso-info-body2-push"><input type="text" class="form-control peerContact"
                                                                         name="email"
                                                                         value="<%= sessionUser.getEmail() == null ? "" : sessionUser.getEmail().toString() %>"
                                                                         readonly></td>
                             </tr>
                             <tr>
                                 <td><h6>Website &nbsp</h6></td>
-                                <td style="padding-bottom:10px;"><input type="text" class="form-control <%= sessionUser.getCompleteProfile() == 0 ? "peerEmail" : "peerContact"%>"
+                                <td class="profile-perso-info-body2-push"><input type="text" class="form-control <%= sessionUser.getCompleteProfile() == 0 ? "peerEmail" : "peerContact"%>"
                                                                         name="personal_website"
                                                                         value="<%= sessionUser.getPersonalWebsite().toString() %>"
                                                                         readonly></td>

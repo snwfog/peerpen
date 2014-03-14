@@ -9,13 +9,7 @@
 <br /><br /><br />
 <div class="wrap-container container">
 
-    <div class="profile" style="position:relative; top:30px; background-color:#fff; padding:35px;
-                padding:0px;
-                text-align:left;
-                padding:25px;
-                -webkit-box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
-				-moz-box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
-				box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);">
+    <div class="profile fa-search-minus">
     <!-- SEARCH FORM -->
     <form action="/search" method="post" class="form-horizontal" role="form" id="search_form">
         <div class="btn-group" data-toggle="buttons">

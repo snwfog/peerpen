@@ -9,7 +9,7 @@
 <div id="feed-container" class="container-fluid wrap-container">
 
     <img />
-    <div class="avatar avatar-container" style="top:-25px; position:relative;">
+    <div class="avatar avatar-container feed-avatar-body">
 		<span class="info user-details-feed">
 		        <a href="/peer/<%=sessionUser.getId()%>/profile" style="color:#fff;">
                     <h4><%=sessionUser.getFirstName()%> <%=sessionUser.getLastName()%></h4>
@@ -23,14 +23,14 @@
 
     <br />
 
-    <div class="bottom" style="text-align:right; top:-25px; position:relative;">
+    <div class="bottom feed-profile-body">
         <p>
             <a class="btn btn-warning btn-sm" href="/peer/<%=sessionUser.getId()%>/profile">View Profile</a>
             <a class="btn btn-warning btn-sm" href="/peer/<%=sessionUser.getId()%>/document">View Documents</a>
         </p>
     </div>
 
-    <h1 style="font-family:'Oswald', sans-serif; text-align:center; border-bottom:1px solid #bdc3c7;">Feeds</h1>
+    <h1 class="feed-profile-header">Feeds</h1>
 
     <!-- BEGINNING of _showfeed -->
 
@@ -39,14 +39,9 @@
         <% } else { %>
     <!-- WHEN NO FEEDS -->
 
-    <div class="profile" style="position:relative; top:30px; background-color:#fff; padding:35px;
-                padding:0px;
-                text-align:center;
-                -webkit-box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
-				-moz-box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
-				box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);">
-        <h2 style="background-color:#e74c3c; color:#fff; margin:0px; padding:15px; font-family:'Oswald', sans-serif; text-align:left; font-size:18px;">Important Notice</h2>
-        <span style="display:block; padding:25px;">Sorry, you have no feeds yet.</span>
+    <div class="profile feed-no-feeds-body"">
+        <h2 class="feed-no-feeds-header">Important Notice</h2>
+        <span class="feed-no-feeds-content">Sorry, you have no feeds yet.</span>
     </div>
     <%}%>
 

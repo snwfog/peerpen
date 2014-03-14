@@ -17,10 +17,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<div class="cover-container" style="padding:60px;"> </div>
+<div class="cover-container group-cover"> </div>
 <div class="container-fluid wrap-container">
 
-<h1 style="font-family:'Oswald', sans-serif; border-bottom:0px solid #bdc3c7;"><%= group.getGroupName()%> Group</h1>
+<h1 class="group-header-title"><%= group.getGroupName()%> Group</h1>
 
 <%if (group.getIsJoined(sessionUser.getId())){%>
 
@@ -30,37 +30,35 @@
 
     <br /><br />
     <div class="feed-comment-pointer"></div>
-    <div class="feed-comment-body" style="padding:0px; -webkit-box-shadow: 10px 10px 0px 0px rgba(149, 165, 166, 1);
-	-moz-box-shadow: 10px 10px 0px 0px rgba(149, 165, 166, 1);
-	box-shadow: 10px 10px 0px 0px rgba(149, 165, 166, 1)">
-        <span class="feed-comment-body-text" style="margin:0px; padding:25px 25px 0px 25px;">
+    <div class="feed-comment-body group-comment-body">
+        <span class="feed-comment-body-text group-comment-content">
             <form method="POST" action="/group/<%= group.getId()%>/broadcast" parsley-validate style="text-align:right;">
-                <textarea id="broadcast" class="parsley-validated" name="broadcast" style="width:100%; height:100px; resize: none; border:1px solid #bdc3c7;" parsley-trigger="change keyup"></textarea>
+                <textarea id="broadcast" class="parsley-validated group-comment-text-box" name="broadcast" parsley-trigger="change keyup"></textarea>
                 <input type="hidden" name="groupid" value="<%= group.getId()%>"/>
                 <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>"/>
                 <input type="hidden" name="_method" value="POST">
-                <button type="submit" class="btn btn-warning " style="margin-top:5px;">Post</button>
+                <button type="submit" class="btn btn-warning group-comment-btn">Post</button>
             </form>
 
             <br />
         </span>
 
-        <div style="background-color:#e74c3c; border-radius:0px 0px 25px 25px; color:#fff; text-align:center; padding:15px 25px 5px 25px;">
+        <div class="group-tag-body">
             <form action="/tag" method="post" class="form-horizontal" role="form">
                 <input type="hidden" name="entityType" value="group" />
                 <input type="hidden" name="entityId" value="<%=group.getId()%>" />
                 <table cellspacing="0" cellpadding="0" style="width:100%;">
                     <tr>
-                        <td style="width:95%; vertical-align:top;">
-                            <ul id="entityTags" style="background-color:#fff;">
+                        <td class="group-tag-content">
+                            <ul id="entityTags" class="group-tag-content-list">
                                 <% for (TagDescriptor td : tds){ %>
                                 <li><%=td.getTagName() %></li>
                                 <% } %>
                             </ul>
                         </td>
 
-                        <td style="width:5%; vertical-align:top; padding:0px;">
-                            <button type="submit" class="btn btn-info" name="submit" style="margin-left:5px" />Save Tags</button>
+                        <td class="group-tag-submit-box">
+                            <button type="submit" class="btn btn-info group-tag-submit" name="submit" />Save Tags</button>
                         </td>
                     </tr>
                 </table>
@@ -69,12 +67,12 @@
     </div>
     <br />
 
-    <div class="profile" style="position:relative; top:30px; background-color:#fff; padding:35px;">
+    <div class="profile group-profile">
 
         <%if (group.getAdminId()==sessionUser.getId() && joingroups!=null && joingroups.size()!=0){%>
         <div class="row">
             <div class="col-md-12">
-                <h2 style="font-family:'Oswald', sans-serif; font-weight:400; border-bottom:1px solid #bdc3c7; margin-bottom:25px;">User Request to join your <%= group.getGroupName()%> group</h2>
+                <h2 class="group-request-header">User Request to join your <%= group.getGroupName()%> group</h2>
                 <%
                     for (Joingroup jg:joingroups){
                         if((group.getPeers().contains(jg.getPeer()))==false)
@@ -114,7 +112,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h2 style="font-family:'Oswald', sans-serif; font-weight:400; border-bottom:1px solid #bdc3c7; margin-bottom:25px;">Members of this group</h2>
+            <h2 class="group-members-header">Members of this group</h2>
 
             <table class="table table-striped table-condensed">
                 <thead>
@@ -182,14 +180,9 @@
 
 <%}else
 {%>
-    <div class="profile" style="position:relative; top:30px; background-color:#fff; padding:35px;
-                padding:0px;
-                text-align:center;
-                -webkit-box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
-				-moz-box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
-				box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);">
-        <h2 style="background-color:#e74c3c; color:#fff; margin:0px; padding:15px; font-family:'Oswald', sans-serif; text-align:left; font-size:18px;">Important Notice</h2>
-    <span style="display:block; padding:25px;">You are not registered to this group.</span>
+    <div class="profile group-no-user-body">
+        <h2 class="group-no-user-header">Important Notice</h2>
+    <span class="group-no-user-text">You are not registered to this group.</span>
     </div>
 <%}%>
 </div>

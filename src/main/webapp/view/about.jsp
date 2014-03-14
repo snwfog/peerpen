@@ -1,4 +1,5 @@
 <%@ include file="/view/includes/static/header.jsp" %>
+<%@ include file="/view/includes/static/navbar.jsp" %>
 
 <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
 
