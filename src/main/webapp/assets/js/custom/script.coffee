@@ -4,7 +4,6 @@ $ ->
   #$('button#avatar-upload-submit').click (e) ->
   #  e.preventDefault()
   #  $('form#avatar-upload').submit()
-
   $("a#upload-new-avatar").click (e) ->
     e.preventDefault()
     $("div#dropzone-container").fadeToggle()
@@ -46,4 +45,6 @@ $ ->
     setTimeout ( -> parentForm.submit() ), 2000
 
   console.log("Loading ppedit")
-  $('.editor').ppedit()
+  $('.editor').ppedit(
+    onload: -> console.log "Loaded"
+  )

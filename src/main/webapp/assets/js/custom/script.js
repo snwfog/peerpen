@@ -37,5 +37,9 @@ $(function() {
     }), 2000);
   });
   console.log("Loading ppedit");
-  return $('.editor').ppedit();
+  return $('.editor').ppedit({
+    onload: function() {
+      return console.log("Loaded");
+    }
+  });
 });
