@@ -1,3 +1,28 @@
+/* clear all tables first */
+SET FOREIGN_KEY_CHECKS = 0; -- Disable foreign key checking.
+truncate avatars;
+truncate broadcasts;
+truncate categories;
+truncate changesets;
+truncate comments;
+truncate documents;
+truncate `documents_taggables`;
+truncate `feedables`;
+truncate groups;
+truncate `groups_categories`;
+truncate hunks;
+truncate joingroups;
+truncate likes;
+truncate logs;
+truncate peers;
+truncate `peers_groups`;
+truncate ranks;
+truncate `snapshots`;
+truncate `tag_descriptors`;
+truncate taggables;
+truncate tags;
+SET FOREIGN_KEY_CHECKS = 1; -- Enable foreign key checking.
+
 
 
 INSERT INTO `peers` (`id`, `first_name`, `last_name`, `email`, `user_name`, `password`, `point`, `personal_website`, `creation_date`, `last_modified_date`, `etag`, `semaphore`, `description`, `rank_id`, `date_of_birth`, `country`, `industry`, `experience`, `gender`, `avatar_id`, `session_id`)
