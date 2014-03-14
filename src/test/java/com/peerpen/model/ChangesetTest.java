@@ -94,6 +94,7 @@ public class ChangesetTest
     Assert.assertTrue(changeset2.getPeerId() == 4);
     Assert.assertEquals(changeset2.getContent(), "ChangesetContent:" + randomString);
     Assert.assertTrue(changeset2.getHunkId() == 3);
+    changeset2.destroy();
   }
 
   @Test
@@ -126,6 +127,7 @@ public class ChangesetTest
 //    Assert.assertTrue(changeset3.getPeerId() == 3);
     Assert.assertEquals(changeset3.getContent(), "ChangesetContent2:" + randomString);
     Assert.assertTrue(changeset3.getHunkId() == 2);
+    changeset3.destroy();
   }
 
   @Test
