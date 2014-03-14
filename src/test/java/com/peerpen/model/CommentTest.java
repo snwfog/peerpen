@@ -50,6 +50,7 @@ public class CommentTest
     Assert.assertEquals(comment1.getType(), "Document");
     Assert.assertEquals(comment1.getPosterPeerId(), peer.getId());
 
+    comment1.destroy();
   }
 
   @Test
@@ -68,6 +69,7 @@ public class CommentTest
 
     Comment comment2 = new Comment().find(hm);
     Assert.assertTrue(comment2.getPosterPeerId() == 2, "Check the peer who posted the comment");
+    comment2.destroy();
   }
   @Test
   public void testSave() throws Exception
@@ -88,6 +90,7 @@ public class CommentTest
     Assert.assertTrue(comment2.getObjectId() == 3);
     Assert.assertEquals(comment2.getType(), "Resume");
     Assert.assertEquals(comment2.getMessage(), "TestCommentSave:" + randomString);
+    comment2.destroy();
   }
 
   @Test
@@ -100,6 +103,7 @@ public class CommentTest
     Comment comment1 = new Comment().find(hm);
     Assert.assertEquals(new Peer().find(2), comment1.getPosterPeer());
     Assert.assertEquals("TestCommentCreate:" + randomString, comment1.getMessage());
+    comment1.destroy();
   }
 
   @Test
