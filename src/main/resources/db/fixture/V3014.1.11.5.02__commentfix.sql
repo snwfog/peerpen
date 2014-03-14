@@ -39,31 +39,61 @@ INSERT INTO `changesets` (`id`, `creation_date`, `last_modified_date`, `peer_id`
   (6,'2014-01-15 23:24:48','2014-01-15 23:24:48',2,'Added Leasure section',2),
   (7,'2014-01-15 23:25:24','2014-01-15 23:25:24',2,'Remove High School in Education',3);
 
+INSERT INTO `comments` (`id`, `message`, `type`, `object_id`, `poster_peer_id`, `creation_date`, `last_modified_date`, `up_vote`, `down_vote`, `semaphore`, `etag`)
+  VALUES
+  (1,'My first comment','Document',1,2,'2014-03-14 13:34:09','2014-03-14 13:34:09',0,0,0,'b8a3729cda4fdcc9c98d2aaaafd85e79a037fe1658ab164360868fbc6870bd56'),
+  (2,'My second comment','Document',2,2,'2014-03-14 13:34:53','2014-03-14 13:34:53',0,0,0,'c2a7b3db27f72eb089f4a15d22982b884bb671e12a52381d8bfd95331dd96732'),
+  (3,'My third comment','Document',3,2,'2014-03-14 13:35:04','2014-03-14 13:35:04',0,0,0,'190d5ee1f96d73e0cb7bd07ad2f7d0ee211f449d22c0232ad8dcf660f8596e9e'),
+  (4,'What you you guys think?','Document',4,2,'2014-03-14 13:35:30','2014-03-14 13:35:30',0,0,0,'7669a214c5634f8d7abee523b970d79ca63e7fc2e8e1ef49c42f18f4ab84aaf3'),
+  (5,'Good job!','Document',5,2,'2014-03-14 13:35:52','2014-03-14 13:35:52',0,0,0,'f4c5ee02944b89b90778aef98d2dda7ee6ca5b6e974797aaeb8c0a24c215c34a'),
+  (6,'Good luck brah, looks good. but dont be flippin burgers your whole life!','Document',6,2,'2014-03-14 13:36:34','2014-03-14 13:36:34',0,0,0,'210a9bc2d3c42c924e9f23e00e21cec75f45c8195589e1806b368dbcedcc8bf4'),
+  (7,'I hope you get accepted!','Document',7,2,'2014-03-14 13:37:00','2014-03-14 13:37:00',0,0,0,'5a125bf20dfc1de4d6f84cc6ccfcb6ff75571ac2666c059a7819c3b659476056'),
+  (8,'Good luck on your thesis','Document',8,2,'2014-03-14 13:37:22','2014-03-14 13:37:22',0,0,0,'be0bb6bf0a641dd43c8e3a3b74cfd1e62c6cb021114ee7656a41af81eeb57745'),
+  (9,'Dont be a code monkey..','Document',9,2,'2014-03-14 13:37:45','2014-03-14 13:37:45',0,0,0,'7b19711d3778497ca7a0697ee0dd7ecb5fe007a138b5a5cf1ee108edf8bbf8b2'),
+  (10,'NICE','Document',1,3,'2014-03-14 13:38:58','2014-03-14 13:38:58',0,0,0,'9abfdb287706b9e03b2dafb53aff4403c9805a70059b9385b80878e9630b459b'),
+  (11,'Cool','Document',2,3,'2014-03-14 13:39:08','2014-03-14 13:39:08',0,0,0,'9b637d54f16f6d2a03175a62e5f3ad568440244458586287b5491aee2bac953a'),
+  (12,'awesome brooo','Document',3,3,'2014-03-14 13:39:17','2014-03-14 13:39:17',0,0,0,'b236991c2c84124103cabb7f4233f601905d71477fb49018aed6b9ea87a3d336'),
+  (13,'Superb','Document',4,3,'2014-03-14 13:39:41','2014-03-14 13:39:41',0,0,0,'e2c9b8149de3101683efdfe7521a6568a7be95aec8cd46ff5de5ad5919010b56'),
+  (14,'Thanks brah','Document',5,3,'2014-03-14 13:39:59','2014-03-14 13:39:59',0,0,0,'8830cd7dd39658457892d9caed0a70fba9efc6b0ed0ea7490a2899c75dc574a9'),
+  (15,'I promise :)','Document',6,3,'2014-03-14 13:40:15','2014-03-14 13:40:15',0,0,0,'2f768c7dcd13d5b258e6771dd70362134019724b53d34ae122b93d6c546f1f93'),
+  (16,'I wish you all the luck','Document',7,3,'2014-03-14 13:40:37','2014-03-14 13:40:37',0,0,0,'f8e93115d1fcbb8c346423b7e295b4668ec66164dfb52ea7fbc301f8849af8f9'),
+  (17,'You made a mistake in your education','Document',8,3,'2014-03-14 13:41:09','2014-03-14 13:41:09',0,0,0,'00410df661e4ab558c6f239c9012c6d433f71af45e0d4bbb58c2caa055927d83'),
+  (18,'You have a run-on sentence in experience','Document',9,3,'2014-03-14 13:41:29','2014-03-14 13:41:29',0,0,0,'830ce673a190ff2514f68ed9deea96c2c8f4beb26d173768ec8c45b2c8f06abe'),
+  (19,'Thank you! I updated it, have look!','Document',7,4,'2014-03-14 13:42:49','2014-03-14 13:42:49',0,0,0,'94b2881823fbc46b61942b6157beb6c2a24eff31e0ccffaae9d2a8464be7707c'),
+  (20,'Do not use abbeivations, write out the whole word instead','Document',1,4,'2014-03-14 13:43:24','2014-03-14 13:43:24',0,0,0,'a68eb2b69f8eed61687bd2bc1b2f3ce3edc594d9b96dcda46f623d886d686e63'),
+  (21,'hello','Changeset',5,4,'2014-03-14 13:43:51','2014-03-14 13:43:51',0,0,0,'6696e6893e05e58cfc8adc5bef143950f232b994006b469179b14153213e428a'),
+  (22,'hello again','Changeset',6,4,'2014-03-14 13:43:59','2014-03-14 13:43:59',0,0,0,'3c9c01d1306130879d6ed8281e9402ea17e5749af8369d6beef9345f888decc7'),
+  (23,'hello again again','Changeset',7,4,'2014-03-14 13:44:09','2014-03-14 13:44:09',0,0,0,'d567f5f5975d91fbef883321a87f73ed1ac505f6bb7fe435940b4fb7df7df51f'),
+  (24,'Thats awseome','Document',3,4,'2014-03-14 13:44:32','2014-03-14 13:44:32',0,0,0,'bea7458e40b83dd5fc7ce9cc5772f043d811ee7657ca23562d67b1a48a68c8a0');
 
--- INSERT INTO `comments` (`id`, `message`, `document_id`, `peer_id`, `creation_date`, `last_modified_date`, `changeset_id`, `up_vote`, `down_vote`)
--- VALUES
---   (1,'My first comment',1,2,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,2,0),
---   (2,'Nice resume! :)',1,3,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,3,0),
---   (3,'Theres a few spelling mistakes..',1,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,4,0),
---   (4,'Thanks! fixed :D',1,2,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,5,0),
---   (5,'There a run-on sentence in your first paragraph.',2,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,5,0),
---   (6,'Thanks, fixed it! stayed up all night trying to fix it... :/\r\nYou a life saver! ',2,2,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,6,0),
---   (7,'No problem :)',2,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,3,0),
---   (8,'Nice!',2,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,5,0),
---   (9,'Good Luck',1,4,'2014-01-15 23:26:41','2014-01-15 23:26:41',NULL,2,0),
---   (10,'True',1,3,'2014-01-15 23:26:35','2014-01-15 23:26:35',5,4,0),
---   (11,'Smart',1,4,'2014-01-15 23:27:01','2014-01-15 23:27:01',5,3,0),
---   (12,'Hmmm.. I see your point',1,5,'2014-01-15 23:27:48','2014-01-15 23:27:48',6,10,0);
---
---
 
--- INSERT INTO `feedables` (`id`, `child_id`, `user_id`,`type`, `status`,`last_modified_date`, `creation_date`)
---   VALUES
---   (1, 5, 2,'Changeset','new' ,'2014-01-13 17:59:59','2014-01-13 17:58:59'),
---   (2, 6, 2,'Changeset','new' ,'2014-01-13 17:56:59','2014-01-13 17:58:59'),
---   (3, 7, 2,'Changeset','new' ,'2014-01-13 17:54:59','2014-01-13 17:58:59'),
---   (4, 1, 2,'Comment','new' ,'2014-01-13 17:57:59','2014-01-13 17:58:59'),
---   (5, 2, 2,'Comment','new' ,'2014-01-13 17:52:59','2014-01-13 17:58:59');
+
+INSERT INTO `feedables` (`id`, `child_id`, `user_id`, `type`, `status`, `notify_status`, `creation_date`, `last_modified_date`, `semaphore`, `etag`)
+  VALUES
+  (1,1,2,'Comment','new','SENT','2014-03-14 13:34:09','2014-03-14 13:37:46',0,'e35d1614fc0136c45d5ca57d89d4113938d196371ee584867778b449812e1ac1'),
+  (2,2,2,'Comment','new','SENT','2014-03-14 13:34:53','2014-03-14 13:37:46',0,'ce20dddf75e3ae767d59ffe1f2ce880f794f4782c7b0a542d6be9e567877de59'),
+  (3,3,2,'Comment','new','SENT','2014-03-14 13:35:04','2014-03-14 13:37:46',0,'d57d167c6232e3367e2fbf56d79835c94c815974c525783dbd8a22248c014709'),
+  (4,4,2,'Comment','new','SENT','2014-03-14 13:35:30','2014-03-14 13:37:46',0,'fee1996b2a34ae01da1ee1f85987ea1c2664f8124473fcbc99060c67877d348a'),
+  (5,5,3,'Comment','new','SENT','2014-03-14 13:35:52','2014-03-14 13:41:32',0,'f51feedd2ab83d37259d8c74d23148d25a5dca041fed9e239d1586be697ffdbd'),
+  (6,6,3,'Comment','new','SENT','2014-03-14 13:36:34','2014-03-14 13:41:32',0,'c97bd2050822b0bbd57105cc4b9b6a51ef6c07d7a74a7bf5f14bbfe0b9260888'),
+  (7,7,4,'Comment','new','SENT','2014-03-14 13:37:00','2014-03-14 13:44:33',0,'8c332fbaf43a62feaff31ea2dbd09372736a724cbed8c12d8341f3c92061fe70'),
+  (8,8,5,'Comment','new',NULL,'2014-03-14 13:37:22','2014-03-14 13:37:22',0,'d88a230729e059a25c380ba3ce14897ec1bcc41191f03f72b03d7347845cda1d'),
+  (9,9,5,'Comment','new',NULL,'2014-03-14 13:37:45','2014-03-14 13:37:45',0,'f05bf1d7bf8f239143e8afffbd8325bee83e5074320a3d082028bc65cb5fc3a8'),
+  (10,10,2,'Comment','new',NULL,'2014-03-14 13:38:58','2014-03-14 13:38:58',0,'cd2e1a5db43f0a9657a6c93950084094f38d3a75db9fce1b5f7e22edcc7af617'),
+  (11,11,2,'Comment','new',NULL,'2014-03-14 13:39:08','2014-03-14 13:39:08',0,'0efd6947e445e881dcb739e5776ac6929f5ce105570cfebd6df748120ae5d6d1'),
+  (12,12,2,'Comment','new',NULL,'2014-03-14 13:39:17','2014-03-14 13:39:17',0,'b7d4ceee626051209e94f8851b93ed00b2042e37917ed585ab1856c744a61c87'),
+  (13,13,2,'Comment','new',NULL,'2014-03-14 13:39:41','2014-03-14 13:39:41',0,'edd3d2c402be5771cf35c1457849fe7d14603da275a14f823d290ee1fc90e273'),
+  (14,14,3,'Comment','new','SENT','2014-03-14 13:39:59','2014-03-14 13:41:32',0,'f4955d2bf0790b9c59746155258a9e80dcb35db1fcc64dd25fe500fc7cfe1ea4'),
+  (15,15,3,'Comment','new','SENT','2014-03-14 13:40:15','2014-03-14 13:41:32',0,'c9221a046dbb272dd8b56e6556cc42a13728620e2bef1256e5db7d4401bedac3'),
+  (16,16,4,'Comment','new','SENT','2014-03-14 13:40:37','2014-03-14 13:44:33',0,'746e627dc302df60ec027a6b2510293c8e1b1e54133caa9ea903394d90303219'),
+  (17,17,5,'Comment','new',NULL,'2014-03-14 13:41:09','2014-03-14 13:41:09',0,'9cf16bdda01d378b0144c0bebdf93fb1cd007852baaad8bbb51e315161cedb89'),
+  (18,18,5,'Comment','new',NULL,'2014-03-14 13:41:29','2014-03-14 13:41:29',0,'155f73a06d8dca5c9c8ca16181311775856f33104e7a874a8b3edb9c40b7545c'),
+  (19,19,4,'Comment','new','SENT','2014-03-14 13:42:49','2014-03-14 13:44:33',0,'47ae650b7c8e8bef5c721dbab8102240e4da668dce87ed9f19979f3943c8436a'),
+  (20,20,2,'Comment','new',NULL,'2014-03-14 13:43:24','2014-03-14 13:43:24',0,'e814dd1cf62237835b915e1452116a0137255422022b9ee8b072f052b76105d6'),
+  (21,21,2,'Comment','new',NULL,'2014-03-14 13:43:51','2014-03-14 13:43:51',0,'e52f1860a379ae9e5895cc16cfc384eacf0a7878fd1a237fcaefd72a5b1ef519'),
+  (22,22,2,'Comment','new',NULL,'2014-03-14 13:43:59','2014-03-14 13:43:59',0,'d02839f85e5f08062c82f9a54b49fe7f9685760178d75061b8947609ecc766e8'),
+  (23,23,2,'Comment','new',NULL,'2014-03-14 13:44:09','2014-03-14 13:44:09',0,'d1c00418939313726ff664f66b457a1f976678bd9bacfbc4c3104e4c6c23e1fd'),
+  (24,24,2,'Comment','new',NULL,'2014-03-14 13:44:32','2014-03-14 13:44:32',0,'27d428a0b659be266f655ac0102535971bd126b002ba22b7abceb0d32b42e718');
 
 
 INSERT INTO `groups` (`id`, `group_name`, `description`, `creation_date`, `last_modified_date`, `semaphore`, `etag`, `admin_id`)

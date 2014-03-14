@@ -98,7 +98,7 @@ public class CommentTest
     Map<String, Object> hm = Maps.newHashMap();
     hm.put("message", "TestComment:" + randomString);
     Comment comment1 = new Comment().find(hm);
-    Assert.assertEquals(new Document().find(4), comment1.getPosterPeer());
+    Assert.assertEquals(new Peer().find(2), comment1.getPosterPeer());
     Assert.assertEquals("TestComment:" + randomString, comment1.getMessage());
   }
 

@@ -197,6 +197,8 @@ CREATE TABLE `changesets` (
   `peer_id` int(11) DEFAULT NULL,
   `content` text,
   `hunk_id` int(11) DEFAULT NULL,
+  `semaphore` int(1) NOT NULL DEFAULT '0',
+  `etag` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `peer_id` (`peer_id`),
   KEY `hunk_id` (`hunk_id`),
