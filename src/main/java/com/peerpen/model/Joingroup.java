@@ -59,11 +59,26 @@ public class Joingroup extends Feedable implements IModel {
         initRelation("peer");
         return peer;
     }
+
+    public void setPeer(Peer p)
+    {
+        peerId = p.getId();
+        peer = p;
+    }
     public Group getGroup()
     {
         initRelation("group");
         return group;
     }
+
+
+    public void setGroup(Group g)
+    {
+        this.setGroupId(g.getId());
+        this.group = g;
+        this.setUpdateFlag(true);
+    }
+
 
 //    public List<Joingroup> getRequests()
 //    {
