@@ -187,8 +187,11 @@ public class PeerTest {
     @AfterClass
     public void TestDestroy() {
         Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
+        Integer groupId = (Integer) Manager.find("SELECT max(id) as id FROM groups").get("id");
         Peer p = new Peer().find(peerId);
+        Group group = new Group().find(groupId);
         Assert.assertTrue(p.destroy());
+        Assert.assertTrue(group.destroy());
         Assert.assertNull(p.getId());
     }
 
@@ -198,6 +201,7 @@ public class PeerTest {
         Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
         Peer p = new Peer().find(peerId);
         Assert.assertFalse(p.hasAvatar());
+
     }
 
     @Test
