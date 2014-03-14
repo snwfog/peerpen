@@ -13,6 +13,24 @@ INSERT INTO `peers` (`id`, `first_name`, `last_name`, `email`, `user_name`, `pas
   (10,'James','DeSanta','james.desenta@getalife.com','jam','jam',3,'google.com','2014-02-08 19:21:05','2014-02-08 20:27:17',NULL,0,'I am looking for a exciting positiong',NULL,'2014-02-08','France','BIOT',3,'M',NULL,NULL);
 
 
+INSERT INTO `avatars` (`id`, `peer_id`, `filename`, `creation_date`, `last_modified_date`, `semaphore`, `etag`, `x1`, `y1`, `x2`, `y2`, `original_width`, `original_height`)
+  VALUES
+  (1,2,'default-avatar.jpg','2014-03-14 14:27:46','2014-03-14 14:27:46',0,'991dd12857cf90f58b60d5138c524bb6d7024d88f8000ca47dd824988871c934',0,0,256,256,NULL,NULL),
+  (2,4,'default-avatar.jpg','2014-03-14 14:27:46','2014-03-14 14:27:46',0,'3ce67d667f1f5cd0577d0cc5f5a622fb38bb16100fb4b44796463d580baa4cb5',0,0,256,256,NULL,NULL),
+  (3,4,'default-avatar.jpg','2014-03-14 14:27:46','2014-03-14 14:27:46',0,'3ce67d667f1f5cd0577d0cc5f5a622fb38bb16100fb4b44796463d580baa4cb5',0,0,256,256,NULL,NULL),
+  (4,4,'default-avatar.jpg','2014-03-14 14:27:46','2014-03-14 14:27:46',0,'3ce67d667f1f5cd0577d0cc5f5a622fb38bb16100fb4b44796463d580baa4cb5',0,0,256,256,NULL,NULL),
+  (5,4,'default-avatar.jpg','2014-03-14 14:27:47','2014-03-14 14:27:47',0,'3ce67d667f1f5cd0577d0cc5f5a622fb38bb16100fb4b44796463d580baa4cb5',0,0,256,256,NULL,NULL),
+  (6,4,'default-avatar.jpg','2014-03-14 14:27:47','2014-03-14 14:27:47',0,'3ce67d667f1f5cd0577d0cc5f5a622fb38bb16100fb4b44796463d580baa4cb5',0,0,256,256,NULL,NULL),
+  (7,3,'default-avatar.jpg','2014-03-14 14:27:47','2014-03-14 14:27:47',0,'8a4706e501c40b3ff33cd85adaddea2610cda5458a48aa584b81b061cc26be8e',0,0,256,256,NULL,NULL),
+  (8,3,'default-avatar.jpg','2014-03-14 14:27:47','2014-03-14 14:27:47',0,'8a4706e501c40b3ff33cd85adaddea2610cda5458a48aa584b81b061cc26be8e',0,0,256,256,NULL,NULL),
+  (9,3,'default-avatar.jpg','2014-03-14 14:27:47','2014-03-14 14:27:47',0,'8a4706e501c40b3ff33cd85adaddea2610cda5458a48aa584b81b061cc26be8e',0,0,256,256,NULL,NULL),
+  (10,3,'default-avatar.jpg','2014-03-14 14:27:47','2014-03-14 14:27:47',0,'8a4706e501c40b3ff33cd85adaddea2610cda5458a48aa584b81b061cc26be8e',0,0,256,256,NULL,NULL),
+  (11,2,'default-avatar.jpg','2014-03-14 14:27:47','2014-03-14 14:27:47',0,'991dd12857cf90f58b60d5138c524bb6d7024d88f8000ca47dd824988871c934',0,0,256,256,NULL,NULL),
+  (12,2,'default-avatar.jpg','2014-03-14 14:27:47','2014-03-14 14:27:47',0,'991dd12857cf90f58b60d5138c524bb6d7024d88f8000ca47dd824988871c934',0,0,256,256,NULL,NULL),
+  (13,2,'default-avatar.jpg','2014-03-14 14:27:47','2014-03-14 14:27:47',0,'991dd12857cf90f58b60d5138c524bb6d7024d88f8000ca47dd824988871c934',0,0,256,256,NULL,NULL),
+  (14,2,'default-avatar.jpg','2014-03-14 14:27:47','2014-03-14 14:27:47',0,'991dd12857cf90f58b60d5138c524bb6d7024d88f8000ca47dd824988871c934',0,0,256,256,NULL,NULL);
+
+
 
 INSERT INTO `documents` (`id`, `doc_name`, `thumbnail_path`, `peer_id`, `last_modified_date`, `creation_date`, `semaphore`, `etag`, `doc_type`)
   VALUES

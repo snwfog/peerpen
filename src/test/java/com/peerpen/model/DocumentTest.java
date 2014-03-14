@@ -32,66 +32,6 @@ public class DocumentTest
   }
 
   @Test
-  public void testGetDocName() throws Exception
-  {
-
-  }
-
-  @Test
-  public void testGetPeer() throws Exception
-  {
-
-  }
-
-  @Test
-  public void testSetPeerId() throws Exception
-  {
-
-  }
-
-  @Test
-  public void testGetPeerId() throws Exception
-  {
-
-  }
-
-  @Test
-  public void testSetDocName() throws Exception
-  {
-
-  }
-
-  @Test
-  public void testGetThumbnailPath() throws Exception
-  {
-
-  }
-
-  @Test
-  public void testSetThumbnailPath() throws Exception
-  {
-
-  }
-
-  @Test
-  public void testSetLastModifiedDate() throws Exception
-  {
-
-  }
-
-  @Test
-  public void testGetCreationDate() throws Exception
-  {
-
-  }
-
-  @Test
-  public void testSetCreationDate() throws Exception
-  {
-
-  }
-
-  @Test
   public void testGetHunks() throws Exception
   {
     Assert.assertTrue(document.getHunks() instanceof List<?>, "Check if return object is type List");
@@ -112,13 +52,14 @@ public class DocumentTest
   {
     Peer peer = new Peer().find(2);
 
-    document.createComment("Test:" + randomString, peer);
+    document.createComment("TestDocumentCreateComment:" + randomString, peer);
     document.update();
 
     Map<String, Object> hm = Maps.newHashMap();
-    hm.put("message", "Test:" + randomString);
+    hm.put("message", "TestDocumentCreateComment:" + randomString);
     Comment comment2 = new Comment().find(hm);
-    Assert.assertTrue(comment2.getMessage().contentEquals("Test:" + randomString), "Create comment");
+    Assert.assertTrue(comment2.getMessage().contentEquals("TestDocumentCreateComment:" + randomString), "Create comment");
+    comment2.destroy();
   }
 
   @Test(dependsOnMethods = {"testCreateComment"})

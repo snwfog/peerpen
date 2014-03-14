@@ -1,5 +1,7 @@
 package com.peerpen.model;
 
+import org.testng.annotations.Test;
+
 /**
  * Created with IntelliJ IDEA.
  * User: WAIS
@@ -8,4 +10,8 @@ package com.peerpen.model;
  * To change this template use File | Settings | File Templates.
  */
 public class BroadcastTest {
+    @Test
+    public void TestSaveGroup() {
+
+    }
 }

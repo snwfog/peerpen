@@ -30,6 +30,15 @@ public class ChangesetTest
   public void tearDown() throws Exception
   {
     changeset = null;
+
+    Map<String, Object> hm = Maps.newHashMap();
+    hm.put("message", "TestChangesetSetUp:" + randomString);
+    Comment comment2;
+
+    if((comment2 = new Comment().find(hm))!=null)
+    {
+       comment2.destroy();
+    }
   }
 
   @Test
@@ -53,6 +62,7 @@ public class ChangesetTest
     hm.put("message", "TestChangesetCreateComment:" + randomString);
     Comment comment2 = new Comment().find(hm);
     Assert.assertTrue(comment2.getMessage().contentEquals("TestChangesetCreateComment:" + randomString), "Create comment");
+    comment2.destroy();
   }
 
   @Test
