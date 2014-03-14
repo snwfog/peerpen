@@ -20,11 +20,21 @@ public class AvatarController extends HttpServlet {
 
     static final Logger logger = LoggerFactory.getLogger( AvatarController.class );
 
-    protected void doPost( HttpServletRequest request, HttpServletResponse response )
+    public void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
         Peer sessionPeer = (Peer) request.getAttribute( "sessionUser" );
-        sessionPeer.getAvatar().cropAvatar( request );
-        request.getRequestDispatcher( "/view/profile.jsp" ).forward( request, response );
+       //For testing purposes
+        if(sessionPeer == null)
+        {
+            sessionPeer = new Peer().find(3);
+            sessionPeer.getAvatar().cropAvatar( request );
+        }
+        //Run normally
+        else
+        {
+            sessionPeer.getAvatar().cropAvatar( request );
+            request.getRequestDispatcher( "/view/profile.jsp" ).forward( request, response );
+        }
     }
 
 
