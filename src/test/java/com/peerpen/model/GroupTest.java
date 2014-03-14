@@ -65,7 +65,7 @@ public class GroupTest {
     }
 
     @Test(dependsOnMethods = { "TestFindGroup" })
-    public void TestUpdate() {
+    public void TestUpdateGroup() {
         Integer gId = (Integer) Manager.find("SELECT max(id) as id FROM groups").get("id");
 
         Group group = new Group().find(gId);
@@ -97,7 +97,7 @@ public class GroupTest {
         Assert.assertNull(group.getId());
     }
 
-    @Test
+    @Test(dependsOnMethods = { "TestUpdateGroup" })
     public void testGetSortedGroups() throws Exception {
         Peer p = new Peer().find(7);
         List<Group> groupList1 = new Group().getSortedGroups("az", p.getId());
@@ -119,7 +119,7 @@ public class GroupTest {
 
     }
 
-    @Test
+    @Test(dependsOnMethods = { "TestFindGroup" })
     public void testEquals() throws Exception {
         Group g = new Group();
         Assert.assertFalse(g.equals(null));
