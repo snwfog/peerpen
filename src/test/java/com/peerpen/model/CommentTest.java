@@ -36,7 +36,7 @@ public class CommentTest
   {
     Peer peer = new Peer().find(4);
     Map<String, Object> hm = Maps.newHashMap();
-    hm.put("message", "TestComment:" + randomString);
+    hm.put("message", "TestCommentConstructor:" + randomString);
     hm.put("objectId", 3);
     hm.put("type", "Document");
     hm.put("posterPeerId", peer.getId());
@@ -45,7 +45,7 @@ public class CommentTest
     newComment.save();
 
     Comment comment1 = new Comment().find(hm);
-    Assert.assertEquals(comment1.getMessage(), "TestComment:" + randomString);
+    Assert.assertEquals(comment1.getMessage(), "TestCommentConstructor:" + randomString);
     Assert.assertTrue(comment1.getObjectId() == 3);
     Assert.assertEquals(comment1.getType(), "Document");
     Assert.assertEquals(comment1.getPosterPeerId(), peer.getId());
@@ -56,7 +56,7 @@ public class CommentTest
   public void testGetPosterPeerId() throws Exception
   {
     Comment c = new Comment();
-    c.setMessage("TestComment:" + randomString);
+    c.setMessage("TestCommentGetPosterId:" + randomString);
     c.setType("Resume");
     c.setObjectId(3);
     c.setPosterPeerId(2);
@@ -64,7 +64,7 @@ public class CommentTest
     c.save();
 
     Map<String, Object> hm = Maps.newHashMap();
-    hm.put("message", "TestComment:" + randomString);
+    hm.put("message", "TestCommentGetPosterId:" + randomString);
 
     Comment comment2 = new Comment().find(hm);
     Assert.assertTrue(comment2.getPosterPeerId() == 2, "Check the peer who posted the comment");
@@ -73,7 +73,7 @@ public class CommentTest
   public void testSave() throws Exception
   {
     Comment c = new Comment();
-    c.setMessage("TestComment:" + randomString);
+    c.setMessage("TestCommentSave:" + randomString);
     c.setType("Resume");
     c.setObjectId(3);
     c.setPosterPeerId(2);
@@ -81,32 +81,32 @@ public class CommentTest
     c.save();
 
     Map<String, Object> hm = Maps.newHashMap();
-    hm.put("message", "TestComment:" + randomString);
+    hm.put("message", "TestCommentSave:" + randomString);
 
     Comment comment2 = new Comment().find(hm);
     Assert.assertTrue(comment2.getPosterPeerId() == 2, "Check the peer id who posted the comment");
     Assert.assertTrue(comment2.getObjectId() == 3);
     Assert.assertEquals(comment2.getType(), "Resume");
-    Assert.assertEquals(comment2.getMessage(), "TestComment:" + randomString);
+    Assert.assertEquals(comment2.getMessage(), "TestCommentSave:" + randomString);
   }
 
   @Test
   public void testCreateComment() throws Exception
   {
-    Comment.createComment((Document) new Document().find(4), "TestComment:" + randomString, (Peer) new Peer().find(2));
+    Comment.createComment((Document) new Document().find(4), "TestCommentCreate:" + randomString, (Peer) new Peer().find(2));
 
     Map<String, Object> hm = Maps.newHashMap();
-    hm.put("message", "TestComment:" + randomString);
+    hm.put("message", "TestCommentCreate:" + randomString);
     Comment comment1 = new Comment().find(hm);
     Assert.assertEquals(new Peer().find(2), comment1.getPosterPeer());
-    Assert.assertEquals("TestComment:" + randomString, comment1.getMessage());
+    Assert.assertEquals("TestCommentCreate:" + randomString, comment1.getMessage());
   }
 
   @Test
   public void testDeleteComment() throws Exception
   {
     Comment c = new Comment();
-    c.setMessage("TestComment:" + randomString);
+    c.setMessage("TestCommentDelete:" + randomString);
     c.setType("Resume");
     c.setObjectId(3);
     c.setPosterPeerId(2);
@@ -114,7 +114,7 @@ public class CommentTest
     c.save();
 
     Map<String, Object> hm = Maps.newHashMap();
-    hm.put("message", "TestComment:" + randomString);
+    hm.put("message", "TestCommentDelete:" + randomString);
 
     Comment comment2 = new Comment().find(hm);
 
