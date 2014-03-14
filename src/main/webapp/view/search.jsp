@@ -9,7 +9,7 @@
 <br /><br /><br />
 <div class="wrap-container container">
 
-    <div class="profile fa-search-minus">
+    <div class="search-body">
     <!-- SEARCH FORM -->
     <form action="/search" method="post" class="form-horizontal" role="form" id="search_form">
         <div class="btn-group" data-toggle="buttons">
