@@ -81,8 +81,11 @@ public class AvatarTest {
         ServletContext context = mock(ServletContext.class);
         HttpSession session = mock(HttpSession.class);
         Peer sessionUser = new Peer().find(3);
+        sessionUser.setAvatarId(7);
+        sessionUser.update();
         Avatar avatarTest = sessionUser.getAvatar();
-        avatarTest.setOriginalSize(1024, 1024);
+        avatarTest.setOriginalHeight(1024.0);
+        avatarTest.setOriginalWidth(1024.0);
         avatarTest.update();
         Map<String, Object> populate = new HashMap<>();
         populate.put("x1", "0");
@@ -97,13 +100,14 @@ public class AvatarTest {
 
         Peer peer = new Peer().find(3);
         avatarTest = peer.getAvatar();
-        String fileNameTest = peer.getId()+"-"+peer.getFirstName().toLowerCase();
         verify(request, atLeast(1)).getParametersMap(); // only if you want to verify populate was called...
         Assert.assertEquals(avatarTest.getX1(), 0.0);
         Assert.assertEquals(avatarTest.getX2(), 40.0);
         Assert.assertEquals(avatarTest.getY1(), 0.0);
         Assert.assertEquals(avatarTest.getY2(), 40.0);
-        Assert.assertTrue(avatarTest.getFilename().startsWith(fileNameTest));
+        //For AvatarUpload
+//        String fileNameTest = peer.getId()+"-"+peer.getFirstName().toLowerCase();
+//        Assert.assertTrue(avatarTest.getFilename().startsWith(fileNameTest));
     }
 
 
