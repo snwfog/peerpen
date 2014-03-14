@@ -17,12 +17,12 @@ public class NotificationTest {
     @Test
     public void relationTest(){
         Feedable f1 = new Feedable().find(1);
-        Feedable f11 = new Feedable().find(11);
+        Feedable f2 = new Feedable().find(2);
 
         f1.setNotifyStatus("UNSEND");
-        f11.setNotifyStatus("UNSEND");
+        f2.setNotifyStatus("UNSEND");
         Assert.assertTrue(f1.updateFeedable());
-        Assert.assertTrue(f11.updateFeedable());
+        Assert.assertTrue(f2.updateFeedable());
 
         Notification nf = new Notification();
         Peer p = new Peer().find(2);
@@ -36,12 +36,12 @@ public class NotificationTest {
         Assert.assertEquals(fs.size(), 0);
 
         f1 = new Feedable().find(1);
-        f11 = new Feedable().find(11);
+        f2 = new Feedable().find(11);
 
         f1.setNotifyStatus("UNSEND");
-        f11.setNotifyStatus("UNSEND");
+        f2.setNotifyStatus("UNSEND");
         Assert.assertTrue(f1.updateFeedable());
-        Assert.assertTrue(f11.updateFeedable());
+        Assert.assertTrue(f2.updateFeedable());
 
     }
 }
