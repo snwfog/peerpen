@@ -81,6 +81,9 @@ public class AvatarTest {
         ServletContext context = mock(ServletContext.class);
         HttpSession session = mock(HttpSession.class);
         Peer sessionUser = new Peer().find(3);
+        Avatar avatarTest = sessionUser.getAvatar();
+        avatarTest.setOriginalSize(1024, 1024);
+        avatarTest.update();
         Map<String, Object> populate = new HashMap<>();
         populate.put("x1", "0");
         populate.put("x2", "40");
@@ -93,7 +96,7 @@ public class AvatarTest {
         new AvatarController().doPost(request,response);
 
         Peer peer = new Peer().find(3);
-        Avatar avatarTest = peer.getAvatar();
+        avatarTest = peer.getAvatar();
         String fileNameTest = peer.getId()+"-"+peer.getFirstName().toLowerCase();
         verify(request, atLeast(1)).getParametersMap(); // only if you want to verify populate was called...
         Assert.assertEquals(avatarTest.getX1(), 0.0);
