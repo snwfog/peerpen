@@ -10,12 +10,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-
 public class ChangesetTest
 {
   Changeset changeset;
   private String randomString;
-
 
   @BeforeMethod
   public void setUp() throws Exception
@@ -91,34 +89,33 @@ public class ChangesetTest
   @Test
   public void testUpdate() throws Exception
   {
-//    Changeset changeset1 = new Changeset();
-//    changeset1.setPeerId(4);
-////    changeset1.setType("Dunno");
-//    changeset1.setContent("Content:" + randomString);
-//    changeset1.setHunkId(3);
-//    changeset1.setHunk((Hunk) new Hunk().find(3));
-//    Assert.assertTrue(changeset1.save(), "Test save() method in Changeset");
-//
-//    Map<String, Object> hm = Maps.newHashMap();
-//    hm.put("content", "Content:" + randomString);
-//    Changeset changeset2 = new Changeset().find(hm);
-//    changeset2.setPeerId(3);
-////    changeset2.setType("Dunno");
-//    changeset2.setContent("Content2:" + randomString);
-//    changeset2.setHunkId(2);
-//    changeset2.setHunk((Hunk) new Hunk().find(2));
-//
-//    Assert.assertTrue(changeset2.update());
-//
-//    hm = null;
-//    hm = Maps.newHashMap();
-//    hm.put("content", "Content2:" + randomString);
-//    Changeset changeset3 = new Changeset().find(hm);
-//
-//    Assert.assertTrue(changeset3.getPeerId() == 3);
-//    Assert.assertEquals(changeset3.getContent(), "Content2:" + randomString);
-//    Assert.assertTrue(changeset3.getHunkId() == 2);
+    Changeset changeset1 = new Changeset();
+    changeset1.setPeerId(4);
+//    changeset1.setType("Dunno");
+    changeset1.setContent("Content:" + randomString);
+    changeset1.setHunkId(3);
+    changeset1.setHunk((Hunk) new Hunk().find(3));
+    Assert.assertTrue(changeset1.save(), "Test save() method in Changeset");
 
+    Map<String, Object> hm = Maps.newHashMap();
+    hm.put("content", "Content:" + randomString);
+    Changeset changeset2 = new Changeset().find(hm);
+//    changeset2.setPeerId(3);
+//    changeset2.setType("Dunno");
+    changeset2.setContent("Content2:" + randomString);
+    changeset2.setHunkId(2);
+    changeset2.setHunk((Hunk) new Hunk().find(2));
+
+    changeset2.update();
+
+    hm = null;
+    hm = Maps.newHashMap();
+    hm.put("content", "Content2:" + randomString);
+    Changeset changeset3 = new Changeset().find(hm);
+
+//    Assert.assertTrue(changeset3.getPeerId() == 3);
+    Assert.assertEquals(changeset3.getContent(), "Content2:" + randomString);
+    Assert.assertTrue(changeset3.getHunkId() == 2);
   }
 
   @Test
