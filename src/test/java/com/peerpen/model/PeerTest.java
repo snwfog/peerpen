@@ -66,18 +66,6 @@ public class PeerTest {
         a.setDocuments(docArray);
         Assert.assertTrue(d.save());
 
-//        Changeset changeset = new Changeset().find(5);
-//        List<Changeset> changesets = a.getChangesets();
-//        changesets.add(changeset);
-
-//        Changeset ch = new Changeset();
-//        ch.setContent("changeset");
-//        ch.setHunkId(3);
-//        List<Changeset> changesets = a.getChangesets();
-//        changesets.add(ch);
-//        a.setChangesets(changesets);
-//        Assert.assertTrue(ch.save());
-
         Group group = new Group();
         group.setGroupName("new group");
         Assert.assertTrue(group.save());
@@ -125,7 +113,6 @@ public class PeerTest {
 
         Assert.assertEquals(peerId.intValue(), peer.getId().intValue());
         Assert.assertEquals(a.intValue(),peer.getDocuments().size());
-//        Assert.assertEquals(b.intValue(),peer.getChangesets().size());
         Assert.assertEquals(c.intValue(),peer.getGroups().size());
 
 
@@ -151,13 +138,6 @@ public class PeerTest {
         docArray.add(d);
         p.setDocuments(docArray);
         Assert.assertTrue(d.update());
-
-//              Changeset changeset = new Changeset().find(chId);
-//        changeset.setContent("new ch");
-//        List<Changeset> changesets = p.getChangesets();
-//        changesets.add(changeset);
-//        p.setChangesets(changesets);
-//        Assert.assertTrue(changeset.update());
 
         Group group = new Group().find(gId);
         group.setGroupName("new group");
@@ -209,36 +189,10 @@ public class PeerTest {
 
     }
 
-    //@Test
-    //public void testGetMatchedPeers() throws Exception {
-    //    Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
-    //
-    //    Peer p = new Peer().find(peerId);
-    //    List<Peer>peers = new ArrayList<>();
-    //    peers.add(p);
-    //    Assert.assertEquals(peers,p.getMatchedPeers(p.getFirstName()));
-    //}
-    //
-    //@Test
-    //public void testGetSuggestions() throws Exception {
-    //    Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
-    //    Peer p = new Peer().find(peerId);
-    //    List<Peer>peers = new ArrayList<>();
-    //    peers.add(p);
-    //    Assert.assertEquals(peers,p.getSuggestions(p.getUserName(),1));
-    //}
-
     @Test
     public void testIsValidSession() throws Exception {
 
     }
-
-//    @Test
-//    public void testIsValidLogin() throws Exception {
-//        Integer peerId = (Integer) Manager.find("SELECT max(id) as id FROM peers").get("id");
-//        Peer p = new Peer().find(peerId);
-//        p.isValidLogin();
-//    }
 
     @Test
     public void testEquals() throws Exception {
