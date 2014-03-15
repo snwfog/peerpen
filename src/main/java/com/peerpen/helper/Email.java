@@ -1,5 +1,8 @@
 package com.peerpen.helper;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -14,6 +17,8 @@ import javax.mail.internet.*;
 
 public class Email
 {
+  static final Logger logger = LoggerFactory.getLogger(Email.class);
+
   public static Boolean email(String toEmail, String toName, String newPassword){
     return sendMail(toEmail, "Peerpen - Password has been reset", getEmail(toName, newPassword), "sunnyd.peerpen@gmail.com", "penisland");
   }
@@ -46,7 +51,8 @@ public class Email
 
     }catch(Exception e)
     {
-      e.printStackTrace();
+      logger.error("Failed to send email:" + e.toString());
+//      e.printStackTrace();
       return false;
     }
 

@@ -1,14 +1,14 @@
 package com.peerpen.ajax;
 
-import com.peerpen.helper.Email;
 import com.peerpen.model.Peer;
-import org.apache.commons.lang3.RandomStringUtils;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,23 +25,19 @@ public class ResetControllerAjax extends HttpServlet
     String email = request.getParameter("email");
     String message;
 
-    Map<String, Object> map = new HashMap<String, Object>();
-    map.put("email", email);
-    List<Peer> matches = new Peer().findAll(map);
+    Map<String, Object> hm = new HashMap<>();
+    hm.put("email", email);
+    Peer pear;
 
-    if(matches.size() == 1)
+    if ((pear = new Peer().find(hm)) != null)
     {
-      String password = getRandomPassword();
-      Peer pear = matches.get(0);
-
-      pear.setPassword(password);
+      pear.resetPassword();
       pear.update();
-
-      boolean status = Email.email(pear.getEmail(), pear.getFirstName(), password);
 
       message = "True";
     }
-    else{
+    else
+    {
       message = "False";
     }
 
@@ -52,9 +48,5 @@ public class ResetControllerAjax extends HttpServlet
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
-  }
-
-  private String getRandomPassword() {
-    return RandomStringUtils.randomAlphabetic(2) + RandomStringUtils.randomAlphanumeric(7);
   }
 }

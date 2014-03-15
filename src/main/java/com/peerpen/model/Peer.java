@@ -7,11 +7,13 @@ import com.peerpen.framework.exception.HttpSessionException;
 import com.peerpen.framework.exception.MissingArgumentException;
 import com.peerpen.framework.exception.PermissionDeniedException;
 import com.peerpen.framework.exception.UserNotFoundException;
+import com.peerpen.helper.Email;
 import com.sunnyd.Base;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.annotations.ActiveRelationHasOne;
 import com.sunnyd.annotations.ActiveRelationManyToMany;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -457,6 +459,20 @@ public class Peer extends Base
     }
 
     return document;
+  }
+
+
+  public void resetPassword()
+  {
+    String password = getRandomPassword();
+    setPassword(password);
+
+    boolean status = Email.email(this.getEmail(), this.getFirstName(), password);
+
+  }
+
+  private String getRandomPassword() {
+    return RandomStringUtils.randomAlphabetic(2) + RandomStringUtils.randomAlphanumeric(7);
   }
 
   @Override
