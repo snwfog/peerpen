@@ -7,7 +7,10 @@ import com.peerpen.model.Taggable;
 import com.peerpen.model.Peer;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -39,6 +42,11 @@ public class Search {
         return new Group().queryAll(sql);
     }
 
+    public static List<Document> getMatchedDocumentsContents(String keyword){
+        String sql = "SELECT * FROM `documents`, `hunks` WHERE `hunks`.`document_id` = `documents`.`id` AND (`hunks`.`content` LIKE '%" + keyword + "%' OR '" + keyword + "' LIKE CONCAT" +
+                "('%',`hunks`.`content`,'%'));";
+        return new Document(  ).queryAll( sql );
+    }
 
     /*
     ======== ADV. SEARCH (with tags) ===========
@@ -72,6 +80,19 @@ public class Search {
             }
         }
         return groups;
+    }
+
+    public static void removeDuplicatedResults (List list){
+        //remove duplicates if any
+        //Set set = new LinkedHashSet(list);
+        //list.clear();
+        //list.addAll(set);
+        List result = new ArrayList(  );
+        for(int i=0;i<list.size();i++){
+            if (!result.contains( list.get( i ) )){
+                 result.add( list.get( i ) );
+            }
+        }
     }
 
 }

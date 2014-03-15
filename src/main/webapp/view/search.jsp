@@ -34,7 +34,12 @@
 
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="searchTags"> Look in tags too
+                <input type="checkbox" name="searchTags"> Look in tags
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="searchDocContent"> Look inside the documents
             </label>
         </div>
     </form>

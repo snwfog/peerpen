@@ -121,6 +121,7 @@ public class SearchController extends HttpServlet {
      */
     private static void doSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean doTagMatching = false;
+        boolean doDocContentMatching = false;
         String query = "";
         String area = "";
         List<String> tagNames;
@@ -140,6 +141,12 @@ public class SearchController extends HttpServlet {
             };
         }
 
+        if (request.getParameter( "searchDocContent" ) != null){
+            if (request.getParameter( "searchDocContent" ).equals( "on" )){
+                doDocContentMatching = true;
+            };
+        }
+
         if (doTagMatching) {
             tagNames = Arrays.asList( query.split( "\\s* \\s*" ) );
             tagDescriptors = new TagDescriptor(  ).getTagDescriptors(tagNames);
@@ -153,6 +160,10 @@ public class SearchController extends HttpServlet {
                     if (doTagMatching && tagDescriptors.size() > 0) {
                         documents.addAll( Search.getMatchedDocuments( tagDescriptors ) );
                     }
+                    if (doDocContentMatching) {
+                        documents.addAll( Search.getMatchedDocumentsContents( query ) );
+                    }
+                    Search.removeDuplicatedResults( documents );
                     request.setAttribute( "searchResults", documents );
                     break;
                 case "peers":
@@ -164,6 +175,7 @@ public class SearchController extends HttpServlet {
                     if (doTagMatching && tagDescriptors.size() > 0) {
                         groups.addAll( Search.getMatchedGroups( tagDescriptors ) );
                     }
+                    Search.removeDuplicatedResults( groups );
                     request.setAttribute( "searchResults", groups );
                     break;
                 default:
@@ -175,6 +187,10 @@ public class SearchController extends HttpServlet {
                         everything.addAll( Search.getMatchedDocuments( tagDescriptors ) );
                         everything.addAll( Search.getMatchedGroups( tagDescriptors ) );
                     }
+                    if (doDocContentMatching) {
+                        everything.addAll( Search.getMatchedDocumentsContents( query ) );
+                    }
+                    Search.removeDuplicatedResults( everything );
                     request.setAttribute( "searchResults", everything );
             }
         }
