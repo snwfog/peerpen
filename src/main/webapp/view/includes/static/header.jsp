@@ -20,13 +20,13 @@
 
             String defaultTitle = "PeerPen - A Capstone project by Sunny Delight";
             if ( request.getParameter( "title" ) != null ) {
-                out.println( request.getParameter( "title" ) );
+              out.println("Peerpen - " +  request.getParameter( "title" ) );
             } else if ( request.getAttribute( "title" ) != null ) {
-                out.println( request.getAttribute( "title" ) );
+              out.println("Peerpen - " + request.getAttribute( "title" ) );
             } else if ( explode !=null && explode.find() ){
                 if(explode.group(0) != null){
-                    String formatIt = explode.group(0).replace(".jsp", "").replace("/", "");
-                    out.println(StringUtils.capitaliseAllWords(formatIt));
+                  String formatIt = explode.group(0).replace(".jsp", "").replace("/", "");
+                  out.println("Peerpen - " + StringUtils.capitaliseAllWords(formatIt));
                 }
             } else {
                 out.println( defaultTitle );
