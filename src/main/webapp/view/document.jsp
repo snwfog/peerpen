@@ -1,8 +1,4 @@
-
-<% Document document =(Document) request.getAttribute("document");%>
-<jsp:include page="/view/includes/static/header.jsp">
-  <jsp:param name="title" value="<%=document.getDocName()%>" />
-</jsp:include>
+<%@ include file="/view/includes/static/header.jsp" %>
 <%@ page import="com.peerpen.model.Peer" %>
 <%@ page import="com.peerpen.model.Document" %>
 <%@ page import="com.peerpen.model.Comment" %>
@@ -15,6 +11,7 @@
 <%--Declare all request variables here, easy to debug!!!--%>
 <% Peer urlUser; %>
 <% if (request.getAttribute("urlUser") != null){urlUser= (Peer) request.getAttribute("urlUser");}else{urlUser=sessionUser;} %>
+<% Document document =(Document) request.getAttribute("document");%>
 <% List<Comment> comments = document.getComments();%>
 <% List<Changeset> changesets = document.getChangeset();%>
 <% List<TagDescriptor> tds = document.getTagDescriptors(); %>

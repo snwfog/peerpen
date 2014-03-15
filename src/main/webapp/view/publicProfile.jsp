@@ -1,12 +1,8 @@
-<%Peer viewedUser = (Peer) request.getAttribute("viewedUser");
-  String fullName =    viewedUser.getFirstName() + " "+ viewedUser.getLastName();
-%>
-<jsp:include page="/view/includes/static/header.jsp">
-  <jsp:param name="title" value="<%= fullName%>" />
-</jsp:include>
+<%@ include file="/view/includes/static/header.jsp" %>
 <%@ include file="/view/includes/static/navbar.jsp" %>
 
 <%
+    Peer viewedUser = (Peer) request.getAttribute("viewedUser");
     ArrayList<Group> navGroups =(ArrayList<Group>) sessionUser.getGroups();
 %>
 
