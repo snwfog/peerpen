@@ -84,15 +84,9 @@ public class Search {
 
     public static void removeDuplicatedResults (List list){
         //remove duplicates if any
-        //Set set = new LinkedHashSet(list);
-        //list.clear();
-        //list.addAll(set);
-        List result = new ArrayList(  );
-        for(int i=0;i<list.size();i++){
-            if (!result.contains( list.get( i ) )){
-                 result.add( list.get( i ) );
-            }
-        }
+        Set set = new LinkedHashSet(list);
+        list.clear();
+        list.addAll(set);
     }
 
 }

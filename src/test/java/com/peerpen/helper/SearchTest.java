@@ -2,6 +2,7 @@ package com.peerpen.helper;
 
 import com.peerpen.model.Document;
 import com.peerpen.model.Group;
+import com.peerpen.model.Hunk;
 import com.peerpen.model.TagDescriptor;
 import com.peerpen.model.Peer;
 
@@ -24,6 +25,7 @@ public class SearchTest {
 
     private Peer p;
     private Document d;
+    private Hunk h;
     private Group g;
     private TagDescriptor td1;
     private TagDescriptor td2;
@@ -53,6 +55,13 @@ public class SearchTest {
         d.save();
         d.updateTags( list );
 
+        h = new Hunk( );
+        h.setHunkName( "test" );
+        h.setContent( "zhang hai yue" );
+        h.setDocument( d );
+        h.save();
+
+
         g = new Group(  );
         g.setGroupName( "harry" );
         g.save();
@@ -68,6 +77,7 @@ public class SearchTest {
         g.updateTags( list );
 
         d.destroy();
+        h.destroy();
         g.destroy();
         p.destroy();
 
@@ -94,6 +104,13 @@ public class SearchTest {
         Assert.assertTrue( Search.getMatchedGroups( g.getGroupName() ).size() > 0 );
         Assert.assertTrue( Search.getMatchedGroups( g.getGroupName() ) instanceof List<?> );
         Assert.assertTrue( Search.getMatchedGroups( g.getGroupName() ).contains( g ) );
+    }
+
+    @Test
+    public void testGetMatchedDocumentContent() throws Exception {
+        Assert.assertTrue( Search.getMatchedDocumentsContents( h.getContent() ).size() > 0 );
+        Assert.assertTrue( Search.getMatchedDocumentsContents( h.getContent() ) instanceof List<?> );
+        Assert.assertTrue( Search.getMatchedDocumentsContents( h.getContent() ).contains( d ) );
     }
 
     @Test
