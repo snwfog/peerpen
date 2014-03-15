@@ -134,7 +134,7 @@
                     <td><%=p.getIndustry()%></td>
                     <td><a href="/peer/<%=p.getId()%>/document"> Documents </a></td>
                     <td>
-                        <% if (p.getId()==group.getAdminId()){ %>
+                        <% if ((p.getId()!=group.getAdminId())&&(sessionUser.getId()==group.getAdminId())){ %>
                                 <%--<div class="span8 child"><%=p.getUserName()%></div>--%>
                                 <form action="/group" method="POST" class="form-horizontal child">
                                     <input type="hidden" name="groupid" value="<%= group.getId()%>">
