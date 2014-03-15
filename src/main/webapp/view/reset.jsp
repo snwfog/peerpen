@@ -1,4 +1,7 @@
-<%@ include file="/view/includes/static/header.jsp" %>
+<jsp:include page="/view/includes/static/header.jsp">
+  <jsp:param name="title" value="Reset" />
+</jsp:include>
+
 <%@ include file="/view/includes/static/navbar.jsp" %>
 
 <div class="container">

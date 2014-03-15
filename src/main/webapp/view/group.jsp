@@ -1,9 +1,11 @@
+<% Group group = (Group) request.getAttribute("group"); %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.peerpen.model.*" %>
-<%@ include file="/view/includes/static/header.jsp" %>
+<jsp:include page="/view/includes/static/header.jsp">
+  <jsp:param name="title" value="<%= group.getGroupName()%>" />
+</jsp:include>
 <%@ include file="/view/includes/static/navbar.jsp" %>
 
-<% Group group = (Group) request.getAttribute("group"); %>
 <% ArrayList<Peer> peers = (ArrayList<Peer>)group.getPeers();%>
 <% ArrayList<Broadcast> broadcasts = (ArrayList<Broadcast>)group.getOrderedBroadcast();%>
 <% ArrayList<Joingroup> joingroups = (ArrayList<Joingroup>)group.getRequests();%>
