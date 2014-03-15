@@ -1,5 +1,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ include file="/view/includes/static/header.jsp" %>
+<jsp:include page="/view/includes/static/header.jsp">
+  <jsp:param name="title" value="Profile" />
+</jsp:include>
 <%@ include file="/view/includes/static/navbar.jsp" %>
 
 <% SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");%>

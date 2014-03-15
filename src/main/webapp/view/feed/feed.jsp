@@ -1,5 +1,5 @@
 <jsp:include page="/view/includes/static/header.jsp">
-    <jsp:param name="title" value="FEED ME"/>
+  <jsp:param name="title" value="Feeds"/>
 </jsp:include>
 <%@ include file="/view/includes/static/navbar.jsp" %>
 <% ArrayList<Group> navGroups =(ArrayList<Group>) sessionUser.getGroups();%>
