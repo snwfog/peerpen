@@ -99,22 +99,21 @@ public class RouteFilter implements Filter {
 
                     logger.warn("Received request is an internal request for " + httpRequest.getRequestURI());
                     logger.warn("Going to assume that you know what you're doing... forwarding you right away");
-                    chain.doFilter(request, response);
-                    //try {
-                    //    (request.getRequestDispatcher( rURI )).forward( request, response );
-                    //} catch ( ServletException e ) {
-                    //    logger.error( "Failed internal forward to path " + rURI );
-                    //} catch ( IOException e ) {
-                    //    logger.error( "Failed internal forward to path " + rURI );
-                    //}
-
+                    //chain.doFilter(request, response);
+                    try {
+                        (request.getRequestDispatcher( rURI )).forward( request, response );
+                    } catch ( ServletException e ) {
+                        logger.error( "Failed internal forward to path " + rURI );
+                    } catch ( IOException e ) {
+                        logger.error( "Failed internal forward to path " + rURI );
+                    }
                 }
 
                 // Don't create the session by default
                 HttpSession session = httpRequest.getSession(false); // TODO: Watch out for session hi-jacking
-                if (session == null) {
-                    throw new NotLoggedInException("Could not find an existing session");
-                }
+                //if (session == null) {
+                //    throw new NotLoggedInException("Could not find an existing session");
+                //}
 
 
                 if (isAjaxRequest(httpRequest)) {
@@ -122,7 +121,7 @@ public class RouteFilter implements Filter {
                     // TODO: Implement the logging for Json data + convert to global JSON object
                     logger.info("Data submitted to servlet is " + " NOT YET IMPLEMENTED");
                     request.setAttribute("requestType", "applicationJson");
-                    request.setAttribute("requestData", toGson(sanitizeJsonData(httpRequest)));
+                    request.setAttribute("requestData", sanitizeJsonData(httpRequest));
                     logger.info("requestType: " + "applicationJson");
                     logger.info("requestData: " + sanitizeJsonData(httpRequest));
                 }
@@ -162,7 +161,7 @@ public class RouteFilter implements Filter {
             } else {
                 this.redirectError(httpRequest, (HttpServletResponse) response);
             }
-        } catch (MissingArgumentException | NonPermissibleRoute | TooManyUrlNestingException | NotLoggedInException e) {
+        } catch (MissingArgumentException | NonPermissibleRoute | TooManyUrlNestingException e) {
             // FIXME: 1. If it is cors ajax, ignore the forward, and return 404 instead
             // FIXME: 2. Have a better JSON api handling
             this.redirectError((HttpServletRequest) request, (HttpServletResponse) response, e);
@@ -170,6 +169,7 @@ public class RouteFilter implements Filter {
 
     }
 
+    @Deprecated
     private Gson toGson(String json) {
         StringBuilder sb = new StringBuilder(json);
 
@@ -227,7 +227,9 @@ public class RouteFilter implements Filter {
         try {
             BufferedReader reader = httpRequest.getReader();
             while ((line = reader.readLine()) != null) {
-                sb.append(StringEscapeUtils.escapeHtml4(line));
+                // FIXME: Need better escaping for html injection
+                //sb.append(StringEscapeUtils.escapeEcmaScript(line));
+                sb.append(line);
             }
         } catch (IOException e) {
             logger.error("Error parsing application Json data");
@@ -239,10 +241,11 @@ public class RouteFilter implements Filter {
 
     private boolean isAjaxRequest(HttpServletRequest request) {
         String applicationRequestHeader = request.getHeader("Content-Type");
-        return applicationRequestHeader != null &&
-                "application/json; charset=utf-8".contains(applicationRequestHeader);
-        //        return applicationRequestHeader != null &&
-        //                "application/x-www-form-urlencoded; charset=UTF-8".contains( applicationRequestHeader );
+
+        return true;
+        //return applicationRequestHeader != null &&
+        //        "application/json; charset=utf-8".toUpperCase()
+        //                .contains(applicationRequestHeader.toUpperCase());
     }
 
     @Override

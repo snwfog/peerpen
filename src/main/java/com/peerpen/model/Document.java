@@ -3,8 +3,10 @@ package com.peerpen.model;
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.mysql.jdbc.Statement;
@@ -314,14 +316,27 @@ public class Document extends Taggable implements IModel, Commentable {
         return false;
     }
 
-    public static class DocumentDeserializer implements JsonSerializer<Document> {
+    public static class DocumentSerializer implements JsonSerializer<Document> {
 
         @Override
         public JsonElement serialize( Document src, Type typeOfSrc, JsonSerializationContext context ) {
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty( "hunks", context.serialize( src.hunks ).toString() );
+            List<Page> documentPages = new ArrayList<>();
+            for ( Hunk h : src.getHunks() ) {
+                Page p = documentPages.get( h.getPageNumber() );
+                if ( p == null ) {
+                    p = new Page();
+                    documentPages.add( h.getPageNumber(), p );
+                }
 
-            return jsonObject;
+                p.getHunks().put( Long.valueOf( h.getIdView() ), h );
+            }
+
+            Gson gson = (new GsonBuilder()).registerTypeAdapter( Page.class, new Page.PageSerializer() ).create();
+            JsonArray documentHunks = new JsonArray();
+            for (Page p : documentPages)
+                documentHunks.add(gson.toJsonTree( p ));
+
+            return documentHunks;
         }
     }
 }

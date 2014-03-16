@@ -136,8 +136,8 @@ public class Hunk extends Base implements IModel {
         @Override
         public JsonElement serialize( Hunk src, Type typeOfSrc, JsonSerializationContext context ) {
             JsonObject hunkJson = new JsonObject();
-            hunkJson.addProperty( "id", src.getIdView() );
-            hunkJson.addProperty( "html", src.getContent() );
+            hunkJson.addProperty( "html", src.getIdView() );
+            hunkJson.addProperty( "name", src.getHunkName() );
 
             return hunkJson;
         }
@@ -150,7 +150,9 @@ public class Hunk extends Base implements IModel {
                 throws JsonParseException {
             String viewId = json.getAsJsonObject().get( "id" ).getAsString();
             String content = json.getAsJsonObject().get( "html" ).getAsString();
-            String hunkName = json.getAsJsonObject().get( "name" ).getAsString();
+            JsonElement hunkNameElement = json.getAsJsonObject().get( "name" );
+            String hunkName = "";
+            if (hunkNameElement != null) hunkName = hunkNameElement.getAsString();
 
             Hunk hunk = new Hunk();
             hunk.setIdView( viewId );

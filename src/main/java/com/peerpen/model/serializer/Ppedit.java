@@ -55,9 +55,8 @@ public class Ppedit {
     }
 
     public static Ppedit serializeFromJsonString( String jsonString ) {
-        GsonBuilder gBuilder = new GsonBuilder();
-        gBuilder.registerTypeAdapter( Ppedit.class, new PpeditDeserializer() );
-        Gson gson = gBuilder.create();
+        Gson gson = (new GsonBuilder()).registerTypeAdapter( Ppedit.class
+                , new PpeditDeserializer() ).create();
         return gson.fromJson( jsonString, Ppedit.class );
     }
 

@@ -128,8 +128,10 @@ public class InternalHttpServletRequest extends HttpServletRequestWrapper {
     }
 
     public boolean isAjaxRequest() {
-        return this.getHeader( "Content-Type" ).equals( "application/json; charset=utf-8" );
-
+        String applicationRequestHeader = this.getHeader("Content-Type");
+        return applicationRequestHeader != null &&
+                "application/json; charset=utf-8".toUpperCase()
+                        .contains(applicationRequestHeader.toUpperCase());
     }
 
     public Map<String, Object> getParametersMap() {

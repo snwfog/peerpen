@@ -30,5 +30,4 @@ public class FeedController extends HttpServlet {
         request.setAttribute( "peerObject", peer );
         request.getRequestDispatcher( "/view/feed/feed.jsp" ).forward( request, response );
     }
-
 }

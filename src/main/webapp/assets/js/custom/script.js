@@ -36,10 +36,26 @@ $(function() {
       return parentForm.submit();
     }), 2000);
   });
-  console.log("Loading ppedit");
-  return $('.editor').ppedit({
+  $('.editor').ppedit({
     onload: function() {
       return console.log("Loaded");
     }
+  });
+  return $('button#submit').click(function(event) {
+    var hunks, postUrl;
+    hunks = $('.editor').ppedit('save');
+    postUrl = window.location.href.split('#')[0].replace(/edit/, '');
+    return $.ajax({
+      type: "post",
+      url: postUrl,
+      data: {
+        "data": hunks
+      },
+      dataType: "json",
+      contentType: "application/json; charset=utf-8",
+      success: function(event) {
+        return console.log("Success saved to the remote database");
+      }
+    });
   });
 });

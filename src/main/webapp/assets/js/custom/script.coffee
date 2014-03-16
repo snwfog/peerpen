@@ -44,7 +44,18 @@ $ ->
     $("h1#msg-jumpstart").html("Your career is in good hands").fadeIn()
     setTimeout ( -> parentForm.submit() ), 2000
 
-  console.log("Loading ppedit")
   $('.editor').ppedit(
     onload: -> console.log "Loaded"
   )
+
+  $('button#submit').click (event) ->
+    hunks = $('.editor').ppedit('save')
+    postUrl = window.location.href.split('#')[0].replace(/edit/, '')
+    $.ajax
+      type: "post"
+      url: postUrl
+      data: { "data": hunks }
+      dataType: "json"
+      contentType: "application/json; charset=utf-8"
+      success: (event) ->
+        console.log("Success saved to the remote database")

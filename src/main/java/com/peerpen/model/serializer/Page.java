@@ -9,6 +9,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
@@ -21,6 +22,10 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 /**
+ * A pure abstract class used to serialize and deserialize the JSON hunks coming from
+ * ppeditor. Its inner class are used to hook up with Gson API so that an abstract page
+ * can be used combined together.
+ *
  * Author: Charles Chao Yang (http://github.com/snwfog)
  * Date:   2/15/2014
  * Time:   10:55 AM
@@ -39,8 +44,13 @@ public class Page {
 
         @Override
         public JsonElement serialize( Page src, Type typeOfSrc, JsonSerializationContext context ) {
+            Gson gson = (new GsonBuilder()).registerTypeAdapter( Hunk.class, new Hunk.HunkSerializer() ).create();
+            JsonObject el = new JsonObject();
+            for ( Long hViewId : src.getHunks().keySet() ) {
+                el.add( (new Long( hViewId )).toString(), gson.toJsonTree( src.getHunks().get( hViewId ) ) );
+            }
 
-            return null;
+            return el;
         }
     }
 
@@ -54,7 +64,8 @@ public class Page {
             JsonArray pageArray = json.getAsJsonArray();
             GsonBuilder builder = new GsonBuilder();
             builder.registerTypeAdapter( Hunk.class, new Hunk.HunkDeserializer() );
-            Type hunkListType = new TypeToken<List<Hunk>>() { }.getType();
+            Type hunkListType = new TypeToken<List<Hunk>>() {
+            }.getType();
             Gson gson = builder.create();
             List<Hunk> hunkList = gson.fromJson( pageArray.toString(), hunkListType );
             aPage.hunks = Maps.uniqueIndex( hunkList, new Function<Hunk, Long>() {
