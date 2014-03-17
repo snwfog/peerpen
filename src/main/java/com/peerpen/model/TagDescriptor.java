@@ -101,13 +101,13 @@ public class TagDescriptor extends Base implements IModel {
             return false;
         }
         TagDescriptor myOther = (TagDescriptor) other;
-        if ( this.getId() == myOther.getId() ) {
-            return true;
-        }
-        if ( this.getTagName().equals( myOther.getTagName() ) ) {
-            return true;
-        }
+        if (this.getId() == myOther.getId()) return true;
         return false;
+    }
+
+    public static void main (String[] args){
+        TagDescriptor td1 = new TagDescriptor(  );
+        td1.setTagName( "ccc" );
     }
 
     /**

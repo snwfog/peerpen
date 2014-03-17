@@ -1,3 +1,9 @@
+<br /><br /><br />
+<footer>
+    <div class="container">
+        <img id="resume-large-bottom" src="/assets/images/index/resume-large-bottom.png" alt=""/>
+    </div>
+</footer>
 <%--Including the debug information--%>
 
 

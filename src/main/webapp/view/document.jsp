@@ -20,168 +20,212 @@
 <% List<TagDescriptor> tds = document.getTagDescriptors(); %>
 <% List<Hunk> hunks = document.getHunks(); %>
 
-<div class="container">
-  <h1><%= document.getDocName()%> <%= (sessionUser.getId() == urlUser.getId()) ? "" : " (View-only mode)" %></h1>
-    <div style="border:1px solid black">
-      <%for(Hunk hunk: hunks){ %>
-      <textarea name=""><%= hunk.getContent()%></textarea>
+<div class="cover-container document-cover"> </div>
+<div class="container-fluid wrap-container">
+
+    <h1 class="document-title"><%= document.getDocName()%> <%= (sessionUser.getId() == urlUser.getId()) ? "" : " (View-only mode)" %></h1>
+
+    <%for(Hunk hunk: hunks){ %>
+        <div class="profile document-hunk-container">
+            <span class="document-hunk-content"><%= hunk.getContent()%></span>
+        </div>
+        <br />
       <%}%>
-    </div>
+
+    <img src="<%= sessionUser.getAvatar().getRelativeServletContextAvatarPathForSize( request,
+                    Avatar.Size.LARGE ) %>" width="30px">
+    <span class="feed-comment-commentor"><%= sessionUser.getFirstName() %> <%= sessionUser.getLastName() %> comments</span>
     <br /><br />
-    <!-- TAG SECTION -->
-    <div>
-      <form action="/tag" method="post" class="form-horizontal" role="form">
-        <input type="hidden" name="entityType" value="document" />
-        <input type="hidden" name="entityId" value="<%=document.getId()%>" />
-        <ul id="entityTags" style="float:left;width:600px;">
-          <% for (TagDescriptor td : tds){ %>
-          <li><%=td.getTagName() %></li>
-          <% } %>
-        </ul>
-        <button type="submit" class="btn btn-primary" name="submit" style="margin-left:10px" />Save Tags</button>
-      </form>
-    </div>
-    <br /><br /><br /><br />
-  <div id="content">
-    <div class="caption">
-      <div class="row">
-        <div class="col-md-6">
-          <!-- COMMENT SECTION -->
-          <div class="card2">
-            <h3 class="card-heading simple"><%= sessionUser.getFirstName() %> <%= sessionUser.getLastName() %></h3>
+    <div class="feed-comment-pointer"></div>
+    <div class="feed-comment-body document-comment-body">
+        <span class="feed-comment-body-text document-comment-body-text">
             <form method="POST" id="comment1" action="/peer/<%= sessionUser.getId()%>/document/<%= document.getId()%>/comment" parsley-validate>
-            <div class="card-body">
-                <textarea id="textComment1" class="parsley-validated" name="comment" style="width:100%" parsley-trigger="change keyup"></textarea>
+                <textarea id="textComment1" class="parsley-validated document-comment-body-text-box" name="comment" parsley-trigger="change keyup"></textarea>
                 <input type="hidden" name="docId" value="<%= document.getId()%>"/>
                 <input type="hidden" name="peerId" value="<%= sessionUser.getId()%>"/>
                 <input type="hidden" name="_method" value="POST">
-            </div>
-            <div class="card-actions">
-              <button type="submit" class=" btn btn-success ">Post</button>
-            </div>
+                <button type="submit" class="btn btn-warning document-comment-body-text-submit">Post</button>
             </form>
-          </div>
-          <%for(Comment comment: comments){ Peer p = new Peer().find(comment.getPosterPeerId()); %>
-          <div class="card2">
-            <div class="card-heading image">
-              <img src="<%= comment.getPosterPeer().getAvatar().getRelativeServletContextAvatarPathForSize(request,
-                    Avatar.Size.SMALL) %>" >
-              <div class="card-heading-header">
-                <h3><%= p.getFirstName() %> <%= p.getLastName() %></h3>
-                <span>Published <%= comment.getTimesAgo()%>
-                <% if(sessionUser.getId() == document.getPeerId() || sessionUser.getId() == comment.getPosterPeerId()){%> |
-                  <a data-toggle="modal" data-id="<%= comment.getId()%>" class="confirmDeleteCommentDialog child"
-                   href="#deleteDialog">delete</a>
-                <% } %>
-                </span>
-              </div>
-            </div>
-            <div class="card-body">
-              <%= comment.getMessage() %>
-            </div>
-            <div class="card-actions parent">
-              <form method="POST" action="/vote"  class="AjaxSubmit3 child">
+
+            <br />
+        </span>
+
+        <div class="document-tag-body">
+            <form action="/tag" method="post" class="form-horizontal" role="form">
+                <input type="hidden" name="entityType" value="document" />
+                <input type="hidden" name="entityId" value="<%=document.getId()%>" />
+                <table cellspacing="0" cellpadding="0" style="width:100%;">
+                    <tr>
+                        <td class="document-tag-body-box">
+                            <ul id="entityTags" class="document-tag-body-box-list">
+                                <% for (TagDescriptor td : tds){ %>
+                                <li><%=td.getTagName() %></li>
+                                <% } %>
+                            </ul>
+                        </td>
+
+                        <td class="document-tag-submit-box">
+                            <button type="submit" class="btn btn-info document-tag-submit-box-body" name="submit" />Save Tags</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <br />
+    <div class="document-separator"></div>
+    <br />
+
+    <%for(Comment comment: comments){ Peer p = new Peer().find(comment.getPosterPeerId()); %>
+    <img src="<%= comment.getPosterPeer().getAvatar().getRelativeServletContextAvatarPathForSize(request,
+                    Avatar.Size.SMALL) %>" width="30px">
+    <span class="feed-comment-commentor"><%= p.getFirstName() %> <%= p.getLastName() %> commented</span>
+
+    <span class="feed-comment-date">
+        Published <%= comment.getTimesAgo()%>
+    </span>
+    <br /><br />
+    <div class="feed-comment-pointer"></div>
+    <div class="feed-comment-body document-comment2-body">
+        <span class="feed-comment-body-text document-comment2-body-text">
+            <%= comment.getMessage() %>
+            <br />
+
+        </span>
+
+        <div class="document-upvote-body">
+            <form method="POST" action="/vote"  class="AjaxSubmit3 child">
                 <input type="hidden" name="docid" value="<%= document.getId()%>"/>
                 <input type="hidden" name="commentid" value="<%= comment.getId()%>"/>
                 <input type="hidden" name="upvote" value="<%= comment.getUpVote()%>"/>
                 <input type="hidden" name="downvote" value="<%= comment.getDownVote()%>"/>
-                <button class="btn btn-xs" id="btn1<%= comment.getId()%>" onclick="upVote1();" >
-                  <div class="parent">
-                    <div class="child point" id="up-<%= comment.getId()%>" name="point"><%= comment.getUpVote()%></div>
-                    <div class="child">&nbsp;<i class="fa fa-thumbs-up"></i></div>
-                  </div>
+                <button class="btn btn-xs document-vote-btn" id="btn1<%= comment.getId()%>" onclick="upVote1();">
+                    <div class="parent">
+                        <div class="child point" id="up-<%= comment.getId()%>" name="point"><%= comment.getUpVote()%></div>
+                        <div class="child">&nbsp;<i class="fa fa-thumbs-up"></i></div>
+                    </div>
                 </button>
                 &nbsp;
-              </form>
-              <form method="POST" action="/vote"  id="downvotecomment" class="AjaxSubmit4 child">
+            </form>
+
+            <form method="POST" action="/vote"  id="downvotecomment" class="AjaxSubmit4 child">
                 <input type="hidden" name="docid" value="<%= document.getId()%>"/>
                 <input type="hidden" name="commentid" value="<%= comment.getId()%>"/>
                 <input type="hidden" name="upvote" value="<%= comment.getUpVote()%>"/>
                 <input type="hidden" name="downvote" value="<%= comment.getDownVote()%>"/>
                 <input type="hidden" name="_method" value="put"/>
-                <button  class="btn btn-xs" id="btn2<%= comment.getId()+1%>" onclick="downVote1();" >
-                  <div class="parent">
-                    <div class="child point" id="down-<%= comment.getId()+1%>" name="point"><%= comment.getDownVote()%></div>
-                    <div class="child">&nbsp; <i class="fa fa-thumbs-down"></i></div>
-                  </div>
+                <button  class="btn btn-xs document-vote-btn" id="btn2<%= comment.getId()+1%>" onclick="downVote1();">
+                    <div class="parent">
+                        <div class="child point" id="down-<%= comment.getId()+1%>" name="point"><%= comment.getDownVote()%></div>
+                        <div class="child">&nbsp; <i class="fa fa-thumbs-down"></i></div>
+                    </div>
                 </button>
                 &nbsp;
-              </form>
-            </div>
-          </div>
-          <%}%>
+            </form>
+
+            <% if(sessionUser.getId() == document.getPeerId() || sessionUser.getId() == comment.getPosterPeerId()){%> |
+            <a data-toggle="modal" data-id="<%= comment.getId()%>" class="confirmDeleteCommentDialog child btn btn-danger"
+                href="#deleteDialog">delete</a>
+            <% } %>
         </div>
-        <div class="col-md-6">
-          <!-- CHANGESET SECTION -->
-          <%for(Changeset changeset: changesets){ %>
-          <div class="card2">
-            <h3 class="card-heading simple"><%= changeset.getContent() %> - <span class="child" style="font-style: italic;font-size: small;"><%= changeset.getTimesAgo()%></span></h3>
-            <div class="card-comments">
-              <div class="comments-collapse-toggle">
-                <a data-toggle="collapse" href="#<%= changeset.getId()%>-comments"> <%=changeset.getOrderedComments().size()%> Comments<i class="icon-angle-down"></i></a>
-              </div>
-              <div id="<%= changeset.getId()%>-comments" class="comments collapse">
-                <% for (Comment comment: changeset.getOrderedComments()){%>
-                <div class="media">
-                  <a class="pull-left" href="/peer/<%= comment.getPosterPeer().getId()%>">
-                    <img class="media-object" title="<%= comment.getPosterPeer().getFirstName()%> <%= comment.getPosterPeer().getLastName()%>" src="<%= comment.getPosterPeer().getAvatar().getRelativeServletContextAvatarPathForSize( request,
-                    Avatar.Size.SMALL ) %>" alt="avatar"/>
-                  </a>
-                  <div class="media-body">
-                    <h4 class="media-heading"><%= comment.getPosterPeer().getFirstName()%> <%= comment.getPosterPeer().getLastName()%></h4>
-                      <form  id="upvotechangesetcomment" method="POST" action="/vote" class="AjaxSubmit1 child">
+    </div>
+    <br />
+    <%}%>
+
+    <br /><br />
+
+
+
+
+<%for(Changeset changeset: changesets){ %>
+    <div class="profile document-changeset-body">
+        <span class="row document-changeset-header">
+            <span class="col-lg-9 feed-comment-source"><%= changeset.getContent() %></span>
+
+            <span class="col-lg-3 document-changeset-title">
+                Edited <%= changeset.getTimesAgo()%>
+                <br />
+                <a data-toggle="collapse" href="#<%= changeset.getId()%>-comments" class="document-changeset-size"><%=changeset.getOrderedComments().size()%> Comments<i class="icon-angle-down"></i></a>
+            </span>
+        </span>
+        <br />
+        <img src="<%= sessionUser.getAvatar().getRelativeServletContextAvatarPathForSize( request,
+                    Avatar.Size.LARGE ) %>" width="30px" class="document-changeset-poster-avatar">
+        <span class="feed-comment-commentor"><%= sessionUser.getFirstName() %> <%= sessionUser.getLastName() %> comments</span>
+        <br />
+        <div class="feed-comment-pointer document-changeset-poster-pointer"></div>
+        <span class="document-changeset-poster-body">
+            <form method="POST" id="comment2" action="/peer/<%= sessionUser.getId()%>/document/<%= document.getId()%>/comment" parsley-validate>
+                <input type="hidden" name="docid" value="<%= document.getId()%>"/>
+                <input type="hidden" name="changesetid" value="<%= changeset.getId()%>"/>
+                <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>"/>
+                <input type="hidden" name="_method" value="put"/>
+                <textarea name="comment" id="textComment2" class="parsely-validated document-changeset-body-box" parsley-trigger="change keyup"></textarea>
+                <br/>
+                <div class="media-body">
+                    <button type="submit" class="btn btn-success document-changeset-body-btn">Post</button>
+                </div>
+            </form>
+        </span>
+
+        <div id="<%= changeset.getId()%>-comments">
+        <table class="table table-striped table-condensed document-changeset-poster-comment-body">
+            <% for (Comment comment: changeset.getOrderedComments()){%>
+            <tr>
+                <td class="document-changeset-poster-comment-content">
+                    <a href="/peer/<%= comment.getPosterPeer().getId()%>">
+                        <img title="<%= comment.getPosterPeer().getFirstName()%> <%= comment.getPosterPeer().getLastName()%>" src="<%= comment.getPosterPeer().getAvatar().getRelativeServletContextAvatarPathForSize( request,
+                    Avatar.Size.SMALL ) %>" alt="avatar" width="30px">
+                    </a>
+                    <span class="feed-comment-commentor"><%= comment.getPosterPeer().getFirstName()%> <%= comment.getPosterPeer().getLastName()%> commented</span>
+
+                    <span class="feed-comment-date">
+                        Published <%= comment.getTimesAgo()%>
+                    </span>
+
+                    <br /><br />
+
+                    <i><%= comment.getMessage()%></i>
+
+                    <br />
+
+                    <div class="document-changeset-poster-comment-vote-body">
+                    <form  id="upvotechangesetcomment" method="POST" action="/vote" class="AjaxSubmit1 child">
                         <input type="hidden" name="docid" value="<%= document.getId()%>"/>
                         <input type="hidden" name="commentid" value="<%= comment.getId()%>"/>
                         <input type="hidden" name="upvote" value="<%= comment.getUpVote()%>"/>
                         <input type="hidden" name="downvote" value="<%= comment.getDownVote()%>"/>
-                        <button class="parent btn btn-xs" id="btn3<%= comment.getId()%>" onclick="upVote2();" >
-                          <div class="child point" id="<%= comment.getId()%>" name="point"><%= comment.getUpVote()%></div>
-                          <div class="child">&nbsp;<i class="fa fa-thumbs-up"></i></div>
+                        <button class="parent btn btn-xs document-vote-btn" id="btn3<%= comment.getId()%>" onclick="upVote2();">
+                            <div class="child point" id="<%= comment.getId()%>" name="point"><%= comment.getUpVote()%></div>
+                            <div class="child">&nbsp;<i class="fa fa-thumbs-up"></i></div>
                         </button>&nbsp;
-                      </form>
-                      <form id="downvotechangesetcomment" method="POST" action="/vote" class="AjaxSubmit2 child" >
+                    </form>
+                    <form id="downvotechangesetcomment" method="POST" action="/vote" class="AjaxSubmit2 child" >
                         <input type="hidden" name="docid" value="<%= document.getId()%>"/>
                         <input type="hidden" name="commentid" value="<%= comment.getId()%>"/>
                         <input type="hidden" name="upvote" value="<%= comment.getUpVote()%>"/>
                         <input type="hidden" name="downvote" value="<%= comment.getDownVote()%>"/>
                         <input type="hidden" name="_method" value="put"/>
-                        <button  class="parent btn btn-xs" id="btn4<%= comment.getId()+1%>" onclick="downVote2();">
-                          <div class="child point" id="<%= comment.getId()+1%>" name="point"><%= comment.getDownVote()%></div>
-                          <div class="child">&nbsp;<i class="fa fa-thumbs-down"></i></div>
+                        <button  class="parent btn btn-xs document-vote-btn" id="btn4<%= comment.getId()+1%>" onclick="downVote2();">
+                            <div class="child point" id="<%= comment.getId()+1%>" name="point"><%= comment.getDownVote()%></div>
+                            <div class="child">&nbsp;<i class="fa fa-thumbs-down"></i></div>
                         </button>
                         &nbsp;
-                      </form>
-                      <span class="child" style="font-style: italic;font-size: small;"><%= comment.getTimesAgo()%></span>
-                      <% if(sessionUser.getId() == changeset.getPeerId() || sessionUser.getId() == comment.getPosterPeerId()){%>|
-                      <a data-toggle="modal" data-id="<%= comment.getId()%>" class="confirmDeleteCommentDialog child"
-                         href="#deleteDialog">delete</a>
-                    <p><%= comment.getMessage()%></p>
-                  </div>
-                <% } %>
-                </div>
-                <%}%>
-                <div class="media">
-                  <form method="POST" id="comment2" action="/peer/<%= sessionUser.getId()%>/document/<%= document.getId()%>/comment" parsley-validate>
-                  <div class="media-body">
-                    <textarea name="comment" id="textComment2" class="parsely-validated" style="width:100%" parsley-trigger="change keyup"></textarea>
-                  </div>
-                    <br/>
-                  <div class="media-body">
-                    <input type="hidden" name="docid" value="<%= document.getId()%>"/>
-                    <input type="hidden" name="changesetid" value="<%= changeset.getId()%>"/>
-                    <input type="hidden" name="peerid" value="<%= sessionUser.getId()%>"/>
-                    <input type="hidden" name="_method" value="put"/>
-                    <button type="submit" class="btn btn-success ">Post</button>
-                  </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-          <%}%>
-      </div>
+                    </form>
+                    <% if(sessionUser.getId() == changeset.getPeerId() || sessionUser.getId() == comment.getPosterPeerId()){%>
+                    <a data-toggle="modal" data-id="<%= comment.getId()%>" class="confirmDeleteCommentDialog child btn btn-danger"
+                       href="#deleteDialog">delete</a>
+                    </div>
+                    <% } %>
+                </td>
+            </tr>
+            <%}%>
+        </table>
+        </div>
     </div>
-  </div>
+    <br /><br />
+<%}%>
+
 </div>
 
 <!-- MODEL SECTION -->

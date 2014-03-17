@@ -48,22 +48,23 @@ public class Feedable extends Base {
     public boolean save() {
         Feedable a = new Feedable();
         super.save();
-        System.out.println( this.getId() );
-        if ( this.getId() != null ) {
-            a.setType( this.getClass().getSimpleName() );
-            a.setChildId( this.getId() );
-            a.setStatus( "new" );
-            a.setNotifyStatus( "UNSEND" );
-            if ( this instanceof Changeset ) {
-                Changeset ch = (Changeset) this;
-                if ( ch.getHunk() != null ) {
-                    a.setUserId( ch.getPeerId() );
-                    return a.saveFeedable();
-                }
+        System.out.println(this.getId());
+        if(this.getId() != null){
+           a.setType(this.getClass().getSimpleName());
+           a.setChildId(this.getId());
+           a.setStatus("new");
+           a.setNotifyStatus("UNSEND");
 
-            }
+           if(this instanceof Changeset){
+               Changeset ch = (Changeset) this;
+               if(ch.getHunk() != null){
+                   a.setUserId(ch.getPeerId());
+                   return a.saveFeedable();
+               }
 
-            if ( this instanceof Comment ) {
+           }
+
+            if(this instanceof Comment){
                 Comment com = (Comment) this;
                 if ( com.getType().contentEquals( "Document" ) ) {
                     Document doc = new Document().find( com.getObjectId() );
@@ -86,10 +87,12 @@ public class Feedable extends Base {
                 if ( bc.getGroup() != null ) {
                     for ( Peer p : bc.getGroup().getPeers() ) {
                         Feedable feedable = new Feedable();
-                        feedable.setType( this.getClass().getSimpleName() );
-                        feedable.setChildId( this.getId() );
-                        feedable.setStatus( "new" );
-                        feedable.setUserId( p.getId() );
+
+                        feedable.setType(this.getClass().getSimpleName());
+                        feedable.setChildId(this.getId());
+                        feedable.setStatus("new");
+                        feedable.setUserId(p.getId());
+                        feedable.setNotifyStatus("UNSEND");
                         feedable.saveFeedable();
                     }
                 }

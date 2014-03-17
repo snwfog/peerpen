@@ -7,7 +7,9 @@
 
 
 <br /><br /><br />
-<div class="container">
+<div class="wrap-container container">
+
+    <div class="search-body">
     <!-- SEARCH FORM -->
     <form action="/search" method="post" class="form-horizontal" role="form" id="search_form">
         <div class="btn-group" data-toggle="buttons">
@@ -107,6 +109,7 @@
 
 
     <br /><br /><br /><br /><br /><br /><br /><br />
+    </div>
 </div>
 
 <%@ include file="/view/includes/static/footer.jsp" %>

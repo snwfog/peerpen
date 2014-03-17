@@ -46,6 +46,8 @@
     <link rel="stylesheet" href="/assets/css/custom/peerpen.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/custom/ppeditor.css" type="text/css">
 
+    <link rel="stylesheet" href="/assets/css/custom/styleplus.css" type="text/css">
+
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <!--<script src="../assets/js/html5shiv.js"></script>-->

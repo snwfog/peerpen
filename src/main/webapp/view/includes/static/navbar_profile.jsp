@@ -5,22 +5,22 @@
 <%@ page import="com.peerpen.model.Document" %>
 <%@ page import="java.util.List" %>
 <!-- must set navbar z-index to be <= 100 otherwise search autocomplete box will be hidden under navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="z-index:100 !important;">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="z-index:100 !important; font-family: 'Oswald', sans-serif; font-size:16px;" >
   <div class="container">
     <div class="navbar-header">
-        <a class="navbar-brand" href="/peer/<%=sessionUser.getId()%>/feed">PeerPen</a>
+        <a href="/peer/<%=sessionUser.getId()%>/feed" style="padding-top:5px; display:block;"><img src="/assets/images/logo32x32.png"></a>
     </div>
 
     <ul class="nav navbar-nav">
         <% String jspPageName = request.getServletPath(); %>
         <li   <%= jspPageName.contentEquals("/view/feed/feed.jsp")  ? "class=\"active\"" : "" %>>
-            <a href="/peer/<%=sessionUser.getId()%>/feed">Feeds</a>
+            <a href="/peer/<%=sessionUser.getId()%>/feed" href="/about" style="font-weight:300;">Feeds</a>
         </li>
         <li   <%= jspPageName.contentEquals("/view/documents.jsp") ? "class=\"active\"" : "" %>>
-            <a href="/peer/<%=sessionUser.getId()%>/document">Documents</a>
+            <a href="/peer/<%=sessionUser.getId()%>/document" href="/about" style="font-weight:300;">Documents</a>
         </li>
         <li <%= jspPageName.contentEquals("/view/groups.jsp") ? "class=\"active\"" : "" %>>
-            <a href="/group">Groups</a>
+            <a href="/group" href="/about" style="font-weight:300;">Groups</a>
         </li>
     </ul>
     <!-- SEARCH FORM -->
@@ -33,7 +33,7 @@
 
 
         <li class="dropdown">
-            <a href="/peer/<%=sessionUser.getId()%>/profile" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="/peer/<%=sessionUser.getId()%>/profile" class="dropdown-toggle" data-toggle="dropdown" style="font-weight:300;">
                 <%= sessionUser.getUserName() %> <img style="margin:0 10px;" class="profile"
                      src="<%= sessionUser.getAvatar().getRelativeServletContextAvatarPathForSize( request, Avatar.Size.SMALL ) %>"/>
                 <%if(sessionUser.getCompleteProfile()==0){%><span class="glyphicon glyphicon-exclamation-sign"></span><%}%>
