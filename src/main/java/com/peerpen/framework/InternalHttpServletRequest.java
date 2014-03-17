@@ -15,6 +15,11 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * This is a servlet request wrapper which will provide a certain
+ * set of basic functionality to a given servlet request.
+ *
+ */
 public class InternalHttpServletRequest extends HttpServletRequestWrapper {
 
     public static enum HTTP_METHOD {
@@ -128,8 +133,10 @@ public class InternalHttpServletRequest extends HttpServletRequestWrapper {
     }
 
     public boolean isAjaxRequest() {
-        return this.getHeader( "Content-Type" ).equals( "application/json; charset=utf-8" );
-
+        String applicationRequestHeader = this.getHeader("Content-Type");
+        return applicationRequestHeader != null &&
+                "application/json; charset=utf-8".toUpperCase()
+                        .contains(applicationRequestHeader.toUpperCase());
     }
 
     public Map<String, Object> getParametersMap() {

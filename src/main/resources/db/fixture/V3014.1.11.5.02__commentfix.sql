@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* clear all tables first */
 SET FOREIGN_KEY_CHECKS = 0; -- Disable foreign key checking.
 truncate avatars;
@@ -25,6 +26,8 @@ SET FOREIGN_KEY_CHECKS = 1; -- Enable foreign key checking.
 
 
 
+=======
+>>>>>>> ppedit
 INSERT INTO `peers` (`id`, `first_name`, `last_name`, `email`, `user_name`, `password`, `point`, `personal_website`, `creation_date`, `last_modified_date`, `etag`, `semaphore`, `description`, `rank_id`, `date_of_birth`, `country`, `industry`, `experience`, `gender`, `avatar_id`, `session_id`)
   VALUES
   (2,'Ron','Hagen','hello@gmail.com','qwe','qwe',9000,'peerpen.com','2014-01-11 13:04:33','2014-02-08 20:30:52',NULL,0,'this is a description',NULL,'2014-01-11','Canada','SOEN',2,'M',NULL,NULL),
@@ -37,6 +40,7 @@ INSERT INTO `peers` (`id`, `first_name`, `last_name`, `email`, `user_name`, `pas
   (9,'Meg','Griffin','meg@facebook.com','meg','meg',6,'google.com','2014-02-08 19:20:09','2014-02-08 20:27:41',NULL,0,'Meg.',NULL,'2014-02-08','Germany','BIOL',2,'F',NULL,NULL),
   (10,'James','DeSanta','james.desenta@getalife.com','jam','jam',3,'google.com','2014-02-08 19:21:05','2014-02-08 20:27:17',NULL,0,'I am looking for a exciting positiong',NULL,'2014-02-08','France','BIOT',3,'M',NULL,NULL);
 
+<<<<<<< HEAD
 
 INSERT INTO `avatars` (`id`, `peer_id`, `filename`, `creation_date`, `last_modified_date`, `semaphore`, `etag`, `x1`, `y1`, `x2`, `y2`, `original_width`, `original_height`)
   VALUES
@@ -57,6 +61,8 @@ INSERT INTO `avatars` (`id`, `peer_id`, `filename`, `creation_date`, `last_modif
 
 
 
+=======
+>>>>>>> ppedit
 INSERT INTO `documents` (`id`, `doc_name`, `thumbnail_path`, `peer_id`, `last_modified_date`, `creation_date`, `semaphore`, `etag`, `doc_type`)
   VALUES
   (1,'My First Resume','none',2,'2014-01-13 17:58:59','2014-01-13 17:58:59',0,NULL,NULL),
@@ -69,15 +75,32 @@ INSERT INTO `documents` (`id`, `doc_name`, `thumbnail_path`, `peer_id`, `last_mo
   (8,'McGill Masters Cover Letter','none',5,'2014-01-24 21:50:24','2014-01-24 21:50:24',0,NULL,NULL),
   (9,'Exxcon Resume','none',5,'2014-01-13 18:02:31','2014-01-13 18:02:31',0,NULL,NULL);
 
+# INSERT INTO `comments` (`id`, `message`, `document_id`, `peer_id`, `creation_date`, `last_modified_date`, `changeset_id`, `up_vote`, `down_vote`)
+# VALUES
+#   (1,'My first comment',1,2,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,2,0),
+#   (2,'Nice resume! :)',1,3,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,3,0),
+#   (3,'Theres a few spelling mistakes..',1,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,4,0),
+#   (4,'Thanks! fixed :D',1,2,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,5,0),
+#   (5,'There a run-on sentence in your first paragraph.',2,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,5,0),
+#   (6,'Thanks, fixed it! stayed up all night trying to fix it... :/\r\nYou a life saver! ',2,2,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,6,0),
+#   (7,'No problem :)',2,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,3,0),
+#   (8,'Nice!',2,4,'2014-01-13 00:00:00','2014-01-13 00:00:00',NULL,5,0),
+#   (9,'Good Luck',1,4,'2014-01-15 23:26:41','2014-01-15 23:26:41',NULL,2,0),
+#   (10,'True',1,3,'2014-01-15 23:26:35','2014-01-15 23:26:35',5,4,0),
+#   (11,'Smart',1,4,'2014-01-15 23:27:01','2014-01-15 23:27:01',5,3,0),
+#   (12,'Hmmm.. I see your point',1,5,'2014-01-15 23:27:48','2014-01-15 23:27:48',6,10,0);
 
-INSERT INTO `hunks` (`id`, `id_view`, `document_id`, `content`, `creation_date`, `last_modified_date`)
+INSERT INTO `feedables` (`id`, `child_id`, `user_id`,`type`, `status`,`last_modified_date`, `creation_date`)
   VALUES
-  (1, NUll,'2','something about something about something','2014-01-13 17:58:59','2014-01-13 17:58:59'),
-  (2, NUll,'2','bloooood','2014-01-13 17:58:59','2014-01-13 17:58:59'),
-  (3, NUll,'2','power','2014-01-13 17:58:59','2014-01-13 17:58:59');
+  (1, 5, 2,'Changeset','new' ,'2014-01-13 17:59:59','2014-01-13 17:58:59'),
+  (2, 6, 2,'Changeset','new' ,'2014-01-13 17:56:59','2014-01-13 17:58:59'),
+  (3, 7, 2,'Changeset','new' ,'2014-01-13 17:54:59','2014-01-13 17:58:59'),
+  (4, 1, 2,'Comment','new' ,'2014-01-13 17:57:59','2014-01-13 17:58:59'),
+  (5, 2, 2,'Comment','new' ,'2014-01-13 17:52:59','2014-01-13 17:58:59');
 
-INSERT INTO `changesets` (`id`, `creation_date`, `last_modified_date`, `peer_id`, `content`, `hunk_id`)
+INSERT INTO `changesets` (`id`, `creation_date`, `last_modified_date`, `content`, `hunk_id`, `state`)
   VALUES
+<<<<<<< HEAD
   (5,'2014-01-15 23:24:05','2014-01-15 23:24:05',2,'Changed the format of Education\n',1),
   (6,'2014-01-15 23:24:48','2014-01-15 23:24:48',2,'Added Leasure section',2),
   (7,'2014-01-15 23:25:24','2014-01-15 23:25:24',2,'Remove High School in Education',3);
@@ -138,6 +161,11 @@ INSERT INTO `feedables` (`id`, `child_id`, `user_id`, `type`, `status`, `notify_
   (23,23,2,'Comment','new',NULL,'2014-03-14 13:44:09','2014-03-14 13:44:09',0,'d1c00418939313726ff664f66b457a1f976678bd9bacfbc4c3104e4c6c23e1fd'),
   (24,24,2,'Comment','new',NULL,'2014-03-14 13:44:32','2014-03-14 13:44:32',0,'27d428a0b659be266f655ac0102535971bd126b002ba22b7abceb0d32b42e718');
 
+=======
+  (5,'2014-01-15 23:24:05','2014-01-15 23:24:05','Changed the format of Education\n',1,0),
+  (6,'2014-01-15 23:24:48','2014-01-15 23:24:48','Added Leasure section',2,0),
+  (7,'2014-01-15 23:25:24','2014-01-15 23:25:24','Remove High School in Education',3,0);
+>>>>>>> ppedit
 
 INSERT INTO `groups` (`id`, `group_name`, `description`, `creation_date`, `last_modified_date`, `semaphore`, `etag`, `admin_id`)
   VALUES

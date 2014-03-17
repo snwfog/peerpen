@@ -14,8 +14,11 @@ import com.peerpen.model.Peer;
 import com.sunnyd.database.Manager;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.MessageFormat;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
@@ -33,19 +36,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RouteFilter implements Filter {
 
+    private PrintWriter fileLogger;
     private FilterConfig fc;
     static final Logger logger = LoggerFactory.getLogger( RouteFilter.class );
 
     @Override
     public void init( FilterConfig filterConfig ) throws ServletException {
         this.fc = filterConfig;
+        try {
+            this.fileLogger = new PrintWriter( new BufferedWriter(
+                    new FileWriter( this.fc.getServletContext().getRealPath( "" ) + "/log/request.log", true ) ) );
+        } catch ( IOException e ) {
+            logger.warn( "Failed to initialize the request debug logger" );
+        }
     }
+
+    private void fileLog( String str ) {
+        this.fileLogger.println( str );
+        this.fileLogger.flush();
+    }
+
+
 
     @Override
     public void doFilter( ServletRequest request, ServletResponse response, FilterChain chain )
@@ -55,8 +71,9 @@ public class RouteFilter implements Filter {
         // /Users/snw/Dropbox/prog/java/peerpen/target/peerpen
         String appPath = fc.getServletContext().getRealPath( "" );
 
-        logger.info( "Incoming request for " + ((HttpServletRequest) request).getRequestURL() );
-
+        String logString = ("Incoming request for " + ((HttpServletRequest) request).getRequestURL());
+        logger.info( logString );
+        fileLog( logString );
         try {
 
             if ( isSafeRoutes( rURI ) ) {
@@ -86,34 +103,37 @@ public class RouteFilter implements Filter {
                 }
             } else if ( isCheckedRoutes( rURI ) ) {
                 if ( isInternalPreauthorizedForward( httpRequest, (HttpServletResponse) response ) ) {
+
                     logger.warn( "Received request is an internal request for " + httpRequest.getRequestURI() );
                     logger.warn( "Going to assume that you know what you're doing... forwarding you right away" );
-                    chain.doFilter( request, response );
-                    //try {
-                    //    (request.getRequestDispatcher( rURI )).forward( request, response );
-                    //} catch ( ServletException e ) {
-                    //    logger.error( "Failed internal forward to path " + rURI );
-                    //} catch ( IOException e ) {
-                    //    logger.error( "Failed internal forward to path " + rURI );
-                    //}
-
+                    //chain.doFilter(request, response);
+                    try {
+                        (request.getRequestDispatcher( rURI )).forward( request, response );
+                    } catch ( ServletException e ) {
+                        logger.error( "Failed internal forward to path " + rURI );
+                    } catch ( IOException e ) {
+                        logger.error( "Failed internal forward to path " + rURI );
+                    }
                 }
 
                 // Don't create the session by default
                 HttpSession session = httpRequest.getSession( false ); // TODO: Watch out for session hi-jacking
-                if ( session == null ) {
-                    throw new NotLoggedInException( "Could not find an existing session" );
-                }
+
+                //if (session == null) {
+                //    throw new NotLoggedInException("Could not find an existing session");
+                //}
 
 
                 if ( isAjaxRequest( httpRequest ) ) {
                     logger.info( "Received request is an application Ajax request for " + httpRequest.getRequestURI() );
                     // TODO: Implement the logging for Json data + convert to global JSON object
                     logger.info( "Data submitted to servlet is " + " NOT YET IMPLEMENTED" );
+
+                    String sanitizedJsonData = sanitizeJsonData( httpRequest );
                     request.setAttribute( "requestType", "applicationJson" );
-                    request.setAttribute( "requestData", toGson( sanitizeJsonData( httpRequest ) ) );
+                    request.setAttribute( "requestData", sanitizedJsonData );
                     logger.info( "requestType: " + "applicationJson" );
-                    logger.info( "requestData: " + sanitizeJsonData( httpRequest ) );
+                    logger.info( "requestData: " + sanitizedJsonData );
                 }
 
 
@@ -151,12 +171,16 @@ public class RouteFilter implements Filter {
             } else {
                 this.redirectError( httpRequest, (HttpServletResponse) response );
             }
-        } catch ( MissingArgumentException | NonPermissibleRoute | TooManyUrlNestingException | NotLoggedInException e ) {
+        } catch ( MissingArgumentException | NonPermissibleRoute | TooManyUrlNestingException e ) {
+            // FIXME: 1. If it is cors ajax, ignore the forward, and return 404 instead
+            // FIXME: 2. Have a better JSON api handling
             this.redirectError( (HttpServletRequest) request, (HttpServletResponse) response, e );
         }
 
     }
 
+
+    @Deprecated
     private Gson toGson( String json ) {
         StringBuilder sb = new StringBuilder( json );
 
@@ -214,7 +238,9 @@ public class RouteFilter implements Filter {
         try {
             BufferedReader reader = httpRequest.getReader();
             while ( (line = reader.readLine()) != null ) {
-                sb.append( StringEscapeUtils.escapeHtml4( line ) );
+                // FIXME: Need better escaping for html injection
+                //sb.append(StringEscapeUtils.escapeEcmaScript(line));
+                sb.append( line );
             }
         } catch ( IOException e ) {
             logger.error( "Error parsing application Json data" );
@@ -227,9 +253,9 @@ public class RouteFilter implements Filter {
     private boolean isAjaxRequest( HttpServletRequest request ) {
         String applicationRequestHeader = request.getHeader( "Content-Type" );
         return applicationRequestHeader != null &&
-                "application/json; charset=utf-8".contains( applicationRequestHeader );
-        //        return applicationRequestHeader != null &&
-        //                "application/x-www-form-urlencoded; charset=UTF-8".contains( applicationRequestHeader );
+
+                "application/json; charset=utf-8".toUpperCase()
+                        .contains(applicationRequestHeader.toUpperCase());
     }
 
     @Override

@@ -19,6 +19,16 @@
         FILTER SECTION
      ================= -->
 
+    <!--<filter>-->
+        <!--<filter-name>CORS</filter-name>-->
+        <!--<filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>-->
+    <!--</filter>-->
+
+    <!--<filter-mapping>-->
+        <!--<filter-name>CORS</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
     <filter>
         <filter-name>no-cache-filter</filter-name>
         <filter-class>com.peerpen.framework.filter.NoCacheFilter</filter-class>
@@ -187,14 +197,14 @@
     <!--<url-pattern>/hunk</url-pattern>-->
     <!--</servlet-mapping>-->
 
-    <servlet>
-        <servlet-name>hunk.do</servlet-name>
-        <servlet-class>com.peerpen.controller.HunkController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>hunk.do</servlet-name>
-        <url-pattern>/hunk.do</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+    <!--<servlet-name>hunk.do</servlet-name>-->
+    <!--<servlet-class>com.peerpen.controller.HunkController</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>hunk.do</servlet-name>-->
+    <!--<url-pattern>/hunk.do</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <servlet>
         <servlet-name>reset</servlet-name>
@@ -269,31 +279,14 @@
         <url-pattern>/document</url-pattern>
     </servlet-mapping>
 
-    <!--<servlet>-->
-    <!--<servlet-name>changeset</servlet-name>-->
-    <!--<jsp-file>/view/document.jsp</jsp-file>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>changeset</servlet-name>-->
-    <!--<url-pattern>/changeset</url-pattern>-->
-    <!--</servlet-mapping>-->
-    <!--<servlet>-->
-    <!--<servlet-name>changeset.do</servlet-name>-->
-    <!--<servlet-class>com.peerpen.controller.ChangesetController</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>changeset.do</servlet-name>-->
-    <!--<url-pattern>/changeset.do</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--<servlet>-->
-    <!--<servlet-name>upload.do</servlet-name>-->
-    <!--<servlet-class>com.peerpen.controller.UploadController</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>upload.do</servlet-name>-->
-    <!--<url-pattern>/upload.do</url-pattern>-->
-    <!--</servlet-mapping>-->
+    <servlet>
+        <servlet-name>ppeditor</servlet-name>
+        <servlet-class>com.peerpen.controller.PeerpenEditorController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ppeditor</servlet-name>
+        <url-pattern>/edit</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>error</servlet-name>
@@ -303,7 +296,6 @@
         <servlet-name>error</servlet-name>
         <url-pattern>/error</url-pattern>
     </servlet-mapping>
-
 
     <!--FEED STUFF-->
     <servlet>
@@ -315,14 +307,14 @@
         <url-pattern>/feed</url-pattern>
     </servlet-mapping>
 
-  <servlet>
-    <servlet-name>group.do</servlet-name>
-    <servlet-class>com.peerpen.ajax.GroupControllerAjax</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>group.do</servlet-name>
-    <url-pattern>/group.do</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>group.do</servlet-name>
+        <servlet-class>com.peerpen.ajax.GroupControllerAjax</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>group.do</servlet-name>
+        <url-pattern>/group.do</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>joingroup</servlet-name>
@@ -333,15 +325,14 @@
         <url-pattern>/joingroup</url-pattern>
     </servlet-mapping>
 
-  <servlet>
-    <servlet-name>group</servlet-name>
-    <servlet-class>com.peerpen.controller.GroupController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>group</servlet-name>
-    <url-pattern>/group</url-pattern>
-  </servlet-mapping>
-
+    <servlet>
+        <servlet-name>group</servlet-name>
+        <servlet-class>com.peerpen.controller.GroupController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>group</servlet-name>
+        <url-pattern>/group</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>broadcast</servlet-name>
         <servlet-class>com.peerpen.controller.BroadcastController</servlet-class>
@@ -378,55 +369,9 @@
         <url-pattern>/DocumentAjax</url-pattern>
     </servlet-mapping>
 
-    <session-config>
-        <session-timeout>72</session-timeout>
-    </session-config>
-
-    <context-param>
-        <description>Location to store uploaded file</description>
-        <param-name>file-upload-mac</param-name>
-        <param-value>
-            <!--Change this to whoever is responsible for it-->
-            /Users/bobbyyit/Desktop/
-        </param-value>
-    </context-param>
-    <context-param>
-        <description>Location to store uploaded file</description>
-        <param-name>file-upload-win</param-name>
-        <param-value>
-            <!--Change this to whoever is responsible for it-->
-            <!--not tested yet-->
-            c:\PeerPen\temp\
-        </param-value>
-    </context-param>
-
-
-    <!--<session-config>-->
-    <!--<session-timeout>72</session-timeout>-->
-    <!--</session-config>-->
-
-    <!--<context-param>-->
-    <!--<description>Location to store uploaded file</description>-->
-    <!--<param-name>file-upload-mac</param-name>-->
-    <!--<param-value>-->
-    <!--&lt;!&ndash;Change this to whoever is responsible for it&ndash;&gt;-->
-    <!--/Users/bobbyyit/Desktop/-->
-    <!--</param-value>-->
-    <!--</context-param>-->
-    <!--<context-param>-->
-    <!--<description>Location to store uploaded file</description>-->
-    <!--<param-name>file-upload-win</param-name>-->
-    <!--<param-value>-->
-    <!--&lt;!&ndash;Change this to whoever is responsible for it&ndash;&gt;-->
-    <!--&lt;!&ndash;not tested yet&ndash;&gt;-->
-    <!--c:\PeerPen\temp\-->
-    <!--</param-value>-->
-    <!--</context-param>-->
-
     <!--
         SERVLET CONTEXT PARAM
     ========================= -->
-
     <context-param>
         <description>Location of the permissible domain model</description>
         <param-name>resource</param-name>
@@ -477,7 +422,6 @@
         <description>Upload image relative path to the webapp dir</description>
         <param-name>avatar-dir</param-name>
         <param-value>assets/images/peers/avatars</param-value>
-
     </context-param>
 
     <!--

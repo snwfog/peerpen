@@ -1,17 +1,23 @@
 package com.peerpen.model;
 
-import com.google.gson.JsonArray;
+import com.google.common.collect.ImmutableMap;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.sunnyd.Base;
 import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.annotations.ActiveRelationHasOne;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.Map;
 
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -30,6 +36,8 @@ public class Hunk extends Base implements IModel {
     private String idView;
     @ActiveRecordField
     private String content;
+    @ActiveRecordField
+    private Integer pageNumber;
     @ActiveRecordField
     private Integer documentId;
     @ActiveRelationHasOne
@@ -61,9 +69,10 @@ public class Hunk extends Base implements IModel {
         return content;
     }
 
-    public void setContent( String content ) {
+    public Hunk setContent( String content ) {
         this.content = content;
         setUpdateFlag( true );
+        return this;
     }
 
     public Integer getDocumentId() {
@@ -94,6 +103,20 @@ public class Hunk extends Base implements IModel {
         String sql = "SELECT * FROM `hunks` WHERE `id_view` = " + idView;
         return new Hunk().queryAll( sql );
     }
+    
+    @Deprecated
+    public Hunk findByViewId( String viewId ) {
+        return (new Hunk()).find( ImmutableMap.of( "idView", (Object) viewId ) );
+    }
+
+    public Integer getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber( Integer pageNumber ) {
+        this.pageNumber = pageNumber;
+        this.setUpdateFlag( true );
+    }
 
     public String getHunkName() {
         return hunkName;
@@ -104,7 +127,17 @@ public class Hunk extends Base implements IModel {
         setUpdateFlag( true );
     }
 
+    public boolean spawnChangeset( Changeset.ChangesetState state ) {
+        return Changeset.getInstanceFromHunk( this, state ).save();
+    }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder( getContent() );
+        sb.replace( 0, 1, "" );
+        sb.replace( sb.length() - 1, sb.length(), "" );
+        return getIdView() + ":\"" + StringEscapeUtils.escapeJava( sb.toString() ) + "\"";
+    }
 
     public static void main( String[] args ) {
         String input = "{\n" +
@@ -143,7 +176,38 @@ public class Hunk extends Base implements IModel {
                 System.out.println( id + "->" + html );
             }
         }
+    }
+    
+    public static class HunkSerializer implements JsonSerializer<Hunk> {
 
+        @Override
+        public JsonElement serialize( Hunk src, Type typeOfSrc, JsonSerializationContext context ) {
+            JsonObject hunkJson = new JsonObject();
+            hunkJson.addProperty( "html", src.getContent() );
+            hunkJson.addProperty( "name", src.getHunkName() );
+
+            return hunkJson;
+        }
+    }
+
+    public static class HunkDeserializer implements JsonDeserializer<Hunk> {
+
+        @Override
+        public Hunk deserialize( JsonElement json, Type typeOfT, JsonDeserializationContext context )
+                throws JsonParseException {
+            String viewId = json.getAsJsonObject().get( "id" ).getAsString();
+            String content = json.getAsJsonObject().get( "html" ).getAsString();
+            JsonElement hunkNameElement = json.getAsJsonObject().get( "name" );
+            String hunkName = "";
+            if (hunkNameElement != null) hunkName = hunkNameElement.getAsString();
+
+            Hunk hunk = new Hunk();
+            hunk.setIdView( viewId );
+            hunk.setContent( content );
+            hunk.setHunkName( hunkName );
+
+            return hunk;
+        }
     }
 
     @Override

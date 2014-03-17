@@ -71,6 +71,7 @@ public class Taggable extends Base {
      * Returns a list of TagDescriptors attached to the calling entity
      * @return
      */
+
     public List<TagDescriptor> getTagDescriptors() {
         List<TagDescriptor> tagDescriptors = new ArrayList<>();
         String taggableId = this.getTaggableId().toString();
@@ -115,11 +116,13 @@ public class Taggable extends Base {
      * @param newList
      * @return
      */
+
     public boolean updateTags( List<TagDescriptor> newList ) {
         List<TagDescriptor> oldList = this.getTagDescriptors();
 
         // note that the contains uses .equals from TagDescriptor
         // removing tags that don't exist anymore in newlist
+
         for ( int i = 0; i < oldList.size(); i++ ) {
             if ( !newList.contains( oldList.get( i ) ) ) {
                 removeTag( oldList.get( i ) );
@@ -127,6 +130,7 @@ public class Taggable extends Base {
         }
 
         // adding tags that don't exist in oldlist
+
         for ( int i = 0; i < newList.size(); i++ ) {
             if ( !oldList.contains( newList.get( i ) ) ) {
                 addTag( newList.get( i ) );
@@ -138,7 +142,6 @@ public class Taggable extends Base {
     /*
         ==============  HELPER METHODS ==================
      */
-
     // attach a td to entity (adding existing tag will be ignored)
     private boolean addTag( TagDescriptor td ) {
         // check if this tag is already associated with the taggable entity
@@ -146,6 +149,7 @@ public class Taggable extends Base {
                 getTaggableId();
         List<Tag> tags = new Tag().queryAll( sql );
         if ( tags.size() == 0 ) { // means entity doesn't have the tag yet, can do add now
+
             Tag tag = new Tag();
             tag.setTagDescriptor( td );
             tag.setTaggable( this );
@@ -159,6 +163,7 @@ public class Taggable extends Base {
         String sql =
                 "SELECT * FROM `tags` WHERE tags.`tag_descriptor_id` = " + td.getId() + " AND tags.`taggable_id` = " +
                         getTaggableId();
+
         List<Tag> tags = new Tag().queryAll( sql );
         boolean success = false;
         for ( int i = 0; i < tags.size(); i++ ) {
@@ -169,7 +174,6 @@ public class Taggable extends Base {
         }
         return true;
     }
-
 }
 
 

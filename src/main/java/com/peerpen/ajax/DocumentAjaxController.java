@@ -2,20 +2,12 @@ package com.peerpen.ajax;
 
 import com.peerpen.model.Document;
 
+import java.util.Map;
+import java.util.Set;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Map;
-import java.util.Set;
 
-/**
- * Created with IntelliJ IDEA.
- * User: MP
- * Date: 07/02/14
- * Time: 7:56 PM
- * To change this template use File | Settings | File Templates.
- */
 public class DocumentAjaxController extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws javax.servlet.ServletException, java.io.IOException {

@@ -53,7 +53,10 @@ public class Feedable extends Base {
             a.setType( this.getClass().getSimpleName() );
             a.setChildId( this.getId() );
             a.setStatus( "new" );
+<<<<<<< HEAD
             a.setNotifyStatus( "UNSEND" );
+=======
+>>>>>>> ppedit
 
             if ( this instanceof Changeset ) {
                 Changeset ch = (Changeset) this;
@@ -132,6 +135,10 @@ public class Feedable extends Base {
             if ( this instanceof Comment ) {
                 a.updateFeedable();
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> ppedit
             if ( this instanceof Broadcast ) {
                 //TODO: if user update his broadcast then you need to set all feedable to update status
                 return a.updateFeedable();
@@ -154,9 +161,15 @@ public class Feedable extends Base {
     @Override
     public boolean destroy() {
         Map<String, Object> map = new HashMap<>();
+<<<<<<< HEAD
         map.put( "childId", this.getId() );
         map.put( "type", this.getClass().getSimpleName() );
 
+=======
+
+        map.put( "childId", this.getId() );
+        map.put( "type", this.getClass().getSimpleName() );
+>>>>>>> ppedit
         if ( this instanceof Broadcast ) {
             List<Feedable> feeds = new Feedable().findAll( map );
             boolean deletedAllFeedable = false;
@@ -171,7 +184,10 @@ public class Feedable extends Base {
             }
 
             return this.baseDestroy() && deletedAllFeedable;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ppedit
         } else {
             Feedable a = new Feedable().find( map );
             super.destroy();
@@ -191,8 +207,11 @@ public class Feedable extends Base {
         return super.destroy();
     }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> ppedit
     private Feedable reveal() {
         if ( trueSelf == null ) {
             try {

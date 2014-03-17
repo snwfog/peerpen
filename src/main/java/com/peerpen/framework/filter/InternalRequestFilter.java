@@ -28,12 +28,12 @@ public class InternalRequestFilter implements Filter {
     @Override
     public void doFilter( ServletRequest request, ServletResponse response, FilterChain chain )
             throws IOException, ServletException {
-        logger.info( "Determining the request source" );
+        logger.info( "Internal request filter caught a new request..." );
         if ( request instanceof InternalHttpServletRequest ) {
-            logger.info( "Internal request... Skipping the request mutation" );
+            logger.info( "Internal request... Skipping request mutation" );
             chain.doFilter( request, response );
         } else {
-            logger.info( "Mutating into internal HTTP servlet request" );
+            logger.info( "Not an internal request, mutating into an internal request" );
             InternalHttpServletRequest internalRequest = new InternalHttpServletRequest( (HttpServletRequest) request );
             chain.doFilter( internalRequest, response );
         }

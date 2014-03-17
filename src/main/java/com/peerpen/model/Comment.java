@@ -50,6 +50,7 @@ public class Comment extends Feedable implements IModel {
         return posterPeer;
     }
 
+
     public Comment() {
         super();
         this.upVote = 0;
@@ -81,6 +82,7 @@ public class Comment extends Feedable implements IModel {
     //  {
     //    return name;
     //  }
+
 
     public Integer getUpVote() {
         return upVote;
@@ -158,5 +160,4 @@ public class Comment extends Feedable implements IModel {
         return comments;
 
     }
-
 }

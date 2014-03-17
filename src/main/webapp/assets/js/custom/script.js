@@ -23,6 +23,7 @@ $(function() {
     if (vHeight >= 3040) {
       return od.update(123456);
     }
+<<<<<<< HEAD
   });
   return $("section#signup form button[type='submit']").click(function(e) {
     var parentForm;
@@ -36,4 +37,49 @@ $(function() {
       return parentForm.submit();
     }), 2000);
   });
+=======
+  });
+  $("section#signup form button[type='submit']").click(function(e) {
+    var parentForm;
+    e.preventDefault();
+    $("h2#msg-hey").fadeOut();
+    $("h1#msg-jumpstart").fadeOut();
+    parentForm = $(this).parents("form");
+    parentForm.fadeOut();
+    $("h1#msg-jumpstart").html("Your career is in good hands").fadeIn();
+    return setTimeout((function() {
+      return parentForm.submit();
+    }), 2000);
+  });
+  $('.editor').ppedit({
+    onload: function() {
+      if ($('.editor').length) {
+        return $.ajax(window.location.href.split("#")[0].replace(/edit/, ""), {
+          accept: "application/json",
+          success: function(data) {
+            console.log(data);
+            return $('.editor').ppedit('load', {
+              hunks: data
+            });
+          }
+        });
+      }
+    }
+  });
+  return $('button#submit').click(function(event) {
+    var hunks, postUrl;
+    hunks = $('.editor').ppedit('save');
+    postUrl = window.location.href.split('#')[0].replace(/edit/, '');
+    return $.ajax({
+      type: "post",
+      url: postUrl,
+      data: JSON.stringify(hunks),
+      dataType: "json",
+      contentType: "application/json; charset=utf-8",
+      success: function(event) {
+        return console.log("Success saved to the remote database");
+      }
+    });
+  });
+>>>>>>> ppedit
 });
