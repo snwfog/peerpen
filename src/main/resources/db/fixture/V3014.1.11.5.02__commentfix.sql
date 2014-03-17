@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* clear all tables first */
 SET FOREIGN_KEY_CHECKS = 0; -- Disable foreign key checking.
 truncate avatars;
@@ -25,9 +24,6 @@ truncate tags;
 SET FOREIGN_KEY_CHECKS = 1; -- Enable foreign key checking.
 
 
-
-=======
->>>>>>> ppedit
 INSERT INTO `peers` (`id`, `first_name`, `last_name`, `email`, `user_name`, `password`, `point`, `personal_website`, `creation_date`, `last_modified_date`, `etag`, `semaphore`, `description`, `rank_id`, `date_of_birth`, `country`, `industry`, `experience`, `gender`, `avatar_id`, `session_id`)
   VALUES
   (2,'Ron','Hagen','hello@gmail.com','qwe','qwe',9000,'peerpen.com','2014-01-11 13:04:33','2014-02-08 20:30:52',NULL,0,'this is a description',NULL,'2014-01-11','Canada','SOEN',2,'M',NULL,NULL),
@@ -39,8 +35,6 @@ INSERT INTO `peers` (`id`, `first_name`, `last_name`, `email`, `user_name`, `pas
   (8,'Melissa','Margerat','mel@stdlife.ca','mel','mel',7,'google.com','2014-02-08 19:19:18','2014-02-08 20:28:14',NULL,0,'Hello, is it me youre looking for?',NULL,'2014-02-08','Australia','MECH',5,'F',NULL,NULL),
   (9,'Meg','Griffin','meg@facebook.com','meg','meg',6,'google.com','2014-02-08 19:20:09','2014-02-08 20:27:41',NULL,0,'Meg.',NULL,'2014-02-08','Germany','BIOL',2,'F',NULL,NULL),
   (10,'James','DeSanta','james.desenta@getalife.com','jam','jam',3,'google.com','2014-02-08 19:21:05','2014-02-08 20:27:17',NULL,0,'I am looking for a exciting positiong',NULL,'2014-02-08','France','BIOT',3,'M',NULL,NULL);
-
-<<<<<<< HEAD
 
 INSERT INTO `avatars` (`id`, `peer_id`, `filename`, `creation_date`, `last_modified_date`, `semaphore`, `etag`, `x1`, `y1`, `x2`, `y2`, `original_width`, `original_height`)
   VALUES
@@ -60,9 +54,6 @@ INSERT INTO `avatars` (`id`, `peer_id`, `filename`, `creation_date`, `last_modif
   (14,2,'default-avatar.jpg','2014-03-14 14:27:47','2014-03-14 14:27:47',0,'991dd12857cf90f58b60d5138c524bb6d7024d88f8000ca47dd824988871c934',0,0,256,256,NULL,NULL);
 
 
-
-=======
->>>>>>> ppedit
 INSERT INTO `documents` (`id`, `doc_name`, `thumbnail_path`, `peer_id`, `last_modified_date`, `creation_date`, `semaphore`, `etag`, `doc_type`)
   VALUES
   (1,'My First Resume','none',2,'2014-01-13 17:58:59','2014-01-13 17:58:59',0,NULL,NULL),
@@ -160,12 +151,6 @@ INSERT INTO `feedables` (`id`, `child_id`, `user_id`, `type`, `status`, `notify_
   (22,22,2,'Comment','new',NULL,'2014-03-14 13:43:59','2014-03-14 13:43:59',0,'d02839f85e5f08062c82f9a54b49fe7f9685760178d75061b8947609ecc766e8'),
   (23,23,2,'Comment','new',NULL,'2014-03-14 13:44:09','2014-03-14 13:44:09',0,'d1c00418939313726ff664f66b457a1f976678bd9bacfbc4c3104e4c6c23e1fd'),
   (24,24,2,'Comment','new',NULL,'2014-03-14 13:44:32','2014-03-14 13:44:32',0,'27d428a0b659be266f655ac0102535971bd126b002ba22b7abceb0d32b42e718');
-
-=======
-  (5,'2014-01-15 23:24:05','2014-01-15 23:24:05','Changed the format of Education\n',1,0),
-  (6,'2014-01-15 23:24:48','2014-01-15 23:24:48','Added Leasure section',2,0),
-  (7,'2014-01-15 23:25:24','2014-01-15 23:25:24','Remove High School in Education',3,0);
->>>>>>> ppedit
 
 INSERT INTO `groups` (`id`, `group_name`, `description`, `creation_date`, `last_modified_date`, `semaphore`, `etag`, `admin_id`)
   VALUES
