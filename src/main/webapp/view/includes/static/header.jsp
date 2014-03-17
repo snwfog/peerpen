@@ -37,9 +37,9 @@
     <link rel="stylesheet" href="/assets/css/lib/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/lib/odometer-theme-default.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/lib/jquery.Jcrop.min.css" type="text/css">
-    <link rel="stylesheet" href="/assets/css/lib/jquery.tagit.css" type="text/css">
-    <link rel="stylesheet" href="/assets/css/lib/jquery-ui-1.10.4-smoothness.css" type="text/css">
-    <link rel="stylesheet" href="/assets/css/lib/tagit.ui-zendesk.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/lib/jquery.tagit.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/lib/jquery-ui-1.10.4-smoothness.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/lib/tagit.ui-zendesk.min.css" type="text/css">
 
     <link rel="stylesheet" href="/assets/css/custom/style.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/custom/avatar.css" type="text/css">
