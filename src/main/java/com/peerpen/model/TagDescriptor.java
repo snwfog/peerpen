@@ -17,24 +17,25 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class TagDescriptor extends Base implements IModel {
+
     public static final String tableName = "tag_descriptors";
 
     @ActiveRecordField
     private String tagName;
 
-    public TagDescriptor(){
+    public TagDescriptor() {
         super();
     }
 
     public TagDescriptor( Map<String, Object> HM ) {
-        super(HM);
+        super( HM );
     }
 
-    public String getTagName(){
+    public String getTagName() {
         return tagName;
     }
 
-    public void setTagName(String tagName){
+    public void setTagName( String tagName ) {
         this.tagName = tagName;
     }
 
@@ -44,12 +45,12 @@ public class TagDescriptor extends Base implements IModel {
      * @param tagName
      * @return TagDescriptor
      */
-    public TagDescriptor getTagDescriptor(String tagName){
-        TagDescriptor td = new TagDescriptor(  ).getTagDescriptorIfExists( tagName );
-        if (td != null){
+    public TagDescriptor getTagDescriptor( String tagName ) {
+        TagDescriptor td = new TagDescriptor().getTagDescriptorIfExists( tagName );
+        if ( td != null ) {
             return td;
-        }else{
-            td = new TagDescriptor(  );
+        } else {
+            td = new TagDescriptor();
             td.setTagName( tagName );
             td.save();
             return td;
@@ -61,13 +62,13 @@ public class TagDescriptor extends Base implements IModel {
      * @param tagName
      * @return TagDescriptor or null
      */
-    public TagDescriptor getTagDescriptorIfExists (String tagName){
+    public TagDescriptor getTagDescriptorIfExists( String tagName ) {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("tagName", tagName);
-        TagDescriptor td = new TagDescriptor(  ).find( map );
-        if (td != null){ // tag exists
+        map.put( "tagName", tagName );
+        TagDescriptor td = new TagDescriptor().find( map );
+        if ( td != null ) { // tag exists
             return td;
-        } else{
+        } else {
             return null;
         }
     }
@@ -77,11 +78,11 @@ public class TagDescriptor extends Base implements IModel {
      * @param tagNames
      * @return
      */
-    public List<TagDescriptor> getTagDescriptors (List<String> tagNames){
-        List<TagDescriptor> tagDescriptors = new ArrayList<>(  );
-        for (String tagName: tagNames){
-            TagDescriptor td = new TagDescriptor(  ).getTagDescriptorIfExists( tagName );
-            if (td !=null){
+    public List<TagDescriptor> getTagDescriptors( List<String> tagNames ) {
+        List<TagDescriptor> tagDescriptors = new ArrayList<>();
+        for ( String tagName : tagNames ) {
+            TagDescriptor td = new TagDescriptor().getTagDescriptorIfExists( tagName );
+            if ( td != null ) {
                 tagDescriptors.add( td );
             }
         }
@@ -89,13 +90,23 @@ public class TagDescriptor extends Base implements IModel {
     }
 
     @Override
-    public boolean equals (Object other){
-        if (other == null) return false;
-        if (other == this) return true;
-        if (!(other instanceof TagDescriptor))return false;
+    public boolean equals( Object other ) {
+        if ( other == null ) {
+            return false;
+        }
+        if ( other == this ) {
+            return true;
+        }
+        if ( !(other instanceof TagDescriptor) ) {
+            return false;
+        }
         TagDescriptor myOther = (TagDescriptor) other;
-        if (this.getId() == myOther.getId()) return true;
-        if (this.getTagName().equals( myOther.getTagName() )) return true;
+        if ( this.getId() == myOther.getId() ) {
+            return true;
+        }
+        if ( this.getTagName().equals( myOther.getTagName() ) ) {
+            return true;
+        }
         return false;
     }
 
@@ -103,7 +114,7 @@ public class TagDescriptor extends Base implements IModel {
      * Get all tagDescriptors
      * @return
      */
-    public static List<TagDescriptor> getTagCloud(){
+    public static List<TagDescriptor> getTagCloud() {
         return new TagDescriptor().findAll( new HashMap<String, Object>() );
     }
 }

@@ -2,9 +2,8 @@ package com.peerpen.model;
 
 import com.sunnyd.Base;
 import com.sunnyd.IModel;
-import com.sunnyd.annotations.*;
+import com.sunnyd.annotations.ActiveRecordField;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class Rank extends Base implements IModel {
@@ -21,26 +20,26 @@ public class Rank extends Base implements IModel {
         super();
     }
 
-    public Rank(Map<String, Object> HM) {
-        super(HM);
+    public Rank( Map<String, Object> HM ) {
+        super( HM );
     }
 
     public String getRankName() {
         return rankName;
     }
 
-    public void setRankName(String rankName) {
+    public void setRankName( String rankName ) {
         this.rankName = rankName;
-        setUpdateFlag(true);
+        setUpdateFlag( true );
     }
 
     public Integer getMinPoint() {
         return minPoint;
     }
 
-    public void setMinPoint(Integer minPoint) {
+    public void setMinPoint( Integer minPoint ) {
         this.minPoint = minPoint;
-        setUpdateFlag(true);
+        setUpdateFlag( true );
     }
 
 }

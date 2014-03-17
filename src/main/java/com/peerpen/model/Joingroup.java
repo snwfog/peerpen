@@ -4,7 +4,6 @@ import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasOne;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,64 +26,60 @@ public class Joingroup extends Feedable implements IModel {
     @ActiveRelationHasOne
     private Group group;
 
-    public Joingroup()
-    {
+    public Joingroup() {
         super();
     }
 
-    public Joingroup(Map<String, Object> HM)
-    {
-        super(HM);
+    public Joingroup( Map<String, Object> HM ) {
+        super( HM );
     }
 
     public Integer getPeerId() {
         return peerId;
     }
 
-    public void setPeerId(Integer peerId) {
+    public void setPeerId( Integer peerId ) {
         this.peerId = peerId;
-        setUpdateFlag(true);
+        setUpdateFlag( true );
     }
 
     public Integer getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(Integer groupId) {
+    public void setGroupId( Integer groupId ) {
         this.groupId = groupId;
-        setUpdateFlag(true);
+        setUpdateFlag( true );
     }
-    public Peer getPeer()
-    {
-        initRelation("peer");
+
+    public Peer getPeer() {
+        initRelation( "peer" );
         return peer;
     }
 
-    public void setPeer(Peer p)
-    {
+    public void setPeer( Peer p ) {
         peerId = p.getId();
         peer = p;
     }
-    public Group getGroup()
-    {
-        initRelation("group");
+
+    public Group getGroup() {
+        initRelation( "group" );
         return group;
     }
 
 
-    public void setGroup(Group g)
-    {
-        this.setGroupId(g.getId());
+    public void setGroup( Group g ) {
+        this.setGroupId( g.getId() );
         this.group = g;
-        this.setUpdateFlag(true);
+        this.setUpdateFlag( true );
     }
 
 
-//    public List<Joingroup> getRequests()
-//    {
-//        List<Joingroup> joingroups = new Joingroup().queryAll("SELECT * FROM `joingroups` WHERE group_id= "+ this.getGroupId() +" ORDER BY last_modified_date DESC");
-//        return joingroups;
-//    }
+    //    public List<Joingroup> getRequests()
+    //    {
+    //        List<Joingroup> joingroups = new Joingroup().queryAll("SELECT * FROM `joingroups` WHERE group_id= "+ this.getGroupId() +" ORDER BY last_modified_date DESC");
+    //        return joingroups;
+    //    }
 
 }
 

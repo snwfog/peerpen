@@ -1,10 +1,8 @@
 package com.peerpen.model;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.sunnyd.annotations.ActiveRecordInheritFrom;
-import com.sunnyd.annotations.ActiveRecordField;
+
+import java.util.Map;
 
 @ActiveRecordInheritFrom(childClassof = "Document")
 public class CoverLetter extends Document {
@@ -15,8 +13,8 @@ public class CoverLetter extends Document {
         super();
     }
 
-    public CoverLetter(Map<String, Object> HM) {
-        super(HM);
+    public CoverLetter( Map<String, Object> HM ) {
+        super( HM );
     }
 
 }

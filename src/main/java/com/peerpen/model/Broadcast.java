@@ -4,10 +4,6 @@ import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasOne;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,23 +28,21 @@ public class Broadcast extends Feedable implements IModel {
     @ActiveRelationHasOne
     private Group group;
 
-    public Broadcast()
-    {
+    public Broadcast() {
         super();
     }
 
-    public Broadcast(Map<String, Object> HM)
-    {
-        super(HM);
+    public Broadcast( Map<String, Object> HM ) {
+        super( HM );
     }
 
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage( String message ) {
         this.message = message;
-        setUpdateFlag(true);
+        setUpdateFlag( true );
 
     }
 
@@ -56,27 +50,27 @@ public class Broadcast extends Feedable implements IModel {
         return peerId;
     }
 
-    public void setPeerId(Integer peerId) {
+    public void setPeerId( Integer peerId ) {
         this.peerId = peerId;
-        setUpdateFlag(true);
+        setUpdateFlag( true );
     }
 
     public Integer getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(Integer groupId) {
+    public void setGroupId( Integer groupId ) {
         this.groupId = groupId;
-        setUpdateFlag(true);
+        setUpdateFlag( true );
     }
-    public Peer getPeer()
-    {
-        initRelation("peer");
+
+    public Peer getPeer() {
+        initRelation( "peer" );
         return peer;
     }
-    public Group getGroup()
-    {
-        initRelation("group");
+
+    public Group getGroup() {
+        initRelation( "group" );
         return group;
     }
 

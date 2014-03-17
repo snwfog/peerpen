@@ -2,10 +2,6 @@ package com.peerpen.model;
 
 import com.sunnyd.Base;
 import com.sunnyd.annotations.ActiveRecordField;
-import org.jooq.DSLContext;
-import org.jooq.Field;
-import org.jooq.impl.DSL;
-import org.ocpsoft.prettytime.PrettyTime;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -13,7 +9,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jooq.DSLContext;
+import org.jooq.Field;
+import org.jooq.impl.DSL;
+import org.ocpsoft.prettytime.PrettyTime;
+
 public class Feedable extends Base {
+
     @ActiveRecordField
     private String type;
 
@@ -38,68 +40,67 @@ public class Feedable extends Base {
         super();
     }
 
-    public Feedable(Map<String, Object> HM) {
-        super(HM);
+    public Feedable( Map<String, Object> HM ) {
+        super( HM );
     }
 
     @Override
-    public boolean save(){
+    public boolean save() {
         Feedable a = new Feedable();
         super.save();
-        System.out.println(this.getId());
-        if(this.getId() != null){
-           a.setType(this.getClass().getSimpleName());
-           a.setChildId(this.getId());
-           a.setStatus("new");
-           a.setNotifyStatus("UNSEND");
+        System.out.println( this.getId() );
+        if ( this.getId() != null ) {
+            a.setType( this.getClass().getSimpleName() );
+            a.setChildId( this.getId() );
+            a.setStatus( "new" );
+            a.setNotifyStatus( "UNSEND" );
 
-           if(this instanceof Changeset){
-               Changeset ch = (Changeset) this;
-               if(ch.getHunk() != null){
-                   a.setUserId(ch.getPeerId());
-                   return a.saveFeedable();
-               }
+            if ( this instanceof Changeset ) {
+                Changeset ch = (Changeset) this;
+                if ( ch.getHunk() != null ) {
+                    a.setUserId( ch.getPeerId() );
+                    return a.saveFeedable();
+                }
 
-           }
+            }
 
-            if(this instanceof Comment){
+            if ( this instanceof Comment ) {
                 Comment com = (Comment) this;
-                if(com.getType().contentEquals("Document")){
-                    Document doc = new Document().find(com.getObjectId());
-                    if(doc != null){
-                        a.setUserId(doc.getPeerId());
+                if ( com.getType().contentEquals( "Document" ) ) {
+                    Document doc = new Document().find( com.getObjectId() );
+                    if ( doc != null ) {
+                        a.setUserId( doc.getPeerId() );
                         return a.saveFeedable();
                     }
-                }else if(com.getType().contentEquals("Changeset")){
-                    Changeset cs = new Changeset().find(com.getObjectId());
-                    if(cs != null){
-                        a.setUserId(cs.getPeerId());
+                } else if ( com.getType().contentEquals( "Changeset" ) ) {
+                    Changeset cs = new Changeset().find( com.getObjectId() );
+                    if ( cs != null ) {
+                        a.setUserId( cs.getPeerId() );
                         return a.saveFeedable();
                     }
                 }
 
             }
 
-            if(this instanceof Broadcast){
+            if ( this instanceof Broadcast ) {
                 Broadcast bc = (Broadcast) this;
-                if(bc.getGroup() != null){
-                    for(Peer p: bc.getGroup().getPeers())
-                    {
+                if ( bc.getGroup() != null ) {
+                    for ( Peer p : bc.getGroup().getPeers() ) {
                         Feedable feedable = new Feedable();
-                        feedable.setType(this.getClass().getSimpleName());
-                        feedable.setChildId(this.getId());
-                        feedable.setStatus("new");
-                        feedable.setUserId(p.getId());
+                        feedable.setType( this.getClass().getSimpleName() );
+                        feedable.setChildId( this.getId() );
+                        feedable.setStatus( "new" );
+                        feedable.setUserId( p.getId() );
                         feedable.saveFeedable();
                     }
                 }
                 return true;
             }
 
-            if(this instanceof Joingroup){
+            if ( this instanceof Joingroup ) {
                 Joingroup jg = (Joingroup) this;
-                if(jg.getGroup() != null){
-                    a.setUserId(jg.getGroup().getAdminId());
+                if ( jg.getGroup() != null ) {
+                    a.setUserId( jg.getGroup().getAdminId() );
                 }
                 return a.saveFeedable();
             }
@@ -109,60 +110,60 @@ public class Feedable extends Base {
 
     }
 
-    private boolean saveFeedable(){
+    private boolean saveFeedable() {
         return super.save();
     }
 
     @Override
-    public boolean update(){
+    public boolean update() {
         Map<String, Object> m = new HashMap<String, Object>();
-        m.put("childId", this.getId());
-        Feedable a = new Feedable().find(m);
+        m.put( "childId", this.getId() );
+        Feedable a = new Feedable().find( m );
         super.update();
-        if(a == null){
-            System.out.println("NO FEEDABLE FOR OBJECT!!!!");
+        if ( a == null ) {
+            System.out.println( "NO FEEDABLE FOR OBJECT!!!!" );
             return false;
-        }else{
-           a.setStatus("update");
-           a.setNotifyStatus("UNSEND");
-           if(this instanceof Changeset){
-               a.updateFeedable();
-           }
-            if(this instanceof Comment){
-                    a.updateFeedable();
+        } else {
+            a.setStatus( "update" );
+            a.setNotifyStatus( "UNSEND" );
+            if ( this instanceof Changeset ) {
+                a.updateFeedable();
             }
-            if(this instanceof Broadcast){
+            if ( this instanceof Comment ) {
+                a.updateFeedable();
+            }
+            if ( this instanceof Broadcast ) {
                 //TODO: if user update his broadcast then you need to set all feedable to update status
-                return  a.updateFeedable();
-            }
-
-            if(this instanceof Joingroup){
                 return a.updateFeedable();
             }
-           return true;
+
+            if ( this instanceof Joingroup ) {
+                return a.updateFeedable();
+            }
+            return true;
         }
     }
 
 
-    public boolean updateFeedable(){
-        System.out.println(this.getStatus());
-        System.out.println("updating feedable");
+    public boolean updateFeedable() {
+        System.out.println( this.getStatus() );
+        System.out.println( "updating feedable" );
         return super.update();
     }
 
     @Override
-    public boolean destroy(){
+    public boolean destroy() {
         Map<String, Object> map = new HashMap<>();
-        map.put("childId", this.getId());
-        map.put("type",this.getClass().getSimpleName());
+        map.put( "childId", this.getId() );
+        map.put( "type", this.getClass().getSimpleName() );
 
-        if(this instanceof Broadcast){
-            List<Feedable> feeds = new Feedable().findAll(map);
+        if ( this instanceof Broadcast ) {
+            List<Feedable> feeds = new Feedable().findAll( map );
             boolean deletedAllFeedable = false;
-            for(Feedable a : feeds){
+            for ( Feedable a : feeds ) {
                 deletedAllFeedable = a.baseDestroy();
-                if(!deletedAllFeedable){
-                    System.out.println("CANNOT DELETE FEEDABLE");
+                if ( !deletedAllFeedable ) {
+                    System.out.println( "CANNOT DELETE FEEDABLE" );
                     break;
 
                 }
@@ -171,15 +172,14 @@ public class Feedable extends Base {
 
             return this.baseDestroy() && deletedAllFeedable;
 
-        }
-        else{
-            Feedable a = new Feedable().find(map);
+        } else {
+            Feedable a = new Feedable().find( map );
             super.destroy();
-            if(this.getId() == null){
-                if(a != null){
+            if ( this.getId() == null ) {
+                if ( a != null ) {
                     return a.baseDestroy();
-                }else{
-                    System.out.println("NO FEEDABLE FOR OBJECT!!!!");
+                } else {
+                    System.out.println( "NO FEEDABLE FOR OBJECT!!!!" );
                     return false;
                 }
             }
@@ -187,26 +187,28 @@ public class Feedable extends Base {
         return false;
     }
 
-    public boolean baseDestroy(){
+    public boolean baseDestroy() {
         return super.destroy();
     }
 
 
 
-    private Feedable reveal(){
-        if(trueSelf == null){
+    private Feedable reveal() {
+        if ( trueSelf == null ) {
             try {
-                Constructor cons = Class.forName(modelPath+this.getType()).getConstructor();
-                trueSelf = (Feedable) Class.forName(modelPath+this.getType()).getMethod("find", int.class).invoke(cons.newInstance(),this.getChildId());
-            } catch (NoSuchMethodException e) {
+                Constructor cons = Class.forName( modelPath + this.getType() ).getConstructor();
+                trueSelf = (Feedable) Class.forName( modelPath + this.getType() )
+                        .getMethod( "find", int.class )
+                        .invoke( cons.newInstance(), this.getChildId() );
+            } catch ( NoSuchMethodException e ) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            } catch (ClassNotFoundException e) {
+            } catch ( ClassNotFoundException e ) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            } catch (InvocationTargetException e) {
+            } catch ( InvocationTargetException e ) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            } catch (IllegalAccessException e) {
+            } catch ( IllegalAccessException e ) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            } catch (InstantiationException e) {
+            } catch ( InstantiationException e ) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
         }
@@ -214,61 +216,65 @@ public class Feedable extends Base {
     }
 
 
-    public static void revealList(List<Feedable> feedables){
-        for( Feedable f : feedables){
-             Integer index = feedables.indexOf(f);
-             feedables.add(index, f.reveal());
+    public static void revealList( List<Feedable> feedables ) {
+        for ( Feedable f : feedables ) {
+            Integer index = feedables.indexOf( f );
+            feedables.add( index, f.reveal() );
         }
     }
 
-    public static List<Feedable> getFeed(Peer p){
-      return getFeed(p.getId());
+    public static List<Feedable> getFeed( Peer p ) {
+        return getFeed( p.getId() );
     }
 
-    public static List<Feedable> getFeed(int id){
+    public static List<Feedable> getFeed( int id ) {
         DSLContext jooq = startQuery();
 
-        Field<?> allField    = DSL.field("a.*");
-        Field<?> lastModifiedDate    = DSL.field("a.last_modified_date");
+        Field<?> allField = DSL.field( "a.*" );
+        Field<?> lastModifiedDate = DSL.field( "a.last_modified_date" );
 
-        String query = jooq.select(allField).from("feedables a").where("a.user_id = "+id).orderBy(lastModifiedDate.desc()).toString();
-        return new Feedable().queryAll(query);
+        String query = jooq.select( allField )
+                .from( "feedables a" )
+                .where( "a.user_id = " + id )
+                .orderBy( lastModifiedDate.desc() )
+                .toString();
+        return new Feedable().queryAll( query );
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType( String type ) {
         this.type = type;
-        setUpdateFlag(true);
+        setUpdateFlag( true );
     }
 
     public Integer getChildId() {
         return childId;
     }
 
-    public void setChildId(Integer childId) {
+    public void setChildId( Integer childId ) {
         this.childId = childId;
-        setUpdateFlag(true);
+        setUpdateFlag( true );
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus( String status ) {
         this.status = status;
-        setUpdateFlag(true);
+        setUpdateFlag( true );
     }
 
     public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId( Integer userId ) {
         this.userId = userId;
-        setUpdateFlag(true);
+        setUpdateFlag( true );
     }
 
     public Feedable getTrueSelf() {
@@ -276,17 +282,17 @@ public class Feedable extends Base {
         return trueSelf;
     }
 
-  public String getTimesAgo()
-  {
-    return new PrettyTime().format(getCreationDate());
-  }
+    public String getTimesAgo() {
+        return new PrettyTime().format( getCreationDate() );
+    }
 
-    public String getNotifyStatus(){
+    public String getNotifyStatus() {
         return notifyStatus;
     }
-    public void setNotifyStatus(String notifyStatus){
+
+    public void setNotifyStatus( String notifyStatus ) {
 
         this.notifyStatus = notifyStatus;
-        setUpdateFlag(true);
+        setUpdateFlag( true );
     }
 }

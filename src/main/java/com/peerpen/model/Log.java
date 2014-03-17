@@ -18,22 +18,20 @@ public class Log extends Base {
     @ActiveRecordField
     private String etag;
 
-    public Log()
-    {
+    public Log() {
         super();
     }
 
     // TODO: We need to add a parameterized constructor here
-    public Log(Map<String, Object> HM)
-    {
-        super(HM);
+    public Log( Map<String, Object> HM ) {
+        super( HM );
     }
 
     public String getEtag() {
         return etag;
     }
 
-    public void setEtag(String etag) {
+    public void setEtag( String etag ) {
         this.etag = etag;
     }
 }

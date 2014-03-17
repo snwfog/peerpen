@@ -8,98 +8,87 @@ import java.util.List;
 import java.util.Map;
 
 //Feedable model will not avoided by base and any parent of Feedable
-public class Changeset extends Feedable implements IModel, Commentable
-{
-  public static final String tableName = "changesets";
+public class Changeset extends Feedable implements IModel, Commentable {
 
-  @ActiveRecordField
-  private String content;
-  @ActiveRelationHasOne
-  private Peer peer;
-  @ActiveRecordField
-  private Integer peerId;
-  @ActiveRelationHasOne
-  private Hunk hunk;
-  @ActiveRecordField
-  private Integer hunkId;
+    public static final String tableName = "changesets";
 
-  public Changeset()
-  {
-    super();
-  }
+    @ActiveRecordField
+    private String content;
+    @ActiveRelationHasOne
+    private Peer peer;
+    @ActiveRecordField
+    private Integer peerId;
+    @ActiveRelationHasOne
+    private Hunk hunk;
+    @ActiveRecordField
+    private Integer hunkId;
 
-  public Changeset(Map<String, Object> HM)
-  {
-    super(HM);
-  }
+    public Changeset() {
+        super();
+    }
+   
 
-  public String getContent()
-  {
-    return content;
-  }
+    public Changeset( Map<String, Object> HM ) {
+        super( HM );
+    }
 
-  public void setContent(String content)
-  {
-    this.content = content;
-    setUpdateFlag(true);
-  }
+    public String getContent() {
+        return content;
+    }
 
-  public void setPeerId(Integer peerId)
-  {
-    this.peerId = peerId;
-  }
+    public void setContent( String content ) {
+        this.content = content;
+        setUpdateFlag( true );
+    }
 
-  public Integer getPeerId()
-  {
-    return this.peerId;
-  }
+    public void setPeerId( Integer peerId ) {
+        this.peerId = peerId;
+    }
 
-  public Peer getPeer()
-  {
-    initRelation("peer");
-    return peer;
-  }
+    public Integer getPeerId() {
+        return this.peerId;
+    }
 
-  public void setHunkId(Integer hunkId)
-  {
-    this.hunkId = hunkId;
-    setUpdateFlag(true);
-  }
+    public Peer getPeer() {
+        initRelation( "peer" );
+        return peer;
+    }
 
-  public int getHunkId()
-  {
-    return this.hunkId;
-  }
+    public void setHunkId( Integer hunkId ) {
+        this.hunkId = hunkId;
+        setUpdateFlag( true );
+    }
 
-  public void setHunk(Hunk hunk)
-  {
-    this.hunk = hunk;
-  }
+    public int getHunkId() {
+        return this.hunkId;
+    }
 
-  public Hunk getHunk()
-  {
-    initRelation("hunk");
-    return hunk;
-  }
+    public void setHunk( Hunk hunk ) {
+        this.hunk = hunk;
+    }
 
-  public List<Comment> getOrderedComments()
-  {
-    Integer changesetId = this.getId();
-    List<Comment> comments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE type='Changeset' AND object_id= " + changesetId + " ORDER BY total_vote DESC, last_modified_date DESC");
+    public Hunk getHunk() {
+        initRelation( "hunk" );
+        return hunk;
+    }
 
-    return comments;
-  }
+    public List<Comment> getOrderedComments() {
+        Integer changesetId = this.getId();
+        List<Comment> comments = new Comment().queryAll(
+                "SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE type='Changeset' AND object_id= " +
+                        changesetId + " ORDER BY total_vote DESC, last_modified_date DESC" );
 
-  @Override
-  public void createComment(String message, Peer peer)
-  {
-    Comment.createComment(this, message, peer);
-  }
+        return comments;
+    }
 
-  @Override
-  public List<Comment> findComments()
-  {
-    return Comment.findComments(this, this.getId());
+    @Override
+    public void createComment( String message, Peer peer ) {
+        Comment.createComment( this, message, peer );
+    }
 
-  }
+    @Override
+    public List<Comment> findComments() {
+        return Comment.findComments( this, this.getId() );
+
+    }
 }

@@ -16,6 +16,7 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class Tag extends Base implements IModel {
+
     public static final String tableName = "tags";
 
     @ActiveRelationHasMany
@@ -39,23 +40,23 @@ public class Tag extends Base implements IModel {
         super();
     }
 
-    public Tag(Map<String, Object> HM) {
-        super(HM);
+    public Tag( Map<String, Object> HM ) {
+        super( HM );
     }
 
-    public Integer getTagDescriptorId (){
+    public Integer getTagDescriptorId() {
         return this.tagDescriptorId;
     }
 
-    public void setTagDescriptorId(Integer id){
+    public void setTagDescriptorId( Integer id ) {
         this.tagDescriptorId = id;
     }
 
-    public Integer getTaggableId(){
+    public Integer getTaggableId() {
         return this.taggableId;
     }
 
-    public void setTaggableId(Integer id){
+    public void setTaggableId( Integer id ) {
         this.taggableId = id;
     }
 
@@ -68,7 +69,7 @@ public class Tag extends Base implements IModel {
         this.tagDescriptor = tagDescriptor;
     }
 
-    public void setTaggable (Taggable taggable){
+    public void setTaggable( Taggable taggable ) {
         this.taggableId = taggable.getTaggableId();
         this.taggable = taggable;
     }

@@ -9,176 +9,154 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Comment extends Feedable implements IModel
-{
-  public static final String tableName = "comments";
+public class Comment extends Feedable implements IModel {
 
-  @ActiveRecordField
-  private String message;
-  @ActiveRecordField
-  private Integer objectId;
-  @ActiveRecordField
-  private String type;
-  @ActiveRecordField
-  private Integer upVote;
-  @ActiveRecordField
-  private Integer downVote;
-  @ActiveRecordField
-  private Integer posterPeerId;
-  @ActiveRelationHasOne(idFieldName = "posterPeerId")
-  private Peer posterPeer;
+    public static final String tableName = "comments";
 
-  private Integer totalVote;
+    @ActiveRecordField
+    private String message;
+    @ActiveRecordField
+    private Integer objectId;
+    @ActiveRecordField
+    private String type;
+    @ActiveRecordField
+    private Integer upVote;
+    @ActiveRecordField
+    private Integer downVote;
+    @ActiveRecordField
+    private Integer posterPeerId;
+    @ActiveRelationHasOne(idFieldName = "posterPeerId")
+    private Peer posterPeer;
 
-  public Integer getPosterPeerId()
-  {
-    return posterPeerId;
-  }
+    private Integer totalVote;
 
-  public void setPosterPeerId(Integer posterPeerId)
-  {
-    this.posterPeerId = posterPeerId;
-    setUpdateFlag(true);
-  }
+    public Integer getPosterPeerId() {
+        return posterPeerId;
+    }
 
-  public Peer getPosterPeer()
-  {
-    initRelation("posterPeer");
-    return posterPeer;
-  }
+    public void setPosterPeerId( Integer posterPeerId ) {
+        this.posterPeerId = posterPeerId;
+        setUpdateFlag( true );
+    }
 
-  public Peer setPosterPeer(Peer peer)
-  {
-    posterPeer = peer;
-    this.setUpdateFlag(true);
-    return posterPeer;
-  }
+    public Peer getPosterPeer() {
+        initRelation( "posterPeer" );
+        return posterPeer;
+    }
 
-  public Comment()
-  {
-    super();
-    this.upVote = 0;
-    this.downVote = 0;
-  }
+    public Peer setPosterPeer( Peer peer ) {
+        posterPeer = peer;
+        this.setUpdateFlag( true );
+        return posterPeer;
+    }
 
-  public Comment(Map<String, Object> HM)
-  {
-    super(HM);
-  }
+    public Comment() {
+        super();
+        this.upVote = 0;
+        this.downVote = 0;
+    }
 
-  public String getMessage()
-  {
-    return message;
-  }
+    public Comment( Map<String, Object> HM ) {
+        super( HM );
+    }
 
-  public void setMessage(String message)
-  {
-    this.message = message;
-    setUpdateFlag(true);
-  }
+    public String getMessage() {
+        return message;
+    }
 
-//  //testing purposes only
-//  private String name;
-//
-//  public void setName(String name)
-//  {
-//    this.name = name;
-//  }
-//
-//  public String getName()
-//  {
-//    return name;
-//  }
+    public void setMessage( String message ) {
+        this.message = message;
+        setUpdateFlag( true );
+    }
 
-  public Integer getUpVote()
-  {
-    return upVote;
-  }
+    //  //testing purposes only
+    //  private String name;
+    //
+    //  public void setName(String name)
+    //  {
+    //    this.name = name;
+    //  }
+    //
+    //  public String getName()
+    //  {
+    //    return name;
+    //  }
 
-  public void setUpVote(Integer upVote)
-  {
-    this.upVote = upVote;
-    setUpdateFlag(true);
-  }
+    public Integer getUpVote() {
+        return upVote;
+    }
 
-  public void upVote()
-  {
-    this.upVote++;
-    setUpdateFlag(true);
-  }
+    public void setUpVote( Integer upVote ) {
+        this.upVote = upVote;
+        setUpdateFlag( true );
+    }
 
-  public Integer getDownVote()
-  {
-    return downVote;
-  }
+    public void upVote() {
+        this.upVote++;
+        setUpdateFlag( true );
+    }
 
-  public void setDownVote(Integer downVote)
-  {
-    this.downVote = downVote;
-    setUpdateFlag(true);
-  }
+    public Integer getDownVote() {
+        return downVote;
+    }
 
-  public void downVote()
-  {
-    this.downVote++;
-    setUpdateFlag(true);
-  }
+    public void setDownVote( Integer downVote ) {
+        this.downVote = downVote;
+        setUpdateFlag( true );
+    }
 
-  @Override
-  public boolean save()
-  { //use this method for now, until Mike change it in the BASE
-    return super.save();
-  }
+    public void downVote() {
+        this.downVote++;
+        setUpdateFlag( true );
+    }
 
-  public String getType()
-  {
-    return type;
-  }
+    @Override
+    public boolean save() { //use this method for now, until Mike change it in the BASE
+        return super.save();
+    }
 
-  public void setType(String type)
-  {
-    this.type = type;
-    setUpdateFlag(true);
-  }
+    public String getType() {
+        return type;
+    }
 
-  public Integer getObjectId()
-  {
-    return objectId;
-  }
+    public void setType( String type ) {
+        this.type = type;
+        setUpdateFlag( true );
+    }
 
-  public void setObjectId(Integer objectId)
-  {
-    this.objectId = objectId;
-    setUpdateFlag(true);
-  }
+    public Integer getObjectId() {
+        return objectId;
+    }
 
-  public static void createComment(Commentable commentable, String message, Peer posterPeer)
-  {
-    Comment comment = new Comment();
+    public void setObjectId( Integer objectId ) {
+        this.objectId = objectId;
+        setUpdateFlag( true );
+    }
 
-    comment.setType(commentable.getClass().getSimpleName());
-    comment.setObjectId(((Base) commentable).getId());
-    comment.setMessage(message);
-    comment.setPosterPeerId(posterPeer.getId());
-    comment.save();
-  }
+    public static void createComment( Commentable commentable, String message, Peer posterPeer ) {
+        Comment comment = new Comment();
+
+        comment.setType( commentable.getClass().getSimpleName() );
+        comment.setObjectId( ((Base) commentable).getId() );
+        comment.setMessage( message );
+        comment.setPosterPeerId( posterPeer.getId() );
+        comment.save();
+    }
 
 
-  public static void deleteComment(Integer commentId)
-  {
-    Comment comment = new Comment().find(commentId);
-    comment.destroy();
-  }
+    public static void deleteComment( Integer commentId ) {
+        Comment comment = new Comment().find( commentId );
+        comment.destroy();
+    }
 
-  public static List<Comment> findComments(Object object, Integer objectId)
-  {
+    public static List<Comment> findComments( Object object, Integer objectId ) {
 
-    HashMap<String, Object> map = new HashMap<String, Object>();
-    map.put("type", object.getClass().getSimpleName());
-    map.put("object_id", objectId);
-    List<Comment> comments = new Comment().findAll(map);
-    return comments;
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put( "type", object.getClass().getSimpleName() );
+        map.put( "object_id", objectId );
+        List<Comment> comments = new Comment().findAll( map );
+        return comments;
 
-  }
+    }
 
 }

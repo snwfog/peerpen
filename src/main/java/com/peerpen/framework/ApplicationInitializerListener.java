@@ -49,7 +49,7 @@ public class ApplicationInitializerListener implements ServletContextListener {
         String appSecret = event.getServletContext().getInitParameter( "app-secret" );
         event.getServletContext().setAttribute( "appSecret", appSecret );
     }
-   
+
     /**
      * Will set into servlet context all possible routes
      * @param event

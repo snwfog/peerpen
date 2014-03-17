@@ -297,19 +297,19 @@ public class Avatar extends Base implements IModel {
         Map<String, Object> parameters = ((InternalHttpServletRequest) request).getParametersMap();
         if ( parameters.containsKey( "x1" ) ) {
             this.setX1( Double.parseDouble( (String) parameters.get( "x1" ) ) );
-            System.out.println(this.getX1());
+            System.out.println( this.getX1() );
         }
         if ( parameters.containsKey( "y1" ) ) {
             this.setY1( Double.parseDouble( (String) parameters.get( "y1" ) ) );
-            System.out.println(this.getY1());
+            System.out.println( this.getY1() );
         }
         if ( parameters.containsKey( "x2" ) ) {
             this.setX2( Double.parseDouble( (String) parameters.get( "x2" ) ) );
-            System.out.println(this.getX2());
+            System.out.println( this.getX2() );
         }
         if ( parameters.containsKey( "y2" ) ) {
             this.setY2( Double.parseDouble( (String) parameters.get( "y2" ) ) );
-            System.out.println(this.getY2());
+            System.out.println( this.getY2() );
         }
     }
 }

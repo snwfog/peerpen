@@ -11,7 +11,6 @@ import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.annotations.ActiveRelationHasOne;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -91,7 +90,7 @@ public class Hunk extends Base implements IModel {
         return this.changesets;
     }
 
-    public List<Hunk> getHunksFromIdView(Integer idView){
+    public List<Hunk> getHunksFromIdView( Integer idView ) {
         String sql = "SELECT * FROM `hunks` WHERE `id_view` = " + idView;
         return new Hunk().queryAll( sql );
     }
@@ -100,18 +99,14 @@ public class Hunk extends Base implements IModel {
         return hunkName;
     }
 
-    public void setHunkName(String hunkName) {
+    public void setHunkName( String hunkName ) {
         this.hunkName = hunkName;
-        setUpdateFlag(true);
+        setUpdateFlag( true );
     }
 
 
 
-
-
-
-
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         String input = "{\n" +
                 "    \"modified\": [],\n" +
                 "    \"removed\": [],\n" +
@@ -130,7 +125,7 @@ public class Hunk extends Base implements IModel {
                 "    ],\n" +
                 "    \"etag\": \"429a8768235e551541c2538787d4f065c350fdb1c57e0235e45572828cbbe32c\"\n" +
                 "}";
-        System.out.println(input);
+        System.out.println( input );
 
 
         JsonObject rootObj = new JsonParser().parse( input ).getAsJsonObject();
@@ -138,26 +133,25 @@ public class Hunk extends Base implements IModel {
         JsonArray createdList = rootObj.getAsJsonArray( "created" );
         JsonArray modifiedList = rootObj.getAsJsonArray( "modified" );
         JsonArray deletedList = rootObj.getAsJsonArray( "removed" );
-        String etagObj = rootObj.get("etag").getAsString();
+        String etagObj = rootObj.get( "etag" ).getAsString();
 
         // creation list
-        for (JsonElement j: createdList){
-            for (JsonElement e: j.getAsJsonArray()){
-                String id = e.getAsJsonObject().get("id").getAsString();
-                String html = e.getAsJsonObject().get("html").getAsString();
-                System.out.println(id + "->" + html);
+        for ( JsonElement j : createdList ) {
+            for ( JsonElement e : j.getAsJsonArray() ) {
+                String id = e.getAsJsonObject().get( "id" ).getAsString();
+                String html = e.getAsJsonObject().get( "html" ).getAsString();
+                System.out.println( id + "->" + html );
             }
         }
 
     }
 
     @Override
-    public String toString()
-    {
-        StringBuilder sb = new StringBuilder( getContent());
-        sb.replace(0, 1, "");
-        sb.replace( sb.length() - 1, sb.length(), "");
-        String obj = getIdView() + ":\"" + StringEscapeUtils.escapeJava(sb.toString()) + "\"";
+    public String toString() {
+        StringBuilder sb = new StringBuilder( getContent() );
+        sb.replace( 0, 1, "" );
+        sb.replace( sb.length() - 1, sb.length(), "" );
+        String obj = getIdView() + ":\"" + StringEscapeUtils.escapeJava( sb.toString() ) + "\"";
         return obj;
     }
 }
