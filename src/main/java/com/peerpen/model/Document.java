@@ -322,19 +322,22 @@ public class Document extends Taggable implements IModel, Commentable {
         public JsonElement serialize( Document src, Type typeOfSrc, JsonSerializationContext context ) {
             List<Page> documentPages = new ArrayList<>();
             for ( Hunk h : src.getHunks() ) {
-                Page p = documentPages.get( h.getPageNumber() );
-                if ( p == null ) {
+                Page p = null;
+                try {
+                    p = documentPages.get( h.getPageNumber() );
+                } catch ( IndexOutOfBoundsException e ) {
                     p = new Page();
                     documentPages.add( h.getPageNumber(), p );
+                } finally {
+                    p.getHunks().put( Long.valueOf( h.getIdView() ), h );
                 }
-
-                p.getHunks().put( Long.valueOf( h.getIdView() ), h );
             }
 
             Gson gson = (new GsonBuilder()).registerTypeAdapter( Page.class, new Page.PageSerializer() ).create();
             JsonArray documentHunks = new JsonArray();
-            for (Page p : documentPages)
-                documentHunks.add(gson.toJsonTree( p ));
+            for ( Page p : documentPages ) {
+                documentHunks.add( gson.toJsonTree( p ) );
+            }
 
             return documentHunks;
         }

@@ -44,9 +44,13 @@ $ ->
     $("h1#msg-jumpstart").html("Your career is in good hands").fadeIn()
     setTimeout ( -> parentForm.submit() ), 2000
 
-  $('.editor').ppedit(
-    onload: -> console.log "Loaded"
-  )
+  $('.editor').ppedit
+    onload: ->
+      $.ajax window.location.href.split("#")[0].replace(/edit/, ""),
+        accept: "application/json"
+        success: (data) ->
+          console.log(data)
+          $('.editor').ppedit('load', {hunks: data})
 
   $('button#submit').click (event) ->
     hunks = $('.editor').ppedit('save')
@@ -54,7 +58,7 @@ $ ->
     $.ajax
       type: "post"
       url: postUrl
-      data: { "data": hunks }
+      data: JSON.stringify(hunks)
       dataType: "json"
       contentType: "application/json; charset=utf-8"
       success: (event) ->

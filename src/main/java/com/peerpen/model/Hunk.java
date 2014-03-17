@@ -136,7 +136,7 @@ public class Hunk extends Base implements IModel {
         @Override
         public JsonElement serialize( Hunk src, Type typeOfSrc, JsonSerializationContext context ) {
             JsonObject hunkJson = new JsonObject();
-            hunkJson.addProperty( "html", src.getIdView() );
+            hunkJson.addProperty( "html", src.getContent() );
             hunkJson.addProperty( "name", src.getHunkName() );
 
             return hunkJson;

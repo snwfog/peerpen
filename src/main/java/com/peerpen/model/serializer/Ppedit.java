@@ -54,16 +54,37 @@ public class Ppedit {
         return pageNumber;
     }
 
+    public void setPageNumber() {
+        for ( int i = 0; i < modified.size(); i++ ) {
+            modified.get( i ).setPageNumber( i );
+        }
+        for ( int i = 0; i < removed.size(); i++ ) {
+            removed.get( i ).setPageNumber( i );
+        }
+        for ( int i = 0; i < created.size(); i++ ) {
+            created.get( i ).setPageNumber( i );
+        }
+    }
+
+
     public static Ppedit serializeFromJsonString( String jsonString ) {
-        Gson gson = (new GsonBuilder()).registerTypeAdapter( Ppedit.class
-                , new PpeditDeserializer() ).create();
-        return gson.fromJson( jsonString, Ppedit.class );
+        Gson gson = (new GsonBuilder()).registerTypeAdapter( Ppedit.class, new PpeditDeserializer() ).create();
+        StringBuffer sb = new StringBuffer();
+        for ( int i = 1; i < jsonString.length() - 1; i++ ) {
+            if ( jsonString.charAt( i ) == 92 && jsonString.charAt( i + 1 ) == 92 ) {
+                sb.append( jsonString.charAt( i++ ) );
+            } else if ( !(jsonString.charAt( i ) == 92 && jsonString.charAt( i + 1 ) == 34) ) {
+                sb.append( jsonString.charAt( i ) );
+            }
+        }
+        return gson.fromJson( sb.toString(), Ppedit.class );
+        //return gson.fromJson( jsonString, Ppedit.class );
     }
 
     public static void main( String[] args ) {
         // FIXME: Write a proper test for this
         String testString =
-                "{\"modified\":[],\"removed\":[],\"created\":[[{\"id\":\"1392410782094\",\"html\":\"<div class=\\\"ppedit-box\\\" contenteditable=\\\"true\\\" id=\\\"1392410782094\\\" style=\\\"left: 15px; top: 13px; width: 174px; height: 50px; color: black; font-family: Arial; font-size: 20pt; font-weight: normal; text-decoration: none; font-style: normal; z-index: 0; text-align: left; vertical-align: bottom;\\\">Charles Yang</div>\"},{\"id\":\"1392410840432\",\"html\":\"<div class=\\\"ppedit-box\\\" contenteditable=\\\"true\\\" id=\\\"1392410840432\\\" style=\\\"left: 200px; top: 13px; width: 245px; height: 50px; color: black; font-family: Arial; font-size: 20pt; font-weight: normal; text-decoration: none; font-style: normal; z-index: 1; text-align: left; vertical-align: bottom;\\\">2105 Patricia Apt. 7</div>\"}],[]],\"etag\":\"61bd33a3e2bb88cdab20634e3745baa081ba05253bdb53dde70cfacb3afdf6a1\"}";
+                "{\"modified\":[[],[]],\"removed\":[[],[]],\"created\":[[{\"id\":\"1395022685890\",\"html\":\"<div class=\\\"ppedit-box ppedit-box-focus\\\" contenteditable=\\\"true\\\" id=\\\"1395022685890\\\" style=\\\"left: 275px; top: 71px; width: 75px; height: 50px; color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: 12pt; font-weight: normal; text-decoration: none; font-style: normal; line-height: 117%; letter-spacing: 0px; padding: 0px; z-index: 0; text-align: left; vertical-align: bottom;\\\">asdfasdfasdfasdfadsfasdfasdfasdf</div>\",\"name\":\"asdfasdfas\"}],[]],\"etag\":\"93e2fc3652cca582b60b301f9263980ac09d66a4cf0b89f377d2279e57dc7445\"}";
         System.out.println( Ppedit.serializeFromJsonString( testString ) );
     }
 
@@ -89,7 +110,7 @@ public class Ppedit {
             ppedit.created = gson.fromJson( created, listType );
             ppedit.removed = gson.fromJson( removed, listType );
             ppedit.etag = jsonObject.get( "etag" ).getAsString();
-            //ppedit.pageNumber = jsonObject.get( "pageNumber" ).getAsInt();
+            ppedit.setPageNumber();
 
             return ppedit;
         }

@@ -16,6 +16,7 @@ import com.google.gson.JsonSerializer;
 import com.peerpen.model.Hunk;
 
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,9 +36,22 @@ public class Page {
 
     // A map from viewId to actual hunk object
     Map<Long, Hunk> hunks;
+    int pageNumber;
+
+    public Page()
+    {
+        hunks = new HashMap<>();
+    }
 
     public Map<Long, Hunk> getHunks() {
         return hunks;
+    }
+
+    public int getPageNumber() { return pageNumber; }
+    public void setPageNumber(int page) {
+        this.pageNumber = page;
+        for (Hunk h : hunks.values())
+            h.setPageNumber( this.pageNumber );
     }
 
     public static class PageSerializer implements JsonSerializer<Page> {

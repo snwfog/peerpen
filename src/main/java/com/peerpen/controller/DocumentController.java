@@ -13,6 +13,7 @@ import com.sunnyd.Base;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -110,7 +111,7 @@ public class DocumentController extends GenericApplicationServlet {
                 throw new Exception();
             }
 
-            String jsonObjectAsString = request.getParameter( "data" );
+            String jsonObjectAsString = (String) request.getAttribute( "requestData" );
             doc.commitDocumentFromRawJson( jsonObjectAsString );
             logger.info( "Document updated for " + doc.getId() );
         } catch ( Exception e ) {

@@ -15,6 +15,11 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * This is a servlet request wrapper which will provide a certain
+ * set of basic functionality to a given servlet request.
+ *
+ */
 public class InternalHttpServletRequest extends HttpServletRequestWrapper {
 
     public static enum HTTP_METHOD {

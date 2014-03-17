@@ -38,7 +38,15 @@ $(function() {
   });
   $('.editor').ppedit({
     onload: function() {
-      return console.log("Loaded");
+      return $.ajax(window.location.href.split("#")[0].replace(/edit/, ""), {
+        accept: "application/json",
+        success: function(data) {
+          console.log(data);
+          return $('.editor').ppedit('load', {
+            hunks: data
+          });
+        }
+      });
     }
   });
   return $('button#submit').click(function(event) {
@@ -48,9 +56,7 @@ $(function() {
     return $.ajax({
       type: "post",
       url: postUrl,
-      data: {
-        "data": hunks
-      },
+      data: JSON.stringify(hunks),
       dataType: "json",
       contentType: "application/json; charset=utf-8",
       success: function(event) {
