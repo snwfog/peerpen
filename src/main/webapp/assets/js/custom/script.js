@@ -23,21 +23,6 @@ $(function() {
     if (vHeight >= 3040) {
       return od.update(123456);
     }
-<<<<<<< HEAD
-  });
-  return $("section#signup form button[type='submit']").click(function(e) {
-    var parentForm;
-    e.preventDefault();
-    $("h2#msg-hey").fadeOut();
-    $("h1#msg-jumpstart").fadeOut();
-    parentForm = $(this).parents("form");
-    parentForm.fadeOut();
-    $("h1#msg-jumpstart").html("Your career is in good hands").fadeIn();
-    return setTimeout((function() {
-      return parentForm.submit();
-    }), 2000);
-  });
-=======
   });
   $("section#signup form button[type='submit']").click(function(e) {
     var parentForm;
@@ -81,5 +66,4 @@ $(function() {
       }
     });
   });
->>>>>>> ppedit
 });

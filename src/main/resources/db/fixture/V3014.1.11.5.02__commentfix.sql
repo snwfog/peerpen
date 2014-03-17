@@ -91,7 +91,6 @@ INSERT INTO `feedables` (`id`, `child_id`, `user_id`,`type`, `status`,`last_modi
 
 INSERT INTO `changesets` (`id`, `creation_date`, `last_modified_date`, `content`, `hunk_id`, `state`)
   VALUES
-<<<<<<< HEAD
   (5,'2014-01-15 23:24:05','2014-01-15 23:24:05',2,'Changed the format of Education\n',1),
   (6,'2014-01-15 23:24:48','2014-01-15 23:24:48',2,'Added Leasure section',2),
   (7,'2014-01-15 23:25:24','2014-01-15 23:25:24',2,'Remove High School in Education',3);
