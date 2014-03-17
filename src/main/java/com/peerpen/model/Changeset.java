@@ -129,8 +129,8 @@ public class Changeset extends Feedable implements IModel, Commentable {
     }
 
     @Override
-    public void findComments() {
-        Comment.findComments( this, this.getId() );
+    public List<Comment> findComments() {
+        return Comment.findComments( this, this.getId() );
     }
 
     public static enum ChangesetState {
