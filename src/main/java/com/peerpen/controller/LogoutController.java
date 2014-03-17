@@ -17,13 +17,16 @@ import javax.servlet.http.HttpServletResponse;
  * To change this template use File | Settings | File Templates.
  */
 public class LogoutController extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    protected void doPost( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("loggingOut");
+    protected void doGet( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
+        System.out.println( "loggingOut" );
         request.getSession().invalidate();
-        response.sendRedirect("/"); // redirect to homepage
+        response.sendRedirect( "/" ); // redirect to homepage
     }
 }

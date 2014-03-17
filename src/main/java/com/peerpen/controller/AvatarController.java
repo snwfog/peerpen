@@ -22,15 +22,13 @@ public class AvatarController extends HttpServlet {
     public void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
         Peer sessionPeer = (Peer) request.getAttribute( "sessionUser" );
-       //For testing purposes
-        if(sessionPeer == null)
-        {
-            sessionPeer = new Peer().find(3);
+        //For testing purposes
+        if ( sessionPeer == null ) {
+            sessionPeer = new Peer().find( 3 );
             sessionPeer.getAvatar().cropAvatar( request );
         }
         //Run normally
-        else
-        {
+        else {
             sessionPeer.getAvatar().cropAvatar( request );
             request.getRequestDispatcher( "/view/profile.jsp" ).forward( request, response );
         }

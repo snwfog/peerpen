@@ -49,7 +49,7 @@ public class ModelHierarchyUtil {
             InstantiationException {
         // className will be in lower case
         Class<?> klazz = Class.forName( "com.peerpen.model." + StringUtils.capitalise( className ) );
-        Constructor<?> cons = klazz.getConstructor( );
+        Constructor<?> cons = klazz.getConstructor();
         T instance = (T) cons.newInstance();
         return instance.find( id );
     }

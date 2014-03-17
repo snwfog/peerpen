@@ -23,10 +23,12 @@ import org.apache.commons.lang3.StringUtils;
 
 public class HunkController extends HttpServlet {
 
-    protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+    protected void doPost( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
         // hand
-        String raw = request.getParameter("json_ajax");
-        Boolean isOwner = Boolean.parseBoolean( request.getParameter( "isOwner" ) );   //  check if session user is the document owner?
+        String raw = request.getParameter( "json_ajax" );
+        Boolean isOwner = Boolean.parseBoolean(
+                request.getParameter( "isOwner" ) );   //  check if session user is the document owner?
 
         //handling JSON from Ajax .. the old way using chrome console
         //Scanner scanner = new Scanner( request.getReader() );
@@ -45,8 +47,7 @@ public class HunkController extends HttpServlet {
         JsonArray createdList = rootObj.getAsJsonArray( "created" );
         JsonArray modifiedList = rootObj.getAsJsonArray( "modified" );
         JsonArray deletedList = rootObj.getAsJsonArray( "removed" );
-        String etagObj = rootObj.get("etag").getAsString();
-
+        String etagObj = rootObj.get( "etag" ).getAsString();
 
 
 
@@ -55,9 +56,6 @@ public class HunkController extends HttpServlet {
         Iterator<JsonElement> createdIterator = createdList.iterator();
         Iterator<JsonElement> modifiedIterator = modifiedList.iterator();
         Iterator<JsonElement> deletedIterator = deletedList.iterator();
-
-
-
 
 
 
@@ -74,7 +72,7 @@ public class HunkController extends HttpServlet {
             String receivedIdView = ob.get( "id" ).toString();
             String receivedHtml = ob.get( "html" ).toString();
             receivedHtml = receivedHtml.replace( "'", "\\'" );
-            if(isOwner){
+            if ( isOwner ) {
                 // create and save new hunk directly
                 Hunk hunk = new Hunk();
                 hunk.setDocumentId( newDoc.getId() );
@@ -82,9 +80,10 @@ public class HunkController extends HttpServlet {
                 hunk.setIdView( receivedIdView );
                 hunk.setContent( receivedHtml );
 
-                if (!hunk.save())
-                     throw new RuntimeException("Could not save properly.");
-            }else{
+                if ( !hunk.save() ) {
+                    throw new RuntimeException( "Could not save properly." );
+                }
+            } else {
                 // create a new changeset
                 HashMap<String, Object> changesetData = new HashMap<String, Object>();
                 changesetData.put( "content", receivedHtml );
@@ -102,14 +101,14 @@ public class HunkController extends HttpServlet {
             JsonObject ob = modifiedIterator.next().getAsJsonObject().getAsJsonObject();
             String receivedIdView = ob.get( "id" ).toString();
             String receivedHtml = ob.get( "html" ).toString();
-            receivedHtml = receivedHtml.replace("'", "\\'");
+            receivedHtml = receivedHtml.replace( "'", "\\'" );
             System.out.println( "MODIFICATION(received):" + receivedIdView + " " + receivedHtml );
 
             // finding the old hunk (need a better way to do this)
             HashMap<String, Object> existingHunkData = new HashMap<String, Object>();
             existingHunkData.put( "idView", receivedIdView );
             List<Hunk> existingHunks = new Hunk().findAll( existingHunkData );
-            Hunk existingHunk =existingHunks.get( 0 );
+            Hunk existingHunk = existingHunks.get( 0 );
             int existingHunkId = existingHunk.getId();
             System.out.println( "oldHunkId:" + existingHunkId );
 
@@ -136,7 +135,7 @@ public class HunkController extends HttpServlet {
             JsonObject ob = deletedIterator.next().getAsJsonObject().getAsJsonObject();
             String receivedIdView = ob.get( "id" ).toString();
             String receivedHtml = ob.get( "html" ).toString();
-            receivedHtml = receivedHtml.replace("'", "\\'");
+            receivedHtml = receivedHtml.replace( "'", "\\'" );
             System.out.println( "DELETE(received):" + receivedIdView + " " + receivedHtml );
 
             // finding the old hunk (need a better way to do this)
@@ -146,10 +145,10 @@ public class HunkController extends HttpServlet {
             Hunk existingHunk = existingHunks.get( 0 );
             int existingHunkId = existingHunk.getId();
 
-            if (isOwner){
+            if ( isOwner ) {
                 // Destroy Hunk & Changesets
                 existingHunk.destroy();
-            }else{
+            } else {
                 // create a new changeset with null as content
                 HashMap<String, Object> changesetData = new HashMap<String, Object>();
                 changesetData.put( "hunkId", existingHunkId );
@@ -162,12 +161,13 @@ public class HunkController extends HttpServlet {
 
     }
 
-    protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+    protected void doGet( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
         int id = Integer.parseInt( (String) request.getParameter( "id" ) );
-        Document document = new Document().find(id);
+        Document document = new Document().find( id );
         List<Hunk> hunks = document.getHunks();
         StringBuffer sb = new StringBuffer();
-        sb.append("{").append( StringUtils.join( hunks, "," ) ).append("}");
+        sb.append( "{" ).append( StringUtils.join( hunks, "," ) ).append( "}" );
 
         response.addHeader( "Access-Control-Allow-Origin", "*" );
         response.setContentType( "application/json" );
@@ -176,7 +176,7 @@ public class HunkController extends HttpServlet {
 
 
         PrintWriter out = response.getWriter();
-        out.write(sb.toString());
+        out.write( sb.toString() );
 
 
     }

@@ -32,7 +32,8 @@ public class TagController extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+    protected void doPost( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
         // Client data handling
         Integer id = Integer.parseInt( request.getParameter( "entityId" ) );
         String type = request.getParameter( "entityType" ).toLowerCase();
@@ -40,32 +41,33 @@ public class TagController extends HttpServlet {
 
         // Processing
         List<String> tagNames = Arrays.asList( query.split( "\\s*,\\s*" ) );
-        List<TagDescriptor> newTagDescriptors = new ArrayList<>(  );
+        List<TagDescriptor> newTagDescriptors = new ArrayList<>();
 
-        if (!query.isEmpty()){
-            for (String tagName: tagNames){
-                newTagDescriptors.add(new TagDescriptor(  ).getTagDescriptor( tagName ));
+        if ( !query.isEmpty() ) {
+            for ( String tagName : tagNames ) {
+                newTagDescriptors.add( new TagDescriptor().getTagDescriptor( tagName ) );
             }
         }
 
         // alternatively use reflection but it is slow
-        switch ( type ){
+        switch ( type ) {
             case "group":
-                Group group = new Group(  ).find( id );
+                Group group = new Group().find( id );
                 group.updateTags( newTagDescriptors );
                 break;
             case "document":
-                Document document = new Document( ).find( id );
+                Document document = new Document().find( id );
                 document.updateTags( newTagDescriptors );
                 break;
             default:
-                System.out.println("type is not specified");
+                System.out.println( "type is not specified" );
         }
 
         response.sendRedirect( request.getHeader( "referer" ) );
     }
 
-    protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+    protected void doGet( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
 
     }
 }

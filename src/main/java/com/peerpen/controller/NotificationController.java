@@ -15,27 +15,31 @@ import javax.servlet.http.HttpServletResponse;
  * Created by Zearf on 2/15/2014.
  */
 public class NotificationController extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    protected void doPost( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
         String requestType = request.getParameter( "format" );
-        if (requestType != null && requestType.equals( "json" )){ // request.getAttribute ("applicationJson") doesnt work
+        if ( requestType != null &&
+                requestType.equals( "json" ) ) { // request.getAttribute ("applicationJson") doesnt work
 
-            if (request.getAttribute("sessionUser") != null){
+            if ( request.getAttribute( "sessionUser" ) != null ) {
 
-                Peer sessionUser = (Peer) request.getAttribute("sessionUser");
+                Peer sessionUser = (Peer) request.getAttribute( "sessionUser" );
                 Notification notification = new Notification();
-                String json = new Gson().toJson(notification.getNotification(sessionUser));
-                notification.updateNotification(sessionUser);
+                String json = new Gson().toJson( notification.getNotification( sessionUser ) );
+                notification.updateNotification( sessionUser );
 
 
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().write(json);
+                response.setContentType( "application/json" );
+                response.setCharacterEncoding( "UTF-8" );
+                response.getWriter().write( json );
             }
 
         }
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
 
     }
 }

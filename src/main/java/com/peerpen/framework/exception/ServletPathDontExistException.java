@@ -6,6 +6,6 @@ package com.peerpen.framework.exception;
 public class ServletPathDontExistException extends HttpException {
 
     public ServletPathDontExistException( String path ) {
-        super(404, path);
+        super( 404, path );
     }
 }

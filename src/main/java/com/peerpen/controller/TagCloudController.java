@@ -35,10 +35,11 @@ public class TagCloudController extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+    protected void doGet( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
         // Get a list of all tag descriptors
         request.setAttribute( "tagCloud", TagDescriptor.getTagCloud() );
-        request.getRequestDispatcher("/view/tagcloud.jsp").forward(request, response);
+        request.getRequestDispatcher( "/view/tagcloud.jsp" ).forward( request, response );
     }
 
     /**
@@ -48,12 +49,14 @@ public class TagCloudController extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+    protected void doPost( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
         String requestType = request.getParameter( "format" );
         // ajax autocomplete request
-        if (requestType != null && requestType.equals( "json" )){ // request.getAttribute ("applicationJson") doesnt work
+        if ( requestType != null &&
+                requestType.equals( "json" ) ) { // request.getAttribute ("applicationJson") doesnt work
             doAutocomplete( request, response );
-        }else{ // normal post request from jsp
+        } else { // normal post request from jsp
             doSearch( request, response );
         }
     }
@@ -65,21 +68,22 @@ public class TagCloudController extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    private static void doAutocomplete (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    private static void doAutocomplete( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
         String q = " ";
-        if( request.getParameter("term")!= null){
+        if ( request.getParameter( "term" ) != null ) {
             q = request.getParameter( "term" );
         }
 
-        Set suggestionPool = new LinkedHashSet(  );
-        suggestionPool.addAll( Autocomplete.getSuggestedTagDescriptors( q, 3) );
+        Set suggestionPool = new LinkedHashSet();
+        suggestionPool.addAll( Autocomplete.getSuggestedTagDescriptors( q, 3 ) );
         // Convert set into json string
         String json = new Gson().toJson( suggestionPool );
 
         // Return json string as response
         response.setContentType( "application/json" );
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
+        response.setCharacterEncoding( "UTF-8" );
+        response.getWriter().write( json );
     }
 
     /**
@@ -89,17 +93,18 @@ public class TagCloudController extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    private static void doSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private static void doSearch( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
         String query = "";
-        if (request.getParameter( "tags" )!= null && !request.getParameter( "tags" ).isEmpty()){
+        if ( request.getParameter( "tags" ) != null && !request.getParameter( "tags" ).isEmpty() ) {
             query = request.getParameter( "tags" );
             // converts tags string into a list
             List<String> tagNames = Arrays.asList( query.split( "\\s*,\\s*" ) );
             // converts list<string> into list<tagdescriptor>
-            List<TagDescriptor> tagDescriptors = new TagDescriptor(  ).getTagDescriptors(tagNames);
+            List<TagDescriptor> tagDescriptors = new TagDescriptor().getTagDescriptors( tagNames );
 
             // find match
-            if(!tagDescriptors.isEmpty()){
+            if ( !tagDescriptors.isEmpty() ) {
                 List<Group> groups = Search.getMatchedGroups( tagDescriptors );
                 List<Document> documents = Search.getMatchedDocuments( tagDescriptors );
                 request.setAttribute( "tagSearchResultsGroups", groups );

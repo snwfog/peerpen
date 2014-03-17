@@ -37,7 +37,7 @@ public class ApplicationInitializerListener implements ServletContextListener {
     }
 
     private void setAvatarDir( ServletContextEvent event ) {
-        String avatarDir = event.getServletContext().getInitParameter("avatar-dir");
+        String avatarDir = event.getServletContext().getInitParameter( "avatar-dir" );
         event.getServletContext().setAttribute( "avatarDir", avatarDir );
     }
 
@@ -49,7 +49,7 @@ public class ApplicationInitializerListener implements ServletContextListener {
         String appSecret = event.getServletContext().getInitParameter( "app-secret" );
         event.getServletContext().setAttribute( "appSecret", appSecret );
     }
-
+   
     /**
      * Will set into servlet context all possible routes
      * @param event

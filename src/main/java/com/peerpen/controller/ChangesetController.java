@@ -14,13 +14,13 @@ import javax.servlet.http.HttpServletResponse;
  * Time: 2:52 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ChangesetController extends HttpServlet
-{
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+public class ChangesetController extends HttpServlet {
+
+    protected void doGet( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doPost( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
     }
 }

@@ -3,14 +3,12 @@ package com.peerpen.framework;
 import com.j256.simplemagic.ContentInfo;
 import com.j256.simplemagic.ContentInfoUtil;
 
-import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 
-import javax.imageio.ImageIO;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +39,7 @@ public class ContentWriter {
 
         if ( mimeType.contains( "image" ) ) {
             OutputStream out = response.getOutputStream();
-            IOUtils.copy(is, out);
+            IOUtils.copy( is, out );
             out.close();
         } else {
             PrintWriter pw = response.getWriter();

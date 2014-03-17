@@ -33,8 +33,9 @@ public class SearchController extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        request.getRequestDispatcher("/view/search.jsp").forward(request, response);
+    protected void doGet( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
+        request.getRequestDispatcher( "/view/search.jsp" ).forward( request, response );
     }
 
     /**
@@ -44,12 +45,14 @@ public class SearchController extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+    protected void doPost( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
         String requestType = request.getParameter( "format" );
         // ajax autocomplete request
-        if (requestType != null && requestType.equals( "json" )){ // request.getAttribute ("applicationJson") doesnt work
+        if ( requestType != null &&
+                requestType.equals( "json" ) ) { // request.getAttribute ("applicationJson") doesnt work
             doAutocomplete( request, response );
-        }else{  // normal post request from jsp
+        } else {  // normal post request from jsp
             doSearch( request, response );
         }
     }
@@ -61,18 +64,19 @@ public class SearchController extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    private static void doAutocomplete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    private static void doAutocomplete( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
         String q = " ";
-        if( request.getParameter("term")!= null){
+        if ( request.getParameter( "term" ) != null ) {
             q = request.getParameter( "term" );
         }
 
         String area = "";
-        if (request.getParameter( "area" )!= null){
+        if ( request.getParameter( "area" ) != null ) {
             area = request.getParameter( "area" );
         }
         String json = ""; // json format [{"value":"resue", "desc":"document"}]
-        switch(area){
+        switch ( area ) {
             case "documents":
                 json = Autocomplete.getSuggestedDocuments( q, 5 );
                 break;
@@ -88,15 +92,15 @@ public class SearchController extends HttpServlet {
                 json += Autocomplete.getSuggestedGroups( q, 5 );
         }
         // remove trailling comma
-        if (json.endsWith( "," )){
+        if ( json.endsWith( "," ) ) {
             json = json.substring( 0, json.lastIndexOf( "," ) );
         }
         json = "[" + json + "]";
 
         // Return json string as response
         response.setContentType( "application/json" );
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
+        response.setCharacterEncoding( "UTF-8" );
+        response.getWriter().write( json );
     }
 
 
@@ -107,7 +111,8 @@ public class SearchController extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    private static void doSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private static void doSearch( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
         boolean doTagMatching = false;
         boolean doDocContentMatching = false;
         String query = "";
@@ -115,40 +120,42 @@ public class SearchController extends HttpServlet {
         List<String> tagNames;
         List<TagDescriptor> tagDescriptors = null;
 
-        if (request.getParameter( "area" )!= null){
+        if ( request.getParameter( "area" ) != null ) {
             area = request.getParameter( "area" );
         }
 
-        if (request.getParameter( "search_query" )!= null && !request.getParameter( "search_query" ).isEmpty()){
+        if ( request.getParameter( "search_query" ) != null && !request.getParameter( "search_query" ).isEmpty() ) {
             query = request.getParameter( "search_query" );
         }
 
-        if (request.getParameter( "searchTags" ) != null){
-            if (request.getParameter( "searchTags" ).equals( "on" )){
+        if ( request.getParameter( "searchTags" ) != null ) {
+            if ( request.getParameter( "searchTags" ).equals( "on" ) ) {
                 doTagMatching = true;
-            };
+            }
+            ;
         }
 
-        if (request.getParameter( "searchDocContent" ) != null){
-            if (request.getParameter( "searchDocContent" ).equals( "on" )){
+        if ( request.getParameter( "searchDocContent" ) != null ) {
+            if ( request.getParameter( "searchDocContent" ).equals( "on" ) ) {
                 doDocContentMatching = true;
-            };
+            }
+            ;
         }
 
-        if (doTagMatching) {
+        if ( doTagMatching ) {
             tagNames = Arrays.asList( query.split( "\\s* \\s*" ) );
-            tagDescriptors = new TagDescriptor(  ).getTagDescriptors(tagNames);
+            tagDescriptors = new TagDescriptor().getTagDescriptors( tagNames );
         }
 
-        if (!query.isEmpty()){
-            switch (area){
+        if ( !query.isEmpty() ) {
+            switch ( area ) {
                 case "documents":
-                    List<Document> documents = new ArrayList<>(  );
+                    List<Document> documents = new ArrayList<>();
                     documents.addAll( Search.getMatchedDocuments( query ) );
-                    if (doTagMatching && tagDescriptors.size() > 0) {
+                    if ( doTagMatching && tagDescriptors.size() > 0 ) {
                         documents.addAll( Search.getMatchedDocuments( tagDescriptors ) );
                     }
-                    if (doDocContentMatching) {
+                    if ( doDocContentMatching ) {
                         documents.addAll( Search.getMatchedDocumentsContents( query ) );
                     }
                     Search.removeDuplicatedResults( documents );
@@ -158,24 +165,24 @@ public class SearchController extends HttpServlet {
                     request.setAttribute( "searchResults", Search.getMatchedPeers( query ) );
                     break;
                 case "groups":
-                    List<Group> groups = new ArrayList<>(  );
+                    List<Group> groups = new ArrayList<>();
                     groups.addAll( Search.getMatchedGroups( query ) );
-                    if (doTagMatching && tagDescriptors.size() > 0) {
+                    if ( doTagMatching && tagDescriptors.size() > 0 ) {
                         groups.addAll( Search.getMatchedGroups( tagDescriptors ) );
                     }
                     Search.removeDuplicatedResults( groups );
                     request.setAttribute( "searchResults", groups );
                     break;
                 default:
-                    List<Object> everything = new ArrayList<Object>(  );
+                    List<Object> everything = new ArrayList<Object>();
                     everything.addAll( Search.getMatchedDocuments( query ) );
                     everything.addAll( Search.getMatchedPeers( query ) );
                     everything.addAll( Search.getMatchedGroups( query ) );
-                    if (doTagMatching && tagDescriptors.size() > 0) {
+                    if ( doTagMatching && tagDescriptors.size() > 0 ) {
                         everything.addAll( Search.getMatchedDocuments( tagDescriptors ) );
                         everything.addAll( Search.getMatchedGroups( tagDescriptors ) );
                     }
-                    if (doDocContentMatching) {
+                    if ( doDocContentMatching ) {
                         everything.addAll( Search.getMatchedDocumentsContents( query ) );
                     }
                     Search.removeDuplicatedResults( everything );
@@ -183,6 +190,6 @@ public class SearchController extends HttpServlet {
             }
         }
 
-        request.getRequestDispatcher("/view/search.jsp").forward( request, response );
+        request.getRequestDispatcher( "/view/search.jsp" ).forward( request, response );
     }
 }

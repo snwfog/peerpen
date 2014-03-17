@@ -22,7 +22,7 @@ public class FeedController extends HttpServlet {
             throws ServletException, IOException {
 
         //User can only see their own feed
-        Integer peerId = ((Peer)request.getAttribute("sessionUser")).getId();
+        Integer peerId = ((Peer) request.getAttribute( "sessionUser" )).getId();
         Peer peer = new Peer().find( peerId );
         List<Feedable> data = Feedable.getFeed( peerId );
         request.setAttribute( "feedableList", data );

@@ -21,7 +21,7 @@ public class GenericApplicationServlet extends HttpServlet {
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-       internalRequest = (InternalHttpServletRequest)request;
+        internalRequest = (InternalHttpServletRequest) request;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.peerpen.framework;
 
-import com.google.common.base.Throwables;
 import com.peerpen.framework.exception.HttpException;
 
 import java.io.IOException;
