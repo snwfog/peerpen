@@ -1,8 +1,6 @@
 package com.peerpen.model;
 
 import static org.testng.AssertJUnit.assertEquals;
-<<<<<<< HEAD
-
 import com.sunnyd.database.Manager;
 
 import java.util.HashMap;
@@ -11,14 +9,11 @@ import java.util.Map;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-=======
 import static org.testng.AssertJUnit.assertNotSame;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
->>>>>>> ui
 import org.testng.annotations.Test;
 
 /**
@@ -31,7 +26,6 @@ import org.testng.annotations.Test;
 
 public class TagDescriptorTest {
 
-<<<<<<< HEAD
     private TagDescriptor td1;
     private TagDescriptor td2;
 
@@ -87,8 +81,6 @@ public class TagDescriptorTest {
         assertEquals( td2.getId(), id );
     }
 
-
-=======
     @Test
     public void equalsTest(){
         TagDescriptor td1 = new TagDescriptor(  );
@@ -124,6 +116,4 @@ public class TagDescriptorTest {
         TagDescriptor td = new TagDescriptor( ).getTagDescriptor( "1234567890" );
         assertEquals( td.getTagName(), "1234567890" );
     }
-
->>>>>>> ui
 }
