@@ -46,11 +46,12 @@ $ ->
 
   $('.editor').ppedit
     onload: ->
-      $.ajax window.location.href.split("#")[0].replace(/edit/, ""),
-        accept: "application/json"
-        success: (data) ->
-          console.log(data)
-          $('.editor').ppedit('load', {hunks: data})
+      if $('.editor').length
+        $.ajax window.location.href.split("#")[0].replace(/edit/, ""),
+          accept: "application/json"
+          success: (data) ->
+            console.log(data)
+            $('.editor').ppedit('load', {hunks: data})
 
   $('button#submit').click (event) ->
     hunks = $('.editor').ppedit('save')

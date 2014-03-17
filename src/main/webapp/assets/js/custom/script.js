@@ -38,15 +38,17 @@ $(function() {
   });
   $('.editor').ppedit({
     onload: function() {
-      return $.ajax(window.location.href.split("#")[0].replace(/edit/, ""), {
-        accept: "application/json",
-        success: function(data) {
-          console.log(data);
-          return $('.editor').ppedit('load', {
-            hunks: data
-          });
-        }
-      });
+      if ($('.editor').length) {
+        return $.ajax(window.location.href.split("#")[0].replace(/edit/, ""), {
+          accept: "application/json",
+          success: function(data) {
+            console.log(data);
+            return $('.editor').ppedit('load', {
+              hunks: data
+            });
+          }
+        });
+      }
     }
   });
   return $('button#submit').click(function(event) {
