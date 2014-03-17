@@ -99,7 +99,6 @@
     <orderEntry type="library" name="Maven: org.twitter4j:twitter4j-core:4.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.thetransactioncompany:cors-filter:1.9" level="project" />
     <orderEntry type="library" name="Maven: com.thetransactioncompany:java-property-utils:1.9.1" level="project" />
-
   </component>
 </module>
 

@@ -1,5 +1,5 @@
-<%@ page import="java.util.regex.Pattern" %>
 <%@ page import="java.util.regex.Matcher" %>
+<%@ page import="java.util.regex.Pattern" %>
 <%@ page import="org.codehaus.plexus.util.StringUtils" %>
 <!DOCTYPE html>
 <html>
@@ -13,20 +13,19 @@
 
     <title>
         <%
-
             String jspPageNAme = request.getServletPath();
-            Pattern regx = Pattern.compile("/[A-Za-z1-9]*\\.jsp");
-            Matcher explode = regx.matcher(jspPageNAme);
+            Pattern regx = Pattern.compile( "/[A-Za-z1-9]*\\.jsp" );
+            Matcher explode = regx.matcher( jspPageNAme );
 
             String defaultTitle = "PeerPen - A Capstone project by Sunny Delight";
             if ( request.getParameter( "title" ) != null ) {
-              out.println("Peerpen - " +  request.getParameter( "title" ) );
+                out.println( "Peerpen - " + request.getParameter( "title" ) );
             } else if ( request.getAttribute( "title" ) != null ) {
-              out.println("Peerpen - " + request.getAttribute( "title" ) );
-            } else if ( explode !=null && explode.find() ){
-                if(explode.group(0) != null){
-                  String formatIt = explode.group(0).replace(".jsp", "").replace("/", "");
-                  out.println("Peerpen - " + StringUtils.capitaliseAllWords(formatIt));
+                out.println( "Peerpen - " + request.getAttribute( "title" ) );
+            } else if ( explode != null && explode.find() ) {
+                if ( explode.group( 0 ) != null ) {
+                    String formatIt = explode.group( 0 ).replace( ".jsp", "" ).replace( "/", "" );
+                    out.println( "Peerpen - " + StringUtils.capitaliseAllWords( formatIt ) );
                 }
             } else {
                 out.println( defaultTitle );
@@ -45,7 +44,6 @@
     <link rel="stylesheet" href="/assets/css/custom/avatar.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/custom/peerpen.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/custom/ppeditor.css" type="text/css">
-
     <link rel="stylesheet" href="/assets/css/custom/styleplus.css" type="text/css">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -54,10 +52,10 @@
     <!--[endif]-->
 
     <!-- Fav and touch icons -->
-    <%--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">--%>
-    <%--<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">--%>
-    <%--<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">--%>
-    <%--<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">--%>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
     <%--<link rel="shortcut icon" href="../assets/ico/favicon.png">--%>
 </head>
 <body>
