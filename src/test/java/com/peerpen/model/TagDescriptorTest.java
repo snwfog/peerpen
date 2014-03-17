@@ -26,54 +26,52 @@ public class TagDescriptorTest {
     private TagDescriptor td2;
 
     @BeforeMethod
-    public void setUp() throws Exception
-    {
-        td1 = new TagDescriptor(  ).getTagDescriptor( "concordia" );
-        td2 = new TagDescriptor(  ).getTagDescriptor( "CONCORDIA" );
+    public void setUp() throws Exception {
+        td1 = new TagDescriptor().getTagDescriptor( "concordia" );
+        td2 = new TagDescriptor().getTagDescriptor( "CONCORDIA" );
     }
 
     @AfterMethod
-    public void tearDown() throws Exception
-    {
+    public void tearDown() throws Exception {
         td1.destroy();
         td2.destroy();
     }
 
     @Test
-    public void constructorTest(){
+    public void constructorTest() {
         Map<String, Object> populate = new HashMap<>();
-        populate.put("tagName", "testtag");
-        TagDescriptor t = new TagDescriptor(populate);
+        populate.put( "tagName", "testtag" );
+        TagDescriptor t = new TagDescriptor( populate );
     }
 
     @Test
-    public void createTagDescriptorTest(){
-        assertEquals(td1.getTagName(), "concordia");
+    public void createTagDescriptorTest() {
+        assertEquals( td1.getTagName(), "concordia" );
     }
 
     @Test
-    public void getTagDescriptorIfExistsTest(){
+    public void getTagDescriptorIfExistsTest() {
         assertEquals( td1.getTagDescriptorIfExists( td1.getTagName() ).getTagName(), td1.getTagName() );
-        TagDescriptor td2 = new TagDescriptor(  );
+        TagDescriptor td2 = new TagDescriptor();
         assertEquals( td2.getTagDescriptorIfExists( "nonexistingtag" ), null );
     }
 
     @Test
-    public void getTagDescriptorTest(){
+    public void getTagDescriptorTest() {
         assertEquals( td2.getTagName(), "concordia" );
     }
 
     @Test
-    public void getTagCloudTest(){
+    public void getTagCloudTest() {
         List<TagDescriptor> actual = TagDescriptor.getTagCloud();
         List<TagDescriptor> expected = new TagDescriptor().queryAll( "SELECT * FROM tag_descriptors" );
-        assertEquals( actual.size(), expected.size());
+        assertEquals( actual.size(), expected.size() );
     }
 
     @Test
-    public void equalsTest(){
-        Integer id = (Integer) Manager.find("SELECT max(id) as id FROM tag_descriptors").get("id");
-        TagDescriptor td = new TagDescriptor( ).find( id );
+    public void equalsTest() {
+        Integer id = (Integer) Manager.find( "SELECT max(id) as id FROM tag_descriptors" ).get( "id" );
+        TagDescriptor td = new TagDescriptor().find( id );
         assertEquals( td.getId(), id );
         assertEquals( td1.getId(), id );
         assertEquals( td2.getId(), id );

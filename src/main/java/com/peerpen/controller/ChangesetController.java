@@ -1,17 +1,11 @@
 package com.peerpen.controller;
 
-import com.peerpen.model.Changeset;
-import com.peerpen.model.Comment;
-import com.peerpen.model.Document;
-import com.peerpen.model.Peer;
+import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.

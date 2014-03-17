@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
  * To change this template use File | Settings | File Templates.
  */
 public class BroadcastTest {
+
     @Test
     public void TestSaveGroup() {
 

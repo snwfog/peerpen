@@ -1,12 +1,15 @@
 package com.peerpen.controller;
+
 import com.peerpen.model.Peer;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Map;
 
 /**
  * Created by Zearf on 1/7/2014.

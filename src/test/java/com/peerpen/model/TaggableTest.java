@@ -1,4 +1,5 @@
 package com.peerpen.model;
+
 import static org.testng.AssertJUnit.assertEquals;
 
 import com.sunnyd.database.Manager;
@@ -26,35 +27,33 @@ public class TaggableTest {
     private Group g;
 
     @BeforeMethod
-    public void setUp() throws Exception
-    {
-        td1 = new TagDescriptor(  ).getTagDescriptor( "test1" );
-        td2 = new TagDescriptor(  ).getTagDescriptor( "test2" );
+    public void setUp() throws Exception {
+        td1 = new TagDescriptor().getTagDescriptor( "test1" );
+        td2 = new TagDescriptor().getTagDescriptor( "test2" );
 
-        g = new Group(  );
+        g = new Group();
         g.setGroupName( "test_group" );
         g.save();
     }
 
     @AfterMethod
-    public void tearDown() throws Exception
-    {
+    public void tearDown() throws Exception {
         g.destroy();
         td1.destroy();
         td2.destroy();
     }
 
     @Test
-    public void constructorTest(){
+    public void constructorTest() {
         Map<String, Object> populate = new HashMap<>();
-        populate.put("childId", 1);
-        populate.put("type", "Group");
-        Taggable t = new Taggable(populate);
+        populate.put( "childId", 1 );
+        populate.put( "type", "Group" );
+        Taggable t = new Taggable( populate );
     }
 
     @Test
     public void testGetTagDescriptors() throws Exception {
-        List<TagDescriptor> expected = new ArrayList<>(  );
+        List<TagDescriptor> expected = new ArrayList<>();
         expected.add( td1 );
         expected.add( td2 );
         g.updateTags( expected );
@@ -64,18 +63,18 @@ public class TaggableTest {
 
     @Test
     public void testUpdateTags() throws Exception {
-        List<TagDescriptor> expected = new ArrayList<>(  );
+        List<TagDescriptor> expected = new ArrayList<>();
         expected.add( td1 );
         expected.add( td2 );
         g.updateTags( expected );
         List<TagDescriptor> actual = g.getTagDescriptors();
-        System.out.println("expected:");
-        for(TagDescriptor t : expected){
-            System.out.println(t.getTagName());
+        System.out.println( "expected:" );
+        for ( TagDescriptor t : expected ) {
+            System.out.println( t.getTagName() );
         }
-        System.out.println("actual:");
-        for(TagDescriptor t : actual){
-            System.out.println(t.getTagName());
+        System.out.println( "actual:" );
+        for ( TagDescriptor t : actual ) {
+            System.out.println( t.getTagName() );
         }
         assertEquals( expected, actual );
     }
@@ -83,7 +82,7 @@ public class TaggableTest {
     @Test
     public void testGetTaggableId() throws Exception {
         Integer actual = g.getTaggableId();
-        Integer expected = (Integer) Manager.find( "SELECT max(id) as id FROM taggables" ).get("id");
+        Integer expected = (Integer) Manager.find( "SELECT max(id) as id FROM taggables" ).get( "id" );
         assertEquals( expected, actual );
     }
 }

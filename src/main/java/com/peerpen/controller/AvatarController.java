@@ -3,7 +3,6 @@
  */
 package com.peerpen.controller;
 
-import com.peerpen.model.Avatar;
 import com.peerpen.model.Peer;
 
 import java.io.IOException;

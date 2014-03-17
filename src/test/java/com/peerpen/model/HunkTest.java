@@ -1,7 +1,5 @@
 package com.peerpen.model;
 
-import java.text.SimpleDateFormat;
-
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -22,7 +20,7 @@ public class HunkTest {
 
     @BeforeMethod
     public void setUp() throws Exception {
-        p = new Peer(  );
+        p = new Peer();
         p.setFirstName( "testhunk" );
         p.setLastName( "testhunk" );
         p.setUserName( "testhunk" );
@@ -33,14 +31,14 @@ public class HunkTest {
         p.setExperience( 3 );
         p.save();
 
-        d = new Document(  );
+        d = new Document();
         d.setDocName( "testhunk" );
         d.setPeerId( p.getId() );
         d.setType( "resume" );
         d.setThumbnailPath( "asd" );
         d.save();
 
-        h = new Hunk(  );
+        h = new Hunk();
         h.setContent( "testhunk" );
         h.setDocumentId( d.getId() );
         h.setHunkName( "testhunk" );
@@ -58,6 +56,6 @@ public class HunkTest {
     @Test
     public void testGetDocument() throws Exception {
         Document actual = h.getDocument();
-        Assert.assertEquals( actual, d);
+        Assert.assertEquals( actual, d );
     }
 }

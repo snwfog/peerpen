@@ -1,32 +1,20 @@
 package com.peerpen.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.peerpen.framework.InternalHttpServletRequest;
-import com.peerpen.framework.exception.MissingArgumentException;
 import com.peerpen.helper.Autocomplete;
 import com.peerpen.helper.Search;
-import com.peerpen.model.Avatar;
 import com.peerpen.model.Document;
 import com.peerpen.model.Group;
-import com.peerpen.model.Peer;
 import com.peerpen.model.TagDescriptor;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
-import javax.json.JsonObject;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 
 /**
