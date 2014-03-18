@@ -5,12 +5,13 @@
 <%@ page import="com.peerpen.model.Document" %>
 <%@ page import="java.util.List" %>
 <!-- must set navbar z-index to be <= 100 otherwise search autocomplete box will be hidden under navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="z-index:100 !important; font-family: 'Oswald', sans-serif; font-size:16px;" >
+<div class="navbar navbar-inverse navbar-fixed-top nav-body" role="navigation" style="z-index:100 !important;" >
   <div class="container">
     <div class="navbar-header">
-        <a href="/peer/<%=sessionUser.getId()%>/feed" style="padding-top:5px; display:block;"><img src="/assets/images/logo32x32.png"></a>
+        <a href="/peer/<%=sessionUser.getId()%>/feed" class="nav-logo-link"><img src="/assets/images/logo32x32.png"></a>
     </div>
 
+<div class="collapse navbar-collapse">
     <ul class="nav navbar-nav">
         <% String jspPageName = request.getServletPath(); %>
         <li   <%= jspPageName.contentEquals("/view/feed/feed.jsp")  ? "class=\"active\"" : "" %>>
@@ -49,5 +50,6 @@
 
     </ul>
   </div>
-</nav>
+</div>
+</div>
 <div id="enableNotification"></div>

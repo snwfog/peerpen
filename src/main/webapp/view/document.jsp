@@ -29,6 +29,7 @@
         <br />
       <%}%>
 
+    <br /><br />
     <img src="<%= sessionUser.getAvatar().getRelativeServletContextAvatarPathForSize( request,
                     Avatar.Size.LARGE ) %>" width="30px">
     <span class="feed-comment-commentor"><%= sessionUser.getFirstName() %> <%= sessionUser.getLastName() %> comments</span>

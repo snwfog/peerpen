@@ -1,4 +1,4 @@
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="font-family:'Oswald', sans-serif; font-size:16px;">
+<div class="navbar navbar-inverse navbar-fixed-top nav-body" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -7,17 +7,17 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/" style="padding-top:5px; display:block;"><img src="/assets/images/logo32x32.png"></a>
+            <a href="/" class="nav-logo-link"><img src="/assets/images/logo32x32.png"></a>
         </div>
 
-        <div class="navbar-collapse collapse">
+        <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <% String jspPageName = request.getServletPath();%>
                 <li>
-                    <a href="/about" style="font-weight:300;">About</a>
+                    <a href="/about" class="nav-link">About</a>
                 </li>
                 <li  <%= jspPageName.contentEquals("/view/register.jsp")  ? "class=\"active\"" : "" %>>
-                    <a href="/register" style="font-weight:300;">Register</a>
+                    <a href="/register" class="nav-link">Register</a>
                 </li>
             </ul>
 

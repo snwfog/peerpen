@@ -505,7 +505,7 @@ body {
     vertical-align:top;
 }
 
-.document-tag-body-box-list {
+ul.document-tag-body-box-list {
     background-color:#fff;
 }
 
@@ -781,6 +781,22 @@ a.groups-box-header-link {
     padding-right:10px;
 }
 /* END OF GROUPS STYLE */
+
+/* BEGINNING OF NAVBAR STYLE */
+.nav-body {
+    font-family:'Oswald', sans-serif;
+    font-size:16px;
+}
+
+a.nav-link {
+    font-weight:300;
+}
+
+a.nav-logo-link {
+    padding-top:5px;
+    display:block;
+}
+/* END OF PUBLIC NAVBAR STYLE */
 
 /* BEGINNING OF PROFILE STYLE */
 .profile-about-me-body {
