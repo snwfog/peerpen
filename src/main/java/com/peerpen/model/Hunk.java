@@ -1,11 +1,13 @@
 package com.peerpen.model;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.sunnyd.Base;
@@ -17,7 +19,6 @@ import com.sunnyd.annotations.ActiveRelationHasOne;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.Map;
 
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -55,6 +56,44 @@ public class Hunk extends Base implements IModel {
         super( HM );
     }
 
+    public static void main( String[] args ) {
+        String input = "{\n" +
+                "    \"modified\": [],\n" +
+                "    \"removed\": [],\n" +
+                "    \"created\": [\n" +
+                "        [\n" +
+                "            {\n" +
+                "                \"id\": \"1391820471425\",\n" +
+                "                \"html\": \"<div class=\\\"ppedit-box\\\" contenteditable=\\\"true\\\" id=\\\"1391820471425\\\" style=\\\"left: 50px; top: 50px; width: 75px; height: 50px; color: black; font-family: 'Times New Roman'; font-size: 12pt; font-weight: normal; text-decoration: none; font-style: normal; z-index: 0; text-align: left; vertical-align: bottom;\\\"></div>\"\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"id\": \"1391820471440\",\n" +
+                "                \"html\": \"<div class=\\\"ppedit-box\\\" contenteditable=\\\"true\\\" id=\\\"1391820471440\\\" style=\\\"left: 50px; top: 50px; width: 75px; height: 50px; color: black; font-family: 'Times New Roman'; font-size: 12pt; font-weight: normal; text-decoration: none; font-style: normal; z-index: 1; text-align: left; vertical-align: bottom;\\\"></div>\"\n" +
+                "            }\n" +
+                "        ],\n" +
+                "        []\n" +
+                "    ],\n" +
+                "    \"etag\": \"429a8768235e551541c2538787d4f065c350fdb1c57e0235e45572828cbbe32c\"\n" +
+                "}";
+        System.out.println( input );
+
+
+        JsonObject rootObj = new JsonParser().parse( input ).getAsJsonObject();
+
+        JsonArray createdList = rootObj.getAsJsonArray( "created" );
+        JsonArray modifiedList = rootObj.getAsJsonArray( "modified" );
+        JsonArray deletedList = rootObj.getAsJsonArray( "removed" );
+        String etagObj = rootObj.get( "etag" ).getAsString();
+
+        // creation list
+        for ( JsonElement j : createdList ) {
+            for ( JsonElement e : j.getAsJsonArray() ) {
+                String id = e.getAsJsonObject().get( "id" ).getAsString();
+                String html = e.getAsJsonObject().get( "html" ).getAsString();
+                System.out.println( id + "->" + html );
+            }
+        }
+    }
 
     public String getIdView() {
         return idView;
@@ -103,7 +142,7 @@ public class Hunk extends Base implements IModel {
         String sql = "SELECT * FROM `hunks` WHERE `id_view` = " + idView;
         return new Hunk().queryAll( sql );
     }
-    
+
     @Deprecated
     public Hunk findByViewId( String viewId ) {
         return (new Hunk()).find( ImmutableMap.of( "idView", (Object) viewId ) );
@@ -136,48 +175,10 @@ public class Hunk extends Base implements IModel {
         StringBuilder sb = new StringBuilder( getContent() );
         sb.replace( 0, 1, "" );
         sb.replace( sb.length() - 1, sb.length(), "" );
-        return getIdView() + ":\"" + StringEscapeUtils.escapeJava( sb.toString() ) + "\"";
+        String obj = getIdView() + ":\"" + StringEscapeUtils.escapeJava( sb.toString() ) + "\"";
+        return obj;
     }
 
-    public static void main( String[] args ) {
-        String input = "{\n" +
-                "    \"modified\": [],\n" +
-                "    \"removed\": [],\n" +
-                "    \"created\": [\n" +
-                "        [\n" +
-                "            {\n" +
-                "                \"id\": \"1391820471425\",\n" +
-                "                \"html\": \"<div class=\\\"ppedit-box\\\" contenteditable=\\\"true\\\" id=\\\"1391820471425\\\" style=\\\"left: 50px; top: 50px; width: 75px; height: 50px; color: black; font-family: 'Times New Roman'; font-size: 12pt; font-weight: normal; text-decoration: none; font-style: normal; z-index: 0; text-align: left; vertical-align: bottom;\\\"></div>\"\n" +
-                "            },\n" +
-                "            {\n" +
-                "                \"id\": \"1391820471440\",\n" +
-                "                \"html\": \"<div class=\\\"ppedit-box\\\" contenteditable=\\\"true\\\" id=\\\"1391820471440\\\" style=\\\"left: 50px; top: 50px; width: 75px; height: 50px; color: black; font-family: 'Times New Roman'; font-size: 12pt; font-weight: normal; text-decoration: none; font-style: normal; z-index: 1; text-align: left; vertical-align: bottom;\\\"></div>\"\n" +
-                "            }\n" +
-                "        ],\n" +
-                "        []\n" +
-                "    ],\n" +
-                "    \"etag\": \"429a8768235e551541c2538787d4f065c350fdb1c57e0235e45572828cbbe32c\"\n" +
-                "}";
-        System.out.println( input );
-
-
-        JsonObject rootObj = new JsonParser().parse( input ).getAsJsonObject();
-
-        JsonArray createdList = rootObj.getAsJsonArray( "created" );
-        JsonArray modifiedList = rootObj.getAsJsonArray( "modified" );
-        JsonArray deletedList = rootObj.getAsJsonArray( "removed" );
-        String etagObj = rootObj.get( "etag" ).getAsString();
-
-        // creation list
-        for ( JsonElement j : createdList ) {
-            for ( JsonElement e : j.getAsJsonArray() ) {
-                String id = e.getAsJsonObject().get( "id" ).getAsString();
-                String html = e.getAsJsonObject().get( "html" ).getAsString();
-                System.out.println( id + "->" + html );
-            }
-        }
-    }
-    
     public static class HunkSerializer implements JsonSerializer<Hunk> {
 
         @Override
@@ -199,7 +200,9 @@ public class Hunk extends Base implements IModel {
             String content = json.getAsJsonObject().get( "html" ).getAsString();
             JsonElement hunkNameElement = json.getAsJsonObject().get( "name" );
             String hunkName = "";
-            if (hunkNameElement != null) hunkName = hunkNameElement.getAsString();
+            if ( hunkNameElement != null ) {
+                hunkName = hunkNameElement.getAsString();
+            }
 
             Hunk hunk = new Hunk();
             hunk.setIdView( viewId );
@@ -208,14 +211,5 @@ public class Hunk extends Base implements IModel {
 
             return hunk;
         }
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder( getContent() );
-        sb.replace( 0, 1, "" );
-        sb.replace( sb.length() - 1, sb.length(), "" );
-        String obj = getIdView() + ":\"" + StringEscapeUtils.escapeJava( sb.toString() ) + "\"";
-        return obj;
     }
 }
