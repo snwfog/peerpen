@@ -51,6 +51,7 @@ public class Feedable extends Base {
            a.setType(this.getClass().getSimpleName());
            a.setChildId(this.getId());
            a.setStatus("new");
+           a.setNotifyStatus("UNSEND");
 
            if(this instanceof Changeset){
                Changeset ch = (Changeset) this;
@@ -89,6 +90,7 @@ public class Feedable extends Base {
                         feedable.setChildId(this.getId());
                         feedable.setStatus("new");
                         feedable.setUserId(p.getId());
+                        feedable.setNotifyStatus("UNSEND");
                         feedable.saveFeedable();
                     }
                 }
