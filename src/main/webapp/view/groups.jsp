@@ -35,7 +35,7 @@
                 <%
                     for (Group group : groups){
                 %>
-                <div class="col-4 col-sm-3 col-lg-4" >
+                <div class="col-sm-12 col-md-4 col-lg-4" >
                     <div class="groups-box-body">
                         <h2 class="groups-box-header"><a href="group/<%= group.getId()%>" class="groups-box-header-link"><%= group.getGroupName()%></a></h2>
                         <p class="groups-size-body">

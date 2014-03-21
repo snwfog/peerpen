@@ -8,6 +8,12 @@
 <div class="navbar navbar-inverse navbar-fixed-top nav-body" role="navigation" style="z-index:100 !important;" >
   <div class="container">
     <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
         <a href="/peer/<%=sessionUser.getId()%>/feed" class="nav-logo-link"><img src="/assets/images/logo32x32.png"></a>
     </div>
 

@@ -24,6 +24,30 @@
 
 <%if (group.getIsJoined(sessionUser.getId())){%>
 
+    <%if (group.getAdminId()==sessionUser.getId()) {%>
+    <div class="profile group-tag-body">
+        <form action="/tag" method="post" class="form-horizontal" role="form">
+            <input type="hidden" name="entityType" value="group" />
+            <input type="hidden" name="entityId" value="<%=group.getId()%>" />
+            <table cellspacing="0" cellpadding="0" style="width:100%;">
+                <tr>
+                    <td class="group-tag-content">
+                        <ul id="entityTags" class="group-tag-content-list">
+                            <% for (TagDescriptor td : tds){ %>
+                            <li><%=td.getTagName() %></li>
+                            <% } %>
+                        </ul>
+                    </td>
+
+                    <td class="group-tag-submit-box">
+                        <button type="submit" class="btn btn-info group-tag-submit" name="submit" />Save Tags</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <% } %>
+
     <img src="<%= sessionUser.getAvatar().getRelativeServletContextAvatarPathForSize( request,
                     Avatar.Size.LARGE ) %>" width="30px">
     <span class="feed-comment-commentor"><%= sessionUser.getFirstName() %> <%= sessionUser.getLastName() %> broadcasts from <%= group.getGroupName()%> peers</span>
@@ -42,28 +66,6 @@
 
             <br />
         </span>
-
-        <div class="group-tag-body">
-            <form action="/tag" method="post" class="form-horizontal" role="form">
-                <input type="hidden" name="entityType" value="group" />
-                <input type="hidden" name="entityId" value="<%=group.getId()%>" />
-                <table cellspacing="0" cellpadding="0" style="width:100%;">
-                    <tr>
-                        <td class="group-tag-content">
-                            <ul id="entityTags" class="group-tag-content-list">
-                                <% for (TagDescriptor td : tds){ %>
-                                <li><%=td.getTagName() %></li>
-                                <% } %>
-                            </ul>
-                        </td>
-
-                        <td class="group-tag-submit-box">
-                            <button type="submit" class="btn btn-info group-tag-submit" name="submit" />Save Tags</button>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </div>
     </div>
     <br />
 

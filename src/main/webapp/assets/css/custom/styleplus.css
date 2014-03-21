@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Oswald:400,300|Quicksand:300,400,700);
 
 body {
-    font-family: Quicksand, sans-serif;
+    font-family: Helvetica, sans-serif;
     background-color:#ecf0f1;
 }
 
@@ -59,7 +59,7 @@ body {
 }
 
 .feed-change-body-source {
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     color:#bdc3c7;
 }
 
@@ -74,7 +74,7 @@ body {
 }
 
 .feed-change-source {
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     font-weight:bold;
 }
 
@@ -113,7 +113,7 @@ body {
 }
 
 .feed-comment-commentor {
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     font-weight:400;
     display:inline-block;
     position:relative;
@@ -122,7 +122,7 @@ body {
 
 
 .feed-comment-date {
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     font-weight:400;
     display:inline-block;
     position:relative;
@@ -170,7 +170,7 @@ body {
     color:#fff;
     margin:0px;
     padding:15px;
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     text-align:left;
     font-size:18px;
 }
@@ -182,7 +182,7 @@ body {
 }
 
 .feed-profile-header {
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     text-align:center;
     border-bottom:1px solid #bdc3c7;
 }
@@ -191,7 +191,7 @@ body {
     width:130px;
     height: 50px;
     display:block;
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     font-weight:400;
     font-size:40px;
     border-bottom:3px solid #000;
@@ -211,7 +211,7 @@ body {
 }
 
 .user-details-feed {
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     font-weight:300;
     display:inline-block;
     position:relative;
@@ -220,7 +220,7 @@ body {
 }
 
 .wrap-container {
-    font-family:Quicksand, sans-serif;
+    font-family:Helvetica, sans-serif;
     padding:0px 150px;
 }
 
@@ -250,13 +250,13 @@ body {
 
 .founder-cover {
     padding-top:55px;
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
 }
 
 .founder-header {
     font-weight:300;
     font-size:16px;
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
 }
 
 .founder-head-master {
@@ -299,7 +299,7 @@ body {
     padding:0px;
     position:relative;
     top:5px;
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     font-weight:300;
     text-align:center;
 }
@@ -318,7 +318,7 @@ body {
 }
 
 .team-title {
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     font-weight:400; text-align:center;
     border:0px;
     -webkit-margin-after:0em;
@@ -372,7 +372,7 @@ body {
     color:#fff;
     margin:0px;
     padding:15px;
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     text-align:left;
     font-size:18px;
     font-size:15px;
@@ -493,12 +493,26 @@ body {
 }
 
 .document-tag-body {
+    position:relative;
+    top:30px;
+    background-color:#e74c3c;
+    text-align:center;
+    padding:25px;
+    margin-bottom:75px;
+    -webkit-box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
+    -moz-box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
+    box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
+}
+
+/*
+.document-tag-body {
     background-color:#e74c3c;
     border-radius:0px 0px 25px 25px;
     color:#fff;
     text-align:center;
     padding:15px 25px 5px 25px;
 }
+*/
 
 .document-tag-body-box {
     width:95%;
@@ -520,7 +534,7 @@ ul.document-tag-body-box-list {
 }
 
 .document-title {
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     border-bottom:0px solid #bdc3c7;
 }
 
@@ -591,7 +605,7 @@ cursor: pointer;
     left:25px;
     background-color:#bdc3c7;
     padding:5px;
-    font-family: 'Oswald', sans-serif;
+    font-family: Helvetica, sans-serif;
     font-weight:400;
     border-radius:10px 10px 0px 0px;
 }
@@ -629,12 +643,12 @@ a.documents-slider-header-text {
 }
 
 .group-header-title {
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     border-bottom:0px solid #bdc3c7;
 }
 
 .group-members-header {
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     font-weight:400;
     border-bottom:1px solid #bdc3c7;
     margin-bottom:25px;
@@ -656,7 +670,7 @@ a.documents-slider-header-text {
     color:#fff;
     margin:0px;
     padding:15px;
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     text-align:left;
     font-size:18px;
 }
@@ -674,12 +688,25 @@ a.documents-slider-header-text {
 }
 
 .group-request-header {
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     font-weight:400;
     border-bottom:1px solid #bdc3c7;
     margin-bottom:25px;
 }
 
+.group-tag-body {
+    position:relative;
+    top:30px;
+    background-color:#e74c3c;
+    text-align:center;
+    padding:25px;
+    margin-bottom:75px;
+    -webkit-box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
+    -moz-box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
+    box-shadow: 10px 10px 0px 0px rgba(149,165,166,1);
+}
+
+/*
 .group-tag-body {
     background-color:#e74c3c;
     border-radius:0px 0px 25px 25px;
@@ -687,13 +714,14 @@ a.documents-slider-header-text {
     text-align:center;
     padding:15px 25px 5px 25px;
 }
+*/
 
 .group-tag-content {
     width:95%;
     vertical-align:top;
 }
 
-.group-tag-content-list {
+ul.group-tag-content-list {
     background-color:#fff;
 }
 
@@ -728,7 +756,7 @@ a.documents-slider-header-text {
 
 a.groups-box-header-link {
     text-decoration: none;
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     color:#fff;
 }
 
@@ -738,7 +766,7 @@ a.groups-box-header-link {
 }
 
 .groups-header {
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     text-align:center;
     border-bottom:1px solid #bdc3c7;
 }
@@ -748,7 +776,7 @@ a.groups-box-header-link {
 }
 
 .groups-new-group-text {
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     border-bottom:1px solid transparent;
     border-top:1px solid #bdc3c7;
     margin-top:30px;
@@ -774,7 +802,7 @@ a.groups-box-header-link {
 }
 
 .groups-sort-text {
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     font-weight:400;
     font-size:15px;
     display:inline-block;
@@ -784,7 +812,7 @@ a.groups-box-header-link {
 
 /* BEGINNING OF NAVBAR STYLE */
 .nav-body {
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     font-size:16px;
 }
 
@@ -814,7 +842,7 @@ a.nav-logo-link {
 }
 
 .profile-about-me-content-text {
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     font-weight:400;
     display:block;
     padding:25px 0px 0px 25px;
@@ -863,7 +891,7 @@ a.nav-logo-link {
     width:100%;
     display:block;
     float:left;
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     font-weight:400;
     font-size:15px;
     color:#000;
@@ -901,7 +929,7 @@ a.nav-logo-link {
     width:100%;
     display:block;
     float:left;
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     font-weight:400;
     font-size:15px;
     color:#000;
@@ -913,7 +941,7 @@ a.nav-logo-link {
     width:100%;
     display:block;
     float:left;
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     font-weight:400;
     font-size:15px;
     color:#000;
@@ -938,7 +966,7 @@ a.nav-logo-link {
 }
 
 .pp-basic-info-header {
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     font-weight:400;
     font-size:25px;
 }
@@ -952,7 +980,7 @@ a.nav-logo-link {
 }
 
 .pp-basic-info-title {
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     font-weight:400;
     font-size:18px;
 }
@@ -976,7 +1004,7 @@ a.nav-logo-link {
 }
 
 .pp-header {
-    font-family:'Oswald', sans-serif;
+    font-family:Helvetica, sans-serif;
     border-bottom:0px solid #bdc3c7;
 }
 /* END OF PUBLIC PROFILE STYLE */

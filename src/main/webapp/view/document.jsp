@@ -22,6 +22,28 @@
 
     <h1 class="document-title"><%= document.getDocName()%> <%= (sessionUser.getId() == urlUser.getId()) ? "" : " (View-only mode)" %></h1>
 
+    <div class="document-tag-body">
+        <form action="/tag" method="post" class="form-horizontal" role="form">
+            <input type="hidden" name="entityType" value="document" />
+            <input type="hidden" name="entityId" value="<%=document.getId()%>" />
+            <table cellspacing="0" cellpadding="0" style="width:100%;">
+                <tr>
+                    <td class="document-tag-body-box">
+                        <ul id="entityTags" class="document-tag-body-box-list">
+                            <% for (TagDescriptor td : tds){ %>
+                            <li><%=td.getTagName() %></li>
+                            <% } %>
+                        </ul>
+                    </td>
+
+                    <td class="document-tag-submit-box">
+                        <button type="submit" class="btn btn-info document-tag-submit-box-body" name="submit" />Save Tags</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
     <%for(Hunk hunk: hunks){ %>
         <div class="profile document-hunk-container">
             <span class="document-hunk-content"><%= hunk.getContent()%></span>
@@ -47,28 +69,6 @@
 
             <br />
         </span>
-
-        <div class="document-tag-body">
-            <form action="/tag" method="post" class="form-horizontal" role="form">
-                <input type="hidden" name="entityType" value="document" />
-                <input type="hidden" name="entityId" value="<%=document.getId()%>" />
-                <table cellspacing="0" cellpadding="0" style="width:100%;">
-                    <tr>
-                        <td class="document-tag-body-box">
-                            <ul id="entityTags" class="document-tag-body-box-list">
-                                <% for (TagDescriptor td : tds){ %>
-                                <li><%=td.getTagName() %></li>
-                                <% } %>
-                            </ul>
-                        </td>
-
-                        <td class="document-tag-submit-box">
-                            <button type="submit" class="btn btn-info document-tag-submit-box-body" name="submit" />Save Tags</button>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </div>
     </div>
     <br />
     <div class="document-separator"></div>
