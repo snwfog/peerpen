@@ -9,3 +9,5 @@ classes/
 .DS_Store
 out
 *.map
+.project
+.classpath
