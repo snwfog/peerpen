@@ -81,19 +81,22 @@ INSERT INTO `documents` (`id`, `doc_name`, `thumbnail_path`, `peer_id`, `last_mo
 #   (11,'Smart',1,4,'2014-01-15 23:27:01','2014-01-15 23:27:01',5,3,0),
 #   (12,'Hmmm.. I see your point',1,5,'2014-01-15 23:27:48','2014-01-15 23:27:48',6,10,0);
 
-INSERT INTO `feedables` (`id`, `child_id`, `user_id`,`type`, `status`,`last_modified_date`, `creation_date`)
-  VALUES
-  (1, 5, 2,'Changeset','new' ,'2014-01-13 17:59:59','2014-01-13 17:58:59'),
-  (2, 6, 2,'Changeset','new' ,'2014-01-13 17:56:59','2014-01-13 17:58:59'),
-  (3, 7, 2,'Changeset','new' ,'2014-01-13 17:54:59','2014-01-13 17:58:59'),
-  (4, 1, 2,'Comment','new' ,'2014-01-13 17:57:59','2014-01-13 17:58:59'),
-  (5, 2, 2,'Comment','new' ,'2014-01-13 17:52:59','2014-01-13 17:58:59');
 
-INSERT INTO `changesets` (`id`, `creation_date`, `last_modified_date`, `content`, `hunk_id`, `state`)
-  VALUES
-  (5,'2014-01-15 23:24:05','2014-01-15 23:24:05',2,'Changed the format of Education\n',1),
-  (6,'2014-01-15 23:24:48','2014-01-15 23:24:48',2,'Added Leasure section',2),
-  (7,'2014-01-15 23:25:24','2014-01-15 23:25:24',2,'Remove High School in Education',3);
+INSERT INTO `peerpendb`.`hunks` (`id`, `id_view`, `document_id`, `content`, `creation_date`, `last_modified_date`, `semaphore`, `etag`, `page_number`, `hunk_name`) VALUES
+(1, NULL, 2, 'hunk 1', '2014-03-26 00:00:00', CURRENT_TIMESTAMP, 0, NULL, NULL, NULL),
+(2, NULL, 2, 'hunk 2', '2014-03-26 00:00:00', CURRENT_TIMESTAMP, 0, NULL, NULL, NULL),
+(3, NULL, 2, 'hunk 3', '2014-03-26 00:00:00', CURRENT_TIMESTAMP, 0, NULL, NULL, NULL),
+(4, NULL, 2, 'hunk 4', '2014-03-26 00:00:00', CURRENT_TIMESTAMP, 0, NULL, NULL, NULL),
+(5, NULL, 2, 'hunk 5', '2014-03-26 00:00:00', CURRENT_TIMESTAMP, 0, NULL, NULL, NULL),
+(6, NULL, 2, 'hunk 6', '2014-03-26 00:00:00', CURRENT_TIMESTAMP, 0, NULL, NULL, NULL);
+
+INSERT INTO `peerpendb`.`changesets` (`id`, `creation_date`, `last_modified_date`, `peer_id`, `content`, `hunk_id`, `semaphore`, `etag`, `state`, `is_applied`) VALUES
+(1, '2014-03-26 00:00:00', '2014-03-26 00:00:00', 2, 'changeset', 1, 0, NULL, 0, 0),
+(2, '2014-03-26 00:00:00', '2014-03-26 00:00:00', 2, 'changeset', 1, 0, NULL, 0, 0),
+(3, '2014-03-26 00:00:00', '2014-03-26 00:00:00', 2, 'changeset', 1, 0, NULL, 0, 0),
+(4, '2014-03-26 00:00:00', '2014-03-26 00:00:00', 2, 'changeset', 1, 0, NULL, 0, 0),
+(5, '2014-03-26 00:00:00', '2014-03-26 00:00:00', 2, 'changeset', 1, 0, NULL, 0, 0),
+(6, '2014-03-26 00:00:00', '2014-03-26 00:00:00', 2, 'changeset', 1, 0, NULL, 0, 0);
 
 INSERT INTO `comments` (`id`, `message`, `type`, `object_id`, `poster_peer_id`, `creation_date`, `last_modified_date`, `up_vote`, `down_vote`, `semaphore`, `etag`)
   VALUES

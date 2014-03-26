@@ -49,9 +49,6 @@ public class Document extends Taggable implements IModel, Commentable {
     @ActiveRelationHasMany
     private List<Hunk> hunks;
 
-    @Deprecated
-    @ActiveRelationHasMany
-    private List<Changeset> changesets;
     @ActiveRelationHasMany
     private List<Comment> comments;
 
@@ -117,14 +114,11 @@ public class Document extends Taggable implements IModel, Commentable {
         return this.hunks;
     }
 
-    public List<Changeset> getChangesets() {
-        initRelation( "changesets" );
-        return this.changesets;
-    }
-
-    public List<Comment> getComments() {
-        initRelation( "comments" );
-        return this.comments;
+    public List<Comment> getComments()
+    {
+        Integer docId = this.getId();
+        List<Comment> comments = new Comment().queryAll("SELECT *, `up_vote` - `down_vote` AS `total_vote`  FROM `comments` WHERE type='Document' AND object_id= " + docId + " ORDER BY total_vote DESC, last_modified_date DESC");
+        return comments;
     }
 
 
@@ -335,7 +329,8 @@ public class Document extends Taggable implements IModel, Commentable {
 
     @Override
     public int hashCode() {
-        return this.getId().hashCode();}
+        return this.getId().hashCode();
+}
 
     public static class DocumentSerializer implements JsonSerializer<Document> {
 
