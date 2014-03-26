@@ -16,12 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class RegistrationController extends HttpServlet {
-
-    static final Logger logger = LoggerFactory.getLogger( RegistrationController.class );
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
@@ -36,7 +31,6 @@ public class RegistrationController extends HttpServlet {
             }
             Peer p = new Peer( map );
             p.setCompleteProfile( 0 );
-            // TODO: Validate uniqueness either using Java, or database constraint
             // Create the user unquestionably given that this user does not exists already
             if ( (map.get( "password" )).equals( map.get( "confirmPassword" ) ) && p.save() ) {
                 p.setSessionId( request.getSession().getId() );

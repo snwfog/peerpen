@@ -31,7 +31,7 @@ public class LoginController extends GenericApplicationServlet {
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
         try {
-            Peer p = null;
+            Peer p;
             if ( (p = Peer.isValidLogin( request )) != null ) {
                 response.sendRedirect( "/peer/" + p.getId() + "/feed" );
             }
@@ -55,6 +55,6 @@ public class LoginController extends GenericApplicationServlet {
 
     @Override
     protected void doDelete( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
-        logger.warn( "Loggin called delete" );
+        logger.warn( "Login called delete" );
     }
 }

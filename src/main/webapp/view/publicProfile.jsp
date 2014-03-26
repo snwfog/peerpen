@@ -8,8 +8,6 @@
 <%@ include file="/view/includes/static/navbar.jsp" %>
 
 <%
-
-    Peer viewedUser = (Peer) request.getAttribute("viewedUser");
     ArrayList<Group> navGroups =(ArrayList<Group>) sessionUser.getGroups();
 %>
 

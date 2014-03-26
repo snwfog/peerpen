@@ -37,7 +37,6 @@ public class AvatarUploadController extends HttpServlet {
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
         this.storeAvatar( request, response );
-        Peer sessionPeer = (Peer) request.getAttribute( "sessionUser" );
         request.getRequestDispatcher( "/view/avatar.jsp" ).forward( request, response );
     }
 
@@ -45,8 +44,6 @@ public class AvatarUploadController extends HttpServlet {
             throws ServletException, IOException {
         boolean isMultipart = ServletFileUpload.isMultipartContent( request );
         Peer sessionPeer = (Peer) request.getAttribute( "sessionUser" );
-        // http://www.tutorialspoint.com/jsp/jsp_file_uploading.htm
-        // http://stackoverflow.com/questions/5096862/jsp-get-mime-type-on-file-upload
         ServletContext ctx = this.getServletContext();
         String avatarDir = ctx.getInitParameter( "avatar-dir" );
 
@@ -95,10 +92,9 @@ public class AvatarUploadController extends HttpServlet {
                 }
                 logger.info( "Image upload properties " + parameterMaps.toString() );
                 Avatar avatar = sessionPeer.getAvatar();
-                //                avatar.setViewport(parameterMaps);
                 avatar.setOriginalSize( parameterMaps );
                 avatar.setFilename( MessageFormat.format( "{0}.{1}", fileName, fileType ) );
-                avatar.update(); // FIXME: Does PPAR update relationship?
+                avatar.update();
                 sessionPeer.update();
             } catch ( FileUploadException e ) {
                 logger.error( "Something went wrong with image upload ", e );

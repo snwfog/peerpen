@@ -214,7 +214,7 @@ public class Avatar extends Base implements IModel {
 
     public String getAvatarExtension( String path ) {
         ContentInfo info = ContentInfoUtil.findExtensionMatch( path );
-        return info.getFileExtensions().length > 0 ? info.getFileExtensions()[0] : "";
+        return info.getFileExtensions().length > 0 ? info.getFileExtensions()[0] : AVATAR_DEFAULT_PATH;
     }
 
     public void cropAvatar( HttpServletRequest request ) {
@@ -227,11 +227,10 @@ public class Avatar extends Base implements IModel {
         double scaledY2 = this.y2 * ratio;
 
         try {
-            // FIXME: Better pathing
             String originalImageRelativePath =
                     this.getRelativeServletContextAvatarPathForSize( request, Size.ORIGINAL );
             File originalAvatarFile = new File(
-                    MessageFormat.format( "{0}/{1}", request.getSession().getServletContext().getRealPath( "" ),
+                    MessageFormat.format( "{0}/{1}", request.getSession().getServletContext().getRealPath( AVATAR_DEFAULT_PATH ),
                             originalImageRelativePath ) );
             BufferedImage outImage = ImageIO.read( originalAvatarFile );
             BufferedImage croppedImageBuffer =
@@ -240,7 +239,7 @@ public class Avatar extends Base implements IModel {
 
             String fileExtension = this.getAvatarExtension( originalImageRelativePath );
             File croppedImage = new File(
-                    MessageFormat.format( "{0}/{1}", request.getSession().getServletContext().getRealPath( "" ),
+                    MessageFormat.format( "{0}/{1}", request.getSession().getServletContext().getRealPath( AVATAR_DEFAULT_PATH ),
                             this.getRelativeServletContextAvatarPathForSize( request, Size.LARGE ) ) );
 
             ImageIO.write( croppedImageBuffer, fileExtension, croppedImage );
@@ -286,7 +285,7 @@ public class Avatar extends Base implements IModel {
         g.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
 
         String resizeImageAbsolutePath =
-                MessageFormat.format( "{0}/{1}", request.getSession().getServletContext().getRealPath( "" ),
+                MessageFormat.format( "{0}/{1}", request.getSession().getServletContext().getRealPath( AVATAR_DEFAULT_PATH ),
                         this.getServletContextAvatarPathForSize( request, size ) );
         ImageIO.write( scaledImage, fileExtension, new File( resizeImageAbsolutePath ) );
 

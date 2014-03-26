@@ -9,13 +9,11 @@ import java.util.Map;
  */
 public class Notification {
 
-    //CONSIDER making this static method
-    public List<Feedable> getNotification( Peer peer ) {
+    public static List<Feedable> getNotification( Peer peer ) {
         String pid = peer.getId().toString();
         String query = "SELECT * FROM `feedables` WHERE `user_id` = " + pid + " AND `notify_status` = 'UNSEND'";
         return new Feedable().queryAll( query );
     }
-
     public void updateNotification( Peer peer ) {
         String pid = peer.getId().toString();
 
@@ -27,15 +25,5 @@ public class Notification {
             f.setNotifyStatus( "SENT" );
             f.update();
         }
-
-        //        new Feedable().queryAll(query);
     }
-
-    //    public static void main(String[] args){
-    //        Notification n = new Notification();
-    //        Peer p = new Peer().find(2);
-    ////        String json = new Gson().toJson(n.getNotification(p));
-    //        n.updateNotification(p);
-    ////        System.out.println(json);
-    //    }
 }
