@@ -24,14 +24,11 @@ public class VoteControllerAjax extends HttpServlet {
 
     }
 
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
-        Document document = new Document().find(Integer.parseInt(parameters.get("docid")));
         Comment comment = new Comment().find(Integer.parseInt(parameters.get("commentid")));
         comment.upVote();
-
         comment.update();
         String message= comment.getId().toString()+"|"+comment.getUpVote().toString();
 
@@ -44,7 +41,6 @@ public class VoteControllerAjax extends HttpServlet {
     {
         Map<String, String> parameters = (Map<String, String>) request.getAttribute("parameters");
         Comment comment = new Comment().find(Integer.parseInt(parameters.get("commentid")));
-        //comment.setDownVote(comment.getDownVote()+1);
         comment.downVote();
         int commentId = comment.getId()+1;
         String message= commentId+"|"+comment.getDownVote().toString();

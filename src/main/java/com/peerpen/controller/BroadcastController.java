@@ -32,15 +32,12 @@ public class BroadcastController extends HttpServlet {
         Map<String, String> parameters = (Map<String, String>) request.getAttribute( "parameters" );
         Peer peer = new Peer().find( Integer.parseInt( parameters.get( "peerid" ) ) );
         Group group = new Group().find( Integer.parseInt( parameters.get( "groupid" ) ) );
-
         Map<String, Object> map = Maps.newHashMap();
         map.put( "message", parameters.get( "broadcast" ) );
         map.put( "peerId", peer.getId() );
         map.put( "groupId", group.getId() );
-
         Broadcast bc = new Broadcast( map );
         bc.save();
-
         request.setAttribute( "group", group );
         response.sendRedirect( request.getHeader( "referer" ) );
     }
@@ -48,13 +45,10 @@ public class BroadcastController extends HttpServlet {
     protected void doDelete( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
         Map<String, String> parameters = (Map<String, String>) request.getAttribute( "parameters" );
-
         Peer peer = new Peer().find( Integer.parseInt( parameters.get( "peerid" ) ) );
         Group group = new Group().find( Integer.parseInt( request.getParameter( "groupid" ) ) );
-
         Broadcast broadcast = new Broadcast().find( Integer.parseInt( request.getParameter( "broadcastid" ) ) );
         broadcast.destroy();
-
         request.setAttribute( "group", group );
         request.setAttribute( "user", peer );
         response.sendRedirect( request.getHeader( "referer" ) );

@@ -50,7 +50,6 @@ public class Comment extends Feedable implements IModel {
         return posterPeer;
     }
 
-
     public Comment() {
         super();
         this.upVote = 0;
@@ -69,20 +68,6 @@ public class Comment extends Feedable implements IModel {
         this.message = message;
         setUpdateFlag( true );
     }
-
-    //  //testing purposes only
-    //  private String name;
-    //
-    //  public void setName(String name)
-    //  {
-    //    this.name = name;
-    //  }
-    //
-    //  public String getName()
-    //  {
-    //    return name;
-    //  }
-
 
     public Integer getUpVote() {
         return upVote;
@@ -144,7 +129,6 @@ public class Comment extends Feedable implements IModel {
         comment.setPosterPeerId( posterPeer.getId() );
         comment.save();
     }
-
 
     public static void deleteComment( Integer commentId ) {
         Comment comment = new Comment().find( commentId );
