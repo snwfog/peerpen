@@ -108,6 +108,7 @@ body {
 }
 
 .feed-comment-body-text {
+    font-family: Roboto, arial, sans-serif;
     display:block;
     margin-left:33px;
 }

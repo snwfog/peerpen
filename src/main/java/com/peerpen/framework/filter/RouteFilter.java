@@ -13,12 +13,8 @@ import com.peerpen.framework.exception.TooManyUrlNestingException;
 import com.peerpen.model.Peer;
 import com.sunnyd.database.Manager;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.nio.file.Path;
 import java.text.MessageFormat;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
@@ -49,10 +45,15 @@ public class RouteFilter implements Filter {
     public void init( FilterConfig filterConfig ) throws ServletException {
         this.fc = filterConfig;
         try {
-            this.fileLogger = new PrintWriter( new BufferedWriter(
-                    new FileWriter( this.fc.getServletContext().getRealPath( "" ) + "/log/request.log", true ) ) );
+            File file = new File( this.fc.getServletContext().getRealPath( "" ) + "/log/request.log");
+            if(!file.exists())   {
+                new File( this.fc.getServletContext().getRealPath( "" ) + "/log").mkdirs();
+                file.createNewFile();
+            }
+            this.fileLogger = new PrintWriter( new BufferedWriter(new FileWriter( file, true ) ) );
+
         } catch ( IOException e ) {
-            logger.warn( "Failed to initialize the request debug logger" );
+            logger.warn( "Failed to initialize the request debug logger " + e);
         }
     }
 
