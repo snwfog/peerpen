@@ -36,13 +36,13 @@
             <a href="/peer/<%=sessionUser.getId()%>/profile" class="dropdown-toggle" data-toggle="dropdown" style="font-weight:300;">
                 <%= sessionUser.getUserName() %> <img style="margin:0 10px;" class="profile"
                      src="<%= sessionUser.getAvatar().getRelativeServletContextAvatarPathForSize( request, Avatar.Size.SMALL ) %>"/>
-                <%if(sessionUser.getCompleteProfile()==0){%><span class="glyphicon glyphicon-exclamation-sign"></span><%}%>
+                <%if(sessionUser.getCompleteProfile()==0){%><span class="fa fa-exclamation-triangle"></span><%}%>
             </a>
 
             <ul class="dropdown-menu" role="menu">
                 <li><a href="/peer/<%=sessionUser.getId()%>">Profile</a></li>
                 <li><a href="/peer/<%=sessionUser.getId()%>/profile">Edit Profile</a></li>
-                <%if(sessionUser.getCompleteProfile()==0){%> <li><a href="/peer/<%=sessionUser.getId()%>/profile/full">Complete Profile <span class="glyphicon glyphicon-arrow-left"></span></a></li><%}%>
+                <%if(sessionUser.getCompleteProfile()==0){%> <li><a href="/peer/<%=sessionUser.getId()%>/profile/full">Complete Profile <span class="fa fa-arrow-left"></span></a></li><%}%>
                 <li class="divider"></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>

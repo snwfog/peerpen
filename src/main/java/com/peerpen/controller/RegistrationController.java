@@ -6,10 +6,8 @@ import com.peerpen.framework.InternalRequestDispatcher;
 import com.peerpen.framework.exception.MissingArgumentException;
 import com.peerpen.framework.exception.RegistrationFailedException;
 import com.peerpen.model.Peer;
-
 import java.io.IOException;
 import java.util.Map;
-
 import javax.naming.OperationNotSupportedException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

@@ -3,9 +3,7 @@ package com.peerpen.controller;
 import com.google.gson.Gson;
 import com.peerpen.model.Notification;
 import com.peerpen.model.Peer;
-
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

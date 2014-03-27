@@ -31,7 +31,7 @@
 							<a id="edit_description" href="#" style="color:#000;">
                                 Edit
 
-                                <span id="description_icon" class="glyphicon glyphicon-pencil"></span>
+                                <span id="description_icon" class="fa fa-pencil"></span>
                             </a>
 						</span>
 						</span>
@@ -72,7 +72,7 @@
 
             <div class="col-md-4 profile-perso-info-body">
 <span class="profile-perso-info-header">
-	Personal Information <a id="edit_personal" href="#"><span id="personal_icon" class="glyphicon glyphicon-pencil" style="color:#000;"></span></a>
+	Personal Information <a id="edit_personal" href="#"><span id="personal_icon" class="fa fa-pencil" style="color:#000;"></span></a>
 	</span>
 
                 <br /><br />
@@ -166,7 +166,7 @@
 
             <div class="col-md-4 profile-contact-body">
 	<span class="profile-contact-header">
-		Contact Information <a id="edit_contact" href="#"><span id="contact_icon" class="glyphicon glyphicon-pencil" style="color:#000;"></span></a>
+		Contact Information <a id="edit_contact" href="#"><span id="contact_icon" class="fa fa-pencil" style="color:#000;"></span></a>
 	</span>
 
                 <br /><br />

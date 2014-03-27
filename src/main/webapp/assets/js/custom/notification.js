@@ -38,16 +38,12 @@ $(function () {
                         case "Comment" : ctr_comment ++; break;
                         case "Joingroup" : ctr_group ++; break;
                         case "Broadcast" : ctr_broadcast ++; break;
-
-
                         default : break;
                     }
                 });
-
                 if(ctr_changeset > 0){
                     popNotification("you got " + ctr_changeset + " changesets");
                 }
-
                 if(ctr_comment > 0){
                     popNotification("you got " + ctr_comment + " comments");
                 }
@@ -57,11 +53,10 @@ $(function () {
                 if(ctr_broadcast > 0){
                     popNotification("you got " + ctr_broadcast + " broadcast messages");
                 }
-
             }
         });
     }
-
+    //Start pulling from database at specific interval
     if ($("#enableNotification" ).length > 0){
         fetchNotification();
         setInterval(fetchNotification, 500000);
