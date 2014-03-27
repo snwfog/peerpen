@@ -80,12 +80,11 @@
                         if((group.getPeers().contains(jg.getPeer()))==false)
                         {
                 %>
-                <%--<div class="card2">--%>
 
                 <div class="card-body">
                     <strong> Peer <%= jg.getPeer().getUserName() %> wants to join your group</strong>
-                                                <span class="child" style="font-style: italic;font-size: small;">
-                                                 <p class="text-right"><%= jg.getTimesAgo()%></p></span>
+                    <span class="child" style="font-style: italic;font-size: small;">
+                    <p class="text-right"><%= jg.getTimesAgo()%></p></span>
                     <div class="card-actions parent">
                         <form action="/joingroup" method="POST" class="form-horizontal child">
                             <input type="hidden" name="groupid" value="<%= jg.getGroupId()%>">
@@ -137,7 +136,6 @@
                     <td><a href="/peer/<%=p.getId()%>/document"> Documents </a></td>
                     <td>
                         <% if ((p.getId()!=group.getAdminId())&&(sessionUser.getId()==group.getAdminId())){ %>
-                                <%--<div class="span8 child"><%=p.getUserName()%></div>--%>
                                 <form action="/group" method="POST" class="form-horizontal child">
                                     <input type="hidden" name="groupid" value="<%= group.getId()%>">
                                     <input type="hidden" name="peerid" value="<%= p.getId()%>">
@@ -154,8 +152,6 @@
 
          </div>
 
-        <%--<div id="row">--%>
-
                 <%for(Broadcast broadcast : broadcasts ){%>
                 <div class="card2">
                     <h3 class="card-heading simple"><%= broadcast.getPeer().getFirstName() %> <%= broadcast.getPeer().getLastName() %></h3>
@@ -165,8 +161,6 @@
                         <span class="child" style="font-style: italic;font-size: small;">
                             <p class="text-right"><%= broadcast.getTimesAgo()%></p></span>
                     </div>
-
-                    <%--<span class="child" style="font-style: italic;font-size: small;"><%= broadcast.getTimesAgo()%></span>--%>
                     &nbsp;&nbsp;
                     <% if(sessionUser.getId() == broadcast.getPeerId() || sessionUser.getId() == broadcast.getPeerId()){%>
                     <a data-toggle="modal" data-id="<%= broadcast.getId()%>" class="confirmDeleteBroadcastDialog child"
@@ -176,7 +170,6 @@
                 <%}%>
 
              </div>
-         <%--</div>--%>
 
     </div>
 

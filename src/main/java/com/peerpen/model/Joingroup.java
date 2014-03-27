@@ -67,19 +67,11 @@ public class Joingroup extends Feedable implements IModel {
         return group;
     }
 
-
     public void setGroup( Group g ) {
         this.setGroupId( g.getId() );
         this.group = g;
         this.setUpdateFlag( true );
     }
-
-
-    //    public List<Joingroup> getRequests()
-    //    {
-    //        List<Joingroup> joingroups = new Joingroup().queryAll("SELECT * FROM `joingroups` WHERE group_id= "+ this.getGroupId() +" ORDER BY last_modified_date DESC");
-    //        return joingroups;
-    //    }
 
 }
 

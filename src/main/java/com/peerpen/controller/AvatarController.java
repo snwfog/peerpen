@@ -12,12 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class AvatarController extends HttpServlet {
-
-    static final Logger logger = LoggerFactory.getLogger( AvatarController.class );
 
     public void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
@@ -33,7 +28,6 @@ public class AvatarController extends HttpServlet {
             request.getRequestDispatcher( "/view/profile.jsp" ).forward( request, response );
         }
     }
-
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {

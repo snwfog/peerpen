@@ -69,13 +69,6 @@ public class Group extends Taggable implements IModel {
         }
     }
 
-    //public List<Group> getMatchedGroups(String keyword)
-    //{
-    //  String sql = "SELECT * FROM `groups` WHERE `group_name` LIKE '%" + keyword + "%'";
-    //  List<Group> groups = new Group().queryAll(sql);
-    //  return groups;
-    //}
-
     public List<Group> getGroups() {
         return new Group().queryAll( "SELECT * FROM `groups`" );
     }

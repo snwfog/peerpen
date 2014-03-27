@@ -96,7 +96,6 @@ public class Changeset extends Feedable implements IModel, Commentable {
         return hunk;
     }
 
-
     public void setHunk( Hunk h ) {
         this.hunk = h;
         setUpdateFlag( true );

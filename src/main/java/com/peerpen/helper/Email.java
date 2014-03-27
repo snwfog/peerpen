@@ -7,20 +7,12 @@ import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: bobbyyit
- * Date: 2014-01-24
- * Time: 6:28 PM
- * To change this template use File | Settings | File Templates.
- */
-
 public class Email
 {
   static final Logger logger = LoggerFactory.getLogger(Email.class);
 
   public static Boolean email(String toEmail, String toName, String newPassword){
-    return sendMail(toEmail, "Peerpen - Password has been reset", getEmail(toName, newPassword), "sunnyd.peerpen@gmail.com", "penisland");
+    return sendMail(toEmail, "Peerpen - Password has been reset", getEmail(toName, newPassword), "sunnyd.peerpen@gmail.com", "capstonepeerpen");
   }
 
   private static Boolean sendMail(String to, String subject, String msg,
@@ -29,6 +21,7 @@ public class Email
 
     props.put("mail.smtp.host", "smtp.gmail.com");
     props.put("mail.smtp.port", "587");
+    props.put("mail.smtp.auth", "true");
     props.put("mail.smtp.auth", "true");
     props.put("mail.smtp.starttls.enable", "true");
 
@@ -52,7 +45,6 @@ public class Email
     }catch(Exception e)
     {
       logger.error("Failed to send email:" + e.toString());
-//      e.printStackTrace();
       return false;
     }
 

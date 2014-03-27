@@ -10,14 +10,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created with IntelliJ IDEA.
- * User: bobbyyit
- * Date: 2013-11-15
- * Time: 2:15 PM
- * To change this template use File | Settings | File Templates.
- */
-
 public class ResetControllerAjax extends HttpServlet
 {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -46,7 +38,4 @@ public class ResetControllerAjax extends HttpServlet
     response.getWriter().write(message);
   }
 
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-  {
-  }
 }

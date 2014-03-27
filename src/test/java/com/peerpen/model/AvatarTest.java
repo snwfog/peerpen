@@ -35,7 +35,6 @@ public class AvatarTest {
         attributes.put( "y2", 256.0 );
         attributes.put( "originalWidth", 1024.0 );
         attributes.put( "originalHeight", 1024.0 );
-        Avatar avatar = new Avatar( attributes );
     }
 
     @Test
@@ -112,9 +111,7 @@ public class AvatarTest {
         Assert.assertEquals( avatarTest.getX2(), 40.0 );
         Assert.assertEquals( avatarTest.getY1(), 0.0 );
         Assert.assertEquals( avatarTest.getY2(), 40.0 );
-        //For AvatarUpload
-        //        String fileNameTest = peer.getId()+"-"+peer.getFirstName().toLowerCase();
-        //        Assert.assertTrue(avatarTest.getFilename().startsWith(fileNameTest));
+
     }
 
 

@@ -1,7 +1,6 @@
 <%@ include file="/view/includes/static/header.jsp" %>
 <%@ include file="/view/includes/static/navbar.jsp" %>
 
-<%--Declare all request variables here, easy to debug!!!--%>
 <%
     List<Group> groups = (List<Group>) request.getAttribute("groups");
     String sort = (String) request.getAttribute("sort");
@@ -28,9 +27,6 @@
                         <input type="hidden" name="_method" value="put" />
                     </form>
                 </div>
-
-
-
 
                 <%
                     for (Group group : groups){
@@ -82,13 +78,8 @@
                 <h1 class="groups-new-group-text">Your desired group not enlisted? Create your own!</h1>
                 <button class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal">Create a new group</button>
             </div>
-
-
         </div>
     </div>
-
-
-
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
