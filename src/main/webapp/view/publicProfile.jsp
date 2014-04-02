@@ -14,7 +14,7 @@
 <div class="cover-container pp-body"> </div>
 <div class="container-fluid wrap-container">
 
-    <h1 class="pp-header"><%=viewedUser.getFirstName()%> <%=viewedUser.getLastName()%>'s Profile</h1>
+    <h1 class="pp-header"><%= viewedUser.getFirstName()== null ? viewedUser.getUserName().toString() : viewedUser.getFirstName().toString() %> <%= viewedUser.getLastName()== null ? "" : viewedUser.getLastName().toString() %>'s Profile</h1>
 
     <div class="row">
 
@@ -32,7 +32,7 @@
     <tr>
         <td class="pp-basic-info-body">
         <div class="profile-about-me-pointer pp-basic-info-pointer"></div>
-        <span class="pp-basic-info-header"><%=viewedUser.getFirstName()%> <%=viewedUser.getLastName()%></span>
+        <span class="pp-basic-info-header"><%= viewedUser.getFirstName()== null ? viewedUser.getUserName().toString() : viewedUser.getFirstName().toString() %> <%= viewedUser.getLastName()== null ? "" : viewedUser.getLastName().toString() %></span>
 
         <br /><br />
 

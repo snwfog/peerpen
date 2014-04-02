@@ -28,13 +28,13 @@
 
     <div id="page-wrap">
 
-        <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSUXeROtkv2O9umjXYUARIec8JgWZrFBwCM577WdmEomEGYkzBQlQ" alt="Photo of Cthulu" id="pic" />
+    <img src="/assets/images/lib/example-image.jpeg" alt="" id="pic" />
 
         <div id="contact-info" class="vcard">
 
             <!-- Microformats! -->
 
-            <h1 class="fn">C'thulhu</h1>
+            <h1 class="fn">Person A</h1>
 
             <p>
                 Cell: <span class="tel">555-666-7777</span><br />

@@ -10,21 +10,21 @@
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <form class="form-inline" name="register" id="register" action="/register" method="post" role="form" style="text-align:center;">
+                    <input type="text" class="form-control parsley-validated" name="user_name" id="valid_username"
+                           placeholder="Choose a Username" style="width:300px;" parsley-trigger="change keyup">
+
                     <div class="form-group">
-                        <input type="text" class="form-control" name="last_name" id="lastName"
-                               placeholder="Your name" style="width:300px;">
+                        <input type="password" class="form-control parsley-validated" name="password" id="inputPassword"
+                               placeholder="Choose a password" style="width:300px;" parsley-trigger="change keyup">
                     </div>
 
                     <div class="form-group">
-                        <input type="email" class="form-control" name="email" id="inputEmail"
-                               placeholder="Your email" style="width:300px;">
+                        <input type="email" class="form-control parsley-validated" name="email" id="inputEmail"
+                               placeholder="Your email" style="width:300px;" parsley-trigger="change keyup">
                     </div>
 
+                    <input type="hidden" name="form" value="index">
 
-                    <div class="form-group">
-                        <input type="password" class="form-control" name="password" id="inputPassword"
-                               placeholder="Choose a password" style="width:300px;">
-                    </div>
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-default btn-success" style="width:300px;">Sign up for Peerpen</button>

@@ -44,7 +44,7 @@ public class Peer extends Base {
     @ActiveRecordField
     private Integer point;
     @ActiveRecordField
-    private Integer rankId; // FIXME: has rank or rank id? Interface is inconsistent
+    private Integer rankId;
     @ActiveRecordField
     private String personalWebsite;
     @ActiveRecordField
@@ -82,7 +82,7 @@ public class Peer extends Base {
         super( HM );
     }
 
-    private void giveDefaultAvatar() {
+    public void giveDefaultAvatar() {
         this.avatar = Avatar.getDefaultAvatar();
         this.avatar.setPeerId( this.getId() );
         this.avatar.save();

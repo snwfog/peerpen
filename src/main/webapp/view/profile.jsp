@@ -84,14 +84,14 @@
                             <td><h6>First name</h6></td>
                             <td style="padding-bottom:10px;"><input type="text" class="form-control peerPersonal"
                                                                     name="first_name"
-                                                                    value="<%= sessionUser.getFirstName().toString() %>" readonly>
+                                                                    value="<%= sessionUser.getFirstName()== null ? "" : sessionUser.getFirstName().toString() %>" readonly>
                             </td>
                         </tr>
                         <tr>
                             <td><h6>Last name</h6></td>
                             <td style="padding-bottom:10px;"><input type="text" class="form-control peerPersonal"
                                                                     name="last_name"
-                                                                    value="<%= sessionUser.getLastName().toString() %>" readonly>
+                                                                    value="<%= sessionUser.getLastName()== null ? "" : sessionUser.getFirstName().toString() %>" readonly>
                             </td>
                         </tr>
                         <tr>
