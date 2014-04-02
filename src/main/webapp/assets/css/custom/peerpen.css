@@ -419,6 +419,11 @@ display:none;
     margin-top: 20px;
 }
 
+.card2 .card-body h3{
+    color: #e67e22
+}
+
+
 .card2 .card-media {
     padding: 0 20px;
     margin: 0 -14px;
@@ -720,6 +725,9 @@ display:none;
   /*min-width:px;*/
   /*min-height:50px;*/
 
+}
+.child h4{
+    color: #000000;
 }
 
 
