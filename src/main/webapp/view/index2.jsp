@@ -1,5 +1,3 @@
-<%@ page import="java.util.List" %>
-<%@ page import="twitter4j.Status" %>
 <%@ include file="/view/includes/static/header.jsp" %>
 <%@ include file="/view/includes/static/navbar.jsp" %>
 
@@ -119,87 +117,87 @@
     </div>
 </section>
 
-<section id="osx-notification">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <p data-2250="opacity:0" data-2500="opacity:1">
-                    Delivered right to your desktop via advance web notification
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-md-offset-8">
-                <div data-2170="top:-300px" data-2490="top:-120px" class="float-glyphs" id="osx-desktop-notification">
-                    <img src="/assets/images/index/osx-notification.png" alt=""/>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<%--<section id="osx-notification">--%>
+    <%--<div class="container">--%>
+        <%--<div class="row">--%>
+            <%--<div class="col-md-4">--%>
+                <%--<p data-2250="opacity:0" data-2500="opacity:1">--%>
+                    <%--Delivered right to your desktop via advance web notification--%>
+                <%--</p>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--<div class="row">--%>
+            <%--<div class="col-md-4 col-md-offset-8">--%>
+                <%--<div data-2170="top:-300px" data-2490="top:-120px" class="float-glyphs" id="osx-desktop-notification">--%>
+                    <%--<img src="/assets/images/index/osx-notification.png" alt=""/>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</section>--%>
 
-<section id="twitter">
-    <div class="row text-center">
-        <p>We don't like to brag about us</p>
+<%--<section id="twitter">--%>
+    <%--<div class="row text-center">--%>
+        <%--<p>We don't like to brag about us</p>--%>
 
-        <p>So here are praises from your friendly undergrads just like you</p>
-    </div>
-    <div class="container">
-        <div id="carousel-tweets" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <% int TWEETS_PER_SLIDE = 3; %>
-                <% List<Status> tweets = (List<Status>) request.getAttribute( "tweets" ); %>
-                <% int indicatorCount = tweets.size() / TWEETS_PER_SLIDE; %>
-                <% for ( int i = 0; i < indicatorCount; i++ ) { %>
-                <li data-target="#carousel-tweets" data-slide-to="<%= i %>" <%= (i == 0) ? "class=\"active\"" :
-                        "" %>></li>
-                <% } %>
-            </ol>
-            <div class="carousel-inner">
-                <% for ( int i = 0; i < tweets.size() - (tweets.size() % 3); i += TWEETS_PER_SLIDE ) { %>
-                <div class="item <%= (i==0) ? "active" : "" %>">
-                    <div class="row">
-                        <% for ( int j = i; j < i + TWEETS_PER_SLIDE; j++ ) { %>
-                        <div class="col-md-4">
-                            <blockquote>
-                                <% Status tw = tweets.get( j ); %>
-                                <p><%= StringEscapeUtils.escapeHtml4( tw.getText() ) %>
-                                </p>
-                                <a href="https://twitter.com/peerpen/status/<%= tw.getId() %>">
-                                    <small class="pull-right">@<%= tw.getUser().getName() %>
-                                    </small>
-                                </a>
-                            </blockquote>
-                        </div>
-                        <% } %>
-                    </div>
-                </div>
-                <% } %>
-            </div>
-            <a class="left carousel-control" href="#carousel-tweets" data-slide="prev">
-                <i class="fa fa-chevron-left fa-inverse"></i>
-            </a>
-            <a class="right carousel-control" href="#carousel-tweets" data-slide="next">
-                <i class="fa fa-chevron-right fa-inverse"></i>
-            </a>
-        </div>
-    </div>
-</section>
+        <%--<p>So here are praises from your friendly undergrads just like you</p>--%>
+    <%--</div>--%>
+    <%--<div class="container">--%>
+        <%--<div id="carousel-tweets" class="carousel slide" data-ride="carousel">--%>
+            <%--<ol class="carousel-indicators">--%>
+                <%--<% int TWEETS_PER_SLIDE = 3; %>--%>
+                <%--<% List<Status> tweets = (List<Status>) request.getAttribute( "tweets" ); %>--%>
+                <%--<% int indicatorCount = tweets.size() / TWEETS_PER_SLIDE; %>--%>
+                <%--<% for ( int i = 0; i < indicatorCount; i++ ) { %>--%>
+                <%--<li data-target="#carousel-tweets" data-slide-to="<%= i %>" <%= (i == 0) ? "class=\"active\"" :--%>
+                        <%--"" %>></li>--%>
+                <%--<% } %>--%>
+            <%--</ol>--%>
+            <%--<div class="carousel-inner">--%>
+                <%--<% for ( int i = 0; i < tweets.size() - (tweets.size() % 3); i += TWEETS_PER_SLIDE ) { %>--%>
+                <%--<div class="item <%= (i==0) ? "active" : "" %>">--%>
+                    <%--<div class="row">--%>
+                        <%--<% for ( int j = i; j < i + TWEETS_PER_SLIDE; j++ ) { %>--%>
+                        <%--<div class="col-md-4">--%>
+                            <%--<blockquote>--%>
+                                <%--<% Status tw = tweets.get( j ); %>--%>
+                                <%--<p><%= StringEscapeUtils.escapeHtml4( tw.getText() ) %>--%>
+                                <%--</p>--%>
+                                <%--<a href="https://twitter.com/peerpen/status/<%= tw.getId() %>">--%>
+                                    <%--<small class="pull-right">@<%= tw.getUser().getName() %>--%>
+                                    <%--</small>--%>
+                                <%--</a>--%>
+                            <%--</blockquote>--%>
+                        <%--</div>--%>
+                        <%--<% } %>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<% } %>--%>
+            <%--</div>--%>
+            <%--<a class="left carousel-control" href="#carousel-tweets" data-slide="prev">--%>
+                <%--<i class="fa fa-chevron-left fa-inverse"></i>--%>
+            <%--</a>--%>
+            <%--<a class="right carousel-control" href="#carousel-tweets" data-slide="next">--%>
+                <%--<i class="fa fa-chevron-right fa-inverse"></i>--%>
+            <%--</a>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</section>--%>
 
-<section id="counter">
-    <div class="container">
-        <div class="row text-center">
-            <p>Convinced yet?</p>
-        </div>
+<%--<section id="counter">--%>
+    <%--<div class="container">--%>
+        <%--<div class="row text-center">--%>
+            <%--<p>Convinced yet?</p>--%>
+        <%--</div>--%>
 
-        <div class="row text-center">
-            <div class="col-md-12 odometer">654321</div>
-            <p>people have already joined,</p>
+        <%--<div class="row text-center">--%>
+            <%--<div class="col-md-12 odometer">654321</div>--%>
+            <%--<p>people have already joined,</p>--%>
 
-            <p>will you be the next one?</p>
-        </div>
-    </div>
-</section>
+            <%--<p>will you be the next one?</p>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</section>--%>
 
 <!-- /container -->
 <%@ include file="/view/includes/static/footer.jsp" %>
