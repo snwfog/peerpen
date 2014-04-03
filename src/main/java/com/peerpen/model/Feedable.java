@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.jooq.DSLContext;
 import org.jooq.Field;
+import org.jooq.SortField;
 import org.jooq.impl.DSL;
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -226,17 +227,9 @@ public class Feedable extends Base {
     }
 
     public static List<Feedable> getFeed( int id ) {
-        DSLContext jooq = startQuery();
-
-        Field<?> allField = DSL.field( "a.*" );
-        Field<?> lastModifiedDate = DSL.field( "a.last_modified_date" );
-
-        String query = jooq.select( allField )
-                .from( "feedables a" )
-                .where( "a.user_id = " + id )
-                .orderBy( lastModifiedDate.desc() )
-                .toString();
-        return new Feedable().queryAll( query );
+        List<Feedable> feedables = new Feedable().queryAll(
+                "SELECT * FROM `feedables` WHERE user_id= " + id + " ORDER BY creation_date DESC" );
+        return feedables;
     }
 
     public String getType() {
