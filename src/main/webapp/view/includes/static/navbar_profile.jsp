@@ -34,7 +34,7 @@
 
         <li class="dropdown">
             <a href="/peer/<%=sessionUser.getId()%>/profile" class="dropdown-toggle" data-toggle="dropdown" style="font-weight:300;">
-                <%= sessionUser.getUserName() %> <img style="margin:0 10px;" class="profile"
+                <%= sessionUser.getFirstName() %> <%= sessionUser.getLastName() %> <img style="margin:0 10px;" class="profile"
                      src="<%= sessionUser.getAvatar().getRelativeServletContextAvatarPathForSize( request, Avatar.Size.SMALL ) %>"/>
                 <%if(sessionUser.getCompleteProfile()==0){%><span class="fa fa-exclamation-triangle"></span><%}%>
             </a>

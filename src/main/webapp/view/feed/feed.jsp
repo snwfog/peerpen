@@ -4,15 +4,15 @@
 <%@ include file="/view/includes/static/navbar.jsp" %>
 <% ArrayList<Group> navGroups =(ArrayList<Group>) sessionUser.getGroups();%>
 
-<div class="cover-container"> </div>
+<div class="cover-container"></div>
 
 <div id="feed-container" class="container-fluid wrap-container">
 
     <img />
     <div class="avatar avatar-container feed-avatar-body">
 		<span class="info user-details-feed">
-		        <a href="/peer/<%=sessionUser.getId()%>/profile" style="color:#fff;">
-                    <h4><%=sessionUser.getFirstName()%> <%=sessionUser.getLastName()%></h4>
+		        <a href="/peer/<%=sessionUser.getId()%>/profile" style="color:#3A3838;">
+                    <h2><%=sessionUser.getFirstName()%> <%=sessionUser.getLastName()%></h2>
                 </a>
 		</span>
         <a href="/peer/<%=sessionUser.getId()%>/profile">

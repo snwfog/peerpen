@@ -219,7 +219,7 @@
         </p></div>
 </div>
 
-<h1 class="team-title">THE TEAM</h1>
+<h1 class="team-title">The Team</h1>
 
 <div class="container-fluid team-container">
     <div class="row team-nav">
@@ -367,12 +367,12 @@
 
 </div>
 
-<p id="back-top">
-    <a href="#top"><span></span>Back to Top</a>
-</p>
+<%--<p id="back-top">--%>
+    <%--<a href="#top"><span></span>Back to Top</a>--%>
+<%--</p>--%>
 </div><!-- /.container -->
 
-<script src="/assets/js/lib/jquery-1.9.1.js"></script>
+<%--<script src="/assets/js/lib/jquery-1.9.1.js"></script>--%>
 <script>
     function selectProfile(ID, scrolled) {
         resetProfile();
