@@ -63,7 +63,7 @@
       return $.ajax({
         type: "post",
         url: postUrl,
-        data: JSON.stringify(hunks),
+        data: hunks,
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         success: function(event) {

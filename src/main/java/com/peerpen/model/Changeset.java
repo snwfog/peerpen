@@ -47,7 +47,7 @@ public class Changeset extends Feedable implements Commentable {
 
         changeset.setState( state.getValue() );
         changeset.setIsApplied( false );
-        changeset.update();
+        changeset.save();
         return changeset;
     }
 

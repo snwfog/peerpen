@@ -106,15 +106,21 @@ public class DocumentController extends GenericApplicationServlet {
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
         try {
-            int documentId = 2;
-            Document doc = new Document().find( documentId );
+
+            Map<String, Object> parameterMap = (Map<String, Object>) request.getAttribute( "parameters" );
+            Map<String, Base> modelMap = ModelHierarchyUtil.parameterAsMap( parameterMap );
+
+            Peer sessionUser = (Peer) request.getAttribute( "sessionUser" );
+            Peer urlUser = (Peer) modelMap.get( "peer" );
+
+            Document doc = (Document) modelMap.get( "document" );
             if ( doc == null ) {
                 throw new Exception();
             }
-
             String jsonObjectAsString = (String) request.getAttribute( "requestData" );
-            doc.commitDocumentFromRawJson( jsonObjectAsString );
-            logger.info( "Document updated for " + doc.getId() );
+            doc.commitDocumentFromRawJson( jsonObjectAsString, sessionUser.getId() != urlUser.getId() );
+            logger.info( "Document updated for " + doc.getId());
+
         } catch ( Exception e ) {
             System.out.println( "Problem" );
         }

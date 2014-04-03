@@ -202,6 +202,7 @@ public class Document extends Taggable implements Commentable
     {
 
       h.setDocumentId(this.getId());
+
       // h.setDocument(this);
 
       if (h.save())
@@ -225,14 +226,14 @@ public class Document extends Taggable implements Commentable
   private boolean updateHunk(Map<Long, Hunk> modifiedHunks, boolean createChangeset)
   {
     boolean successful = true;
-    Map<Long, Hunk> hunkMap = this.getHunkAsMap();
     for (Hunk h : modifiedHunks.values())
     {
       if (createChangeset)
       {
         h.getChangesets().add(Changeset.getInstanceFromHunk(h, Changeset.ChangesetState.MODIFIED));
       }
-      successful = successful && (hunkMap.get(h.getIdView())).setContent(h.getContent()).update();
+      List<Hunk> dbHunks = new Hunk().queryAll("select * from hunks where id_view=" + h.getIdView() + " AND document_id =" + this.getId());
+      successful = successful && (dbHunks.get(0)).setContent(h.getContent()).update();
     }
 
     return successful;
@@ -245,31 +246,29 @@ public class Document extends Taggable implements Commentable
    * @param jsonString
    * @return
    */
-  public boolean commitDocumentFromRawJson(String jsonString)
+  public boolean commitDocumentFromRawJson(String jsonString, boolean createChangeset)
   {
-    Ppedit ppedit = Ppedit.serializeFromJsonString(jsonString);
+      Gson gson =
+              new GsonBuilder().registerTypeAdapter( Ppedit.class, new Ppedit.PpeditDeserializer() ).create();
 
-    boolean successful = true;
-
-    // FIXME: Turn off when finish debugging
-    boolean createChangeset = true;
+    Ppedit ppedit = gson.fromJson(jsonString, Ppedit.class);
+    boolean successful = false;
 
     for (Page page : ppedit.getRemoved())
     {
-      successful = successful && this.removeHunk(page.getHunks(), createChangeset);
+      successful = this.removeHunk(page.getHunks(), createChangeset);
     }
 
     for (Page page : ppedit.getModified())
     {
-      successful = successful && this.updateHunk(page.getHunks(), createChangeset);
+      successful = this.updateHunk(page.getHunks(), createChangeset);
     }
 
     for (Page page : ppedit.getCreated())
     {
-      successful = successful && this.createHunk(page.getHunks(), createChangeset);
+      successful = this.createHunk(page.getHunks(), createChangeset);
     }
 
-    // FIXME: This is wrong
     return successful;
   }
 
@@ -351,15 +350,14 @@ public class Document extends Taggable implements Commentable
     public JsonElement serialize(Document src, Type typeOfSrc, JsonSerializationContext context)
     {
       List<Page> documentPages = new ArrayList<>();
-      documentPages.add(0, new Page());
       for (Hunk h : src.getHunks())
       {
         Page p = null;
-        if(documentPages.size() >= h.getPageNumber()){
-            p = documentPages.get(h.getPageNumber()-1);
+        if(documentPages.size() > h.getPageNumber()){
+            p = documentPages.get(h.getPageNumber());
         }else{
             p = new Page();
-            documentPages.add(h.getPageNumber()-1, p);
+            documentPages.add(h.getPageNumber(), p);
         }
         p.getHunks().put(Long.valueOf(h.getIdView()), h);
       }
