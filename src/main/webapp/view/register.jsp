@@ -16,7 +16,7 @@
         </div>
         <div style=" max-width:352px; margin-left:50%">
             <h2>Join Now</h2>
-            <h4>Become a member of PeerPen</h4>
+            <h4>Become a member of Peerpen</h4>
 
             <div class="form-group">
                 <input type="text" class="form-control parsley-validated" style="margin:10px 0" id="valid_fname" name="first_name"
@@ -37,6 +37,7 @@
                    placeholder="Confirmed Password" parsley-trigger="change keyup"/>
             <input type="text" class="form-control parsley-validated" style="margin:10px 0" id="valid_email" name="email"
                    placeholder="Email"  parsley-trigger="change keyup"/>
+            <input type="hidden" name="form" value="register">
             <button type="submit" class="btn btn-primary pull-right" value="submit">Sign Up</button>
             <div id="errorContainer">
             </div>

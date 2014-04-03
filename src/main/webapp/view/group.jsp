@@ -113,6 +113,7 @@
 
     <div class="row">
         <div class="col-md-12">
+            <div>
             <h2 class="group-members-header">Members of this group</h2>
 
             <table class="table table-striped table-condensed">
@@ -151,15 +152,15 @@
             </table>
 
          </div>
-
+            <h2 class="group-members-header">Broadcasts</h2>
                 <%for(Broadcast broadcast : broadcasts ){%>
                 <div class="card2">
                     <h3 class="card-heading simple"><%= broadcast.getPeer().getFirstName() %> <%= broadcast.getPeer().getLastName() %></h3>
                     <div class="card-body">
-                        <strong><%= broadcast.getMessage() %></strong>
+                        <h3><strong><%= broadcast.getMessage() %></strong></h3>
 
                         <span class="child" style="font-style: italic;font-size: small;">
-                            <p class="text-right"><%= broadcast.getTimesAgo()%></p></span>
+                            <h4 class="text-right">&nbsp<%= broadcast.getTimesAgo()%></h4></span>
                     </div>
                     &nbsp;&nbsp;
                     <% if(sessionUser.getId() == broadcast.getPeerId() || sessionUser.getId() == broadcast.getPeerId()){%>

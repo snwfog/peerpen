@@ -3,20 +3,17 @@ package com.peerpen.controller;
 import com.google.common.collect.Maps;
 import com.peerpen.model.Avatar;
 import com.peerpen.model.Peer;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -33,13 +30,11 @@ public class AvatarUploadController extends HttpServlet {
             throws ServletException, IOException {
         request.getRequestDispatcher( "/view/avatar.jsp" ).forward( request, response );
     }
-
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
         this.storeAvatar( request, response );
         request.getRequestDispatcher( "/view/avatar.jsp" ).forward( request, response );
     }
-
     private void storeAvatar( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
         boolean isMultipart = ServletFileUpload.isMultipartContent( request );

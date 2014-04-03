@@ -4,10 +4,8 @@ import com.peerpen.framework.GenericApplicationServlet;
 import com.peerpen.framework.ModelHierarchyUtil;
 import com.peerpen.model.Peer;
 import com.sunnyd.Base;
-
 import java.io.IOException;
 import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

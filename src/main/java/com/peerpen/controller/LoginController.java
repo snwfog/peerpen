@@ -31,7 +31,7 @@ public class LoginController extends GenericApplicationServlet {
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
         try {
-            Peer p;
+            Peer p = null;
             if ( (p = Peer.isValidLogin( request )) != null ) {
                 response.sendRedirect( "/peer/" + p.getId() + "/feed" );
             }
