@@ -1,8 +1,13 @@
 <%@ page import="com.peerpen.model.Document" %><% Document doc = (Document) request.getAttribute("doc");%>
 <div class="row center-block text-center">
-       <h1>
-           <%=doc.getDocName()%>
-       </h1>
+  <div style="text-align: center">
+    <a class="btn btn-warning btn-sm" href="document/<%= doc.getId()%>"  >View document</a>
+    <a class="btn btn-warning btn-sm" href="document/<%= doc.getId()%>/edit" >Edit document</a>
+  </div>
+  <br />
+  <h1>
+    <%=doc.getDocName()%>
+  </h1>
 </div>
 
 <div class="row">

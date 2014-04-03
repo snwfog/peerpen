@@ -10,21 +10,21 @@
 <% List<Document> documents = peer.getDocuments(); %>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-4">
-        </div>
+    <%--<div class="row">--%>
+        <%--<div class="col-md-4">--%>
+        <%--</div>--%>
 
-        <div class="col-md-4">
-            <div class="row text-center" id="documentBar">
-                <input type="hidden" value="<%=peer.getId()%>" id="ajaxPeer">
-                <a class="btn btn-warning btn-sm" href="#" id="viewDocument" disabled>View Detail Document</a>
-                <a class="btn btn-warning btn-sm" href="#" id="editDocument" disabled>Edit Document</a>
-            </div>
-        </div>
+        <%--<div class="col-md-4">--%>
+            <%--<div class="row text-center" id="documentBar">--%>
+                <%--<input type="hidden" value="<%=peer.getId()%>" id="ajaxPeer">--%>
+                <%--<a class="btn btn-warning btn-sm" href="#" id="viewDocument" disabled>View Detail Document</a>--%>
+                <%--<a class="btn btn-warning btn-sm" href="#" id="editDocument" disabled>Edit Document</a>--%>
+            <%--</div>--%>
+        <%--</div>--%>
 
-        <div class="col-md-4">
-        </div>
-    </div>
+        <%--<div class="col-md-4">--%>
+        <%--</div>--%>
+    <%--</div>--%>
 
     <div class="row top-buffer">
         <div class="col-md-2">
