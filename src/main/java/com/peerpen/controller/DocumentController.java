@@ -53,9 +53,9 @@ public class DocumentController extends GenericApplicationServlet {
                 response.setStatus( 200 );
             } catch ( Exception e ) {
                 response.setStatus( 404 );
-            } finally {
-                pw.print( content );
             }
+            pw.print( content );
+
         } else {
             Map<String, Object> parameters = internalRequest.getParametersMap();
             // FIXME: parameters is not garantee to be clean, need distinguish between parameters and URL parameters
