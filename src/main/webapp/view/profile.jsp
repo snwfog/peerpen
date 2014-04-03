@@ -91,7 +91,7 @@
                             <td><h6>Last name</h6></td>
                             <td style="padding-bottom:10px;"><input type="text" class="form-control peerPersonal"
                                                                     name="last_name"
-                                                                    value="<%= sessionUser.getLastName()== null ? "" : sessionUser.getFirstName().toString() %>" readonly>
+                                                                    value="<%= sessionUser.getLastName()== null ? "" : sessionUser.getLastName().toString() %>" readonly>
                             </td>
                         </tr>
                         <tr>

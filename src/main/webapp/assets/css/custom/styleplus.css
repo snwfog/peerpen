@@ -333,7 +333,6 @@ body {
     background-color:#fff;
     text-align:center;
     margin:auto;
-    padding: 25px 25px 25px 50px;
     -webkit-box-shadow: 10px 10px 0px 0px rgba(127, 140, 141, 1);
     -moz-box-shadow: 10px 10px 0px 0px rgba(127, 140, 141, 1);
     box-shadow: 10px 10px 0px 0px rgba(127, 140, 141, 1);
@@ -353,7 +352,7 @@ body {
     height:200px;
     margin:auto;
     position:relative;
-    left:-250px; z-index:5;
+    left:-335px; z-index:5;
 }
 /* END OF AVATAR STYLE */
 

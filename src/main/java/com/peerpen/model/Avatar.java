@@ -255,11 +255,16 @@ public class Avatar extends Base {
             ImageIO.write( croppedImageBuffer, fileExtension, croppedImage );
             logger.info( "Success saving cropped image for size " + "large" + " at " + croppedImage.getPath() );
 
-            Peer sessionPeer = (Peer) request.getAttribute( "sessionUser" );
-            String fileName = sessionPeer.getId().toString() + "-" +
-                    StringUtils.lowerCase(sessionPeer.getFirstName())+".jpg";
-            this.setFilename(fileName);
-
+            if(this.getFilename().equals(DEFAULT_AVATAR_FILENAME)){
+                Peer sessionPeer = (Peer) request.getAttribute( "sessionUser" );
+                String fileName = sessionPeer.getId().toString() + "-" +
+                        StringUtils.lowerCase(sessionPeer.getFirstName())+".jpg";
+                File originalImageDuplicate = new File(
+                        MessageFormat.format( "{0}/{1}", request.getSession().getServletContext().getRealPath( AVATAR_DEFAULT_PATH ),
+                                this.getServletContextAvatarPathForResize( request, Size.ORIGINAL ) ) );
+                ImageIO.write( outImage, fileExtension, originalImageDuplicate );
+                this.setFilename(fileName);
+            }
             // Resize the avatar
             this.resizeAvatar( request, Size.LARGE );
             this.resizeAvatar( request, Size.MEDIUM );
