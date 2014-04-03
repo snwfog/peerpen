@@ -1,6 +1,5 @@
 package com.peerpen.model;
 
-import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.annotations.ActiveRelationHasOne;
@@ -9,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 //Feedable model will not avoided by base and any parent of Feedable
-public class Changeset extends Feedable implements IModel, Commentable {
+public class Changeset extends Feedable implements Commentable {
 
     public static final String tableName = "changesets";
     @ActiveRecordField
@@ -48,7 +47,7 @@ public class Changeset extends Feedable implements IModel, Commentable {
 
         changeset.setState( state.getValue() );
         changeset.setIsApplied( false );
-        changeset.save();
+        changeset.update();
         return changeset;
     }
 

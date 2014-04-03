@@ -12,7 +12,7 @@ import com.google.gson.JsonSerializer;
 import com.mysql.jdbc.Statement;
 import com.peerpen.model.serializer.Page;
 import com.peerpen.model.serializer.Ppedit;
-import com.sunnyd.IModel;
+
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.annotations.ActiveRelationHasOne;
@@ -28,7 +28,7 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
-public class Document extends Taggable implements IModel, Commentable
+public class Document extends Taggable implements Commentable
 {
 
   public static final String tableName = "documents";

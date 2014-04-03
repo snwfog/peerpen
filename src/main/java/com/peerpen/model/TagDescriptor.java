@@ -1,7 +1,6 @@
 package com.peerpen.model;
 
 import com.sunnyd.Base;
-import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import java.util.Map;
  * Time: 4:56 PM
  * To change this template use File | Settings | File Templates.
  */
-public class TagDescriptor extends Base implements IModel {
+public class TagDescriptor extends Base {
 
     public static final String tableName = "tag_descriptors";
 

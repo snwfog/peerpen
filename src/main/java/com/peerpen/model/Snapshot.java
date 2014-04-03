@@ -1,11 +1,10 @@
 package com.peerpen.model;
 
 import com.sunnyd.Base;
-import com.sunnyd.IModel;
 
 import java.util.Map;
 
-public class Snapshot extends Base implements IModel {
+public class Snapshot extends Base {
 
     public static final String tableName = "snapshots";
 

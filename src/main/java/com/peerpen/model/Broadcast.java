@@ -1,6 +1,5 @@
 package com.peerpen.model;
 
-import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasOne;
 
@@ -13,7 +12,7 @@ import java.util.Map;
  * Time: 4:43 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Broadcast extends Feedable implements IModel {
+public class Broadcast extends Feedable  {
 
     public static final String tableName = "broadcasts";
 
