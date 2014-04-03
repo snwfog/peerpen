@@ -117,8 +117,7 @@ public class Changeset extends Feedable implements IModel, Commentable {
 
     public List<Comment> getOrderedComments() {
         return new Comment().queryAll(
-                "SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE document_id= " +
-                        this.getHunk().getDocument().getId() + " AND changeset_id= " + this.getId() +
+                "SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE type=\"Changeset\" AND object_id= " + this.getId() +
                         " ORDER BY total_vote DESC, last_modified_date DESC" );
     }
 
