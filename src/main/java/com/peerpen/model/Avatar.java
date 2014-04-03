@@ -21,6 +21,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -124,7 +125,17 @@ public class Avatar extends Base {
     public String getServletContextAvatarPath( HttpServletRequest request ) {
         return this.getServletContextAvatarPathForSize( request, Size.LARGE );
     }
-
+    public String getServletContextAvatarPathForResize( HttpServletRequest request, Avatar.Size size ){
+        String avatarDir = (String) request.getSession().getServletContext().getAttribute( "avatarDir" );
+        if(this.getFilename().equals(DEFAULT_AVATAR_FILENAME)){
+            Peer sessionPeer = (Peer) request.getAttribute( "sessionUser" );
+            String fileName = sessionPeer.getId().toString() + "-" +
+                    StringUtils.lowerCase(sessionPeer.getFirstName())+".jpg";
+            return MessageFormat.format( "/{0}/{1}/{2}", avatarDir, size.getFolderName(), fileName );
+        }
+        else
+            return MessageFormat.format( "/{0}/{1}/{2}", avatarDir, size.getFolderName(), this.getFilename() );
+    }
     public String getServletContextAvatarPathForSize( HttpServletRequest request, Avatar.Size size ) {
         String avatarDir = (String) request.getSession().getServletContext().getAttribute( "avatarDir" );
         return MessageFormat.format( "/{0}/{1}/{2}", avatarDir, size.getFolderName(), this.getFilename() );
@@ -239,12 +250,21 @@ public class Avatar extends Base {
             String fileExtension = this.getAvatarExtension( originalImageRelativePath );
             File croppedImage = new File(
                     MessageFormat.format( "{0}/{1}", request.getSession().getServletContext().getRealPath( AVATAR_DEFAULT_PATH ),
-                            this.getRelativeServletContextAvatarPathForSize( request, Size.LARGE ) ) );
+                            this.getServletContextAvatarPathForResize( request, Size.LARGE ) ) );
 
             ImageIO.write( croppedImageBuffer, fileExtension, croppedImage );
             logger.info( "Success saving cropped image for size " + "large" + " at " + croppedImage.getPath() );
 
-
+            if(this.getFilename().equals(DEFAULT_AVATAR_FILENAME)){
+                Peer sessionPeer = (Peer) request.getAttribute( "sessionUser" );
+                String fileName = sessionPeer.getId().toString() + "-" +
+                        StringUtils.lowerCase(sessionPeer.getFirstName())+".jpg";
+                File originalImageDuplicate = new File(
+                        MessageFormat.format( "{0}/{1}", request.getSession().getServletContext().getRealPath( AVATAR_DEFAULT_PATH ),
+                                this.getServletContextAvatarPathForResize( request, Size.ORIGINAL ) ) );
+                ImageIO.write( outImage, fileExtension, originalImageDuplicate );
+                this.setFilename(fileName);
+            }
             // Resize the avatar
             this.resizeAvatar( request, Size.LARGE );
             this.resizeAvatar( request, Size.MEDIUM );
@@ -285,7 +305,7 @@ public class Avatar extends Base {
 
         String resizeImageAbsolutePath =
                 MessageFormat.format( "{0}/{1}", request.getSession().getServletContext().getRealPath( AVATAR_DEFAULT_PATH ),
-                        this.getServletContextAvatarPathForSize( request, size ) );
+                        this.getServletContextAvatarPathForResize( request, size ) );
         ImageIO.write( scaledImage, fileExtension, new File( resizeImageAbsolutePath ) );
 
         logger.warn( "Finish resize image for size " + size );

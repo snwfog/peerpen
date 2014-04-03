@@ -12,7 +12,7 @@
     <div class="avatar avatar-container feed-avatar-body">
 		<span class="info user-details-feed">
 		        <a href="/peer/<%=sessionUser.getId()%>/profile" style="color:#3A3838;">
-                    <h2><%=sessionUser.getFirstName()%> <%=sessionUser.getLastName()%></h2>
+                    <h2><%= sessionUser.getFirstName()== null ? "" : sessionUser.getFirstName().toString() %> <%= sessionUser.getLastName()== null ? "" : sessionUser.getLastName().toString() %></h2>
                 </a>
 		</span>
         <a href="/peer/<%=sessionUser.getId()%>/profile">
@@ -39,7 +39,7 @@
         <% } else { %>
     <!-- WHEN NO FEEDS -->
 
-    <div class="profile feed-no-feeds-body"">
+    <div class="profile feed-no-feeds-body">
         <h2 class="feed-no-feeds-header">Important Notice</h2>
         <span class="feed-no-feeds-content">Sorry, you have no feeds yet.</span>
     </div>
