@@ -12,7 +12,7 @@ import com.google.gson.JsonSerializer;
 import com.mysql.jdbc.Statement;
 import com.peerpen.model.serializer.Page;
 import com.peerpen.model.serializer.Ppedit;
-import com.sunnyd.IModel;
+
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.annotations.ActiveRelationHasOne;
@@ -28,7 +28,7 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
-public class Document extends Taggable implements IModel, Commentable
+public class Document extends Taggable implements Commentable
 {
 
   public static final String tableName = "documents";
@@ -351,22 +351,17 @@ public class Document extends Taggable implements IModel, Commentable
     public JsonElement serialize(Document src, Type typeOfSrc, JsonSerializationContext context)
     {
       List<Page> documentPages = new ArrayList<>();
+      documentPages.add(0, new Page());
       for (Hunk h : src.getHunks())
       {
         Page p = null;
-        try
-        {
-          p = documentPages.get(h.getPageNumber());
+        if(documentPages.size() >= h.getPageNumber()){
+            p = documentPages.get(h.getPageNumber()-1);
+        }else{
+            p = new Page();
+            documentPages.add(h.getPageNumber()-1, p);
         }
-        catch (IndexOutOfBoundsException e)
-        {
-          p = new Page();
-          documentPages.add(h.getPageNumber(), p);
-        }
-        finally
-        {
-          p.getHunks().put(Long.valueOf(h.getIdView()), h);
-        }
+        p.getHunks().put(Long.valueOf(h.getIdView()), h);
       }
 
       Gson gson = (new GsonBuilder()).registerTypeAdapter(Page.class, new Page.PageSerializer()).create();

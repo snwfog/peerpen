@@ -39,6 +39,6 @@
 <script src="/assets/js/custom/vote.js"></script>
 <script src="/assets/js/custom/confirm_delete_dialog.js"></script>
 
-</body>
-<%@ include file="/view/debug.jsp" %>
+<%--</body>--%>
+<%--<%@ include file="/view/debug.jsp" %>--%>
 </html>

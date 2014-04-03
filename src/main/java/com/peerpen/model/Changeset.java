@@ -1,6 +1,5 @@
 package com.peerpen.model;
 
-import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.annotations.ActiveRelationHasOne;
@@ -9,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 //Feedable model will not avoided by base and any parent of Feedable
-public class Changeset extends Feedable implements IModel, Commentable {
+public class Changeset extends Feedable implements Commentable {
 
     public static final String tableName = "changesets";
     @ActiveRecordField
@@ -48,7 +47,7 @@ public class Changeset extends Feedable implements IModel, Commentable {
 
         changeset.setState( state.getValue() );
         changeset.setIsApplied( false );
-        changeset.save();
+        changeset.update();
         return changeset;
     }
 
@@ -117,8 +116,7 @@ public class Changeset extends Feedable implements IModel, Commentable {
 
     public List<Comment> getOrderedComments() {
         return new Comment().queryAll(
-                "SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE document_id= " +
-                        this.getHunk().getDocument().getId() + " AND changeset_id= " + this.getId() +
+                "SELECT *, `up_vote` - `down_vote` AS `total_vote` FROM `comments` WHERE type=\"Changeset\" AND object_id= " + this.getId() +
                         " ORDER BY total_vote DESC, last_modified_date DESC" );
     }
 

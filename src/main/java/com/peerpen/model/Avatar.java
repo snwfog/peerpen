@@ -4,7 +4,6 @@ import com.j256.simplemagic.ContentInfo;
 import com.j256.simplemagic.ContentInfoUtil;
 import com.peerpen.framework.InternalHttpServletRequest;
 import com.sunnyd.Base;
-import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasOne;
 
@@ -26,7 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Avatar extends Base implements IModel {
+public class Avatar extends Base {
 
     public static final String tableName = "avatars";
     static final Logger logger = LoggerFactory.getLogger( Avatar.class );

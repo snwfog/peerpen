@@ -1,7 +1,6 @@
 package com.peerpen.model;
 
 import com.sunnyd.Base;
-import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasOne;
 
@@ -9,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Comment extends Feedable implements IModel
+public class Comment extends Feedable
 {
 
   public static final String tableName = "comments";

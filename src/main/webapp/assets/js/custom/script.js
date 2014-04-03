@@ -36,10 +36,14 @@
         return parentForm.submit();
       }), 2000);
     });
+
     $('.editor').ppedit({
       onload: function() {
         if ($('.editor').length) {
-          return $.ajax(window.location.href.split("#")[0].replace(/edit/, ""), {
+          return $.ajax({
+            type: "GET",
+            url: window.location.href.split("#")[0].replace(/edit/, ""),
+            contentType: 'application/json',
             accept: "application/json",
             success: function(data) {
               console.log(data);
@@ -51,6 +55,7 @@
         }
       }
     });
+
     return $('button#submit').click(function(event) {
       var hunks, postUrl;
       hunks = $('.editor').ppedit('save');

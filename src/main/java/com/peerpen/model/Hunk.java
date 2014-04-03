@@ -11,7 +11,6 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.sunnyd.Base;
-import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.annotations.ActiveRelationHasOne;
@@ -30,7 +29,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
  * Time: 2:17 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Hunk extends Base implements IModel {
+public class Hunk extends Base {
 
     public static final String tableName = "hunks";
     @ActiveRecordField

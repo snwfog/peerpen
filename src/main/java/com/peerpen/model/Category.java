@@ -1,14 +1,13 @@
 package com.peerpen.model;
 
 import com.sunnyd.Base;
-import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRecordModel;
 
 import java.util.Map;
 
 @ActiveRecordModel
-public class Category extends Base implements IModel {
+public class Category extends Base {
 
     public static final String tableName = "categories";
 

@@ -47,6 +47,6 @@ public class IndexController extends GenericApplicationServlet {
             logger.warn( "Cannot fetch tweets for Peerpen" );
         }
 
-        request.getRequestDispatcher( "/view/index2.jsp" ).forward( request, response );
+        request.getRequestDispatcher( "/view/index.jsp" ).forward( request, response );
     }
 }

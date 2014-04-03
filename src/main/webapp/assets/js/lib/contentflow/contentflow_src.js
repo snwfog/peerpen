@@ -659,8 +659,8 @@ ContentFlowItem.prototype = {
                                 $("#currentDocument").append(response);
                                 var peerId = $("#ajaxPeer").attr("value");
                                 var documentId = doc.split("-");
-                                $("#viewDocument").attr("href", "/peer/"+peerId+"/document/"+documentId[1]);
-                                $("#viewDocument").removeAttr("disabled");
+//                                $("#viewDocument").attr("href", "/peer/"+peerId+"/document/"+documentId[1]);
+//                                $("#viewDocument").removeAttr("disabled");
                             }
                         });
                         $("#currentDocument").css('background-image', "");

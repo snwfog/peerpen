@@ -1,7 +1,6 @@
 package com.peerpen.model;
 
 import com.google.common.collect.Maps;
-import com.sunnyd.IModel;
 import com.sunnyd.annotations.ActiveRecordField;
 import com.sunnyd.annotations.ActiveRelationHasMany;
 import com.sunnyd.annotations.ActiveRelationManyToMany;
@@ -11,7 +10,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Group extends Taggable implements IModel {
+public class Group extends Taggable {
 
     public static final String tableName = "groups";
 
