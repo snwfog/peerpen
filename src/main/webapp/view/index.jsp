@@ -10,10 +10,10 @@
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <form class="form-inline" name="register" id="register" action="/register" method="post" role="form" style="text-align:center;">
-                    <input type="text" class="form-control parsley-validated" name="user_name" id="valid_username"
-                           placeholder="Choose a Username" style="width:300px;" parsley-trigger="change keyup">
+                  <input type="text" class="form-control parsley-validated" name="user_name" id="valid_username"
+                         placeholder="Choose a Username" style="width:300px;" parsley-trigger="change keyup">
 
-                    <div class="form-group">
+                  <div class="form-group">
                         <input type="password" class="form-control parsley-validated" name="password" id="inputPassword"
                                placeholder="Choose a password" style="width:300px;" parsley-trigger="change keyup">
                     </div>
